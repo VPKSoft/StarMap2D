@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Description>Interfaces and calculations for the StarMap2D project.</Description>
+    <Copyright>VPKSoft</Copyright>
+    <RepositoryType>git</RepositoryType>
+	  <DocumentationFile>bin\$(Configuration)\StarMap2D.Calculations.xml</DocumentationFile>
+	  <PackageIcon>ursa-major.jpg</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\ursa-major.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AASharp" Version="1.99.1" />
+  </ItemGroup>
+
+</Project>

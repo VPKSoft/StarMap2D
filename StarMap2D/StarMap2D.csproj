@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DocumentationFile>bin\$(Configuration)\StarMap2D.xml</DocumentationFile>
+    <PackageIcon>ursa-major.jpg</PackageIcon>
+    <ApplicationIcon>ursa-major.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="StarCatalogs\Yale Bright Star Catalog\**" />
+    <EmbeddedResource Remove="StarCatalogs\Yale Bright Star Catalog\**" />
+    <None Remove="StarCatalogs\Yale Bright Star Catalog\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ursa-major.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AASharp" Version="1.99.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="StarCatalogs\CNS3\" />
+    <Folder Include="StarCatalogs\HYG 3.0\" />
+    <Folder Include="StarCatalogs\YaleSmall\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\ursa-major.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarMap2D.Calculations\StarMap2D.Calculations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

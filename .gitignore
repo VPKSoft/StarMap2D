@@ -348,3 +348,15 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/StarMap2D/StarCatalogs/CNS3/Extracted
+/StarMap2D/StarCatalogs/CNS3/ReadMe.txt
+/StarMap2D/StarCatalogs/CNS3/notes.tex
+/StarMap2D/StarCatalogs/CNS3/catalog.dat.gz
+/StarMap2D/StarCatalogs/HYG 3.0/Extracted
+/StarMap2D/StarCatalogs/HYG 3.0/ReadMe.txt
+/StarMap2D/StarCatalogs/HYG 3.0/hygdata_v3.csv.gz
+/StarMap2D/StarCatalogs/Yale Bright Star Catalog 5th/Extracted/bsc5.dat
+/StarMap2D/StarCatalogs/Yale Bright Star Catalog 5th/Extracted
+/StarMap2D/StarCatalogs/Yale Bright Star Catalog 5th/bsc5.readme.txt
+/StarMap2D/StarCatalogs/Yale Bright Star Catalog 5th/bsc5.notes.gz
+/StarMap2D/StarCatalogs/Yale Bright Star Catalog 5th/bsc5.dat.gz
