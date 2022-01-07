@@ -48,8 +48,8 @@ namespace StarMap2D.Calculations.Plotting.Interfaces
         /// <param name="latitude">The latitude of the observer.</param>
         /// <param name="longitude">The longitude of the observer.</param>
         /// <param name="radius">The radius of the 2D projection of the star map.</param>
-        /// <returns>An instance to a <see cref="PointD"/> class for the result of the calculation.</returns>
-        public delegate PointD CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
+        /// <returns>An instance to a <see cref="PointDouble"/> class for the result of the calculation.</returns>
+        public delegate PointDouble CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
             double longitude, double radius);
 
         /// <summary>

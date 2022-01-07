@@ -99,7 +99,7 @@ namespace StarMap2D.Calculations.Plotting
         /// </summary>
         /// <param name="coordinate">The coordinate to project.</param>
         /// <returns>The 2D coordinate.</returns>
-        public PointD Project2D(AAS2DCoordinate coordinate)
+        public PointDouble Project2D(AAS2DCoordinate coordinate)
         {
             var azimuth = ((coordinate.X + 180) % 360).ToRadians();
             var altitude = (coordinate.Y).ToRadians();
@@ -114,7 +114,7 @@ namespace StarMap2D.Calculations.Plotting
             var xR = r * (1 - x1);
             var yR = r * (1 - y1);
 
-            return new PointD { X = xR, Y = yR};
+            return new PointDouble { X = xR, Y = yR};
         }
 
         /// <summary>

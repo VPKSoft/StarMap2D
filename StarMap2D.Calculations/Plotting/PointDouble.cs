@@ -29,7 +29,7 @@ namespace StarMap2D.Calculations.Plotting
     /// <summary>
     /// A <c>double</c> floating point point class.
     /// </summary>
-    public class PointD
+    public class PointDouble
     {
         /// <summary>
         /// Gets or sets the x-coordinate.

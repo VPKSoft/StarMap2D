@@ -12,12 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="StarCatalogs\Yale Bright Star Catalog\**" />
-    <EmbeddedResource Remove="StarCatalogs\Yale Bright Star Catalog\**" />
-    <None Remove="StarCatalogs\Yale Bright Star Catalog\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="ursa-major.ico" />
   </ItemGroup>
 
@@ -48,6 +42,7 @@
   <ItemGroup>
     <Folder Include="StarCatalogs\CNS3\" />
     <Folder Include="StarCatalogs\HYG 3.0\" />
+    <Folder Include="StarCatalogs\Hipparcos\" />
     <Folder Include="StarCatalogs\YaleSmall\" />
   </ItemGroup>
 

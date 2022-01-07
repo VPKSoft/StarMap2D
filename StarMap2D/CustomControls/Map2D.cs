@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using AASharp;
+using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Drawing;
@@ -91,7 +92,7 @@ namespace StarMap2D.CustomControls
         #endregion
 
         #region PrivateMethods
-        private Point GetDrawPoint(Image image, PointD centerPoint)
+        private Point GetDrawPoint(Image image, PointDouble centerPoint)
         {
             return new Point((int)centerPoint.X - image.Width / 2 + OffsetX, (int)centerPoint.Y - image.Height / 2 + OffsetY);
         }
@@ -166,6 +167,43 @@ namespace StarMap2D.CustomControls
                         //    new Rectangle(new Point((int)point.X, (int)point.Y), new Size(3, 3)));
                         
                     }
+                }
+
+                var constellation = new Perseus();
+                for (int i = 0; i < constellation.Stars.Count - 1; i++)
+                {
+                    var point1 = new AAS2DCoordinate
+                    { X = constellation.Stars[i].RightAscension % 360, Y = constellation.Stars[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                    var point2 = new AAS2DCoordinate
+                        { X = constellation.Stars[i + 1].RightAscension % 360, Y = constellation.Stars[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                    var pointD1 = Plot2D.Project2D(point1);
+                    var pointD2 = Plot2D.Project2D(point2);
+
+                    var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
+                    var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
+
+                    graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+                }
+
+                foreach (var orionConstellationLine in constellation.ConstellationLines)
+                {
+                    var point1 = new AAS2DCoordinate
+                            { X = orionConstellationLine.RightAscensionStart % 360, Y = orionConstellationLine.DeclinationStart }
+                        .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                    var point2 = new AAS2DCoordinate
+                            { X = orionConstellationLine.RightAscensionEnd % 360, Y = orionConstellationLine.DeclinationEnd }
+                        .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                    var pointD1 = Plot2D.Project2D(point1);
+                    var pointD2 = Plot2D.Project2D(point2);
+
+                    var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
+                    var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
+
+                    graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
                 }
             }
 
@@ -303,7 +341,6 @@ namespace StarMap2D.CustomControls
                 }
             }
         }
-
 
         #region InternalEvents
         private void Map2D_NeedsRepaint(object sender, EventArgs e)

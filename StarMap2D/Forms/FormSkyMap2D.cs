@@ -118,7 +118,7 @@ namespace StarMap2D.Forms
             }
             */
 
-            var yaleBrightStarProvider = new YaleBrightStarProvider();
+            var yaleBrightStarProvider = new YaleBrightProvider();
             yaleBrightStarProvider.LoadData(@"C:\Users\Petteri Kautonen\Downloads\catalog.dat\bsc5.dat");
 
             foreach (var yaleBrightStarData in yaleBrightStarProvider.StarData)

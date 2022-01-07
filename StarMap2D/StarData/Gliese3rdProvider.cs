@@ -186,8 +186,8 @@ namespace StarMap2D.StarData
                 var raHours = double.Parse(GetDataRaw(rawDataEntry, "RAh").Trim(), CultureInfo.InvariantCulture);
                 var raMinutes = double.Parse(GetDataRaw(rawDataEntry, "RAm").Trim(), CultureInfo.InvariantCulture);
                 var raSeconds = double.Parse(GetDataRaw(rawDataEntry, "RAs").Trim(), CultureInfo.InvariantCulture);
-                var rightAscension =
-                    AASCoordinateTransformation.HoursToDegrees(raHours + raMinutes / 60 + raSeconds / 3600);
+                var rightAscension = raHours + raMinutes / 60 + raSeconds / 3600;
+                    //AASCoordinateTransformation.HoursToDegrees(raHours + raMinutes / 60 + raSeconds / 3600);
 
                 var deDegrees = double.Parse(GetDataRaw(rawDataEntry, "DE-").Trim() + GetDataRaw(rawDataEntry, "DEd").Trim(), CultureInfo.InvariantCulture);
                 var deMinutes = double.Parse(GetDataRaw(rawDataEntry, "DEm").Trim(), CultureInfo.InvariantCulture);
