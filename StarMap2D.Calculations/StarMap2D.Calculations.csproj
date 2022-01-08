@@ -25,8 +25,4 @@
     <PackageReference Include="AASharp" Version="1.99.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Constellations\ConstellationBorderData\" />
-  </ItemGroup>
-
 </Project>

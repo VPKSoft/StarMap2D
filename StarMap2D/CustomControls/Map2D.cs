@@ -28,7 +28,7 @@ using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using AASharp;
-using StarMap2D.Calculations.Constellations;
+//using StarMap2D.Calculations.Constellations.ConstellationClasses;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Drawing;
@@ -169,14 +169,15 @@ namespace StarMap2D.CustomControls
                     }
                 }
 
+                /*
                 var constellation = new Perseus();
-                for (int i = 0; i < constellation.Stars.Count - 1; i++)
+                for (int i = 0; i < constellation.Boundary.Count - 1; i++)
                 {
                     var point1 = new AAS2DCoordinate
-                    { X = constellation.Stars[i].RightAscension % 360, Y = constellation.Stars[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+                    { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                     var point2 = new AAS2DCoordinate
-                        { X = constellation.Stars[i + 1].RightAscension % 360, Y = constellation.Stars[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+                        { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                     var pointD1 = Plot2D.Project2D(point1);
                     var pointD2 = Plot2D.Project2D(point2);
@@ -205,8 +206,9 @@ namespace StarMap2D.CustomControls
 
                     graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
                 }
+                */
             }
-
+                
             BackgroundImage = bitmap;
             previousBitmap?.Dispose();
             previousBitmap = bitmap;

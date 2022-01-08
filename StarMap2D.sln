@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D", "StarMap2D\StarMap2D.csproj", "{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Calculations", "StarMap2D.Calculations\StarMap2D.Calculations.csproj", "{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Calculations", "StarMap2D.Calculations\StarMap2D.Calculations.csproj", "{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Tests", "StarMap2D.Tests\StarMap2D.Tests.csproj", "{3248CE18-0FFA-476C-8A07-F98DB2E33DA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3248CE18-0FFA-476C-8A07-F98DB2E33DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3248CE18-0FFA-476C-8A07-F98DB2E33DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3248CE18-0FFA-476C-8A07-F98DB2E33DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3248CE18-0FFA-476C-8A07-F98DB2E33DA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

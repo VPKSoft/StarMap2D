@@ -7,6 +7,9 @@ namespace StarMap2D.Calculations.Constellations
     /// </summary>
     public class ConstellationLine: IConstellationLine
     {
+        /// <inheritdoc cref="IConstellationLine.Identifier"/>
+        public string? Identifier { get; init; }
+
         /// <inheritdoc cref="IConstellationLine.RightAscensionStart"/>
         public double RightAscensionStart { get; init; }
 

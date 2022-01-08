@@ -1,4 +1,5 @@
 ﻿using StarMap2D.Calculations.Constellations.Interfaces;
+using StarMap2D.Calculations.Constellations.StaticData;
 
 namespace StarMap2D.Calculations.Constellations
 {
@@ -15,10 +16,10 @@ namespace StarMap2D.Calculations.Constellations
         public ConstellationTemplate()
         {
 
-            ConstellationLines = new[]
-            {
-                new ConstellationLine(),
-            };
+            Boundary = ConstellationBoundary.ConstellationBoundaries.Where(f => f.Identifier == Identifier).ToList();
+            ConstellationLines = StaticData.ConstellationLines.Lines
+                .Where(f => f.Identifier == Identifier).ToList();
+
         }
 
         /// <inheritdoc cref="IConstellation{T, TLines}.Identifier"/>
@@ -27,8 +28,8 @@ namespace StarMap2D.Calculations.Constellations
         /// <inheritdoc cref="IConstellation{T, TLines}.Name"/>
         public string Name { get; set; }
 
-        /// <inheritdoc cref="IConstellation{T, TLines}.Stars"/>
-        public IReadOnlyList<IConstellationStar> Stars { get; }
+        /// <inheritdoc cref="IConstellation{T,TLines}.Boundary"/>
+        public IReadOnlyList<IConstellationStar> Boundary { get; }
 
         /// <inheritdoc cref="IConstellation{T, TLines}.ConstellationLines"/>
         public IReadOnlyList<ConstellationLine> ConstellationLines { get; init; }

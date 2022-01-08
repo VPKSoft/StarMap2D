@@ -20,10 +20,10 @@
         string Name { get; set; }
 
         /// <summary>
-        /// Gets the stars in the constellation.
+        /// Gets the constellation boundary.
         /// </summary>
-        /// <value>The stars in the constellation.</value>
-        IReadOnlyList<IConstellationStar> Stars { get; }
+        /// <value>The constellation boundary.</value>
+        IReadOnlyList<IConstellationStar> Boundary { get; }
 
         /// <summary>
         /// Gets or sets the constellation lines.

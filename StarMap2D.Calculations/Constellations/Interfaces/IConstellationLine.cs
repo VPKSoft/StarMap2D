@@ -6,6 +6,12 @@
     public interface IConstellationLine
     {
         /// <summary>
+        /// Gets or sets the constellation identifier.
+        /// </summary>
+        /// <value>The constellation identifier.</value>
+        public string? Identifier { get; init; }
+
+        /// <summary>
         /// Gets or sets the right ascension start coordinate of the line.
         /// </summary>
         /// <value>The right ascension start coordinate of the line.</value>
