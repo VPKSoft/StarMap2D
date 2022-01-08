@@ -26,6 +26,7 @@ SOFTWARE.
 
 using AASharp;
 using StarMap2D.Calculations.Helpers.Math;
+using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.Calculations.Plotting
 {

@@ -65,6 +65,10 @@ namespace StarMap2D.CustomControls
             this.Name = "Map2D";
             this.Size = new System.Drawing.Size(400, 400);
             this.SizeChanged += new System.EventHandler(this.Map2D_NeedsRepaint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseDown);
+            this.MouseLeave += new System.EventHandler(this.Map2D_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseUp);
             this.Resize += new System.EventHandler(this.Map2D_NeedsRepaint);
             this.ParentChanged += new System.EventHandler(this.Map2D_NeedsRepaint);
             this.ResumeLayout(false);

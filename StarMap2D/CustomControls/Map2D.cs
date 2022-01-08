@@ -25,13 +25,18 @@ SOFTWARE.
 #endregion
 
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using AASharp;
-//using StarMap2D.Calculations.Constellations.ConstellationClasses;
+using StarMap2D.Calculations.Constellations;
+using StarMap2D.Calculations.Constellations.Interfaces;
+using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
+using StarMap2D.CustomControls.EventArguments;
 using StarMap2D.Drawing;
+using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.CustomControls
 {
@@ -54,7 +59,31 @@ namespace StarMap2D.CustomControls
             base.DoubleBuffered = true;
             DrawMapImage();
             base.BackgroundImageLayout = ImageLayout.None;
+            foreach (var constellationClassEnumMap in ConstellationClassEnumMap.ConstellationClassesEnums)
+            {
+                var constellation = Activator.CreateInstance(constellationClassEnumMap.ConstellationClassType);
+                constellations.Add((IConstellation<ConstellationArea, ConstellationLine>)constellation!);
+            }
         }
+
+        #region EventDelegates        
+        /// <summary>
+        /// Delegate OnCoordinatesChanged
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
+        public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Gets or sets the coordinates changed.
+        /// </summary>
+        /// <value>The coordinates changed.</value>
+        public event OnCoordinatesChanged? CoordinatesChanged;
+        #endregion
 
         #region PrivateFields
         private Color mapCircleColor = Color.Black;
@@ -62,6 +91,7 @@ namespace StarMap2D.CustomControls
         private SolidBrush backgroundBrush;
         private Bitmap? previousBitmap;
         private Plot2D? plot2D;
+        private List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
         #endregion
 
         #region PrivateProperties
@@ -141,12 +171,12 @@ namespace StarMap2D.CustomControls
                         var pointD = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
                             Plot2D.Latitude, Plot2D.Longitude, Diameter / 2);
 
-                        var location = Point.Empty;
+                        Point location;
 
                         if (pointD != null)
                         {
                             location = new Point((int)pointD.X / 2, (int)pointD.Y / 2);
-                            graphics.CreateStar(location, plot2D?.Radius ?? 0, starMapObject.Magnitude, 5);
+                            //graphics.CreateStar(location, plot2D?.Radius ?? 0, starMapObject.Magnitude, 5);
 
                             //graphics.FillEllipse(Brushes.White,
                             //    new Rectangle(new Point((int)pointD.X, (int)pointD.Y), new Size(3, 3)));
@@ -162,56 +192,86 @@ namespace StarMap2D.CustomControls
 
                         var drawPoint = new Point(location.X + OffsetX, location.Y + OffsetY);
 
-                        graphics.CreateStarSimple(drawPoint, plot2D?.Radius ?? 0, starMapObject.Magnitude, 25, 6);
+                        graphics.CreateStar(Size, drawPoint, starMapObject.Magnitude);
                         //graphics.FillEllipse(Brushes.White,
                         //    new Rectangle(new Point((int)point.X, (int)point.Y), new Size(3, 3)));
                         
                     }
                 }
 
-                /*
-                var constellation = new Perseus();
-                for (int i = 0; i < constellation.Boundary.Count - 1; i++)
+                foreach (var constellation in constellations)
                 {
-                    var point1 = new AAS2DCoordinate
-                    { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
-
-                    var point2 = new AAS2DCoordinate
-                        { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
-
-                    var pointD1 = Plot2D.Project2D(point1);
-                    var pointD2 = Plot2D.Project2D(point2);
-
-                    var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
-                    var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
-
-                    graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+                    //5DrawConstellationBoundary(constellation, graphics);
+                    DrawConstellation(constellation, graphics);
                 }
-
-                foreach (var orionConstellationLine in constellation.ConstellationLines)
-                {
-                    var point1 = new AAS2DCoordinate
-                            { X = orionConstellationLine.RightAscensionStart % 360, Y = orionConstellationLine.DeclinationStart }
-                        .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
-
-                    var point2 = new AAS2DCoordinate
-                            { X = orionConstellationLine.RightAscensionEnd % 360, Y = orionConstellationLine.DeclinationEnd }
-                        .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
-
-                    var pointD1 = Plot2D.Project2D(point1);
-                    var pointD2 = Plot2D.Project2D(point2);
-
-                    var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
-                    var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
-
-                    graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
-                }
-                */
             }
                 
             BackgroundImage = bitmap;
             previousBitmap?.Dispose();
             previousBitmap = bitmap;
+        }
+
+        /// <summary>
+        /// Draws the specified constellation boundary on a specified graphics.
+        /// </summary>
+        /// <param name="constellation">The constellation instance which boundary to draw.</param>
+        /// <param name="graphics">The graphics to draw the constellation boundary on.</param>
+        private void DrawConstellationBoundary(IConstellation<ConstellationArea, ConstellationLine> constellation, Graphics graphics)
+        {
+            if (Plot2D == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < constellation.Boundary.Count - 1; i++)
+            {
+                var point1 = new AAS2DCoordinate
+                    { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                var point2 = new AAS2DCoordinate
+                    { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                var pointD1 = Plot2D.Project2D(point1);
+                var pointD2 = Plot2D.Project2D(point2);
+
+                var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
+                var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
+
+                graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+            }
+        }
+
+        /// <summary>
+        /// Draws the specified constellation stick image on a specified graphics.
+        /// </summary>
+        /// <param name="constellation">The constellation instance which stick image to draw.</param>
+        /// <param name="graphics">The graphics to draw the constellation stick image on.</param>
+        private void DrawConstellation(IConstellation<ConstellationArea, ConstellationLine> constellation,
+            Graphics graphics)
+        {
+            if (Plot2D == null)
+            {
+                return;
+            }
+
+            foreach (var orionConstellationLine in constellation.ConstellationLines)
+            {
+                var point1 = new AAS2DCoordinate
+                        { X = orionConstellationLine.RightAscensionStart % 360, Y = orionConstellationLine.DeclinationStart }
+                    .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                var point2 = new AAS2DCoordinate
+                        { X = orionConstellationLine.RightAscensionEnd % 360, Y = orionConstellationLine.DeclinationEnd }
+                    .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+                var pointD1 = Plot2D.Project2D(point1);
+                var pointD2 = Plot2D.Project2D(point2);
+
+                var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
+                var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
+
+                graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+            }
         }
         #endregion
 
@@ -354,5 +414,79 @@ namespace StarMap2D.CustomControls
             }
         }
         #endregion
+
+        private bool mouseDown;
+        private Point mousePoint;
+
+        private void Map2D_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button.HasFlag(MouseButtons.Right))
+            {
+                mouseDown = true;
+                Cursor = Cursors.NoMove2D;
+                mousePoint = e.Location;
+            }
+        }
+
+        private void Map2D_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button.HasFlag(MouseButtons.Right))
+            {
+                Cursor = Cursors.Default;
+                mouseDown = false;
+            }
+        }
+
+        private void Map2D_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+            mouseDown = false;
+        }
+
+        private void Map2D_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown && e.Button.HasFlag(MouseButtons.Right))
+            {
+                var newPoint = e.Location;
+                var xChange = (double)(mousePoint.X - newPoint.X) / 10.0;
+                var yChange = (double)(mousePoint.Y - newPoint.Y) / 10.0;
+                if (Plot2D != null)
+                {
+                    var latitude = Plot2D.Latitude - yChange;
+                    var longitude = Plot2D.Longitude - xChange;
+                    if (latitude > 90)
+                    {
+                        latitude = 90;
+                    }
+
+                    if (latitude < -90)
+                    {
+                        latitude = -90;
+                    }
+
+                    if (longitude > 180)
+                    {
+                        longitude = -180;
+                    }
+
+                    if (longitude < -180)
+                    {
+                        longitude = 180;
+                    }
+
+                    if (latitude != Plot2D.Latitude || longitude != Plot2D.Longitude)
+                    {
+                        Plot2D.Latitude = latitude;
+                        Plot2D.Longitude = longitude;
+
+                        Debug.WriteLine($"Latitude: {latitude}, Longitude: {longitude}");
+
+                        mousePoint = newPoint;
+                        DrawMapImage();
+                        CoordinatesChanged?.Invoke(this, new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude});
+                    }
+                }
+            }
+        }
     }
 }

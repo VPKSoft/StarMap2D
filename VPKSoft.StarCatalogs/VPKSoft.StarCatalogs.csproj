@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<DocumentationFile>bin\$(Configuration)\VPKSoft.StarCatalogs.xml</DocumentationFile>
+	<Description>Providers for star catalogs.</Description>
+	<Copyright>Copyright © VPKSoft 2022</Copyright>
+	<PackageTags>star map sky catalog stellar</PackageTags>
+	<Authors>VPKSoft</Authors>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AASharp" Version="1.99.1" />
+  </ItemGroup>
+
+</Project>

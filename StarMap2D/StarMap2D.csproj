@@ -40,13 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StarCatalogs\CNS3\" />
-    <Folder Include="StarCatalogs\HYG 3.0\" />
-    <Folder Include="StarCatalogs\Hipparcos\" />
-    <Folder Include="StarCatalogs\YaleSmall\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\ursa-major.jpg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -55,6 +48,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarMap2D.Calculations\StarMap2D.Calculations.csproj" />
+    <ProjectReference Include="..\VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

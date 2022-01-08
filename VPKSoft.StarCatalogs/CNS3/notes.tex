@@ -1,0 +1,27 @@
+%%%% LaTeX document with errors detected.
+\documentstyle[11pt]{article}
+\def\ifhtx{\iffalse}
+\ifhtx
+\def\vMORE#1#2{\glutag{VizDetail,n V/70&-out.add=.&recno=#1|#2}}
+\else 
+\renewenvironment{glossary}{\begin{list}{}{\leftmargin=2em}}{\end{list}}
+\def\ligne#1{\makebox[\textwidth][l]{\bf #1}}
+\def\term#1{\item[\ligne{#1}]}
+\def\vMORE #1#2{Line #1: #2}
+\fi
+\begin{document}
+\begin{center}
+\LARGE\bf Problems detected in CNS3 \\
+   (Catalogue of Nearby Stars, 3rd Version)
+\end{center}
+\bigskip
+
+\begin{glossary}
+\term{\vMORE{1972}{Gl 473} (Wolf 424)}
+   {\em (detected by Andre Masclet [andre.masclet@wanadoo.fr] on
+        12-Feb-1999, corrected values by Hartmut Jahreiss)}
+   has an erroneous radial velocity of 553.7 km/s \\
+   {\bf Correct values:}  RV = +0.7 km/s ; 
+                 U,V,W = -34, -15, +0  km/s
+\end{glossary}
+\end{document}

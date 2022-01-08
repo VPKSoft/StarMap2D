@@ -25,4 +25,8 @@
     <PackageReference Include="AASharp" Version="1.99.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj" />
+  </ItemGroup>
+
 </Project>

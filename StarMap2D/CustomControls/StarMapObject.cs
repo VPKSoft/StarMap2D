@@ -24,8 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-using StarMap2D.Calculations.Plotting.Interfaces;
 using StarMap2D.CustomControls.Interfaces;
+using VPKSoft.StarCatalogs.Interfaces;
 
 namespace StarMap2D.CustomControls
 {

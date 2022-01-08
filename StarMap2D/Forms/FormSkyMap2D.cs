@@ -28,7 +28,7 @@ using System.Globalization;
 using AASharp;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.CustomControls;
-using StarMap2D.StarData;
+using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D.Forms
 {
@@ -118,6 +118,7 @@ namespace StarMap2D.Forms
             }
             */
 
+            
             var yaleBrightStarProvider = new YaleBrightProvider();
             yaleBrightStarProvider.LoadData(@"C:\Users\Petteri Kautonen\Downloads\catalog.dat\bsc5.dat");
 
@@ -125,7 +126,7 @@ namespace StarMap2D.Forms
             {
                 map2d1.StarMapObjects.Add(new StarMapObject { RightAscension = yaleBrightStarData.RightAscension, Declination = yaleBrightStarData.Declination, Magnitude = yaleBrightStarData.Magnitude});
             }
-
+            
 
 
             /*
