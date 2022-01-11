@@ -24,32 +24,10 @@ SOFTWARE.
 */
 #endregion
 
-using System.Drawing.Drawing2D;
-
-
 namespace StarMap2D.Drawing
 {
     public static class DrawStarImage
     {
-        public static void CreateStarSimple(this Graphics graphics, Point location, double radius, double magnitude,
-            double starMaxSize, double minimumMagnitude)
-        {
-            if (magnitude > minimumMagnitude)
-            {
-                return;
-            }
-
-            var size = (int)(-magnitude * 1.2);
-
-            size = size < 2 ? 2 : size;
-
-            var startPoint = new Point(location.X - size / 2, location.Y - size / 2);
-
-            using var solidBrush = new SolidBrush(Color.White);
-
-            graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(size, size)));
-        }
-
         public class MapDrawParameters
         {
             public MapDrawParameters(double magnitudeMinimum, double magnitudeMaximum, Color drawColor,

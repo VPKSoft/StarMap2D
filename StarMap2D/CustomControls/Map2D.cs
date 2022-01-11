@@ -58,6 +58,7 @@ namespace StarMap2D.CustomControls
             backgroundBrush = new SolidBrush(BackColor);
             base.DoubleBuffered = true;
             DrawMapImage();
+            HandleCreated += Map2D_NeedsRepaint;
             base.BackgroundImageLayout = ImageLayout.None;
             foreach (var constellationClassEnumMap in ConstellationClassEnumMap.ConstellationClassesEnums)
             {
@@ -66,6 +67,7 @@ namespace StarMap2D.CustomControls
             }
         }
 
+
         #region EventDelegates        
         /// <summary>
         /// Delegate OnCoordinatesChanged
@@ -73,15 +75,14 @@ namespace StarMap2D.CustomControls
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
         public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
-
         #endregion
 
-        #region Events
-
+        #region Events        
         /// <summary>
-        /// Gets or sets the coordinates changed.
+        /// Occurs when the latitude or the longitude coordinates changed.
         /// </summary>
-        /// <value>The coordinates changed.</value>
+        [Browsable(true)]
+        [Description("Occurs when the latitude or the longitude coordinates changed.")]
         public event OnCoordinatesChanged? CoordinatesChanged;
         #endregion
 
@@ -399,13 +400,14 @@ namespace StarMap2D.CustomControls
                     if (plot2D != null)
                     {
                         plot2D.Radius = Math.Min(Width, Height);
+                        CoordinatesChanged?.Invoke(this, new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude});
                     }
                 }
             }
         }
 
         #region InternalEvents
-        private void Map2D_NeedsRepaint(object sender, EventArgs e)
+        private void Map2D_NeedsRepaint(object? sender, EventArgs e)
         {
             if (plot2D != null)
             {

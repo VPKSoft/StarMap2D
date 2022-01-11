@@ -25,6 +25,9 @@ SOFTWARE.
 #endregion
 
 using StarMap2D.Forms;
+using StarMap2D.Forms.Dialogs;
+using StarMap2D.Miscellaneous;
+using VPKSoft.LangLib;
 
 namespace StarMap2D
 {
@@ -33,7 +36,7 @@ namespace StarMap2D
     /// Implements the <see cref="System.Windows.Forms.Form" />
     /// </summary>
     /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class FormMain : Form
+    public partial class FormMain : DBLangEngineWinforms
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FormMain"/> class.
@@ -41,7 +44,32 @@ namespace StarMap2D
         public FormMain()
         {
             InitializeComponent();
-            new FormSkyMap2D().Show();
+
+            DBLangEngine.DBName = "lang.sqlite"; // Do the VPKSoft.LangLib == translation..
+
+            if (Utils.ShouldLocalize() != null)
+            {
+                DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
+                return; // After localization don't do anything more..
+            }
+
+            // initialize the language/localization database..
+            DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormDialogSettings.Display(this);
+        }
+
+        private void button2_Click(object sender, EventArgs ee)
+        {
+            FormSkyMap2D.Display(this);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new FormTestDrawing().Show(this);
         }
     }
 }

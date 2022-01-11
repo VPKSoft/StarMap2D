@@ -58,7 +58,7 @@ namespace StarMap2D.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSkyMap2D));
             this.tmSetTime = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.map2d1 = new StarMap2D.CustomControls.Map2D();
+            this.map2d = new StarMap2D.CustomControls.Map2D();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btPlayPause = new System.Windows.Forms.Button();
@@ -80,18 +80,21 @@ namespace StarMap2D.Forms
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // map2d1
+            // map2d
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.map2d1, 10);
-            this.map2d1.CurrentTimeUtc = new System.DateTime(2022, 1, 6, 17, 59, 30, 507);
-            this.map2d1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.map2d1.Location = new System.Drawing.Point(0, 0);
-            this.map2d1.MapCircleColor = System.Drawing.Color.Black;
-            this.map2d1.Margin = new System.Windows.Forms.Padding(0);
-            this.map2d1.Name = "map2d1";
-            this.map2d1.Plot2D = null;
-            this.map2d1.Size = new System.Drawing.Size(862, 751);
-            this.map2d1.TabIndex = 0;
+            this.map2d.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("map2d.BackgroundImage")));
+            this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.map2d, 10);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 11, 17, 4, 51, 585);
+            this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.map2d.Location = new System.Drawing.Point(0, 0);
+            this.map2d.MapCircleColor = System.Drawing.Color.Black;
+            this.map2d.Margin = new System.Windows.Forms.Padding(0);
+            this.map2d.Name = "map2d";
+            this.map2d.Plot2D = null;
+            this.map2d.Size = new System.Drawing.Size(862, 751);
+            this.map2d.TabIndex = 0;
+            this.map2d.CoordinatesChanged += new StarMap2D.CustomControls.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -109,7 +112,7 @@ namespace StarMap2D.Forms
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Controls.Add(this.map2d1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.map2d, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 8, 1);
             this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btPlayPause, 3, 1);
@@ -161,7 +164,8 @@ namespace StarMap2D.Forms
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSkyMap2D";
-            this.Text = "FormSkyMap2D";
+            this.Text = "Sky Map";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSkyMap2D_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -171,7 +175,7 @@ namespace StarMap2D.Forms
         #endregion
         private System.Windows.Forms.Timer tmSetTime;
         private Label label1;
-        private CustomControls.Map2D map2d1;
+        private CustomControls.Map2D map2d;
         private TableLayoutPanel tableLayoutPanel1;
         private DateTimePicker dateTimePicker1;
         private Button btPlayPause;
