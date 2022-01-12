@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AASharp" Version="1.99.1" />
+    <PackageReference Include="Svg" Version="3.4.0" />
     <PackageReference Include="VPKSoft.LangLib" Version="1.0.8" />
   </ItemGroup>
 

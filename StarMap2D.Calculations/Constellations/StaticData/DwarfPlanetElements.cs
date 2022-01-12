@@ -1,5 +1,30 @@
-﻿using AASharp;
-using StarMap2D.Calculations.Enumerations;
+﻿#region License
+/*
+MIT License
+
+Copyright(c) 2022 Petteri Kautonen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+#endregion
+
+using AASharp;
 
 namespace StarMap2D.Calculations.Constellations.StaticData
 {
@@ -295,45 +320,6 @@ namespace StarMap2D.Calculations.Constellations.StaticData
             };
 
             return elements;
-        }
-
-        /// <summary>
-        /// Gets the dwarf planet orbital elements to calculate its position.
-        /// </summary>
-        /// <param name="planets">A <see cref="DwarfPlanets"/> enumeration value to specify the planet to get.</param>
-        /// <returns>An instance to a <see cref="AASEllipticalObjectElements"/> containing the orbital elements of the dwarf planet.</returns>
-        /// <remarks>Pluto is not included as there is a formula to calculate its position.</remarks>
-        public static AASEllipticalObjectElements GetDwarfPlanet(DwarfPlanets planets)
-        {
-            switch (planets)
-            {
-                case DwarfPlanets.Ceres:
-                    return CeresOrbitalElements();
-
-                case DwarfPlanets.Orcus:
-                    return OrcusOrbitalElements();
-
-                case DwarfPlanets.Haumea:
-                    return HaumeaOrbitalElements();
-
-                case DwarfPlanets.Quaoar:
-                    return QuaoarOrbitalElements();
-
-                case DwarfPlanets.Makemake:
-                    return MakemakeOrbitalElements();
-
-                case DwarfPlanets.Gonggong:
-                    return GonggongOrbitalElements();
-
-                case DwarfPlanets.Eris:
-                    return ErisOrbitalElements();
-
-                case DwarfPlanets.Sedna:
-                    return SednaOrbitalElements();
-
-                default:
-                    return new AASEllipticalObjectElements();
-            }
         }
     }
 }

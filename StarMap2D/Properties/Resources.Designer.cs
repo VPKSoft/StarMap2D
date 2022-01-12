@@ -87,6 +87,53 @@ namespace StarMap2D.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The symbols images for files:
+        ///* minor_planet_eris1.svg
+        ///* minor_planet_eris2.svg
+        ///* minor_planet_gonggong.svg
+        ///* minor_planet_haumea.svg
+        ///* minor_planet_makemake.svg
+        ///* minor_planet_orcus.svg
+        ///* minor_planet_quoar.svg
+        ///are copyright by Wikipedia, CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/
+        ///
+        ///MIT-licensed files, Copyright(c) 2022 Petteri Kautonen:
+        ///* dwarf_pluto.svg
+        ///* earth.svg
+        ///* jupiter.png
+        ///* mars.png
+        ///* mercury.png
+        ///* minor_planet_ceres.svg
+        ///* minor_planet_chiron.svg
+        ///* minor_planet_ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string copyright {
+            get {
+                return ResourceManager.GetString("copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dwarf_pluto {
+            get {
+                object obj = ResourceManager.GetObject("dwarf_pluto", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] earth {
+            get {
+                object obj = ResourceManager.GetObject("earth", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap jupiter {
@@ -117,6 +164,136 @@ namespace StarMap2D.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_ceres {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_ceres", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_chiron {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_chiron", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_eris1 {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_eris1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_eris2 {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_eris2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_gonggong {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_gonggong", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_haumea {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_haumea", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_juno {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_juno", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_makemake {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_makemake", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_orcus {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_orcus", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_pallas {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_pallas", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_quoar {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_quoar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_sedna {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_sedna", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] minor_planet_vesta {
+            get {
+                object obj = ResourceManager.GetObject("minor_planet_vesta", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap moon {
@@ -127,12 +304,92 @@ namespace StarMap2D.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] moon_svg {
+            get {
+                object obj = ResourceManager.GetObject("moon_svg", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap neptune {
             get {
                 object obj = ResourceManager.GetObject("neptune", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_jupiter {
+            get {
+                object obj = ResourceManager.GetObject("planet_jupiter", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_mars {
+            get {
+                object obj = ResourceManager.GetObject("planet_mars", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_mercury {
+            get {
+                object obj = ResourceManager.GetObject("planet_mercury", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_neptune {
+            get {
+                object obj = ResourceManager.GetObject("planet_neptune", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_saturn {
+            get {
+                object obj = ResourceManager.GetObject("planet_saturn", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_uranus {
+            get {
+                object obj = ResourceManager.GetObject("planet_uranus", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] planet_venus {
+            get {
+                object obj = ResourceManager.GetObject("planet_venus", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -163,6 +420,16 @@ namespace StarMap2D.Properties {
             get {
                 object obj = ResourceManager.GetObject("sun", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] sun_svg {
+            get {
+                object obj = ResourceManager.GetObject("sun_svg", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

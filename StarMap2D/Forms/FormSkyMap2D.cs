@@ -99,12 +99,14 @@ namespace StarMap2D.Forms
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => Properties.Resources.venus },
                 IsLocationCalculated = true
             });
-            
+
+            var bodies = new SmallBodies();
+
             map2d.StarMapObjects.Add(new StarMapObject
             {
                 CalculatePosition = (aaDate, precision, latitude, longitude, radius) =>
                 {
-                    var ceres = DwarfPlanetElements.GetDwarfPlanet(DwarfPlanets.Ceres);
+                    var ceres = bodies[SolarSystemSmallBodies.Ceres];
                     var details = AASElliptical.Calculate(aaDate.Julian, ref ceres, false);
                     var coordinate = new AAS2DCoordinate
                         { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);

@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="copyright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\copyright.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="dwarf_pluto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dwarf_pluto.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\earth.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="jupiter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jupiter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -127,11 +136,74 @@
   <data name="mercury" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mercury.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="minor_planet_ceres" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_ceres.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_chiron" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_chiron.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_eris1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_eris1.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_eris2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_eris2.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_gonggong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_gonggong.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_haumea" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_haumea.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_juno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_juno.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_makemake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_makemake.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_orcus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_orcus.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_pallas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_pallas.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_quoar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_quoar.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_sedna" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_sedna.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="minor_planet_vesta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minor_planet_vesta.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="moon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\moon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="moon_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\moon.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="neptune" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neptune.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="planet_jupiter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_jupiter.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_mars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_mars.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_mercury" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_mercury.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_neptune" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_neptune.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_saturn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_saturn.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_uranus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_uranus.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="planet_venus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\planet_venus.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pluto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pluto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -141,6 +213,9 @@
   </data>
   <data name="sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sun_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sun.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="uranus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uranus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

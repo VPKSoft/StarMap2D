@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="200mm"
+   height="200mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8">
+  <metadata
+     id="metadata3806">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <circle
+       style="fill:#000000;stroke:#231f20;stroke-width:0.0529167"
+       id="path833"
+       cx="105"
+       cy="148.5"
+       r="148.47354" />
+    <path
+       id="path4369"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:285.639px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffffff;stroke-width:0.264583px"
+       d="m 117.32918,230.5708 v 26.0813 H 96.268886 V 230.5708 H 71.721784 V 209.51051 H 96.268886 V 190.12387 Q 73.255978,187.05549 56.240373,170.03988 35.319547,149.11906 35.180075,119.13254 V 107.41688 L 15.096083,127.22192 14.95661,107.69582 35.180075,86.356578 h 21.19977 l 20.083993,21.339242 v 19.5261 L 56.379845,107.41688 v 11.71566 h 0.278945 v 0.27894 h -0.278945 q 0.139473,21.0603 14.644578,35.56541 10.87883,11.0183 25.244463,13.80774 V 69.201501 L 76.045422,88.867077 75.905949,69.480445 96.268886,48.001731 h 21.060294 l 20.22347,21.478714 V 88.867077 L 117.32918,69.201501 v 99.443659 q 14.08669,-2.78944 24.82605,-13.66827 14.78405,-14.78405 14.78405,-35.70488 v -0.13947 h 0.13947 v -12.41302 l -20.08399,19.80504 -0.13947,-19.5261 20.22346,-21.339243 h 21.19977 l 20.084,21.339243 v 19.5261 l -20.084,-19.80504 v 12.41302 h 0.13948 v 0.55789 q -0.13948,29.42863 -21.0603,50.34945 -17.01561,16.87613 -40.02852,20.08399 v 19.38664 h 24.40763 v 21.06029 z" />
+  </g>
+</svg>
