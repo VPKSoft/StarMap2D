@@ -41,7 +41,7 @@ namespace StarMap2D.Calculations.Constellations.StaticData
         {
             // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
             // solution date: 2021-Nov-09 15:07:45
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1
+            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=chiron
             var elements = new AASEllipticalObjectElements
             {
                 // The eccentricity of the orbit. JPL(e): eccentricity

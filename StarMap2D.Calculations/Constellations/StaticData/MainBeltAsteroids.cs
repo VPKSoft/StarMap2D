@@ -41,7 +41,7 @@ namespace StarMap2D.Calculations.Constellations.StaticData
         {
             // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
             // solution date: 2021-Nov-10 04:32:18
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1
+            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Pallas
             var elements = new AASEllipticalObjectElements
             {
                 // The eccentricity of the orbit. JPL(e): eccentricity
@@ -77,7 +77,7 @@ namespace StarMap2D.Calculations.Constellations.StaticData
         {
             // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
             // solution date: 2021-Nov-10 04:32:18
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1
+            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Juno
             var elements = new AASEllipticalObjectElements
             {
                 // The eccentricity of the orbit. JPL(e): eccentricity
@@ -113,7 +113,7 @@ namespace StarMap2D.Calculations.Constellations.StaticData
         {
             // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
             // solution date: 2021-Apr-13 11:15:57
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1
+            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Vesta
             var elements = new AASEllipticalObjectElements
             {
                 // The eccentricity of the orbit. JPL(e): eccentricity
