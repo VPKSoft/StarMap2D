@@ -39,10 +39,9 @@ namespace VPKSoft.StarCatalogs.Providers
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<YaleSmallStarData> StarData { get; } = new();
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
-        public void LoadData(string fileName)
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        public void LoadData(string[] lines)
         {
-            var lines = File.ReadAllLines(fileName);
             foreach (var line in lines)
             {
                 var lineData = line.Replace(" ", string.Empty);
@@ -54,6 +53,13 @@ namespace VPKSoft.StarCatalogs.Providers
                     Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture)
                 });
             }
+        }
+
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+        public void LoadData(string fileName)
+        {
+            var lines = File.ReadAllLines(fileName);
+            LoadData(lines);
         }
 
         /// <inheritdoc cref="IStarDataProvider{T}.GetDataRaw"/>

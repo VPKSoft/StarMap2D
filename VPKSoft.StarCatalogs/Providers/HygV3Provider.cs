@@ -83,11 +83,9 @@ namespace VPKSoft.StarCatalogs.Providers
             "var_max",
         };
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
-        public void LoadData(string fileName)
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        public void LoadData(string[] lines)
         {
-            var lines = File.ReadAllLines(fileName);
-
             for (int i = 2; i < lines.Length; i++)
             {
                 RawDataEntries.Add(lines[i]);
@@ -102,6 +100,13 @@ namespace VPKSoft.StarCatalogs.Providers
                     Magnitude = double.Parse(GetDataRaw(rawDataEntry, "mag"), CultureInfo.InvariantCulture),
                 });
             }
+        }
+
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+        public void LoadData(string fileName)
+        {
+            var lines = File.ReadAllLines(fileName);
+            LoadData(lines);
         }
 
         private List<string> FieldNameList { get; } = new();

@@ -166,11 +166,9 @@ namespace VPKSoft.StarCatalogs.Providers
             (189, 257),
         };
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
-        public void LoadData(string fileName)
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        public void LoadData(string[] lines)
         {
-            var lines = File.ReadAllLines(fileName);
-
             RawDataEntries.AddRange(lines);
 
             foreach (var rawDataEntry in RawDataEntries)
@@ -187,7 +185,7 @@ namespace VPKSoft.StarCatalogs.Providers
                 var raMinutes = double.Parse(GetDataRaw(rawDataEntry, "RAm").Trim(), CultureInfo.InvariantCulture);
                 var raSeconds = double.Parse(GetDataRaw(rawDataEntry, "RAs").Trim(), CultureInfo.InvariantCulture);
                 var rightAscension = raHours + raMinutes / 60 + raSeconds / 3600;
-                    //AASCoordinateTransformation.HoursToDegrees(raHours + raMinutes / 60 + raSeconds / 3600);
+                //AASCoordinateTransformation.HoursToDegrees(raHours + raMinutes / 60 + raSeconds / 3600);
 
                 var deDegrees = double.Parse(GetDataRaw(rawDataEntry, "DE-").Trim() + GetDataRaw(rawDataEntry, "DEd").Trim(), CultureInfo.InvariantCulture);
                 var deMinutes = double.Parse(GetDataRaw(rawDataEntry, "DEm").Trim(), CultureInfo.InvariantCulture);
@@ -202,6 +200,14 @@ namespace VPKSoft.StarCatalogs.Providers
                     Name = name, Declination = declination, RightAscension = rightAscension, Magnitude = magnitude
                 });
             }
+        }
+
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+        public void LoadData(string fileName)
+        {
+            var lines = File.ReadAllLines(fileName);
+
+            LoadData(lines);
         }
     }
 }

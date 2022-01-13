@@ -212,6 +212,31 @@ namespace StarMap2D.CustomControls
             previousBitmap = bitmap;
         }
 
+
+        /// <inheritdoc cref="ValidDrawPoint(PointDouble)"/>
+        private bool ValidDrawPoint(Point point)
+        {
+            return ValidDrawPoint(new PointDouble { X = point.X, Y = point.Y });
+        }
+
+        /// <summary>
+        /// Checks if the specified draw point is valid for the star map.
+        /// </summary>
+        /// <param name="point">The point to check for.</param>
+        /// <returns><c>true</c> if specified point is a valid draw point, <c>false</c> otherwise.</returns>
+        private bool ValidDrawPoint(PointDouble point)
+        {
+            if (point.X < 0 && point.Y < 0)
+            {
+                return false;
+            }
+
+            var x = Width / 2.0;
+            var y = Height / 2.0;
+            var r = (double)Math.Min(Width, Height);
+            return Math.Sqrt(Math.Pow(point.X - x, 2) + Math.Pow(point.Y - y, 2)) <= r;
+        }
+
         /// <summary>
         /// Draws the specified constellation boundary on a specified graphics.
         /// </summary>
@@ -237,6 +262,11 @@ namespace StarMap2D.CustomControls
 
                 var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
                 var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
+
+                if (!ValidDrawPoint(drawPoint1) && !ValidDrawPoint(drawPoint2))
+                {
+                    continue;
+                }
 
                 graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
             }
@@ -271,7 +301,12 @@ namespace StarMap2D.CustomControls
                 var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
                 var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
 
-                graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+                if (!ValidDrawPoint(drawPoint1) && !ValidDrawPoint(drawPoint2))
+                {
+                    continue;
+                }
+
+                graphics.DrawLine(Pens.DeepSkyBlue, drawPoint1, drawPoint2);
             }
         }
         #endregion

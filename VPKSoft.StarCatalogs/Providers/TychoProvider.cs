@@ -31,13 +31,14 @@ using VPKSoft.StarCatalogs.Interfaces;
 namespace VPKSoft.StarCatalogs.Providers
 {
     /// <summary>
-    /// A data provider of Hipparcos ESA 1997 star catalog data.
+    /// A data provider of Tycho ESA 1997 star catalog data.
     /// Implements the <see cref="IStarDataProvider{T}" />
     /// </summary>
     /// <seealso cref="IStarDataProvider{T}" />
-    public class HipparcosProvider : IStarDataProvider<HipparcosStarData>
+    public class TychoProvider: IStarDataProvider<TychoStarData>
     {
-        public List<HipparcosStarData> StarData { get; } = new();
+        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+        public List<TychoStarData> StarData { get; } = new();
 
         /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
         public void LoadData(string[] lines)
@@ -54,7 +55,7 @@ namespace VPKSoft.StarCatalogs.Providers
                     continue;
                 }
 
-                var hip = int.Parse(GetDataRaw(rawDataEntry, "HIP"));
+                var tyc = GetDataRaw(rawDataEntry, "TYC").Trim();
 
                 var raData = GetDataRaw(rawDataEntry, "RAhms").Split(' ');
 
@@ -62,7 +63,6 @@ namespace VPKSoft.StarCatalogs.Providers
                 var raMinutes = double.Parse(raData[1], CultureInfo.InvariantCulture);
                 var raSeconds = double.Parse(raData[2], CultureInfo.InvariantCulture);
                 var rightAscension = raHours + raMinutes / 60 + raSeconds / 3600;
-                //AASCoordinateTransformation.HoursToDegrees(raHours + raMinutes / 60 + raSeconds / 3600);
 
                 var deData = GetDataRaw(rawDataEntry, "DEdms").Split(' ');
 
@@ -78,9 +78,9 @@ namespace VPKSoft.StarCatalogs.Providers
 
                 var magnitude = double.Parse(mag, CultureInfo.InvariantCulture);
 
-                StarData.Add(new HipparcosStarData
+                StarData.Add(new TychoStarData
                 {
-                    HIP = hip, Declination = declination, RightAscension = rightAscension, Magnitude = magnitude, 
+                    TYC = tyc, Declination = declination, RightAscension = rightAscension, Magnitude = magnitude, 
                 });
             }
         }
@@ -90,13 +90,6 @@ namespace VPKSoft.StarCatalogs.Providers
         {
             var lines = File.ReadAllLines(fileName);
             LoadData(lines);
-        }
-
-        private string ReadRaw(string lineEntry, int index, int end)
-        {
-            end += 1;
-            var result = lineEntry.Substring(index - 1, end - index);
-            return result;
         }
 
         /// <inheritdoc cref="IStarDataProvider{T}.GetDataRaw"/>
@@ -112,10 +105,15 @@ namespace VPKSoft.StarCatalogs.Providers
             return ReadRaw(rawDataEntry, FieldPositions[index].start, FieldPositions[index].end);
         }
 
+        private string ReadRaw(string lineEntry, int index, int end)
+        {
+            end += 1;
+            var result = lineEntry.Substring(index - 1, end - index);
+            return result;
+        }
 
         /// <inheritdoc cref="IStarDataProvider{T}.RawDataEntries"/>
         public List<string> RawDataEntries { get; } = new();
-
 
         /// <summary>
         /// The field names of the star data of this provider.
@@ -123,12 +121,12 @@ namespace VPKSoft.StarCatalogs.Providers
         public static readonly string[] FieldNames =
         {
             "Catalog",
-            "HIP",
+            "TYC",
             "Proxy",
             "RAhms",
             "DEdms",
             "Vmag",
-            "VarFlag",
+            "---N/A_1", // Reserved field.
             "r_Vmag",
             "RAdeg",
             "DEdeg",
@@ -151,61 +149,41 @@ namespace VPKSoft.StarCatalogs.Providers
             "pmDE:DE",
             "pmDE:Plx",
             "pmDE:pmRA",
-            "F1",
+            "Nastro",
             "F2",
-            "HIPr",
+            "HIP",
             "BTmag",
             "e_BTmag",
             "VTmag",
             "e_VTmag",
-            "m_BTmag",
+            "r_BTmag",
             "B-V",
             "e_B-V",
-            "r_B-V",
-            "V-I",
-            "e_V-I",
-            "r_V-I",
-            "CombMag",
-            "Hpmag",
-            "e_Hpmag",
-            "Hpscat",
-            "o_Hpmag",
-            "m_Hpmag",
-            "Hpmax",
-            "HPmin",
-            "Period",
-            "HvarType",
-            "moreVar",
-            "morePhoto",
-            "CCDM",
-            "n_CCDM",
-            "Nsys",
-            "Ncomp",
-            "MultFlag",
+            "---N/A_2", // Reserved field.
+            "Q",
+            "Fs",
             "Source",
-            "Qual",
+            "Nphoto",
+            "VTscat",
+            "VTmax",
+            "VTmin",
+            "Var",
+            "VarFlag",
+            "MultFlag",
+            "morePhoto",
             "m_HIP",
-            "theta",
-            "rho",
-            "e_rho",
-            "dHp",
-            "e_dHp",
-            "Survey",
-            "Chart",
-            "Notes",
+            "PPM",
             "HD",
             "BD",
             "CoD",
             "CPD",
-            "(V-I)red",
-            "SpType",
-            "r_SpType",
+            "Remark",
         };
 
         private static readonly (int start, int end)[] FieldPositions =
         {
             (1, 1),
-            (9, 14),
+            (3, 14),
             (16, 16),
             (18, 28),
             (30, 40),
@@ -244,44 +222,24 @@ namespace VPKSoft.StarCatalogs.Providers
             (246, 251),
             (253, 257),
             (259, 259),
-            (261, 264),
-            (266, 269),
-            (271, 271),
-            (273, 273),
-            (275, 281),
-            (283, 288),
-            (290, 294),
-            (296, 298),
-            (300, 300),
-            (302, 306),
-            (308, 312),
-            (314, 320),
-            (322, 322),
-            (324, 324),
-            (326, 326),
+            (261, 261),
+            (263, 266),
+            (268, 268),
+            (270, 272),
+            (274, 278),
+            (280, 284),
+            (286, 290),
+            (292, 292),
+            (294, 294),
+            (296, 296),
+            (298, 298),
+            (300, 301),
+            (303, 308),
+            (310, 315),
+            (317, 326),
             (328, 337),
-            (339, 339),
-            (341, 342),
-            (344, 345),
-            (347, 347),
-            (349, 349),
-            (351, 351),
-            (353, 354),
-            (356, 358),
-            (360, 366),
-            (368, 372),
-            (374, 378),
-            (380, 383),
-            (385, 385),
-            (387, 387),
-            (389, 389),
-            (391, 396),
-            (398, 407),
-            (409, 418),
-            (420, 429),
-            (431, 434),
-            (436, 447),
-            (449, 449),
+            (339, 348),
+            (350, 350),
         };
     }
 }

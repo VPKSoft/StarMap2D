@@ -28,6 +28,7 @@ using System.Globalization;
 using AASharp;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.CustomControls;
 using VPKSoft.LangLib;
@@ -131,52 +132,24 @@ namespace StarMap2D.Forms
                 Magnitude = -6.4,
             });
 
-            /*
-            var gliese3rdProvider = new Gliese3rdProvider();
-            gliese3rdProvider.LoadData(@"C:\Users\Petteri Kautonen\Downloads\catalog.dat\catalog - Copy.dat");
+            var yaleBrightProvider = new YaleBrightProvider();
 
-            foreach (var gliese3rdData in gliese3rdProvider.StarData)
-            {
-                map2d1.StarMapObjects.Add(new StarMapObject { RightAscension = gliese3rdData.RightAscension, Declination = gliese3rdData.Declination, Magnitude = gliese3rdData.Magnitude});
-            }
-            */
-
-            /*
-            var hygV3Provider = new HygV3Provider();
-            hygV3Provider.LoadData(@"C:\Users\Petteri Kautonen\Downloads\catalog.dat\hygdata_v3.csv");
-
-            foreach (var hygV3StartData in hygV3Provider.StarData)
-            {
-                map2d1.StarMapObjects.Add(new StarMapObject { RightAscension = hygV3StartData.RightAscension, Declination = hygV3StartData.Declination, Magnitude = hygV3StartData.Magnitude});
-            }
-            */
-
+            using var reader = new StreamReader(new MemoryStream(Properties.Resources.YaleBrightStars));
             
-            var yaleBrightStarProvider = new YaleBrightProvider();
-            yaleBrightStarProvider.LoadData(@"C:\Users\Petteri Kautonen\Downloads\catalog.dat\bsc5.dat");
+            yaleBrightProvider.LoadData(reader.ReadAllLines());
 
-            foreach (var yaleBrightStarData in yaleBrightStarProvider.StarData)
+            foreach (var yaleBrightStar in yaleBrightProvider.StarData)
             {
-                map2d.StarMapObjects.Add(new StarMapObject { RightAscension = yaleBrightStarData.RightAscension, Declination = yaleBrightStarData.Declination, Magnitude = yaleBrightStarData.Magnitude});
+                map2d.StarMapObjects.Add(new StarMapObject { RightAscension = yaleBrightStar.RightAscension, Declination = yaleBrightStar.Declination, Magnitude = yaleBrightStar.Magnitude});
             }
-            
-
-
-            /*
-            var yaleSmallProvider = new YaleSmallProvider();
-            yaleSmallProvider.LoadData(@"C:\Users\Petteri Kautonen\Documents\Visual Studio 2013\Projects\Starmap\Data\StarData\yale.dat");
-
-            foreach (var yaleSmallData in yaleSmallProvider.StarData)
-            {
-                map2d1.StarMapObjects.Add(new StarMapObject { RightAscension = yaleSmallData.RightAscension, Declination = yaleSmallData.Declination, Magnitude = yaleSmallData.Magnitude});
-            }
-            */
         }
-
-        private DateTime dateTimeEnd = new (2022, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc);
 
         private static FormSkyMap2D? singletonInstance;
 
+        /// <summary>
+        /// Displays the <see cref="FormSkyMap2D"/> window.
+        /// </summary>
+        /// <param name="owner">The owner of the form.</param>
         public static void Display(IWin32Window? owner)
         {
             if (singletonInstance == null)
@@ -187,6 +160,7 @@ namespace StarMap2D.Forms
             singletonInstance.Show(owner);
         }
 
+        #region InternalEvents
         private void tmSetTime_Tick(object sender, EventArgs e)
         {
             map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddSeconds(60);
@@ -220,5 +194,6 @@ namespace StarMap2D.Forms
         {
             singletonInstance = null;
         }
+        #endregion
     }
 }

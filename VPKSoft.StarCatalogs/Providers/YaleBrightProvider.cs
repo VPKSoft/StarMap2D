@@ -40,11 +40,9 @@ namespace VPKSoft.StarCatalogs.Providers
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<YaleBrightStarData> StarData { get; } = new();
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
-        public void LoadData(string fileName)
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        public void LoadData(string[] lines)
         {
-            var lines = File.ReadAllLines(fileName);
-
             RawDataEntries.AddRange(lines);
 
             foreach (var rawDataEntry in RawDataEntries)
@@ -86,6 +84,13 @@ namespace VPKSoft.StarCatalogs.Providers
                     // Erroneous record.
                 }
             }
+        }
+
+        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+        public void LoadData(string fileName)
+        {
+            var lines = File.ReadAllLines(fileName);
+            LoadData(lines);
         }
 
 

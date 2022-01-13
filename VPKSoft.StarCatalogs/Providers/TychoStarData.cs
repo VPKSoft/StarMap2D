@@ -24,9 +24,31 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Drawing
+using VPKSoft.StarCatalogs.Interfaces;
+
+namespace VPKSoft.StarCatalogs.Providers
 {
-    public class ObjectImages
+    /// <summary>
+    /// Star data entry for the Tycho catalog.
+    /// Implements the <see cref="IStarData" />
+    /// </summary>
+    /// <seealso cref="IStarData" />
+    public class TychoStarData: IStarData
     {
+        /// <summary>
+        /// Gets or sets the TYC number.
+        /// </summary>
+        /// <value>The TYC number.</value>
+        // ReSharper disable once InconsistentNaming
+        public string TYC { get; set; } = string.Empty;
+
+        /// <inheritdoc cref="IStarData.RightAscension"/>
+        public double RightAscension { get; set; }
+
+        /// <inheritdoc cref="IStarData.Declination"/>
+        public double Declination { get; set; }
+
+        /// <inheritdoc cref="IStarData.Magnitude"/>
+        public double Magnitude { get; set; }
     }
 }

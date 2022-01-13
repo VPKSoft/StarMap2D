@@ -45,6 +45,12 @@ namespace VPKSoft.StarCatalogs.Interfaces
         void LoadData(string fileName);
 
         /// <summary>
+        /// Loads the star data from a specified collection of data lines.
+        /// </summary>
+        /// <param name="lines">The lines containing the data.</param>
+        void LoadData(string[] lines);
+
+        /// <summary>
         /// Gets the raw data of the star based by the data field name.
         /// </summary>
         /// <param name="rawDataEntry">The raw data entry.</param>
