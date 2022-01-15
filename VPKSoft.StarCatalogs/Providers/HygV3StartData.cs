@@ -43,5 +43,15 @@ namespace VPKSoft.StarCatalogs.Providers
 
         /// <inheritdoc cref="IStarData.Magnitude"/>
         public double Magnitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Hipparcos identifier for the data entry.
+        /// </summary>
+        /// <value>The Hipparcos identifier for the data entry.</value>
+        // ReSharper disable once InconsistentNaming
+        public int HIP { get; set; }
+
+        /// <inheritdoc cref="IStarData.RawData"/>
+        public string? RawData { get; set; }
     }
 }

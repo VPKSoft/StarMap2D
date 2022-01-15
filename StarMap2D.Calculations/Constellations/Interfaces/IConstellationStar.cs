@@ -35,36 +35,48 @@ namespace StarMap2D.Calculations.Constellations.Interfaces
         /// Gets or sets the constellation identifier.
         /// </summary>
         /// <value>The constellation identifier.</value>
-        public string? Identifier { get; init; }
+        string Identifier { get; set; }
+
+        /// <summary>
+        /// Gets or sets the proper of the star.
+        /// </summary>
+        /// <value>The proper of the star.</value>
+        string ProperName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the star.
+        /// </summary>
+        /// <value>The name of the star.</value>
+        string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the right ascension.
         /// </summary>
         /// <value>The right ascension.</value>
-        public double RightAscension { get; init; }
+        double RightAscension { get; init; }
 
         /// <summary>
         /// Gets or sets the declination.
         /// </summary>
         /// <value>The declination.</value>
-        public double Declination { get; init; }
+        double Declination { get; init; }
 
         /// <summary>
-        /// Gets or sets the right ascension degrees.
+        /// Gets or sets the right ascension hours.
         /// </summary>
-        /// <value>The right ascension degrees.</value>
-        public double Rad { get; init; }
+        /// <value>The right ascension hours.</value>
+        double Rah { get; init; }
 
         /// <summary>
         /// Gets or sets the right ascension minutes.
         /// </summary>
         /// <value>The right ascension minutes.</value>
-        public double Ram { get; init; }
+        double Ram { get; init; }
 
         /// <summary>
         /// Gets or sets the right ascension seconds.
         /// </summary>
         /// <value>The right ascension seconds.</value>
-        public double Ras { get; init; }
+        double Ras { get; init; }
     }
 }

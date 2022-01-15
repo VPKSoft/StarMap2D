@@ -96,5 +96,41 @@ namespace StarMap2D.Properties {
                 this["DefaultLocationName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DeepSkyBlue")]
+        public global::System.Drawing.Color ConstellationLineColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ConstellationLineColor"]));
+            }
+            set {
+                this["ConstellationLineColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("13, 23, 125")]
+        public global::System.Drawing.Color ConstellationBorderLineColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ConstellationBorderLineColor"]));
+            }
+            set {
+                this["ConstellationBorderLineColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color MapCircleColor {
+            get {
+                return ((global::System.Drawing.Color)(this["MapCircleColor"]));
+            }
+            set {
+                this["MapCircleColor"] = value;
+            }
+        }
     }
 }

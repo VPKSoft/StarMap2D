@@ -56,6 +56,8 @@ namespace StarMap2D.CustomControls
             base.Margin = new Padding(0);
             mapBrush = new SolidBrush(mapCircleColor);
             backgroundBrush = new SolidBrush(BackColor);
+            constellationLinePen = new Pen(constellationLineColor);
+            constellationBorderPen = new Pen(constellationBorderLineColor);
             base.DoubleBuffered = true;
             DrawMapImage();
             HandleCreated += Map2D_NeedsRepaint;
@@ -88,11 +90,15 @@ namespace StarMap2D.CustomControls
 
         #region PrivateFields
         private Color mapCircleColor = Color.Black;
+        private Color constellationLineColor = Color.DeepSkyBlue;
+        private Color constellationBorderLineColor = Color.FromArgb(13, 23, 125);
+        private Pen constellationLinePen;
+        private Pen constellationBorderPen;
         private SolidBrush mapBrush;
         private SolidBrush backgroundBrush;
         private Bitmap? previousBitmap;
         private Plot2D? plot2D;
-        private List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
+        private readonly List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
         #endregion
 
         #region PrivateProperties
@@ -202,7 +208,7 @@ namespace StarMap2D.CustomControls
 
                 foreach (var constellation in constellations)
                 {
-                    //5DrawConstellationBoundary(constellation, graphics);
+                    DrawConstellationBoundary(constellation, graphics);
                     DrawConstellation(constellation, graphics);
                 }
             }
@@ -249,7 +255,7 @@ namespace StarMap2D.CustomControls
                 return;
             }
 
-            for (int i = 0; i < constellation.Boundary.Count - 1; i++)
+            for (var i = 0; i < constellation.Boundary.Count - 1; i++)
             {
                 var point1 = new AAS2DCoordinate
                     { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
@@ -268,7 +274,7 @@ namespace StarMap2D.CustomControls
                     continue;
                 }
 
-                graphics.DrawLine(Pens.White, drawPoint1, drawPoint2);
+                graphics.DrawLine(constellationBorderPen!, drawPoint1, drawPoint2);
             }
         }
 
@@ -285,14 +291,20 @@ namespace StarMap2D.CustomControls
                 return;
             }
 
-            foreach (var orionConstellationLine in constellation.ConstellationLines)
+            foreach (var constellationLine in constellation.ConstellationLines)
             {
+                var star1 = ConstellationStars.ConstellationStarsDf.First(f =>
+                    f.InternalId == constellationLine.StartIdentifier);
+
+                var star2 = ConstellationStars.ConstellationStarsDf.First(f =>
+                    f.InternalId == constellationLine.EndIdentifier);
+
                 var point1 = new AAS2DCoordinate
-                        { X = orionConstellationLine.RightAscensionStart % 360, Y = orionConstellationLine.DeclinationStart }
+                        { X = star1.RightAscension, Y = star1.Declination }
                     .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                 var point2 = new AAS2DCoordinate
-                        { X = orionConstellationLine.RightAscensionEnd % 360, Y = orionConstellationLine.DeclinationEnd }
+                        { X = star2.RightAscension, Y = star2.Declination }
                     .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                 var pointD1 = Plot2D.Project2D(point1);
@@ -306,7 +318,7 @@ namespace StarMap2D.CustomControls
                     continue;
                 }
 
-                graphics.DrawLine(Pens.DeepSkyBlue, drawPoint1, drawPoint2);
+                graphics.DrawLine(constellationLinePen!, drawPoint1, drawPoint2);
             }
         }
         #endregion
@@ -356,9 +368,55 @@ namespace StarMap2D.CustomControls
             {
                 if (mapCircleColor != value)
                 {
+                    mapBrush?.Dispose();
                     mapCircleColor = value;
-                    mapBrush = new SolidBrush(mapCircleColor);
-                    mapBrush.Dispose();
+                    mapBrush = new SolidBrush(value);
+                    DrawMapImage();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the constellation lines.
+        /// </summary>
+        /// <value>The color of the constellation lines.</value>
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("The color of the constellation lines.")]
+        public Color ConstellationLineColor
+        {
+            get => constellationLineColor;
+
+            set
+            {
+                if (constellationLineColor != value)
+                {
+                    constellationLinePen?.Dispose();
+                    constellationLineColor = value;
+                    constellationLinePen = new Pen(value);
+                    DrawMapImage();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the constellation border lines.
+        /// </summary>
+        /// <value>The color of the constellation border lines.</value>
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("The color of the constellation border lines.")]
+        public Color ConstellationBorderLineColor
+        {
+            get => constellationBorderLineColor;
+
+            set
+            {
+                if (constellationBorderLineColor != value)
+                {
+                    constellationBorderPen?.Dispose();
+                    constellationBorderLineColor = value;
+                    constellationBorderPen = new Pen(value);
                     DrawMapImage();
                 }
             }

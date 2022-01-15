@@ -93,11 +93,17 @@ namespace VPKSoft.StarCatalogs.Providers
 
             foreach (var rawDataEntry in RawDataEntries)
             {
+                var hipId = -1;
+
+                int.TryParse(GetDataRaw(rawDataEntry, "hip"), out hipId);
+
                 StarData.Add(new HygV3StartData
                 {
                     Declination = double.Parse(GetDataRaw(rawDataEntry, "dec"), CultureInfo.InvariantCulture),
                     RightAscension = double.Parse(GetDataRaw(rawDataEntry, "ra"), CultureInfo.InvariantCulture),
                     Magnitude = double.Parse(GetDataRaw(rawDataEntry, "mag"), CultureInfo.InvariantCulture),
+                    HIP = hipId,
+                    RawData = rawDataEntry,
                 });
             }
         }

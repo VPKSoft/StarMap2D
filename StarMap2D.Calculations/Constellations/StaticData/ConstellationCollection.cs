@@ -34,7 +34,7 @@ namespace StarMap2D.Calculations.Constellations.StaticData
         /// <summary>
         /// A list of constellations defined by IAU.
         /// </summary>
-        public static IReadOnlyList<ConstellationNameIdentifier> Constellations = new ConstellationNameIdentifier[]
+        public static IReadOnlyList<ConstellationNameIdentifier> Constellations { get; } = new ConstellationNameIdentifier[]
         {
             new()
             {

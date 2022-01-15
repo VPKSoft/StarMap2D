@@ -24,10 +24,15 @@ SOFTWARE.
 */
 #endregion
 
+using System.Globalization;
+using AASharp;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.HelperClasses;
+using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D
 {

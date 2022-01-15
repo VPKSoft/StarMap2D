@@ -48,5 +48,11 @@ namespace VPKSoft.StarCatalogs.Interfaces
         /// </summary>
         /// <value>The magnitude of the star.</value>
         double Magnitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the raw star data of the catalog.
+        /// </summary>
+        /// <value>The raw star data of the catalog.</value>
+        string? RawData { get; set; }
     }
 }

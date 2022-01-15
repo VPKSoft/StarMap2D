@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Calculations.Constellations.Enumerations;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
 
@@ -46,7 +47,6 @@ namespace StarMap2D.Calculations.Constellations.ConstellationClasses
             Boundary = ConstellationBoundary.ConstellationBoundaries.Where(f => f.Identifier == Identifier).ToList();
             ConstellationLines = StaticData.ConstellationLines.Lines
                 .Where(f => f.Identifier == Identifier).ToList();
-
         }
 
         /// <inheritdoc cref="IConstellation{T, TLines}.Identifier"/>

@@ -48,5 +48,8 @@ namespace VPKSoft.StarCatalogs.Providers
 
         /// <inheritdoc cref="IStarData.Magnitude"/>
         public double Magnitude { get; set; }
+
+        /// <inheritdoc cref="IStarData.RawData"/>
+        public string? RawData { get; set; }
     }
 }

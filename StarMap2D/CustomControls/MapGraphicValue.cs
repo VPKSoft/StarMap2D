@@ -24,30 +24,32 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Constellations.Interfaces
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StarMap2D.CustomControls
 {
     /// <summary>
-    /// An interface for constellation line data.
+    /// An enumeration of graphical elements in the 2D star map.
     /// </summary>
-    public interface IConstellationLine
+    public enum MapGraphicValue
     {
         /// <summary>
-        /// Gets or sets the constellation identifier.
+        /// The map circle color.
         /// </summary>
-        /// <value>The constellation identifier.</value>
-        string? Identifier { get; init; }
+        MapCircleColor,
 
         /// <summary>
-        /// Gets or sets the identifier for the start star.
+        /// The constellation line color.
         /// </summary>
-        /// <value>The identifier for the start star.</value>
-        int StartIdentifier { get; set; }
-
+        ConstellationLineColor,
 
         /// <summary>
-        /// Gets or sets the internal identifier for the end star.
+        /// The constellation border line color.
         /// </summary>
-        /// <value>The internal identifier for the end star.</value>
-        int EndIdentifier { get; set; }
+        ConstellationBorderLineColor,
     }
 }

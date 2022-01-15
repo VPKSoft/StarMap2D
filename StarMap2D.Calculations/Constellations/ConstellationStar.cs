@@ -36,21 +36,33 @@ namespace StarMap2D.Calculations.Constellations
     public class ConstellationStar: IConstellationStar
     {
         /// <inheritdoc cref="IConstellationStar.Identifier"/>
-        public string? Identifier { get; init; }
+        public string Identifier { get; set; } = string.Empty;
 
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
+        /// <inheritdoc cref="IConstellationStar.ProperName"/>
+        public string ProperName { get; set; } = string.Empty;
+
+        /// <inheritdoc cref="IConstellationStar.Name"/>
+        public string Name { get; set; } = string.Empty;
+
+        /// <inheritdoc cref="IConstellationStar.RightAscension"/>
         public double RightAscension { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
+        /// <inheritdoc cref="IConstellationStar.Declination"/>
         public double Declination { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
-        public double Rad { get; init; }
+        /// <inheritdoc cref="IConstellationStar.Rah"/>
+        public double Rah { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
+        /// <inheritdoc cref="IConstellationStar.Ram"/>
         public double Ram { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
+        /// <inheritdoc cref="IConstellationStar.Ras"/>
         public double Ras { get; init; }
+
+        /// <summary>
+        /// Gets or sets the internal identifier for the star.
+        /// </summary>
+        /// <value>The internal identifier for the star.</value>
+        public int InternalId { get; set; }
     }
 }

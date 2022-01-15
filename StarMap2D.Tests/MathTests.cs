@@ -24,9 +24,11 @@ SOFTWARE.
 */
 #endregion
 
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StarMap2D.Calculations.Constellations.ConstellationClasses;
+using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs;
 
@@ -72,10 +74,23 @@ namespace StarMap2D.Tests
             // Test that the constellation Orion is inside Orion boundaries ;-)
             foreach (var line in orion.ConstellationLines)
             {
-                var inPolygon = PolygonShapes.PointInPolygon(coordinates, line.RightAscensionStart, line.DeclinationStart);
+                var lineStarStart =
+                    ConstellationStars.ConstellationStarsSMap.FirstOrDefault(f =>
+                        f.InternalId == line.StartIdentifier);
+
+                var lineStarEnd =
+                    ConstellationStars.ConstellationStarsSMap.FirstOrDefault(f =>
+                        f.InternalId == line.EndIdentifier);
+
+                Assert.IsNotNull(lineStarStart);
+                Assert.IsNotNull(lineStarEnd);
+
+                var inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarStart.RightAscension,
+                    lineStarStart.Declination);
                 Assert.IsTrue(inPolygon);
 
-                inPolygon = PolygonShapes.PointInPolygon(coordinates, line.RightAscensionEnd, line.DeclinationEnd);
+                inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarEnd.RightAscension,
+                    lineStarEnd.Declination);
                 Assert.IsTrue(inPolygon);
             }
         }

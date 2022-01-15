@@ -36,16 +36,10 @@ namespace StarMap2D.Calculations.Constellations
         /// <inheritdoc cref="IConstellationLine.Identifier"/>
         public string? Identifier { get; init; }
 
-        /// <inheritdoc cref="IConstellationLine.RightAscensionStart"/>
-        public double RightAscensionStart { get; init; }
+        /// <inheritdoc cref="IConstellationLine.StartIdentifier"/>
+        public int StartIdentifier { get; set; }
 
-        /// <inheritdoc cref="IConstellationLine.RightAscensionEnd"/>
-        public double RightAscensionEnd { get; init; }
-
-        /// <inheritdoc cref="IConstellationLine.DeclinationStart"/>
-        public double DeclinationStart { get; set; }
-
-        /// <inheritdoc cref="IConstellationLine.DeclinationEnd"/>
-        public double DeclinationEnd { get; set; }
+        /// <inheritdoc cref="IConstellationLine.EndIdentifier"/>
+        public int EndIdentifier { get; set; }
     }
 }

@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Calculations.Constellations.Enumerations;
+
 namespace StarMap2D.Calculations.Constellations.StaticData
 {
     /// <summary>
@@ -32,3420 +34,1390 @@ namespace StarMap2D.Calculations.Constellations.StaticData
     public class ConstellationLines
     {
         /// <summary>
+        /// Gets or sets the figure flavor for the constellation lines.
+        /// </summary>
+        /// <value>The figure flavor.</value>
+        public static ConstellationFigureFlavor FigureFlavor { get; set; } = ConstellationFigureFlavor.LinesDf;
+
+        /// <summary>
         /// The constellation lines (stick figures).
         /// </summary>
-        public static readonly ConstellationLine[] Lines =
+        /// <value>The lines (stick figures).</value>
+        public static ConstellationLine[] Lines
         {
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 0.13976888, DeclinationStart = 29.09082805,
-                RightAscensionEnd = 0.65544371, DeclinationEnd = 30.86122579,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 0.65544371, DeclinationStart = 30.86122579,
-                RightAscensionEnd = 1.16216599, DeclinationEnd = 35.62083048,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 0.83023048, DeclinationStart = 41.07895474,
-                RightAscensionEnd = 0.94586046, DeclinationEnd = 38.49925513,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 0.94586046, DeclinationStart = 38.49925513,
-                RightAscensionEnd = 1.16216599, DeclinationEnd = 35.62083048,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 1.16216599, DeclinationStart = 35.62083048,
-                RightAscensionEnd = 1.61332694, DeclinationEnd = 41.40638491,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 1.61332694, DeclinationStart = 41.40638491,
-                RightAscensionEnd = 1.6331951, DeclinationEnd = 48.62848641,
-            },
-            new()
-            {
-                Identifier = "AND", RightAscensionStart = 2.06497752, DeclinationStart = 42.32984832,
-                RightAscensionEnd = 1.61332694, DeclinationEnd = 41.40638491,
-            },
-            new()
-            {
-                Identifier = "ANT", RightAscensionStart = 10.4525433, DeclinationStart = -31.06780228,
-                RightAscensionEnd = 10.94527675, DeclinationEnd = -37.1374629,
-            },
-            new()
-            {
-                Identifier = "ANT", RightAscensionStart = 9.48742707, DeclinationStart = -35.9513478,
-                RightAscensionEnd = 9.73670284, DeclinationEnd = -27.76956287,
-            },
-            new()
-            {
-                Identifier = "ANT", RightAscensionStart = 9.73670284, DeclinationStart = -27.76956287,
-                RightAscensionEnd = 10.4525433, DeclinationEnd = -31.06780228,
-            },
-            new()
-            {
-                Identifier = "APS", RightAscensionStart = 14.79770171, DeclinationStart = -79.04471242,
-                RightAscensionEnd = 16.33912085, DeclinationEnd = -78.69565609,
-            },
-            new()
-            {
-                Identifier = "APS", RightAscensionStart = 16.33912085, DeclinationStart = -78.69565609,
-                RightAscensionEnd = 16.55762893, DeclinationEnd = -78.89695917,
-            },
-            new()
-            {
-                Identifier = "APS", RightAscensionStart = 16.55762893, DeclinationStart = -78.89695917,
-                RightAscensionEnd = 16.71817212, DeclinationEnd = -77.51657182,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 18.99371922, DeclinationStart = 15.06847757,
-                RightAscensionEnd = 19.09017012, DeclinationEnd = 13.86370983,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.02801149, DeclinationStart = -5.73901832,
-                RightAscensionEnd = 19.10415275, DeclinationEnd = -4.88233456,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.09017012, DeclinationStart = 13.86370983,
-                RightAscensionEnd = 19.77099171, DeclinationEnd = 10.61326869,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.10415275, DeclinationStart = -4.88233456,
-                RightAscensionEnd = 19.42493129, DeclinationEnd = 3.11457923,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.42493129, DeclinationStart = 3.11457923,
-                RightAscensionEnd = 19.09017012, DeclinationEnd = 13.86370983,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.77099171, DeclinationStart = 10.61326869,
-                RightAscensionEnd = 19.84630057, DeclinationEnd = 8.86738491,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.84630057, DeclinationStart = 8.86738491,
-                RightAscensionEnd = 19.92187948, DeclinationEnd = 6.40793334,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.8745455, DeclinationStart = 1.00567827,
-                RightAscensionEnd = 19.42493129, DeclinationEnd = 3.11457923,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 19.92187948, DeclinationStart = 6.40793334,
-                RightAscensionEnd = 20.18840688, DeclinationEnd = -0.82147569,
-            },
-            new()
-            {
-                Identifier = "AQL", RightAscensionStart = 20.18840688, DeclinationStart = -0.82147569,
-                RightAscensionEnd = 19.8745455, DeclinationEnd = 1.00567827,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 20.79459238, DeclinationStart = -9.49568988,
-                RightAscensionEnd = 20.87755716, DeclinationEnd = -8.98323782,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 20.87755716, DeclinationStart = -8.98323782,
-                RightAscensionEnd = 21.52597796, DeclinationEnd = -5.57115593,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 21.52597796, DeclinationStart = -5.57115593,
-                RightAscensionEnd = 22.09639591, DeclinationEnd = -0.31982656,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.09639591, DeclinationStart = -0.31982656,
-                RightAscensionEnd = 22.28054621, DeclinationEnd = -7.78323706,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.09639591, DeclinationStart = -0.31982656,
-                RightAscensionEnd = 22.36091665, DeclinationEnd = -1.38735315,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.28054621, DeclinationStart = -7.78323706,
-                RightAscensionEnd = 22.10727926, DeclinationEnd = -13.86954013,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.36091665, DeclinationStart = -1.38735315,
-                RightAscensionEnd = 22.48050015, DeclinationEnd = -0.02006304,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.48050015, DeclinationStart = -0.02006304,
-                RightAscensionEnd = 23.23870347, DeclinationEnd = -6.0485268,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.8265305, DeclinationStart = -13.59253756,
-                RightAscensionEnd = 22.91084423, DeclinationEnd = -15.82075994,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.87690679, DeclinationStart = -7.57967878,
-                RightAscensionEnd = 22.8265305, DeclinationEnd = -13.59253756,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 22.91084423, DeclinationStart = -15.82075994,
-                RightAscensionEnd = 23.15743391, DeclinationEnd = -21.17248555,
-            },
-            new()
-            {
-                Identifier = "AQR", RightAscensionStart = 23.23870347, DeclinationStart = -6.0485268,
-                RightAscensionEnd = 22.87690679, DeclinationEnd = -7.57967878,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 16.82975317, DeclinationStart = -59.04131648,
-                RightAscensionEnd = 16.97700854, DeclinationEnd = -55.99005508,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 16.97700854, DeclinationStart = -55.99005508,
-                RightAscensionEnd = 16.99306851, DeclinationEnd = -53.16049005,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 16.97700854, DeclinationStart = -55.99005508,
-                RightAscensionEnd = 17.42323884, DeclinationEnd = -56.37768824,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 16.99306851, DeclinationStart = -53.16049005,
-                RightAscensionEnd = 17.53070044, DeclinationEnd = -49.87598159,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 17.42166588, DeclinationStart = -55.52982397,
-                RightAscensionEnd = 17.42323884, DeclinationEnd = -56.37768824,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 17.42323884, DeclinationStart = -56.37768824,
-                RightAscensionEnd = 17.51832693, DeclinationEnd = -60.68360667,
-            },
-            new()
-            {
-                Identifier = "ARA", RightAscensionStart = 17.53070044, DeclinationStart = -49.87598159,
-                RightAscensionEnd = 17.42166588, DeclinationEnd = -55.52982397,
-            },
-            new()
-            {
-                Identifier = "ARI", RightAscensionStart = 1.892157, DeclinationStart = 19.29409264,
-                RightAscensionEnd = 1.91065251, DeclinationEnd = 20.80829949,
-            },
-            new()
-            {
-                Identifier = "ARI", RightAscensionStart = 1.91065251, DeclinationStart = 20.80829949,
-                RightAscensionEnd = 2.11952383, DeclinationEnd = 23.46277743,
-            },
-            new()
-            {
-                Identifier = "ARI", RightAscensionStart = 2.11952383, DeclinationStart = 23.46277743,
-                RightAscensionEnd = 2.8330526, DeclinationEnd = 27.26079044,
-            },
-            new()
-            {
-                Identifier = "AUR", RightAscensionStart = 5.10857473, DeclinationStart = 41.23464074,
-                RightAscensionEnd = 5.27813767, DeclinationEnd = 45.99902927,
-            },
-            new()
-            {
-                Identifier = "AUR", RightAscensionStart = 5.27813767, DeclinationStart = 45.99902927,
-                RightAscensionEnd = 5.99215817, DeclinationEnd = 44.94743492,
-            },
-            new()
-            {
-                Identifier = "AUR", RightAscensionStart = 5.99215817, DeclinationStart = 44.94743492,
-                RightAscensionEnd = 5.10857473, DeclinationEnd = 41.23464074,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 13.78778795, DeclinationStart = 17.45677436,
-                RightAscensionEnd = 13.91142116, DeclinationEnd = 18.39858742,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 13.82463829, DeclinationStart = 15.79780583,
-                RightAscensionEnd = 13.78778795, DeclinationEnd = 17.45677436,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 13.91142116, DeclinationStart = 18.39858742,
-                RightAscensionEnd = 14.2612076, DeclinationEnd = 19.18726997,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.2612076, DeclinationStart = 19.18726997,
-                RightAscensionEnd = 14.53051606, DeclinationEnd = 30.37114497,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.2612076, DeclinationStart = 19.18726997,
-                RightAscensionEnd = 14.74979191, DeclinationEnd = 27.07417383,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.27310454, DeclinationStart = 46.08791894,
-                RightAscensionEnd = 14.22437444, DeclinationEnd = 51.78787676,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.53051606, DeclinationStart = 30.37114497,
-                RightAscensionEnd = 14.53465494, DeclinationEnd = 38.30788348,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.53465494, DeclinationStart = 38.30788348,
-                RightAscensionEnd = 14.27310454, DeclinationEnd = 46.08791894,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.67876693, DeclinationStart = 16.4183013,
-                RightAscensionEnd = 14.2612076, DeclinationEnd = 19.18726997,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.68581121, DeclinationStart = 13.72833113,
-                RightAscensionEnd = 14.67876693, DeclinationEnd = 16.4183013,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 14.74979191, DeclinationStart = 27.07417383,
-                RightAscensionEnd = 15.25836216, DeclinationEnd = 33.31510222,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 15.03244253, DeclinationStart = 40.39063671,
-                RightAscensionEnd = 14.53465494, DeclinationEnd = 38.30788348,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 15.25836216, DeclinationStart = 33.31510222,
-                RightAscensionEnd = 15.03244253, DeclinationEnd = 40.39063671,
-            },
-            new()
-            {
-                Identifier = "BOO", RightAscensionStart = 15.4082045, DeclinationStart = 37.37696091,
-                RightAscensionEnd = 15.25836216, DeclinationEnd = 33.31510222,
-            },
-            new()
-            {
-                Identifier = "CAE", RightAscensionStart = 4.67606197, DeclinationStart = -41.86357034,
-                RightAscensionEnd = 4.7009573, DeclinationEnd = -37.14476616,
-            },
-            new()
-            {
-                Identifier = "CAM", RightAscensionStart = 4.90083628, DeclinationStart = 66.34266029,
-                RightAscensionEnd = 3.83929883, DeclinationEnd = 71.33236777,
-            },
-            new()
-            {
-                Identifier = "CAM", RightAscensionStart = 4.95478345, DeclinationStart = 53.75208289,
-                RightAscensionEnd = 5.05697146, DeclinationEnd = 60.44228144,
-            },
-            new()
-            {
-                Identifier = "CAM", RightAscensionStart = 5.05697146, DeclinationStart = 60.44228144,
-                RightAscensionEnd = 4.90083628, DeclinationEnd = 66.34266029,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 20.29412669, DeclinationStart = -12.50821403,
-                RightAscensionEnd = 20.35017956, DeclinationEnd = -14.78140119,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 20.35017956, DeclinationStart = -14.78140119,
-                RightAscensionEnd = 20.76826836, DeclinationEnd = -25.27051682,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 20.76826836, DeclinationStart = -25.27051682,
-                RightAscensionEnd = 20.86369338, DeclinationEnd = -26.91912642,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 20.86369338, DeclinationStart = -26.91912642,
-                RightAscensionEnd = 21.11880151, DeclinationEnd = -25.00574796,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.09910538, DeclinationStart = -17.23271095,
-                RightAscensionEnd = 20.35017956, DeclinationEnd = -14.78140119,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.11880151, DeclinationStart = -25.00574796,
-                RightAscensionEnd = 21.44445214, DeclinationEnd = -22.41137838,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.3707715, DeclinationStart = -16.83455521,
-                RightAscensionEnd = 21.09910538, DeclinationEnd = -17.23271095,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.44445214, DeclinationStart = -22.41137838,
-                RightAscensionEnd = 21.61800632, DeclinationEnd = -19.46601352,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.61800632, DeclinationStart = -19.46601352,
-                RightAscensionEnd = 21.78396813, DeclinationEnd = -16.12656595,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.66815062, DeclinationStart = -16.66225343,
-                RightAscensionEnd = 21.3707715, DeclinationEnd = -16.83455521,
-            },
-            new()
-            {
-                Identifier = "CAP", RightAscensionStart = 21.78396813, DeclinationStart = -16.12656595,
-                RightAscensionEnd = 21.66815062, DeclinationEnd = -16.66225343,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 10.22896636, DeclinationStart = -70.03792169,
-                RightAscensionEnd = 9.22006688, DeclinationEnd = -69.71747245,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 10.28472369, DeclinationStart = -61.33231977,
-                RightAscensionEnd = 10.5337455, DeclinationEnd = -61.68536031,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 10.5337455, DeclinationStart = -61.68536031,
-                RightAscensionEnd = 10.71595186, DeclinationEnd = -64.39447937,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 10.71595186, DeclinationStart = -64.39447937,
-                RightAscensionEnd = 10.22896636, DeclinationEnd = -70.03792169,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 6.39919184, DeclinationStart = -52.69571799,
-                RightAscensionEnd = 7.94631715, DeclinationEnd = -52.98240062,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 7.94631715, DeclinationStart = -52.98240062,
-                RightAscensionEnd = 8.37524019, DeclinationEnd = -59.50953829,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 8.37524019, DeclinationStart = -59.50953829,
-                RightAscensionEnd = 9.28484122, DeclinationEnd = -59.27526115,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 9.22006688, DeclinationStart = -69.71747245,
-                RightAscensionEnd = 9.78503822, DeclinationEnd = -65.07201888,
-            },
-            new()
-            {
-                Identifier = "CAR", RightAscensionStart = 9.28484122, DeclinationStart = -59.27526115,
-                RightAscensionEnd = 10.28472369, DeclinationEnd = -61.33231977,
-            },
-            new()
-            {
-                Identifier = "CAS", RightAscensionStart = 0.67510756, DeclinationStart = 56.53740928,
-                RightAscensionEnd = 0.15280269, DeclinationEnd = 59.15021814,
-            },
-            new()
-            {
-                Identifier = "CAS", RightAscensionStart = 0.9451392, DeclinationStart = 60.71674966,
-                RightAscensionEnd = 0.67510756, DeclinationEnd = 56.53740928,
-            },
-            new()
-            {
-                Identifier = "CAS", RightAscensionStart = 1.43016751, DeclinationStart = 60.23540347,
-                RightAscensionEnd = 0.9451392, DeclinationEnd = 60.71674966,
-            },
-            new()
-            {
-                Identifier = "CAS", RightAscensionStart = 1.90657873, DeclinationStart = 63.67014686,
-                RightAscensionEnd = 1.43016751, DeclinationEnd = 60.23540347,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 11.35012284, DeclinationStart = -54.49101395,
-                RightAscensionEnd = 11.59636896, DeclinationEnd = -63.01982488,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 12.13931767, DeclinationStart = -50.72240999,
-                RightAscensionEnd = 12.19420872, DeclinationEnd = -52.36841559,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 12.19420872, DeclinationStart = -52.36841559,
-                RightAscensionEnd = 11.35012284, DeclinationEnd = -54.49101395,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 12.2340908, DeclinationStart = -45.72393011,
-                RightAscensionEnd = 13.82508261, DeclinationEnd = -41.68765971,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 12.46733655, DeclinationStart = -50.2306048,
-                RightAscensionEnd = 12.13931767, DeclinationEnd = -50.72240999,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 12.69200138, DeclinationStart = -48.95988553,
-                RightAscensionEnd = 12.46733655, DeclinationEnd = -50.2306048,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.34335154, DeclinationStart = -36.71208109,
-                RightAscensionEnd = 12.2340908, DeclinationEnd = -45.72393011,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.66479797, DeclinationStart = -53.46636269,
-                RightAscensionEnd = 12.69200138, DeclinationEnd = -48.95988553,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.66479797, DeclinationStart = -53.46636269,
-                RightAscensionEnd = 14.06373459, DeclinationEnd = -60.3729784,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.82508261, DeclinationStart = -41.68765971,
-                RightAscensionEnd = 13.92567635, DeclinationEnd = -47.28826634,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.82508261, DeclinationStart = -41.68765971,
-                RightAscensionEnd = 14.5917921, DeclinationEnd = -42.15774562,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 13.92567635, DeclinationStart = -47.28826634,
-                RightAscensionEnd = 13.66479797, DeclinationEnd = -53.46636269,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 14.11147907, DeclinationStart = -36.36869575,
-                RightAscensionEnd = 13.82508261, DeclinationEnd = -41.68765971,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 14.5917921, DeclinationStart = -42.15774562,
-                RightAscensionEnd = 14.9860275, DeclinationEnd = -42.10414199,
-            },
-            new()
-            {
-                Identifier = "CEN", RightAscensionStart = 14.66136068, DeclinationStart = -60.83514707,
-                RightAscensionEnd = 13.66479797, DeclinationEnd = -53.46636269,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 20.75479684, DeclinationStart = 61.83679404,
-                RightAscensionEnd = 20.49300758, DeclinationEnd = 62.99413722,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 21.30960598, DeclinationStart = 62.58545529,
-                RightAscensionEnd = 20.75479684, DeclinationEnd = 61.83679404,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 21.47765973, DeclinationStart = 70.56069481,
-                RightAscensionEnd = 21.30960598, DeclinationEnd = 62.58545529,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 22.18090608, DeclinationStart = 58.20124992,
-                RightAscensionEnd = 21.30960598, DeclinationEnd = 62.58545529,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 22.18090608, DeclinationStart = 58.20124992,
-                RightAscensionEnd = 22.82803115, DeclinationEnd = 66.20071089,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 22.25046638, DeclinationStart = 57.04346522,
-                RightAscensionEnd = 22.18090608, DeclinationEnd = 58.20124992,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 22.48617998, DeclinationStart = 58.4151899,
-                RightAscensionEnd = 22.25046638, DeclinationEnd = 57.04346522,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 22.82803115, DeclinationStart = 66.20071089,
-                RightAscensionEnd = 23.65582834, DeclinationEnd = 77.63196681,
-            },
-            new()
-            {
-                Identifier = "CEP", RightAscensionStart = 23.65582834, DeclinationStart = 77.63196681,
-                RightAscensionEnd = 21.47765973, DeclinationEnd = 70.56069481,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 0.32380084, DeclinationStart = -8.82382948,
-                RightAscensionEnd = 0.7264523, DeclinationEnd = -17.9866841,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 0.7264523, DeclinationStart = -17.9866841,
-                RightAscensionEnd = 1.73475762, DeclinationEnd = -15.93955597,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 1.14312879, DeclinationStart = -10.181928,
-                RightAscensionEnd = 0.32380084, DeclinationEnd = -8.82382948,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 1.40040311, DeclinationStart = -8.18275372,
-                RightAscensionEnd = 1.14312879, DeclinationEnd = -10.181928,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 1.73475762, DeclinationStart = -15.93955597,
-                RightAscensionEnd = 1.85766961, DeclinationEnd = -10.33494526,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 1.85766961, DeclinationStart = -10.33494526,
-                RightAscensionEnd = 1.40040311, DeclinationEnd = -8.18275372,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.32244073, DeclinationStart = -2.97706055,
-                RightAscensionEnd = 1.85766961, DeclinationEnd = -10.33494526,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.46931052, DeclinationStart = 8.4600887,
-                RightAscensionEnd = 2.7489926, DeclinationEnd = 10.11421979,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.59791361, DeclinationStart = 5.59330163,
-                RightAscensionEnd = 2.46931052, DeclinationEnd = 8.4600887,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.65804119, DeclinationStart = 0.3285168,
-                RightAscensionEnd = 2.32244073, DeclinationEnd = -2.97706055,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.72170126, DeclinationStart = 3.23617162,
-                RightAscensionEnd = 2.59791361, DeclinationEnd = 5.59330163,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.72170126, DeclinationStart = 3.23617162,
-                RightAscensionEnd = 2.65804119, DeclinationEnd = 0.3285168,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.7489926, DeclinationStart = 10.11421979,
-                RightAscensionEnd = 2.99524897, DeclinationEnd = 8.90740111,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 2.99524897, DeclinationStart = 8.90740111,
-                RightAscensionEnd = 3.03799418, DeclinationEnd = 4.08992539,
-            },
-            new()
-            {
-                Identifier = "CET", RightAscensionStart = 3.03799418, DeclinationStart = 4.08992539,
-                RightAscensionEnd = 2.72170126, DeclinationEnd = 3.23617162,
-            },
-            new()
-            {
-                Identifier = "CHA", RightAscensionStart = 10.59117177, DeclinationStart = -78.60781379,
-                RightAscensionEnd = 12.30581775, DeclinationEnd = -79.31226899,
-            },
-            new()
-            {
-                Identifier = "CHA", RightAscensionStart = 10.75454864, DeclinationStart = -80.4695233,
-                RightAscensionEnd = 8.34413553, DeclinationEnd = -77.4845764,
-            },
-            new()
-            {
-                Identifier = "CHA", RightAscensionStart = 12.30581775, DeclinationStart = -79.31226899,
-                RightAscensionEnd = 10.75454864, DeclinationEnd = -80.4695233,
-            },
-            new()
-            {
-                Identifier = "CHA", RightAscensionStart = 8.30868523, DeclinationStart = -76.91998251,
-                RightAscensionEnd = 10.59117177, DeclinationEnd = -78.60781379,
-            },
-            new()
-            {
-                Identifier = "CHA", RightAscensionStart = 8.34413553, DeclinationStart = -77.4845764,
-                RightAscensionEnd = 8.30868523, DeclinationEnd = -76.91998251,
-            },
-            new()
-            {
-                Identifier = "CIR", RightAscensionStart = 14.70852362, DeclinationStart = -64.97456957,
-                RightAscensionEnd = 15.29193339, DeclinationEnd = -58.80087882,
-            },
-            new()
-            {
-                Identifier = "CIR", RightAscensionStart = 15.38962715, DeclinationStart = -59.32069839,
-                RightAscensionEnd = 14.70852362, DeclinationEnd = -64.97456957,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.33855198, DeclinationStart = -30.06337656,
-                RightAscensionEnd = 6.9770963, DeclinationEnd = -28.97208931,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.7525694, DeclinationStart = -16.71314306,
-                RightAscensionEnd = 6.37832983, DeclinationEnd = -17.95591658,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.7525694, DeclinationStart = -16.71314306,
-                RightAscensionEnd = 6.90318908, DeclinationEnd = -12.03859273,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.90318908, DeclinationStart = -12.03859273,
-                RightAscensionEnd = 7.06263699, DeclinationEnd = -15.63325876,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.93561842, DeclinationStart = -17.05424675,
-                RightAscensionEnd = 6.7525694, DeclinationEnd = -16.71314306,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 6.9770963, DeclinationStart = -28.97208931,
-                RightAscensionEnd = 7.02865325, DeclinationEnd = -27.93484165,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.02865325, DeclinationStart = -27.93484165,
-                RightAscensionEnd = 7.13985723, DeclinationEnd = -26.39320776,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.05040932, DeclinationStart = -23.83330131,
-                RightAscensionEnd = 6.7525694, DeclinationEnd = -16.71314306,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.06263699, DeclinationStart = -15.63325876,
-                RightAscensionEnd = 6.93561842, DeclinationEnd = -17.05424675,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.13985723, DeclinationStart = -26.39320776,
-                RightAscensionEnd = 7.05040932, DeclinationEnd = -23.83330131,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.24685045, DeclinationStart = -26.77268601,
-                RightAscensionEnd = 7.13985723, DeclinationEnd = -26.39320776,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.24685045, DeclinationStart = -26.77268601,
-                RightAscensionEnd = 7.31180218, DeclinationEnd = -24.95438447,
-            },
-            new()
-            {
-                Identifier = "CMA", RightAscensionStart = 7.40158473, DeclinationStart = -29.30311979,
-                RightAscensionEnd = 7.24685045, DeclinationEnd = -26.77268601,
-            },
-            new()
-            {
-                Identifier = "CMI", RightAscensionStart = 7.45252008, DeclinationStart = 8.28940893,
-                RightAscensionEnd = 7.65514946, DeclinationEnd = 5.22750767,
-            },
-            new()
-            {
-                Identifier = "CNC", RightAscensionStart = 8.72144808, DeclinationStart = 21.46859609,
-                RightAscensionEnd = 8.7447528, DeclinationEnd = 18.15486399,
-            },
-            new()
-            {
-                Identifier = "CNC", RightAscensionStart = 8.7447528, DeclinationStart = 18.15486399,
-                RightAscensionEnd = 8.2752634, DeclinationEnd = 9.18566295,
-            },
-            new()
-            {
-                Identifier = "CNC", RightAscensionStart = 8.7447528, DeclinationStart = 18.15486399,
-                RightAscensionEnd = 8.97477693, DeclinationEnd = 11.85777198,
-            },
-            new()
-            {
-                Identifier = "CNC", RightAscensionStart = 8.77777674, DeclinationStart = 28.76516551,
-                RightAscensionEnd = 8.72144808, DeclinationEnd = 21.46859609,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 5.5202043, DeclinationStart = -35.47043592,
-                RightAscensionEnd = 5.66081665, DeclinationEnd = -34.07404941,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 5.66081665, DeclinationStart = -34.07404941,
-                RightAscensionEnd = 5.84932022, DeclinationEnd = -35.76929225,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 5.84932022, DeclinationStart = -35.76929225,
-                RightAscensionEnd = 5.95894774, DeclinationEnd = -35.28330688,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 5.95894774, DeclinationStart = -35.28330688,
-                RightAscensionEnd = 6.27587093, DeclinationEnd = -35.14073157,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 5.98577514, DeclinationStart = -42.81510761,
-                RightAscensionEnd = 5.84932022, DeclinationEnd = -35.76929225,
-            },
-            new()
-            {
-                Identifier = "COL", RightAscensionStart = 6.27587093, DeclinationStart = -35.14073157,
-                RightAscensionEnd = 6.36856809, DeclinationEnd = -33.43627251,
-            },
-            new()
-            {
-                Identifier = "COM", RightAscensionStart = 12.44897988, DeclinationStart = 28.26861975,
-                RightAscensionEnd = 13.19803407, DeclinationEnd = 27.87603769,
-            },
-            new()
-            {
-                Identifier = "COM", RightAscensionStart = 13.19803407, DeclinationStart = 27.87603769,
-                RightAscensionEnd = 13.1665415, DeclinationEnd = 17.52911621,
-            },
-            new()
-            {
-                Identifier = "CRA", RightAscensionStart = 18.97874276, DeclinationStart = -37.10708855,
-                RightAscensionEnd = 19.10695543, DeclinationEnd = -37.06275714,
-            },
-            new()
-            {
-                Identifier = "CRA", RightAscensionStart = 19.10695543, DeclinationStart = -37.06275714,
-                RightAscensionEnd = 19.15785508, DeclinationEnd = -37.90423953,
-            },
-            new()
-            {
-                Identifier = "CRA", RightAscensionStart = 19.13914805, DeclinationStart = -40.4966376,
-                RightAscensionEnd = 19.05189794, DeclinationEnd = -42.09499443,
-            },
-            new()
-            {
-                Identifier = "CRA", RightAscensionStart = 19.15785508, DeclinationStart = -37.90423953,
-                RightAscensionEnd = 19.16715345, DeclinationEnd = -39.34070677,
-            },
-            new()
-            {
-                Identifier = "CRA", RightAscensionStart = 19.16715345, DeclinationStart = -39.34070677,
-                RightAscensionEnd = 19.13914805, DeclinationEnd = -40.4966376,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.46384775, DeclinationStart = 29.10549164,
-                RightAscensionEnd = 15.57810819, DeclinationEnd = 26.71491041,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.5488322, DeclinationStart = 31.35915517,
-                RightAscensionEnd = 15.46384775, DeclinationEnd = 29.10549164,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.57810819, DeclinationStart = 26.71491041,
-                RightAscensionEnd = 15.71239951, DeclinationEnd = 26.29551419,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.71239951, DeclinationStart = 26.29551419,
-                RightAscensionEnd = 15.82658278, DeclinationEnd = 26.06854936,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.82658278, DeclinationStart = 26.06854936,
-                RightAscensionEnd = 15.95980608, DeclinationEnd = 26.87802632,
-            },
-            new()
-            {
-                Identifier = "CRB", RightAscensionStart = 15.95980608, DeclinationStart = 26.87802632,
-                RightAscensionEnd = 16.02405295, DeclinationEnd = 29.85107821,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 10.9963191, DeclinationStart = -18.29909723,
-                RightAscensionEnd = 11.19430174, DeclinationEnd = -22.82560642,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.19430174, DeclinationStart = -22.82560642,
-                RightAscensionEnd = 11.41471755, DeclinationEnd = -17.68401748,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.3223674, DeclinationStart = -14.77904358,
-                RightAscensionEnd = 10.9963191, DeclinationEnd = -18.29909723,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.41016816, DeclinationStart = -10.85938276,
-                RightAscensionEnd = 11.3223674, DeclinationEnd = -14.77904358,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.41471755, DeclinationStart = -17.68401748,
-                RightAscensionEnd = 11.3223674, DeclinationEnd = -14.77904358,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.41471755, DeclinationStart = -17.68401748,
-                RightAscensionEnd = 11.74604415, DeclinationEnd = -18.35061467,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.61137458, DeclinationStart = -9.80225368,
-                RightAscensionEnd = 11.41016816, DeclinationEnd = -10.85938276,
-            },
-            new()
-            {
-                Identifier = "CRT", RightAscensionStart = 11.74604415, DeclinationStart = -18.35061467,
-                RightAscensionEnd = 11.93360653, DeclinationEnd = -17.15080863,
-            },
-            new()
-            {
-                Identifier = "CRU", RightAscensionStart = 12.44331705, DeclinationStart = -63.09905586,
-                RightAscensionEnd = 12.5194248, DeclinationEnd = -57.11256922,
-            },
-            new()
-            {
-                Identifier = "CRU", RightAscensionStart = 12.79536635, DeclinationStart = -59.68873246,
-                RightAscensionEnd = 12.25243248, DeclinationEnd = -58.74890179,
-            },
-            new()
-            {
-                Identifier = "CRV", RightAscensionStart = 12.14020907, DeclinationStart = -24.72877993,
-                RightAscensionEnd = 12.16875718, DeclinationEnd = -22.61979211,
-            },
-            new()
-            {
-                Identifier = "CRV", RightAscensionStart = 12.16875718, DeclinationStart = -22.61979211,
-                RightAscensionEnd = 12.26346329, DeclinationEnd = -17.5419837,
-            },
-            new()
-            {
-                Identifier = "CRV", RightAscensionStart = 12.26346329, DeclinationStart = -17.5419837,
-                RightAscensionEnd = 12.4977731, DeclinationEnd = -16.51509397,
-            },
-            new()
-            {
-                Identifier = "CRV", RightAscensionStart = 12.4977731, DeclinationStart = -16.51509397,
-                RightAscensionEnd = 12.57312057, DeclinationEnd = -23.39662306,
-            },
-            new()
-            {
-                Identifier = "CRV", RightAscensionStart = 12.57312057, DeclinationStart = -23.39662306,
-                RightAscensionEnd = 12.16875718, DeclinationEnd = -22.61979211,
-            },
-            new()
-            {
-                Identifier = "CVN", RightAscensionStart = 12.9338447, DeclinationStart = 38.31824617,
-                RightAscensionEnd = 12.5625257, DeclinationEnd = 41.35676779,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 19.28503052, DeclinationStart = 53.36816064,
-                RightAscensionEnd = 19.49509425, DeclinationEnd = 51.72946747,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 19.49509425, DeclinationStart = 51.72946747,
-                RightAscensionEnd = 19.60737289, DeclinationEnd = 50.22046347,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 19.60737289, DeclinationStart = 50.22046347,
-                RightAscensionEnd = 19.74956725, DeclinationEnd = 45.13069195,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 19.74956725, DeclinationStart = 45.13069195,
-                RightAscensionEnd = 20.37047223, DeclinationEnd = 40.2566815,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 19.93844337, DeclinationStart = 35.08349079,
-                RightAscensionEnd = 19.51261019, DeclinationEnd = 27.9652789,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 20.37047223, DeclinationStart = 40.2566815,
-                RightAscensionEnd = 19.93844337, DeclinationEnd = 35.08349079,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 20.37047223, DeclinationStart = 40.2566815,
-                RightAscensionEnd = 20.77012006, DeclinationEnd = 33.96945334,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 20.69053151, DeclinationStart = 45.28033423,
-                RightAscensionEnd = 20.37047223, DeclinationEnd = 40.2566815,
-            },
-            new()
-            {
-                Identifier = "CYG", RightAscensionStart = 20.77012006, DeclinationStart = 33.96945334,
-                RightAscensionEnd = 21.21560598, DeclinationEnd = 30.22708128,
-            },
-            new()
-            {
-                Identifier = "DEL", RightAscensionStart = 20.55354577, DeclinationStart = 11.30333217,
-                RightAscensionEnd = 20.62579715, DeclinationEnd = 14.59520289,
-            },
-            new()
-            {
-                Identifier = "DEL", RightAscensionStart = 20.62579715, DeclinationStart = 14.59520289,
-                RightAscensionEnd = 20.66062626, DeclinationEnd = 15.9120527,
-            },
-            new()
-            {
-                Identifier = "DEL", RightAscensionStart = 20.66062626, DeclinationStart = 15.9120527,
-                RightAscensionEnd = 20.77764388, DeclinationEnd = 16.12477326,
-            },
-            new()
-            {
-                Identifier = "DEL", RightAscensionStart = 20.72431825, DeclinationStart = 15.07468224,
-                RightAscensionEnd = 20.62579715, DeclinationEnd = 14.59520289,
-            },
-            new()
-            {
-                Identifier = "DEL", RightAscensionStart = 20.77764388, DeclinationStart = 16.12477326,
-                RightAscensionEnd = 20.72431825, DeclinationEnd = 15.07468224,
-            },
-            new()
-            {
-                Identifier = "DOR", RightAscensionStart = 4.26708095, DeclinationStart = -51.48709578,
-                RightAscensionEnd = 4.56658845, DeclinationEnd = -55.04500559,
-            },
-            new()
-            {
-                Identifier = "DOR", RightAscensionStart = 4.56658845, DeclinationStart = -55.04500559,
-                RightAscensionEnd = 5.09185843, DeclinationEnd = -57.47298928,
-            },
-            new()
-            {
-                Identifier = "DOR", RightAscensionStart = 5.09185843, DeclinationStart = -57.47298928,
-                RightAscensionEnd = 5.5604212, DeclinationEnd = -62.48985585,
-            },
-            new()
-            {
-                Identifier = "DOR", RightAscensionStart = 5.5604212, DeclinationStart = -62.48985585,
-                RightAscensionEnd = 5.74622751, DeclinationEnd = -65.7355408,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 11.52341346, DeclinationStart = 69.33112161,
-                RightAscensionEnd = 12.55806736, DeclinationEnd = 69.78820992,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 12.55806736, DeclinationStart = 69.78820992,
-                RightAscensionEnd = 14.07317389, DeclinationEnd = 64.37580873,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 14.07317389, DeclinationStart = 64.37580873,
-                RightAscensionEnd = 15.41549558, DeclinationEnd = 58.96602354,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 15.41549558, DeclinationStart = 58.96602354,
-                RightAscensionEnd = 16.03158437, DeclinationEnd = 58.56443739,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 16.03158437, DeclinationStart = 58.56443739,
-                RightAscensionEnd = 16.39986301, DeclinationEnd = 61.51407536,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 16.39986301, DeclinationStart = 61.51407536,
-                RightAscensionEnd = 17.1464514, DeclinationEnd = 65.71463676,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 17.1464514, DeclinationStart = 65.71463676,
-                RightAscensionEnd = 18.35064971, DeclinationEnd = 72.73369763,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 17.5072158, DeclinationStart = 52.30135901,
-                RightAscensionEnd = 17.94343829, DeclinationEnd = 51.48895101,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 17.53622721, DeclinationStart = 55.18411077,
-                RightAscensionEnd = 17.5072158, DeclinationEnd = 52.30135901,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 17.8921193, DeclinationStart = 56.87245216,
-                RightAscensionEnd = 17.53622721, DeclinationEnd = 55.18411077,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 17.94343829, DeclinationStart = 51.48895101,
-                RightAscensionEnd = 17.8921193, DeclinationEnd = 56.87245216,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 18.35064971, DeclinationStart = 72.73369763,
-                RightAscensionEnd = 19.8028371, DeclinationEnd = 70.26783533,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 19.20920972, DeclinationStart = 67.66131695,
-                RightAscensionEnd = 17.8921193, DeclinationEnd = 56.87245216,
-            },
-            new()
-            {
-                Identifier = "DRA", RightAscensionStart = 19.8028371, DeclinationStart = 70.26783533,
-                RightAscensionEnd = 19.20920972, DeclinationEnd = 67.66131695,
-            },
-            new()
-            {
-                Identifier = "EQU", RightAscensionStart = 21.17235307, DeclinationStart = 10.13194861,
-                RightAscensionEnd = 21.26372131, DeclinationEnd = 5.2480739,
-            },
-            new()
-            {
-                Identifier = "EQU", RightAscensionStart = 21.26372131, DeclinationStart = 5.2480739,
-                RightAscensionEnd = 21.38155049, DeclinationEnd = 6.81111338,
-            },
-            new()
-            {
-                Identifier = "EQU", RightAscensionStart = 21.38155049, DeclinationStart = 6.81111338,
-                RightAscensionEnd = 21.24133058, DeclinationEnd = 10.00771855,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 1.93245347, DeclinationStart = -51.60958673,
-                RightAscensionEnd = 1.62854213, DeclinationEnd = -57.23666007,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.27513896, DeclinationStart = -51.51211145,
-                RightAscensionEnd = 1.93245347, DeclinationEnd = -51.60958673,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.44975138, DeclinationStart = -47.70382692,
-                RightAscensionEnd = 2.27513896, DeclinationEnd = -51.51211145,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.66331092, DeclinationStart = -42.89163328,
-                RightAscensionEnd = 2.44975138, DeclinationEnd = -47.70382692,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.66331092, DeclinationStart = -42.89163328,
-                RightAscensionEnd = 2.44975138, DeclinationEnd = -47.70382692,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.6777588, DeclinationStart = -39.85530905,
-                RightAscensionEnd = 2.66331092, DeclinationEnd = -42.89163328,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.75166151, DeclinationStart = -18.57265077,
-                RightAscensionEnd = 2.85065164, DeclinationEnd = -21.0039789,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.85065164, DeclinationStart = -21.0039789,
-                RightAscensionEnd = 3.03988697, DeclinationEnd = -23.62433613,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.94044549, DeclinationStart = -8.89760976,
-                RightAscensionEnd = 2.75166151, DeclinationEnd = -18.57265077,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 2.97103212, DeclinationStart = -40.30473491,
-                RightAscensionEnd = 2.6777588, DeclinationEnd = -39.85530905,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.03988697, DeclinationStart = -23.62433613,
-                RightAscensionEnd = 3.32526935, DeclinationEnd = -21.7579421,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.32526935, DeclinationStart = -21.7579421,
-                RightAscensionEnd = 3.56312442, DeclinationEnd = -21.63281597,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.33145134, DeclinationStart = -43.07154929,
-                RightAscensionEnd = 2.97103212, DeclinationEnd = -40.30473491,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.549006, DeclinationStart = -9.45830584,
-                RightAscensionEnd = 2.94044549, DeclinationEnd = -8.89760976,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.56312442, DeclinationStart = -21.63281597,
-                RightAscensionEnd = 3.78083028, DeclinationEnd = -23.248438,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.72082113, DeclinationStart = -9.76519868,
-                RightAscensionEnd = 3.549006, DeclinationEnd = -9.45830584,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.76902844, DeclinationStart = -12.1017353,
-                RightAscensionEnd = 3.72082113, DeclinationEnd = -9.76519868,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.78083028, DeclinationStart = -23.248438,
-                RightAscensionEnd = 3.99874336, DeclinationEnd = -24.01625677,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.82424469, DeclinationStart = -36.20011250,
-                RightAscensionEnd = 3.33145134, DeclinationEnd = -43.07154929,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.96714724, DeclinationStart = -13.50824471,
-                RightAscensionEnd = 3.76902844, DeclinationEnd = -12.1017353,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 3.99874336, DeclinationStart = -24.01625677,
-                RightAscensionEnd = 4.55850819, DeclinationEnd = -29.76583186,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.19775922, DeclinationStart = -6.8377787,
-                RightAscensionEnd = 3.96714724, DeclinationEnd = -13.50824471,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.29822737, DeclinationStart = -33.79833145,
-                RightAscensionEnd = 3.82424469, DeclinationEnd = -36.20011250,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.40060148, DeclinationStart = -34.01698632,
-                RightAscensionEnd = 4.29822737, DeclinationEnd = -33.79833145,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.55850819, DeclinationStart = -29.76583186,
-                RightAscensionEnd = 4.59251991, DeclinationEnd = -30.56231049,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.59251991, DeclinationStart = -30.56231049,
-                RightAscensionEnd = 4.40060148, DeclinationEnd = -34.01698632,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.60531682, DeclinationStart = -3.352448,
-                RightAscensionEnd = 4.19775922, DeclinationEnd = -6.8377787,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.7583725, DeclinationStart = -3.25462465,
-                RightAscensionEnd = 4.60531682, DeclinationEnd = -3.352448,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 4.88157788, DeclinationStart = -5.45275591,
-                RightAscensionEnd = 4.7583725, DeclinationEnd = -3.25462465,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 5.13084276, DeclinationStart = -5.08626282,
-                RightAscensionEnd = 4.88157788, DeclinationEnd = -5.45275591,
-            },
-            new()
-            {
-                Identifier = "ERI", RightAscensionStart = 5.15243971, DeclinationStart = -8.75407607,
-                RightAscensionEnd = 5.13084276, DeclinationEnd = -5.08626282,
-            },
-            new()
-            {
-                Identifier = "FOR", RightAscensionStart = 2.8181554, DeclinationStart = -32.40628403,
-                RightAscensionEnd = 2.07484168, DeclinationEnd = -29.29683966,
-            },
-            new()
-            {
-                Identifier = "FOR", RightAscensionStart = 3.20118888, DeclinationStart = -28.98910623,
-                RightAscensionEnd = 2.8181554, DeclinationEnd = -32.40628403,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.06867126, DeclinationStart = 23.26363207,
-                RightAscensionEnd = 6.2479713, DeclinationEnd = 22.50682376,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.2479713, DeclinationStart = 22.50682376,
-                RightAscensionEnd = 6.3826642, DeclinationEnd = 22.51385027,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.3826642, DeclinationStart = 22.51385027,
-                RightAscensionEnd = 6.73220272, DeclinationEnd = 25.13115531,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.48271957, DeclinationStart = 20.2121672,
-                RightAscensionEnd = 6.73220272, DeclinationEnd = 25.13115531,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.73220272, DeclinationStart = 25.13115531,
-                RightAscensionEnd = 7.18566433, DeclinationEnd = 30.24528065,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 6.87981668, DeclinationStart = 33.96136985,
-                RightAscensionEnd = 7.18566433, DeclinationEnd = 30.24528065,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.06848205, DeclinationStart = 20.57029939,
-                RightAscensionEnd = 6.62852842, DeclinationEnd = 16.39941482,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.18566433, DeclinationStart = 30.24528065,
-                RightAscensionEnd = 7.42879891, DeclinationEnd = 27.79828561,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.18566433, DeclinationStart = 30.24528065,
-                RightAscensionEnd = 7.48516936, DeclinationEnd = 31.78407932,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.22285194, DeclinationStart = 16.15906775,
-                RightAscensionEnd = 6.75484265, DeclinationEnd = 12.89605513,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.30155744, DeclinationStart = 16.54047526,
-                RightAscensionEnd = 7.22285194, DeclinationEnd = 16.15906775,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.33538592, DeclinationStart = 21.98233941,
-                RightAscensionEnd = 7.06848205, DeclinationEnd = 20.57029939,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.33538592, DeclinationStart = 21.98233941,
-                RightAscensionEnd = 7.30155744, DeclinationEnd = 16.54047526,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.42879891, DeclinationStart = 27.79828561,
-                RightAscensionEnd = 7.59871452, DeclinationEnd = 26.89600343,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.48516936, DeclinationStart = 31.78407932,
-                RightAscensionEnd = 7.57666793, DeclinationEnd = 31.88863645,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.59871452, DeclinationStart = 26.89600343,
-                RightAscensionEnd = 7.33538592, DeclinationEnd = 21.98233941,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.59871452, DeclinationStart = 26.89600343,
-                RightAscensionEnd = 7.74079682, DeclinationEnd = 24.39812929,
-            },
-            new()
-            {
-                Identifier = "GEM", RightAscensionStart = 7.75537884, DeclinationStart = 28.02631031,
-                RightAscensionEnd = 7.59871452, DeclinationEnd = 26.89600343,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 21.8987928, DeclinationStart = -37.3648229,
-                RightAscensionEnd = 22.10191767, DeclinationEnd = -39.54304903,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.10191767, DeclinationStart = -39.54304903,
-                RightAscensionEnd = 22.26024577, DeclinationEnd = -41.34675029,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.13718789, DeclinationStart = -46.96061593,
-                RightAscensionEnd = 22.71109302, DeclinationEnd = -46.88456594,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.26024577, DeclinationStart = -41.34675029,
-                RightAscensionEnd = 22.48782057, DeclinationEnd = -43.49555433,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.48782057, DeclinationStart = -43.49555433,
-                RightAscensionEnd = 22.71109302, DeclinationEnd = -46.88456594,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.71109302, DeclinationStart = -46.88456594,
-                RightAscensionEnd = 22.80922142, DeclinationEnd = -51.31670354,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.71109302, DeclinationStart = -46.88456594,
-                RightAscensionEnd = 23.17261887, DeclinationEnd = -45.24664747,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 22.80922142, DeclinationStart = -51.31670354,
-                RightAscensionEnd = 23.01468731, DeclinationEnd = -52.75410562,
-            },
-            new()
-            {
-                Identifier = "GRU", RightAscensionStart = 23.17261887, DeclinationStart = -45.24664747,
-                RightAscensionEnd = 23.1146579, DeclinationEnd = -43.52032436,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.36534546, DeclinationStart = 19.15302185,
-                RightAscensionEnd = 16.50368379, DeclinationEnd = 21.4896485,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.50368379, DeclinationStart = 21.4896485,
-                RightAscensionEnd = 16.68818808, DeclinationEnd = 31.60188695,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.50368379, DeclinationStart = 21.4896485,
-                RightAscensionEnd = 17.24412845, DeclinationEnd = 14.39025314,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.5683859, DeclinationStart = 42.43689565,
-                RightAscensionEnd = 16.14616647, DeclinationEnd = 44.93481883,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.68818808, DeclinationStart = 31.60188695,
-                RightAscensionEnd = 16.71492737, DeclinationEnd = 38.92246103,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.68818808, DeclinationStart = 31.60188695,
-                RightAscensionEnd = 17.00483505, DeclinationEnd = 30.92633926,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.71492737, DeclinationStart = 38.92246103,
-                RightAscensionEnd = 16.5683859, DeclinationEnd = 42.43689565,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 16.71492737, DeclinationStart = 38.92246103,
-                RightAscensionEnd = 17.25079285, DeclinationEnd = 36.80915527,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.00483505, DeclinationStart = 30.92633926,
-                RightAscensionEnd = 17.25053449, DeclinationEnd = 24.83958739,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.25053449, DeclinationStart = 24.83958739,
-                RightAscensionEnd = 17.512305, DeclinationEnd = 26.1106045,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.25079285, DeclinationStart = 36.80915527,
-                RightAscensionEnd = 17.00483505, DeclinationEnd = 30.92633926,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.25079285, DeclinationStart = 36.80915527,
-                RightAscensionEnd = 17.39471468, DeclinationEnd = 37.14592396,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.39471468, DeclinationStart = 37.14592396,
-                RightAscensionEnd = 17.93754959, DeclinationEnd = 37.25052158,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.512305, DeclinationStart = 26.1106045,
-                RightAscensionEnd = 17.77436636, DeclinationEnd = 27.72249917,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.77436636, DeclinationStart = 27.72249917,
-                RightAscensionEnd = 17.96273073, DeclinationEnd = 29.24792527,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.93754959, DeclinationStart = 37.25052158,
-                RightAscensionEnd = 17.65774789, DeclinationEnd = 46.00632216,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 17.96273073, DeclinationStart = 29.24792527,
-                RightAscensionEnd = 18.12570854, DeclinationEnd = 28.76247025,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 18.12570854, DeclinationStart = 28.76247025,
-                RightAscensionEnd = 17.97504159, DeclinationEnd = 30.18926892,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 18.12570854, DeclinationStart = 28.76247025,
-                RightAscensionEnd = 18.39493521, DeclinationEnd = 21.77034249,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 18.39493521, DeclinationStart = 21.77034249,
-                RightAscensionEnd = 18.14597017, DeclinationEnd = 20.81457203,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 18.39493521, DeclinationStart = 21.77034249,
-                RightAscensionEnd = 18.76103644, DeclinationEnd = 20.54712356,
-            },
-            new()
-            {
-                Identifier = "HER", RightAscensionStart = 18.76103644, DeclinationStart = 20.54712356,
-                RightAscensionEnd = 18.78367287, DeclinationEnd = 18.18122968,
-            },
-            new()
-            {
-                Identifier = "HOR", RightAscensionStart = 2.6234069, DeclinationStart = -52.54308845,
-                RightAscensionEnd = 2.70921068, DeclinationEnd = -50.80082665,
-            },
-            new()
-            {
-                Identifier = "HOR", RightAscensionStart = 2.67766108, DeclinationStart = -54.54992422,
-                RightAscensionEnd = 2.6234069, DeclinationEnd = -52.54308845,
-            },
-            new()
-            {
-                Identifier = "HOR", RightAscensionStart = 2.70921068, DeclinationStart = -50.80082665,
-                RightAscensionEnd = 4.23335592, DeclinationEnd = -42.29387294,
-            },
-            new()
-            {
-                Identifier = "HOR", RightAscensionStart = 2.979935, DeclinationStart = -64.07129717,
-                RightAscensionEnd = 3.06025103, DeclinationEnd = -59.73761994,
-            },
-            new()
-            {
-                Identifier = "HOR", RightAscensionStart = 3.06025103, DeclinationStart = -59.73761994,
-                RightAscensionEnd = 2.67766108, DeclinationEnd = -54.54992422,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 10.17649919, DeclinationStart = -12.35383921,
-                RightAscensionEnd = 9.85796735, DeclinationEnd = -14.84654997,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 10.43486251, DeclinationStart = -16.83609584,
-                RightAscensionEnd = 10.17649919, DeclinationEnd = -12.35383921,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 10.82706446, DeclinationStart = -16.19413208,
-                RightAscensionEnd = 10.43486251, DeclinationEnd = -16.83609584,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 11.55007195, DeclinationStart = -31.85752405,
-                RightAscensionEnd = 10.82706446, DeclinationEnd = -16.19413208,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 11.88182257, DeclinationStart = -33.90813014,
-                RightAscensionEnd = 11.55007195, DeclinationEnd = -31.85752405,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 13.31534816, DeclinationStart = -23.17141246,
-                RightAscensionEnd = 11.88182257, DeclinationEnd = -33.90813014,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 14.10618582, DeclinationStart = -26.68201883,
-                RightAscensionEnd = 13.31534816, DeclinationEnd = -23.17141246,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 8.62761315, DeclinationStart = 5.70379868,
-                RightAscensionEnd = 8.64595799, DeclinationEnd = 3.34147477,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 8.64595799, DeclinationStart = 3.34147477,
-                RightAscensionEnd = 8.72041287, DeclinationEnd = 3.39866539,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 8.72041287, DeclinationStart = 3.39866539,
-                RightAscensionEnd = 8.92324579, DeclinationEnd = 5.9455277,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 8.77962395, DeclinationStart = 6.41890691,
-                RightAscensionEnd = 8.62761315, DeclinationEnd = 5.70379868,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 8.92324579, DeclinationStart = 5.9455277,
-                RightAscensionEnd = 8.77962395, DeclinationEnd = 6.41890691,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 9.23938701, DeclinationStart = 2.31502422,
-                RightAscensionEnd = 8.92324579, DeclinationEnd = 5.9455277,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 9.45979217, DeclinationStart = -8.65868335,
-                RightAscensionEnd = 9.66425943, DeclinationEnd = -1.14265722,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 9.66425943, DeclinationStart = -1.14265722,
-                RightAscensionEnd = 9.23938701, DeclinationEnd = 2.31502422,
-            },
-            new()
-            {
-                Identifier = "HYA", RightAscensionStart = 9.85796735, DeclinationStart = -14.84654997,
-                RightAscensionEnd = 9.45979217, DeclinationEnd = -8.65868335,
-            },
-            new()
-            {
-                Identifier = "HYI", RightAscensionStart = 0.42755612, DeclinationStart = -77.25503511,
-                RightAscensionEnd = 3.78728653, DeclinationEnd = -74.23924251,
-            },
-            new()
-            {
-                Identifier = "HYI", RightAscensionStart = 1.97940884, DeclinationStart = -61.56992444,
-                RightAscensionEnd = 0.42755612, DeclinationEnd = -77.25503511,
-            },
-            new()
-            {
-                Identifier = "HYI", RightAscensionStart = 3.78728653, DeclinationStart = -74.23924251,
-                RightAscensionEnd = 1.97940884, DeclinationEnd = -61.56992444,
-            },
-            new()
-            {
-                Identifier = "IND", RightAscensionStart = 20.91349433, DeclinationStart = -58.4540947,
-                RightAscensionEnd = 21.33107883, DeclinationEnd = -53.44926434,
-            },
-            new()
-            {
-                Identifier = "IND", RightAscensionStart = 21.33107883, DeclinationStart = -53.44926434,
-                RightAscensionEnd = 20.62610824, DeclinationEnd = -47.29166239,
-            },
-            new()
-            {
-                Identifier = "IND", RightAscensionStart = 21.96528638, DeclinationStart = -54.9925666,
-                RightAscensionEnd = 21.33107883, DeclinationEnd = -53.44926434,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.26615838, DeclinationStart = 37.74873483,
-                RightAscensionEnd = 22.50812822, DeclinationEnd = 43.12338985,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.35042452, DeclinationStart = 46.53656484,
-                RightAscensionEnd = 22.49217298, DeclinationEnd = 47.70689488,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.40860992, DeclinationStart = 49.47640074,
-                RightAscensionEnd = 22.52149326, DeclinationEnd = 50.28244976,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.49217298, DeclinationStart = 47.70689488,
-                RightAscensionEnd = 22.40860992, DeclinationEnd = 49.47640074,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.50812822, DeclinationStart = 43.12338985,
-                RightAscensionEnd = 22.35042452, DeclinationEnd = 46.53656484,
-            },
-            new()
-            {
-                Identifier = "LAC", RightAscensionStart = 22.52149326, DeclinationStart = 50.28244976,
-                RightAscensionEnd = 22.39267678, DeclinationEnd = 52.22949951,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 10.12220929, DeclinationStart = 16.76266572,
-                RightAscensionEnd = 10.13957205, DeclinationEnd = 11.96719513,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 10.13957205, DeclinationStart = 11.96719513,
-                RightAscensionEnd = 11.23734469, DeclinationEnd = 15.4297631,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 10.27816787, DeclinationStart = 23.4173284,
-                RightAscensionEnd = 9.87943268, DeclinationEnd = 26.00708498,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 10.3328227, DeclinationStart = 19.84186032,
-                RightAscensionEnd = 10.12220929, DeclinationEnd = 16.76266572,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 10.3328227, DeclinationStart = 19.84186032,
-                RightAscensionEnd = 10.27816787, DeclinationEnd = 23.4173284,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 11.23511447, DeclinationStart = 20.52403384,
-                RightAscensionEnd = 10.3328227, DeclinationEnd = 19.84186032,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 11.23734469, DeclinationStart = 15.4297631,
-                RightAscensionEnd = 11.81774398, DeclinationEnd = 14.57233687,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 11.35229115, DeclinationStart = 6.02935289,
-                RightAscensionEnd = 11.39871355, DeclinationEnd = 10.52969772,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 11.39871355, DeclinationStart = 10.52969772,
-                RightAscensionEnd = 11.23734469, DeclinationEnd = 15.4297631,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 11.81774398, DeclinationStart = 14.57233687,
-                RightAscensionEnd = 11.23511447, DeclinationEnd = 20.52403384,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 9.68586607, DeclinationStart = 9.89239902,
-                RightAscensionEnd = 10.13957205, DeclinationEnd = 11.96719513,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 9.76419511, DeclinationStart = 23.77427792,
-                RightAscensionEnd = 10.3328227, DeclinationEnd = 19.84186032,
-            },
-            new()
-            {
-                Identifier = "LEO", RightAscensionStart = 9.87943268, DeclinationStart = 26.00708498,
-                RightAscensionEnd = 9.76419511, DeclinationEnd = 23.77427792,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.47075731, DeclinationStart = -20.75923214,
-                RightAscensionEnd = 5.09101447, DeclinationEnd = -22.37085673,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.47075731, DeclinationStart = -20.75923214,
-                RightAscensionEnd = 5.54550386, DeclinationEnd = -17.82229227,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.54550386, DeclinationStart = -17.82229227,
-                RightAscensionEnd = 5.2155203, DeclinationEnd = -16.20542901,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.74110416, DeclinationStart = -22.44748663,
-                RightAscensionEnd = 5.47075731, DeclinationEnd = -20.75923214,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.78259715, DeclinationStart = -14.82194717,
-                RightAscensionEnd = 5.54550386, DeclinationEnd = -17.82229227,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.85532022, DeclinationStart = -20.87751376,
-                RightAscensionEnd = 5.74110416, DeclinationEnd = -22.44748663,
-            },
-            new()
-            {
-                Identifier = "LEP", RightAscensionStart = 5.94008841, DeclinationStart = -14.16803805,
-                RightAscensionEnd = 5.78259715, DeclinationEnd = -14.82194717,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 14.84479547, DeclinationStart = -15.99709226,
-                RightAscensionEnd = 15.06785052, DeclinationEnd = -25.28185602,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.06785052, DeclinationStart = -25.28185602,
-                RightAscensionEnd = 15.61707183, DeclinationEnd = -28.13507099,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.28346439, DeclinationStart = -9.38286694,
-                RightAscensionEnd = 14.84479547, DeclinationEnd = -15.99709226,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.28346439, DeclinationStart = -9.38286694,
-                RightAscensionEnd = 15.06785052, DeclinationEnd = -25.28185602,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.59209426, DeclinationStart = -14.78955365,
-                RightAscensionEnd = 15.28346439, DeclinationEnd = -9.38286694,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.61707183, DeclinationStart = -28.13507099,
-                RightAscensionEnd = 15.64427343, DeclinationEnd = -29.77768935,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.89707695, DeclinationStart = -16.7296223,
-                RightAscensionEnd = 15.59209426, DeclinationEnd = -14.78955365,
-            },
-            new()
-            {
-                Identifier = "LIB", RightAscensionStart = 15.96982674, DeclinationStart = -14.27931773,
-                RightAscensionEnd = 15.89707695, DeclinationEnd = -16.7296223,
-            },
-            new()
-            {
-                Identifier = "LMI", RightAscensionStart = 10.12381254, DeclinationStart = 35.24469176,
-                RightAscensionEnd = 10.46474791, DeclinationEnd = 36.70747818,
-            },
-            new()
-            {
-                Identifier = "LMI", RightAscensionStart = 10.46474791, DeclinationStart = 36.70747818,
-                RightAscensionEnd = 10.88851107, DeclinationEnd = 34.21556641,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 14.69882606, DeclinationStart = -47.38814127,
-                RightAscensionEnd = 15.20477865, DeclinationEnd = -52.09907465,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 14.97554279, DeclinationStart = -43.13386699,
-                RightAscensionEnd = 14.69882606, DeclinationEnd = -47.38814127,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.19893362, DeclinationStart = -48.73770212,
-                RightAscensionEnd = 15.37802431, DeclinationEnd = -44.68957314,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.20477865, DeclinationStart = -52.09907465,
-                RightAscensionEnd = 15.19893362, DeclinationEnd = -48.73770212,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.35620455, DeclinationStart = -40.64745946,
-                RightAscensionEnd = 14.97554279, DeclinationEnd = -43.13386699,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.35620455, DeclinationStart = -40.64745946,
-                RightAscensionEnd = 15.58568343, DeclinationEnd = -41.16669497,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.36345457, DeclinationStart = -36.26116729,
-                RightAscensionEnd = 15.35620455, DeclinationEnd = -40.64745946,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.37802431, DeclinationStart = -44.68957314,
-                RightAscensionEnd = 15.58568343, DeclinationEnd = -41.16669497,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.58568343, DeclinationStart = -41.16669497,
-                RightAscensionEnd = 16.00203902, DeclinationEnd = -38.39664079,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 15.84931715, DeclinationStart = -33.62710488,
-                RightAscensionEnd = 15.36345457, DeclinationEnd = -36.26116729,
-            },
-            new()
-            {
-                Identifier = "LUP", RightAscensionStart = 16.00203902, DeclinationStart = -38.39664079,
-                RightAscensionEnd = 16.10987675, DeclinationEnd = -36.80221297,
-            },
-            new()
-            {
-                Identifier = "LYN", RightAscensionStart = 6.9546107, DeclinationStart = 58.42305973,
-                RightAscensionEnd = 6.32705299, DeclinationEnd = 59.01090518,
-            },
-            new()
-            {
-                Identifier = "LYN", RightAscensionStart = 7.44523915, DeclinationStart = 49.21164489,
-                RightAscensionEnd = 6.9546107, DeclinationEnd = 58.42305973,
-            },
-            new()
-            {
-                Identifier = "LYN", RightAscensionStart = 8.38059169, DeclinationStart = 43.18837233,
-                RightAscensionEnd = 7.44523915, DeclinationEnd = 49.21164489,
-            },
-            new()
-            {
-                Identifier = "LYN", RightAscensionStart = 9.31407426, DeclinationStart = 36.80289763,
-                RightAscensionEnd = 8.38059169, DeclinationEnd = 43.18837233,
-            },
-            new()
-            {
-                Identifier = "LYN", RightAscensionStart = 9.35096077, DeclinationStart = 34.39252592,
-                RightAscensionEnd = 9.31407426, DeclinationEnd = 36.80289763,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.33103366, DeclinationStart = 36.06444696,
-                RightAscensionEnd = 18.61560722, DeclinationEnd = 38.78299311,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.61560722, DeclinationStart = 38.78299311,
-                RightAscensionEnd = 18.7462044, DeclinationEnd = 37.60505025,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.73965995, DeclinationStart = 39.61259557,
-                RightAscensionEnd = 18.61560722, DeclinationEnd = 38.78299311,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.7462044, DeclinationStart = 37.60505025,
-                RightAscensionEnd = 18.83466497, DeclinationEnd = 33.36267788,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.83466497, DeclinationStart = 33.36267788,
-                RightAscensionEnd = 18.98239571, DeclinationEnd = 32.68955312,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.89543292, DeclinationStart = 36.97172755,
-                RightAscensionEnd = 18.74671939, DeclinationEnd = 37.59456466,
-            },
-            new()
-            {
-                Identifier = "LYR", RightAscensionStart = 18.98239571, DeclinationStart = 32.68955312,
-                RightAscensionEnd = 18.89543292, DeclinationEnd = 36.97172755,
-            },
-            new()
-            {
-                Identifier = "MEN", RightAscensionStart = 4.91976102, DeclinationStart = -74.93700232,
-                RightAscensionEnd = 5.53129495, DeclinationEnd = -76.3416634,
-            },
-            new()
-            {
-                Identifier = "MEN", RightAscensionStart = 5.04527913, DeclinationStart = -71.31432608,
-                RightAscensionEnd = 4.91976102, DeclinationEnd = -74.93700232,
-            },
-            new()
-            {
-                Identifier = "MEN", RightAscensionStart = 5.53129495, DeclinationStart = -76.3416634,
-                RightAscensionEnd = 6.17061203, DeclinationEnd = -74.7525279,
-            },
-            new()
-            {
-                Identifier = "MIC", RightAscensionStart = 20.83279986, DeclinationStart = -33.7796732,
-                RightAscensionEnd = 21.02151713, DeclinationEnd = -32.25776681,
-            },
-            new()
-            {
-                Identifier = "MIC", RightAscensionStart = 21.02151713, DeclinationStart = -32.25776681,
-                RightAscensionEnd = 21.29895737, DeclinationEnd = -32.17248551,
-            },
-            new()
-            {
-                Identifier = "MIC", RightAscensionStart = 21.29895737, DeclinationStart = -32.17248551,
-                RightAscensionEnd = 21.34599543, DeclinationEnd = -40.80950852,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 6.24759346, DeclinationStart = -6.27472737,
-                RightAscensionEnd = 6.48029836, DeclinationEnd = -7.03305042,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 6.39613824, DeclinationStart = 4.59283881,
-                RightAscensionEnd = 6.5483971, DeclinationEnd = 7.33297921,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 6.48029836, DeclinationStart = -7.03305042,
-                RightAscensionEnd = 7.19773899, DeclinationEnd = -0.49278056,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 6.79768245, DeclinationStart = 2.41218914,
-                RightAscensionEnd = 6.39613824, DeclinationEnd = 4.59283881,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 7.19773899, DeclinationStart = -0.49278056,
-                RightAscensionEnd = 6.79768245, DeclinationEnd = 2.41218914,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 7.68746574, DeclinationStart = -9.55108315,
-                RightAscensionEnd = 7.19773899, DeclinationEnd = -0.49278056,
-            },
-            new()
-            {
-                Identifier = "MON", RightAscensionStart = 8.14323824, DeclinationStart = -2.98377649,
-                RightAscensionEnd = 7.68746574, DeclinationEnd = -9.55108315,
-            },
-            new()
-            {
-                Identifier = "MUS", RightAscensionStart = 11.80402484, DeclinationStart = -66.81487085,
-                RightAscensionEnd = 12.29295453, DeclinationEnd = -67.96067161,
-            },
-            new()
-            {
-                Identifier = "MUS", RightAscensionStart = 12.29295453, DeclinationStart = -67.96067161,
-                RightAscensionEnd = 12.61974547, DeclinationEnd = -69.13553358,
-            },
-            new()
-            {
-                Identifier = "MUS", RightAscensionStart = 12.54114193, DeclinationStart = -72.1329759,
-                RightAscensionEnd = 12.61974547, DeclinationEnd = -69.13553358,
-            },
-            new()
-            {
-                Identifier = "MUS", RightAscensionStart = 12.61974547, DeclinationStart = -69.13553358,
-                RightAscensionEnd = 12.77135267, DeclinationEnd = -68.10809405,
-            },
-            new()
-            {
-                Identifier = "MUS", RightAscensionStart = 12.61974547, DeclinationStart = -69.13553358,
-                RightAscensionEnd = 13.03771597, DeclinationEnd = -71.54879865,
-            },
-            new()
-            {
-                Identifier = "NOR", RightAscensionStart = 16.05357227, DeclinationStart = -49.22972074,
-                RightAscensionEnd = 16.33071322, DeclinationEnd = -50.15537923,
-            },
-            new()
-            {
-                Identifier = "NOR", RightAscensionStart = 16.28359319, DeclinationStart = -50.06811224,
-                RightAscensionEnd = 16.45306883, DeclinationEnd = -47.5547359,
-            },
-            new()
-            {
-                Identifier = "NOR", RightAscensionStart = 16.33071322, DeclinationStart = -50.15537923,
-                RightAscensionEnd = 16.28359319, DeclinationEnd = -50.06811224,
-            },
-            new()
-            {
-                Identifier = "OCT", RightAscensionStart = 14.44881687, DeclinationStart = -83.66785308,
-                RightAscensionEnd = 22.76770092, DeclinationEnd = -81.38161731,
-            },
-            new()
-            {
-                Identifier = "OCT", RightAscensionStart = 21.69124253, DeclinationStart = -77.38946215,
-                RightAscensionEnd = 14.44881687, DeclinationEnd = -83.66785308,
-            },
-            new()
-            {
-                Identifier = "OCT", RightAscensionStart = 22.3337445, DeclinationStart = -80.43964301,
-                RightAscensionEnd = 21.69124253, DeclinationEnd = -77.38946215,
-            },
-            new()
-            {
-                Identifier = "OCT", RightAscensionStart = 22.76770092, DeclinationStart = -81.38161731,
-                RightAscensionEnd = 22.3337445, DeclinationEnd = -80.43964301,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 16.23910173, DeclinationStart = -3.69397562,
-                RightAscensionEnd = 16.96118627, DeclinationEnd = 9.37505626,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 16.30534466, DeclinationStart = -4.69260809,
-                RightAscensionEnd = 16.23910173, DeclinationEnd = -3.69397562,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 16.61931389, DeclinationStart = -10.5671518,
-                RightAscensionEnd = 16.30534466, DeclinationEnd = -4.69260809,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 16.96118627, DeclinationStart = 9.37505626,
-                RightAscensionEnd = 17.58222354, DeclinationEnd = 12.56057584,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.17296177, DeclinationStart = -15.72514757,
-                RightAscensionEnd = 16.61931389, DeclinationEnd = -10.5671518,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.35005841, DeclinationStart = -21.11243499,
-                RightAscensionEnd = 17.17296177, DeclinationEnd = -15.72514757,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.36682891, DeclinationStart = -24.99948797,
-                RightAscensionEnd = 17.43950482, DeclinationEnd = -24.17502346,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.43950482, DeclinationStart = -24.17502346,
-                RightAscensionEnd = 17.35005841, DeclinationEnd = -21.11243499,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.45590667, DeclinationStart = -29.86669942,
-                RightAscensionEnd = 17.36682891, DeclinationEnd = -24.99948797,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.58222354, DeclinationStart = 12.56057584,
-                RightAscensionEnd = 17.72454914, DeclinationEnd = 4.56691684,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.72454914, DeclinationStart = 4.56691684,
-                RightAscensionEnd = 17.17296177, DeclinationEnd = -15.72514757,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.79821501, DeclinationStart = 2.70745875,
-                RightAscensionEnd = 17.72454914, DeclinationEnd = 4.56691684,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 17.9837771, DeclinationStart = -9.77334973,
-                RightAscensionEnd = 17.79821501, DeclinationEnd = 2.70745875,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 18.01075431, DeclinationStart = 2.93158759,
-                RightAscensionEnd = 17.79821501, DeclinationEnd = 2.70745875,
-            },
-            new()
-            {
-                Identifier = "OPH", RightAscensionStart = 18.09089245, DeclinationStart = 2.50243928,
-                RightAscensionEnd = 18.01075431, DeclinationEnd = 2.93158759,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.83059395, DeclinationStart = 06.96124744,
-                RightAscensionEnd = 4.853435, DeclinationEnd = 05.60510146,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.83059395, DeclinationStart = 06.96124744,
-                RightAscensionEnd = 5.41885227, DeclinationEnd = 06.34973451,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.84353396, DeclinationStart = 08.90025258,
-                RightAscensionEnd = 4.83059395, DeclinationEnd = 06.96124744,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.853435, DeclinationStart = 05.60510146,
-                RightAscensionEnd = 4.90419323, DeclinationEnd = 02.44067149,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.90419323, DeclinationStart = 02.44067149,
-                RightAscensionEnd = 4.97580635, DeclinationEnd = 01.71403506,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 4.91491781, DeclinationStart = 10.15114511,
-                RightAscensionEnd = 4.84353396, DeclinationEnd = 08.90025258,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.24229756, DeclinationStart = -08.20163919,
-                RightAscensionEnd = 5.79594109, DeclinationEnd = -09.66960186,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.41885227, DeclinationStart = 06.34973451,
-                RightAscensionEnd = 5.53344437, DeclinationEnd = -00.29909340,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.53344437, DeclinationStart = -00.29909340,
-                RightAscensionEnd = 5.24229756, DeclinationEnd = -08.20163919,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.58563269, DeclinationStart = 09.93416294,
-                RightAscensionEnd = 5.41885227, DeclinationEnd = 06.34973451,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.67931244, DeclinationStart = -01.94257841,
-                RightAscensionEnd = 5.91952477, DeclinationEnd = 07.40703634,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.79594109, DeclinationStart = -09.66960186,
-                RightAscensionEnd = 5.67931244, DeclinationEnd = -01.94257841,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.91952477, DeclinationStart = 07.40703634,
-                RightAscensionEnd = 5.58563269, DeclinationEnd = 09.93416294,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 5.91952477, DeclinationStart = 07.40703634,
-                RightAscensionEnd = 6.03971954, DeclinationEnd = 09.64736756,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 6.03971954, DeclinationStart = 09.64736756,
-                RightAscensionEnd = 6.1989991, DeclinationEnd = 14.20881425,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 6.12620051, DeclinationStart = 14.76852318,
-                RightAscensionEnd = 6.06532876, DeclinationEnd = 20.13845865,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 6.1989991, DeclinationStart = 14.20881425,
-                RightAscensionEnd = 6.12620051, DeclinationEnd = 14.76852318,
-            },
-            new()
-            {
-                Identifier = "ORI", RightAscensionStart = 6.1989991, DeclinationStart = 14.20881425,
-                RightAscensionEnd = 6.20037193, DeclinationEnd = 19.79057155,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 17.76222289, DeclinationStart = -64.7237345,
-                RightAscensionEnd = 18.14299745, DeclinationEnd = -63.66804844,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 18.14299745, DeclinationStart = -63.66804844,
-                RightAscensionEnd = 18.38711682, DeclinationEnd = -61.49390506,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 18.38711682, DeclinationStart = -61.49390506,
-                RightAscensionEnd = 18.87028792, DeclinationEnd = -62.18756062,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 18.71725939, DeclinationStart = -71.42772867,
-                RightAscensionEnd = 17.76222289, DeclinationEnd = -64.7237345,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 18.87028792, DeclinationStart = -62.18756062,
-                RightAscensionEnd = 20.14496114, DeclinationEnd = -66.17932101,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 20.00983148, DeclinationStart = -72.91018443,
-                RightAscensionEnd = 18.71725939, DeclinationEnd = -71.42772867,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 20.14496114, DeclinationStart = -66.17932101,
-                RightAscensionEnd = 20.74932102, DeclinationEnd = -66.20323826,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 20.42745823, DeclinationStart = -56.73488071,
-                RightAscensionEnd = 20.74932102, DeclinationEnd = -66.20323826,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 20.74932102, DeclinationStart = -66.20323826,
-                RightAscensionEnd = 20.00983148, DeclinationEnd = -72.91018443,
-            },
-            new()
-            {
-                Identifier = "PAV", RightAscensionStart = 20.74932102, DeclinationStart = -66.20323826,
-                RightAscensionEnd = 21.44069225, DeclinationEnd = -65.36814438,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 21.73642787, DeclinationStart = 9.87500791,
-                RightAscensionEnd = 22.16994993, DeclinationEnd = 6.197789,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.11679848, DeclinationStart = 25.3450461,
-                RightAscensionEnd = 21.7440845, DeclinationEnd = 25.64500284,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.16994993, DeclinationStart = 6.197789,
-                RightAscensionEnd = 22.69102078, DeclinationEnd = 10.83139111,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.69102078, DeclinationStart = 10.83139111,
-                RightAscensionEnd = 22.77817819, DeclinationEnd = 12.17408381,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.71670238, DeclinationStart = 30.22130866,
-                RightAscensionEnd = 22.11679848, DeclinationEnd = 25.3450461,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.77551177, DeclinationStart = 23.56567939,
-                RightAscensionEnd = 21.74185847, DeclinationEnd = 17.35004352,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.77817819, DeclinationStart = 12.17408381,
-                RightAscensionEnd = 23.07933801, DeclinationEnd = 15.20536786,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 22.8333612, DeclinationStart = 24.60168486,
-                RightAscensionEnd = 22.77551177, DeclinationEnd = 23.56567939,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 23.06287038, DeclinationStart = 28.08245462,
-                RightAscensionEnd = 22.71670238, DeclinationEnd = 30.22130866,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 23.06287038, DeclinationStart = 28.08245462,
-                RightAscensionEnd = 22.8333612, DeclinationEnd = 24.60168486,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 23.07933801, DeclinationStart = 15.20536786,
-                RightAscensionEnd = 0.22059721, DeclinationEnd = 15.18361593,
-            },
-            new()
-            {
-                Identifier = "PEG", RightAscensionStart = 23.07933801, DeclinationStart = 15.20536786,
-                RightAscensionEnd = 23.06287038, DeclinationEnd = 28.08245462,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 2.8951606, DeclinationStart = 38.33767914,
-                RightAscensionEnd = 2.84303172, DeclinationEnd = 38.31890838,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.07994173, DeclinationStart = 53.50645031,
-                RightAscensionEnd = 2.84494243, DeclinationEnd = 55.89552955,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.08624916, DeclinationStart = 38.84053298,
-                RightAscensionEnd = 2.8951606, DeclinationEnd = 38.33767914,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.13614714, DeclinationStart = 40.9556512,
-                RightAscensionEnd = 3.08624916, DeclinationEnd = 38.84053298,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.1508009, DeclinationStart = 49.61350009,
-                RightAscensionEnd = 2.73657999, DeclinationEnd = 49.22866639,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.1508009, DeclinationStart = 49.61350009,
-                RightAscensionEnd = 3.1582303, DeclinationEnd = 44.85788896,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.1582303, DeclinationStart = 44.85788896,
-                RightAscensionEnd = 3.13614714, DeclinationEnd = 40.9556512,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.40537459, DeclinationStart = 49.86124281,
-                RightAscensionEnd = 3.07994173, DeclinationEnd = 53.50645031,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.40537459, DeclinationStart = 49.86124281,
-                RightAscensionEnd = 3.1508009, DeclinationEnd = 49.61350009,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.60815558, DeclinationStart = 48.19270068,
-                RightAscensionEnd = 3.40537459, DeclinationEnd = 49.86124281,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.71541169, DeclinationStart = 47.7876533,
-                RightAscensionEnd = 3.60815558, DeclinationEnd = 48.19270068,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.73864623, DeclinationStart = 32.28827325,
-                RightAscensionEnd = 3.90219957, DeclinationEnd = 31.88365776,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.75323428, DeclinationStart = 42.57854437,
-                RightAscensionEnd = 3.71541169, DeclinationEnd = 47.7876533,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.90219957, DeclinationStart = 31.88365776,
-                RightAscensionEnd = 3.98274992, DeclinationEnd = 35.79102701,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.96422809, DeclinationStart = 40.01027315,
-                RightAscensionEnd = 3.75323428, DeclinationEnd = 42.57854437,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 3.98274992, DeclinationStart = 35.79102701,
-                RightAscensionEnd = 3.96422809, DeclinationEnd = 40.01027315,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 4.10973758, DeclinationStart = 50.35135022,
-                RightAscensionEnd = 4.24829381, DeclinationEnd = 48.40937312,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 4.14435368, DeclinationStart = 47.71259359,
-                RightAscensionEnd = 3.71541169, DeclinationEnd = 47.7876533,
-            },
-            new()
-            {
-                Identifier = "PER", RightAscensionStart = 4.24829381, DeclinationStart = 48.40937312,
-                RightAscensionEnd = 4.14435368, DeclinationEnd = 47.71259359,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 0.15681663, DeclinationStart = -45.74698836,
-                RightAscensionEnd = 0.72256778, DeclinationEnd = -57.46309763,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 0.43801871, DeclinationStart = -42.30512197,
-                RightAscensionEnd = 0.15681663, DeclinationEnd = -45.74698836,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 0.72256778, DeclinationStart = -57.46309763,
-                RightAscensionEnd = 1.10141847, DeclinationEnd = -46.71849042,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 1.10141847, DeclinationStart = -46.71849042,
-                RightAscensionEnd = 0.43801871, DeclinationEnd = -42.30512197,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 1.25293547, DeclinationStart = -45.53209717,
-                RightAscensionEnd = 1.10141847, DeclinationEnd = -46.71849042,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 1.47276157, DeclinationStart = -43.31772906,
-                RightAscensionEnd = 1.25293547, DeclinationEnd = -45.53209717,
-            },
-            new()
-            {
-                Identifier = "PHE", RightAscensionStart = 1.5208282, DeclinationStart = -49.07307701,
-                RightAscensionEnd = 1.47276157, DeclinationEnd = -43.31772906,
-            },
-            new()
-            {
-                Identifier = "PIC", RightAscensionStart = 5.7880787, DeclinationStart = -51.06671329,
-                RightAscensionEnd = 5.83043799, DeclinationEnd = -56.1664886,
-            },
-            new()
-            {
-                Identifier = "PIC", RightAscensionStart = 5.83043799, DeclinationStart = -56.1664886,
-                RightAscensionEnd = 6.80320475, DeclinationEnd = -61.94197988,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 21.74910772, DeclinationStart = -33.02555306,
-                RightAscensionEnd = 21.79560369, DeclinationEnd = -30.89830582,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 21.79560369, DeclinationStart = -30.89830582,
-                RightAscensionEnd = 22.23853786, DeclinationEnd = -27.76691218,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.13970922, DeclinationStart = -32.98839827,
-                RightAscensionEnd = 21.74910772, DeclinationEnd = -33.02555306,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.23853786, DeclinationStart = -27.76691218,
-                RightAscensionEnd = 22.67759043, DeclinationEnd = -27.0436148,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.52508043, DeclinationStart = -32.34602798,
-                RightAscensionEnd = 22.13970922, DeclinationEnd = -32.98839827,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.67759043, DeclinationStart = -27.0436148,
-                RightAscensionEnd = 22.96078488, DeclinationEnd = -29.62183701,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.87543275, DeclinationStart = -32.87545019,
-                RightAscensionEnd = 22.52508043, DeclinationEnd = -32.34602798,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.93247, DeclinationStart = -32.53970196,
-                RightAscensionEnd = 22.87543275, DeclinationEnd = -32.87545019,
-            },
-            new()
-            {
-                Identifier = "PSA", RightAscensionStart = 22.96078488, DeclinationStart = -29.62183701,
-                RightAscensionEnd = 22.93247, DeclinationEnd = -32.53970196,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 0.81135982, DeclinationStart = 7.58520186,
-                RightAscensionEnd = 23.98850066, DeclinationEnd = 6.86359373,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.04907107, DeclinationStart = 7.89007256,
-                RightAscensionEnd = 0.81135982, DeclinationEnd = 7.58520186,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.19432964, DeclinationStart = 30.08972962,
-                RightAscensionEnd = 1.3244383, DeclinationEnd = 27.26408682,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.22914867, DeclinationStart = 24.58376482,
-                RightAscensionEnd = 1.52472051, DeclinationEnd = 15.34583101,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.3244383, DeclinationStart = 27.26408682,
-                RightAscensionEnd = 1.22914867, DeclinationEnd = 24.58376482,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.50303973, DeclinationStart = 6.14393314,
-                RightAscensionEnd = 1.04907107, DeclinationEnd = 7.89007256,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.52472051, DeclinationStart = 15.34583101,
-                RightAscensionEnd = 1.75655241, DeclinationEnd = 9.15764102,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.69052987, DeclinationStart = 5.48760445,
-                RightAscensionEnd = 1.50303973, DeclinationEnd = 6.14393314,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 1.75655241, DeclinationStart = 9.15764102,
-                RightAscensionEnd = 2.03411128, DeclinationEnd = 2.76376048,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 2.03411128, DeclinationStart = 2.76376048,
-                RightAscensionEnd = 1.69052987, DeclinationEnd = 5.48760445,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.28597045, DeclinationStart = 3.28224524,
-                RightAscensionEnd = 23.44886258, DeclinationEnd = 1.25583758,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.44886258, DeclinationStart = 1.25583758,
-                RightAscensionEnd = 23.70080049, DeclinationEnd = 1.7804172,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.46615772, DeclinationStart = 6.37909727,
-                RightAscensionEnd = 23.28597045, DeclinationEnd = 3.28224524,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.66578342, DeclinationStart = 5.62735374,
-                RightAscensionEnd = 23.46615772, DeclinationEnd = 6.37909727,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.70080049, DeclinationStart = 1.7804172,
-                RightAscensionEnd = 23.66578342, DeclinationEnd = 5.62735374,
-            },
-            new()
-            {
-                Identifier = "PSC", RightAscensionStart = 23.98850066, DeclinationStart = 6.86359373,
-                RightAscensionEnd = 23.66578342, DeclinationEnd = 5.62735374,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 6.62935324, DeclinationStart = -43.19592394,
-                RightAscensionEnd = 6.83226023, DeclinationEnd = -50.61439973,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 6.83226023, DeclinationStart = -50.61439973,
-                RightAscensionEnd = 7.48718842, DeclinationEnd = -43.30189129,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 7.28571226, DeclinationStart = -37.09748689,
-                RightAscensionEnd = 6.62935324, DeclinationEnd = -43.19592394,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 7.48718842, DeclinationStart = -43.30189129,
-                RightAscensionEnd = 8.0597417, DeclinationEnd = -40.00318846,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 7.82157187, DeclinationStart = -24.85978401,
-                RightAscensionEnd = 7.28571226, DeclinationEnd = -37.09748689,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 7.94765507, DeclinationStart = -22.88014849,
-                RightAscensionEnd = 7.82157187, DeclinationEnd = -24.85978401,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 8.0597417, DeclinationStart = -40.00318846,
-                RightAscensionEnd = 8.12575059, DeclinationEnd = -24.30443677,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 8.12575059, DeclinationStart = -24.30443677,
-                RightAscensionEnd = 7.94765507, DeclinationEnd = -22.88014849,
-            },
-            new()
-            {
-                Identifier = "PUP", RightAscensionStart = 8.15045651, DeclinationStart = -19.24500094,
-                RightAscensionEnd = 7.94765507, DeclinationEnd = -22.88014849,
-            },
-            new()
-            {
-                Identifier = "PYX", RightAscensionStart = 8.66837126, DeclinationStart = -35.30830091,
-                RightAscensionEnd = 8.72654096, DeclinationEnd = -33.18641133,
-            },
-            new()
-            {
-                Identifier = "PYX", RightAscensionStart = 8.72654096, DeclinationStart = -33.18641133,
-                RightAscensionEnd = 8.84222536, DeclinationEnd = -27.71005869,
-            },
-            new()
-            {
-                Identifier = "RET", RightAscensionStart = 3.73654302, DeclinationStart = -64.80709398,
-                RightAscensionEnd = 3.97909374, DeclinationEnd = -61.40015059,
-            },
-            new()
-            {
-                Identifier = "RET", RightAscensionStart = 3.97909374, DeclinationStart = -61.40015059,
-                RightAscensionEnd = 4.27474542, DeclinationEnd = -59.30174841,
-            },
-            new()
-            {
-                Identifier = "RET", RightAscensionStart = 4.24039753, DeclinationStart = -62.47397888,
-                RightAscensionEnd = 3.73654302, DeclinationEnd = -64.80709398,
-            },
-            new()
-            {
-                Identifier = "RET", RightAscensionStart = 4.27474542, DeclinationStart = -59.30174841,
-                RightAscensionEnd = 4.24039753, DeclinationEnd = -62.47397888,
-            },
-            new()
-            {
-                Identifier = "SCL", RightAscensionStart = 23.31372966, DeclinationStart = -32.53183574,
-                RightAscensionEnd = 23.81541108, DeclinationEnd = -28.1300148,
-            },
-            new()
-            {
-                Identifier = "SCL", RightAscensionStart = 23.5494967, DeclinationStart = -37.81835895,
-                RightAscensionEnd = 23.31372966, DeclinationEnd = -32.53183574,
-            },
-            new()
-            {
-                Identifier = "SCL", RightAscensionStart = 23.81541108, DeclinationStart = -28.1300148,
-                RightAscensionEnd = 0.97676274, DeclinationEnd = -29.35746436,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 15.98086685, DeclinationStart = -26.1140428,
-                RightAscensionEnd = 15.94807962, DeclinationEnd = -29.21401221,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.00555881, DeclinationStart = -22.62162024,
-                RightAscensionEnd = 15.98086685, DeclinationEnd = -26.1140428,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.00555881, DeclinationStart = -22.62162024,
-                RightAscensionEnd = 16.09071534, DeclinationEnd = -19.80184191,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.09071534, DeclinationStart = -19.80184191,
-                RightAscensionEnd = 16.12678906, DeclinationEnd = -12.74534315,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.11345346, DeclinationStart = -20.66913479,
-                RightAscensionEnd = 16.09071534, DeclinationEnd = -19.80184191,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.12678906, DeclinationStart = -12.74534315,
-                RightAscensionEnd = 16.19992791, DeclinationEnd = -19.46064684,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.19992791, DeclinationStart = -19.46064684,
-                RightAscensionEnd = 16.11345346, DeclinationEnd = -20.66913479,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.35314514, DeclinationStart = -25.59275259,
-                RightAscensionEnd = 16.00555881, DeclinationEnd = -22.62162024,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.49012986, DeclinationStart = -26.43194608,
-                RightAscensionEnd = 16.35314514, DeclinationEnd = -25.59275259,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.59804428, DeclinationStart = -28.21596156,
-                RightAscensionEnd = 16.49012986, DeclinationEnd = -26.43194608,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.83617915, DeclinationStart = -34.29260982,
-                RightAscensionEnd = 16.59804428, DeclinationEnd = -28.21596156,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.86451079, DeclinationStart = -38.04732717,
-                RightAscensionEnd = 16.83617915, DeclinationEnd = -34.29260982,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 16.89992424, DeclinationStart = -42.36201968,
-                RightAscensionEnd = 16.86451079, DeclinationEnd = -38.04732717,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.20254886, DeclinationStart = -43.23849039,
-                RightAscensionEnd = 16.89992424, DeclinationEnd = -42.36201968,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.62197938, DeclinationStart = -42.99782155,
-                RightAscensionEnd = 17.20254886, DeclinationEnd = -43.23849039,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.70813327, DeclinationStart = -39.02992092,
-                RightAscensionEnd = 17.56014624, DeclinationEnd = -37.10374835,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.79307809, DeclinationStart = -40.12698197,
-                RightAscensionEnd = 17.62197938, DeclinationEnd = -42.99782155,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.79307809, DeclinationStart = -40.12698197,
-                RightAscensionEnd = 17.70813327, DeclinationEnd = -39.02992092,
-            },
-            new()
-            {
-                Identifier = "SCO", RightAscensionStart = 17.83095867, DeclinationStart = -37.04337105,
-                RightAscensionEnd = 17.79307809, DeclinationEnd = -40.12698197,
-            },
-            new()
-            {
-                Identifier = "SCT", RightAscensionStart = 18.58678829, DeclinationStart = -8.24330819,
-                RightAscensionEnd = 18.3943205, DeclinationEnd = -8.93451038,
-            },
-            new()
-            {
-                Identifier = "SCT", RightAscensionStart = 18.58678829, DeclinationStart = -8.24330819,
-                RightAscensionEnd = 18.48662553, DeclinationEnd = -14.56580499,
-            },
-            new()
-            {
-                Identifier = "SCT", RightAscensionStart = 18.7862437, DeclinationStart = -4.74782871,
-                RightAscensionEnd = 18.58678829, DeclinationEnd = -8.24330819,
-            },
-            new()
-            {
-                Identifier = "SEC", RightAscensionStart = 17.62645145, DeclinationStart = -15.39840835,
-                RightAscensionEnd = 17.34712098, DeclinationEnd = -12.846882,
-            },
-            new()
-            {
-                Identifier = "SEC", RightAscensionStart = 17.69025458, DeclinationStart = -12.87517268,
-                RightAscensionEnd = 17.62645145, DeclinationEnd = -15.39840835,
-            },
-            new()
-            {
-                Identifier = "SEC", RightAscensionStart = 18.35525571, DeclinationStart = -2.897122,
-                RightAscensionEnd = 17.69025458, DeclinationEnd = -12.87517268,
-            },
-            new()
-            {
-                Identifier = "SEC", RightAscensionStart = 18.93698898, DeclinationStart = 4.20352956,
-                RightAscensionEnd = 18.35525571, DeclinationEnd = -2.897122,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.58005284, DeclinationStart = 10.53885916,
-                RightAscensionEnd = 15.76978191, DeclinationEnd = 15.42192602,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.7377766, DeclinationStart = 6.42551971,
-                RightAscensionEnd = 15.58005284, DeclinationEnd = 10.53885916,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.76978191, DeclinationStart = 15.42192602,
-                RightAscensionEnd = 15.81233572, DeclinationEnd = 18.1417793,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.81233572, DeclinationStart = 18.1417793,
-                RightAscensionEnd = 15.94083173, DeclinationEnd = 15.66473327,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.82701825, DeclinationStart = -3.43014112,
-                RightAscensionEnd = 15.83820259, DeclinationEnd = 2.19662489,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.83820259, DeclinationStart = 2.19662489,
-                RightAscensionEnd = 15.84691422, DeclinationEnd = 4.4775798,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.84691422, DeclinationStart = 4.4775798,
-                RightAscensionEnd = 15.7377766, DeclinationEnd = 6.42551971,
-            },
-            new()
-            {
-                Identifier = "SER", RightAscensionStart = 15.94083173, DeclinationStart = 15.66473327,
-                RightAscensionEnd = 15.76978191, DeclinationEnd = 15.42192602,
-            },
-            new()
-            {
-                Identifier = "SEX", RightAscensionStart = 10.13230432, DeclinationStart = -0.37162786,
-                RightAscensionEnd = 9.8751308, DeclinationEnd = -8.10491559,
-            },
-            new()
-            {
-                Identifier = "SEX", RightAscensionStart = 10.50486195, DeclinationStart = -0.63697208,
-                RightAscensionEnd = 10.13230432, DeclinationEnd = -0.37162786,
-            },
-            new()
-            {
-                Identifier = "SGE", RightAscensionStart = 19.66827292, DeclinationStart = 18.01393839,
-                RightAscensionEnd = 19.78979589, DeclinationEnd = 18.53425912,
-            },
-            new()
-            {
-                Identifier = "SGE", RightAscensionStart = 19.68414825, DeclinationStart = 17.47612356,
-                RightAscensionEnd = 19.78979589, DeclinationEnd = 18.53425912,
-            },
-            new()
-            {
-                Identifier = "SGE", RightAscensionStart = 19.78979589, DeclinationStart = 18.53425912,
-                RightAscensionEnd = 19.97927434, DeclinationEnd = 19.49209287,
-            },
-            new()
-            {
-                Identifier = "SGE", RightAscensionStart = 19.97927434, DeclinationStart = 19.49209287,
-                RightAscensionEnd = 20.08596517, DeclinationEnd = 19.99087704,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 17.79267418, DeclinationStart = -27.83076255,
-                RightAscensionEnd = 18.09681239, DeclinationEnd = -30.42365007,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.09681239, DeclinationStart = -30.42365007,
-                RightAscensionEnd = 18.34989489, DeclinationEnd = -29.82803914,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.09681239, DeclinationStart = -30.42365007,
-                RightAscensionEnd = 18.40287397, DeclinationEnd = -34.3843146,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.2293913, DeclinationStart = -21.05883031,
-                RightAscensionEnd = 18.46618597, DeclinationEnd = -25.42124732,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.34989489, DeclinationStart = -29.82803914,
-                RightAscensionEnd = 18.46618597, DeclinationEnd = -25.42124732,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.34989489, DeclinationStart = -29.82803914,
-                RightAscensionEnd = 18.76093138, DeclinationEnd = -26.9907794,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.40287397, DeclinationStart = -34.3843146,
-                RightAscensionEnd = 18.29381366, DeclinationEnd = -36.76128103,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.40287397, DeclinationStart = -34.3843146,
-                RightAscensionEnd = 18.34989489, DeclinationEnd = -29.82803914,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.46618597, DeclinationStart = -25.42124732,
-                RightAscensionEnd = 18.76093138, DeclinationEnd = -26.9907794,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.76093138, DeclinationStart = -26.9907794,
-                RightAscensionEnd = 18.92108797, DeclinationEnd = -26.29659428,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.76093138, DeclinationStart = -26.9907794,
-                RightAscensionEnd = 19.04353428, DeclinationEnd = -29.88011429,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.92108797, DeclinationStart = -26.29659428,
-                RightAscensionEnd = 19.07803717, DeclinationEnd = -21.74135451,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 18.92108797, DeclinationStart = -26.29659428,
-                RightAscensionEnd = 19.11567841, DeclinationEnd = -27.66981416,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.04353428, DeclinationStart = -29.88011429,
-                RightAscensionEnd = 18.40287397, DeclinationEnd = -34.3843146,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.07803717, DeclinationStart = -21.74135451,
-                RightAscensionEnd = 19.1627316, DeclinationEnd = -21.02352534,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.11567841, DeclinationStart = -27.66981416,
-                RightAscensionEnd = 19.04353428, DeclinationEnd = -29.88011429,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.1627316, DeclinationStart = -21.02352534,
-                RightAscensionEnd = 19.66373763, DeclinationEnd = -23.42761,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.25899921, DeclinationStart = -25.25660677,
-                RightAscensionEnd = 19.11567841, DeclinationEnd = -27.66981416,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.38696127, DeclinationStart = -44.79964788,
-                RightAscensionEnd = 19.92102196, DeclinationEnd = -41.8684135,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.61177473, DeclinationStart = -24.88356664,
-                RightAscensionEnd = 19.25899921, DeclinationEnd = -25.25660677,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.66373763, DeclinationStart = -23.42761,
-                RightAscensionEnd = 19.36121535, DeclinationEnd = -17.84725155,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.92102196, DeclinationStart = -41.8684135,
-                RightAscensionEnd = 19.3980976, DeclinationEnd = -40.61564629,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 19.92102196, DeclinationStart = -41.8684135,
-                RightAscensionEnd = 20.04429424, DeclinationEnd = -27.70987972,
-            },
-            new()
-            {
-                Identifier = "SGR", RightAscensionStart = 20.04429424, DeclinationStart = -27.70987972,
-                RightAscensionEnd = 19.61177473, DeclinationEnd = -24.88356664,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 3.45281136, DeclinationStart = 9.7327724,
-                RightAscensionEnd = 3.413566, DeclinationEnd = 9.02906504,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 3.51454638, DeclinationStart = 12.93668186,
-                RightAscensionEnd = 3.45281136, DeclinationEnd = 9.7327724,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.01133906, DeclinationStart = 12.49037571,
-                RightAscensionEnd = 3.51454638, DeclinationEnd = 12.93668186,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.01133906, DeclinationStart = 12.49037571,
-                RightAscensionEnd = 4.32987052, DeclinationEnd = 15.62770031,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.05260466, DeclinationStart = 5.98930909,
-                RightAscensionEnd = 4.25890144, DeclinationEnd = 8.89240989,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.25890144, DeclinationStart = 8.89240989,
-                RightAscensionEnd = 4.01133906, DeclinationEnd = 12.49037571,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.32987052, DeclinationStart = 15.62770031,
-                RightAscensionEnd = 4.38222981, DeclinationEnd = 17.5425843,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.38222981, DeclinationStart = 17.5425843,
-                RightAscensionEnd = 4.42481039, DeclinationEnd = 17.92798917,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.42481039, DeclinationStart = 17.92798917,
-                RightAscensionEnd = 4.47692591, DeclinationEnd = 19.18052092,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.4762312, DeclinationStart = 15.96221721,
-                RightAscensionEnd = 4.32987052, DeclinationEnd = 15.62770031,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.47692591, DeclinationStart = 19.18052092,
-                RightAscensionEnd = 4.7040843, DeclinationEnd = 22.95697545,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.59866679, DeclinationStart = 16.50976164,
-                RightAscensionEnd = 4.4762312, DeclinationEnd = 15.96221721,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.59866679, DeclinationStart = 16.50976164,
-                RightAscensionEnd = 4.47692591, DeclinationEnd = 19.18052092,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 4.7040843, DeclinationStart = 22.95697545,
-                RightAscensionEnd = 5.43819386, DeclinationEnd = 28.60787346,
-            },
-            new()
-            {
-                Identifier = "TAU", RightAscensionStart = 5.62741229, DeclinationStart = 21.14259299,
-                RightAscensionEnd = 4.59866679, DeclinationEnd = 16.50976164,
-            },
-            new()
-            {
-                Identifier = "TEL", RightAscensionStart = 18.44956396, DeclinationStart = -45.96832919,
-                RightAscensionEnd = 18.18716006, DeclinationEnd = -45.95432704,
-            },
-            new()
-            {
-                Identifier = "TEL", RightAscensionStart = 18.48048221, DeclinationStart = -49.07003097,
-                RightAscensionEnd = 18.44956396, DeclinationEnd = -45.96832919,
-            },
-            new()
-            {
-                Identifier = "TRA", RightAscensionStart = 15.31519133, DeclinationStart = -68.67946723,
-                RightAscensionEnd = 15.91911334, DeclinationEnd = -63.42974973,
-            },
-            new()
-            {
-                Identifier = "TRA", RightAscensionStart = 15.91911334, DeclinationStart = -63.42974973,
-                RightAscensionEnd = 16.81107382, DeclinationEnd = -69.02763503,
-            },
-            new()
-            {
-                Identifier = "TRA", RightAscensionStart = 16.81107382, DeclinationStart = -69.02763503,
-                RightAscensionEnd = 15.31519133, DeclinationEnd = -68.67946723,
-            },
-            new()
-            {
-                Identifier = "TRI", RightAscensionStart = 1.88469439, DeclinationStart = 29.57939727,
-                RightAscensionEnd = 2.04943523, DeclinationEnd = 33.28415151,
-            },
-            new()
-            {
-                Identifier = "TRI", RightAscensionStart = 2.04943523, DeclinationStart = 33.28415151,
-                RightAscensionEnd = 2.15903358, DeclinationEnd = 34.98739204,
-            },
-            new()
-            {
-                Identifier = "TRI", RightAscensionStart = 2.15903358, DeclinationStart = 34.98739204,
-                RightAscensionEnd = 2.28856547, DeclinationEnd = 33.84732099,
-            },
-            new()
-            {
-                Identifier = "TRI", RightAscensionStart = 2.28856547, DeclinationStart = 33.84732099,
-                RightAscensionEnd = 1.88469439, DeclinationEnd = 29.57939727,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 0.33386505, DeclinationStart = -64.8776232,
-                RightAscensionEnd = 23.99858613, DeclinationEnd = -65.57707774,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 0.525932, DeclinationStart = -62.96544985,
-                RightAscensionEnd = 0.33386505, DeclinationEnd = -64.8776232,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 22.30838283, DeclinationStart = -60.25949486,
-                RightAscensionEnd = 23.29050334, DeclinationEnd = -58.23592762,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 22.4555203, DeclinationStart = -64.96637927,
-                RightAscensionEnd = 22.30838283, DeclinationEnd = -60.25949486,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 23.29050334, DeclinationStart = -58.23592762,
-                RightAscensionEnd = 0.525932, DeclinationEnd = -62.96544985,
-            },
-            new()
-            {
-                Identifier = "TUC", RightAscensionStart = 23.99858613, DeclinationStart = -65.57707774,
-                RightAscensionEnd = 23.29050334, DeclinationEnd = -58.23592762,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 11.0306641, DeclinationStart = 56.38234478,
-                RightAscensionEnd = 11.89715035, DeclinationEnd = 53.69473296,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 11.06217691, DeclinationStart = 61.75111888,
-                RightAscensionEnd = 11.0306641, DeclinationEnd = 56.38234478,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 11.89715035, DeclinationStart = 53.69473296,
-                RightAscensionEnd = 12.25706919, DeclinationEnd = 57.03259792,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 12.25706919, DeclinationStart = 57.03259792,
-                RightAscensionEnd = 11.06217691, DeclinationEnd = 61.75111888,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 12.9004536, DeclinationStart = 55.95984301,
-                RightAscensionEnd = 12.25706919, DeclinationEnd = 57.03259792,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 13.39872773, DeclinationStart = 54.92541525,
-                RightAscensionEnd = 12.9004536, DeclinationEnd = 55.95984301,
-            },
-            new()
-            {
-                Identifier = "UMA", RightAscensionStart = 13.79237392, DeclinationStart = 49.31330288,
-                RightAscensionEnd = 13.39872773, DeclinationEnd = 54.92541525,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 14.84510983, DeclinationStart = 74.15547596,
-                RightAscensionEnd = 15.34548589, DeclinationEnd = 71.83397308,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 15.34548589, DeclinationStart = 71.83397308,
-                RightAscensionEnd = 16.29180584, DeclinationEnd = 75.75470385,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 15.73429554, DeclinationStart = 77.79449901,
-                RightAscensionEnd = 14.84510983, DeclinationEnd = 74.15547596,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 16.29180584, DeclinationStart = 75.75470385,
-                RightAscensionEnd = 15.73429554, DeclinationEnd = 77.79449901,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 16.76615597, DeclinationStart = 82.03725071,
-                RightAscensionEnd = 15.73429554, DeclinationEnd = 77.79449901,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 17.53691588, DeclinationStart = 86.58632924,
-                RightAscensionEnd = 16.76615597, DeclinationEnd = 82.03725071,
-            },
-            new()
-            {
-                Identifier = "UMI", RightAscensionStart = 2.52974312, DeclinationStart = 89.26413805,
-                RightAscensionEnd = 17.53691588, DeclinationEnd = 86.58632924,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 10.14895935, DeclinationStart = -51.81126187,
-                RightAscensionEnd = 9.13327141, DeclinationEnd = -43.43262406,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 10.77947836, DeclinationStart = -49.42012517,
-                RightAscensionEnd = 9.51169804, DeclinationEnd = -40.46688763,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 8.15887648, DeclinationStart = -47.33661177,
-                RightAscensionEnd = 8.7450548, DeclinationEnd = -54.70856797,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 8.62740038, DeclinationStart = -42.98910371,
-                RightAscensionEnd = 8.15887648, DeclinationEnd = -47.33661177,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 8.72785444, DeclinationStart = -49.82281081,
-                RightAscensionEnd = 8.62740038, DeclinationEnd = -42.98910371,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 8.7450548, DeclinationStart = -54.70856797,
-                RightAscensionEnd = 9.36856367, DeclinationEnd = -55.01069531,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 9.13327141, DeclinationStart = -43.43262406,
-                RightAscensionEnd = 8.72785444, DeclinationEnd = -49.82281081,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 9.36856367, DeclinationStart = -55.01069531,
-                RightAscensionEnd = 9.94770968, DeclinationEnd = -54.5677973,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 9.51169804, DeclinationStart = -40.46688763,
-                RightAscensionEnd = 10.14895935, DeclinationEnd = -51.81126187,
-            },
-            new()
-            {
-                Identifier = "VEL", RightAscensionStart = 9.94770968, DeclinationStart = -54.5677973,
-                RightAscensionEnd = 10.77947836, DeclinationEnd = -49.42012517,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 11.8448017, DeclinationStart = 1.76537705,
-                RightAscensionEnd = 12.33177539, DeclinationEnd = -0.66674709,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 12.33177539, DeclinationStart = -0.66674709,
-                RightAscensionEnd = 12.69444503, DeclinationEnd = -1.44952231,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 12.69444503, DeclinationStart = -1.44952231,
-                RightAscensionEnd = 13.16583667, DeclinationEnd = -5.53892987,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 12.92680091, DeclinationStart = 3.39759862,
-                RightAscensionEnd = 12.69444503, DeclinationEnd = -1.44952231,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 12.92680091, DeclinationStart = 3.39759862,
-                RightAscensionEnd = 13.03632237, DeclinationEnd = 10.95910186,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 13.16583667, DeclinationStart = -5.53892987,
-                RightAscensionEnd = 13.41989015, DeclinationEnd = -11.16124491,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 13.41989015, DeclinationStart = -11.16124491,
-                RightAscensionEnd = 14.21492805, DeclinationEnd = -10.274044,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 13.5782652, DeclinationStart = -0.59593821,
-                RightAscensionEnd = 12.92680091, DeclinationEnd = 3.39759862,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 13.5782652, DeclinationStart = -0.59593821,
-                RightAscensionEnd = 13.41989015, DeclinationEnd = -11.16124491,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 14.02743976, DeclinationStart = 1.54458338,
-                RightAscensionEnd = 13.5782652, DeclinationEnd = -0.59593821,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 14.21492805, DeclinationStart = -10.274044,
-                RightAscensionEnd = 14.26691247, DeclinationEnd = -5.99952622,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 14.26691247, DeclinationStart = -5.99952622,
-                RightAscensionEnd = 14.71765618, DeclinationEnd = -5.6574291,
-            },
-            new()
-            {
-                Identifier = "VIR", RightAscensionStart = 14.77083106, DeclinationStart = 1.8929383,
-                RightAscensionEnd = 14.02743976, DeclinationEnd = 1.54458338,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 7.14578458, DeclinationStart = -70.49919435,
-                RightAscensionEnd = 7.28050856, DeclinationEnd = -67.95717248,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 7.28050856, DeclinationStart = -67.95717248,
-                RightAscensionEnd = 8.13217799, DeclinationEnd = -68.61713647,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 7.69699889, DeclinationStart = -72.60613528,
-                RightAscensionEnd = 7.14578458, DeclinationEnd = -70.49919435,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 8.13217799, DeclinationStart = -68.61713647,
-                RightAscensionEnd = 7.69699889, DeclinationEnd = -72.60613528,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 8.42895729, DeclinationStart = -66.13652042,
-                RightAscensionEnd = 8.13217799, DeclinationEnd = -68.61713647,
-            },
-            new()
-            {
-                Identifier = "VOL", RightAscensionStart = 9.04077745, DeclinationStart = -66.39584369,
-                RightAscensionEnd = 8.42895729, DeclinationEnd = -66.13652042,
-            },
-            new()
-            {
-                Identifier = "VUL", RightAscensionStart = 19.4784475, DeclinationStart = 24.66516482,
-                RightAscensionEnd = 19.27028877, DeclinationEnd = 21.39044277,
-            },
-            new()
-            {
-                Identifier = "VUL", RightAscensionStart = 19.89102245, DeclinationStart = 24.07952568,
-                RightAscensionEnd = 19.4784475, DeclinationEnd = 24.66516482,
-            },
+            get
+            {
+                if (FigureFlavor == ConstellationFigureFlavor.SMap)
+                {
+                    return LinesSMap;
+                }
+
+                if (FigureFlavor == ConstellationFigureFlavor.LinesDf)
+                {
+                    return ConstellationLinesDf;
+                }
+
+                return LinesSMap;
+            }
+        }
+
+        /// <summary>
+        /// The constellation lines (stick figures).
+        /// </summary>
+        // These values are from the SMap software created in the start 2005. The copyright is unknown.
+        // http://www.vpksoft.net/2015-03-31-13-33-28/starmap
+        public static ConstellationLine[] LinesSMap { get; } =
+        {
+            new() { Identifier = "AND", StartIdentifier = 1, EndIdentifier = 2, },
+            new() { Identifier = "AND", StartIdentifier = 2, EndIdentifier = 3, },
+            new() { Identifier = "AND", StartIdentifier = 4, EndIdentifier = 5, },
+            new() { Identifier = "AND", StartIdentifier = 5, EndIdentifier = 3, },
+            new() { Identifier = "AND", StartIdentifier = 3, EndIdentifier = 6, },
+            new() { Identifier = "AND", StartIdentifier = 6, EndIdentifier = 7, },
+            new() { Identifier = "AND", StartIdentifier = 8, EndIdentifier = 6, },
+            new() { Identifier = "ANT", StartIdentifier = 9, EndIdentifier = 10, },
+            new() { Identifier = "ANT", StartIdentifier = 11, EndIdentifier = 12, },
+            new() { Identifier = "ANT", StartIdentifier = 12, EndIdentifier = 9, },
+            new() { Identifier = "APS", StartIdentifier = 13, EndIdentifier = 14, },
+            new() { Identifier = "APS", StartIdentifier = 14, EndIdentifier = 15, },
+            new() { Identifier = "APS", StartIdentifier = 15, EndIdentifier = 16, },
+            new() { Identifier = "AQL", StartIdentifier = 17, EndIdentifier = 18, },
+            new() { Identifier = "AQL", StartIdentifier = 19, EndIdentifier = 20, },
+            new() { Identifier = "AQL", StartIdentifier = 18, EndIdentifier = 21, },
+            new() { Identifier = "AQL", StartIdentifier = 20, EndIdentifier = 22, },
+            new() { Identifier = "AQL", StartIdentifier = 22, EndIdentifier = 18, },
+            new() { Identifier = "AQL", StartIdentifier = 21, EndIdentifier = 23, },
+            new() { Identifier = "AQL", StartIdentifier = 23, EndIdentifier = 24, },
+            new() { Identifier = "AQL", StartIdentifier = 25, EndIdentifier = 22, },
+            new() { Identifier = "AQL", StartIdentifier = 24, EndIdentifier = 26, },
+            new() { Identifier = "AQL", StartIdentifier = 26, EndIdentifier = 25, },
+            new() { Identifier = "AQR", StartIdentifier = 27, EndIdentifier = 28, },
+            new() { Identifier = "AQR", StartIdentifier = 28, EndIdentifier = 29, },
+            new() { Identifier = "AQR", StartIdentifier = 29, EndIdentifier = 30, },
+            new() { Identifier = "AQR", StartIdentifier = 30, EndIdentifier = 31, },
+            new() { Identifier = "AQR", StartIdentifier = 30, EndIdentifier = 32, },
+            new() { Identifier = "AQR", StartIdentifier = 31, EndIdentifier = 33, },
+            new() { Identifier = "AQR", StartIdentifier = 32, EndIdentifier = 34, },
+            new() { Identifier = "AQR", StartIdentifier = 34, EndIdentifier = 35, },
+            new() { Identifier = "AQR", StartIdentifier = 36, EndIdentifier = 37, },
+            new() { Identifier = "AQR", StartIdentifier = 38, EndIdentifier = 36, },
+            new() { Identifier = "AQR", StartIdentifier = 37, EndIdentifier = 39, },
+            new() { Identifier = "AQR", StartIdentifier = 35, EndIdentifier = 38, },
+            new() { Identifier = "ARA", StartIdentifier = 40, EndIdentifier = 41, },
+            new() { Identifier = "ARA", StartIdentifier = 41, EndIdentifier = 42, },
+            new() { Identifier = "ARA", StartIdentifier = 41, EndIdentifier = 43, },
+            new() { Identifier = "ARA", StartIdentifier = 42, EndIdentifier = 44, },
+            new() { Identifier = "ARA", StartIdentifier = 45, EndIdentifier = 43, },
+            new() { Identifier = "ARA", StartIdentifier = 43, EndIdentifier = 46, },
+            new() { Identifier = "ARA", StartIdentifier = 44, EndIdentifier = 45, },
+            new() { Identifier = "ARI", StartIdentifier = 47, EndIdentifier = 48, },
+            new() { Identifier = "ARI", StartIdentifier = 48, EndIdentifier = 49, },
+            new() { Identifier = "ARI", StartIdentifier = 49, EndIdentifier = 50, },
+            new() { Identifier = "AUR", StartIdentifier = 51, EndIdentifier = 52, },
+            new() { Identifier = "AUR", StartIdentifier = 52, EndIdentifier = 53, },
+            new() { Identifier = "AUR", StartIdentifier = 53, EndIdentifier = 51, },
+            new() { Identifier = "BOO", StartIdentifier = 54, EndIdentifier = 55, },
+            new() { Identifier = "BOO", StartIdentifier = 56, EndIdentifier = 54, },
+            new() { Identifier = "BOO", StartIdentifier = 55, EndIdentifier = 57, },
+            new() { Identifier = "BOO", StartIdentifier = 57, EndIdentifier = 58, },
+            new() { Identifier = "BOO", StartIdentifier = 57, EndIdentifier = 59, },
+            new() { Identifier = "BOO", StartIdentifier = 60, EndIdentifier = 61, },
+            new() { Identifier = "BOO", StartIdentifier = 58, EndIdentifier = 62, },
+            new() { Identifier = "BOO", StartIdentifier = 62, EndIdentifier = 60, },
+            new() { Identifier = "BOO", StartIdentifier = 63, EndIdentifier = 57, },
+            new() { Identifier = "BOO", StartIdentifier = 64, EndIdentifier = 63, },
+            new() { Identifier = "BOO", StartIdentifier = 59, EndIdentifier = 65, },
+            new() { Identifier = "BOO", StartIdentifier = 66, EndIdentifier = 62, },
+            new() { Identifier = "BOO", StartIdentifier = 65, EndIdentifier = 66, },
+            new() { Identifier = "BOO", StartIdentifier = 67, EndIdentifier = 65, },
+            new() { Identifier = "CAE", StartIdentifier = 68, EndIdentifier = 69, },
+            new() { Identifier = "CAM", StartIdentifier = 70, EndIdentifier = 71, },
+            new() { Identifier = "CAM", StartIdentifier = 72, EndIdentifier = 73, },
+            new() { Identifier = "CAM", StartIdentifier = 73, EndIdentifier = 70, },
+            new() { Identifier = "CAP", StartIdentifier = 74, EndIdentifier = 75, },
+            new() { Identifier = "CAP", StartIdentifier = 75, EndIdentifier = 76, },
+            new() { Identifier = "CAP", StartIdentifier = 76, EndIdentifier = 77, },
+            new() { Identifier = "CAP", StartIdentifier = 77, EndIdentifier = 78, },
+            new() { Identifier = "CAP", StartIdentifier = 79, EndIdentifier = 75, },
+            new() { Identifier = "CAP", StartIdentifier = 78, EndIdentifier = 80, },
+            new() { Identifier = "CAP", StartIdentifier = 81, EndIdentifier = 79, },
+            new() { Identifier = "CAP", StartIdentifier = 80, EndIdentifier = 82, },
+            new() { Identifier = "CAP", StartIdentifier = 82, EndIdentifier = 83, },
+            new() { Identifier = "CAP", StartIdentifier = 84, EndIdentifier = 81, },
+            new() { Identifier = "CAP", StartIdentifier = 83, EndIdentifier = 84, },
+            new() { Identifier = "CAR", StartIdentifier = 85, EndIdentifier = 86, },
+            new() { Identifier = "CAR", StartIdentifier = 87, EndIdentifier = 87, },
+            new() { Identifier = "CAR", StartIdentifier = 87, EndIdentifier = 88, },
+            new() { Identifier = "CAR", StartIdentifier = 88, EndIdentifier = 85, },
+            new() { Identifier = "CAR", StartIdentifier = 89, EndIdentifier = 90, },
+            new() { Identifier = "CAR", StartIdentifier = 90, EndIdentifier = 91, },
+            new() { Identifier = "CAR", StartIdentifier = 91, EndIdentifier = 92, },
+            new() { Identifier = "CAR", StartIdentifier = 86, EndIdentifier = 93, },
+            new() { Identifier = "CAR", StartIdentifier = 92, EndIdentifier = 87, },
+            new() { Identifier = "CAS", StartIdentifier = 94, EndIdentifier = 95, },
+            new() { Identifier = "CAS", StartIdentifier = 96, EndIdentifier = 94, },
+            new() { Identifier = "CAS", StartIdentifier = 97, EndIdentifier = 96, },
+            new() { Identifier = "CAS", StartIdentifier = 98, EndIdentifier = 97, },
+            new() { Identifier = "CEN", StartIdentifier = 99, EndIdentifier = 100, },
+            new() { Identifier = "CEN", StartIdentifier = 101, EndIdentifier = 102, },
+            new() { Identifier = "CEN", StartIdentifier = 102, EndIdentifier = 99, },
+            new() { Identifier = "CEN", StartIdentifier = 103, EndIdentifier = 104, },
+            new() { Identifier = "CEN", StartIdentifier = 105, EndIdentifier = 101, },
+            new() { Identifier = "CEN", StartIdentifier = 106, EndIdentifier = 105, },
+            new() { Identifier = "CEN", StartIdentifier = 107, EndIdentifier = 103, },
+            new() { Identifier = "CEN", StartIdentifier = 108, EndIdentifier = 106, },
+            new() { Identifier = "CEN", StartIdentifier = 108, EndIdentifier = 109, },
+            new() { Identifier = "CEN", StartIdentifier = 104, EndIdentifier = 110, },
+            new() { Identifier = "CEN", StartIdentifier = 104, EndIdentifier = 111, },
+            new() { Identifier = "CEN", StartIdentifier = 110, EndIdentifier = 108, },
+            new() { Identifier = "CEN", StartIdentifier = 112, EndIdentifier = 104, },
+            new() { Identifier = "CEN", StartIdentifier = 111, EndIdentifier = 113, },
+            new() { Identifier = "CEN", StartIdentifier = 114, EndIdentifier = 115, },
+            new() { Identifier = "CEP", StartIdentifier = 116, EndIdentifier = 117, },
+            new() { Identifier = "CEP", StartIdentifier = 118, EndIdentifier = 116, },
+            new() { Identifier = "CEP", StartIdentifier = 119, EndIdentifier = 118, },
+            new() { Identifier = "CEP", StartIdentifier = 120, EndIdentifier = 118, },
+            new() { Identifier = "CEP", StartIdentifier = 120, EndIdentifier = 121, },
+            new() { Identifier = "CEP", StartIdentifier = 122, EndIdentifier = 120, },
+            new() { Identifier = "CEP", StartIdentifier = 123, EndIdentifier = 122, },
+            new() { Identifier = "CEP", StartIdentifier = 121, EndIdentifier = 124, },
+            new() { Identifier = "CEP", StartIdentifier = 124, EndIdentifier = 119, },
+            new() { Identifier = "CET", StartIdentifier = 125, EndIdentifier = 126, },
+            new() { Identifier = "CET", StartIdentifier = 126, EndIdentifier = 127, },
+            new() { Identifier = "CET", StartIdentifier = 128, EndIdentifier = 125, },
+            new() { Identifier = "CET", StartIdentifier = 129, EndIdentifier = 128, },
+            new() { Identifier = "CET", StartIdentifier = 127, EndIdentifier = 130, },
+            new() { Identifier = "CET", StartIdentifier = 130, EndIdentifier = 129, },
+            new() { Identifier = "CET", StartIdentifier = 131, EndIdentifier = 130, },
+            new() { Identifier = "CET", StartIdentifier = 132, EndIdentifier = 133, },
+            new() { Identifier = "CET", StartIdentifier = 134, EndIdentifier = 132, },
+            new() { Identifier = "CET", StartIdentifier = 135, EndIdentifier = 131, },
+            new() { Identifier = "CET", StartIdentifier = 136, EndIdentifier = 134, },
+            new() { Identifier = "CET", StartIdentifier = 136, EndIdentifier = 135, },
+            new() { Identifier = "CET", StartIdentifier = 133, EndIdentifier = 137, },
+            new() { Identifier = "CET", StartIdentifier = 137, EndIdentifier = 138, },
+            new() { Identifier = "CET", StartIdentifier = 138, EndIdentifier = 136, },
+            new() { Identifier = "CHA", StartIdentifier = 139, EndIdentifier = 140, },
+            new() { Identifier = "CHA", StartIdentifier = 141, EndIdentifier = 142, },
+            new() { Identifier = "CHA", StartIdentifier = 140, EndIdentifier = 141, },
+            new() { Identifier = "CHA", StartIdentifier = 143, EndIdentifier = 139, },
+            new() { Identifier = "CHA", StartIdentifier = 142, EndIdentifier = 143, },
+            new() { Identifier = "CIR", StartIdentifier = 144, EndIdentifier = 145, },
+            new() { Identifier = "CIR", StartIdentifier = 146, EndIdentifier = 144, },
+            new() { Identifier = "CMA", StartIdentifier = 147, EndIdentifier = 148, },
+            new() { Identifier = "CMA", StartIdentifier = 149, EndIdentifier = 150, },
+            new() { Identifier = "CMA", StartIdentifier = 149, EndIdentifier = 151, },
+            new() { Identifier = "CMA", StartIdentifier = 151, EndIdentifier = 152, },
+            new() { Identifier = "CMA", StartIdentifier = 153, EndIdentifier = 149, },
+            new() { Identifier = "CMA", StartIdentifier = 148, EndIdentifier = 154, },
+            new() { Identifier = "CMA", StartIdentifier = 154, EndIdentifier = 155, },
+            new() { Identifier = "CMA", StartIdentifier = 156, EndIdentifier = 149, },
+            new() { Identifier = "CMA", StartIdentifier = 152, EndIdentifier = 153, },
+            new() { Identifier = "CMA", StartIdentifier = 155, EndIdentifier = 156, },
+            new() { Identifier = "CMA", StartIdentifier = 157, EndIdentifier = 155, },
+            new() { Identifier = "CMA", StartIdentifier = 157, EndIdentifier = 158, },
+            new() { Identifier = "CMA", StartIdentifier = 159, EndIdentifier = 157, },
+            new() { Identifier = "CMI", StartIdentifier = 160, EndIdentifier = 161, },
+            new() { Identifier = "CNC", StartIdentifier = 162, EndIdentifier = 163, },
+            new() { Identifier = "CNC", StartIdentifier = 163, EndIdentifier = 164, },
+            new() { Identifier = "CNC", StartIdentifier = 163, EndIdentifier = 165, },
+            new() { Identifier = "CNC", StartIdentifier = 166, EndIdentifier = 162, },
+            new() { Identifier = "COL", StartIdentifier = 167, EndIdentifier = 168, },
+            new() { Identifier = "COL", StartIdentifier = 168, EndIdentifier = 169, },
+            new() { Identifier = "COL", StartIdentifier = 169, EndIdentifier = 170, },
+            new() { Identifier = "COL", StartIdentifier = 170, EndIdentifier = 171, },
+            new() { Identifier = "COL", StartIdentifier = 172, EndIdentifier = 169, },
+            new() { Identifier = "COL", StartIdentifier = 171, EndIdentifier = 173, },
+            new() { Identifier = "COM", StartIdentifier = 174, EndIdentifier = 175, },
+            new() { Identifier = "COM", StartIdentifier = 175, EndIdentifier = 176, },
+            new() { Identifier = "CRA", StartIdentifier = 177, EndIdentifier = 178, },
+            new() { Identifier = "CRA", StartIdentifier = 178, EndIdentifier = 179, },
+            new() { Identifier = "CRA", StartIdentifier = 180, EndIdentifier = 181, },
+            new() { Identifier = "CRA", StartIdentifier = 179, EndIdentifier = 182, },
+            new() { Identifier = "CRA", StartIdentifier = 182, EndIdentifier = 180, },
+            new() { Identifier = "CRB", StartIdentifier = 183, EndIdentifier = 184, },
+            new() { Identifier = "CRB", StartIdentifier = 185, EndIdentifier = 183, },
+            new() { Identifier = "CRB", StartIdentifier = 184, EndIdentifier = 186, },
+            new() { Identifier = "CRB", StartIdentifier = 186, EndIdentifier = 187, },
+            new() { Identifier = "CRB", StartIdentifier = 187, EndIdentifier = 188, },
+            new() { Identifier = "CRB", StartIdentifier = 188, EndIdentifier = 189, },
+            new() { Identifier = "CRT", StartIdentifier = 190, EndIdentifier = 191, },
+            new() { Identifier = "CRT", StartIdentifier = 191, EndIdentifier = 192, },
+            new() { Identifier = "CRT", StartIdentifier = 193, EndIdentifier = 190, },
+            new() { Identifier = "CRT", StartIdentifier = 194, EndIdentifier = 193, },
+            new() { Identifier = "CRT", StartIdentifier = 192, EndIdentifier = 193, },
+            new() { Identifier = "CRT", StartIdentifier = 192, EndIdentifier = 195, },
+            new() { Identifier = "CRT", StartIdentifier = 196, EndIdentifier = 194, },
+            new() { Identifier = "CRT", StartIdentifier = 195, EndIdentifier = 197, },
+            new() { Identifier = "CRU", StartIdentifier = 198, EndIdentifier = 199, },
+            new() { Identifier = "CRU", StartIdentifier = 200, EndIdentifier = 201, },
+            new() { Identifier = "CRV", StartIdentifier = 202, EndIdentifier = 203, },
+            new() { Identifier = "CRV", StartIdentifier = 203, EndIdentifier = 204, },
+            new() { Identifier = "CRV", StartIdentifier = 204, EndIdentifier = 205, },
+            new() { Identifier = "CRV", StartIdentifier = 205, EndIdentifier = 206, },
+            new() { Identifier = "CRV", StartIdentifier = 206, EndIdentifier = 203, },
+            new() { Identifier = "CVN", StartIdentifier = 207, EndIdentifier = 208, },
+            new() { Identifier = "CYG", StartIdentifier = 209, EndIdentifier = 210, },
+            new() { Identifier = "CYG", StartIdentifier = 210, EndIdentifier = 211, },
+            new() { Identifier = "CYG", StartIdentifier = 211, EndIdentifier = 212, },
+            new() { Identifier = "CYG", StartIdentifier = 212, EndIdentifier = 213, },
+            new() { Identifier = "CYG", StartIdentifier = 214, EndIdentifier = 215, },
+            new() { Identifier = "CYG", StartIdentifier = 213, EndIdentifier = 214, },
+            new() { Identifier = "CYG", StartIdentifier = 213, EndIdentifier = 216, },
+            new() { Identifier = "CYG", StartIdentifier = 217, EndIdentifier = 213, },
+            new() { Identifier = "CYG", StartIdentifier = 216, EndIdentifier = 218, },
+            new() { Identifier = "DEL", StartIdentifier = 219, EndIdentifier = 220, },
+            new() { Identifier = "DEL", StartIdentifier = 220, EndIdentifier = 221, },
+            new() { Identifier = "DEL", StartIdentifier = 221, EndIdentifier = 222, },
+            new() { Identifier = "DEL", StartIdentifier = 223, EndIdentifier = 220, },
+            new() { Identifier = "DEL", StartIdentifier = 222, EndIdentifier = 223, },
+            new() { Identifier = "DOR", StartIdentifier = 224, EndIdentifier = 225, },
+            new() { Identifier = "DOR", StartIdentifier = 225, EndIdentifier = 226, },
+            new() { Identifier = "DOR", StartIdentifier = 226, EndIdentifier = 227, },
+            new() { Identifier = "DOR", StartIdentifier = 227, EndIdentifier = 228, },
+            new() { Identifier = "DRA", StartIdentifier = 229, EndIdentifier = 230, },
+            new() { Identifier = "DRA", StartIdentifier = 230, EndIdentifier = 231, },
+            new() { Identifier = "DRA", StartIdentifier = 231, EndIdentifier = 232, },
+            new() { Identifier = "DRA", StartIdentifier = 232, EndIdentifier = 233, },
+            new() { Identifier = "DRA", StartIdentifier = 233, EndIdentifier = 234, },
+            new() { Identifier = "DRA", StartIdentifier = 234, EndIdentifier = 235, },
+            new() { Identifier = "DRA", StartIdentifier = 235, EndIdentifier = 236, },
+            new() { Identifier = "DRA", StartIdentifier = 237, EndIdentifier = 238, },
+            new() { Identifier = "DRA", StartIdentifier = 239, EndIdentifier = 237, },
+            new() { Identifier = "DRA", StartIdentifier = 240, EndIdentifier = 239, },
+            new() { Identifier = "DRA", StartIdentifier = 238, EndIdentifier = 240, },
+            new() { Identifier = "DRA", StartIdentifier = 236, EndIdentifier = 241, },
+            new() { Identifier = "DRA", StartIdentifier = 242, EndIdentifier = 240, },
+            new() { Identifier = "DRA", StartIdentifier = 241, EndIdentifier = 242, },
+            new() { Identifier = "EQU", StartIdentifier = 243, EndIdentifier = 244, },
+            new() { Identifier = "EQU", StartIdentifier = 244, EndIdentifier = 245, },
+            new() { Identifier = "EQU", StartIdentifier = 245, EndIdentifier = 246, },
+            new() { Identifier = "ERI", StartIdentifier = 247, EndIdentifier = 248, },
+            new() { Identifier = "ERI", StartIdentifier = 249, EndIdentifier = 247, },
+            new() { Identifier = "ERI", StartIdentifier = 250, EndIdentifier = 249, },
+            new() { Identifier = "ERI", StartIdentifier = 251, EndIdentifier = 250, },
+            new() { Identifier = "ERI", StartIdentifier = 252, EndIdentifier = 251, },
+            new() { Identifier = "ERI", StartIdentifier = 253, EndIdentifier = 254, },
+            new() { Identifier = "ERI", StartIdentifier = 254, EndIdentifier = 255, },
+            new() { Identifier = "ERI", StartIdentifier = 256, EndIdentifier = 253, },
+            new() { Identifier = "ERI", StartIdentifier = 257, EndIdentifier = 252, },
+            new() { Identifier = "ERI", StartIdentifier = 255, EndIdentifier = 258, },
+            new() { Identifier = "ERI", StartIdentifier = 258, EndIdentifier = 259, },
+            new() { Identifier = "ERI", StartIdentifier = 260, EndIdentifier = 257, },
+            new() { Identifier = "ERI", StartIdentifier = 261, EndIdentifier = 256, },
+            new() { Identifier = "ERI", StartIdentifier = 259, EndIdentifier = 262, },
+            new() { Identifier = "ERI", StartIdentifier = 263, EndIdentifier = 261, },
+            new() { Identifier = "ERI", StartIdentifier = 264, EndIdentifier = 263, },
+            new() { Identifier = "ERI", StartIdentifier = 262, EndIdentifier = 265, },
+            new() { Identifier = "ERI", StartIdentifier = 251, EndIdentifier = 260, },
+            new() { Identifier = "ERI", StartIdentifier = 266, EndIdentifier = 264, },
+            new() { Identifier = "ERI", StartIdentifier = 265, EndIdentifier = 267, },
+            new() { Identifier = "ERI", StartIdentifier = 268, EndIdentifier = 266, },
+            new() { Identifier = "ERI", StartIdentifier = 269, EndIdentifier = 251, },
+            new() { Identifier = "ERI", StartIdentifier = 270, EndIdentifier = 269, },
+            new() { Identifier = "ERI", StartIdentifier = 267, EndIdentifier = 271, },
+            new() { Identifier = "ERI", StartIdentifier = 271, EndIdentifier = 270, },
+            new() { Identifier = "ERI", StartIdentifier = 272, EndIdentifier = 268, },
+            new() { Identifier = "ERI", StartIdentifier = 273, EndIdentifier = 272, },
+            new() { Identifier = "ERI", StartIdentifier = 274, EndIdentifier = 273, },
+            new() { Identifier = "ERI", StartIdentifier = 275, EndIdentifier = 274, },
+            new() { Identifier = "ERI", StartIdentifier = 276, EndIdentifier = 275, },
+            new() { Identifier = "FOR", StartIdentifier = 277, EndIdentifier = 278, },
+            new() { Identifier = "FOR", StartIdentifier = 279, EndIdentifier = 277, },
+            new() { Identifier = "GEM", StartIdentifier = 280, EndIdentifier = 281, },
+            new() { Identifier = "GEM", StartIdentifier = 281, EndIdentifier = 282, },
+            new() { Identifier = "GEM", StartIdentifier = 282, EndIdentifier = 283, },
+            new() { Identifier = "GEM", StartIdentifier = 284, EndIdentifier = 283, },
+            new() { Identifier = "GEM", StartIdentifier = 283, EndIdentifier = 285, },
+            new() { Identifier = "GEM", StartIdentifier = 286, EndIdentifier = 285, },
+            new() { Identifier = "GEM", StartIdentifier = 287, EndIdentifier = 288, },
+            new() { Identifier = "GEM", StartIdentifier = 285, EndIdentifier = 289, },
+            new() { Identifier = "GEM", StartIdentifier = 285, EndIdentifier = 290, },
+            new() { Identifier = "GEM", StartIdentifier = 291, EndIdentifier = 292, },
+            new() { Identifier = "GEM", StartIdentifier = 293, EndIdentifier = 291, },
+            new() { Identifier = "GEM", StartIdentifier = 294, EndIdentifier = 287, },
+            new() { Identifier = "GEM", StartIdentifier = 294, EndIdentifier = 293, },
+            new() { Identifier = "GEM", StartIdentifier = 289, EndIdentifier = 295, },
+            new() { Identifier = "GEM", StartIdentifier = 290, EndIdentifier = 296, },
+            new() { Identifier = "GEM", StartIdentifier = 295, EndIdentifier = 294, },
+            new() { Identifier = "GEM", StartIdentifier = 295, EndIdentifier = 297, },
+            new() { Identifier = "GEM", StartIdentifier = 298, EndIdentifier = 295, },
+            new() { Identifier = "GRU", StartIdentifier = 299, EndIdentifier = 300, },
+            new() { Identifier = "GRU", StartIdentifier = 300, EndIdentifier = 301, },
+            new() { Identifier = "GRU", StartIdentifier = 302, EndIdentifier = 303, },
+            new() { Identifier = "GRU", StartIdentifier = 301, EndIdentifier = 304, },
+            new() { Identifier = "GRU", StartIdentifier = 304, EndIdentifier = 303, },
+            new() { Identifier = "GRU", StartIdentifier = 303, EndIdentifier = 305, },
+            new() { Identifier = "GRU", StartIdentifier = 303, EndIdentifier = 306, },
+            new() { Identifier = "GRU", StartIdentifier = 305, EndIdentifier = 307, },
+            new() { Identifier = "GRU", StartIdentifier = 306, EndIdentifier = 308, },
+            new() { Identifier = "HER", StartIdentifier = 309, EndIdentifier = 310, },
+            new() { Identifier = "HER", StartIdentifier = 310, EndIdentifier = 311, },
+            new() { Identifier = "HER", StartIdentifier = 310, EndIdentifier = 312, },
+            new() { Identifier = "HER", StartIdentifier = 313, EndIdentifier = 314, },
+            new() { Identifier = "HER", StartIdentifier = 311, EndIdentifier = 315, },
+            new() { Identifier = "HER", StartIdentifier = 311, EndIdentifier = 316, },
+            new() { Identifier = "HER", StartIdentifier = 315, EndIdentifier = 313, },
+            new() { Identifier = "HER", StartIdentifier = 315, EndIdentifier = 317, },
+            new() { Identifier = "HER", StartIdentifier = 316, EndIdentifier = 318, },
+            new() { Identifier = "HER", StartIdentifier = 318, EndIdentifier = 319, },
+            new() { Identifier = "HER", StartIdentifier = 317, EndIdentifier = 316, },
+            new() { Identifier = "HER", StartIdentifier = 317, EndIdentifier = 320, },
+            new() { Identifier = "HER", StartIdentifier = 320, EndIdentifier = 321, },
+            new() { Identifier = "HER", StartIdentifier = 319, EndIdentifier = 322, },
+            new() { Identifier = "HER", StartIdentifier = 322, EndIdentifier = 323, },
+            new() { Identifier = "HER", StartIdentifier = 321, EndIdentifier = 324, },
+            new() { Identifier = "HER", StartIdentifier = 323, EndIdentifier = 325, },
+            new() { Identifier = "HER", StartIdentifier = 325, EndIdentifier = 326, },
+            new() { Identifier = "HER", StartIdentifier = 325, EndIdentifier = 327, },
+            new() { Identifier = "HER", StartIdentifier = 327, EndIdentifier = 328, },
+            new() { Identifier = "HER", StartIdentifier = 327, EndIdentifier = 329, },
+            new() { Identifier = "HER", StartIdentifier = 329, EndIdentifier = 330, },
+            new() { Identifier = "HOR", StartIdentifier = 331, EndIdentifier = 332, },
+            new() { Identifier = "HOR", StartIdentifier = 333, EndIdentifier = 331, },
+            new() { Identifier = "HOR", StartIdentifier = 332, EndIdentifier = 334, },
+            new() { Identifier = "HOR", StartIdentifier = 335, EndIdentifier = 336, },
+            new() { Identifier = "HOR", StartIdentifier = 336, EndIdentifier = 333, },
+            new() { Identifier = "HYA", StartIdentifier = 337, EndIdentifier = 338, },
+            new() { Identifier = "HYA", StartIdentifier = 339, EndIdentifier = 337, },
+            new() { Identifier = "HYA", StartIdentifier = 340, EndIdentifier = 339, },
+            new() { Identifier = "HYA", StartIdentifier = 341, EndIdentifier = 340, },
+            new() { Identifier = "HYA", StartIdentifier = 342, EndIdentifier = 341, },
+            new() { Identifier = "HYA", StartIdentifier = 343, EndIdentifier = 342, },
+            new() { Identifier = "HYA", StartIdentifier = 344, EndIdentifier = 343, },
+            new() { Identifier = "HYA", StartIdentifier = 345, EndIdentifier = 346, },
+            new() { Identifier = "HYA", StartIdentifier = 346, EndIdentifier = 347, },
+            new() { Identifier = "HYA", StartIdentifier = 347, EndIdentifier = 348, },
+            new() { Identifier = "HYA", StartIdentifier = 349, EndIdentifier = 345, },
+            new() { Identifier = "HYA", StartIdentifier = 348, EndIdentifier = 349, },
+            new() { Identifier = "HYA", StartIdentifier = 350, EndIdentifier = 348, },
+            new() { Identifier = "HYA", StartIdentifier = 351, EndIdentifier = 352, },
+            new() { Identifier = "HYA", StartIdentifier = 352, EndIdentifier = 350, },
+            new() { Identifier = "HYA", StartIdentifier = 338, EndIdentifier = 351, },
+            new() { Identifier = "HYI", StartIdentifier = 353, EndIdentifier = 354, },
+            new() { Identifier = "HYI", StartIdentifier = 355, EndIdentifier = 353, },
+            new() { Identifier = "HYI", StartIdentifier = 354, EndIdentifier = 355, },
+            new() { Identifier = "IND", StartIdentifier = 356, EndIdentifier = 357, },
+            new() { Identifier = "IND", StartIdentifier = 357, EndIdentifier = 358, },
+            new() { Identifier = "IND", StartIdentifier = 359, EndIdentifier = 357, },
+            new() { Identifier = "LAC", StartIdentifier = 360, EndIdentifier = 361, },
+            new() { Identifier = "LAC", StartIdentifier = 362, EndIdentifier = 363, },
+            new() { Identifier = "LAC", StartIdentifier = 364, EndIdentifier = 365, },
+            new() { Identifier = "LAC", StartIdentifier = 363, EndIdentifier = 364, },
+            new() { Identifier = "LAC", StartIdentifier = 361, EndIdentifier = 362, },
+            new() { Identifier = "LAC", StartIdentifier = 365, EndIdentifier = 366, },
+            new() { Identifier = "LEO", StartIdentifier = 367, EndIdentifier = 368, },
+            new() { Identifier = "LEO", StartIdentifier = 368, EndIdentifier = 369, },
+            new() { Identifier = "LEO", StartIdentifier = 370, EndIdentifier = 371, },
+            new() { Identifier = "LEO", StartIdentifier = 372, EndIdentifier = 367, },
+            new() { Identifier = "LEO", StartIdentifier = 372, EndIdentifier = 370, },
+            new() { Identifier = "LEO", StartIdentifier = 373, EndIdentifier = 372, },
+            new() { Identifier = "LEO", StartIdentifier = 369, EndIdentifier = 374, },
+            new() { Identifier = "LEO", StartIdentifier = 375, EndIdentifier = 376, },
+            new() { Identifier = "LEO", StartIdentifier = 376, EndIdentifier = 369, },
+            new() { Identifier = "LEO", StartIdentifier = 374, EndIdentifier = 373, },
+            new() { Identifier = "LEO", StartIdentifier = 377, EndIdentifier = 368, },
+            new() { Identifier = "LEO", StartIdentifier = 378, EndIdentifier = 372, },
+            new() { Identifier = "LEO", StartIdentifier = 371, EndIdentifier = 378, },
+            new() { Identifier = "LEP", StartIdentifier = 379, EndIdentifier = 380, },
+            new() { Identifier = "LEP", StartIdentifier = 379, EndIdentifier = 381, },
+            new() { Identifier = "LEP", StartIdentifier = 381, EndIdentifier = 382, },
+            new() { Identifier = "LEP", StartIdentifier = 383, EndIdentifier = 379, },
+            new() { Identifier = "LEP", StartIdentifier = 384, EndIdentifier = 381, },
+            new() { Identifier = "LEP", StartIdentifier = 385, EndIdentifier = 383, },
+            new() { Identifier = "LEP", StartIdentifier = 386, EndIdentifier = 384, },
+            new() { Identifier = "LIB", StartIdentifier = 387, EndIdentifier = 388, },
+            new() { Identifier = "LIB", StartIdentifier = 388, EndIdentifier = 389, },
+            new() { Identifier = "LIB", StartIdentifier = 390, EndIdentifier = 387, },
+            new() { Identifier = "LIB", StartIdentifier = 390, EndIdentifier = 388, },
+            new() { Identifier = "LIB", StartIdentifier = 391, EndIdentifier = 390, },
+            new() { Identifier = "LIB", StartIdentifier = 389, EndIdentifier = 392, },
+            new() { Identifier = "LIB", StartIdentifier = 393, EndIdentifier = 391, },
+            new() { Identifier = "LIB", StartIdentifier = 394, EndIdentifier = 393, },
+            new() { Identifier = "LMI", StartIdentifier = 395, EndIdentifier = 396, },
+            new() { Identifier = "LMI", StartIdentifier = 396, EndIdentifier = 397, },
+            new() { Identifier = "LUP", StartIdentifier = 398, EndIdentifier = 399, },
+            new() { Identifier = "LUP", StartIdentifier = 400, EndIdentifier = 398, },
+            new() { Identifier = "LUP", StartIdentifier = 401, EndIdentifier = 402, },
+            new() { Identifier = "LUP", StartIdentifier = 399, EndIdentifier = 401, },
+            new() { Identifier = "LUP", StartIdentifier = 403, EndIdentifier = 400, },
+            new() { Identifier = "LUP", StartIdentifier = 403, EndIdentifier = 404, },
+            new() { Identifier = "LUP", StartIdentifier = 405, EndIdentifier = 403, },
+            new() { Identifier = "LUP", StartIdentifier = 402, EndIdentifier = 404, },
+            new() { Identifier = "LUP", StartIdentifier = 404, EndIdentifier = 406, },
+            new() { Identifier = "LUP", StartIdentifier = 407, EndIdentifier = 405, },
+            new() { Identifier = "LUP", StartIdentifier = 406, EndIdentifier = 408, },
+            new() { Identifier = "LYN", StartIdentifier = 409, EndIdentifier = 410, },
+            new() { Identifier = "LYN", StartIdentifier = 411, EndIdentifier = 409, },
+            new() { Identifier = "LYN", StartIdentifier = 412, EndIdentifier = 411, },
+            new() { Identifier = "LYN", StartIdentifier = 413, EndIdentifier = 412, },
+            new() { Identifier = "LYN", StartIdentifier = 414, EndIdentifier = 413, },
+            new() { Identifier = "LYR", StartIdentifier = 415, EndIdentifier = 416, },
+            new() { Identifier = "LYR", StartIdentifier = 416, EndIdentifier = 417, },
+            new() { Identifier = "LYR", StartIdentifier = 418, EndIdentifier = 416, },
+            new() { Identifier = "LYR", StartIdentifier = 417, EndIdentifier = 419, },
+            new() { Identifier = "LYR", StartIdentifier = 419, EndIdentifier = 420, },
+            new() { Identifier = "LYR", StartIdentifier = 421, EndIdentifier = 422, },
+            new() { Identifier = "LYR", StartIdentifier = 420, EndIdentifier = 421, },
+            new() { Identifier = "MEN", StartIdentifier = 423, EndIdentifier = 424, },
+            new() { Identifier = "MEN", StartIdentifier = 425, EndIdentifier = 423, },
+            new() { Identifier = "MEN", StartIdentifier = 424, EndIdentifier = 426, },
+            new() { Identifier = "MIC", StartIdentifier = 427, EndIdentifier = 428, },
+            new() { Identifier = "MIC", StartIdentifier = 428, EndIdentifier = 429, },
+            new() { Identifier = "MIC", StartIdentifier = 429, EndIdentifier = 430, },
+            new() { Identifier = "MON", StartIdentifier = 431, EndIdentifier = 432, },
+            new() { Identifier = "MON", StartIdentifier = 433, EndIdentifier = 434, },
+            new() { Identifier = "MON", StartIdentifier = 432, EndIdentifier = 435, },
+            new() { Identifier = "MON", StartIdentifier = 436, EndIdentifier = 433, },
+            new() { Identifier = "MON", StartIdentifier = 435, EndIdentifier = 436, },
+            new() { Identifier = "MON", StartIdentifier = 437, EndIdentifier = 435, },
+            new() { Identifier = "MON", StartIdentifier = 438, EndIdentifier = 437, },
+            new() { Identifier = "MUS", StartIdentifier = 439, EndIdentifier = 440, },
+            new() { Identifier = "MUS", StartIdentifier = 440, EndIdentifier = 441, },
+            new() { Identifier = "MUS", StartIdentifier = 442, EndIdentifier = 441, },
+            new() { Identifier = "MUS", StartIdentifier = 441, EndIdentifier = 443, },
+            new() { Identifier = "MUS", StartIdentifier = 441, EndIdentifier = 444, },
+            new() { Identifier = "NOR", StartIdentifier = 445, EndIdentifier = 446, },
+            new() { Identifier = "NOR", StartIdentifier = 447, EndIdentifier = 448, },
+            new() { Identifier = "NOR", StartIdentifier = 446, EndIdentifier = 447, },
+            new() { Identifier = "OCT", StartIdentifier = 449, EndIdentifier = 450, },
+            new() { Identifier = "OCT", StartIdentifier = 450, EndIdentifier = 451, },
+            new() { Identifier = "OCT", StartIdentifier = 451, EndIdentifier = 452, },
+            new() { Identifier = "OCT", StartIdentifier = 452, EndIdentifier = 449, },
+            new() { Identifier = "OPH", StartIdentifier = 453, EndIdentifier = 454, },
+            new() { Identifier = "OPH", StartIdentifier = 455, EndIdentifier = 453, },
+            new() { Identifier = "OPH", StartIdentifier = 456, EndIdentifier = 455, },
+            new() { Identifier = "OPH", StartIdentifier = 454, EndIdentifier = 457, },
+            new() { Identifier = "OPH", StartIdentifier = 458, EndIdentifier = 456, },
+            new() { Identifier = "OPH", StartIdentifier = 459, EndIdentifier = 458, },
+            new() { Identifier = "OPH", StartIdentifier = 460, EndIdentifier = 461, },
+            new() { Identifier = "OPH", StartIdentifier = 461, EndIdentifier = 459, },
+            new() { Identifier = "OPH", StartIdentifier = 462, EndIdentifier = 460, },
+            new() { Identifier = "OPH", StartIdentifier = 457, EndIdentifier = 463, },
+            new() { Identifier = "OPH", StartIdentifier = 463, EndIdentifier = 458, },
+            new() { Identifier = "OPH", StartIdentifier = 464, EndIdentifier = 463, },
+            new() { Identifier = "OPH", StartIdentifier = 465, EndIdentifier = 464, },
+            new() { Identifier = "OPH", StartIdentifier = 466, EndIdentifier = 464, },
+            new() { Identifier = "OPH", StartIdentifier = 467, EndIdentifier = 466, },
+            new() { Identifier = "ORI", StartIdentifier = 468, EndIdentifier = 469, },
+            new() { Identifier = "ORI", StartIdentifier = 468, EndIdentifier = 470, },
+            new() { Identifier = "ORI", StartIdentifier = 471, EndIdentifier = 468, },
+            new() { Identifier = "ORI", StartIdentifier = 469, EndIdentifier = 472, },
+            new() { Identifier = "ORI", StartIdentifier = 472, EndIdentifier = 473, },
+            new() { Identifier = "ORI", StartIdentifier = 474, EndIdentifier = 471, },
+            new() { Identifier = "ORI", StartIdentifier = 475, EndIdentifier = 476, },
+            new() { Identifier = "ORI", StartIdentifier = 470, EndIdentifier = 477, },
+            new() { Identifier = "ORI", StartIdentifier = 477, EndIdentifier = 475, },
+            new() { Identifier = "ORI", StartIdentifier = 478, EndIdentifier = 470, },
+            new() { Identifier = "ORI", StartIdentifier = 479, EndIdentifier = 480, },
+            new() { Identifier = "ORI", StartIdentifier = 476, EndIdentifier = 479, },
+            new() { Identifier = "ORI", StartIdentifier = 480, EndIdentifier = 478, },
+            new() { Identifier = "ORI", StartIdentifier = 480, EndIdentifier = 481, },
+            new() { Identifier = "ORI", StartIdentifier = 481, EndIdentifier = 482, },
+            new() { Identifier = "ORI", StartIdentifier = 483, EndIdentifier = 484, },
+            new() { Identifier = "ORI", StartIdentifier = 482, EndIdentifier = 483, },
+            new() { Identifier = "ORI", StartIdentifier = 482, EndIdentifier = 485, },
+            new() { Identifier = "PAV", StartIdentifier = 486, EndIdentifier = 487, },
+            new() { Identifier = "PAV", StartIdentifier = 487, EndIdentifier = 488, },
+            new() { Identifier = "PAV", StartIdentifier = 488, EndIdentifier = 489, },
+            new() { Identifier = "PAV", StartIdentifier = 490, EndIdentifier = 486, },
+            new() { Identifier = "PAV", StartIdentifier = 489, EndIdentifier = 491, },
+            new() { Identifier = "PAV", StartIdentifier = 492, EndIdentifier = 490, },
+            new() { Identifier = "PAV", StartIdentifier = 491, EndIdentifier = 493, },
+            new() { Identifier = "PAV", StartIdentifier = 494, EndIdentifier = 493, },
+            new() { Identifier = "PAV", StartIdentifier = 493, EndIdentifier = 492, },
+            new() { Identifier = "PAV", StartIdentifier = 493, EndIdentifier = 495, },
+            new() { Identifier = "PEG", StartIdentifier = 496, EndIdentifier = 497, },
+            new() { Identifier = "PEG", StartIdentifier = 498, EndIdentifier = 499, },
+            new() { Identifier = "PEG", StartIdentifier = 497, EndIdentifier = 500, },
+            new() { Identifier = "PEG", StartIdentifier = 500, EndIdentifier = 501, },
+            new() { Identifier = "PEG", StartIdentifier = 502, EndIdentifier = 498, },
+            new() { Identifier = "PEG", StartIdentifier = 503, EndIdentifier = 504, },
+            new() { Identifier = "PEG", StartIdentifier = 501, EndIdentifier = 505, },
+            new() { Identifier = "PEG", StartIdentifier = 506, EndIdentifier = 503, },
+            new() { Identifier = "PEG", StartIdentifier = 507, EndIdentifier = 502, },
+            new() { Identifier = "PEG", StartIdentifier = 507, EndIdentifier = 506, },
+            new() { Identifier = "PEG", StartIdentifier = 505, EndIdentifier = 508, },
+            new() { Identifier = "PEG", StartIdentifier = 505, EndIdentifier = 507, },
+            new() { Identifier = "PER", StartIdentifier = 509, EndIdentifier = 510, },
+            new() { Identifier = "PER", StartIdentifier = 511, EndIdentifier = 512, },
+            new() { Identifier = "PER", StartIdentifier = 513, EndIdentifier = 509, },
+            new() { Identifier = "PER", StartIdentifier = 514, EndIdentifier = 513, },
+            new() { Identifier = "PER", StartIdentifier = 515, EndIdentifier = 516, },
+            new() { Identifier = "PER", StartIdentifier = 515, EndIdentifier = 517, },
+            new() { Identifier = "PER", StartIdentifier = 517, EndIdentifier = 514, },
+            new() { Identifier = "PER", StartIdentifier = 518, EndIdentifier = 511, },
+            new() { Identifier = "PER", StartIdentifier = 518, EndIdentifier = 515, },
+            new() { Identifier = "PER", StartIdentifier = 519, EndIdentifier = 518, },
+            new() { Identifier = "PER", StartIdentifier = 520, EndIdentifier = 519, },
+            new() { Identifier = "PER", StartIdentifier = 521, EndIdentifier = 522, },
+            new() { Identifier = "PER", StartIdentifier = 523, EndIdentifier = 520, },
+            new() { Identifier = "PER", StartIdentifier = 522, EndIdentifier = 524, },
+            new() { Identifier = "PER", StartIdentifier = 525, EndIdentifier = 523, },
+            new() { Identifier = "PER", StartIdentifier = 524, EndIdentifier = 525, },
+            new() { Identifier = "PER", StartIdentifier = 526, EndIdentifier = 527, },
+            new() { Identifier = "PER", StartIdentifier = 528, EndIdentifier = 520, },
+            new() { Identifier = "PER", StartIdentifier = 527, EndIdentifier = 528, },
+            new() { Identifier = "PHE", StartIdentifier = 529, EndIdentifier = 530, },
+            new() { Identifier = "PHE", StartIdentifier = 531, EndIdentifier = 529, },
+            new() { Identifier = "PHE", StartIdentifier = 530, EndIdentifier = 532, },
+            new() { Identifier = "PHE", StartIdentifier = 532, EndIdentifier = 531, },
+            new() { Identifier = "PHE", StartIdentifier = 533, EndIdentifier = 532, },
+            new() { Identifier = "PHE", StartIdentifier = 534, EndIdentifier = 533, },
+            new() { Identifier = "PHE", StartIdentifier = 535, EndIdentifier = 534, },
+            new() { Identifier = "PIC", StartIdentifier = 536, EndIdentifier = 537, },
+            new() { Identifier = "PIC", StartIdentifier = 537, EndIdentifier = 538, },
+            new() { Identifier = "PSA", StartIdentifier = 539, EndIdentifier = 540, },
+            new() { Identifier = "PSA", StartIdentifier = 540, EndIdentifier = 541, },
+            new() { Identifier = "PSA", StartIdentifier = 542, EndIdentifier = 539, },
+            new() { Identifier = "PSA", StartIdentifier = 541, EndIdentifier = 543, },
+            new() { Identifier = "PSA", StartIdentifier = 544, EndIdentifier = 542, },
+            new() { Identifier = "PSA", StartIdentifier = 543, EndIdentifier = 545, },
+            new() { Identifier = "PSA", StartIdentifier = 546, EndIdentifier = 544, },
+            new() { Identifier = "PSA", StartIdentifier = 547, EndIdentifier = 546, },
+            new() { Identifier = "PSA", StartIdentifier = 545, EndIdentifier = 547, },
+            new() { Identifier = "PSC", StartIdentifier = 548, EndIdentifier = 549, },
+            new() { Identifier = "PSC", StartIdentifier = 550, EndIdentifier = 548, },
+            new() { Identifier = "PSC", StartIdentifier = 551, EndIdentifier = 552, },
+            new() { Identifier = "PSC", StartIdentifier = 553, EndIdentifier = 554, },
+            new() { Identifier = "PSC", StartIdentifier = 552, EndIdentifier = 553, },
+            new() { Identifier = "PSC", StartIdentifier = 555, EndIdentifier = 550, },
+            new() { Identifier = "PSC", StartIdentifier = 554, EndIdentifier = 556, },
+            new() { Identifier = "PSC", StartIdentifier = 557, EndIdentifier = 555, },
+            new() { Identifier = "PSC", StartIdentifier = 556, EndIdentifier = 558, },
+            new() { Identifier = "PSC", StartIdentifier = 558, EndIdentifier = 557, },
+            new() { Identifier = "PSC", StartIdentifier = 559, EndIdentifier = 560, },
+            new() { Identifier = "PSC", StartIdentifier = 560, EndIdentifier = 561, },
+            new() { Identifier = "PSC", StartIdentifier = 562, EndIdentifier = 559, },
+            new() { Identifier = "PSC", StartIdentifier = 563, EndIdentifier = 562, },
+            new() { Identifier = "PSC", StartIdentifier = 561, EndIdentifier = 563, },
+            new() { Identifier = "PSC", StartIdentifier = 549, EndIdentifier = 563, },
+            new() { Identifier = "PUP", StartIdentifier = 564, EndIdentifier = 565, },
+            new() { Identifier = "PUP", StartIdentifier = 565, EndIdentifier = 566, },
+            new() { Identifier = "PUP", StartIdentifier = 567, EndIdentifier = 564, },
+            new() { Identifier = "PUP", StartIdentifier = 566, EndIdentifier = 568, },
+            new() { Identifier = "PUP", StartIdentifier = 569, EndIdentifier = 567, },
+            new() { Identifier = "PUP", StartIdentifier = 570, EndIdentifier = 569, },
+            new() { Identifier = "PUP", StartIdentifier = 568, EndIdentifier = 571, },
+            new() { Identifier = "PUP", StartIdentifier = 571, EndIdentifier = 570, },
+            new() { Identifier = "PUP", StartIdentifier = 572, EndIdentifier = 570, },
+            new() { Identifier = "PYX", StartIdentifier = 573, EndIdentifier = 574, },
+            new() { Identifier = "PYX", StartIdentifier = 574, EndIdentifier = 575, },
+            new() { Identifier = "RET", StartIdentifier = 576, EndIdentifier = 577, },
+            new() { Identifier = "RET", StartIdentifier = 577, EndIdentifier = 578, },
+            new() { Identifier = "RET", StartIdentifier = 579, EndIdentifier = 576, },
+            new() { Identifier = "RET", StartIdentifier = 578, EndIdentifier = 579, },
+            new() { Identifier = "SCL", StartIdentifier = 580, EndIdentifier = 581, },
+            new() { Identifier = "SCL", StartIdentifier = 582, EndIdentifier = 580, },
+            new() { Identifier = "SCL", StartIdentifier = 581, EndIdentifier = 583, },
+            new() { Identifier = "SCO", StartIdentifier = 584, EndIdentifier = 585, },
+            new() { Identifier = "SCO", StartIdentifier = 586, EndIdentifier = 584, },
+            new() { Identifier = "SCO", StartIdentifier = 586, EndIdentifier = 587, },
+            new() { Identifier = "SCO", StartIdentifier = 587, EndIdentifier = 588, },
+            new() { Identifier = "SCO", StartIdentifier = 589, EndIdentifier = 587, },
+            new() { Identifier = "SCO", StartIdentifier = 588, EndIdentifier = 590, },
+            new() { Identifier = "SCO", StartIdentifier = 590, EndIdentifier = 589, },
+            new() { Identifier = "SCO", StartIdentifier = 591, EndIdentifier = 586, },
+            new() { Identifier = "SCO", StartIdentifier = 592, EndIdentifier = 591, },
+            new() { Identifier = "SCO", StartIdentifier = 593, EndIdentifier = 592, },
+            new() { Identifier = "SCO", StartIdentifier = 594, EndIdentifier = 593, },
+            new() { Identifier = "SCO", StartIdentifier = 595, EndIdentifier = 594, },
+            new() { Identifier = "SCO", StartIdentifier = 596, EndIdentifier = 595, },
+            new() { Identifier = "SCO", StartIdentifier = 597, EndIdentifier = 596, },
+            new() { Identifier = "SCO", StartIdentifier = 598, EndIdentifier = 597, },
+            new() { Identifier = "SCO", StartIdentifier = 599, EndIdentifier = 600, },
+            new() { Identifier = "SCO", StartIdentifier = 601, EndIdentifier = 598, },
+            new() { Identifier = "SCO", StartIdentifier = 601, EndIdentifier = 599, },
+            new() { Identifier = "SCO", StartIdentifier = 602, EndIdentifier = 601, },
+            new() { Identifier = "SCT", StartIdentifier = 603, EndIdentifier = 604, },
+            new() { Identifier = "SCT", StartIdentifier = 603, EndIdentifier = 605, },
+            new() { Identifier = "SCT", StartIdentifier = 606, EndIdentifier = 603, },
+            new() { Identifier = "SEC", StartIdentifier = 607, EndIdentifier = 608, },
+            new() { Identifier = "SEC", StartIdentifier = 609, EndIdentifier = 607, },
+            new() { Identifier = "SEC", StartIdentifier = 610, EndIdentifier = 609, },
+            new() { Identifier = "SEC", StartIdentifier = 611, EndIdentifier = 610, },
+            new() { Identifier = "SER", StartIdentifier = 612, EndIdentifier = 613, },
+            new() { Identifier = "SER", StartIdentifier = 614, EndIdentifier = 612, },
+            new() { Identifier = "SER", StartIdentifier = 613, EndIdentifier = 615, },
+            new() { Identifier = "SER", StartIdentifier = 615, EndIdentifier = 616, },
+            new() { Identifier = "SER", StartIdentifier = 617, EndIdentifier = 618, },
+            new() { Identifier = "SER", StartIdentifier = 618, EndIdentifier = 619, },
+            new() { Identifier = "SER", StartIdentifier = 619, EndIdentifier = 614, },
+            new() { Identifier = "SER", StartIdentifier = 616, EndIdentifier = 613, },
+            new() { Identifier = "SEX", StartIdentifier = 620, EndIdentifier = 621, },
+            new() { Identifier = "SEX", StartIdentifier = 622, EndIdentifier = 620, },
+            new() { Identifier = "SGE", StartIdentifier = 623, EndIdentifier = 624, },
+            new() { Identifier = "SGE", StartIdentifier = 625, EndIdentifier = 624, },
+            new() { Identifier = "SGE", StartIdentifier = 624, EndIdentifier = 626, },
+            new() { Identifier = "SGE", StartIdentifier = 626, EndIdentifier = 627, },
+            new() { Identifier = "SGR", StartIdentifier = 628, EndIdentifier = 629, },
+            new() { Identifier = "SGR", StartIdentifier = 629, EndIdentifier = 630, },
+            new() { Identifier = "SGR", StartIdentifier = 629, EndIdentifier = 631, },
+            new() { Identifier = "SGR", StartIdentifier = 632, EndIdentifier = 633, },
+            new() { Identifier = "SGR", StartIdentifier = 630, EndIdentifier = 633, },
+            new() { Identifier = "SGR", StartIdentifier = 630, EndIdentifier = 634, },
+            new() { Identifier = "SGR", StartIdentifier = 635, EndIdentifier = 636, },
+            new() { Identifier = "SGR", StartIdentifier = 633, EndIdentifier = 634, },
+            new() { Identifier = "SGR", StartIdentifier = 634, EndIdentifier = 637, },
+            new() { Identifier = "SGR", StartIdentifier = 634, EndIdentifier = 638, },
+            new() { Identifier = "SGR", StartIdentifier = 637, EndIdentifier = 639, },
+            new() { Identifier = "SGR", StartIdentifier = 637, EndIdentifier = 640, },
+            new() { Identifier = "SGR", StartIdentifier = 638, EndIdentifier = 631, },
+            new() { Identifier = "SGR", StartIdentifier = 639, EndIdentifier = 641, },
+            new() { Identifier = "SGR", StartIdentifier = 640, EndIdentifier = 638, },
+            new() { Identifier = "SGR", StartIdentifier = 641, EndIdentifier = 642, },
+            new() { Identifier = "SGR", StartIdentifier = 643, EndIdentifier = 640, },
+            new() { Identifier = "SGR", StartIdentifier = 644, EndIdentifier = 645, },
+            new() { Identifier = "SGR", StartIdentifier = 646, EndIdentifier = 643, },
+            new() { Identifier = "SGR", StartIdentifier = 642, EndIdentifier = 647, },
+            new() { Identifier = "SGR", StartIdentifier = 645, EndIdentifier = 648, },
+            new() { Identifier = "SGR", StartIdentifier = 645, EndIdentifier = 649, },
+            new() { Identifier = "SGR", StartIdentifier = 649, EndIdentifier = 646, },
+            new() { Identifier = "TAU", StartIdentifier = 650, EndIdentifier = 651, },
+            new() { Identifier = "TAU", StartIdentifier = 652, EndIdentifier = 650, },
+            new() { Identifier = "TAU", StartIdentifier = 653, EndIdentifier = 652, },
+            new() { Identifier = "TAU", StartIdentifier = 653, EndIdentifier = 654, },
+            new() { Identifier = "TAU", StartIdentifier = 655, EndIdentifier = 656, },
+            new() { Identifier = "TAU", StartIdentifier = 656, EndIdentifier = 653, },
+            new() { Identifier = "TAU", StartIdentifier = 654, EndIdentifier = 657, },
+            new() { Identifier = "TAU", StartIdentifier = 657, EndIdentifier = 658, },
+            new() { Identifier = "TAU", StartIdentifier = 658, EndIdentifier = 659, },
+            new() { Identifier = "TAU", StartIdentifier = 660, EndIdentifier = 654, },
+            new() { Identifier = "TAU", StartIdentifier = 659, EndIdentifier = 661, },
+            new() { Identifier = "TAU", StartIdentifier = 662, EndIdentifier = 660, },
+            new() { Identifier = "TAU", StartIdentifier = 662, EndIdentifier = 659, },
+            new() { Identifier = "TAU", StartIdentifier = 661, EndIdentifier = 663, },
+            new() { Identifier = "TAU", StartIdentifier = 664, EndIdentifier = 662, },
+            new() { Identifier = "TEL", StartIdentifier = 665, EndIdentifier = 666, },
+            new() { Identifier = "TEL", StartIdentifier = 666, EndIdentifier = 667, },
+            new() { Identifier = "TRA", StartIdentifier = 668, EndIdentifier = 669, },
+            new() { Identifier = "TRA", StartIdentifier = 669, EndIdentifier = 670, },
+            new() { Identifier = "TRA", StartIdentifier = 670, EndIdentifier = 668, },
+            new() { Identifier = "TRI", StartIdentifier = 671, EndIdentifier = 672, },
+            new() { Identifier = "TRI", StartIdentifier = 672, EndIdentifier = 673, },
+            new() { Identifier = "TRI", StartIdentifier = 673, EndIdentifier = 674, },
+            new() { Identifier = "TRI", StartIdentifier = 674, EndIdentifier = 671, },
+            new() { Identifier = "TUC", StartIdentifier = 675, EndIdentifier = 676, },
+            new() { Identifier = "TUC", StartIdentifier = 677, EndIdentifier = 675, },
+            new() { Identifier = "TUC", StartIdentifier = 678, EndIdentifier = 679, },
+            new() { Identifier = "TUC", StartIdentifier = 680, EndIdentifier = 678, },
+            new() { Identifier = "TUC", StartIdentifier = 679, EndIdentifier = 677, },
+            new() { Identifier = "TUC", StartIdentifier = 676, EndIdentifier = 679, },
+            new() { Identifier = "UMA", StartIdentifier = 681, EndIdentifier = 682, },
+            new() { Identifier = "UMA", StartIdentifier = 683, EndIdentifier = 681, },
+            new() { Identifier = "UMA", StartIdentifier = 682, EndIdentifier = 684, },
+            new() { Identifier = "UMA", StartIdentifier = 684, EndIdentifier = 683, },
+            new() { Identifier = "UMA", StartIdentifier = 685, EndIdentifier = 684, },
+            new() { Identifier = "UMA", StartIdentifier = 686, EndIdentifier = 685, },
+            new() { Identifier = "UMA", StartIdentifier = 687, EndIdentifier = 686, },
+            new() { Identifier = "UMI", StartIdentifier = 688, EndIdentifier = 689, },
+            new() { Identifier = "UMI", StartIdentifier = 689, EndIdentifier = 690, },
+            new() { Identifier = "UMI", StartIdentifier = 691, EndIdentifier = 688, },
+            new() { Identifier = "UMI", StartIdentifier = 690, EndIdentifier = 691, },
+            new() { Identifier = "UMI", StartIdentifier = 692, EndIdentifier = 691, },
+            new() { Identifier = "UMI", StartIdentifier = 693, EndIdentifier = 692, },
+            new() { Identifier = "UMI", StartIdentifier = 694, EndIdentifier = 693, },
+            new() { Identifier = "VEL", StartIdentifier = 695, EndIdentifier = 696, },
+            new() { Identifier = "VEL", StartIdentifier = 697, EndIdentifier = 698, },
+            new() { Identifier = "VEL", StartIdentifier = 699, EndIdentifier = 700, },
+            new() { Identifier = "VEL", StartIdentifier = 695, EndIdentifier = 699, },
+            new() { Identifier = "VEL", StartIdentifier = 695, EndIdentifier = 695, },
+            new() { Identifier = "VEL", StartIdentifier = 700, EndIdentifier = 701, },
+            new() { Identifier = "VEL", StartIdentifier = 696, EndIdentifier = 695, },
+            new() { Identifier = "VEL", StartIdentifier = 701, EndIdentifier = 702, },
+            new() { Identifier = "VEL", StartIdentifier = 698, EndIdentifier = 695, },
+            new() { Identifier = "VEL", StartIdentifier = 702, EndIdentifier = 697, },
+            new() { Identifier = "VIR", StartIdentifier = 703, EndIdentifier = 704, },
+            new() { Identifier = "VIR", StartIdentifier = 704, EndIdentifier = 705, },
+            new() { Identifier = "VIR", StartIdentifier = 705, EndIdentifier = 706, },
+            new() { Identifier = "VIR", StartIdentifier = 707, EndIdentifier = 705, },
+            new() { Identifier = "VIR", StartIdentifier = 707, EndIdentifier = 708, },
+            new() { Identifier = "VIR", StartIdentifier = 706, EndIdentifier = 709, },
+            new() { Identifier = "VIR", StartIdentifier = 709, EndIdentifier = 710, },
+            new() { Identifier = "VIR", StartIdentifier = 711, EndIdentifier = 707, },
+            new() { Identifier = "VIR", StartIdentifier = 711, EndIdentifier = 709, },
+            new() { Identifier = "VIR", StartIdentifier = 712, EndIdentifier = 711, },
+            new() { Identifier = "VIR", StartIdentifier = 710, EndIdentifier = 713, },
+            new() { Identifier = "VIR", StartIdentifier = 713, EndIdentifier = 714, },
+            new() { Identifier = "VIR", StartIdentifier = 715, EndIdentifier = 712, },
+            new() { Identifier = "VOL", StartIdentifier = 716, EndIdentifier = 717, },
+            new() { Identifier = "VOL", StartIdentifier = 717, EndIdentifier = 718, },
+            new() { Identifier = "VOL", StartIdentifier = 719, EndIdentifier = 716, },
+            new() { Identifier = "VOL", StartIdentifier = 718, EndIdentifier = 719, },
+            new() { Identifier = "VOL", StartIdentifier = 720, EndIdentifier = 718, },
+            new() { Identifier = "VOL", StartIdentifier = 721, EndIdentifier = 720, },
+            new() { Identifier = "VUL", StartIdentifier = 722, EndIdentifier = 723, },
+            new() { Identifier = "VUL", StartIdentifier = 724, EndIdentifier = 722, },
+        };
+
+        /// <summary>
+        /// The constellation star data.
+        /// </summary>
+        /// <remarks>Copyright (C) Dominic Ford 2015 - 2019. Gnu General Public License.</remarks>
+        // These values are from "Constellation stick figures" repository in GitHub licensed
+        // under the terms of the Gnu General Public License:
+        // https://github.com/dcf21/constellation-stick-figures
+        public static ConstellationLine[] ConstellationLinesDf { get; } =
+        {
+            new() { Identifier = "AND", StartIdentifier = 1, EndIdentifier = 2, },
+            new() { Identifier = "AND", StartIdentifier = 2, EndIdentifier = 3, },
+            new() { Identifier = "AND", StartIdentifier = 3, EndIdentifier = 4, },
+            new() { Identifier = "AND", StartIdentifier = 4, EndIdentifier = 5, },
+            new() { Identifier = "AND", StartIdentifier = 5, EndIdentifier = 6, },
+            new() { Identifier = "AND", StartIdentifier = 6, EndIdentifier = 7, },
+            new() { Identifier = "ANT", StartIdentifier = 8, EndIdentifier = 9, },
+            new() { Identifier = "ANT", StartIdentifier = 9, EndIdentifier = 10, },
+            new() { Identifier = "ANT", StartIdentifier = 10, EndIdentifier = 11, },
+            new() { Identifier = "APS", StartIdentifier = 12, EndIdentifier = 13, },
+            new() { Identifier = "APS", StartIdentifier = 13, EndIdentifier = 14, },
+            new() { Identifier = "APS", StartIdentifier = 14, EndIdentifier = 12, },
+            new() { Identifier = "APS", StartIdentifier = 12, EndIdentifier = 15, },
+            new() { Identifier = "AQR", StartIdentifier = 16, EndIdentifier = 17, },
+            new() { Identifier = "AQR", StartIdentifier = 17, EndIdentifier = 18, },
+            new() { Identifier = "AQR", StartIdentifier = 18, EndIdentifier = 19, },
+            new() { Identifier = "AQR", StartIdentifier = 19, EndIdentifier = 20, },
+            new() { Identifier = "AQR", StartIdentifier = 18, EndIdentifier = 21, },
+            new() { Identifier = "AQR", StartIdentifier = 21, EndIdentifier = 22, },
+            new() { Identifier = "AQR", StartIdentifier = 23, EndIdentifier = 24, },
+            new() { Identifier = "AQR", StartIdentifier = 24, EndIdentifier = 25, },
+            new() { Identifier = "AQR", StartIdentifier = 25, EndIdentifier = 26, },
+            new() { Identifier = "AQR", StartIdentifier = 26, EndIdentifier = 27, },
+            new() { Identifier = "AQL", StartIdentifier = 28, EndIdentifier = 29, },
+            new() { Identifier = "AQL", StartIdentifier = 29, EndIdentifier = 30, },
+            new() { Identifier = "AQL", StartIdentifier = 30, EndIdentifier = 31, },
+            new() { Identifier = "AQL", StartIdentifier = 31, EndIdentifier = 32, },
+            new() { Identifier = "AQL", StartIdentifier = 31, EndIdentifier = 33, },
+            new() { Identifier = "AQL", StartIdentifier = 33, EndIdentifier = 34, },
+            new() { Identifier = "AQL", StartIdentifier = 34, EndIdentifier = 35, },
+            new() { Identifier = "AQL", StartIdentifier = 35, EndIdentifier = 36, },
+            new() { Identifier = "AQL", StartIdentifier = 36, EndIdentifier = 37, },
+            new() { Identifier = "AQL", StartIdentifier = 37, EndIdentifier = 30, },
+            new() { Identifier = "ARA", StartIdentifier = 38, EndIdentifier = 39, },
+            new() { Identifier = "ARA", StartIdentifier = 39, EndIdentifier = 40, },
+            new() { Identifier = "ARA", StartIdentifier = 40, EndIdentifier = 41, },
+            new() { Identifier = "ARA", StartIdentifier = 41, EndIdentifier = 42, },
+            new() { Identifier = "ARA", StartIdentifier = 41, EndIdentifier = 43, },
+            new() { Identifier = "ARA", StartIdentifier = 43, EndIdentifier = 44, },
+            new() { Identifier = "ARA", StartIdentifier = 43, EndIdentifier = 45, },
+            new() { Identifier = "ARA", StartIdentifier = 45, EndIdentifier = 39, },
+            new() { Identifier = "ARI", StartIdentifier = 46, EndIdentifier = 47, },
+            new() { Identifier = "ARI", StartIdentifier = 47, EndIdentifier = 48, },
+            new() { Identifier = "ARI", StartIdentifier = 48, EndIdentifier = 49, },
+            new() { Identifier = "AUR", StartIdentifier = 50, EndIdentifier = 51, },
+            new() { Identifier = "AUR", StartIdentifier = 51, EndIdentifier = 52, },
+            new() { Identifier = "AUR", StartIdentifier = 52, EndIdentifier = 53, },
+            new() { Identifier = "AUR", StartIdentifier = 53, EndIdentifier = 54, },
+            new() { Identifier = "AUR", StartIdentifier = 54, EndIdentifier = 55, },
+            new() { Identifier = "AUR", StartIdentifier = 55, EndIdentifier = 56, },
+            new() { Identifier = "AUR", StartIdentifier = 56, EndIdentifier = 50, },
+            new() { Identifier = "BOO", StartIdentifier = 57, EndIdentifier = 58, },
+            new() { Identifier = "BOO", StartIdentifier = 58, EndIdentifier = 59, },
+            new() { Identifier = "BOO", StartIdentifier = 59, EndIdentifier = 60, },
+            new() { Identifier = "BOO", StartIdentifier = 60, EndIdentifier = 61, },
+            new() { Identifier = "BOO", StartIdentifier = 61, EndIdentifier = 62, },
+            new() { Identifier = "BOO", StartIdentifier = 60, EndIdentifier = 63, },
+            new() { Identifier = "BOO", StartIdentifier = 63, EndIdentifier = 64, },
+            new() { Identifier = "BOO", StartIdentifier = 64, EndIdentifier = 65, },
+            new() { Identifier = "BOO", StartIdentifier = 65, EndIdentifier = 58, },
+            new() { Identifier = "BOO", StartIdentifier = 58, EndIdentifier = 66, },
+            new() { Identifier = "CAE", StartIdentifier = 67, EndIdentifier = 68, },
+            new() { Identifier = "CAM", StartIdentifier = 69, EndIdentifier = 70, },
+            new() { Identifier = "CAM", StartIdentifier = 70, EndIdentifier = 71, },
+            new() { Identifier = "CAM", StartIdentifier = 71, EndIdentifier = 72, },
+            new() { Identifier = "CAM", StartIdentifier = 72, EndIdentifier = 73, },
+            new() { Identifier = "CNC", StartIdentifier = 74, EndIdentifier = 75, },
+            new() { Identifier = "CNC", StartIdentifier = 75, EndIdentifier = 76, },
+            new() { Identifier = "CNC", StartIdentifier = 76, EndIdentifier = 77, },
+            new() { Identifier = "CNC", StartIdentifier = 76, EndIdentifier = 78, },
+            new() { Identifier = "CVN", StartIdentifier = 79, EndIdentifier = 80, },
+            new() { Identifier = "CMA", StartIdentifier = 81, EndIdentifier = 82, },
+            new() { Identifier = "CMA", StartIdentifier = 82, EndIdentifier = 83, },
+            new() { Identifier = "CMA", StartIdentifier = 83, EndIdentifier = 84, },
+            new() { Identifier = "CMA", StartIdentifier = 83, EndIdentifier = 85, },
+            new() { Identifier = "CMA", StartIdentifier = 85, EndIdentifier = 86, },
+            new() { Identifier = "CMA", StartIdentifier = 86, EndIdentifier = 87, },
+            new() { Identifier = "CMI", StartIdentifier = 88, EndIdentifier = 89, },
+            new() { Identifier = "CAP", StartIdentifier = 90, EndIdentifier = 91, },
+            new() { Identifier = "CAP", StartIdentifier = 91, EndIdentifier = 92, },
+            new() { Identifier = "CAP", StartIdentifier = 92, EndIdentifier = 93, },
+            new() { Identifier = "CAP", StartIdentifier = 93, EndIdentifier = 94, },
+            new() { Identifier = "CAP", StartIdentifier = 94, EndIdentifier = 95, },
+            new() { Identifier = "CAP", StartIdentifier = 95, EndIdentifier = 96, },
+            new() { Identifier = "CAP", StartIdentifier = 96, EndIdentifier = 97, },
+            new() { Identifier = "CAP", StartIdentifier = 97, EndIdentifier = 91, },
+            new() { Identifier = "CAR", StartIdentifier = 98, EndIdentifier = 99, },
+            new() { Identifier = "CAR", StartIdentifier = 99, EndIdentifier = 100, },
+            new() { Identifier = "CAR", StartIdentifier = 100, EndIdentifier = 101, },
+            new() { Identifier = "CAR", StartIdentifier = 101, EndIdentifier = 102, },
+            new() { Identifier = "CAR", StartIdentifier = 102, EndIdentifier = 103, },
+            new() { Identifier = "CAR", StartIdentifier = 103, EndIdentifier = 104, },
+            new() { Identifier = "CAR", StartIdentifier = 104, EndIdentifier = 105, },
+            new() { Identifier = "CAR", StartIdentifier = 105, EndIdentifier = 106, },
+            new() { Identifier = "CAS", StartIdentifier = 107, EndIdentifier = 108, },
+            new() { Identifier = "CAS", StartIdentifier = 108, EndIdentifier = 109, },
+            new() { Identifier = "CAS", StartIdentifier = 109, EndIdentifier = 110, },
+            new() { Identifier = "CAS", StartIdentifier = 110, EndIdentifier = 111, },
+            new() { Identifier = "CEN", StartIdentifier = 112, EndIdentifier = 113, },
+            new() { Identifier = "CEN", StartIdentifier = 113, EndIdentifier = 114, },
+            new() { Identifier = "CEN", StartIdentifier = 114, EndIdentifier = 115, },
+            new() { Identifier = "CEN", StartIdentifier = 115, EndIdentifier = 116, },
+            new() { Identifier = "CEN", StartIdentifier = 116, EndIdentifier = 117, },
+            new() { Identifier = "CEN", StartIdentifier = 117, EndIdentifier = 118, },
+            new() { Identifier = "CEN", StartIdentifier = 118, EndIdentifier = 119, },
+            new() { Identifier = "CEN", StartIdentifier = 118, EndIdentifier = 120, },
+            new() { Identifier = "CEN", StartIdentifier = 118, EndIdentifier = 121, },
+            new() { Identifier = "CEN", StartIdentifier = 121, EndIdentifier = 122, },
+            new() { Identifier = "CEN", StartIdentifier = 122, EndIdentifier = 123, },
+            new() { Identifier = "CEN", StartIdentifier = 123, EndIdentifier = 124, },
+            new() { Identifier = "CEN", StartIdentifier = 123, EndIdentifier = 125, },
+            new() { Identifier = "CEN", StartIdentifier = 123, EndIdentifier = 126, },
+            new() { Identifier = "CEN", StartIdentifier = 126, EndIdentifier = 127, },
+            new() { Identifier = "CEP", StartIdentifier = 128, EndIdentifier = 129, },
+            new() { Identifier = "CEP", StartIdentifier = 129, EndIdentifier = 130, },
+            new() { Identifier = "CEP", StartIdentifier = 130, EndIdentifier = 131, },
+            new() { Identifier = "CEP", StartIdentifier = 131, EndIdentifier = 132, },
+            new() { Identifier = "CEP", StartIdentifier = 132, EndIdentifier = 133, },
+            new() { Identifier = "CEP", StartIdentifier = 133, EndIdentifier = 134, },
+            new() { Identifier = "CEP", StartIdentifier = 134, EndIdentifier = 135, },
+            new() { Identifier = "CEP", StartIdentifier = 135, EndIdentifier = 136, },
+            new() { Identifier = "CEP", StartIdentifier = 134, EndIdentifier = 130, },
+            new() { Identifier = "CET", StartIdentifier = 137, EndIdentifier = 138, },
+            new() { Identifier = "CET", StartIdentifier = 138, EndIdentifier = 139, },
+            new() { Identifier = "CET", StartIdentifier = 139, EndIdentifier = 140, },
+            new() { Identifier = "CET", StartIdentifier = 140, EndIdentifier = 141, },
+            new() { Identifier = "CET", StartIdentifier = 141, EndIdentifier = 137, },
+            new() { Identifier = "CET", StartIdentifier = 141, EndIdentifier = 142, },
+            new() { Identifier = "CET", StartIdentifier = 142, EndIdentifier = 143, },
+            new() { Identifier = "CET", StartIdentifier = 143, EndIdentifier = 144, },
+            new() { Identifier = "CET", StartIdentifier = 144, EndIdentifier = 145, },
+            new() { Identifier = "CET", StartIdentifier = 145, EndIdentifier = 146, },
+            new() { Identifier = "CET", StartIdentifier = 146, EndIdentifier = 147, },
+            new() { Identifier = "CET", StartIdentifier = 147, EndIdentifier = 148, },
+            new() { Identifier = "CET", StartIdentifier = 148, EndIdentifier = 149, },
+            new() { Identifier = "CET", StartIdentifier = 149, EndIdentifier = 144, },
+            new() { Identifier = "CHA", StartIdentifier = 150, EndIdentifier = 151, },
+            new() { Identifier = "CHA", StartIdentifier = 151, EndIdentifier = 152, },
+            new() { Identifier = "CHA", StartIdentifier = 152, EndIdentifier = 150, },
+            new() { Identifier = "CHA", StartIdentifier = 150, EndIdentifier = 153, },
+            new() { Identifier = "CHA", StartIdentifier = 153, EndIdentifier = 154, },
+            new() { Identifier = "CHA", StartIdentifier = 154, EndIdentifier = 155, },
+            new() { Identifier = "CIR", StartIdentifier = 156, EndIdentifier = 157, },
+            new() { Identifier = "CIR", StartIdentifier = 157, EndIdentifier = 158, },
+            new() { Identifier = "COL", StartIdentifier = 159, EndIdentifier = 160, },
+            new() { Identifier = "COL", StartIdentifier = 160, EndIdentifier = 161, },
+            new() { Identifier = "COL", StartIdentifier = 161, EndIdentifier = 162, },
+            new() { Identifier = "COL", StartIdentifier = 162, EndIdentifier = 163, },
+            new() { Identifier = "COL", StartIdentifier = 163, EndIdentifier = 164, },
+            new() { Identifier = "COL", StartIdentifier = 162, EndIdentifier = 165, },
+            new() { Identifier = "COM", StartIdentifier = 166, EndIdentifier = 167, },
+            new() { Identifier = "COM", StartIdentifier = 167, EndIdentifier = 168, },
+            new() { Identifier = "CRA", StartIdentifier = 169, EndIdentifier = 170, },
+            new() { Identifier = "CRA", StartIdentifier = 170, EndIdentifier = 171, },
+            new() { Identifier = "CRA", StartIdentifier = 171, EndIdentifier = 172, },
+            new() { Identifier = "CRA", StartIdentifier = 172, EndIdentifier = 173, },
+            new() { Identifier = "CRA", StartIdentifier = 173, EndIdentifier = 174, },
+            new() { Identifier = "CRA", StartIdentifier = 174, EndIdentifier = 175, },
+            new() { Identifier = "CRA", StartIdentifier = 175, EndIdentifier = 176, },
+            new() { Identifier = "CRB", StartIdentifier = 177, EndIdentifier = 178, },
+            new() { Identifier = "CRB", StartIdentifier = 178, EndIdentifier = 179, },
+            new() { Identifier = "CRB", StartIdentifier = 179, EndIdentifier = 180, },
+            new() { Identifier = "CRB", StartIdentifier = 180, EndIdentifier = 181, },
+            new() { Identifier = "CRB", StartIdentifier = 181, EndIdentifier = 182, },
+            new() { Identifier = "CRV", StartIdentifier = 183, EndIdentifier = 184, },
+            new() { Identifier = "CRV", StartIdentifier = 184, EndIdentifier = 185, },
+            new() { Identifier = "CRV", StartIdentifier = 185, EndIdentifier = 186, },
+            new() { Identifier = "CRV", StartIdentifier = 186, EndIdentifier = 187, },
+            new() { Identifier = "CRV", StartIdentifier = 187, EndIdentifier = 184, },
+            new() { Identifier = "CRT", StartIdentifier = 188, EndIdentifier = 189, },
+            new() { Identifier = "CRT", StartIdentifier = 189, EndIdentifier = 190, },
+            new() { Identifier = "CRT", StartIdentifier = 190, EndIdentifier = 191, },
+            new() { Identifier = "CRT", StartIdentifier = 191, EndIdentifier = 192, },
+            new() { Identifier = "CRT", StartIdentifier = 192, EndIdentifier = 193, },
+            new() { Identifier = "CRT", StartIdentifier = 193, EndIdentifier = 190, },
+            new() { Identifier = "CRT", StartIdentifier = 193, EndIdentifier = 194, },
+            new() { Identifier = "CRT", StartIdentifier = 194, EndIdentifier = 195, },
+            new() { Identifier = "CRU", StartIdentifier = 196, EndIdentifier = 197, },
+            new() { Identifier = "CRU", StartIdentifier = 198, EndIdentifier = 199, },
+            new() { Identifier = "CYG", StartIdentifier = 200, EndIdentifier = 201, },
+            new() { Identifier = "CYG", StartIdentifier = 201, EndIdentifier = 202, },
+            new() { Identifier = "CYG", StartIdentifier = 202, EndIdentifier = 203, },
+            new() { Identifier = "CYG", StartIdentifier = 203, EndIdentifier = 204, },
+            new() { Identifier = "CYG", StartIdentifier = 204, EndIdentifier = 205, },
+            new() { Identifier = "CYG", StartIdentifier = 205, EndIdentifier = 206, },
+            new() { Identifier = "CYG", StartIdentifier = 207, EndIdentifier = 202, },
+            new() { Identifier = "CYG", StartIdentifier = 202, EndIdentifier = 208, },
+            new() { Identifier = "CYG", StartIdentifier = 208, EndIdentifier = 209, },
+            new() { Identifier = "DEL", StartIdentifier = 210, EndIdentifier = 211, },
+            new() { Identifier = "DEL", StartIdentifier = 211, EndIdentifier = 212, },
+            new() { Identifier = "DEL", StartIdentifier = 212, EndIdentifier = 213, },
+            new() { Identifier = "DEL", StartIdentifier = 213, EndIdentifier = 214, },
+            new() { Identifier = "DEL", StartIdentifier = 214, EndIdentifier = 211, },
+            new() { Identifier = "DOR", StartIdentifier = 215, EndIdentifier = 216, },
+            new() { Identifier = "DOR", StartIdentifier = 216, EndIdentifier = 217, },
+            new() { Identifier = "DOR", StartIdentifier = 217, EndIdentifier = 218, },
+            new() { Identifier = "DOR", StartIdentifier = 218, EndIdentifier = 219, },
+            new() { Identifier = "DOR", StartIdentifier = 218, EndIdentifier = 220, },
+            new() { Identifier = "DRA", StartIdentifier = 221, EndIdentifier = 222, },
+            new() { Identifier = "DRA", StartIdentifier = 222, EndIdentifier = 223, },
+            new() { Identifier = "DRA", StartIdentifier = 223, EndIdentifier = 224, },
+            new() { Identifier = "DRA", StartIdentifier = 224, EndIdentifier = 221, },
+            new() { Identifier = "DRA", StartIdentifier = 224, EndIdentifier = 225, },
+            new() { Identifier = "DRA", StartIdentifier = 225, EndIdentifier = 226, },
+            new() { Identifier = "DRA", StartIdentifier = 226, EndIdentifier = 227, },
+            new() { Identifier = "DRA", StartIdentifier = 227, EndIdentifier = 228, },
+            new() { Identifier = "DRA", StartIdentifier = 228, EndIdentifier = 229, },
+            new() { Identifier = "DRA", StartIdentifier = 229, EndIdentifier = 230, },
+            new() { Identifier = "DRA", StartIdentifier = 230, EndIdentifier = 231, },
+            new() { Identifier = "DRA", StartIdentifier = 231, EndIdentifier = 232, },
+            new() { Identifier = "DRA", StartIdentifier = 232, EndIdentifier = 233, },
+            new() { Identifier = "DRA", StartIdentifier = 233, EndIdentifier = 234, },
+            new() { Identifier = "DRA", StartIdentifier = 234, EndIdentifier = 235, },
+            new() { Identifier = "DRA", StartIdentifier = 235, EndIdentifier = 236, },
+            new() { Identifier = "EQU", StartIdentifier = 237, EndIdentifier = 238, },
+            new() { Identifier = "EQU", StartIdentifier = 238, EndIdentifier = 239, },
+            new() { Identifier = "EQU", StartIdentifier = 239, EndIdentifier = 240, },
+            new() { Identifier = "EQU", StartIdentifier = 240, EndIdentifier = 237, },
+            new() { Identifier = "ERI", StartIdentifier = 241, EndIdentifier = 242, },
+            new() { Identifier = "ERI", StartIdentifier = 242, EndIdentifier = 243, },
+            new() { Identifier = "ERI", StartIdentifier = 243, EndIdentifier = 244, },
+            new() { Identifier = "ERI", StartIdentifier = 244, EndIdentifier = 245, },
+            new() { Identifier = "ERI", StartIdentifier = 245, EndIdentifier = 246, },
+            new() { Identifier = "ERI", StartIdentifier = 246, EndIdentifier = 247, },
+            new() { Identifier = "ERI", StartIdentifier = 247, EndIdentifier = 248, },
+            new() { Identifier = "ERI", StartIdentifier = 248, EndIdentifier = 249, },
+            new() { Identifier = "ERI", StartIdentifier = 249, EndIdentifier = 250, },
+            new() { Identifier = "ERI", StartIdentifier = 250, EndIdentifier = 251, },
+            new() { Identifier = "ERI", StartIdentifier = 251, EndIdentifier = 252, },
+            new() { Identifier = "ERI", StartIdentifier = 252, EndIdentifier = 253, },
+            new() { Identifier = "ERI", StartIdentifier = 253, EndIdentifier = 254, },
+            new() { Identifier = "ERI", StartIdentifier = 254, EndIdentifier = 255, },
+            new() { Identifier = "ERI", StartIdentifier = 255, EndIdentifier = 256, },
+            new() { Identifier = "ERI", StartIdentifier = 256, EndIdentifier = 257, },
+            new() { Identifier = "ERI", StartIdentifier = 257, EndIdentifier = 258, },
+            new() { Identifier = "ERI", StartIdentifier = 258, EndIdentifier = 259, },
+            new() { Identifier = "ERI", StartIdentifier = 259, EndIdentifier = 260, },
+            new() { Identifier = "ERI", StartIdentifier = 260, EndIdentifier = 261, },
+            new() { Identifier = "ERI", StartIdentifier = 261, EndIdentifier = 262, },
+            new() { Identifier = "ERI", StartIdentifier = 262, EndIdentifier = 262, },
+            new() { Identifier = "ERI", StartIdentifier = 262, EndIdentifier = 263, },
+            new() { Identifier = "ERI", StartIdentifier = 263, EndIdentifier = 264, },
+            new() { Identifier = "ERI", StartIdentifier = 264, EndIdentifier = 265, },
+            new() { Identifier = "ERI", StartIdentifier = 265, EndIdentifier = 266, },
+            new() { Identifier = "ERI", StartIdentifier = 266, EndIdentifier = 267, },
+            new() { Identifier = "ERI", StartIdentifier = 267, EndIdentifier = 268, },
+            new() { Identifier = "ERI", StartIdentifier = 268, EndIdentifier = 269, },
+            new() { Identifier = "FOR", StartIdentifier = 270, EndIdentifier = 271, },
+            new() { Identifier = "FOR", StartIdentifier = 271, EndIdentifier = 272, },
+            new() { Identifier = "GEM", StartIdentifier = 273, EndIdentifier = 274, },
+            new() { Identifier = "GEM", StartIdentifier = 274, EndIdentifier = 275, },
+            new() { Identifier = "GEM", StartIdentifier = 275, EndIdentifier = 276, },
+            new() { Identifier = "GEM", StartIdentifier = 276, EndIdentifier = 277, },
+            new() { Identifier = "GEM", StartIdentifier = 277, EndIdentifier = 278, },
+            new() { Identifier = "GEM", StartIdentifier = 278, EndIdentifier = 279, },
+            new() { Identifier = "GEM", StartIdentifier = 279, EndIdentifier = 280, },
+            new() { Identifier = "GEM", StartIdentifier = 280, EndIdentifier = 281, },
+            new() { Identifier = "GEM", StartIdentifier = 281, EndIdentifier = 282, },
+            new() { Identifier = "GEM", StartIdentifier = 282, EndIdentifier = 283, },
+            new() { Identifier = "GEM", StartIdentifier = 283, EndIdentifier = 284, },
+            new() { Identifier = "GRU", StartIdentifier = 285, EndIdentifier = 286, },
+            new() { Identifier = "GRU", StartIdentifier = 286, EndIdentifier = 287, },
+            new() { Identifier = "GRU", StartIdentifier = 287, EndIdentifier = 288, },
+            new() { Identifier = "GRU", StartIdentifier = 288, EndIdentifier = 289, },
+            new() { Identifier = "GRU", StartIdentifier = 289, EndIdentifier = 290, },
+            new() { Identifier = "GRU", StartIdentifier = 290, EndIdentifier = 291, },
+            new() { Identifier = "GRU", StartIdentifier = 292, EndIdentifier = 293, },
+            new() { Identifier = "GRU", StartIdentifier = 293, EndIdentifier = 287, },
+            new() { Identifier = "GRU", StartIdentifier = 287, EndIdentifier = 294, },
+            new() { Identifier = "HER", StartIdentifier = 295, EndIdentifier = 296, },
+            new() { Identifier = "HER", StartIdentifier = 296, EndIdentifier = 297, },
+            new() { Identifier = "HER", StartIdentifier = 297, EndIdentifier = 298, },
+            new() { Identifier = "HER", StartIdentifier = 298, EndIdentifier = 299, },
+            new() { Identifier = "HER", StartIdentifier = 299, EndIdentifier = 300, },
+            new() { Identifier = "HER", StartIdentifier = 300, EndIdentifier = 301, },
+            new() { Identifier = "HER", StartIdentifier = 301, EndIdentifier = 302, },
+            new() { Identifier = "HER", StartIdentifier = 303, EndIdentifier = 304, },
+            new() { Identifier = "HER", StartIdentifier = 304, EndIdentifier = 305, },
+            new() { Identifier = "HER", StartIdentifier = 305, EndIdentifier = 306, },
+            new() { Identifier = "HER", StartIdentifier = 306, EndIdentifier = 307, },
+            new() { Identifier = "HER", StartIdentifier = 307, EndIdentifier = 308, },
+            new() { Identifier = "HER", StartIdentifier = 308, EndIdentifier = 309, },
+            new() { Identifier = "HER", StartIdentifier = 309, EndIdentifier = 310, },
+            new() { Identifier = "HER", StartIdentifier = 310, EndIdentifier = 311, },
+            new() { Identifier = "HER", StartIdentifier = 310, EndIdentifier = 312, },
+            new() { Identifier = "HER", StartIdentifier = 298, EndIdentifier = 308, },
+            new() { Identifier = "HER", StartIdentifier = 299, EndIdentifier = 309, },
+            new() { Identifier = "HOR", StartIdentifier = 313, EndIdentifier = 314, },
+            new() { Identifier = "HOR", StartIdentifier = 314, EndIdentifier = 315, },
+            new() { Identifier = "HOR", StartIdentifier = 315, EndIdentifier = 316, },
+            new() { Identifier = "HOR", StartIdentifier = 316, EndIdentifier = 317, },
+            new() { Identifier = "HOR", StartIdentifier = 317, EndIdentifier = 318, },
+            new() { Identifier = "HYA", StartIdentifier = 319, EndIdentifier = 320, },
+            new() { Identifier = "HYA", StartIdentifier = 320, EndIdentifier = 321, },
+            new() { Identifier = "HYA", StartIdentifier = 321, EndIdentifier = 322, },
+            new() { Identifier = "HYA", StartIdentifier = 322, EndIdentifier = 323, },
+            new() { Identifier = "HYA", StartIdentifier = 323, EndIdentifier = 319, },
+            new() { Identifier = "HYA", StartIdentifier = 319, EndIdentifier = 324, },
+            new() { Identifier = "HYA", StartIdentifier = 324, EndIdentifier = 325, },
+            new() { Identifier = "HYA", StartIdentifier = 325, EndIdentifier = 326, },
+            new() { Identifier = "HYA", StartIdentifier = 326, EndIdentifier = 327, },
+            new() { Identifier = "HYA", StartIdentifier = 327, EndIdentifier = 328, },
+            new() { Identifier = "HYA", StartIdentifier = 328, EndIdentifier = 329, },
+            new() { Identifier = "HYA", StartIdentifier = 329, EndIdentifier = 330, },
+            new() { Identifier = "HYA", StartIdentifier = 330, EndIdentifier = 331, },
+            new() { Identifier = "HYA", StartIdentifier = 331, EndIdentifier = 332, },
+            new() { Identifier = "HYA", StartIdentifier = 332, EndIdentifier = 333, },
+            new() { Identifier = "HYA", StartIdentifier = 333, EndIdentifier = 334, },
+            new() { Identifier = "HYA", StartIdentifier = 334, EndIdentifier = 335, },
+            new() { Identifier = "HYI", StartIdentifier = 336, EndIdentifier = 337, },
+            new() { Identifier = "HYI", StartIdentifier = 337, EndIdentifier = 338, },
+            new() { Identifier = "HYI", StartIdentifier = 338, EndIdentifier = 339, },
+            new() { Identifier = "HYI", StartIdentifier = 339, EndIdentifier = 340, },
+            new() { Identifier = "IND", StartIdentifier = 341, EndIdentifier = 342, },
+            new() { Identifier = "IND", StartIdentifier = 342, EndIdentifier = 343, },
+            new() { Identifier = "IND", StartIdentifier = 342, EndIdentifier = 344, },
+            new() { Identifier = "LAC", StartIdentifier = 345, EndIdentifier = 346, },
+            new() { Identifier = "LAC", StartIdentifier = 346, EndIdentifier = 347, },
+            new() { Identifier = "LAC", StartIdentifier = 347, EndIdentifier = 348, },
+            new() { Identifier = "LAC", StartIdentifier = 348, EndIdentifier = 349, },
+            new() { Identifier = "LAC", StartIdentifier = 349, EndIdentifier = 350, },
+            new() { Identifier = "LAC", StartIdentifier = 350, EndIdentifier = 351, },
+            new() { Identifier = "LAC", StartIdentifier = 351, EndIdentifier = 352, },
+            new() { Identifier = "LEO", StartIdentifier = 353, EndIdentifier = 354, },
+            new() { Identifier = "LEO", StartIdentifier = 354, EndIdentifier = 355, },
+            new() { Identifier = "LEO", StartIdentifier = 355, EndIdentifier = 353, },
+            new() { Identifier = "LEO", StartIdentifier = 353, EndIdentifier = 356, },
+            new() { Identifier = "LEO", StartIdentifier = 356, EndIdentifier = 357, },
+            new() { Identifier = "LEO", StartIdentifier = 357, EndIdentifier = 358, },
+            new() { Identifier = "LEO", StartIdentifier = 358, EndIdentifier = 359, },
+            new() { Identifier = "LEO", StartIdentifier = 359, EndIdentifier = 360, },
+            new() { Identifier = "LEO", StartIdentifier = 360, EndIdentifier = 361, },
+            new() { Identifier = "LMI", StartIdentifier = 362, EndIdentifier = 363, },
+            new() { Identifier = "LMI", StartIdentifier = 363, EndIdentifier = 364, },
+            new() { Identifier = "LEP", StartIdentifier = 365, EndIdentifier = 366, },
+            new() { Identifier = "LEP", StartIdentifier = 366, EndIdentifier = 367, },
+            new() { Identifier = "LEP", StartIdentifier = 367, EndIdentifier = 368, },
+            new() { Identifier = "LEP", StartIdentifier = 369, EndIdentifier = 370, },
+            new() { Identifier = "LEP", StartIdentifier = 370, EndIdentifier = 371, },
+            new() { Identifier = "LEP", StartIdentifier = 371, EndIdentifier = 372, },
+            new() { Identifier = "LEP", StartIdentifier = 367, EndIdentifier = 371, },
+            new() { Identifier = "LIB", StartIdentifier = 373, EndIdentifier = 374, },
+            new() { Identifier = "LIB", StartIdentifier = 374, EndIdentifier = 375, },
+            new() { Identifier = "LIB", StartIdentifier = 375, EndIdentifier = 376, },
+            new() { Identifier = "LIB", StartIdentifier = 376, EndIdentifier = 377, },
+            new() { Identifier = "LIB", StartIdentifier = 377, EndIdentifier = 378, },
+            new() { Identifier = "LIB", StartIdentifier = 378, EndIdentifier = 379, },
+            new() { Identifier = "LIB", StartIdentifier = 377, EndIdentifier = 375, },
+            new() { Identifier = "LUP", StartIdentifier = 380, EndIdentifier = 381, },
+            new() { Identifier = "LUP", StartIdentifier = 381, EndIdentifier = 382, },
+            new() { Identifier = "LUP", StartIdentifier = 382, EndIdentifier = 383, },
+            new() { Identifier = "LUP", StartIdentifier = 383, EndIdentifier = 384, },
+            new() { Identifier = "LUP", StartIdentifier = 384, EndIdentifier = 385, },
+            new() { Identifier = "LUP", StartIdentifier = 385, EndIdentifier = 386, },
+            new() { Identifier = "LUP", StartIdentifier = 386, EndIdentifier = 387, },
+            new() { Identifier = "LUP", StartIdentifier = 387, EndIdentifier = 388, },
+            new() { Identifier = "LUP", StartIdentifier = 388, EndIdentifier = 389, },
+            new() { Identifier = "LUP", StartIdentifier = 389, EndIdentifier = 390, },
+            new() { Identifier = "LUP", StartIdentifier = 382, EndIdentifier = 388, },
+            new() { Identifier = "LYN", StartIdentifier = 391, EndIdentifier = 392, },
+            new() { Identifier = "LYN", StartIdentifier = 392, EndIdentifier = 393, },
+            new() { Identifier = "LYN", StartIdentifier = 393, EndIdentifier = 394, },
+            new() { Identifier = "LYN", StartIdentifier = 394, EndIdentifier = 395, },
+            new() { Identifier = "LYN", StartIdentifier = 395, EndIdentifier = 396, },
+            new() { Identifier = "LYN", StartIdentifier = 396, EndIdentifier = 397, },
+            new() { Identifier = "LYR", StartIdentifier = 398, EndIdentifier = 399, },
+            new() { Identifier = "LYR", StartIdentifier = 399, EndIdentifier = 400, },
+            new() { Identifier = "LYR", StartIdentifier = 400, EndIdentifier = 401, },
+            new() { Identifier = "LYR", StartIdentifier = 401, EndIdentifier = 402, },
+            new() { Identifier = "LYR", StartIdentifier = 402, EndIdentifier = 403, },
+            new() { Identifier = "LYR", StartIdentifier = 403, EndIdentifier = 404, },
+            new() { Identifier = "LYR", StartIdentifier = 404, EndIdentifier = 401, },
+            new() { Identifier = "MEN", StartIdentifier = 405, EndIdentifier = 406, },
+            new() { Identifier = "MEN", StartIdentifier = 406, EndIdentifier = 407, },
+            new() { Identifier = "MEN", StartIdentifier = 407, EndIdentifier = 408, },
+            new() { Identifier = "MIC", StartIdentifier = 409, EndIdentifier = 410, },
+            new() { Identifier = "MIC", StartIdentifier = 410, EndIdentifier = 411, },
+            new() { Identifier = "MIC", StartIdentifier = 411, EndIdentifier = 412, },
+            new() { Identifier = "MON", StartIdentifier = 413, EndIdentifier = 414, },
+            new() { Identifier = "MON", StartIdentifier = 414, EndIdentifier = 415, },
+            new() { Identifier = "MON", StartIdentifier = 415, EndIdentifier = 416, },
+            new() { Identifier = "MON", StartIdentifier = 416, EndIdentifier = 417, },
+            new() { Identifier = "MON", StartIdentifier = 417, EndIdentifier = 418, },
+            new() { Identifier = "MON", StartIdentifier = 415, EndIdentifier = 419, },
+            new() { Identifier = "MON", StartIdentifier = 419, EndIdentifier = 420, },
+            new() { Identifier = "MUS", StartIdentifier = 421, EndIdentifier = 422, },
+            new() { Identifier = "MUS", StartIdentifier = 422, EndIdentifier = 423, },
+            new() { Identifier = "MUS", StartIdentifier = 423, EndIdentifier = 424, },
+            new() { Identifier = "MUS", StartIdentifier = 423, EndIdentifier = 425, },
+            new() { Identifier = "MUS", StartIdentifier = 423, EndIdentifier = 426, },
+            new() { Identifier = "NOR", StartIdentifier = 427, EndIdentifier = 428, },
+            new() { Identifier = "NOR", StartIdentifier = 428, EndIdentifier = 429, },
+            new() { Identifier = "OCT", StartIdentifier = 430, EndIdentifier = 431, },
+            new() { Identifier = "OCT", StartIdentifier = 431, EndIdentifier = 432, },
+            new() { Identifier = "OCT", StartIdentifier = 432, EndIdentifier = 430, },
+            new() { Identifier = "OPH", StartIdentifier = 433, EndIdentifier = 434, },
+            new() { Identifier = "OPH", StartIdentifier = 434, EndIdentifier = 435, },
+            new() { Identifier = "OPH", StartIdentifier = 435, EndIdentifier = 436, },
+            new() { Identifier = "OPH", StartIdentifier = 436, EndIdentifier = 437, },
+            new() { Identifier = "OPH", StartIdentifier = 437, EndIdentifier = 438, },
+            new() { Identifier = "OPH", StartIdentifier = 438, EndIdentifier = 439, },
+            new() { Identifier = "OPH", StartIdentifier = 439, EndIdentifier = 440, },
+            new() { Identifier = "OPH", StartIdentifier = 440, EndIdentifier = 441, },
+            new() { Identifier = "OPH", StartIdentifier = 441, EndIdentifier = 442, },
+            new() { Identifier = "OPH", StartIdentifier = 442, EndIdentifier = 443, },
+            new() { Identifier = "OPH", StartIdentifier = 443, EndIdentifier = 437, },
+            new() { Identifier = "OPH", StartIdentifier = 443, EndIdentifier = 444, },
+            new() { Identifier = "OPH", StartIdentifier = 444, EndIdentifier = 445, },
+            new() { Identifier = "OPH", StartIdentifier = 445, EndIdentifier = 446, },
+            new() { Identifier = "OPH", StartIdentifier = 444, EndIdentifier = 447, },
+            new() { Identifier = "ORI", StartIdentifier = 448, EndIdentifier = 449, },
+            new() { Identifier = "ORI", StartIdentifier = 449, EndIdentifier = 450, },
+            new() { Identifier = "ORI", StartIdentifier = 450, EndIdentifier = 451, },
+            new() { Identifier = "ORI", StartIdentifier = 451, EndIdentifier = 452, },
+            new() { Identifier = "ORI", StartIdentifier = 452, EndIdentifier = 453, },
+            new() { Identifier = "ORI", StartIdentifier = 453, EndIdentifier = 454, },
+            new() { Identifier = "ORI", StartIdentifier = 453, EndIdentifier = 455, },
+            new() { Identifier = "ORI", StartIdentifier = 455, EndIdentifier = 456, },
+            new() { Identifier = "ORI", StartIdentifier = 451, EndIdentifier = 457, },
+            new() { Identifier = "ORI", StartIdentifier = 457, EndIdentifier = 458, },
+            new() { Identifier = "ORI", StartIdentifier = 458, EndIdentifier = 459, },
+            new() { Identifier = "ORI", StartIdentifier = 459, EndIdentifier = 460, },
+            new() { Identifier = "ORI", StartIdentifier = 460, EndIdentifier = 461, },
+            new() { Identifier = "ORI", StartIdentifier = 459, EndIdentifier = 462, },
+            new() { Identifier = "ORI", StartIdentifier = 462, EndIdentifier = 463, },
+            new() { Identifier = "ORI", StartIdentifier = 463, EndIdentifier = 464, },
+            new() { Identifier = "ORI", StartIdentifier = 458, EndIdentifier = 465, },
+            new() { Identifier = "ORI", StartIdentifier = 465, EndIdentifier = 466, },
+            new() { Identifier = "ORI", StartIdentifier = 466, EndIdentifier = 448, },
+            new() { Identifier = "PAV", StartIdentifier = 467, EndIdentifier = 468, },
+            new() { Identifier = "PAV", StartIdentifier = 467, EndIdentifier = 469, },
+            new() { Identifier = "PAV", StartIdentifier = 467, EndIdentifier = 470, },
+            new() { Identifier = "PAV", StartIdentifier = 470, EndIdentifier = 471, },
+            new() { Identifier = "PAV", StartIdentifier = 471, EndIdentifier = 472, },
+            new() { Identifier = "PAV", StartIdentifier = 472, EndIdentifier = 473, },
+            new() { Identifier = "PAV", StartIdentifier = 473, EndIdentifier = 474, },
+            new() { Identifier = "PAV", StartIdentifier = 474, EndIdentifier = 475, },
+            new() { Identifier = "PAV", StartIdentifier = 475, EndIdentifier = 476, },
+            new() { Identifier = "PAV", StartIdentifier = 476, EndIdentifier = 467, },
+            new() { Identifier = "PEG", StartIdentifier = 477, EndIdentifier = 478, },
+            new() { Identifier = "PEG", StartIdentifier = 478, EndIdentifier = 479, },
+            new() { Identifier = "PEG", StartIdentifier = 479, EndIdentifier = 480, },
+            new() { Identifier = "PEG", StartIdentifier = 480, EndIdentifier = 477, },
+            new() { Identifier = "PEG", StartIdentifier = 480, EndIdentifier = 481, },
+            new() { Identifier = "PEG", StartIdentifier = 481, EndIdentifier = 482, },
+            new() { Identifier = "PEG", StartIdentifier = 482, EndIdentifier = 483, },
+            new() { Identifier = "PEG", StartIdentifier = 480, EndIdentifier = 484, },
+            new() { Identifier = "PEG", StartIdentifier = 484, EndIdentifier = 485, },
+            new() { Identifier = "PEG", StartIdentifier = 485, EndIdentifier = 486, },
+            new() { Identifier = "PEG", StartIdentifier = 486, EndIdentifier = 487, },
+            new() { Identifier = "PEG", StartIdentifier = 479, EndIdentifier = 488, },
+            new() { Identifier = "PEG", StartIdentifier = 488, EndIdentifier = 489, },
+            new() { Identifier = "PEG", StartIdentifier = 489, EndIdentifier = 490, },
+            new() { Identifier = "PEG", StartIdentifier = 490, EndIdentifier = 491, },
+            new() { Identifier = "PER", StartIdentifier = 492, EndIdentifier = 493, },
+            new() { Identifier = "PER", StartIdentifier = 493, EndIdentifier = 494, },
+            new() { Identifier = "PER", StartIdentifier = 494, EndIdentifier = 495, },
+            new() { Identifier = "PER", StartIdentifier = 495, EndIdentifier = 496, },
+            new() { Identifier = "PER", StartIdentifier = 496, EndIdentifier = 497, },
+            new() { Identifier = "PER", StartIdentifier = 497, EndIdentifier = 498, },
+            new() { Identifier = "PER", StartIdentifier = 498, EndIdentifier = 499, },
+            new() { Identifier = "PER", StartIdentifier = 499, EndIdentifier = 500, },
+            new() { Identifier = "PER", StartIdentifier = 495, EndIdentifier = 501, },
+            new() { Identifier = "PER", StartIdentifier = 501, EndIdentifier = 502, },
+            new() { Identifier = "PER", StartIdentifier = 502, EndIdentifier = 503, },
+            new() { Identifier = "PER", StartIdentifier = 503, EndIdentifier = 504, },
+            new() { Identifier = "PHE", StartIdentifier = 505, EndIdentifier = 506, },
+            new() { Identifier = "PHE", StartIdentifier = 506, EndIdentifier = 507, },
+            new() { Identifier = "PHE", StartIdentifier = 507, EndIdentifier = 508, },
+            new() { Identifier = "PHE", StartIdentifier = 508, EndIdentifier = 509, },
+            new() { Identifier = "PHE", StartIdentifier = 509, EndIdentifier = 510, },
+            new() { Identifier = "PHE", StartIdentifier = 510, EndIdentifier = 511, },
+            new() { Identifier = "PHE", StartIdentifier = 511, EndIdentifier = 507, },
+            new() { Identifier = "PIC", StartIdentifier = 512, EndIdentifier = 513, },
+            new() { Identifier = "PIC", StartIdentifier = 513, EndIdentifier = 514, },
+            new() { Identifier = "PSC", StartIdentifier = 515, EndIdentifier = 516, },
+            new() { Identifier = "PSC", StartIdentifier = 516, EndIdentifier = 517, },
+            new() { Identifier = "PSC", StartIdentifier = 517, EndIdentifier = 518, },
+            new() { Identifier = "PSC", StartIdentifier = 518, EndIdentifier = 519, },
+            new() { Identifier = "PSC", StartIdentifier = 519, EndIdentifier = 520, },
+            new() { Identifier = "PSC", StartIdentifier = 520, EndIdentifier = 521, },
+            new() { Identifier = "PSC", StartIdentifier = 521, EndIdentifier = 522, },
+            new() { Identifier = "PSC", StartIdentifier = 522, EndIdentifier = 523, },
+            new() { Identifier = "PSC", StartIdentifier = 523, EndIdentifier = 524, },
+            new() { Identifier = "PSC", StartIdentifier = 524, EndIdentifier = 525, },
+            new() { Identifier = "PSC", StartIdentifier = 525, EndIdentifier = 526, },
+            new() { Identifier = "PSC", StartIdentifier = 526, EndIdentifier = 527, },
+            new() { Identifier = "PSC", StartIdentifier = 527, EndIdentifier = 528, },
+            new() { Identifier = "PSC", StartIdentifier = 528, EndIdentifier = 529, },
+            new() { Identifier = "PSC", StartIdentifier = 529, EndIdentifier = 530, },
+            new() { Identifier = "PSC", StartIdentifier = 530, EndIdentifier = 531, },
+            new() { Identifier = "PSC", StartIdentifier = 531, EndIdentifier = 532, },
+            new() { Identifier = "PSC", StartIdentifier = 532, EndIdentifier = 526, },
+            new() { Identifier = "PSA", StartIdentifier = 533, EndIdentifier = 534, },
+            new() { Identifier = "PSA", StartIdentifier = 534, EndIdentifier = 535, },
+            new() { Identifier = "PSA", StartIdentifier = 535, EndIdentifier = 536, },
+            new() { Identifier = "PSA", StartIdentifier = 536, EndIdentifier = 537, },
+            new() { Identifier = "PSA", StartIdentifier = 537, EndIdentifier = 538, },
+            new() { Identifier = "PSA", StartIdentifier = 538, EndIdentifier = 539, },
+            new() { Identifier = "PSA", StartIdentifier = 539, EndIdentifier = 540, },
+            new() { Identifier = "PSA", StartIdentifier = 540, EndIdentifier = 541, },
+            new() { Identifier = "PSA", StartIdentifier = 541, EndIdentifier = 533, },
+            new() { Identifier = "PUP", StartIdentifier = 542, EndIdentifier = 543, },
+            new() { Identifier = "PUP", StartIdentifier = 543, EndIdentifier = 544, },
+            new() { Identifier = "PUP", StartIdentifier = 544, EndIdentifier = 545, },
+            new() { Identifier = "PUP", StartIdentifier = 545, EndIdentifier = 546, },
+            new() { Identifier = "PUP", StartIdentifier = 546, EndIdentifier = 547, },
+            new() { Identifier = "PUP", StartIdentifier = 547, EndIdentifier = 543, },
+            new() { Identifier = "PUP", StartIdentifier = 543, EndIdentifier = 543, },
+            new() { Identifier = "PUP", StartIdentifier = 543, EndIdentifier = 548, },
+            new() { Identifier = "PUP", StartIdentifier = 548, EndIdentifier = 549, },
+            new() { Identifier = "PUP", StartIdentifier = 549, EndIdentifier = 542, },
+            new() { Identifier = "PYX", StartIdentifier = 550, EndIdentifier = 551, },
+            new() { Identifier = "PYX", StartIdentifier = 551, EndIdentifier = 552, },
+            new() { Identifier = "RET", StartIdentifier = 553, EndIdentifier = 554, },
+            new() { Identifier = "RET", StartIdentifier = 554, EndIdentifier = 555, },
+            new() { Identifier = "RET", StartIdentifier = 555, EndIdentifier = 556, },
+            new() { Identifier = "RET", StartIdentifier = 556, EndIdentifier = 553, },
+            new() { Identifier = "SGE", StartIdentifier = 557, EndIdentifier = 558, },
+            new() { Identifier = "SGE", StartIdentifier = 558, EndIdentifier = 559, },
+            new() { Identifier = "SGE", StartIdentifier = 559, EndIdentifier = 560, },
+            new() { Identifier = "SGE", StartIdentifier = 559, EndIdentifier = 561, },
+            new() { Identifier = "SGR", StartIdentifier = 562, EndIdentifier = 563, },
+            new() { Identifier = "SGR", StartIdentifier = 563, EndIdentifier = 564, },
+            new() { Identifier = "SGR", StartIdentifier = 563, EndIdentifier = 565, },
+            new() { Identifier = "SGR", StartIdentifier = 565, EndIdentifier = 566, },
+            new() { Identifier = "SGR", StartIdentifier = 566, EndIdentifier = 567, },
+            new() { Identifier = "SGR", StartIdentifier = 567, EndIdentifier = 568, },
+            new() { Identifier = "SGR", StartIdentifier = 568, EndIdentifier = 569, },
+            new() { Identifier = "SGR", StartIdentifier = 569, EndIdentifier = 570, },
+            new() { Identifier = "SGR", StartIdentifier = 570, EndIdentifier = 571, },
+            new() { Identifier = "SGR", StartIdentifier = 571, EndIdentifier = 568, },
+            new() { Identifier = "SGR", StartIdentifier = 571, EndIdentifier = 572, },
+            new() { Identifier = "SGR", StartIdentifier = 572, EndIdentifier = 573, },
+            new() { Identifier = "SGR", StartIdentifier = 572, EndIdentifier = 574, },
+            new() { Identifier = "SGR", StartIdentifier = 574, EndIdentifier = 575, },
+            new() { Identifier = "SGR", StartIdentifier = 570, EndIdentifier = 576, },
+            new() { Identifier = "SGR", StartIdentifier = 576, EndIdentifier = 577, },
+            new() { Identifier = "SGR", StartIdentifier = 576, EndIdentifier = 578, },
+            new() { Identifier = "SGR", StartIdentifier = 578, EndIdentifier = 579, },
+            new() { Identifier = "SGR", StartIdentifier = 579, EndIdentifier = 580, },
+            new() { Identifier = "SGR", StartIdentifier = 578, EndIdentifier = 581, },
+            new() { Identifier = "SGR", StartIdentifier = 581, EndIdentifier = 582, },
+            new() { Identifier = "SCO", StartIdentifier = 583, EndIdentifier = 584, },
+            new() { Identifier = "SCO", StartIdentifier = 584, EndIdentifier = 585, },
+            new() { Identifier = "SCO", StartIdentifier = 585, EndIdentifier = 586, },
+            new() { Identifier = "SCO", StartIdentifier = 586, EndIdentifier = 587, },
+            new() { Identifier = "SCO", StartIdentifier = 587, EndIdentifier = 588, },
+            new() { Identifier = "SCO", StartIdentifier = 588, EndIdentifier = 589, },
+            new() { Identifier = "SCO", StartIdentifier = 589, EndIdentifier = 590, },
+            new() { Identifier = "SCO", StartIdentifier = 590, EndIdentifier = 591, },
+            new() { Identifier = "SCO", StartIdentifier = 591, EndIdentifier = 592, },
+            new() { Identifier = "SCO", StartIdentifier = 592, EndIdentifier = 593, },
+            new() { Identifier = "SCO", StartIdentifier = 593, EndIdentifier = 594, },
+            new() { Identifier = "SCO", StartIdentifier = 594, EndIdentifier = 595, },
+            new() { Identifier = "SCO", StartIdentifier = 595, EndIdentifier = 596, },
+            new() { Identifier = "SCO", StartIdentifier = 594, EndIdentifier = 597, },
+            new() { Identifier = "SCO", StartIdentifier = 597, EndIdentifier = 598, },
+            new() { Identifier = "SCL", StartIdentifier = 599, EndIdentifier = 600, },
+            new() { Identifier = "SCL", StartIdentifier = 600, EndIdentifier = 601, },
+            new() { Identifier = "SCL", StartIdentifier = 601, EndIdentifier = 602, },
+            new() { Identifier = "SCT", StartIdentifier = 603, EndIdentifier = 604, },
+            new() { Identifier = "SCT", StartIdentifier = 603, EndIdentifier = 605, },
+            new() { Identifier = "SCT", StartIdentifier = 603, EndIdentifier = 606, },
+            new() { Identifier = "SEC", StartIdentifier = 607, EndIdentifier = 608, },
+            new() { Identifier = "SEC", StartIdentifier = 608, EndIdentifier = 609, },
+            new() { Identifier = "SEC", StartIdentifier = 609, EndIdentifier = 610, },
+            new() { Identifier = "SEC", StartIdentifier = 610, EndIdentifier = 611, },
+            new() { Identifier = "SER", StartIdentifier = 612, EndIdentifier = 613, },
+            new() { Identifier = "SER", StartIdentifier = 613, EndIdentifier = 614, },
+            new() { Identifier = "SER", StartIdentifier = 614, EndIdentifier = 615, },
+            new() { Identifier = "SER", StartIdentifier = 615, EndIdentifier = 616, },
+            new() { Identifier = "SER", StartIdentifier = 616, EndIdentifier = 617, },
+            new() { Identifier = "SER", StartIdentifier = 617, EndIdentifier = 618, },
+            new() { Identifier = "SER", StartIdentifier = 618, EndIdentifier = 616, },
+            new() { Identifier = "SEX", StartIdentifier = 619, EndIdentifier = 620, },
+            new() { Identifier = "SEX", StartIdentifier = 620, EndIdentifier = 621, },
+            new() { Identifier = "SEX", StartIdentifier = 621, EndIdentifier = 619, },
+            new() { Identifier = "TAU", StartIdentifier = 622, EndIdentifier = 623, },
+            new() { Identifier = "TAU", StartIdentifier = 623, EndIdentifier = 624, },
+            new() { Identifier = "TAU", StartIdentifier = 624, EndIdentifier = 625, },
+            new() { Identifier = "TAU", StartIdentifier = 625, EndIdentifier = 626, },
+            new() { Identifier = "TAU", StartIdentifier = 626, EndIdentifier = 627, },
+            new() { Identifier = "TAU", StartIdentifier = 627, EndIdentifier = 628, },
+            new() { Identifier = "TAU", StartIdentifier = 625, EndIdentifier = 629, },
+            new() { Identifier = "TAU", StartIdentifier = 629, EndIdentifier = 630, },
+            new() { Identifier = "TAU", StartIdentifier = 630, EndIdentifier = 631, },
+            new() { Identifier = "TAU", StartIdentifier = 631, EndIdentifier = 632, },
+            new() { Identifier = "TEL", StartIdentifier = 633, EndIdentifier = 634, },
+            new() { Identifier = "TEL", StartIdentifier = 634, EndIdentifier = 635, },
+            new() { Identifier = "TRI", StartIdentifier = 636, EndIdentifier = 637, },
+            new() { Identifier = "TRI", StartIdentifier = 637, EndIdentifier = 638, },
+            new() { Identifier = "TRI", StartIdentifier = 638, EndIdentifier = 636, },
+            new() { Identifier = "TRA", StartIdentifier = 639, EndIdentifier = 640, },
+            new() { Identifier = "TRA", StartIdentifier = 640, EndIdentifier = 641, },
+            new() { Identifier = "TRA", StartIdentifier = 641, EndIdentifier = 639, },
+            new() { Identifier = "TUC", StartIdentifier = 642, EndIdentifier = 643, },
+            new() { Identifier = "TUC", StartIdentifier = 643, EndIdentifier = 644, },
+            new() { Identifier = "TUC", StartIdentifier = 644, EndIdentifier = 645, },
+            new() { Identifier = "TUC", StartIdentifier = 645, EndIdentifier = 642, },
+            new() { Identifier = "TUC", StartIdentifier = 645, EndIdentifier = 646, },
+            new() { Identifier = "TUC", StartIdentifier = 646, EndIdentifier = 647, },
+            new() { Identifier = "UMA", StartIdentifier = 648, EndIdentifier = 649, },
+            new() { Identifier = "UMA", StartIdentifier = 649, EndIdentifier = 650, },
+            new() { Identifier = "UMA", StartIdentifier = 650, EndIdentifier = 651, },
+            new() { Identifier = "UMA", StartIdentifier = 651, EndIdentifier = 652, },
+            new() { Identifier = "UMA", StartIdentifier = 652, EndIdentifier = 653, },
+            new() { Identifier = "UMA", StartIdentifier = 653, EndIdentifier = 654, },
+            new() { Identifier = "UMA", StartIdentifier = 654, EndIdentifier = 655, },
+            new() { Identifier = "UMA", StartIdentifier = 653, EndIdentifier = 656, },
+            new() { Identifier = "UMA", StartIdentifier = 656, EndIdentifier = 657, },
+            new() { Identifier = "UMA", StartIdentifier = 657, EndIdentifier = 658, },
+            new() { Identifier = "UMA", StartIdentifier = 651, EndIdentifier = 659, },
+            new() { Identifier = "UMA", StartIdentifier = 659, EndIdentifier = 660, },
+            new() { Identifier = "UMA", StartIdentifier = 660, EndIdentifier = 652, },
+            new() { Identifier = "UMA", StartIdentifier = 659, EndIdentifier = 661, },
+            new() { Identifier = "UMA", StartIdentifier = 661, EndIdentifier = 662, },
+            new() { Identifier = "UMA", StartIdentifier = 662, EndIdentifier = 663, },
+            new() { Identifier = "UMA", StartIdentifier = 663, EndIdentifier = 660, },
+            new() { Identifier = "UMA", StartIdentifier = 663, EndIdentifier = 664, },
+            new() { Identifier = "UMA", StartIdentifier = 664, EndIdentifier = 665, },
+            new() { Identifier = "UMA", StartIdentifier = 665, EndIdentifier = 666, },
+            new() { Identifier = "UMI", StartIdentifier = 667, EndIdentifier = 668, },
+            new() { Identifier = "UMI", StartIdentifier = 668, EndIdentifier = 669, },
+            new() { Identifier = "UMI", StartIdentifier = 669, EndIdentifier = 670, },
+            new() { Identifier = "UMI", StartIdentifier = 670, EndIdentifier = 667, },
+            new() { Identifier = "UMI", StartIdentifier = 667, EndIdentifier = 671, },
+            new() { Identifier = "UMI", StartIdentifier = 671, EndIdentifier = 672, },
+            new() { Identifier = "UMI", StartIdentifier = 672, EndIdentifier = 673, },
+            new() { Identifier = "VEL", StartIdentifier = 674, EndIdentifier = 675, },
+            new() { Identifier = "VEL", StartIdentifier = 675, EndIdentifier = 675, },
+            new() { Identifier = "VEL", StartIdentifier = 675, EndIdentifier = 676, },
+            new() { Identifier = "VEL", StartIdentifier = 676, EndIdentifier = 677, },
+            new() { Identifier = "VEL", StartIdentifier = 677, EndIdentifier = 675, },
+            new() { Identifier = "VEL", StartIdentifier = 675, EndIdentifier = 675, },
+            new() { Identifier = "VEL", StartIdentifier = 675, EndIdentifier = 678, },
+            new() { Identifier = "VEL", StartIdentifier = 678, EndIdentifier = 679, },
+            new() { Identifier = "VEL", StartIdentifier = 679, EndIdentifier = 680, },
+            new() { Identifier = "VEL", StartIdentifier = 680, EndIdentifier = 681, },
+            new() { Identifier = "VEL", StartIdentifier = 681, EndIdentifier = 674, },
+            new() { Identifier = "VIR", StartIdentifier = 682, EndIdentifier = 683, },
+            new() { Identifier = "VIR", StartIdentifier = 683, EndIdentifier = 684, },
+            new() { Identifier = "VIR", StartIdentifier = 684, EndIdentifier = 685, },
+            new() { Identifier = "VIR", StartIdentifier = 685, EndIdentifier = 686, },
+            new() { Identifier = "VIR", StartIdentifier = 686, EndIdentifier = 687, },
+            new() { Identifier = "VIR", StartIdentifier = 688, EndIdentifier = 689, },
+            new() { Identifier = "VIR", StartIdentifier = 689, EndIdentifier = 690, },
+            new() { Identifier = "VIR", StartIdentifier = 690, EndIdentifier = 691, },
+            new() { Identifier = "VIR", StartIdentifier = 691, EndIdentifier = 692, },
+            new() { Identifier = "VIR", StartIdentifier = 683, EndIdentifier = 690, },
+            new() { Identifier = "VIR", StartIdentifier = 685, EndIdentifier = 691, },
+            new() { Identifier = "VOL", StartIdentifier = 693, EndIdentifier = 694, },
+            new() { Identifier = "VOL", StartIdentifier = 694, EndIdentifier = 695, },
+            new() { Identifier = "VOL", StartIdentifier = 695, EndIdentifier = 696, },
+            new() { Identifier = "VOL", StartIdentifier = 696, EndIdentifier = 697, },
+            new() { Identifier = "VOL", StartIdentifier = 697, EndIdentifier = 698, },
+            new() { Identifier = "VOL", StartIdentifier = 698, EndIdentifier = 695, },
+            new() { Identifier = "VUL", StartIdentifier = 699, EndIdentifier = 700, },
+            new() { Identifier = "VUL", StartIdentifier = 700, EndIdentifier = 701, },
         };
     }
 }

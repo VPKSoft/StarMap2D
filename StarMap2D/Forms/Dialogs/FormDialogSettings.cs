@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.CustomControls;
 using StarMap2D.Properties;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
@@ -85,6 +86,76 @@ namespace StarMap2D.Forms.Dialogs
             tbLocationName.Text = city.CityName;
             nudLatitude.Value = (decimal)city.Latitude;
             nudLongitude.Value = (decimal)city.Longitude;
+        }
+
+        private void colorPanel_Click(object sender, EventArgs e)
+        {
+            var panel = (Panel)sender;
+            suspendColorChange = true;
+
+            var color = panel.BackColor;
+
+            ceColor.Color = color;
+            cwColor.Color = color;
+            colorControl = panel;
+            if (Enum.TryParse<MapGraphicValue>(panel.Tag?.ToString(), false, out var value))
+            {
+                FormSkyMap2D.ChangeColor(color, value);
+
+            }
+            suspendColorChange = false;
+        }
+
+        private Control? colorControl;
+
+        private bool suspendColorChange;
+
+        private void cwColor_ColorChanged(object sender, EventArgs e)
+        {
+            if (suspendColorChange)
+            {
+                return;
+            }
+
+            suspendColorChange = true;
+
+            var color = cwColor.Color;
+
+            if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag?.ToString(), false, out var value))
+            {
+                FormSkyMap2D.ChangeColor(color, value);
+
+            }
+
+            ceColor.Color = color;
+            if (colorControl != null)
+            {
+                colorControl.BackColor = color;
+            }
+            suspendColorChange = false;
+        }
+
+        private void ceColor_ColorChanged(object sender, EventArgs e)
+        {
+            if (suspendColorChange)
+            {
+                return;
+            }
+
+            suspendColorChange = true;
+            var color = ceColor.Color;
+
+            if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag.ToString(), false, out var value))
+            {
+                FormSkyMap2D.ChangeColor(color, value);
+            }
+
+            cwColor.Color = color;
+            if (colorControl != null)
+            {
+                colorControl.BackColor = color;
+            }
+            suspendColorChange = false;
         }
     }
 }

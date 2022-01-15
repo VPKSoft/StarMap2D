@@ -14,5 +14,14 @@
     <Setting Name="DefaultLocationName" Type="System.String" Scope="User">
       <Value Profile="(Default)">N/A</Value>
     </Setting>
+    <Setting Name="ConstellationLineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">DeepSkyBlue</Value>
+    </Setting>
+    <Setting Name="ConstellationBorderLineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">13, 23, 125</Value>
+    </Setting>
+    <Setting Name="MapCircleColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

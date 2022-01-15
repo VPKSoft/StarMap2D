@@ -54,7 +54,6 @@ namespace StarMap2D.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpLocation = new System.Windows.Forms.TabPage();
@@ -66,14 +65,23 @@ namespace StarMap2D.Forms.Dialogs
             this.lbLatitude = new System.Windows.Forms.Label();
             this.tbLocationName = new System.Windows.Forms.TextBox();
             this.lbLocationName = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabColorSettings = new System.Windows.Forms.TabPage();
+            this.pnConstellationBorderLineColor = new System.Windows.Forms.Panel();
+            this.lbConstellationBorderLineColor = new System.Windows.Forms.Label();
+            this.ceColor = new Cyotek.Windows.Forms.ColorEditor();
+            this.cwColor = new Cyotek.Windows.Forms.ColorWheel();
+            this.pnConstellationLineColor = new System.Windows.Forms.Panel();
+            this.lbConstellationLineColor = new System.Windows.Forms.Label();
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.pnMapCircleColor = new System.Windows.Forms.Panel();
+            this.lbMapCircleColor = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
+            this.tabColorSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -82,11 +90,11 @@ namespace StarMap2D.Forms.Dialogs
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcSettings.Controls.Add(this.tpLocation);
-            this.tcSettings.Controls.Add(this.tabPage2);
+            this.tcSettings.Controls.Add(this.tabColorSettings);
             this.tcSettings.Location = new System.Drawing.Point(12, 12);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(490, 397);
+            this.tcSettings.Size = new System.Drawing.Size(696, 493);
             this.tcSettings.TabIndex = 1;
             // 
             // tpLocation
@@ -102,7 +110,7 @@ namespace StarMap2D.Forms.Dialogs
             this.tpLocation.Location = new System.Drawing.Point(4, 24);
             this.tpLocation.Name = "tpLocation";
             this.tpLocation.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLocation.Size = new System.Drawing.Size(482, 369);
+            this.tpLocation.Size = new System.Drawing.Size(688, 465);
             this.tpLocation.TabIndex = 0;
             this.tpLocation.Text = "Location";
             this.tpLocation.UseVisualStyleBackColor = true;
@@ -201,21 +209,91 @@ namespace StarMap2D.Forms.Dialogs
             this.lbLocationName.TabIndex = 0;
             this.lbLocationName.Text = "Location name";
             // 
-            // tabPage2
+            // tabColorSettings
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(482, 369);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabColorSettings.Controls.Add(this.pnMapCircleColor);
+            this.tabColorSettings.Controls.Add(this.lbMapCircleColor);
+            this.tabColorSettings.Controls.Add(this.pnConstellationBorderLineColor);
+            this.tabColorSettings.Controls.Add(this.lbConstellationBorderLineColor);
+            this.tabColorSettings.Controls.Add(this.ceColor);
+            this.tabColorSettings.Controls.Add(this.cwColor);
+            this.tabColorSettings.Controls.Add(this.pnConstellationLineColor);
+            this.tabColorSettings.Controls.Add(this.lbConstellationLineColor);
+            this.tabColorSettings.Location = new System.Drawing.Point(4, 24);
+            this.tabColorSettings.Name = "tabColorSettings";
+            this.tabColorSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabColorSettings.Size = new System.Drawing.Size(688, 465);
+            this.tabColorSettings.TabIndex = 1;
+            this.tabColorSettings.Text = "Map color settings";
+            this.tabColorSettings.UseVisualStyleBackColor = true;
+            // 
+            // pnConstellationBorderLineColor
+            // 
+            this.pnConstellationBorderLineColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
+            this.pnConstellationBorderLineColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnConstellationBorderLineColor.Location = new System.Drawing.Point(223, 32);
+            this.pnConstellationBorderLineColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnConstellationBorderLineColor.Name = "pnConstellationBorderLineColor";
+            this.pnConstellationBorderLineColor.Size = new System.Drawing.Size(113, 23);
+            this.pnConstellationBorderLineColor.TabIndex = 5;
+            this.pnConstellationBorderLineColor.Tag = "ConstellationBorderLineColor";
+            this.pnConstellationBorderLineColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbConstellationBorderLineColor
+            // 
+            this.lbConstellationBorderLineColor.AutoSize = true;
+            this.lbConstellationBorderLineColor.Location = new System.Drawing.Point(6, 36);
+            this.lbConstellationBorderLineColor.Name = "lbConstellationBorderLineColor";
+            this.lbConstellationBorderLineColor.Size = new System.Drawing.Size(170, 15);
+            this.lbConstellationBorderLineColor.TabIndex = 4;
+            this.lbConstellationBorderLineColor.Text = "Constellation border line color:";
+            // 
+            // ceColor
+            // 
+            this.ceColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ceColor.Location = new System.Drawing.Point(482, 6);
+            this.ceColor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ceColor.Name = "ceColor";
+            this.ceColor.Size = new System.Drawing.Size(202, 284);
+            this.ceColor.TabIndex = 3;
+            this.ceColor.ColorChanged += new System.EventHandler(this.ceColor_ColorChanged);
+            // 
+            // cwColor
+            // 
+            this.cwColor.Alpha = 1D;
+            this.cwColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cwColor.Location = new System.Drawing.Point(482, 296);
+            this.cwColor.Name = "cwColor";
+            this.cwColor.Size = new System.Drawing.Size(200, 163);
+            this.cwColor.TabIndex = 2;
+            this.cwColor.ColorChanged += new System.EventHandler(this.cwColor_ColorChanged);
+            // 
+            // pnConstellationLineColor
+            // 
+            this.pnConstellationLineColor.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.pnConstellationLineColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnConstellationLineColor.Location = new System.Drawing.Point(223, 6);
+            this.pnConstellationLineColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnConstellationLineColor.Name = "pnConstellationLineColor";
+            this.pnConstellationLineColor.Size = new System.Drawing.Size(113, 23);
+            this.pnConstellationLineColor.TabIndex = 1;
+            this.pnConstellationLineColor.Tag = "ConstellationLineColor";
+            this.pnConstellationLineColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbConstellationLineColor
+            // 
+            this.lbConstellationLineColor.AutoSize = true;
+            this.lbConstellationLineColor.Location = new System.Drawing.Point(6, 10);
+            this.lbConstellationLineColor.Name = "lbConstellationLineColor";
+            this.lbConstellationLineColor.Size = new System.Drawing.Size(132, 15);
+            this.lbConstellationLineColor.TabIndex = 0;
+            this.lbConstellationLineColor.Text = "Constellation line color:";
             // 
             // btOk
             // 
             this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOk.Location = new System.Drawing.Point(12, 415);
+            this.btOk.Location = new System.Drawing.Point(12, 511);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(75, 23);
             this.btOk.TabIndex = 2;
@@ -226,23 +304,39 @@ namespace StarMap2D.Forms.Dialogs
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Location = new System.Drawing.Point(427, 415);
+            this.btCancel.Location = new System.Drawing.Point(633, 511);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(75, 23);
             this.btCancel.TabIndex = 3;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
-            // contextMenuStrip1
+            // pnMapCircleColor
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.pnMapCircleColor.BackColor = System.Drawing.Color.Black;
+            this.pnMapCircleColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMapCircleColor.Location = new System.Drawing.Point(223, 58);
+            this.pnMapCircleColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnMapCircleColor.Name = "pnMapCircleColor";
+            this.pnMapCircleColor.Size = new System.Drawing.Size(113, 23);
+            this.pnMapCircleColor.TabIndex = 7;
+            this.pnMapCircleColor.Tag = "MapCircleColor";
+            this.pnMapCircleColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbMapCircleColor
+            // 
+            this.lbMapCircleColor.AutoSize = true;
+            this.lbMapCircleColor.Location = new System.Drawing.Point(6, 62);
+            this.lbMapCircleColor.Name = "lbMapCircleColor";
+            this.lbMapCircleColor.Size = new System.Drawing.Size(95, 15);
+            this.lbMapCircleColor.TabIndex = 6;
+            this.lbMapCircleColor.Text = "Map circle color:";
             // 
             // FormDialogSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 450);
+            this.ClientSize = new System.Drawing.Size(720, 546);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btOk);
             this.Controls.Add(this.tcSettings);
@@ -258,6 +352,8 @@ namespace StarMap2D.Forms.Dialogs
             this.tpLocation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
+            this.tabColorSettings.ResumeLayout(false);
+            this.tabColorSettings.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -270,13 +366,21 @@ namespace StarMap2D.Forms.Dialogs
         private Label lbLatitude;
         private TextBox tbLocationName;
         private Label lbLocationName;
-        private TabPage tabPage2;
+        private TabPage tabColorSettings;
         private NumericUpDown nudLongitude;
         private Label lbLongitude;
         private Button btOk;
         private Button btCancel;
         private Label lbSelectLocation;
         private ComboBox cmbSelectLocation;
-        private ContextMenuStrip contextMenuStrip1;
+        private Panel pnConstellationLineColor;
+        private Label lbConstellationLineColor;
+        private ColorDialog colorDialog1;
+        private Cyotek.Windows.Forms.ColorEditor ceColor;
+        private Cyotek.Windows.Forms.ColorWheel cwColor;
+        private Panel pnConstellationBorderLineColor;
+        private Label lbConstellationBorderLineColor;
+        private Panel pnMapCircleColor;
+        private Label lbMapCircleColor;
     }
 }
