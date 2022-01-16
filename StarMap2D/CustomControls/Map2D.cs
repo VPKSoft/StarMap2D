@@ -129,7 +129,7 @@ namespace StarMap2D.CustomControls
         #endregion
 
         #region PrivateMethods
-        private Point GetDrawPoint(Image image, PointDouble centerPoint)
+        private Point GetDrawPoint(Image image, AAS2DCoordinate centerPoint)
         {
             return new Point((int)centerPoint.X - image.Width / 2 + OffsetX, (int)centerPoint.Y - image.Height / 2 + OffsetY);
         }
@@ -192,6 +192,7 @@ namespace StarMap2D.CustomControls
 
                         var coordinate = new AAS2DCoordinate
                             { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
 
                         pointD = Plot2D.Project2D(coordinate);
 

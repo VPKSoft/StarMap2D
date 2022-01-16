@@ -37,7 +37,7 @@ namespace VPKSoft.StarCatalogs.Providers
     /// <seealso cref="IStarDataProvider{T}" />
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>
+    public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadDataLines
     {
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<Gliese3rdStarData> StarData { get; } = new();
@@ -166,7 +166,7 @@ namespace VPKSoft.StarCatalogs.Providers
             (189, 257),
         };
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
             RawDataEntries.AddRange(lines);

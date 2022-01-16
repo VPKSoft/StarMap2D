@@ -31,9 +31,15 @@ namespace StarMap2D.Calculations.Helpers.Math
     /// </summary>
     public class MathDegrees
     {
-        private const double RadiansDegrees = 180.0 / System.Math.PI;
-        private const double DegreesRadians = System.Math.PI / 180.0;
+        /// <summary>
+        /// A multiplier for converting radians to degrees.
+        /// </summary>
+        public const double RadiansDegrees = 180.0 / System.Math.PI;
 
+        /// <summary>
+        /// A multiplier for converting degrees to radians.
+        /// </summary>
+        public const double DegreesRadians = System.Math.PI / 180.0;
 
         /// <inheritdoc cref="System.Math.Sin"/>
         public static double Sin(double a)
@@ -60,7 +66,7 @@ namespace StarMap2D.Calculations.Helpers.Math
         /// <returns>An angle, θ, measured in degrees, such that -180/2 ≤ θ ≤ 180/2.</returns>
         public static double Asin(double d)
         {
-            return RadiansDegrees * System.Math.Asin(d * DegreesRadians);
+            return RadiansDegrees * System.Math.Asin(d);
         }
 
         /// <summary>

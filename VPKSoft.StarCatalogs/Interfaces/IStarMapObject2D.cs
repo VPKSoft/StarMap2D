@@ -49,7 +49,7 @@ namespace VPKSoft.StarCatalogs.Interfaces
         /// <param name="longitude">The longitude of the observer.</param>
         /// <param name="radius">The radius of the 2D projection of the star map.</param>
         /// <returns>An instance to a <see cref="PointDouble"/> class for the result of the calculation.</returns>
-        public delegate PointDouble CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
+        public delegate AAS2DCoordinate CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
             double longitude, double radius);
 
         /// <summary>

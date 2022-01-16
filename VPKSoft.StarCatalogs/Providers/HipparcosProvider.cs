@@ -35,11 +35,11 @@ namespace VPKSoft.StarCatalogs.Providers
     /// Implements the <see cref="IStarDataProvider{T}" />
     /// </summary>
     /// <seealso cref="IStarDataProvider{T}" />
-    public class HipparcosProvider : IStarDataProvider<HipparcosStarData>
+    public class HipparcosProvider : IStarDataProvider<HipparcosStarData>, ILoadDataLines
     {
         public List<HipparcosStarData> StarData { get; } = new();
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
             RawDataEntries.AddRange(lines);

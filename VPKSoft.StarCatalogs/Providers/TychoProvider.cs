@@ -35,12 +35,12 @@ namespace VPKSoft.StarCatalogs.Providers
     /// Implements the <see cref="IStarDataProvider{T}" />
     /// </summary>
     /// <seealso cref="IStarDataProvider{T}" />
-    public class TychoProvider: IStarDataProvider<TychoStarData>
+    public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
     {
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<TychoStarData> StarData { get; } = new();
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
             RawDataEntries.AddRange(lines);

@@ -24,13 +24,13 @@ SOFTWARE.
 */
 #endregion
 
-using VPKSoft.StarCatalogs;
-
 /*
  * Code © C# Helper, Determine whether a point is inside a polygon in C#.
  * http://csharphelper.com/blog/2014/07/determine-whether-a-point-is-inside-a-polygon-in-c/.
  * No license information provided.
  */
+
+using AASharp;
 
 namespace StarMap2D.Calculations.Helpers.Math
 {
@@ -50,7 +50,7 @@ namespace StarMap2D.Calculations.Helpers.Math
         /// <param name="y">The y-coordinate of the point.</param>
         /// <returns><c>true</c> if the point is inside the polygon, <c>false</c> otherwise.</returns>
         /// <remarks>Based on the article (©): http://csharphelper.com/blog/2014/07/determine-whether-a-point-is-inside-a-polygon-in-c/.</remarks>
-        public static bool PointInPolygon(PointDouble[] points, double x, double y)
+        public static bool PointInPolygon(AAS2DCoordinate[] points, double x, double y)
         {
             // Get the angle between the point and the
             // first and last vertices.

@@ -24,13 +24,12 @@ SOFTWARE.
 */
 #endregion
 
-using System.Diagnostics;
 using System.Linq;
+using AASharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StarMap2D.Calculations.Constellations.ConstellationClasses;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
-using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.Tests
 {
@@ -43,10 +42,10 @@ namespace StarMap2D.Tests
             // Positive coordinates test.
             var coordinates = new[]
             {
-                new PointDouble { X = 2, Y = 2 },
-                new PointDouble { X = 6, Y = 2 },
-                new PointDouble { X = 6, Y = 5 },
-                new PointDouble { X = 2, Y = 5 },
+                new AAS2DCoordinate { X = 2, Y = 2 },
+                new AAS2DCoordinate { X = 6, Y = 2 },
+                new AAS2DCoordinate { X = 6, Y = 5 },
+                new AAS2DCoordinate { X = 2, Y = 5 },
             };
 
             Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5));
@@ -55,10 +54,10 @@ namespace StarMap2D.Tests
             // Partially negative coordinates test.
             coordinates = new[]
             {
-                new PointDouble { X = -2, Y = -2 },
-                new PointDouble { X = 6, Y = -2 },
-                new PointDouble { X = 6, Y = 3 },
-                new PointDouble { X = -2, Y = 3 },
+                new AAS2DCoordinate { X = -2, Y = -2 },
+                new AAS2DCoordinate { X = 6, Y = -2 },
+                new AAS2DCoordinate { X = 6, Y = 3 },
+                new AAS2DCoordinate { X = -2, Y = 3 },
             };
 
             Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));
@@ -69,7 +68,7 @@ namespace StarMap2D.Tests
         {
             var orion = new Orion();
             var coordinates = orion.Boundary.ToList()
-                .Select(f => new PointDouble { X = f.RightAscension, Y = f.Declination }).ToArray();
+                .Select(f => new AAS2DCoordinate { X = f.RightAscension, Y = f.Declination }).ToArray();
 
             // Test that the constellation Orion is inside Orion boundaries ;-)
             foreach (var line in orion.ConstellationLines)

@@ -34,12 +34,12 @@ namespace VPKSoft.StarCatalogs.Providers
     /// Implements the <see cref="IStarDataProvider{T}" />
     /// </summary>
     /// <seealso cref="IStarDataProvider{T}" />
-    public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>
+    public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>, ILoadDataLines
     {
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<YaleSmallStarData> StarData { get; } = new();
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
             foreach (var line in lines)

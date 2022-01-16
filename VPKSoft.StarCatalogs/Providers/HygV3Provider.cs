@@ -34,7 +34,7 @@ namespace VPKSoft.StarCatalogs.Providers
     /// Implements the <see cref="IStarDataProvider{T}" />
     /// </summary>
     /// <seealso cref="IStarDataProvider{T}" />
-    public class HygV3Provider: IStarDataProvider<HygV3StartData>
+    public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
     {
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<HygV3StartData> StarData { get; } = new();
@@ -83,7 +83,7 @@ namespace VPKSoft.StarCatalogs.Providers
             "var_max",
         };
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string[])"/>
+        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
             for (int i = 2; i < lines.Length; i++)

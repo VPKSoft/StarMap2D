@@ -26,7 +26,6 @@ SOFTWARE.
 
 using AASharp;
 using StarMap2D.Calculations.Helpers.Math;
-using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.Calculations.Plotting
 {
@@ -100,7 +99,7 @@ namespace StarMap2D.Calculations.Plotting
         /// </summary>
         /// <param name="coordinate">The coordinate to project.</param>
         /// <returns>The 2D coordinate.</returns>
-        public PointDouble Project2D(AAS2DCoordinate coordinate)
+        public AAS2DCoordinate Project2D(AAS2DCoordinate coordinate)
         {
             var azimuth = ((coordinate.X + 180) % 360).ToRadians();
             var altitude = (coordinate.Y).ToRadians();
@@ -115,7 +114,7 @@ namespace StarMap2D.Calculations.Plotting
             var xR = r * (1 - x1);
             var yR = r * (1 - y1);
 
-            return new PointDouble { X = xR, Y = yR};
+            return new AAS2DCoordinate() { X = xR, Y = yR};
         }
 
         /// <summary>
