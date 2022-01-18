@@ -45,5 +45,10 @@ namespace StarMap2D.CustomControls
         /// The constellation border line color.
         /// </summary>
         ConstellationBorderLineColor,
+
+        /// <summary>
+        /// The map surroundings color.
+        /// </summary>
+        MapSurroundingsColor,
     }
 }

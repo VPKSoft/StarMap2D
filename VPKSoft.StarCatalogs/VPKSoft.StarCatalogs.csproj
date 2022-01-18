@@ -11,6 +11,11 @@
 	<Authors>VPKSoft</Authors>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageId>VPKSoft.StarCatalogs</PackageId>
+	<Product>VPKSoft.StarCatalogs</Product>
+	<PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

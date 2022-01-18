@@ -59,6 +59,9 @@ namespace StarMap2D.Forms.Dialogs
             tbLocationName.Text = Settings.Default.DefaultLocationName;
             nudLongitude.Value = (decimal)Settings.Default.Longitude;
             nudLatitude.Value = (decimal)Settings.Default.Latitude;
+
+            starMagnitudeEditor1.StarMagnitudeColors = Settings.Default.StarMagnitudeColors;
+            starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
         }
 
         public static void Display(IWin32Window? owner)

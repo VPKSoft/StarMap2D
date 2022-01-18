@@ -66,22 +66,27 @@ namespace StarMap2D.Forms.Dialogs
             this.tbLocationName = new System.Windows.Forms.TextBox();
             this.lbLocationName = new System.Windows.Forms.Label();
             this.tabColorSettings = new System.Windows.Forms.TabPage();
+            this.pnMapSurroundingsColor = new System.Windows.Forms.Panel();
+            this.lbMapSurroundingsColor = new System.Windows.Forms.Label();
+            this.pnMapCircleColor = new System.Windows.Forms.Panel();
+            this.lbMapCircleColor = new System.Windows.Forms.Label();
             this.pnConstellationBorderLineColor = new System.Windows.Forms.Panel();
             this.lbConstellationBorderLineColor = new System.Windows.Forms.Label();
             this.ceColor = new Cyotek.Windows.Forms.ColorEditor();
             this.cwColor = new Cyotek.Windows.Forms.ColorWheel();
             this.pnConstellationLineColor = new System.Windows.Forms.Panel();
             this.lbConstellationLineColor = new System.Windows.Forms.Label();
+            this.tabStarMagnitudeSettings = new System.Windows.Forms.TabPage();
+            this.starMagnitudeEditor1 = new StarMap2D.CustomControls.StarMagnitudeEditor();
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.pnMapCircleColor = new System.Windows.Forms.Panel();
-            this.lbMapCircleColor = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
             this.tabColorSettings.SuspendLayout();
+            this.tabStarMagnitudeSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -91,6 +96,7 @@ namespace StarMap2D.Forms.Dialogs
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcSettings.Controls.Add(this.tpLocation);
             this.tcSettings.Controls.Add(this.tabColorSettings);
+            this.tcSettings.Controls.Add(this.tabStarMagnitudeSettings);
             this.tcSettings.Location = new System.Drawing.Point(12, 12);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
@@ -211,6 +217,8 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tabColorSettings
             // 
+            this.tabColorSettings.Controls.Add(this.pnMapSurroundingsColor);
+            this.tabColorSettings.Controls.Add(this.lbMapSurroundingsColor);
             this.tabColorSettings.Controls.Add(this.pnMapCircleColor);
             this.tabColorSettings.Controls.Add(this.lbMapCircleColor);
             this.tabColorSettings.Controls.Add(this.pnConstellationBorderLineColor);
@@ -226,6 +234,49 @@ namespace StarMap2D.Forms.Dialogs
             this.tabColorSettings.TabIndex = 1;
             this.tabColorSettings.Text = "Map color settings";
             this.tabColorSettings.UseVisualStyleBackColor = true;
+            // 
+            // pnMapSurroundingsColor
+            // 
+            this.pnMapSurroundingsColor.BackColor = System.Drawing.SystemColors.Control;
+            this.pnMapSurroundingsColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMapSurroundingsColor.Location = new System.Drawing.Point(223, 84);
+            this.pnMapSurroundingsColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnMapSurroundingsColor.Name = "pnMapSurroundingsColor";
+            this.pnMapSurroundingsColor.Size = new System.Drawing.Size(113, 23);
+            this.pnMapSurroundingsColor.TabIndex = 10;
+            this.pnMapSurroundingsColor.Tag = "MapSurroundingsColor";
+            this.pnMapSurroundingsColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbMapSurroundingsColor
+            // 
+            this.lbMapSurroundingsColor.AutoSize = true;
+            this.lbMapSurroundingsColor.Location = new System.Drawing.Point(6, 88);
+            this.lbMapSurroundingsColor.Name = "lbMapSurroundingsColor";
+            this.lbMapSurroundingsColor.Size = new System.Drawing.Size(137, 15);
+            this.lbMapSurroundingsColor.TabIndex = 9;
+            this.lbMapSurroundingsColor.Text = "Map surroundings color:";
+            this.lbMapSurroundingsColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // pnMapCircleColor
+            // 
+            this.pnMapCircleColor.BackColor = System.Drawing.Color.Black;
+            this.pnMapCircleColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMapCircleColor.Location = new System.Drawing.Point(223, 58);
+            this.pnMapCircleColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnMapCircleColor.Name = "pnMapCircleColor";
+            this.pnMapCircleColor.Size = new System.Drawing.Size(113, 23);
+            this.pnMapCircleColor.TabIndex = 7;
+            this.pnMapCircleColor.Tag = "MapCircleColor";
+            this.pnMapCircleColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbMapCircleColor
+            // 
+            this.lbMapCircleColor.AutoSize = true;
+            this.lbMapCircleColor.Location = new System.Drawing.Point(6, 62);
+            this.lbMapCircleColor.Name = "lbMapCircleColor";
+            this.lbMapCircleColor.Size = new System.Drawing.Size(95, 15);
+            this.lbMapCircleColor.TabIndex = 6;
+            this.lbMapCircleColor.Text = "Map circle color:";
             // 
             // pnConstellationBorderLineColor
             // 
@@ -289,6 +340,28 @@ namespace StarMap2D.Forms.Dialogs
             this.lbConstellationLineColor.TabIndex = 0;
             this.lbConstellationLineColor.Text = "Constellation line color:";
             // 
+            // tabStarMagnitudeSettings
+            // 
+            this.tabStarMagnitudeSettings.Controls.Add(this.starMagnitudeEditor1);
+            this.tabStarMagnitudeSettings.Location = new System.Drawing.Point(4, 24);
+            this.tabStarMagnitudeSettings.Name = "tabStarMagnitudeSettings";
+            this.tabStarMagnitudeSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStarMagnitudeSettings.Size = new System.Drawing.Size(688, 465);
+            this.tabStarMagnitudeSettings.TabIndex = 2;
+            this.tabStarMagnitudeSettings.Text = "Star magnitudes";
+            this.tabStarMagnitudeSettings.UseVisualStyleBackColor = true;
+            // 
+            // starMagnitudeEditor1
+            // 
+            this.starMagnitudeEditor1.Location = new System.Drawing.Point(6, 6);
+            this.starMagnitudeEditor1.MagnitudeValueFormat = "Selected magnitude: {0}";
+            this.starMagnitudeEditor1.Name = "starMagnitudeEditor1";
+            this.starMagnitudeEditor1.SelectedMagnitude = 2147483647;
+            this.starMagnitudeEditor1.Size = new System.Drawing.Size(580, 311);
+            this.starMagnitudeEditor1.StarMagnitudeColors = "";
+            this.starMagnitudeEditor1.StarMagnitudes = "";
+            this.starMagnitudeEditor1.TabIndex = 0;
+            // 
             // btOk
             // 
             this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -310,27 +383,6 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.TabIndex = 3;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
-            // 
-            // pnMapCircleColor
-            // 
-            this.pnMapCircleColor.BackColor = System.Drawing.Color.Black;
-            this.pnMapCircleColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pnMapCircleColor.Location = new System.Drawing.Point(223, 58);
-            this.pnMapCircleColor.Margin = new System.Windows.Forms.Padding(0);
-            this.pnMapCircleColor.Name = "pnMapCircleColor";
-            this.pnMapCircleColor.Size = new System.Drawing.Size(113, 23);
-            this.pnMapCircleColor.TabIndex = 7;
-            this.pnMapCircleColor.Tag = "MapCircleColor";
-            this.pnMapCircleColor.Click += new System.EventHandler(this.colorPanel_Click);
-            // 
-            // lbMapCircleColor
-            // 
-            this.lbMapCircleColor.AutoSize = true;
-            this.lbMapCircleColor.Location = new System.Drawing.Point(6, 62);
-            this.lbMapCircleColor.Name = "lbMapCircleColor";
-            this.lbMapCircleColor.Size = new System.Drawing.Size(95, 15);
-            this.lbMapCircleColor.TabIndex = 6;
-            this.lbMapCircleColor.Text = "Map circle color:";
             // 
             // FormDialogSettings
             // 
@@ -354,6 +406,7 @@ namespace StarMap2D.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
             this.tabColorSettings.ResumeLayout(false);
             this.tabColorSettings.PerformLayout();
+            this.tabStarMagnitudeSettings.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -382,5 +435,9 @@ namespace StarMap2D.Forms.Dialogs
         private Label lbConstellationBorderLineColor;
         private Panel pnMapCircleColor;
         private Label lbMapCircleColor;
+        private Panel pnMapSurroundingsColor;
+        private Label lbMapSurroundingsColor;
+        private TabPage tabStarMagnitudeSettings;
+        private CustomControls.StarMagnitudeEditor starMagnitudeEditor1;
     }
 }

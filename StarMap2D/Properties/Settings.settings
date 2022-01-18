@@ -23,5 +23,14 @@
     <Setting Name="MapCircleColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
+    <Setting Name="MapSurroundingsColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">39, 39, 39</Value>
+    </Setting>
+    <Setting Name="StarMagnitudeColors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff</Value>
+    </Setting>
+    <Setting Name="StarMagnitudeSizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10;10;10;10;10;10;9;8;7;6;5;4;3;3;3;3;3;3;3;3;2</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

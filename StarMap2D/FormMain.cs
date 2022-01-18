@@ -29,7 +29,6 @@ using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
 using VPKSoft.LangLib;
-using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D
 {
@@ -57,6 +56,8 @@ namespace StarMap2D
 
             // initialize the language/localization database..
             DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
+
+            //Properties.Settings.Default.Reset();
         }
 
         private void button1_Click(object sender, EventArgs e)

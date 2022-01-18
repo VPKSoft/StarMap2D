@@ -9,6 +9,15 @@
     <DocumentationFile>bin\$(Configuration)\StarMap2D.xml</DocumentationFile>
     <PackageIcon>ursa-major.jpg</PackageIcon>
     <ApplicationIcon>ursa-major.ico</ApplicationIcon>
+    <Company>VPKSoft</Company>
+    <Product>StarMap2D</Product>
+    <Description>A program to display sky chart with utilities.</Description>
+    <Copyright>Copyright © VPKSoft 2022</Copyright>
+    <PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sky map star</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

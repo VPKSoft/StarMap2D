@@ -170,6 +170,8 @@ namespace StarMap2D.Forms
                         instance.map2d.ConstellationLineColor = color; break;
                     case MapGraphicValue.ConstellationBorderLineColor:
                         instance.map2d.ConstellationBorderLineColor = color; break;
+                    case MapGraphicValue.MapSurroundingsColor:
+                        instance.map2d.BackColor = color; break;
                 }
                 
             }

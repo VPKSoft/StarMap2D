@@ -8,10 +8,17 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Description>Interfaces and calculations for the StarMap2D project.</Description>
-    <Copyright>VPKSoft</Copyright>
+    <Copyright>Copyright © VPKSoft 2022</Copyright>
     <RepositoryType>git</RepositoryType>
 	  <DocumentationFile>bin\$(Configuration)\StarMap2D.Calculations.xml</DocumentationFile>
 	  <PackageIcon>ursa-major.jpg</PackageIcon>
+	  <Authors>StarMap2D.Calculations</Authors>
+	  <PackageId>StarMap2D.Calculations</PackageId>
+	  <Company>VPKSoft</Company>
+	  <Product>StarMap2D.Calculations</Product>
+	  <PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
+	  <PackageTags>astronomy calculation solar system</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

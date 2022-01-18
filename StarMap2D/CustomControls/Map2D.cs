@@ -24,10 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using AASharp;
 using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Constellations.Interfaces;
@@ -36,6 +32,10 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.CustomControls.EventArguments;
 using StarMap2D.Drawing;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.CustomControls
@@ -92,6 +92,7 @@ namespace StarMap2D.CustomControls
         private Color mapCircleColor = Color.Black;
         private Color constellationLineColor = Color.DeepSkyBlue;
         private Color constellationBorderLineColor = Color.FromArgb(13, 23, 125);
+        private Color backColor = Color.FromArgb(39, 39, 39);
         private Pen constellationLinePen;
         private Pen constellationBorderPen;
         private SolidBrush mapBrush;
@@ -415,7 +416,7 @@ namespace StarMap2D.CustomControls
             {
                 if (constellationBorderLineColor != value)
                 {
-                    constellationBorderPen?.Dispose();
+                    constellationBorderPen.Dispose();
                     constellationBorderLineColor = value;
                     constellationBorderPen = new Pen(value);
                     DrawMapImage();
@@ -429,14 +430,15 @@ namespace StarMap2D.CustomControls
         /// <value>A <see cref="Color"/> that represents the background color of the control. The default is the value of the <see cref="Control.DefaultBackColor"/>  property.</value>
         public new Color BackColor
         {
-            get => base.BackColor;
+            get => backColor;
 
             set
             {
-                if (value != base.BackColor)
+                if (value != backColor)
                 {
-                    base.BackColor = value;
-                    backgroundBrush = new SolidBrush(BackColor);
+                    backColor = value;
+                    backgroundBrush.Dispose();
+                    backgroundBrush = new SolidBrush(value);
                     DrawMapImage();
                 }
             }
@@ -475,7 +477,7 @@ namespace StarMap2D.CustomControls
         /// Gets the star map objects to draw to the map.
         /// </summary>
         /// <value>The star map objects.</value>
-        public List<StarMapObject> StarMapObjects { get; } = new ();
+        public List<StarMapObject> StarMapObjects { get; } = new();
 
         /// <summary>
         /// Gets or sets the an instance to the <see cref="Plot2D"/> class used for the star map visualization.
