@@ -100,6 +100,8 @@ namespace StarMap2D.CustomControls
         private Bitmap? previousBitmap;
         private Plot2D? plot2D;
         private readonly List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
+        private int[] starSizes = Array.Empty<int>();
+        private Color[] starColors = Array.Empty<Color>();
         #endregion
 
         #region PrivateProperties
@@ -129,7 +131,32 @@ namespace StarMap2D.CustomControls
         private double Diameter => Math.Min(Width, Height);
         #endregion
 
-        #region PrivateMethods
+        #region PrivateMethods        
+        /// <summary>
+        /// Gets the star drawing arguments.
+        /// </summary>
+        /// <param name="magnitude">The magnitude of the star to draw.</param>
+        /// <returns>A System.ValueTuple&lt;Color, System.Int32&gt; containing the star drawing arguments.</returns>
+        private (Color starColor, int starSize) GetStarDrawArguments(double magnitude)
+        {
+            var index = (int)magnitude + 10;
+
+            var starSize = 3;
+            var starColor = Color.White;
+
+            if (index >= 0 && index < starSizes.Length)
+            {
+                starSize = starSizes[index];
+            }
+
+            if (index >= 0 && index < starColors.Length)
+            {
+                starColor = starColors[index];
+            }
+
+            return (starColor, starSize);
+        }
+
         private Point GetDrawPoint(Image image, AAS2DCoordinate centerPoint)
         {
             return new Point((int)centerPoint.X - image.Width / 2 + OffsetX, (int)centerPoint.Y - image.Height / 2 + OffsetY);
@@ -156,10 +183,18 @@ namespace StarMap2D.CustomControls
 
             graphics.SetClip(clipPath, CombineMode.Replace);
 
+            var previousMagnitude = -11;
+            var drawArguments = GetStarDrawArguments(-11);
+
             if (Plot2D != null)
             {
                 foreach (var starMapObject in StarMapObjects)
                 {
+                    if (starMapObject.Magnitude > magnitudeMinimum || starMapObject.Magnitude < magnitudeMaximum)
+                    {
+                        continue;
+                    }
+
                     if (starMapObject.IsLocationCalculated)
                     {
                         var position = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
@@ -176,35 +211,31 @@ namespace StarMap2D.CustomControls
                     }
                     else
                     {
-                        var pointD = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
-                            Plot2D.Latitude, Plot2D.Longitude, Diameter / 2);
-
-                        Point location;
-
-                        if (pointD != null)
-                        {
-                            location = new Point((int)pointD.X / 2, (int)pointD.Y / 2);
-                            //graphics.CreateStar(location, plot2D?.Radius ?? 0, starMapObject.Magnitude, 5);
-
-                            //graphics.FillEllipse(Brushes.White,
-                            //    new Rectangle(new Point((int)pointD.X, (int)pointD.Y), new Size(3, 3)));
-                            continue;
-                        }
-
                         var coordinate = new AAS2DCoordinate
                             { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
+                        var pointD = Plot2D.Project2D(coordinate);
 
-                        pointD = Plot2D.Project2D(coordinate);
-
-                        location = new Point((int)pointD.X, (int)pointD.Y);
+                        var location = new Point((int)pointD.X, (int)pointD.Y);
 
                         var drawPoint = new Point(location.X + OffsetX, location.Y + OffsetY);
 
-                        graphics.CreateStar(Size, drawPoint, starMapObject.Magnitude);
-                        //graphics.FillEllipse(Brushes.White,
-                        //    new Rectangle(new Point((int)point.X, (int)point.Y), new Size(3, 3)));
-                        
+                        var image = starMapObject.ObjectGraphics?.GetImage?.Invoke(Diameter, starMapObject.Magnitude);
+                        if (image != null)
+                        {
+                            drawPoint.X -= image.Width / 2;
+                            drawPoint.Y -= image.Height / 2;
+                            graphics.DrawImage(image, drawPoint);
+                            continue;
+                        }
+
+                        if ((int)starMapObject.Magnitude != previousMagnitude)
+                        {
+                            drawArguments = GetStarDrawArguments(starMapObject.Magnitude);
+                            previousMagnitude = (int)starMapObject.Magnitude;
+                        }
+
+                        graphics.DrawStar(drawPoint, drawArguments.starSize, drawArguments.starColor);
                     }
                 }
 
@@ -356,6 +387,63 @@ namespace StarMap2D.CustomControls
         }
 
         /// <summary>
+        /// Gets or sets the star sizes for different magnitudes from -10 to 10.
+        /// </summary>
+        /// <value>The star sizes for different magnitudes.</value>
+        [Browsable(true)]
+        [Category("Behaviour")]
+        [Description("he star sizes for different magnitudes.")]
+        public int[] StarSizes
+        {
+            get => starSizes;
+
+            set
+            {
+                if (value.Length != starSizes.Length)
+                {
+                    starSizes = value;
+                    DrawMapImage();
+                    return;
+                }
+
+                var changes = starSizes.Where((t, i) => t != value[i]).Any();
+
+                if (changes)
+                {
+                    starSizes = value;
+                    DrawMapImage();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the star colors for different magnitudes from -10 to 10.
+        /// </summary>
+        /// <value>The star colors different magnitudes.</value>
+        public Color[] StarColors
+        {
+            get => starColors;
+
+            set
+            {
+                if (value.Length != starSizes.Length)
+                {
+                    starColors = value;
+                    DrawMapImage();
+                    return;
+                }
+
+                var changes = starColors.Where((t, i) => t != starColors[i]).Any();
+
+                if (changes)
+                {
+                    starColors = value;
+                    DrawMapImage();
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the color of the map circle background.
         /// </summary>
         /// <value>The color of the map circle background.</value>
@@ -370,7 +458,7 @@ namespace StarMap2D.CustomControls
             {
                 if (mapCircleColor != value)
                 {
-                    mapBrush?.Dispose();
+                    mapBrush.Dispose();
                     mapCircleColor = value;
                     mapBrush = new SolidBrush(value);
                     DrawMapImage();
@@ -393,7 +481,7 @@ namespace StarMap2D.CustomControls
             {
                 if (constellationLineColor != value)
                 {
-                    constellationLinePen?.Dispose();
+                    constellationLinePen.Dispose();
                     constellationLineColor = value;
                     constellationLinePen = new Pen(value);
                     DrawMapImage();
@@ -419,6 +507,52 @@ namespace StarMap2D.CustomControls
                     constellationBorderPen.Dispose();
                     constellationBorderLineColor = value;
                     constellationBorderPen = new Pen(value);
+                    DrawMapImage();
+                }
+            }
+        }
+
+        private double magnitudeMaximum = -500;
+
+        /// <summary>
+        /// Gets or sets the maximum magnitude limit.
+        /// </summary>
+        /// <value>The maximum magnitude limit.</value>
+        [Browsable(true)]
+        [Category("Behaviour")]
+        [Description("The maximum magnitude limit.")]
+        public double MagnitudeMaximum
+        {
+            get => magnitudeMaximum;
+
+            set
+            {
+                if (Math.Abs(value - magnitudeMaximum) > 0.000000000000001)
+                {
+                    magnitudeMaximum = value;
+                    DrawMapImage();
+                }
+            }
+        }
+
+        private double magnitudeMinimum = 5.5;
+
+        /// <summary>
+        /// Gets or sets the minimum magnitude limit.
+        /// </summary>
+        /// <value>The minimum magnitude limit.</value>
+        [Browsable(true)]
+        [Category("Behaviour")]
+        [Description("The maximum magnitude limit.")]
+        public double MagnitudeMinimum
+        {
+            get => magnitudeMinimum;
+
+            set
+            {
+                if (Math.Abs(value - magnitudeMinimum) > 0.000000000000001)
+                {
+                    magnitudeMinimum = value;
                     DrawMapImage();
                 }
             }

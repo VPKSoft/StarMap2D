@@ -33,23 +33,11 @@ namespace VPKSoft.StarCatalogs.Providers
     /// Implements the <see cref="IStarData" />
     /// </summary>
     /// <seealso cref="IStarData" />
-    public class YaleBrightStarData: IStarData
+    public class YaleBrightStarData: StarData
     {
         /// <summary>
         /// Name, generally Bayer and/or Flamsteed name.
         /// </summary>
         public string? Name { get; set; }
-
-        /// <inheritdoc cref="IStarData.RightAscension"/>
-        public double RightAscension { get; set; }
-
-        /// <inheritdoc cref="IStarData.Declination"/>
-        public double Declination { get; set; }
-
-        /// <inheritdoc cref="IStarData.Magnitude"/>
-        public double Magnitude { get; set; }
-
-        /// <inheritdoc cref="IStarData.RawData"/>
-        public string? RawData { get; set; }
     }
 }

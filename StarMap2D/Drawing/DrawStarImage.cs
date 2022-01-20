@@ -62,6 +62,12 @@ namespace StarMap2D.Drawing
             };
         }
 
+        public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
+        {
+            var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);
+            using var solidBrush = new SolidBrush(starColor);
+            graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(starSize, starSize)));
+        }
 
         public static void CreateStar(this Graphics graphics, Size compareSize, Point location, double magnitude)
         {

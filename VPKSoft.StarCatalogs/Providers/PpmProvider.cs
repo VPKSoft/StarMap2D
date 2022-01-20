@@ -1,4 +1,30 @@
-﻿using System.Text;
+﻿#region License
+/*
+MIT License
+
+Copyright(c) 2022 Petteri Kautonen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+#endregion
+
+using System.Text;
 using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs.Interfaces;
 using VPKSoft.StarCatalogs.Utilities;
@@ -131,14 +157,25 @@ namespace VPKSoft.StarCatalogs.Providers
             }
         }
 
-        /// <inheritdoc cref="IStarDataProvider{T}.GetDataRaw"/>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public string GetDataRaw(string rawDataEntry, string dataName)
+        /// <summary>
+        /// A static method to test the <see cref="PpmProvider"/> class.
+        /// </summary>
+        /// <param name="fileName">Name of the file containing the  PPM Star Catalog data.</param>
+        /// <param name="isPpmRa">if set to <c>true</c> if the data is in PPMra format.</param>
+        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+        public static bool TestProvider(string fileName, bool isPpmRa)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var provider = new PpmProvider(isPpmRa);
+                provider.LoadData(fileName);
 
-        /// <inheritdoc cref="IStarDataProvider{T}.RawDataEntries"/>
-        public List<string> RawDataEntries { get; } = new();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

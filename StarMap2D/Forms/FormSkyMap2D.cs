@@ -57,6 +57,11 @@ namespace StarMap2D.Forms
                 return; // After localization don't do anything more..
             }
 
+            map2d.StarColors = Properties.Settings.Default.StarMagnitudeColors.Split(";")
+                .Select(ColorTranslator.FromHtml).ToArray();
+
+            map2d.StarSizes = Properties.Settings.Default.StarMagnitudeSizes.Split(';').Select(int.Parse).ToArray();
+
             // initialize the language/localization database..
             DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
@@ -204,7 +209,8 @@ namespace StarMap2D.Forms
         {
             map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddSeconds(60);
 
-            label1.Text = map2d.Plot2D?.DateTimeUtc.ToLocalTime().ToString(CultureInfo.InvariantCulture);
+            Text = DBLangEngine.GetMessage("msgSkyMap", "Sky Map|A title for a window with a sky chart/map.") +
+                   @$" [{map2d.Plot2D?.DateTimeUtc.ToLocalTime().ToString(CultureInfo.InvariantCulture)}]";
         }
 
         private void btGo_Click(object sender, EventArgs e)

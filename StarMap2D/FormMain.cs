@@ -24,11 +24,13 @@ SOFTWARE.
 */
 #endregion
 
+using System.Diagnostics;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D
 {
@@ -72,8 +74,23 @@ namespace StarMap2D
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var test = Epochs.ChangeEpochB1950ToJ2000(18.538, 43.53);
-            new FormTestDrawing().Show(this);
+            Debug.WriteLine(
+                $"Test: {nameof(HygV3Provider)}, success: {HygV3Provider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\HYG 3.0\Extracted\hygdata_v3.csv")}");
+
+            Debug.WriteLine(
+                $"Test: {nameof(Gliese3rdProvider)}, success: {Gliese3rdProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\CNS3\Extracted\catalog.dat")}");
+
+            Debug.WriteLine(
+                $"Test: {nameof(HipparcosProvider)}, success: {HipparcosProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\Hipparcos\Extracted\hip_main.dat")}");
+
+            Debug.WriteLine(
+                $"Test: {nameof(PpmProvider)}, success: {PpmProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\PPM\Extracted\PPM", false)}");
+
+            Debug.WriteLine(
+                $"Test: {nameof(PpmProvider)}, success: {PpmProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\PPM\Extracted\PPMra", true)}");
+
+            Debug.WriteLine(
+                $"Test: {nameof(TychoProvider)}, success: {TychoProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\Hipparcos\Extracted\tyc_main.dat")}");
         }
     }
 }

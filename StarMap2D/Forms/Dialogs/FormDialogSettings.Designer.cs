@@ -81,12 +81,19 @@ namespace StarMap2D.Forms.Dialogs
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.lbMagnitudeLimits = new System.Windows.Forms.Label();
+            this.lbMagnitudeMaximum = new System.Windows.Forms.Label();
+            this.nudMagnitudeMaximum = new System.Windows.Forms.NumericUpDown();
+            this.lbMagnitudeMinimum = new System.Windows.Forms.Label();
+            this.nudMagnitudeMinimum = new System.Windows.Forms.NumericUpDown();
             this.tcSettings.SuspendLayout();
             this.tpLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
             this.tabColorSettings.SuspendLayout();
             this.tabStarMagnitudeSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).BeginInit();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -342,6 +349,11 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tabStarMagnitudeSettings
             // 
+            this.tabStarMagnitudeSettings.Controls.Add(this.nudMagnitudeMinimum);
+            this.tabStarMagnitudeSettings.Controls.Add(this.lbMagnitudeMinimum);
+            this.tabStarMagnitudeSettings.Controls.Add(this.nudMagnitudeMaximum);
+            this.tabStarMagnitudeSettings.Controls.Add(this.lbMagnitudeMaximum);
+            this.tabStarMagnitudeSettings.Controls.Add(this.lbMagnitudeLimits);
             this.tabStarMagnitudeSettings.Controls.Add(this.starMagnitudeEditor1);
             this.tabStarMagnitudeSettings.Location = new System.Drawing.Point(4, 24);
             this.tabStarMagnitudeSettings.Name = "tabStarMagnitudeSettings";
@@ -384,6 +396,69 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
+            // lbMagnitudeLimits
+            // 
+            this.lbMagnitudeLimits.AutoSize = true;
+            this.lbMagnitudeLimits.Location = new System.Drawing.Point(6, 320);
+            this.lbMagnitudeLimits.Name = "lbMagnitudeLimits";
+            this.lbMagnitudeLimits.Size = new System.Drawing.Size(97, 15);
+            this.lbMagnitudeLimits.TabIndex = 1;
+            this.lbMagnitudeLimits.Text = "Magnitude limits";
+            // 
+            // lbMagnitudeMaximum
+            // 
+            this.lbMagnitudeMaximum.AutoSize = true;
+            this.lbMagnitudeMaximum.Location = new System.Drawing.Point(6, 347);
+            this.lbMagnitudeMaximum.Name = "lbMagnitudeMaximum";
+            this.lbMagnitudeMaximum.Size = new System.Drawing.Size(62, 15);
+            this.lbMagnitudeMaximum.TabIndex = 2;
+            this.lbMagnitudeMaximum.Text = "Maximum";
+            // 
+            // nudMagnitudeMaximum
+            // 
+            this.nudMagnitudeMaximum.DecimalPlaces = 2;
+            this.nudMagnitudeMaximum.Location = new System.Drawing.Point(87, 345);
+            this.nudMagnitudeMaximum.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            this.nudMagnitudeMaximum.Name = "nudMagnitudeMaximum";
+            this.nudMagnitudeMaximum.Size = new System.Drawing.Size(120, 23);
+            this.nudMagnitudeMaximum.TabIndex = 3;
+            this.nudMagnitudeMaximum.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            // 
+            // lbMagnitudeMinimum
+            // 
+            this.lbMagnitudeMinimum.AutoSize = true;
+            this.lbMagnitudeMinimum.Location = new System.Drawing.Point(6, 376);
+            this.lbMagnitudeMinimum.Name = "lbMagnitudeMinimum";
+            this.lbMagnitudeMinimum.Size = new System.Drawing.Size(60, 15);
+            this.lbMagnitudeMinimum.TabIndex = 4;
+            this.lbMagnitudeMinimum.Text = "Minimum";
+            // 
+            // nudMagnitudeMinimum
+            // 
+            this.nudMagnitudeMinimum.DecimalPlaces = 2;
+            this.nudMagnitudeMinimum.Location = new System.Drawing.Point(87, 374);
+            this.nudMagnitudeMinimum.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            this.nudMagnitudeMinimum.Name = "nudMagnitudeMinimum";
+            this.nudMagnitudeMinimum.Size = new System.Drawing.Size(120, 23);
+            this.nudMagnitudeMinimum.TabIndex = 5;
+            this.nudMagnitudeMinimum.Value = new decimal(new int[] {
+            55,
+            0,
+            0,
+            65536});
+            // 
             // FormDialogSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -407,6 +482,9 @@ namespace StarMap2D.Forms.Dialogs
             this.tabColorSettings.ResumeLayout(false);
             this.tabColorSettings.PerformLayout();
             this.tabStarMagnitudeSettings.ResumeLayout(false);
+            this.tabStarMagnitudeSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -439,5 +517,10 @@ namespace StarMap2D.Forms.Dialogs
         private Label lbMapSurroundingsColor;
         private TabPage tabStarMagnitudeSettings;
         private CustomControls.StarMagnitudeEditor starMagnitudeEditor1;
+        private NumericUpDown nudMagnitudeMinimum;
+        private Label lbMagnitudeMinimum;
+        private NumericUpDown nudMagnitudeMaximum;
+        private Label lbMagnitudeMaximum;
+        private Label lbMagnitudeLimits;
     }
 }

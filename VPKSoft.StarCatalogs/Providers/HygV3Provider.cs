@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
 using VPKSoft.StarCatalogs.Interfaces;
 
 namespace VPKSoft.StarCatalogs.Providers
@@ -39,72 +38,46 @@ namespace VPKSoft.StarCatalogs.Providers
         /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
         public List<HygV3StartData> StarData { get; } = new();
 
-        /// <summary>
-        /// The field names of the star data of this provider.
-        /// </summary>
-        public static readonly string[] FieldNames =
-        {
-            "id",
-            "hip",
-            "hd",
-            "hr",
-            "gl",
-            "bf",
-            "proper",
-            "ra",
-            "dec",
-            "dist",
-            "pmra",
-            "pmdec",
-            "rv",
-            "mag",
-            "absmag",
-            "spect",
-            "ci",
-            "x",
-            "y",
-            "z",
-            "vx",
-            "vy",
-            "vz",
-            "rarad",
-            "decrad",
-            "pmrarad",
-            "pmdecrad",
-            "bayer",
-            "flam",
-            "con",
-            "comp",
-            "comp_primary",
-            "base",
-            "lum",
-            "var",
-            "var_min",
-            "var_max",
-        };
-
         /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
         public void LoadData(string[] lines)
         {
+            var dataEntries = new List<string>();
+
             for (int i = 2; i < lines.Length; i++)
             {
-                RawDataEntries.Add(lines[i]);
+                dataEntries.Add(lines[i]);
             }
 
-            foreach (var rawDataEntry in RawDataEntries)
+            foreach (var rawDataEntry in dataEntries)
             {
-                var hipId = -1;
-
-                int.TryParse(GetDataRaw(rawDataEntry, "hip"), out hipId);
-
                 StarData.Add(new HygV3StartData
                 {
-                    Declination = double.Parse(GetDataRaw(rawDataEntry, "dec"), CultureInfo.InvariantCulture),
-                    RightAscension = double.Parse(GetDataRaw(rawDataEntry, "ra"), CultureInfo.InvariantCulture),
-                    Magnitude = double.Parse(GetDataRaw(rawDataEntry, "mag"), CultureInfo.InvariantCulture),
-                    HIP = hipId,
+                    GetStarData = HygV3StartData.GetDataRaw,
                     RawData = rawDataEntry,
                 });
+            }
+        }
+
+        /// <summary>
+        /// A static method to test the <see cref="HygV3Provider"/> class.
+        /// </summary>
+        /// <param name="fileName">Name of the file containing the HYG v.3.0 bright star catalog data.</param>
+        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+        public static bool TestProvider(string fileName)
+        {
+            try
+            {
+                var provider = new HygV3Provider();
+                provider.LoadData(fileName);
+
+                // Enumerate one set of lazy nullable doubles.
+                _ = provider.StarData.Where(f => f.HIP == null).ToList();
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -114,28 +87,5 @@ namespace VPKSoft.StarCatalogs.Providers
             var lines = File.ReadAllLines(fileName);
             LoadData(lines);
         }
-
-        private List<string> FieldNameList { get; } = new();
-
-        /// <inheritdoc cref="IStarDataProvider{T}.GetDataRaw"/>
-        public string GetDataRaw(string rawDataEntry, string dataName)
-        {
-            if (FieldNameList.Count == 0)
-            {
-                FieldNameList.AddRange(FieldNames);
-            }
-
-            var dataIndex = FieldNameList.IndexOf(dataName);
-
-            if (dataIndex != -1)
-            {
-                return rawDataEntry.Split(',')[dataIndex];
-            }
-
-            return string.Empty;
-        }
-
-        /// <inheritdoc cref="IStarDataProvider{T}.RawDataEntries"/>
-        public List<string> RawDataEntries { get; } = new();
     }
 }

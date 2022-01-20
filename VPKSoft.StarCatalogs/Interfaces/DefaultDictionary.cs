@@ -27,21 +27,24 @@ SOFTWARE.
 namespace VPKSoft.StarCatalogs.Interfaces
 {
     /// <summary>
-    /// An interface to provide star data.
+    /// A dictionary which returns the default(TValue) if there is no value found.
+    /// Implements the <see cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IStarDataProvider<T> where T: IStarData
+    /// <typeparam name="TKey">TThe type of the keys in the dictionary.</typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+    /// <seealso cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
+    public class DefaultDictionary<TKey, TValue>: Dictionary<TKey, TValue?> where TKey : notnull
     {
         /// <summary>
-        /// Gets the star data.
+        /// Gets or sets the value associated with the specified key.
         /// </summary>
-        /// <value>The star data.</value>
-        List<T> StarData { get; }
+        /// <param name="key">The key of the value to get or set.</param>
+        /// <returns>The value associated with the specified key. If the specified key is not found the default(TValue) is returned.</returns>
+        public new TValue? this[TKey key]
+        {
+            get => TryGetValue(key, out var value) ? value : default;
 
-        /// <summary>
-        /// Loads the star data.
-        /// </summary>
-        /// <param name="fileName">Name of the file to load the star data from.</param>
-        void LoadData(string fileName);
+            set => base[key] = value;
+        } 
     }
 }

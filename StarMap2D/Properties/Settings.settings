@@ -32,5 +32,11 @@
     <Setting Name="StarMagnitudeSizes" Type="System.String" Scope="User">
       <Value Profile="(Default)">10;10;10;10;10;10;9;8;7;6;5;4;3;3;3;3;3;3;3;3;2</Value>
     </Setting>
+    <Setting Name="MagnitudeMaximum" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-500</Value>
+    </Setting>
+    <Setting Name="MagnitudeMinimum" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5.5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
