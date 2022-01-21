@@ -24,24 +24,23 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.CustomControls.Interfaces
+namespace StarMap2D.CustomControls.Interfaces;
+
+/// <summary>
+/// Interface for the objects in the <see cref="Map2D"/> star map control.
+/// </summary>
+public interface IMap2DGraphics
 {
     /// <summary>
-    /// Interface for the objects in the <see cref="Map2D"/> star map control.
+    /// A delegate to provide an image for a specified diameter of the 2D star map.
     /// </summary>
-    public interface IMap2DGraphics
-    {
-        /// <summary>
-        /// A delegate to provide an image for a specified diameter of the 2D star map.
-        /// </summary>
-        /// <param name="diameter">The diameter of the 2D star map.</param>
-        /// <param name="magnitude">An optional magnitude of the 2D star map object.</param>
-        /// <returns>An image suitable to be used in a 2D star map of diameter of the <paramref name="diameter"/>.</returns>
-        public delegate Image GetImageDelegate(double diameter, double? magnitude);
+    /// <param name="diameter">The diameter of the 2D star map.</param>
+    /// <param name="magnitude">An optional magnitude of the 2D star map object.</param>
+    /// <returns>An image suitable to be used in a 2D star map of diameter of the <paramref name="diameter"/>.</returns>
+    public delegate Image GetImageDelegate(double diameter, double? magnitude);
 
-        /// <summary>
-        /// A delegate to get an image for the 2D graphics object.
-        /// </summary>
-        GetImageDelegate? GetImage { get; set; }
-    }
+    /// <summary>
+    /// A delegate to get an image for the 2D graphics object.
+    /// </summary>
+    GetImageDelegate? GetImage { get; set; }
 }

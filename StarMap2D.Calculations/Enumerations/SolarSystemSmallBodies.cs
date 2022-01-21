@@ -24,76 +24,75 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Enumerations
+namespace StarMap2D.Calculations.Enumerations;
+
+/// <summary>
+/// An enumeration of known dwarf planets and other small solar system objects.
+/// </summary>
+public enum SolarSystemSmallBodies
 {
     /// <summary>
-    /// An enumeration of known dwarf planets and other small solar system objects.
+    /// The dwarf planet Ceres.
     /// </summary>
-    public enum SolarSystemSmallBodies
-    {
-        /// <summary>
-        /// The dwarf planet Ceres.
-        /// </summary>
-        Ceres,
+    Ceres,
 
-        /// <summary>
-        /// The dwarf planet Orcus.
-        /// </summary>
-        Orcus,
+    /// <summary>
+    /// The dwarf planet Orcus.
+    /// </summary>
+    Orcus,
 
-        /// <summary>
-        /// The dwarf planet Pluto.
-        /// </summary>
-        Pluto,
+    /// <summary>
+    /// The dwarf planet Pluto.
+    /// </summary>
+    Pluto,
 
-        /// <summary>
-        /// The dwarf planet Haumea.
-        /// </summary>
-        Haumea,
+    /// <summary>
+    /// The dwarf planet Haumea.
+    /// </summary>
+    Haumea,
 
-        /// <summary>
-        /// The dwarf planet Quaoar.
-        /// </summary>
-        Quaoar,
+    /// <summary>
+    /// The dwarf planet Quaoar.
+    /// </summary>
+    Quaoar,
 
-        /// <summary>
-        /// The dwarf planet Makemake.
-        /// </summary>
-        Makemake,
+    /// <summary>
+    /// The dwarf planet Makemake.
+    /// </summary>
+    Makemake,
 
-        /// <summary>
-        /// The dwarf planet Gonggong.
-        /// </summary>
-        Gonggong,
+    /// <summary>
+    /// The dwarf planet Gonggong.
+    /// </summary>
+    Gonggong,
 
-        /// <summary>
-        /// The dwarf planet Eris.
-        /// </summary>
-        Eris,
+    /// <summary>
+    /// The dwarf planet Eris.
+    /// </summary>
+    Eris,
 
-        /// <summary>
-        /// The dwarf planet Sedna.
-        /// </summary>
-        Sedna,
+    /// <summary>
+    /// The dwarf planet Sedna.
+    /// </summary>
+    Sedna,
 
-        /// <summary>
-        /// The main-belt asteroid Juno.
-        /// </summary>
-        Juno,
+    /// <summary>
+    /// The main-belt asteroid Juno.
+    /// </summary>
+    Juno,
 
-        /// <summary>
-        /// The main-belt asteroid Vesta.
-        /// </summary>
-        Vesta,
+    /// <summary>
+    /// The main-belt asteroid Vesta.
+    /// </summary>
+    Vesta,
         
-        /// <summary>
-        /// The main-belt asteroid Pallas.
-        /// </summary>
-        Pallas,
+    /// <summary>
+    /// The main-belt asteroid Pallas.
+    /// </summary>
+    Pallas,
 
-        /// <summary>
-        /// The centaur Chiron.
-        /// </summary>
-        Chiron,
-    }
+    /// <summary>
+    /// The centaur Chiron.
+    /// </summary>
+    Chiron,
 }

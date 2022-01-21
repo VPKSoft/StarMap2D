@@ -24,32 +24,31 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs
+namespace VPKSoft.StarCatalogs;
+
+/// <summary>
+/// A <c>double</c> floating point point class.
+/// </summary>
+public class PointDouble
 {
     /// <summary>
-    /// A <c>double</c> floating point point class.
+    /// Gets or sets the x-coordinate.
     /// </summary>
-    public class PointDouble
+    /// <value>The x-coordinate.</value>
+    public double X { get; set; }
+
+    /// <summary>
+    /// Gets or sets the y-coordinate.
+    /// </summary>
+    /// <value>The y-coordinate.</value>
+    public double Y { get; set; }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Gets or sets the x-coordinate.
-        /// </summary>
-        /// <value>The x-coordinate.</value>
-        public double X { get; set; }
-
-        /// <summary>
-        /// Gets or sets the y-coordinate.
-        /// </summary>
-        /// <value>The y-coordinate.</value>
-        public double Y { get; set; }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return $@"X ={X}, Y={Y}";
-        }
+        return $@"X ={X}, Y={Y}";
     }
 }

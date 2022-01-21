@@ -24,35 +24,34 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Helpers
+namespace StarMap2D.Calculations.Helpers;
+
+/// <summary>
+/// Helper methods for the <see cref="StreamReader"/> class.
+/// </summary>
+public static class BinaryData
 {
     /// <summary>
-    /// Helper methods for the <see cref="StreamReader"/> class.
+    /// Reads all lines from a specified <see cref="StreamReader"/> instance.
     /// </summary>
-    public static class BinaryData
+    /// <param name="reader">The <see cref="StreamReader"/> instance to read the lines from.</param>
+    /// <returns>An array of string containing the lines read from the <see cref="StreamReader"/> instance.</returns>
+    public static string[] ReadAllLines(this StreamReader reader)
     {
-        /// <summary>
-        /// Reads all lines from a specified <see cref="StreamReader"/> instance.
-        /// </summary>
-        /// <param name="reader">The <see cref="StreamReader"/> instance to read the lines from.</param>
-        /// <returns>An array of string containing the lines read from the <see cref="StreamReader"/> instance.</returns>
-        public static string[] ReadAllLines(this StreamReader reader)
+        if (reader.BaseStream.CanSeek)
         {
-            if (reader.BaseStream.CanSeek)
-            {
-                reader.BaseStream.Position = 0;
-            }
-
-            var result = new List<string>();
-
-            string? line;
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                result.Add(line);
-            }
-
-            return result.ToArray();
+            reader.BaseStream.Position = 0;
         }
+
+        var result = new List<string>();
+
+        string? line;
+
+        while ((line = reader.ReadLine()) != null)
+        {
+            result.Add(line);
+        }
+
+        return result.ToArray();
     }
 }

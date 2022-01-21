@@ -29,153 +29,152 @@ using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs.Interfaces;
 using VPKSoft.StarCatalogs.Utilities;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// Star data provider for the PPM Star Catalog.
+/// Implements the <see cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
+/// </summary>
+/// <seealso cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
+public class PpmProvider: IStarDataProvider<PpmStarData>
 {
     /// <summary>
-    /// Star data provider for the PPM Star Catalog.
-    /// Implements the <see cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
+    /// Initializes a new instance of the <see cref="PpmProvider"/> class.
     /// </summary>
-    /// <seealso cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
-    public class PpmProvider: IStarDataProvider<PpmStarData>
+    /// <param name="isPpmRa">if set to <c>true</c> if the data is in PPMra format.</param>
+    public PpmProvider(bool isPpmRa)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PpmProvider"/> class.
-        /// </summary>
-        /// <param name="isPpmRa">if set to <c>true</c> if the data is in PPMra format.</param>
-        public PpmProvider(bool isPpmRa)
+        IsPpmRa = isPpmRa;
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+    public List<PpmStarData> StarData { get; } = new();
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the file format is PPMRa or PPM.
+    /// </summary>
+    /// <remarks>See: http://tdc-www.harvard.edu/catalogs/ppm.entry.html</remarks>
+    public bool IsPpmRa { get; set; }
+
+    /// <summary>
+    /// Subtract from star number to get sequence number.
+    /// </summary>
+    public int Star0 { get; set; }
+
+    /// <summary>
+    /// Gets or sets the First star number in file.
+    /// </summary>
+    /// <value>The First star number in file.</value>
+    public int Star1 { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Number of stars in file.
+    /// </summary>
+    /// <value>The Number of stars in file.</value>
+    public int StarN { get; set; }
+
+    /// <summary>
+    /// 0 if no star ID numbers are present.
+    /// 1 if star ID numbers are in catalog file.
+    /// 2 if star ID numbers are region nnnn (GSC).
+    /// 3 if star ID numbers are region nnnnn (Tycho).
+    /// 4 if star ID numbers are integer*4 not real*4.
+    /// &lt;0 No ID number, but object name of -STNUM characters at end of entry.
+    /// </summary>
+    public int Stnum { get; set; }
+
+    /// <summary>
+    /// True if proper motion is included.
+    /// False if no proper motion is included.
+    /// </summary>
+    /// <value><c>true</c> if proper motion is included; <c>false</c> if no proper motion is included.</value>
+    public bool Mprop { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Number of magnitudes present.
+    /// </summary>
+    /// <value>The Number of magnitudes present.</value>
+    public int Nmag { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Number of bytes per star entry.
+    /// </summary>
+    /// <value>The Number of bytes per star entry.</value>
+    public int Nbent { get; set; }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
+    public void LoadData(string fileName)
+    {
+        using var fileStream = new FileStream(fileName, FileMode.Open,
+            FileAccess.Read, FileShare.ReadWrite);
+
+        using var reader = new BinaryReaderEndian(fileStream);
+
+        // Header, see: http://tdc-www.harvard.edu/software/catalogs/ppm.header.html
+
+        Star0 = reader.ReadInt32BigEndian(); // Subtract from star number to get sequence number.
+        Star1 = reader.ReadInt32BigEndian(); // First star number in file.
+        StarN = reader.ReadInt32BigEndian(); // Number of stars in file.
+
+        /*
+         * 0 if no star i.d. numbers are present
+         * 1 if star i.d. numbers are in catalog file
+         * 2 if star i.d. numbers are  in file
+         */
+        Stnum = reader.ReadInt32BigEndian();
+
+        Mprop = reader.ReadInt32BigEndian() != -1; // True if proper motion is included. False if no proper motion is included.
+
+        Nmag = reader.ReadInt32BigEndian(); // Number of magnitudes present.
+        Nbent = reader.ReadInt32BigEndian(); // Number of bytes per star entry.
+
+        var count = 0;
+
+        while (count++ < StarN)
         {
-            IsPpmRa = isPpmRa;
+            var data = new PpmStarData
+            {
+                CatalogStarNumber = IsPpmRa ? reader.ReadSingleBigEndian() : null, // Catalog number of star.
+                Sra0 = reader.ReadDoubleBigEndian(), // B1950 Right Ascension (radians).
+                Sdec0 = reader.ReadDoubleBigEndian(), // B1950 Declination (radians).
+                SpectralType = Encoding.ASCII.GetString(reader.ReadBytes(2)), // Spectral type (2 characters).
+                Mag = reader.ReadInt16BigEndian(), // V Magnitude * 100.
+                Xrpm = reader.ReadSingleBigEndian(), // R.A. proper motion (radians per year).
+                Xdpm = reader.ReadSingleBigEndian(), // Dec. proper motion (radians per year).
+            };
+
+            data.Magnitude = data.Mag / 100.0;
+
+            var ra = data.Sra0 * MathDegrees.RadiansDegrees;
+            var dec = data.Sdec0 * MathDegrees.RadiansDegrees;
+
+            var result = Epochs.ChangeEpochB1950ToJ2000Degrees(ra, dec);
+
+            data.RightAscension = result.RightAscension;
+            data.Declination = result.Declination;
+
+            StarData.Add(data);
         }
+    }
 
-        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-        public List<PpmStarData> StarData { get; } = new();
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the file format is PPMRa or PPM.
-        /// </summary>
-        /// <remarks>See: http://tdc-www.harvard.edu/catalogs/ppm.entry.html</remarks>
-        public bool IsPpmRa { get; set; }
-
-        /// <summary>
-        /// Subtract from star number to get sequence number.
-        /// </summary>
-        public int Star0 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the First star number in file.
-        /// </summary>
-        /// <value>The First star number in file.</value>
-        public int Star1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Number of stars in file.
-        /// </summary>
-        /// <value>The Number of stars in file.</value>
-        public int StarN { get; set; }
-
-        /// <summary>
-        /// 0 if no star ID numbers are present.
-        /// 1 if star ID numbers are in catalog file.
-        /// 2 if star ID numbers are region nnnn (GSC).
-        /// 3 if star ID numbers are region nnnnn (Tycho).
-        /// 4 if star ID numbers are integer*4 not real*4.
-        /// &lt;0 No ID number, but object name of -STNUM characters at end of entry.
-        /// </summary>
-        public int Stnum { get; set; }
-
-        /// <summary>
-        /// True if proper motion is included.
-        /// False if no proper motion is included.
-        /// </summary>
-        /// <value><c>true</c> if proper motion is included; <c>false</c> if no proper motion is included.</value>
-        public bool Mprop { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Number of magnitudes present.
-        /// </summary>
-        /// <value>The Number of magnitudes present.</value>
-        public int Nmag { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Number of bytes per star entry.
-        /// </summary>
-        /// <value>The Number of bytes per star entry.</value>
-        public int Nbent { get; set; }
-
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
-        public void LoadData(string fileName)
+    /// <summary>
+    /// A static method to test the <see cref="PpmProvider"/> class.
+    /// </summary>
+    /// <param name="fileName">Name of the file containing the  PPM Star Catalog data.</param>
+    /// <param name="isPpmRa">if set to <c>true</c> if the data is in PPMra format.</param>
+    /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+    public static bool TestProvider(string fileName, bool isPpmRa)
+    {
+        try
         {
-            using var fileStream = new FileStream(fileName, FileMode.Open,
-                FileAccess.Read, FileShare.ReadWrite);
+            var provider = new PpmProvider(isPpmRa);
+            provider.LoadData(fileName);
 
-            using var reader = new BinaryReaderEndian(fileStream);
-
-            // Header, see: http://tdc-www.harvard.edu/software/catalogs/ppm.header.html
-
-            Star0 = reader.ReadInt32BigEndian(); // Subtract from star number to get sequence number.
-            Star1 = reader.ReadInt32BigEndian(); // First star number in file.
-            StarN = reader.ReadInt32BigEndian(); // Number of stars in file.
-
-            /*
-             * 0 if no star i.d. numbers are present
-             * 1 if star i.d. numbers are in catalog file
-             * 2 if star i.d. numbers are  in file
-             */
-            Stnum = reader.ReadInt32BigEndian();
-
-            Mprop = reader.ReadInt32BigEndian() != -1; // True if proper motion is included. False if no proper motion is included.
-
-            Nmag = reader.ReadInt32BigEndian(); // Number of magnitudes present.
-            Nbent = reader.ReadInt32BigEndian(); // Number of bytes per star entry.
-
-            var count = 0;
-
-            while (count++ < StarN)
-            {
-                var data = new PpmStarData
-                {
-                    CatalogStarNumber = IsPpmRa ? reader.ReadSingleBigEndian() : null, // Catalog number of star.
-                    Sra0 = reader.ReadDoubleBigEndian(), // B1950 Right Ascension (radians).
-                    Sdec0 = reader.ReadDoubleBigEndian(), // B1950 Declination (radians).
-                    SpectralType = Encoding.ASCII.GetString(reader.ReadBytes(2)), // Spectral type (2 characters).
-                    Mag = reader.ReadInt16BigEndian(), // V Magnitude * 100.
-                    Xrpm = reader.ReadSingleBigEndian(), // R.A. proper motion (radians per year).
-                    Xdpm = reader.ReadSingleBigEndian(), // Dec. proper motion (radians per year).
-                };
-
-                data.Magnitude = data.Mag / 100.0;
-
-                var ra = data.Sra0 * MathDegrees.RadiansDegrees;
-                var dec = data.Sdec0 * MathDegrees.RadiansDegrees;
-
-                var result = Epochs.ChangeEpochB1950ToJ2000Degrees(ra, dec);
-
-                data.RightAscension = result.RightAscension;
-                data.Declination = result.Declination;
-
-                StarData.Add(data);
-            }
+            return true;
         }
-
-        /// <summary>
-        /// A static method to test the <see cref="PpmProvider"/> class.
-        /// </summary>
-        /// <param name="fileName">Name of the file containing the  PPM Star Catalog data.</param>
-        /// <param name="isPpmRa">if set to <c>true</c> if the data is in PPMra format.</param>
-        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
-        public static bool TestProvider(string fileName, bool isPpmRa)
+        catch
         {
-            try
-            {
-                var provider = new PpmProvider(isPpmRa);
-                provider.LoadData(fileName);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

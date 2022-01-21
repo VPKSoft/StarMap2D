@@ -24,49 +24,48 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces
+namespace VPKSoft.StarCatalogs.Interfaces;
+
+/// <summary>
+/// An interface for the star data entry.
+/// </summary>
+public interface IStarData
 {
     /// <summary>
-    /// An interface for the star data entry.
+    /// Gets or sets the right ascension of the star.
     /// </summary>
-    public interface IStarData
-    {
-        /// <summary>
-        /// Gets or sets the right ascension of the star.
-        /// </summary>
-        /// <value>The right ascension of the star.</value>
-        double RightAscension { get; set; }
+    /// <value>The right ascension of the star.</value>
+    double RightAscension { get; set; }
 
-        /// <summary>
-        /// Gets or sets the declination of the star.
-        /// </summary>
-        /// <value>The declination of the star.</value>
-        double Declination { get; set; }
+    /// <summary>
+    /// Gets or sets the declination of the star.
+    /// </summary>
+    /// <value>The declination of the star.</value>
+    double Declination { get; set; }
 
-        /// <summary>
-        /// Gets or sets the magnitude of the star.
-        /// </summary>
-        /// <value>The magnitude of the star.</value>
-        double Magnitude { get; set; }
+    /// <summary>
+    /// Gets or sets the magnitude of the star.
+    /// </summary>
+    /// <value>The magnitude of the star.</value>
+    double Magnitude { get; set; }
 
-        /// <summary>
-        /// Gets or sets the raw star data of the catalog.
-        /// </summary>
-        /// <value>The raw star data of the catalog.</value>
-        string? RawData { get; set; }
+    /// <summary>
+    /// Gets or sets the raw star data of the catalog.
+    /// </summary>
+    /// <value>The raw star data of the catalog.</value>
+    string? RawData { get; set; }
 
-        /// <summary>
-        /// A delegate to read the <see cref="IStarData.RawData"/> data.
-        /// </summary>
-        /// <param name="rawDataEntry">The raw data value which named data part to read.</param>
-        /// <param name="dataName">Name of the data to read.</param>
-        /// <returns>A string? containing the read data..</returns>
-        public delegate string? GetStarDataDelegate(string? rawDataEntry, string dataName);
+    /// <summary>
+    /// A delegate to read the <see cref="IStarData.RawData"/> data.
+    /// </summary>
+    /// <param name="rawDataEntry">The raw data value which named data part to read.</param>
+    /// <param name="dataName">Name of the data to read.</param>
+    /// <returns>A string? containing the read data..</returns>
+    public delegate string? GetStarDataDelegate(string? rawDataEntry, string dataName);
 
-        /// <summary>
-        /// Gets or sets the get a delegate which returns <see cref="RawData"/> portions indexed by their header names.
-        /// </summary>
-        /// <value>The get star data.</value>
-        public GetStarDataDelegate? GetStarData { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the get a delegate which returns <see cref="RawData"/> portions indexed by their header names.
+    /// </summary>
+    /// <value>The get star data.</value>
+    public GetStarDataDelegate? GetStarData { get; set; }
 }

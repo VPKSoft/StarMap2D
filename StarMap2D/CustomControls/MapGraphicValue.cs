@@ -24,31 +24,30 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.CustomControls
+namespace StarMap2D.CustomControls;
+
+/// <summary>
+/// An enumeration of graphical elements in the 2D star map.
+/// </summary>
+public enum MapGraphicValue
 {
     /// <summary>
-    /// An enumeration of graphical elements in the 2D star map.
+    /// The map circle color.
     /// </summary>
-    public enum MapGraphicValue
-    {
-        /// <summary>
-        /// The map circle color.
-        /// </summary>
-        MapCircleColor,
+    MapCircleColor,
 
-        /// <summary>
-        /// The constellation line color.
-        /// </summary>
-        ConstellationLineColor,
+    /// <summary>
+    /// The constellation line color.
+    /// </summary>
+    ConstellationLineColor,
 
-        /// <summary>
-        /// The constellation border line color.
-        /// </summary>
-        ConstellationBorderLineColor,
+    /// <summary>
+    /// The constellation border line color.
+    /// </summary>
+    ConstellationBorderLineColor,
 
-        /// <summary>
-        /// The map surroundings color.
-        /// </summary>
-        MapSurroundingsColor,
-    }
+    /// <summary>
+    /// The map surroundings color.
+    /// </summary>
+    MapSurroundingsColor,
 }

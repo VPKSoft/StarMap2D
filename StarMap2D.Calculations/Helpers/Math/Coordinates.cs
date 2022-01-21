@@ -26,56 +26,55 @@ SOFTWARE.
 
 using AASharp;
 
-namespace StarMap2D.Calculations.Helpers.Math
+namespace StarMap2D.Calculations.Helpers.Math;
+
+/// <summary>
+/// Coordinate transformation helpers for the <see cref="AAS2DCoordinate"/> class.
+/// </summary>
+public static class Coordinates
 {
     /// <summary>
-    /// Coordinate transformation helpers for the <see cref="AAS2DCoordinate"/> class.
+    /// Converts the specified ecliptic coordinates to horizontal.
     /// </summary>
-    public static class Coordinates
+    /// <param name="coordinate">The coordinate.</param>
+    /// <param name="aaDate">The aa date.</param>
+    /// <param name="latitude">The latitude.</param>
+    /// <param name="longitude">The longitude.</param>
+    /// <returns>AAS2DCoordinate.</returns>
+    public static AAS2DCoordinate ToHorizontal(this AAS2DCoordinate coordinate, AASDate aaDate, double latitude, double longitude)
     {
-        /// <summary>
-        /// Converts the specified ecliptic coordinates to horizontal.
-        /// </summary>
-        /// <param name="coordinate">The coordinate.</param>
-        /// <param name="aaDate">The aa date.</param>
-        /// <param name="latitude">The latitude.</param>
-        /// <param name="longitude">The longitude.</param>
-        /// <returns>AAS2DCoordinate.</returns>
-        public static AAS2DCoordinate ToHorizontal(this AAS2DCoordinate coordinate, AASDate aaDate, double latitude, double longitude)
-        {
-            var rightAscension = coordinate.X;
-            var declination = coordinate.Y;
+        var rightAscension = coordinate.X;
+        var declination = coordinate.Y;
 
-            var meanGreenwichSiderealTime = AASSidereal.MeanGreenwichSiderealTime(aaDate.Julian);
-            var meanLocalSiderealTime = meanGreenwichSiderealTime + AASCoordinateTransformation.DegreesToHours(longitude);
-            var localHourAngle = meanLocalSiderealTime - rightAscension;
-            var result = AASCoordinateTransformation.Equatorial2Horizontal(localHourAngle, declination, latitude);
-            return result;
-        }
+        var meanGreenwichSiderealTime = AASSidereal.MeanGreenwichSiderealTime(aaDate.Julian);
+        var meanLocalSiderealTime = meanGreenwichSiderealTime + AASCoordinateTransformation.DegreesToHours(longitude);
+        var localHourAngle = meanLocalSiderealTime - rightAscension;
+        var result = AASCoordinateTransformation.Equatorial2Horizontal(localHourAngle, declination, latitude);
+        return result;
+    }
 
-        /// <summary>
-        /// Transforms specified ecliptic coordinates into horizontal coordinates.
-        /// </summary>
-        /// <param name="ecliptic">The ecliptic coordinates of the object.</param>
-        /// <param name="longitude">The longitude.</param>
-        /// <param name="latitude">The latitude.</param>
-        /// <param name="julianDay">The julian day.</param>
-        /// <returns>AAS2DCoordinate.</returns>
-        public static AAS2DCoordinate HorizontalTransform(this AAS2DCoordinate ecliptic, double longitude, double latitude, double julianDay)
-        {
-            var eclipticLongitude = ecliptic.X;
-            var eclipticLatitude = ecliptic.Y;
+    /// <summary>
+    /// Transforms specified ecliptic coordinates into horizontal coordinates.
+    /// </summary>
+    /// <param name="ecliptic">The ecliptic coordinates of the object.</param>
+    /// <param name="longitude">The longitude.</param>
+    /// <param name="latitude">The latitude.</param>
+    /// <param name="julianDay">The julian day.</param>
+    /// <returns>AAS2DCoordinate.</returns>
+    public static AAS2DCoordinate HorizontalTransform(this AAS2DCoordinate ecliptic, double longitude, double latitude, double julianDay)
+    {
+        var eclipticLongitude = ecliptic.X;
+        var eclipticLatitude = ecliptic.Y;
 
-            var equatorial = AASCoordinateTransformation.Ecliptic2Equatorial(eclipticLongitude, eclipticLatitude, AASNutation.TrueObliquityOfEcliptic(julianDay));
-            var ra = equatorial.X;
-            var de = equatorial.Y;
+        var equatorial = AASCoordinateTransformation.Ecliptic2Equatorial(eclipticLongitude, eclipticLatitude, AASNutation.TrueObliquityOfEcliptic(julianDay));
+        var ra = equatorial.X;
+        var de = equatorial.Y;
 
-            var meanSiderealTime = AASSidereal.MeanGreenwichSiderealTime(julianDay);
-            var localMeanSiderealTime= meanSiderealTime + AASCoordinateTransformation.DegreesToHours(longitude);
-            var lha = localMeanSiderealTime - ra;
-            var coordinate = AASCoordinateTransformation.Equatorial2Horizontal(lha, de, latitude);
+        var meanSiderealTime = AASSidereal.MeanGreenwichSiderealTime(julianDay);
+        var localMeanSiderealTime= meanSiderealTime + AASCoordinateTransformation.DegreesToHours(longitude);
+        var lha = localMeanSiderealTime - ra;
+        var coordinate = AASCoordinateTransformation.Equatorial2Horizontal(lha, de, latitude);
 
-            return coordinate;
-        }
+        return coordinate;
     }
 }

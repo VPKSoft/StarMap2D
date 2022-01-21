@@ -24,89 +24,78 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
 using AASharp;
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// A data provider of Tycho ESA 1997 star catalog data.
+/// Implements the <see cref="IStarDataProvider{T}" />
+/// </summary>
+/// <seealso cref="IStarDataProvider{T}" />
+public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
 {
-    /// <summary>
-    /// A data provider of Tycho ESA 1997 star catalog data.
-    /// Implements the <see cref="IStarDataProvider{T}" />
-    /// </summary>
-    /// <seealso cref="IStarDataProvider{T}" />
-    public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
+    /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+    public List<TychoStarData> StarData { get; } = new();
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
+    public void LoadData(string[] lines)
     {
-        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-        public List<TychoStarData> StarData { get; } = new();
+        var dataEntries = new List<string>();
+        dataEntries.AddRange(lines);
 
-        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
-        public void LoadData(string[] lines)
+        foreach (var rawDataEntry in dataEntries)
         {
-            var dataEntries = new List<string>();
-            dataEntries.AddRange(lines);
-
-            foreach (var rawDataEntry in dataEntries)
+            var data = new TychoStarData
             {
-                var name = TychoStarData.GetDataRaw(rawDataEntry, "Name");
+                GetStarData = TychoStarData.GetDataRaw, RawData = rawDataEntry,
+            };
 
-                // We don't need the sun (in this case).
-                if (name?.Trim() == "Sun")
-                {
-                    continue;
-                }
-
-                var raData = TychoStarData.GetDataRaw(rawDataEntry, "RAhms")?.Split(' ') ?? Array.Empty<string>();
-
-                var raHours = double.Parse(raData[0], CultureInfo.InvariantCulture);
-                var raMinutes = double.Parse(raData[1], CultureInfo.InvariantCulture);
-                var raSeconds = double.Parse(raData[2], CultureInfo.InvariantCulture);
-                var rightAscension = raHours + raMinutes / 60 + raSeconds / 3600;
-
-                var deData = TychoStarData.GetDataRaw(rawDataEntry, "DEdms")?.Split(' ') ?? Array.Empty<string>();
-
-                var deDegrees = double.Parse(deData[0], CultureInfo.InvariantCulture);
-                var deMinutes = double.Parse(deData[1], CultureInfo.InvariantCulture);
-                var deSeconds = double.Parse(deData[2], CultureInfo.InvariantCulture);
-
-                var declination = AASCoordinateTransformation.DMSToDegrees(deDegrees, deMinutes, deSeconds);
-
-                StarData.Add(new TychoStarData
-                {
-                    Declination = declination, RightAscension = rightAscension, GetStarData = TychoStarData.GetDataRaw, RawData = rawDataEntry,
-                });
+            // We don't need the sun (in this case).
+            if (data.Name == "Sun")
+            {
+                continue;
             }
+
+            StarData.Add(data);
         }
+    }
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
-        public void LoadData(string fileName)
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+    public void LoadData(string fileName)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines);
+    }
+
+
+    /// <summary>
+    /// A static method to test the <see cref="TychoProvider"/> class.
+    /// </summary>
+    /// <param name="fileName">Name of the file containing the Tycho ESA 1997 star catalog data.</param>
+    /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+    public static bool TestProvider(string fileName)
+    {
+        try
         {
-            var lines = File.ReadAllLines(fileName);
-            LoadData(lines);
+            var provider = new TychoProvider();
+            provider.LoadData(fileName);
+
+            // Enumerate one set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.Declination != 0);
+
+            // Enumerate second set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.RightAscension != 0);
+
+            // Enumerate third set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.Magnitude < 0).ToList();
+
+            return true;
         }
-
-
-        /// <summary>
-        /// A static method to test the <see cref="TychoProvider"/> class.
-        /// </summary>
-        /// <param name="fileName">Name of the file containing the Tycho ESA 1997 star catalog data.</param>
-        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
-        public static bool TestProvider(string fileName)
+        catch
         {
-            try
-            {
-                var provider = new TychoProvider();
-                provider.LoadData(fileName);
-
-                // Enumerate one set of lazy nullable doubles.
-                _ = provider.StarData.Where(f => f.Magnitude < 0).ToList();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

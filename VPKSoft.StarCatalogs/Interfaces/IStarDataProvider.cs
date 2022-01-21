@@ -24,24 +24,23 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces
+namespace VPKSoft.StarCatalogs.Interfaces;
+
+/// <summary>
+/// An interface to provide star data.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface IStarDataProvider<T> where T: IStarData
 {
     /// <summary>
-    /// An interface to provide star data.
+    /// Gets the star data.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IStarDataProvider<T> where T: IStarData
-    {
-        /// <summary>
-        /// Gets the star data.
-        /// </summary>
-        /// <value>The star data.</value>
-        List<T> StarData { get; }
+    /// <value>The star data.</value>
+    List<T> StarData { get; }
 
-        /// <summary>
-        /// Loads the star data.
-        /// </summary>
-        /// <param name="fileName">Name of the file to load the star data from.</param>
-        void LoadData(string fileName);
-    }
+    /// <summary>
+    /// Loads the star data.
+    /// </summary>
+    /// <param name="fileName">Name of the file to load the star data from.</param>
+    void LoadData(string fileName);
 }

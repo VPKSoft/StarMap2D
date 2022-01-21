@@ -26,66 +26,65 @@ SOFTWARE.
 
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// A data provider of the HYG v.3.0 bright star catalog data.
+/// Implements the <see cref="IStarDataProvider{T}" />
+/// </summary>
+/// <seealso cref="IStarDataProvider{T}" />
+public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
 {
-    /// <summary>
-    /// A data provider of the HYG v.3.0 bright star catalog data.
-    /// Implements the <see cref="IStarDataProvider{T}" />
-    /// </summary>
-    /// <seealso cref="IStarDataProvider{T}" />
-    public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
+    /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+    public List<HygV3StartData> StarData { get; } = new();
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
+    public void LoadData(string[] lines)
     {
-        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-        public List<HygV3StartData> StarData { get; } = new();
+        var dataEntries = new List<string>();
 
-        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
-        public void LoadData(string[] lines)
+        for (int i = 2; i < lines.Length; i++)
         {
-            var dataEntries = new List<string>();
-
-            for (int i = 2; i < lines.Length; i++)
-            {
-                dataEntries.Add(lines[i]);
-            }
-
-            foreach (var rawDataEntry in dataEntries)
-            {
-                StarData.Add(new HygV3StartData
-                {
-                    GetStarData = HygV3StartData.GetDataRaw,
-                    RawData = rawDataEntry,
-                });
-            }
+            dataEntries.Add(lines[i]);
         }
 
-        /// <summary>
-        /// A static method to test the <see cref="HygV3Provider"/> class.
-        /// </summary>
-        /// <param name="fileName">Name of the file containing the HYG v.3.0 bright star catalog data.</param>
-        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
-        public static bool TestProvider(string fileName)
+        foreach (var rawDataEntry in dataEntries)
         {
-            try
+            StarData.Add(new HygV3StartData
             {
-                var provider = new HygV3Provider();
-                provider.LoadData(fileName);
-
-                // Enumerate one set of lazy nullable doubles.
-                _ = provider.StarData.Where(f => f.HIP == null).ToList();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+                GetStarData = HygV3StartData.GetDataRaw,
+                RawData = rawDataEntry,
+            });
         }
+    }
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
-        public void LoadData(string fileName)
+    /// <summary>
+    /// A static method to test the <see cref="HygV3Provider"/> class.
+    /// </summary>
+    /// <param name="fileName">Name of the file containing the HYG v.3.0 bright star catalog data.</param>
+    /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+    public static bool TestProvider(string fileName)
+    {
+        try
         {
-            var lines = File.ReadAllLines(fileName);
-            LoadData(lines);
+            var provider = new HygV3Provider();
+            provider.LoadData(fileName);
+
+            // Enumerate one set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.HIP == null).ToList();
+
+            return true;
         }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+    public void LoadData(string fileName)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines);
     }
 }

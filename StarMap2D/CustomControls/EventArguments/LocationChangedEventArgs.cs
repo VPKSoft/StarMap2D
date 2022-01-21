@@ -24,25 +24,24 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.CustomControls.EventArguments
+namespace StarMap2D.CustomControls.EventArguments;
+
+/// <summary>
+/// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
+/// Implements the <see cref="System.EventArgs" />
+/// </summary>
+/// <seealso cref="System.EventArgs" />
+public class LocationChangedEventArgs: EventArgs
 {
     /// <summary>
-    /// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
-    /// Implements the <see cref="System.EventArgs" />
+    /// Gets or sets the new latitude.
     /// </summary>
-    /// <seealso cref="System.EventArgs" />
-    public class LocationChangedEventArgs: EventArgs
-    {
-        /// <summary>
-        /// Gets or sets the new latitude.
-        /// </summary>
-        /// <value>The new latitude.</value>
-        public double Latitude { get; set; }
+    /// <value>The new latitude.</value>
+    public double Latitude { get; set; }
 
-        /// <summary>
-        /// Gets or sets the new longitude.
-        /// </summary>
-        /// <value>The new longitude.</value>
-        public double Longitude { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the new longitude.
+    /// </summary>
+    /// <value>The new longitude.</value>
+    public double Longitude { get; set; }
 }

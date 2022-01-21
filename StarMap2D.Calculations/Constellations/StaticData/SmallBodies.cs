@@ -27,40 +27,39 @@ SOFTWARE.
 using AASharp;
 using StarMap2D.Calculations.Enumerations;
 
-namespace StarMap2D.Calculations.Constellations.StaticData
+namespace StarMap2D.Calculations.Constellations.StaticData;
+
+/// <summary>
+/// A class to provide orbital element information of the solar system small-body objects.
+/// </summary>
+public class SmallBodies
 {
     /// <summary>
-    /// A class to provide orbital element information of the solar system small-body objects.
+    /// Gets the <see cref="AASEllipticalObjectElements"/> with the specified <see cref="SolarSystemSmallBodies"/> value.
     /// </summary>
-    public class SmallBodies
+    /// <param name="body">The <see cref="SolarSystemSmallBodies"/> enumeration value.</param>
+    /// <returns>An instance of the <see cref="AASEllipticalObjectElements"/> class containing the the orbital elements of the requested small-body object.</returns>
+    public AASEllipticalObjectElements this[SolarSystemSmallBodies body]
     {
-        /// <summary>
-        /// Gets the <see cref="AASEllipticalObjectElements"/> with the specified <see cref="SolarSystemSmallBodies"/> value.
-        /// </summary>
-        /// <param name="body">The <see cref="SolarSystemSmallBodies"/> enumeration value.</param>
-        /// <returns>An instance of the <see cref="AASEllipticalObjectElements"/> class containing the the orbital elements of the requested small-body object.</returns>
-        public AASEllipticalObjectElements this[SolarSystemSmallBodies body]
+        get
         {
-            get
+            return body switch
             {
-                return body switch
-                {
-                    SolarSystemSmallBodies.Ceres => DwarfPlanetElements.CeresOrbitalElements(),
-                    SolarSystemSmallBodies.Orcus => DwarfPlanetElements.OrcusOrbitalElements(),
-                    SolarSystemSmallBodies.Haumea => DwarfPlanetElements.HaumeaOrbitalElements(),
-                    SolarSystemSmallBodies.Quaoar => DwarfPlanetElements.QuaoarOrbitalElements(),
-                    SolarSystemSmallBodies.Makemake => DwarfPlanetElements.MakemakeOrbitalElements(),
-                    SolarSystemSmallBodies.Gonggong => DwarfPlanetElements.GonggongOrbitalElements(),
-                    SolarSystemSmallBodies.Eris => DwarfPlanetElements.ErisOrbitalElements(),
-                    SolarSystemSmallBodies.Sedna => DwarfPlanetElements.SednaOrbitalElements(),
-                    SolarSystemSmallBodies.Juno => MainBeltAsteroids.JunoOrbitalElements(),
-                    SolarSystemSmallBodies.Vesta => MainBeltAsteroids.VestaOrbitalElements(),
-                    SolarSystemSmallBodies.Pallas => MainBeltAsteroids.PallasOrbitalElements(),
-                    SolarSystemSmallBodies.Chiron => Centaurs.ChironOrbitalElements(),
-                    SolarSystemSmallBodies.Pluto => new AASEllipticalObjectElements(),
-                    _ => new AASEllipticalObjectElements()
-                };
-            }
+                SolarSystemSmallBodies.Ceres => DwarfPlanetElements.CeresOrbitalElements(),
+                SolarSystemSmallBodies.Orcus => DwarfPlanetElements.OrcusOrbitalElements(),
+                SolarSystemSmallBodies.Haumea => DwarfPlanetElements.HaumeaOrbitalElements(),
+                SolarSystemSmallBodies.Quaoar => DwarfPlanetElements.QuaoarOrbitalElements(),
+                SolarSystemSmallBodies.Makemake => DwarfPlanetElements.MakemakeOrbitalElements(),
+                SolarSystemSmallBodies.Gonggong => DwarfPlanetElements.GonggongOrbitalElements(),
+                SolarSystemSmallBodies.Eris => DwarfPlanetElements.ErisOrbitalElements(),
+                SolarSystemSmallBodies.Sedna => DwarfPlanetElements.SednaOrbitalElements(),
+                SolarSystemSmallBodies.Juno => MainBeltAsteroids.JunoOrbitalElements(),
+                SolarSystemSmallBodies.Vesta => MainBeltAsteroids.VestaOrbitalElements(),
+                SolarSystemSmallBodies.Pallas => MainBeltAsteroids.PallasOrbitalElements(),
+                SolarSystemSmallBodies.Chiron => Centaurs.ChironOrbitalElements(),
+                SolarSystemSmallBodies.Pluto => new AASEllipticalObjectElements(),
+                _ => new AASEllipticalObjectElements()
+            };
         }
     }
 }

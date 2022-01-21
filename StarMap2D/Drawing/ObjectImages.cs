@@ -24,9 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Drawing
+namespace StarMap2D.Drawing;
+
+public class ObjectImages
 {
-    public class ObjectImages
-    {
-    }
 }

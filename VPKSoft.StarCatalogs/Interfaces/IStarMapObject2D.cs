@@ -26,59 +26,58 @@ SOFTWARE.
 
 using AASharp;
 
-namespace VPKSoft.StarCatalogs.Interfaces
+namespace VPKSoft.StarCatalogs.Interfaces;
+
+/// <summary>
+/// An interface for an object plotted to the star map.
+/// </summary>
+/// <typeparam name="T">The type of the graphics provider for the object.</typeparam>
+public interface IStarMapObject2D<T>
 {
     /// <summary>
-    /// An interface for an object plotted to the star map.
+    /// Gets or sets a value indicating whether the location of is star map 2D object is calculated. Ie. The Sun.
     /// </summary>
-    /// <typeparam name="T">The type of the graphics provider for the object.</typeparam>
-    public interface IStarMapObject2D<T>
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether the location of is star map 2D object is calculated. Ie. The Sun.
-        /// </summary>
-        /// <value><c>true</c> if this instance is location calculated; otherwise, <c>false</c>.</value>
-        bool IsLocationCalculated { get; set; }
+    /// <value><c>true</c> if this instance is location calculated; otherwise, <c>false</c>.</value>
+    bool IsLocationCalculated { get; set; }
 
-        /// <summary>
-        /// A delegate for the <see cref="IStarMapObject2D{T}.CalculatePosition"/> property.
-        /// </summary>
-        /// <param name="aasDate">An instance to the <see cref="AASDate"/> class.</param>
-        /// <param name="highPrecision">A value indicating whether to prefer high precision in the position calculation.</param>
-        /// <param name="latitude">The latitude of the observer.</param>
-        /// <param name="longitude">The longitude of the observer.</param>
-        /// <param name="radius">The radius of the 2D projection of the star map.</param>
-        /// <returns>An instance to a <see cref="PointDouble"/> class for the result of the calculation.</returns>
-        public delegate AAS2DCoordinate CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
-            double longitude, double radius);
+    /// <summary>
+    /// A delegate for the <see cref="IStarMapObject2D{T}.CalculatePosition"/> property.
+    /// </summary>
+    /// <param name="aasDate">An instance to the <see cref="AASDate"/> class.</param>
+    /// <param name="highPrecision">A value indicating whether to prefer high precision in the position calculation.</param>
+    /// <param name="latitude">The latitude of the observer.</param>
+    /// <param name="longitude">The longitude of the observer.</param>
+    /// <param name="radius">The radius of the 2D projection of the star map.</param>
+    /// <returns>An instance to a <see cref="PointDouble"/> class for the result of the calculation.</returns>
+    public delegate AAS2DCoordinate CalculatePositionDelegate(AASDate aasDate, bool highPrecision, double latitude,
+        double longitude, double radius);
 
-        /// <summary>
-        /// A delegate to calculate the position of the star map 2D object if the <see cref="IsLocationCalculated"/> is set to <c>true</c>.
-        /// </summary>
-        CalculatePositionDelegate? CalculatePosition { get; set; }
+    /// <summary>
+    /// A delegate to calculate the position of the star map 2D object if the <see cref="IsLocationCalculated"/> is set to <c>true</c>.
+    /// </summary>
+    CalculatePositionDelegate? CalculatePosition { get; set; }
 
-        /// <summary>
-        /// Gets or sets the right ascension of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
-        /// </summary>
-        /// <value>The right ascension of the object.</value>
-        public double RightAscension { get; set; }
+    /// <summary>
+    /// Gets or sets the right ascension of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
+    /// </summary>
+    /// <value>The right ascension of the object.</value>
+    public double RightAscension { get; set; }
 
-        /// <summary>
-        /// Gets or sets the right declination of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
-        /// </summary>
-        /// <value>The declination of the object.</value>
-        public double Declination { get; set; }
+    /// <summary>
+    /// Gets or sets the right declination of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
+    /// </summary>
+    /// <value>The declination of the object.</value>
+    public double Declination { get; set; }
 
-        /// <summary>
-        /// Gets or sets the object graphics data for plotting the object to a star map.
-        /// </summary>
-        /// <value>The graphics data for plotting the object to a star map.</value>
-        public T? ObjectGraphics { get; set; }
+    /// <summary>
+    /// Gets or sets the object graphics data for plotting the object to a star map.
+    /// </summary>
+    /// <value>The graphics data for plotting the object to a star map.</value>
+    public T? ObjectGraphics { get; set; }
 
-        /// <summary>
-        /// Gets or sets the magnitude of the object.
-        /// </summary>
-        /// <value>The magnitude of the object.</value>
-        public double Magnitude { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the magnitude of the object.
+    /// </summary>
+    /// <value>The magnitude of the object.</value>
+    public double Magnitude { get; set; }
 }

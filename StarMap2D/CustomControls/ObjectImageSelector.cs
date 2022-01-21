@@ -24,13 +24,12 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.CustomControls
+namespace StarMap2D.CustomControls;
+
+public partial class ObjectImageSelector : UserControl
 {
-    public partial class ObjectImageSelector : UserControl
+    public ObjectImageSelector()
     {
-        public ObjectImageSelector()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

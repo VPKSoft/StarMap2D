@@ -27,48 +27,64 @@ SOFTWARE.
 using System.Globalization;
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// A class to provide star data from the small Yale catalog.
+/// Implements the <see cref="IStarDataProvider{T}" />
+/// </summary>
+/// <seealso cref="IStarDataProvider{T}" />
+public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>, ILoadDataLines
 {
-    /// <summary>
-    /// A class to provide star data from the small Yale catalog.
-    /// Implements the <see cref="IStarDataProvider{T}" />
-    /// </summary>
-    /// <seealso cref="IStarDataProvider{T}" />
-    public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>, ILoadDataLines
+    /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+    public List<YaleSmallStarData> StarData { get; } = new();
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
+    public void LoadData(string[] lines)
     {
-        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-        public List<YaleSmallStarData> StarData { get; } = new();
-
-        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
-        public void LoadData(string[] lines)
+        foreach (var line in lines)
         {
-            foreach (var line in lines)
+            var lineData = line.Replace(" ", string.Empty);
+            var lineDataSplit = lineData.Split(',');
+            StarData.Add(new YaleSmallStarData
             {
-                var lineData = line.Replace(" ", string.Empty);
-                var lineDataSplit = lineData.Split(',');
-                StarData.Add(new YaleSmallStarData
-                {
-                    Declination = double.Parse(lineDataSplit[1], CultureInfo.InvariantCulture), 
-                    RightAscension = double.Parse(lineDataSplit[0], CultureInfo.InvariantCulture),
-                    Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture)
-                });
-            }
+                Declination = double.Parse(lineDataSplit[1], CultureInfo.InvariantCulture), 
+                RightAscension = double.Parse(lineDataSplit[0], CultureInfo.InvariantCulture),
+                Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture)
+            });
         }
+    }
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
-        public void LoadData(string fileName)
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+    public void LoadData(string fileName)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines);
+    }
+
+    /// <summary>
+    /// A static method to test the <see cref="YaleSmallProvider"/> class.
+    /// </summary>
+    /// <param name="fileName">Name of the file containing the small Yale catalog data.</param>
+    /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+    public static bool TestProvider(string fileName)
+    {
+        try
         {
-            var lines = File.ReadAllLines(fileName);
-            LoadData(lines);
-        }
+            var provider = new YaleSmallProvider();
+            provider.LoadData(fileName);
 
-        /// <inheritdoc cref="IStarDataProvider{T}.GetDataRaw"/>
-        public string GetDataRaw(string rawDataEntry, string dataName)
+            // Enumerate one set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.RightAscension != 0).ToList();
+
+            // Enumerate second set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.Declination != 0).ToList();
+
+            return true;
+        }
+        catch
         {
-            throw new NotImplementedException();
+            return false;
         }
-
-        /// <inheritdoc cref="IStarDataProvider{T}.RawDataEntries"/>
-        public List<string> RawDataEntries { get; } = new();
     }
 }

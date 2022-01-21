@@ -26,66 +26,65 @@ SOFTWARE.
 
 using AASharp;
 
-namespace StarMap2D.Calculations.Helpers.Math
+namespace StarMap2D.Calculations.Helpers.Math;
+
+/// <summary>
+/// A class to calculate solar system object locations in horizontal coordinates.
+/// </summary>
+public class SolarSystemObjects
 {
     /// <summary>
-    /// A class to calculate solar system object locations in horizontal coordinates.
+    /// Gets the sun position.
     /// </summary>
-    public class SolarSystemObjects
+    /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
+    /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
+    /// <param name="longitude">The longitude of the observer.</param>
+    /// <param name="latitude">The latitude of the observer.</param>
+    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the sun position in horizontal coordinates.</returns>
+    public static AAS2DCoordinate GetSunPosition(AASDate aaDate, bool highPrecision, double longitude,
+        double latitude)
     {
-        /// <summary>
-        /// Gets the sun position.
-        /// </summary>
-        /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
-        /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
-        /// <param name="longitude">The longitude of the observer.</param>
-        /// <param name="latitude">The latitude of the observer.</param>
-        /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the sun position in horizontal coordinates.</returns>
-        public static AAS2DCoordinate GetSunPosition(AASDate aaDate, bool highPrecision, double longitude,
-            double latitude)
-        {
-            var jdSun = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
-            var sunLong = AASSun.ApparentEclipticLongitude(jdSun, highPrecision);
-            var sunLat = AASSun.ApparentEclipticLatitude(jdSun, highPrecision);
+        var jdSun = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+        var sunLong = AASSun.ApparentEclipticLongitude(jdSun, highPrecision);
+        var sunLat = AASSun.ApparentEclipticLatitude(jdSun, highPrecision);
 
-            return new AAS2DCoordinate { X = sunLong, Y = sunLat }.HorizontalTransform(longitude, latitude, jdSun);
-        }
+        return new AAS2DCoordinate { X = sunLong, Y = sunLat }.HorizontalTransform(longitude, latitude, jdSun);
+    }
 
-        /// <summary>
-        /// Gets the moon position.
-        /// </summary>
-        /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
-        /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
-        /// <param name="longitude">The longitude of the observer.</param>
-        /// <param name="latitude">The latitude of the observer.</param>
-        /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the moon position in horizontal coordinates.</returns>
-        public static AAS2DCoordinate GetMoonPosition(AASDate aaDate, bool highPrecision, double longitude,
-            double latitude)
-        {
-            var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
-            var moonLong = AASMoon.EclipticLongitude(jd);
-            var moonLat = AASMoon.EclipticLatitude(jd);
+    /// <summary>
+    /// Gets the moon position.
+    /// </summary>
+    /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
+    /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
+    /// <param name="longitude">The longitude of the observer.</param>
+    /// <param name="latitude">The latitude of the observer.</param>
+    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the moon position in horizontal coordinates.</returns>
+    public static AAS2DCoordinate GetMoonPosition(AASDate aaDate, bool highPrecision, double longitude,
+        double latitude)
+    {
+        var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+        var moonLong = AASMoon.EclipticLongitude(jd);
+        var moonLat = AASMoon.EclipticLatitude(jd);
 
-            return new AAS2DCoordinate { X = moonLong, Y = moonLat }.HorizontalTransform(longitude, latitude, jd);
-        }
+        return new AAS2DCoordinate { X = moonLong, Y = moonLat }.HorizontalTransform(longitude, latitude, jd);
+    }
 
-        /// <summary>
-        /// Gets the position of an object specified by the <paramref name="object"/> value.
-        /// </summary>
-        /// <param name="object">The one of the <see cref="AASEllipticalObject"/> enumeration value. </param>
-        /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
-        /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
-        /// <param name="longitude">The longitude of the observer.</param>
-        /// <param name="latitude">The latitude of the observer.</param>
-        /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the <paramref name="object"/> position in horizontal coordinates.</returns>
-        public static AAS2DCoordinate GetObjectPosition(AASEllipticalObject @object, AASDate aaDate, bool highPrecision, double longitude,
-            double latitude)
-        {
-            var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+    /// <summary>
+    /// Gets the position of an object specified by the <paramref name="object"/> value.
+    /// </summary>
+    /// <param name="object">The one of the <see cref="AASEllipticalObject"/> enumeration value. </param>
+    /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
+    /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
+    /// <param name="longitude">The longitude of the observer.</param>
+    /// <param name="latitude">The latitude of the observer.</param>
+    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the <paramref name="object"/> position in horizontal coordinates.</returns>
+    public static AAS2DCoordinate GetObjectPosition(AASEllipticalObject @object, AASDate aaDate, bool highPrecision, double longitude,
+        double latitude)
+    {
+        var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
 
-            var planetaryDetails = AASElliptical.Calculate(jd, @object, highPrecision);
+        var planetaryDetails = AASElliptical.Calculate(jd, @object, highPrecision);
             
-            return new AAS2DCoordinate { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
-        }
+        return new AAS2DCoordinate { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
     }
 }

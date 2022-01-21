@@ -25,72 +25,57 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
+using System.Text;
+using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
+using VPKSoft.StarCatalogs.Utilities;
 
-namespace StarMap2D
+namespace StarMap2D;
+
+/// <summary>
+/// The main form of the application.
+/// Implements the <see cref="System.Windows.Forms.Form" />
+/// </summary>
+/// <seealso cref="System.Windows.Forms.Form" />
+public partial class FormMain : DBLangEngineWinforms
 {
     /// <summary>
-    /// The main form of the application.
-    /// Implements the <see cref="System.Windows.Forms.Form" />
+    /// Initializes a new instance of the <see cref="FormMain"/> class.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
-    public partial class FormMain : DBLangEngineWinforms
+    public FormMain()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormMain"/> class.
-        /// </summary>
-        public FormMain()
+        InitializeComponent();
+
+        DBLangEngine.DBName = "lang.sqlite"; // Do the VPKSoft.LangLib == translation..
+
+        if (Utils.ShouldLocalize() != null)
         {
-            InitializeComponent();
-
-            DBLangEngine.DBName = "lang.sqlite"; // Do the VPKSoft.LangLib == translation..
-
-            if (Utils.ShouldLocalize() != null)
-            {
-                DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
-                return; // After localization don't do anything more..
-            }
-
-            // initialize the language/localization database..
-            DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
-
-            //Properties.Settings.Default.Reset();
+            DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
+            return; // After localization don't do anything more..
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            FormDialogSettings.Display(this);
-        }
+        // initialize the language/localization database..
+        DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
-        private void button2_Click(object sender, EventArgs ee)
-        {
-            FormSkyMap2D.Display(this);
-        }
+        //Properties.Settings.Default.Reset();
+    }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Debug.WriteLine(
-                $"Test: {nameof(HygV3Provider)}, success: {HygV3Provider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\HYG 3.0\Extracted\hygdata_v3.csv")}");
+    private void button1_Click(object sender, EventArgs e)
+    {
+        FormDialogSettings.Display(this);
+    }
 
-            Debug.WriteLine(
-                $"Test: {nameof(Gliese3rdProvider)}, success: {Gliese3rdProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\CNS3\Extracted\catalog.dat")}");
+    private void button2_Click(object sender, EventArgs ee)
+    {
+        FormSkyMap2D.Display(this);
+    }
 
-            Debug.WriteLine(
-                $"Test: {nameof(HipparcosProvider)}, success: {HipparcosProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\Hipparcos\Extracted\hip_main.dat")}");
-
-            Debug.WriteLine(
-                $"Test: {nameof(PpmProvider)}, success: {PpmProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\PPM\Extracted\PPM", false)}");
-
-            Debug.WriteLine(
-                $"Test: {nameof(PpmProvider)}, success: {PpmProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\PPM\Extracted\PPMra", true)}");
-
-            Debug.WriteLine(
-                $"Test: {nameof(TychoProvider)}, success: {TychoProvider.TestProvider(@"C:\Files\GitHub\StarMap2D\VPKSoft.StarCatalogs\Hipparcos\Extracted\tyc_main.dat")}");
-        }
+    private void button3_Click(object sender, EventArgs e)
+    {
     }
 }

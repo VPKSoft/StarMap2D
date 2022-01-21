@@ -29,64 +29,63 @@ using System.Drawing.Text;
 using StarMap2D.Drawing;
 using Svg;
 
-namespace StarMap2D.Miscellaneous
+namespace StarMap2D.Miscellaneous;
+
+public partial class FormTestDrawing : Form
 {
-    public partial class FormTestDrawing : Form
+    public FormTestDrawing()
     {
-        public FormTestDrawing()
+        InitializeComponent();
+        pictureBox1.Image = ColorizeSvgTest();
+    }
+
+    private void panel1_Paint(object sender, PaintEventArgs e)
+    {
+        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+        e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+        var wh = trackBar2.Value;
+
+        e.Graphics.FillEllipse(Brushes.White, new Rectangle(Point.Empty, new Size(wh, wh)));
+        var size = e.Graphics.MeasureString("☿", panel1.Font);
+        e.Graphics.DrawString("☿", panel1.Font, Brushes.Black, (wh - size.Width) / 2, (wh - size.Height) / 2);
+    }
+
+    private void trackBar1_Scroll(object sender, EventArgs e)
+    {
+        panel1.Font = new Font(panel1.Font.FontFamily, trackBar1.Value, FontStyle.Bold);
+    }
+
+    private void trackBar2_Scroll(object sender, EventArgs e)
+    {
+        panel1.Invalidate();
+    }
+
+    private void panel1_Click(object sender, EventArgs e)
+    {
+        if (fontDialog1.ShowDialog() == DialogResult.OK)
         {
-            InitializeComponent();
-            pictureBox1.Image = ColorizeSvgTest();
+            panel1.Font = fontDialog1.Font;
         }
+    }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+    private Image ColorizeSvgTest()
+    {
+        var svg = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar);
+        foreach (var svgElement in svg.Descendants())
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-            var wh = trackBar2.Value;
-
-            e.Graphics.FillEllipse(Brushes.White, new Rectangle(Point.Empty, new Size(wh, wh)));
-            var size = e.Graphics.MeasureString("☿", panel1.Font);
-            e.Graphics.DrawString("☿", panel1.Font, Brushes.Black, (wh - size.Width) / 2, (wh - size.Height) / 2);
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            panel1.Font = new Font(panel1.Font.FontFamily, trackBar1.Value, FontStyle.Bold);
-        }
-
-        private void trackBar2_Scroll(object sender, EventArgs e)
-        {
-            panel1.Invalidate();
-        }
-
-        private void panel1_Click(object sender, EventArgs e)
-        {
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            if (svgElement is SvgCircle circle)
             {
-                panel1.Font = fontDialog1.Font;
+                circle.Fill = new SvgColourServer(Color.Aqua);
+                circle.Stroke = SvgPaintServer.None;
+            }
+
+            if (svgElement is SvgPath path)
+            {
+                path.Fill = new SvgColourServer(Color.Yellow);
             }
         }
 
-        private Image ColorizeSvgTest()
-        {
-            var svg = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar);
-            foreach (var svgElement in svg.Descendants())
-            {
-                if (svgElement is SvgCircle circle)
-                {
-                    circle.Fill = new SvgColourServer(Color.Aqua);
-                    circle.Stroke = SvgPaintServer.None;
-                }
-
-                if (svgElement is SvgPath path)
-                {
-                    path.Fill = new SvgColourServer(Color.Yellow);
-                }
-            }
-
-            return svg.Draw(100, 100);
-        }
+        return svg.Draw(100, 100);
     }
 }

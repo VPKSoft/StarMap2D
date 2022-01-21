@@ -24,74 +24,44 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using System.Linq;
 using AASharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StarMap2D.Calculations.Constellations.ConstellationClasses;
+using StarMap2D.Calculations.Constellations.Enumerations;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
 
-namespace StarMap2D.Tests
+namespace StarMap2D.Tests;
+
+[TestClass]
+public class MathTests
 {
-    [TestClass]
-    public class MathTests
+    [TestMethod]
+    public void TestPointInPolygon()
     {
-        [TestMethod]
-        public void TestPointInPolygon()
+        // Positive coordinates test.
+        var coordinates = new[]
         {
-            // Positive coordinates test.
-            var coordinates = new[]
-            {
-                new AAS2DCoordinate { X = 2, Y = 2 },
-                new AAS2DCoordinate { X = 6, Y = 2 },
-                new AAS2DCoordinate { X = 6, Y = 5 },
-                new AAS2DCoordinate { X = 2, Y = 5 },
-            };
+            new AAS2DCoordinate { X = 2, Y = 2 },
+            new AAS2DCoordinate { X = 6, Y = 2 },
+            new AAS2DCoordinate { X = 6, Y = 5 },
+            new AAS2DCoordinate { X = 2, Y = 5 },
+        };
 
-            Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5));
-            Assert.IsFalse(PolygonShapes.PointInPolygon(coordinates, 2, 1.9));
+        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5));
+        Assert.IsFalse(PolygonShapes.PointInPolygon(coordinates, 2, 1.9));
 
-            // Partially negative coordinates test.
-            coordinates = new[]
-            {
-                new AAS2DCoordinate { X = -2, Y = -2 },
-                new AAS2DCoordinate { X = 6, Y = -2 },
-                new AAS2DCoordinate { X = 6, Y = 3 },
-                new AAS2DCoordinate { X = -2, Y = 3 },
-            };
-
-            Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));
-        }
-
-        [TestMethod]
-        public void TestStarBoundary()
+        // Partially negative coordinates test.
+        coordinates = new[]
         {
-            var orion = new Orion();
-            var coordinates = orion.Boundary.ToList()
-                .Select(f => new AAS2DCoordinate { X = f.RightAscension, Y = f.Declination }).ToArray();
+            new AAS2DCoordinate { X = -2, Y = -2 },
+            new AAS2DCoordinate { X = 6, Y = -2 },
+            new AAS2DCoordinate { X = 6, Y = 3 },
+            new AAS2DCoordinate { X = -2, Y = 3 },
+        };
 
-            // Test that the constellation Orion is inside Orion boundaries ;-)
-            foreach (var line in orion.ConstellationLines)
-            {
-                var lineStarStart =
-                    ConstellationStars.ConstellationStarsSMap.FirstOrDefault(f =>
-                        f.InternalId == line.StartIdentifier);
-
-                var lineStarEnd =
-                    ConstellationStars.ConstellationStarsSMap.FirstOrDefault(f =>
-                        f.InternalId == line.EndIdentifier);
-
-                Assert.IsNotNull(lineStarStart);
-                Assert.IsNotNull(lineStarEnd);
-
-                var inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarStart.RightAscension,
-                    lineStarStart.Declination);
-                Assert.IsTrue(inPolygon);
-
-                inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarEnd.RightAscension,
-                    lineStarEnd.Declination);
-                Assert.IsTrue(inPolygon);
-            }
-        }
+        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));
     }
 }

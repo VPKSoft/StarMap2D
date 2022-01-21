@@ -24,59 +24,58 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Constellations.Interfaces
+namespace StarMap2D.Calculations.Constellations.Interfaces;
+
+/// <summary>
+/// An interface for a single star in a constellation.
+/// </summary>
+public interface IConstellationStar
 {
     /// <summary>
-    /// An interface for a single star in a constellation.
+    /// Gets or sets the constellation identifier.
     /// </summary>
-    public interface IConstellationStar
-    {
-        /// <summary>
-        /// Gets or sets the constellation identifier.
-        /// </summary>
-        /// <value>The constellation identifier.</value>
-        string Identifier { get; set; }
+    /// <value>The constellation identifier.</value>
+    string Identifier { get; set; }
 
-        /// <summary>
-        /// Gets or sets the proper of the star.
-        /// </summary>
-        /// <value>The proper of the star.</value>
-        string ProperName { get; set; }
+    /// <summary>
+    /// Gets or sets the proper of the star.
+    /// </summary>
+    /// <value>The proper of the star.</value>
+    string ProperName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the star.
-        /// </summary>
-        /// <value>The name of the star.</value>
-        string Name { get; set; }
+    /// <summary>
+    /// Gets or sets the name of the star.
+    /// </summary>
+    /// <value>The name of the star.</value>
+    string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the right ascension.
-        /// </summary>
-        /// <value>The right ascension.</value>
-        double RightAscension { get; init; }
+    /// <summary>
+    /// Gets or sets the right ascension.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    double RightAscension { get; init; }
 
-        /// <summary>
-        /// Gets or sets the declination.
-        /// </summary>
-        /// <value>The declination.</value>
-        double Declination { get; init; }
+    /// <summary>
+    /// Gets or sets the declination.
+    /// </summary>
+    /// <value>The declination.</value>
+    double Declination { get; init; }
 
-        /// <summary>
-        /// Gets or sets the right ascension hours.
-        /// </summary>
-        /// <value>The right ascension hours.</value>
-        double Rah { get; init; }
+    /// <summary>
+    /// Gets or sets the right ascension hours.
+    /// </summary>
+    /// <value>The right ascension hours.</value>
+    double Rah { get; init; }
 
-        /// <summary>
-        /// Gets or sets the right ascension minutes.
-        /// </summary>
-        /// <value>The right ascension minutes.</value>
-        double Ram { get; init; }
+    /// <summary>
+    /// Gets or sets the right ascension minutes.
+    /// </summary>
+    /// <value>The right ascension minutes.</value>
+    double Ram { get; init; }
 
-        /// <summary>
-        /// Gets or sets the right ascension seconds.
-        /// </summary>
-        /// <value>The right ascension seconds.</value>
-        double Ras { get; init; }
-    }
+    /// <summary>
+    /// Gets or sets the right ascension seconds.
+    /// </summary>
+    /// <value>The right ascension seconds.</value>
+    double Ras { get; init; }
 }

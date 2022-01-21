@@ -27,38 +27,37 @@ SOFTWARE.
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
 
-namespace StarMap2D.Calculations.Constellations.ConstellationClasses
+namespace StarMap2D.Calculations.Constellations.ConstellationClasses;
+
+/// <summary>
+/// A class representing the Ursa Major constellation.
+/// Implements the <see cref="IConstellation{T,TLines}" />
+/// </summary>
+/// <seealso cref="IConstellation{T, TLines}" />
+public class UrsaMajor: IConstellation<ConstellationArea, ConstellationLine>
 {
     /// <summary>
-    /// A class representing the Ursa Major constellation.
-    /// Implements the <see cref="IConstellation{T,TLines}" />
+    /// Initializes a new instance of the <see cref="UrsaMajor"/> class.
     /// </summary>
-    /// <seealso cref="IConstellation{T, TLines}" />
-    public class UrsaMajor: IConstellation<ConstellationArea, ConstellationLine>
+    public UrsaMajor()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UrsaMajor"/> class.
-        /// </summary>
-        public UrsaMajor()
-        {
-            Identifier = "UMA";
-            Name = "Ursa Major";
-            Boundary = ConstellationBoundary.ConstellationBoundaries.Where(f => f.Identifier == Identifier).ToList();
-            ConstellationLines = StaticData.ConstellationLines.Lines
-                .Where(f => f.Identifier == Identifier).ToList();
+        Identifier = "UMA";
+        Name = "Ursa Major";
+        Boundary = ConstellationBoundary.ConstellationBoundaries.Where(f => f.Identifier == Identifier).ToList();
+        ConstellationLines = StaticData.ConstellationLines.Lines
+            .Where(f => f.Identifier == Identifier).ToList();
 
-        }
-
-        /// <inheritdoc cref="IConstellation{T, TLines}.Identifier"/>
-        public string Identifier { get; init; }
-
-        /// <inheritdoc cref="IConstellation{T, TLines}.Name"/>
-        public string Name { get; set; }
-
-        /// <inheritdoc cref="IConstellation{T,TLines}.Boundary"/>
-        public IReadOnlyList<IConstellationStar> Boundary { get; }
-
-        /// <inheritdoc cref="IConstellation{T, TLines}.ConstellationLines"/>
-        public IReadOnlyList<ConstellationLine> ConstellationLines { get; init; }
     }
+
+    /// <inheritdoc cref="IConstellation{T, TLines}.Identifier"/>
+    public string Identifier { get; init; }
+
+    /// <inheritdoc cref="IConstellation{T, TLines}.Name"/>
+    public string Name { get; set; }
+
+    /// <inheritdoc cref="IConstellation{T,TLines}.Boundary"/>
+    public IReadOnlyList<IConstellationStar> Boundary { get; }
+
+    /// <inheritdoc cref="IConstellation{T, TLines}.ConstellationLines"/>
+    public IReadOnlyList<ConstellationLine> ConstellationLines { get; init; }
 }

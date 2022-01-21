@@ -29,146 +29,145 @@ using StarMap2D.Properties;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 
-namespace StarMap2D.Forms.Dialogs
+namespace StarMap2D.Forms.Dialogs;
+
+/// <summary>
+/// The settings dialog for the StarMap2D.
+/// Implements the <see cref="VPKSoft.LangLib.DBLangEngineWinforms" />
+/// </summary>
+/// <seealso cref="VPKSoft.LangLib.DBLangEngineWinforms" />
+public partial class FormDialogSettings : DBLangEngineWinforms
 {
     /// <summary>
-    /// The settings dialog for the StarMap2D.
-    /// Implements the <see cref="VPKSoft.LangLib.DBLangEngineWinforms" />
+    /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
     /// </summary>
-    /// <seealso cref="VPKSoft.LangLib.DBLangEngineWinforms" />
-    public partial class FormDialogSettings : DBLangEngineWinforms
+    public FormDialogSettings()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
-        /// </summary>
-        public FormDialogSettings()
+        InitializeComponent();
+
+        if (Utils.ShouldLocalize() != null)
         {
-            InitializeComponent();
-
-            if (Utils.ShouldLocalize() != null)
-            {
-                DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
-                return; // After localization don't do anything more..
-            }
-
-            // initialize the language/localization database..
-            DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
-
-            cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
-
-            tbLocationName.Text = Settings.Default.DefaultLocationName;
-            nudLongitude.Value = (decimal)Settings.Default.Longitude;
-            nudLatitude.Value = (decimal)Settings.Default.Latitude;
-
-            starMagnitudeEditor1.StarMagnitudeColors = Settings.Default.StarMagnitudeColors;
-            starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
-            nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
-            nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
+            DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
+            return; // After localization don't do anything more..
         }
 
-        /// <summary>
-        /// Displays the form as modal dialog.
-        /// </summary>
-        /// <param name="owner">The owner of the form.</param>
-        public static void Display(IWin32Window? owner)
+        // initialize the language/localization database..
+        DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
+
+        cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
+
+        tbLocationName.Text = Settings.Default.DefaultLocationName;
+        nudLongitude.Value = (decimal)Settings.Default.Longitude;
+        nudLatitude.Value = (decimal)Settings.Default.Latitude;
+
+        starMagnitudeEditor1.StarMagnitudeColors = Settings.Default.StarMagnitudeColors;
+        starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
+        nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
+        nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
+    }
+
+    /// <summary>
+    /// Displays the form as modal dialog.
+    /// </summary>
+    /// <param name="owner">The owner of the form.</param>
+    public static void Display(IWin32Window? owner)
+    {
+        var settingsForm = new FormDialogSettings();
+        if (settingsForm.ShowDialog(owner) == DialogResult.OK)
         {
-            var settingsForm = new FormDialogSettings();
-            if (settingsForm.ShowDialog(owner) == DialogResult.OK)
-            {
-                settingsForm.SaveSettings();
-            }
+            settingsForm.SaveSettings();
+        }
+    }
+
+    private void SaveSettings()
+    {
+        Settings.Default.DefaultLocationName = tbLocationName.Text;
+        Settings.Default.Longitude = (double)nudLongitude.Value;
+        Settings.Default.Latitude = (double)nudLatitude.Value;
+        Settings.Default.StarMagnitudeColors = starMagnitudeEditor1.StarMagnitudeColors;
+        Settings.Default.StarMagnitudeSizes = starMagnitudeEditor1.StarMagnitudes;
+        Settings.Default.MagnitudeMaximum = (double)nudMagnitudeMaximum.Value;
+        Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
+        Settings.Default.Save();
+    }
+
+    private readonly Cities cities = new();
+
+    private void cmbSelectLocation_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var city = (CityLatLonCoordinate)cmbSelectLocation.SelectedItem;
+        tbLocationName.Text = city.CityName;
+        nudLatitude.Value = (decimal)city.Latitude;
+        nudLongitude.Value = (decimal)city.Longitude;
+    }
+
+    private void colorPanel_Click(object sender, EventArgs e)
+    {
+        var panel = (Panel)sender;
+        suspendColorChange = true;
+
+        var color = panel.BackColor;
+
+        ceColor.Color = color;
+        cwColor.Color = color;
+        colorControl = panel;
+        if (Enum.TryParse<MapGraphicValue>(panel.Tag?.ToString(), false, out var value))
+        {
+            FormSkyMap2D.ChangeColor(color, value);
+
+        }
+        suspendColorChange = false;
+    }
+
+    private Control? colorControl;
+
+    private bool suspendColorChange;
+
+    private void cwColor_ColorChanged(object sender, EventArgs e)
+    {
+        if (suspendColorChange)
+        {
+            return;
         }
 
-        private void SaveSettings()
+        suspendColorChange = true;
+
+        var color = cwColor.Color;
+
+        if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag?.ToString(), false, out var value))
         {
-            Settings.Default.DefaultLocationName = tbLocationName.Text;
-            Settings.Default.Longitude = (double)nudLongitude.Value;
-            Settings.Default.Latitude = (double)nudLatitude.Value;
-            Settings.Default.StarMagnitudeColors = starMagnitudeEditor1.StarMagnitudeColors;
-            Settings.Default.StarMagnitudeSizes = starMagnitudeEditor1.StarMagnitudes;
-            Settings.Default.MagnitudeMaximum = (double)nudMagnitudeMaximum.Value;
-            Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
-            Settings.Default.Save();
+            FormSkyMap2D.ChangeColor(color, value);
+
         }
 
-        private readonly Cities cities = new();
-
-        private void cmbSelectLocation_SelectedIndexChanged(object sender, EventArgs e)
+        ceColor.Color = color;
+        if (colorControl != null)
         {
-            var city = (CityLatLonCoordinate)cmbSelectLocation.SelectedItem;
-            tbLocationName.Text = city.CityName;
-            nudLatitude.Value = (decimal)city.Latitude;
-            nudLongitude.Value = (decimal)city.Longitude;
+            colorControl.BackColor = color;
+        }
+        suspendColorChange = false;
+    }
+
+    private void ceColor_ColorChanged(object sender, EventArgs e)
+    {
+        if (suspendColorChange)
+        {
+            return;
         }
 
-        private void colorPanel_Click(object sender, EventArgs e)
+        suspendColorChange = true;
+        var color = ceColor.Color;
+
+        if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag.ToString(), false, out var value))
         {
-            var panel = (Panel)sender;
-            suspendColorChange = true;
-
-            var color = panel.BackColor;
-
-            ceColor.Color = color;
-            cwColor.Color = color;
-            colorControl = panel;
-            if (Enum.TryParse<MapGraphicValue>(panel.Tag?.ToString(), false, out var value))
-            {
-                FormSkyMap2D.ChangeColor(color, value);
-
-            }
-            suspendColorChange = false;
+            FormSkyMap2D.ChangeColor(color, value);
         }
 
-        private Control? colorControl;
-
-        private bool suspendColorChange;
-
-        private void cwColor_ColorChanged(object sender, EventArgs e)
+        cwColor.Color = color;
+        if (colorControl != null)
         {
-            if (suspendColorChange)
-            {
-                return;
-            }
-
-            suspendColorChange = true;
-
-            var color = cwColor.Color;
-
-            if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag?.ToString(), false, out var value))
-            {
-                FormSkyMap2D.ChangeColor(color, value);
-
-            }
-
-            ceColor.Color = color;
-            if (colorControl != null)
-            {
-                colorControl.BackColor = color;
-            }
-            suspendColorChange = false;
+            colorControl.BackColor = color;
         }
-
-        private void ceColor_ColorChanged(object sender, EventArgs e)
-        {
-            if (suspendColorChange)
-            {
-                return;
-            }
-
-            suspendColorChange = true;
-            var color = ceColor.Color;
-
-            if (Enum.TryParse<MapGraphicValue>(colorControl?.Tag.ToString(), false, out var value))
-            {
-                FormSkyMap2D.ChangeColor(color, value);
-            }
-
-            cwColor.Color = color;
-            if (colorControl != null)
-            {
-                colorControl.BackColor = color;
-            }
-            suspendColorChange = false;
-        }
+        suspendColorChange = false;
     }
 }

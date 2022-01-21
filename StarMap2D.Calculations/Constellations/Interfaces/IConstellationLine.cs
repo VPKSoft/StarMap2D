@@ -24,30 +24,29 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Constellations.Interfaces
+namespace StarMap2D.Calculations.Constellations.Interfaces;
+
+/// <summary>
+/// An interface for constellation line data.
+/// </summary>
+public interface IConstellationLine
 {
     /// <summary>
-    /// An interface for constellation line data.
+    /// Gets or sets the constellation identifier.
     /// </summary>
-    public interface IConstellationLine
-    {
-        /// <summary>
-        /// Gets or sets the constellation identifier.
-        /// </summary>
-        /// <value>The constellation identifier.</value>
-        string? Identifier { get; init; }
+    /// <value>The constellation identifier.</value>
+    string? Identifier { get; init; }
 
-        /// <summary>
-        /// Gets or sets the identifier for the start star.
-        /// </summary>
-        /// <value>The identifier for the start star.</value>
-        int StartIdentifier { get; set; }
+    /// <summary>
+    /// Gets or sets the identifier for the start star.
+    /// </summary>
+    /// <value>The identifier for the start star.</value>
+    int StartIdentifier { get; set; }
 
 
-        /// <summary>
-        /// Gets or sets the internal identifier for the end star.
-        /// </summary>
-        /// <value>The internal identifier for the end star.</value>
-        int EndIdentifier { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the internal identifier for the end star.
+    /// </summary>
+    /// <value>The internal identifier for the end star.</value>
+    int EndIdentifier { get; set; }
 }

@@ -27,31 +27,30 @@ SOFTWARE.
 using StarMap2D.CustomControls.Interfaces;
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace StarMap2D.CustomControls
+namespace StarMap2D.CustomControls;
+
+/// <summary>
+/// A class to indicate a single object in the <see cref="Map2D"/> star map.
+/// Implements the <see cref="IStarMapObject2D{T}" />
+/// </summary>
+/// <seealso cref="IStarMapObject2D{T}" />
+public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 {
-    /// <summary>
-    /// A class to indicate a single object in the <see cref="Map2D"/> star map.
-    /// Implements the <see cref="IStarMapObject2D{T}" />
-    /// </summary>
-    /// <seealso cref="IStarMapObject2D{T}" />
-    public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
-    {
-        /// <inheritdoc cref="IStarMapObject2D{T}.IsLocationCalculated"/>
-        public bool IsLocationCalculated { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.IsLocationCalculated"/>
+    public bool IsLocationCalculated { get; set; }
 
-        /// <inheritdoc cref="IStarMapObject2D{T}.CalculatePosition"/>
-        public IStarMapObject2D<IMap2DGraphics>.CalculatePositionDelegate? CalculatePosition { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.CalculatePosition"/>
+    public IStarMapObject2D<IMap2DGraphics>.CalculatePositionDelegate? CalculatePosition { get; set; }
 
-        /// <inheritdoc cref="IStarMapObject2D{T}.RightAscension"/>
-        public double RightAscension { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.RightAscension"/>
+    public double RightAscension { get; set; }
 
-        /// <inheritdoc cref="IStarMapObject2D{T}.Declination"/>
-        public double Declination { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.Declination"/>
+    public double Declination { get; set; }
 
-        /// <inheritdoc cref="IStarMapObject2D{T}.ObjectGraphics"/>
-        public IMap2DGraphics? ObjectGraphics { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.ObjectGraphics"/>
+    public IMap2DGraphics? ObjectGraphics { get; set; }
 
-        /// <inheritdoc cref="IStarMapObject2D{T}.Magnitude"/>
-        public double Magnitude { get; set; }
-    }
+    /// <inheritdoc cref="IStarMapObject2D{T}.Magnitude"/>
+    public double Magnitude { get; set; }
 }

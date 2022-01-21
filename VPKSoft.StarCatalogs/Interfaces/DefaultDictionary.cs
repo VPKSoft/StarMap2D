@@ -24,27 +24,26 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces
+namespace VPKSoft.StarCatalogs.Interfaces;
+
+/// <summary>
+/// A dictionary which returns the default(TValue) if there is no value found.
+/// Implements the <see cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
+/// </summary>
+/// <typeparam name="TKey">TThe type of the keys in the dictionary.</typeparam>
+/// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+/// <seealso cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
+public class DefaultDictionary<TKey, TValue>: Dictionary<TKey, TValue?> where TKey : notnull
 {
     /// <summary>
-    /// A dictionary which returns the default(TValue) if there is no value found.
-    /// Implements the <see cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
+    /// Gets or sets the value associated with the specified key.
     /// </summary>
-    /// <typeparam name="TKey">TThe type of the keys in the dictionary.</typeparam>
-    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-    /// <seealso cref="System.Collections.Generic.Dictionary{TKey, TValue}" />
-    public class DefaultDictionary<TKey, TValue>: Dictionary<TKey, TValue?> where TKey : notnull
+    /// <param name="key">The key of the value to get or set.</param>
+    /// <returns>The value associated with the specified key. If the specified key is not found the default(TValue) is returned.</returns>
+    public new TValue? this[TKey key]
     {
-        /// <summary>
-        /// Gets or sets the value associated with the specified key.
-        /// </summary>
-        /// <param name="key">The key of the value to get or set.</param>
-        /// <returns>The value associated with the specified key. If the specified key is not found the default(TValue) is returned.</returns>
-        public new TValue? this[TKey key]
-        {
-            get => TryGetValue(key, out var value) ? value : default;
+        get => TryGetValue(key, out var value) ? value : default;
 
-            set => base[key] = value;
-        } 
-    }
+        set => base[key] = value;
+    } 
 }

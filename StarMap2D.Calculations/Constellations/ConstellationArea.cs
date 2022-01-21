@@ -26,37 +26,36 @@ SOFTWARE.
 
 using StarMap2D.Calculations.Constellations.Interfaces;
 
-namespace StarMap2D.Calculations.Constellations
+namespace StarMap2D.Calculations.Constellations;
+
+/// <summary>
+/// A class for a single point in a constellation area.
+/// Implements the <see cref="IConstellationStar" />
+/// </summary>
+/// <seealso cref="IConstellationStar" />
+public class ConstellationArea: IConstellationStar
 {
-    /// <summary>
-    /// A class for a single point in a constellation area.
-    /// Implements the <see cref="IConstellationStar" />
-    /// </summary>
-    /// <seealso cref="IConstellationStar" />
-    public class ConstellationArea: IConstellationStar
-    {
-        /// <inheritdoc cref="IConstellationStar.Identifier"/>
-        public string Identifier { get; set; } = string.Empty;
+    /// <inheritdoc cref="IConstellationStar.Identifier"/>
+    public string Identifier { get; set; } = string.Empty;
 
-        /// <inheritdoc cref="IConstellationStar.ProperName"/>
-        public string ProperName { get; set; } = string.Empty;
+    /// <inheritdoc cref="IConstellationStar.ProperName"/>
+    public string ProperName { get; set; } = string.Empty;
 
-        /// <inheritdoc cref="IConstellationStar.Name"/>
-        public string Name { get; set; } = string.Empty;
+    /// <inheritdoc cref="IConstellationStar.Name"/>
+    public string Name { get; set; } = string.Empty;
 
-        /// <inheritdoc cref="IConstellationStar.RightAscension"/>
-        public double RightAscension { get; init; }
+    /// <inheritdoc cref="IConstellationStar.RightAscension"/>
+    public double RightAscension { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Declination"/>
-        public double Declination { get; init; }
+    /// <inheritdoc cref="IConstellationStar.Declination"/>
+    public double Declination { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Rah"/>
-        public double Rah { get; init; }
+    /// <inheritdoc cref="IConstellationStar.Rah"/>
+    public double Rah { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Ram"/>
-        public double Ram { get; init; }
+    /// <inheritdoc cref="IConstellationStar.Ram"/>
+    public double Ram { get; init; }
 
-        /// <inheritdoc cref="IConstellationStar.Ras"/>
-        public double Ras { get; init; }
-    }
+    /// <inheritdoc cref="IConstellationStar.Ras"/>
+    public double Ras { get; init; }
 }

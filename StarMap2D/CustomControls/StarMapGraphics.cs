@@ -26,16 +26,15 @@ SOFTWARE.
 
 using StarMap2D.CustomControls.Interfaces;
 
-namespace StarMap2D.CustomControls
+namespace StarMap2D.CustomControls;
+
+/// <summary>
+/// A class to provide graphics for a single object in the <see cref="Map2D"/> star map.
+/// Implements the <see cref="StarMap2D.CustomControls.Interfaces.IMap2DGraphics" />
+/// </summary>
+/// <seealso cref="StarMap2D.CustomControls.Interfaces.IMap2DGraphics" />
+public class StarMapGraphics: IMap2DGraphics
 {
-    /// <summary>
-    /// A class to provide graphics for a single object in the <see cref="Map2D"/> star map.
-    /// Implements the <see cref="StarMap2D.CustomControls.Interfaces.IMap2DGraphics" />
-    /// </summary>
-    /// <seealso cref="StarMap2D.CustomControls.Interfaces.IMap2DGraphics" />
-    public class StarMapGraphics: IMap2DGraphics
-    {
-        /// <inheritdoc cref="IMap2DGraphics.GetImage"/>
-        public IMap2DGraphics.GetImageDelegate? GetImage { get; set; }
-    }
+    /// <inheritdoc cref="IMap2DGraphics.GetImage"/>
+    public IMap2DGraphics.GetImageDelegate? GetImage { get; set; }
 }

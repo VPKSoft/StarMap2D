@@ -26,119 +26,118 @@ SOFTWARE.
 
 using AASharp;
 
-namespace StarMap2D.Calculations.Constellations.StaticData
+namespace StarMap2D.Calculations.Constellations.StaticData;
+
+/// <summary>
+/// Provides static orbital elements for main-belt asteroids.
+/// </summary>
+public class MainBeltAsteroids
 {
     /// <summary>
-    /// Provides static orbital elements for main-belt asteroids.
+    /// Gets the orbital elements of the main-belt asteroid Pallas.
     /// </summary>
-    public class MainBeltAsteroids
+    /// <returns>The orbital elements of the main-belt asteroid Pallas.</returns>
+    public static AASEllipticalObjectElements PallasOrbitalElements()
     {
-        /// <summary>
-        /// Gets the orbital elements of the main-belt asteroid Pallas.
-        /// </summary>
-        /// <returns>The orbital elements of the main-belt asteroid Pallas.</returns>
-        public static AASEllipticalObjectElements PallasOrbitalElements()
+        // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
+        // solution date: 2021-Nov-10 04:32:18
+        // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Pallas
+        var elements = new AASEllipticalObjectElements
         {
-            // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
-            // solution date: 2021-Nov-10 04:32:18
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Pallas
-            var elements = new AASEllipticalObjectElements
-            {
-                // The eccentricity of the orbit. JPL(e): eccentricity
-                e = 0.2299929743044128,
+            // The eccentricity of the orbit. JPL(e): eccentricity
+            e = 0.2299929743044128,
 
-                // The semi major axis in astronomical units. JPL(a): semi-major axis
-                a = 2.771106905653514,
+            // The semi major axis in astronomical units. JPL(a): semi-major axis
+            a = 2.771106905653514,
 
-                // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
-                i = 34.92530443013783,
+            // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
+            i = 34.92530443013783,
 
-                // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
-                w = 310.6972479100214,
+            // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
+            w = 310.6972479100214,
 
-                // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
-                omega = 172.9165730682058,
+            // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
+            omega = 172.9165730682058,
 
-                //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
-                T = 2460010.122235846004,
+            //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
+            T = 2460010.122235846004,
 
-                // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-                JDEquinox = 2459600.5
-            };
+            // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
+            JDEquinox = 2459600.5
+        };
 
-            return elements;
-        }
+        return elements;
+    }
 
-        /// <summary>
-        /// Gets the orbital elements of the main-belt asteroid Juno.
-        /// </summary>
-        /// <returns>The orbital elements of the main-belt asteroid Juno.</returns>
-        public static AASEllipticalObjectElements JunoOrbitalElements()
+    /// <summary>
+    /// Gets the orbital elements of the main-belt asteroid Juno.
+    /// </summary>
+    /// <returns>The orbital elements of the main-belt asteroid Juno.</returns>
+    public static AASEllipticalObjectElements JunoOrbitalElements()
+    {
+        // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
+        // solution date: 2021-Nov-10 04:32:18
+        // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Juno
+        var elements = new AASEllipticalObjectElements
         {
-            // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
-            // solution date: 2021-Nov-10 04:32:18
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Juno
-            var elements = new AASEllipticalObjectElements
-            {
-                // The eccentricity of the orbit. JPL(e): eccentricity
-                e = 0.2568870154103846,
+            // The eccentricity of the orbit. JPL(e): eccentricity
+            e = 0.2568870154103846,
 
-                // The semi major axis in astronomical units. JPL(a): semi-major axis
-                a = 2.668791059736416,
+            // The semi major axis in astronomical units. JPL(a): semi-major axis
+            a = 2.668791059736416,
 
-                // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
-                i = 12.99185572265956,
+            // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
+            i = 12.99185572265956,
 
-                // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
-                w = 247.9417261893294,
+            // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
+            w = 247.9417261893294,
 
-                // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
-                omega = 169.8477991708865,
+            // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
+            omega = 169.8477991708865,
 
-                //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
-                T = 2460037.107263453041,
+            //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
+            T = 2460037.107263453041,
 
-                // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-                JDEquinox = 2459600.5
-            };
+            // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
+            JDEquinox = 2459600.5
+        };
 
-            return elements;
-        }
+        return elements;
+    }
         
-        /// <summary>
-        /// Gets the orbital elements of the main-belt asteroid Vesta.
-        /// </summary>
-        /// <returns>The orbital elements of the main-belt asteroid Vesta.</returns>
-        public static AASEllipticalObjectElements VestaOrbitalElements()
+    /// <summary>
+    /// Gets the orbital elements of the main-belt asteroid Vesta.
+    /// </summary>
+    /// <returns>The orbital elements of the main-belt asteroid Vesta.</returns>
+    public static AASEllipticalObjectElements VestaOrbitalElements()
+    {
+        // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
+        // solution date: 2021-Apr-13 11:15:57
+        // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Vesta
+        var elements = new AASEllipticalObjectElements
         {
-            // Data © Nasa / Jet Propulsion Laboratory / Small-Body Database
-            // solution date: 2021-Apr-13 11:15:57
-            // https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Vesta
-            var elements = new AASEllipticalObjectElements
-            {
-                // The eccentricity of the orbit. JPL(e): eccentricity
-                e = 0.08823417531213737,
+            // The eccentricity of the orbit. JPL(e): eccentricity
+            e = 0.08823417531213737,
 
-                // The semi major axis in astronomical units. JPL(a): semi-major axis
-                a = 2.361266458114362,
+            // The semi major axis in astronomical units. JPL(a): semi-major axis
+            a = 2.361266458114362,
 
-                // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
-                i = 7.141717168552266,
+            // The inclination of the plane of the orbit in degrees. JPL(i): inclination; angle with respect to x-y ecliptic plane
+            i = 7.141717168552266,
 
-                // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
-                w = 151.0909385501822,
+            // The argument of the perihelion in degrees. JPL(peri): argument of the perihelion
+            w = 151.0909385501822,
 
-                // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
-                omega = 103.8039247181175,
+            // The longitude of the ascending node in degrees. JPL(node): longitude of the ascending node
+            omega = 103.8039247181175,
 
-                //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
-                T = 2459574.614128453124,
+            //  The Julian date of the time of passage in perihelion. JPL(tp): time of perihelion passage
+            T = 2459574.614128453124,
 
-                // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-                JDEquinox = 2459600.5
-            };
+            // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
+            JDEquinox = 2459600.5
+        };
 
-            return elements;
-        }
+        return elements;
     }
 }

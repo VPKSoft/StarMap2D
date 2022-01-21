@@ -24,76 +24,75 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Drawing
+namespace StarMap2D.Drawing;
+
+public static class DrawStarImage
 {
-    public static class DrawStarImage
+    public class MapDrawParameters
     {
-        public class MapDrawParameters
+        public MapDrawParameters(double magnitudeMinimum, double magnitudeMaximum, Color drawColor,
+            int drawDiameter)
         {
-            public MapDrawParameters(double magnitudeMinimum, double magnitudeMaximum, Color drawColor,
-                int drawDiameter)
-            {
-                MagnitudeMinimum = magnitudeMinimum;
-                MagnitudeMaximum = magnitudeMaximum;
-                DrawDiameter = drawDiameter;
-                DrawColor = drawColor;
-            }
-
-            public double MagnitudeMinimum { get; set; }
-
-            public double MagnitudeMaximum { get; set; }
-
-            public Color DrawColor { get; set; }
-
-            public int DrawDiameter { get; set; }
-
-            public static IReadOnlyList<MapDrawParameters> DrawParameters = new MapDrawParameters[]
-            {
-                new( -6, -7, Color.Yellow, 8),
-                new( -5, -6, Color.White, 7),
-                new( -4, -5, Color.White, 6),
-                new( -3, -4, Color.White, 5),
-                new( -2, -3, Color.White, 5),
-                new( -1, -2, Color.White, 5),
-                new( 0, -1, Color.White, 4),
-                new( 1, 0, Color.LightGray, 4),
-                new( 2, 1, Color.DarkGray, 4),
-                new( 10, 3, Color.DarkGray, 3),
-            };
+            MagnitudeMinimum = magnitudeMinimum;
+            MagnitudeMaximum = magnitudeMaximum;
+            DrawDiameter = drawDiameter;
+            DrawColor = drawColor;
         }
 
-        public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
+        public double MagnitudeMinimum { get; set; }
+
+        public double MagnitudeMaximum { get; set; }
+
+        public Color DrawColor { get; set; }
+
+        public int DrawDiameter { get; set; }
+
+        public static IReadOnlyList<MapDrawParameters> DrawParameters = new MapDrawParameters[]
         {
-            var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);
-            using var solidBrush = new SolidBrush(starColor);
-            graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(starSize, starSize)));
+            new( -6, -7, Color.Yellow, 8),
+            new( -5, -6, Color.White, 7),
+            new( -4, -5, Color.White, 6),
+            new( -3, -4, Color.White, 5),
+            new( -2, -3, Color.White, 5),
+            new( -1, -2, Color.White, 5),
+            new( 0, -1, Color.White, 4),
+            new( 1, 0, Color.LightGray, 4),
+            new( 2, 1, Color.DarkGray, 4),
+            new( 10, 3, Color.DarkGray, 3),
+        };
+    }
+
+    public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
+    {
+        var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);
+        using var solidBrush = new SolidBrush(starColor);
+        graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(starSize, starSize)));
+    }
+
+    public static void CreateStar(this Graphics graphics, Size compareSize, Point location, double magnitude)
+    {
+
+        if (!MapDrawParameters.DrawParameters.Any(f => f.MagnitudeMaximum < magnitude && f.MagnitudeMinimum >= magnitude))
+        {
+            return;
         }
 
-        public static void CreateStar(this Graphics graphics, Size compareSize, Point location, double magnitude)
+        var multiplier = Math.Min(compareSize.Width, compareSize.Height) / 800.0;
+
+        var parameter = MapDrawParameters.DrawParameters.First(f =>
+            f.MagnitudeMaximum < magnitude && f.MagnitudeMinimum >= magnitude);
+
+        var size = parameter.DrawDiameter;
+
+        if (size * multiplier > size)
         {
-
-            if (!MapDrawParameters.DrawParameters.Any(f => f.MagnitudeMaximum < magnitude && f.MagnitudeMinimum >= magnitude))
-            {
-                return;
-            }
-
-            var multiplier = Math.Min(compareSize.Width, compareSize.Height) / 800.0;
-
-            var parameter = MapDrawParameters.DrawParameters.First(f =>
-                f.MagnitudeMaximum < magnitude && f.MagnitudeMinimum >= magnitude);
-
-            var size = parameter.DrawDiameter;
-
-            if (size * multiplier > size)
-            {
-                size = (int)(size * multiplier);
-            }
-
-            var startPoint = new Point(location.X - size / 2, location.Y - size / 2);
-
-            using var solidBrush = new SolidBrush(parameter.DrawColor);
-
-            graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(size, size)));
+            size = (int)(size * multiplier);
         }
+
+        var startPoint = new Point(location.X - size / 2, location.Y - size / 2);
+
+        using var solidBrush = new SolidBrush(parameter.DrawColor);
+
+        graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(size, size)));
     }
 }

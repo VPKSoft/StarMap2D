@@ -26,14 +26,13 @@ SOFTWARE.
 
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// A class for a single Yale small data catalog entry.
+/// Implements the <see cref="IStarData" />
+/// </summary>
+/// <seealso cref="IStarData" />
+public class YaleSmallStarData: StarData
 {
-    /// <summary>
-    /// A class for a single Yale small data catalog entry.
-    /// Implements the <see cref="IStarData" />
-    /// </summary>
-    /// <seealso cref="IStarData" />
-    public class YaleSmallStarData: StarData
-    {
-    }
 }

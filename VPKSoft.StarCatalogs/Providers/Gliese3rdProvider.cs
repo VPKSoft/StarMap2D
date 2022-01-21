@@ -24,91 +24,83 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-using AASharp;
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// Class Gliese3rdProvider.
+/// Implements the <see cref="IStarDataProvider{T}" />
+/// </summary>
+/// <seealso cref="IStarDataProvider{T}" />
+// ReSharper disable once IdentifierTypo
+// ReSharper disable once InconsistentNaming
+public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadDataLines
 {
-    /// <summary>
-    /// Class Gliese3rdProvider.
-    /// Implements the <see cref="IStarDataProvider{T}" />
-    /// </summary>
-    /// <seealso cref="IStarDataProvider{T}" />
-    // ReSharper disable once IdentifierTypo
-    // ReSharper disable once InconsistentNaming
-    public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadDataLines
+    /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
+    public List<Gliese3rdStarData> StarData { get; } = new();
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
+    public void LoadData(string[] lines)
     {
-        /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-        public List<Gliese3rdStarData> StarData { get; } = new();
+        var dataEntries = new List<string>();
 
-        /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
-        public void LoadData(string[] lines)
+        for (int i = 2; i < lines.Length; i++)
         {
-            var dataEntries = new List<string>();
-
-            for (int i = 2; i < lines.Length; i++)
-            {
-                dataEntries.Add(lines[i]);
-            }
-
-            foreach (var rawDataEntry in dataEntries)
-            {
-                var name = Interfaces.StarData.ToPrimitive<string>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "Name"));
-
-                // We don't need the sun (in this case).
-                if (name?.Trim() == "Sun")
-                {
-                    continue;
-                }
-
-                var raHours = Interfaces.StarData.ToPrimitive<double?>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "RAh")) ?? 0;
-                var raMinutes = Interfaces.StarData.ToPrimitive<double?>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "RAm")) ?? 0;
-                var raSeconds = Interfaces.StarData.ToPrimitive<double?>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "RAs")) ?? 0;
-                var rightAscension = raHours + raMinutes / 60 + raSeconds / 3600;
-
-                var deDegrees = double.Parse(Gliese3rdStarData.GetDataRaw(rawDataEntry, "DE-")?.Trim() + Gliese3rdStarData.GetDataRaw(rawDataEntry, "DEd")?.Trim(), CultureInfo.InvariantCulture);
-
-
-                var deMinutes = Interfaces.StarData.ToPrimitive<double?>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "DEm")) ?? 0;
-
-                var declination = AASCoordinateTransformation.DMSToDegrees(deDegrees, deMinutes, 0);
-
-                var magnitude = Interfaces.StarData.ToPrimitive<double?>(Gliese3rdStarData.GetDataRaw(rawDataEntry, "Vmag")) ?? 0;
-
-                StarData.Add(new Gliese3rdStarData
-                {
-                    Name = name, Declination = declination, RightAscension = rightAscension, Magnitude = magnitude, RawData = rawDataEntry, 
-                    GetStarData = Gliese3rdStarData.GetDataRaw,
-                });
-            }
+            dataEntries.Add(lines[i]);
         }
 
-        /// <summary>
-        /// A static method to test the <see cref="Gliese3rdProvider"/> class.
-        /// </summary>
-        /// <param name="fileName">Name of the file containing the Gliese 3rd data.</param>
-        /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
-        public static bool TestProvider(string fileName)
+        foreach (var rawDataEntry in dataEntries)
         {
-            try
+            var data = new Gliese3rdStarData
             {
-                var provider = new Gliese3rdProvider();
-                provider.LoadData(fileName);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+                RawData = rawDataEntry, GetStarData = Gliese3rdStarData.GetDataRaw,
+            };
 
-        /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
-        public void LoadData(string fileName)
+            // We don't need the sun (in this case).
+            if (data.Name == "Sun")
+            {
+                continue;
+            }
+
+            StarData.Add(data);
+        }
+    }
+
+    /// <summary>
+    /// A static method to test the <see cref="Gliese3rdProvider"/> class.
+    /// </summary>
+    /// <param name="fileName">Name of the file containing the Gliese 3rd data.</param>
+    /// <returns><c>true</c> if data was successfully loaded, <c>false</c> otherwise.</returns>
+    public static bool TestProvider(string fileName)
+    {
+        try
         {
-            var lines = File.ReadAllLines(fileName);
+            var provider = new Gliese3rdProvider();
+            provider.LoadData(fileName);
 
-            LoadData(lines);
+            // Enumerate one set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.Declination != 0);
+
+            // Enumerate second set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.RightAscension != 0);
+
+            // Enumerate third set of lazy nullable doubles.
+            _ = provider.StarData.Where(f => f.Magnitude < 0).ToList();
+
+            return true;
         }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
+    public void LoadData(string fileName)
+    {
+        var lines = File.ReadAllLines(fileName);
+
+        LoadData(lines);
     }
 }

@@ -26,20 +26,19 @@ SOFTWARE.
 
 using StarMap2D.Calculations.Constellations.Interfaces;
 
-namespace StarMap2D.Calculations.Constellations
+namespace StarMap2D.Calculations.Constellations;
+
+/// <summary>
+/// A class to hold constellation line data in right ascension/declination coordinates.
+/// </summary>
+public class ConstellationLine: IConstellationLine
 {
-    /// <summary>
-    /// A class to hold constellation line data in right ascension/declination coordinates.
-    /// </summary>
-    public class ConstellationLine: IConstellationLine
-    {
-        /// <inheritdoc cref="IConstellationLine.Identifier"/>
-        public string? Identifier { get; init; }
+    /// <inheritdoc cref="IConstellationLine.Identifier"/>
+    public string? Identifier { get; init; }
 
-        /// <inheritdoc cref="IConstellationLine.StartIdentifier"/>
-        public int StartIdentifier { get; set; }
+    /// <inheritdoc cref="IConstellationLine.StartIdentifier"/>
+    public int StartIdentifier { get; set; }
 
-        /// <inheritdoc cref="IConstellationLine.EndIdentifier"/>
-        public int EndIdentifier { get; set; }
-    }
+    /// <inheritdoc cref="IConstellationLine.EndIdentifier"/>
+    public int EndIdentifier { get; set; }
 }

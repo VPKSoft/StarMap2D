@@ -27,215 +27,214 @@ SOFTWARE.
 using System.Globalization;
 using VPKSoft.StarCatalogs.Interfaces;
 
-namespace VPKSoft.StarCatalogs.Providers
+namespace VPKSoft.StarCatalogs.Providers;
+
+/// <summary>
+/// Star data entry for the HYG v.3.0 database.
+/// Implements the <see cref="IStarData" />
+/// </summary>
+/// <seealso cref="IStarData" />
+public class HygV3StartData: StarData
 {
     /// <summary>
-    /// Star data entry for the HYG v.3.0 database.
-    /// Implements the <see cref="IStarData" />
+    /// Gets or sets the proper name of the star if any.
     /// </summary>
-    /// <seealso cref="IStarData" />
-    public class HygV3StartData: StarData
+    /// <value>The proper name of the star.</value>
+    public string? Proper
     {
-        /// <summary>
-        /// Gets or sets the proper name of the star if any.
-        /// </summary>
-        /// <value>The proper name of the star.</value>
-        public string? Proper
+        get
         {
-            get
+            if (!FetchMemory["proper"])
             {
-                if (!FetchMemory["proper"])
-                {
-                    proper = GetEntryByName<string?>("proper")?.Trim();
-                    FetchMemory["proper"] = true;
-                }
-                
-                return proper;
-            }
-            
-            set
-            {
+                proper = GetEntryByName<string?>("proper")?.Trim();
                 FetchMemory["proper"] = true;
-                proper = value;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the Hipparcos identifier for the data entry.
-        /// </summary>
-        /// <value>The Hipparcos identifier for the data entry.</value>
-        // ReSharper disable once InconsistentNaming
-        public int? HIP
-        {
-            get
-            {
-                if (!FetchMemory["hip"])
-                {
-                    hip = GetEntryByName<int?>("hip");
-                    FetchMemory["hip"] = true;
-                }
                 
-                return hip;
-            }
+            return proper;
+        }
             
-            set
+        set
+        {
+            FetchMemory["proper"] = true;
+            proper = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the Hipparcos identifier for the data entry.
+    /// </summary>
+    /// <value>The Hipparcos identifier for the data entry.</value>
+    // ReSharper disable once InconsistentNaming
+    public int? HIP
+    {
+        get
+        {
+            if (!FetchMemory["hip"])
             {
+                hip = GetEntryByName<int?>("hip");
                 FetchMemory["hip"] = true;
-                hip = value;
             }
-        }
-
-        private double? declination;
-        private double? rightAscension;
-        private double? magnitude;
-        private string? proper;
-        private int? hip;
-
-        /// <inheritdoc cref="IStarData.Declination"/>
-        public override double Declination
-        {
-            get
-            {
-                if (!FetchMemory["dec"])
-                {
-                    declination ??= GetEntryByName<double>("dec");
-                    FetchMemory["dec"] = true;
-                }
                 
-                return declination ?? 0;
-            }
+            return hip;
+        }
+            
+        set
+        {
+            FetchMemory["hip"] = true;
+            hip = value;
+        }
+    }
 
-            set
+    private double? declination;
+    private double? rightAscension;
+    private double? magnitude;
+    private string? proper;
+    private int? hip;
+
+    /// <inheritdoc cref="IStarData.Declination"/>
+    public override double Declination
+    {
+        get
+        {
+            if (!FetchMemory["dec"])
             {
+                declination ??= GetEntryByName<double>("dec");
                 FetchMemory["dec"] = true;
-                declination = value;
             }
+                
+            return declination ?? 0;
         }
 
-        /// <inheritdoc cref="IStarData.RightAscension"/>
-        public override double RightAscension
+        set
         {
-            get
-            {
-                if (!FetchMemory["ra"])
-                {
-                    rightAscension ??= GetEntryByName<double>("ra");
-                    FetchMemory["ra"] = true;
-                }
-                
-                return rightAscension ?? 0;
-            }
+            FetchMemory["dec"] = true;
+            declination = value;
+        }
+    }
 
-            set
+    /// <inheritdoc cref="IStarData.RightAscension"/>
+    public override double RightAscension
+    {
+        get
+        {
+            if (!FetchMemory["ra"])
             {
-                FetchMemory["dec"] = true;
-                rightAscension = value;
-            } 
+                rightAscension ??= GetEntryByName<double>("ra");
+                FetchMemory["ra"] = true;
+            }
+                
+            return rightAscension ?? 0;
         }
 
-        /// <inheritdoc cref="IStarData.Magnitude"/>
-        public override double Magnitude 
+        set
         {
-            get
-            {
-                if (!FetchMemory["mag"])
-                {
-                    magnitude ??= GetEntryByName<double>("mag");
-                    FetchMemory["mag"] = true;
-                }
-                
-                return magnitude ?? 0;
-            }
+            FetchMemory["dec"] = true;
+            rightAscension = value;
+        } 
+    }
 
-
-            set
+    /// <inheritdoc cref="IStarData.Magnitude"/>
+    public override double Magnitude 
+    {
+        get
+        {
+            if (!FetchMemory["mag"])
             {
+                magnitude ??= GetEntryByName<double>("mag");
                 FetchMemory["mag"] = true;
-                magnitude = value;
-            } 
+            }
+                
+            return magnitude ?? 0;
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string? ToString()
+
+        set
         {
-            return string.IsNullOrEmpty(Proper) ? HIP?.ToString(CultureInfo.InvariantCulture) ?? base.ToString() : Proper;
+            FetchMemory["mag"] = true;
+            magnitude = value;
+        } 
+    }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string? ToString()
+    {
+        return string.IsNullOrEmpty(Proper) ? HIP?.ToString(CultureInfo.InvariantCulture) ?? base.ToString() : Proper;
+    }
+
+    /// <summary>
+    /// The field names of the star data of this provider.
+    /// </summary>
+    public static readonly string[] FieldNames =
+    {
+        "id",
+        "hip",
+        "hd",
+        "hr",
+        "gl",
+        "bf",
+        "proper",
+        "ra",
+        "dec",
+        "dist",
+        "pmra",
+        "pmdec",
+        "rv",
+        "mag",
+        "absmag",
+        "spect",
+        "ci",
+        "x",
+        "y",
+        "z",
+        "vx",
+        "vy",
+        "vz",
+        "rarad",
+        "decrad",
+        "pmrarad",
+        "pmdecrad",
+        "bayer",
+        "flam",
+        "con",
+        "comp",
+        "comp_primary",
+        "base",
+        "lum",
+        "var",
+        "var_min",
+        "var_max",
+    };
+
+    private static List<string> FieldNameList { get; } = new();
+
+    /// <summary>
+    /// Gets the raw data of the star based by the data field name.
+    /// </summary>
+    /// <param name="rawDataEntry">The raw data entry.</param>
+    /// <param name="dataName">Name of the data.</param>
+    /// <returns>System.String.</returns>
+    public static string? GetDataRaw(string? rawDataEntry, string dataName)
+    {
+        if (rawDataEntry == null)
+        {
+            return null;
         }
 
-        /// <summary>
-        /// The field names of the star data of this provider.
-        /// </summary>
-        public static readonly string[] FieldNames =
+        if (FieldNameList.Count == 0)
         {
-            "id",
-            "hip",
-            "hd",
-            "hr",
-            "gl",
-            "bf",
-            "proper",
-            "ra",
-            "dec",
-            "dist",
-            "pmra",
-            "pmdec",
-            "rv",
-            "mag",
-            "absmag",
-            "spect",
-            "ci",
-            "x",
-            "y",
-            "z",
-            "vx",
-            "vy",
-            "vz",
-            "rarad",
-            "decrad",
-            "pmrarad",
-            "pmdecrad",
-            "bayer",
-            "flam",
-            "con",
-            "comp",
-            "comp_primary",
-            "base",
-            "lum",
-            "var",
-            "var_min",
-            "var_max",
-        };
-
-        private static List<string> FieldNameList { get; } = new();
-
-        /// <summary>
-        /// Gets the raw data of the star based by the data field name.
-        /// </summary>
-        /// <param name="rawDataEntry">The raw data entry.</param>
-        /// <param name="dataName">Name of the data.</param>
-        /// <returns>System.String.</returns>
-        public static string? GetDataRaw(string? rawDataEntry, string dataName)
-        {
-            if (rawDataEntry == null)
-            {
-                return null;
-            }
-
-            if (FieldNameList.Count == 0)
-            {
-                FieldNameList.AddRange(FieldNames);
-            }
-
-            var dataIndex = FieldNameList.IndexOf(dataName);
-
-            if (dataIndex != -1)
-            {
-                return rawDataEntry.Split(',')[dataIndex];
-            }
-
-            return string.Empty;
+            FieldNameList.AddRange(FieldNames);
         }
+
+        var dataIndex = FieldNameList.IndexOf(dataName);
+
+        if (dataIndex != -1)
+        {
+            return rawDataEntry.Split(',')[dataIndex];
+        }
+
+        return string.Empty;
     }
 }
