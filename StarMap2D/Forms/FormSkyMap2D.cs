@@ -30,8 +30,10 @@ using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.Math;
-using StarMap2D.CustomControls;
-using StarMap2D.Drawing;
+using StarMap2D.Controls.WinForms;
+using StarMap2D.Controls.WinForms.Drawing;
+using StarMap2D.Controls.WinForms.EventArguments;
+using StarMap2D.Controls.WinForms.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
 
@@ -75,17 +77,17 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         base.Text = DBLangEngine.GetMessage("", "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}]|A title for a window containing a sky map control with latitude and longitude coordinates.", map2d.Plot2D.Latitude, map2d.Plot2D.Longitude);
 
         // TODO::Parametrize! (base64 in settings?)
-        cache.SetImage("Mars", Properties.Resources.planet_mars);
-        cache.SetImage("Sun", Properties.Resources.sun_svg);
-        cache.SetImage("Mercury", Properties.Resources.planet_mercury);
-        cache.SetImage("Venus", Properties.Resources.planet_venus);
-        cache.SetImage("Moon", Properties.Resources.moon_svg);
-        cache.SetImage("Ceres", Properties.Resources.minor_planet_ceres);
+        //cache.SetImage("Mars", Properties.Resources.planet_mars);
+        //cache.SetImage("Sun", Properties.Resources.sun_svg);
+        //cache.SetImage("Mercury", Properties.Resources.planet_mercury);
+        //cache.SetImage("Venus", Properties.Resources.planet_venus);
+        //cache.SetImage("Moon", Properties.Resources.moon_svg);
+        //cache.SetImage("Ceres", Properties.Resources.minor_planet_ceres);
 
         map2d.StarMapObjects.Add(new StarMapObject
         {
             CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjects.GetSunPosition(aaDate, precision, longitude, latitude)),
+                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude)),
             ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Sun", Color.Yellow, Color.Black, new Size(16, 16)]! },
             IsLocationCalculated = true
         });
@@ -93,7 +95,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         map2d.StarMapObjects.Add(new StarMapObject
         {
             CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjects.GetMoonPosition(aaDate, precision, longitude, latitude)),
+                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude)),
             ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Moon", Color.Yellow, Color.Black, new Size(16, 16)]! },
             IsLocationCalculated = true
         });
@@ -101,7 +103,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         map2d.StarMapObjects.Add(new StarMapObject
         {
             CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjects.GetObjectPosition(AASEllipticalObject.MERCURY, aaDate, precision, longitude, latitude)),
+                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.MERCURY, aaDate, precision, longitude, latitude)),
             ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Mercury", Color.Yellow, Color.Black, new Size(16, 16)]! },
             IsLocationCalculated = true
         });
@@ -109,7 +111,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         map2d.StarMapObjects.Add(new StarMapObject
         {
             CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjects.GetObjectPosition(AASEllipticalObject.VENUS, aaDate, precision, longitude, latitude)),
+                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.VENUS, aaDate, precision, longitude, latitude)),
             ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Venus", Color.Yellow, Color.Black, new Size(16, 16)]! },
             IsLocationCalculated = true
         });
@@ -207,7 +209,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     #region InternalEvents
     private void tmSetTime_Tick(object sender, EventArgs e)
     {
-        map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddSeconds(60);
+        map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddMilliseconds(100);
 
         Text = DBLangEngine.GetMessage("msgSkyMap", "Sky Map|A title for a window with a sky chart/map.") +
                @$" [{map2d.Plot2D?.DateTimeUtc.ToLocalTime().ToString(CultureInfo.InvariantCulture)}]";
@@ -216,7 +218,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     private void btGo_Click(object sender, EventArgs e)
     {
         tmSetTime.Enabled = false;
-        var dateTime = dateTimePicker1.Value;
+        var dateTime = dtpMapDateTime.Value;
 
         btPlayPause.Text = @">";
 
@@ -224,13 +226,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             dateTime.Minute, 0, DateTimeKind.Local).ToUniversalTime();
     }
 
-    private void btPlayPause_Click(object sender, EventArgs e)
-    {
-        tmSetTime.Enabled = !tmSetTime.Enabled;
-        btPlayPause.Text = tmSetTime.Enabled ? @"||" : @">";
-    }
-
-    private void map2d_CoordinatesChanged(object sender, CustomControls.EventArguments.LocationChangedEventArgs e)
+    private void map2d_CoordinatesChanged(object sender, LocationChangedEventArgs e)
     {
         Text = DBLangEngine.GetMessage("", "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}]|A title for a window containing a sky map control with latitude and longitude coordinates.", e.Latitude, e.Longitude);
     }
@@ -240,4 +236,9 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         singletonInstance = null;
     }
     #endregion
+
+    private void btPlayPause_CheckedChanged(object sender, CheckedChangeEventArguments e)
+    {
+        tmSetTime.Enabled = e.Checked;
+    }
 }

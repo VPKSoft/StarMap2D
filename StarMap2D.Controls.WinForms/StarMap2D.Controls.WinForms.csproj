@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Company>VPKSoft</Company>
+    <PackageId>StarMap2D.Controls.WinForms</PackageId>
+    <Authors>VPKSoft</Authors>
+    <RootNamespace>StarMap2D.Controls.WinForms</RootNamespace>
+    <Copyright>Copyright © VPKSoft 2022</Copyright>
+    <PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
+    <PackageTags>WinForms controls starmap2d star sky map</PackageTags>
+    <RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>WinForms controls for the StarMap2D software.</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DocumentationFile>bin\$(Configuration)\StarMap2D.Controls.WinForms.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageIcon>dipper2_vpksoft.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\dipper2_vpksoft.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AASharp" Version="1.99.1" />
+    <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageReference Include="Svg" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarMap2D.Calculations\StarMap2D.Calculations.csproj" />
+    <ProjectReference Include="..\VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Map2D.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="StarMagnitudeEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

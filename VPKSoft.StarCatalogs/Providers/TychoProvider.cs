@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using AASharp;
 using VPKSoft.StarCatalogs.Interfaces;
 
 namespace VPKSoft.StarCatalogs.Providers;

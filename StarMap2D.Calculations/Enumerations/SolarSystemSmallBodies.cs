@@ -34,7 +34,7 @@ public enum SolarSystemSmallBodies
     /// <summary>
     /// The dwarf planet Ceres.
     /// </summary>
-    Ceres,
+    Ceres = 10000,
 
     /// <summary>
     /// The dwarf planet Orcus.

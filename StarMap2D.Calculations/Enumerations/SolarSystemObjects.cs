@@ -24,28 +24,60 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Calculations.Enumerations;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// An enumeration of common solar system objects.
 /// </summary>
-public interface IRightAscensionHms
+public enum SolarSystemObjects
 {
     /// <summary>
-    /// Gets or sets the right ascension hours.
+    /// The sun.
     /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
+    Sun,
+
     /// <summary>
-    /// Gets or sets the right ascension minutes.
+    /// The planet Mercury.
     /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
+    Mercury,
+
     /// <summary>
-    /// Gets or sets the right ascension seconds.
+    /// The planet Venus.
     /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    Venus,
+
+    /// <summary>
+    /// The planet Earth.
+    /// </summary>
+    Earth,
+
+    /// <summary>
+    /// The moon of the planet Earth.
+    /// </summary>
+    Moon,
+
+    /// <summary>
+    /// The planet Mars.
+    /// </summary>
+    Mars,
+
+    /// <summary>
+    /// The planet Jupiter.
+    /// </summary>
+    Jupiter,
+
+    /// <summary>
+    /// The planet Saturn.
+    /// </summary>
+    Saturn,
+
+    /// <summary>
+    /// The planet Uranus.
+    /// </summary>
+    Uranus,
+
+    /// <summary>
+    /// The planet Neptune.
+    /// </summary>
+    Neptune,
 }

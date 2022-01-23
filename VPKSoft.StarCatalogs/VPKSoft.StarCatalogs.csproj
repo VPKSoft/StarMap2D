@@ -16,6 +16,8 @@
 	<PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
+	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	<PackageIcon>dipper2_vpksoft.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +26,13 @@
 
   <ItemGroup>
     <Folder Include="PPM\Extracted\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\dipper2_vpksoft.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

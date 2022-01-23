@@ -24,28 +24,24 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Controls.WinForms.EventArguments;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
+/// Implements the <see cref="System.EventArgs" />
 /// </summary>
-public interface IRightAscensionHms
+/// <seealso cref="System.EventArgs" />
+public class LocationChangedEventArgs: EventArgs
 {
     /// <summary>
-    /// Gets or sets the right ascension hours.
+    /// Gets or sets the new latitude.
     /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
+    /// <value>The new latitude.</value>
+    public double Latitude { get; set; }
+
     /// <summary>
-    /// Gets or sets the right ascension minutes.
+    /// Gets or sets the new longitude.
     /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    /// <value>The new longitude.</value>
+    public double Longitude { get; set; }
 }

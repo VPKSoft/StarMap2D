@@ -24,28 +24,30 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Controls.WinForms.Utilities;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// An enumeration of graphical elements in the 2D star map.
 /// </summary>
-public interface IRightAscensionHms
+public enum MapGraphicValue
 {
     /// <summary>
-    /// Gets or sets the right ascension hours.
+    /// The map circle color.
     /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
+    MapCircleColor,
+
     /// <summary>
-    /// Gets or sets the right ascension minutes.
+    /// The constellation line color.
     /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
+    ConstellationLineColor,
+
     /// <summary>
-    /// Gets or sets the right ascension seconds.
+    /// The constellation border line color.
     /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    ConstellationBorderLineColor,
+
+    /// <summary>
+    /// The map surroundings color.
+    /// </summary>
+    MapSurroundingsColor,
 }

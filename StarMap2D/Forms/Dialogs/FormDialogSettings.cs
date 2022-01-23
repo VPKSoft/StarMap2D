@@ -24,7 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-using StarMap2D.CustomControls;
+using StarMap2D.Controls.WinForms;
+using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Properties;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
@@ -64,6 +65,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
         nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
         nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
+        solarSystemObjectConfigurator1.MapBackgroundColor = Settings.Default.MapCircleColor;
     }
 
     /// <summary>

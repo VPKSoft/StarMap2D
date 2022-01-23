@@ -77,23 +77,26 @@ namespace StarMap2D.Forms.Dialogs
             this.pnConstellationLineColor = new System.Windows.Forms.Panel();
             this.lbConstellationLineColor = new System.Windows.Forms.Label();
             this.tabStarMagnitudeSettings = new System.Windows.Forms.TabPage();
-            this.starMagnitudeEditor1 = new StarMap2D.CustomControls.StarMagnitudeEditor();
+            this.nudMagnitudeMinimum = new System.Windows.Forms.NumericUpDown();
+            this.lbMagnitudeMinimum = new System.Windows.Forms.Label();
+            this.nudMagnitudeMaximum = new System.Windows.Forms.NumericUpDown();
+            this.lbMagnitudeMaximum = new System.Windows.Forms.Label();
+            this.lbMagnitudeLimits = new System.Windows.Forms.Label();
+            this.starMagnitudeEditor1 = new StarMap2D.Controls.WinForms.StarMagnitudeEditor();
+            this.tabObjectSymbols = new System.Windows.Forms.TabPage();
+            this.solarSystemObjectConfigurator1 = new StarMap2D.Controls.WinForms.SolarSystemObjectConfigurator();
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.lbMagnitudeLimits = new System.Windows.Forms.Label();
-            this.lbMagnitudeMaximum = new System.Windows.Forms.Label();
-            this.nudMagnitudeMaximum = new System.Windows.Forms.NumericUpDown();
-            this.lbMagnitudeMinimum = new System.Windows.Forms.Label();
-            this.nudMagnitudeMinimum = new System.Windows.Forms.NumericUpDown();
             this.tcSettings.SuspendLayout();
             this.tpLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
             this.tabColorSettings.SuspendLayout();
             this.tabStarMagnitudeSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).BeginInit();
+            this.tabObjectSymbols.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -104,6 +107,7 @@ namespace StarMap2D.Forms.Dialogs
             this.tcSettings.Controls.Add(this.tpLocation);
             this.tcSettings.Controls.Add(this.tabColorSettings);
             this.tcSettings.Controls.Add(this.tabStarMagnitudeSettings);
+            this.tcSettings.Controls.Add(this.tabObjectSymbols);
             this.tcSettings.Location = new System.Drawing.Point(12, 12);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
@@ -363,6 +367,69 @@ namespace StarMap2D.Forms.Dialogs
             this.tabStarMagnitudeSettings.Text = "Star magnitudes";
             this.tabStarMagnitudeSettings.UseVisualStyleBackColor = true;
             // 
+            // nudMagnitudeMinimum
+            // 
+            this.nudMagnitudeMinimum.DecimalPlaces = 2;
+            this.nudMagnitudeMinimum.Location = new System.Drawing.Point(87, 374);
+            this.nudMagnitudeMinimum.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            this.nudMagnitudeMinimum.Name = "nudMagnitudeMinimum";
+            this.nudMagnitudeMinimum.Size = new System.Drawing.Size(120, 23);
+            this.nudMagnitudeMinimum.TabIndex = 5;
+            this.nudMagnitudeMinimum.Value = new decimal(new int[] {
+            55,
+            0,
+            0,
+            65536});
+            // 
+            // lbMagnitudeMinimum
+            // 
+            this.lbMagnitudeMinimum.AutoSize = true;
+            this.lbMagnitudeMinimum.Location = new System.Drawing.Point(6, 376);
+            this.lbMagnitudeMinimum.Name = "lbMagnitudeMinimum";
+            this.lbMagnitudeMinimum.Size = new System.Drawing.Size(60, 15);
+            this.lbMagnitudeMinimum.TabIndex = 4;
+            this.lbMagnitudeMinimum.Text = "Minimum";
+            // 
+            // nudMagnitudeMaximum
+            // 
+            this.nudMagnitudeMaximum.DecimalPlaces = 2;
+            this.nudMagnitudeMaximum.Location = new System.Drawing.Point(87, 345);
+            this.nudMagnitudeMaximum.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            this.nudMagnitudeMaximum.Name = "nudMagnitudeMaximum";
+            this.nudMagnitudeMaximum.Size = new System.Drawing.Size(120, 23);
+            this.nudMagnitudeMaximum.TabIndex = 3;
+            this.nudMagnitudeMaximum.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            // 
+            // lbMagnitudeMaximum
+            // 
+            this.lbMagnitudeMaximum.AutoSize = true;
+            this.lbMagnitudeMaximum.Location = new System.Drawing.Point(6, 347);
+            this.lbMagnitudeMaximum.Name = "lbMagnitudeMaximum";
+            this.lbMagnitudeMaximum.Size = new System.Drawing.Size(62, 15);
+            this.lbMagnitudeMaximum.TabIndex = 2;
+            this.lbMagnitudeMaximum.Text = "Maximum";
+            // 
+            // lbMagnitudeLimits
+            // 
+            this.lbMagnitudeLimits.AutoSize = true;
+            this.lbMagnitudeLimits.Location = new System.Drawing.Point(6, 320);
+            this.lbMagnitudeLimits.Name = "lbMagnitudeLimits";
+            this.lbMagnitudeLimits.Size = new System.Drawing.Size(97, 15);
+            this.lbMagnitudeLimits.TabIndex = 1;
+            this.lbMagnitudeLimits.Text = "Magnitude limits";
+            // 
             // starMagnitudeEditor1
             // 
             this.starMagnitudeEditor1.Location = new System.Drawing.Point(6, 6);
@@ -373,6 +440,25 @@ namespace StarMap2D.Forms.Dialogs
             this.starMagnitudeEditor1.StarMagnitudeColors = "";
             this.starMagnitudeEditor1.StarMagnitudes = "";
             this.starMagnitudeEditor1.TabIndex = 0;
+            // 
+            // tabObjectSymbols
+            // 
+            this.tabObjectSymbols.Controls.Add(this.solarSystemObjectConfigurator1);
+            this.tabObjectSymbols.Location = new System.Drawing.Point(4, 24);
+            this.tabObjectSymbols.Name = "tabObjectSymbols";
+            this.tabObjectSymbols.Padding = new System.Windows.Forms.Padding(3);
+            this.tabObjectSymbols.Size = new System.Drawing.Size(688, 465);
+            this.tabObjectSymbols.TabIndex = 3;
+            this.tabObjectSymbols.Text = "tabPage1";
+            this.tabObjectSymbols.UseVisualStyleBackColor = true;
+            // 
+            // solarSystemObjectConfigurator1
+            // 
+            this.solarSystemObjectConfigurator1.Location = new System.Drawing.Point(3, 3);
+            this.solarSystemObjectConfigurator1.Margin = new System.Windows.Forms.Padding(0);
+            this.solarSystemObjectConfigurator1.Name = "solarSystemObjectConfigurator1";
+            this.solarSystemObjectConfigurator1.Size = new System.Drawing.Size(594, 360);
+            this.solarSystemObjectConfigurator1.TabIndex = 0;
             // 
             // btOk
             // 
@@ -395,69 +481,6 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.TabIndex = 3;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
-            // 
-            // lbMagnitudeLimits
-            // 
-            this.lbMagnitudeLimits.AutoSize = true;
-            this.lbMagnitudeLimits.Location = new System.Drawing.Point(6, 320);
-            this.lbMagnitudeLimits.Name = "lbMagnitudeLimits";
-            this.lbMagnitudeLimits.Size = new System.Drawing.Size(97, 15);
-            this.lbMagnitudeLimits.TabIndex = 1;
-            this.lbMagnitudeLimits.Text = "Magnitude limits";
-            // 
-            // lbMagnitudeMaximum
-            // 
-            this.lbMagnitudeMaximum.AutoSize = true;
-            this.lbMagnitudeMaximum.Location = new System.Drawing.Point(6, 347);
-            this.lbMagnitudeMaximum.Name = "lbMagnitudeMaximum";
-            this.lbMagnitudeMaximum.Size = new System.Drawing.Size(62, 15);
-            this.lbMagnitudeMaximum.TabIndex = 2;
-            this.lbMagnitudeMaximum.Text = "Maximum";
-            // 
-            // nudMagnitudeMaximum
-            // 
-            this.nudMagnitudeMaximum.DecimalPlaces = 2;
-            this.nudMagnitudeMaximum.Location = new System.Drawing.Point(87, 345);
-            this.nudMagnitudeMaximum.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            -2147483648});
-            this.nudMagnitudeMaximum.Name = "nudMagnitudeMaximum";
-            this.nudMagnitudeMaximum.Size = new System.Drawing.Size(120, 23);
-            this.nudMagnitudeMaximum.TabIndex = 3;
-            this.nudMagnitudeMaximum.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            -2147483648});
-            // 
-            // lbMagnitudeMinimum
-            // 
-            this.lbMagnitudeMinimum.AutoSize = true;
-            this.lbMagnitudeMinimum.Location = new System.Drawing.Point(6, 376);
-            this.lbMagnitudeMinimum.Name = "lbMagnitudeMinimum";
-            this.lbMagnitudeMinimum.Size = new System.Drawing.Size(60, 15);
-            this.lbMagnitudeMinimum.TabIndex = 4;
-            this.lbMagnitudeMinimum.Text = "Minimum";
-            // 
-            // nudMagnitudeMinimum
-            // 
-            this.nudMagnitudeMinimum.DecimalPlaces = 2;
-            this.nudMagnitudeMinimum.Location = new System.Drawing.Point(87, 374);
-            this.nudMagnitudeMinimum.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            -2147483648});
-            this.nudMagnitudeMinimum.Name = "nudMagnitudeMinimum";
-            this.nudMagnitudeMinimum.Size = new System.Drawing.Size(120, 23);
-            this.nudMagnitudeMinimum.TabIndex = 5;
-            this.nudMagnitudeMinimum.Value = new decimal(new int[] {
-            55,
-            0,
-            0,
-            65536});
             // 
             // FormDialogSettings
             // 
@@ -483,8 +506,9 @@ namespace StarMap2D.Forms.Dialogs
             this.tabColorSettings.PerformLayout();
             this.tabStarMagnitudeSettings.ResumeLayout(false);
             this.tabStarMagnitudeSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).EndInit();
+            this.tabObjectSymbols.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -516,11 +540,13 @@ namespace StarMap2D.Forms.Dialogs
         private Panel pnMapSurroundingsColor;
         private Label lbMapSurroundingsColor;
         private TabPage tabStarMagnitudeSettings;
-        private CustomControls.StarMagnitudeEditor starMagnitudeEditor1;
+        private StarMap2D.Controls.WinForms.StarMagnitudeEditor starMagnitudeEditor1;
         private NumericUpDown nudMagnitudeMinimum;
         private Label lbMagnitudeMinimum;
         private NumericUpDown nudMagnitudeMaximum;
         private Label lbMagnitudeMaximum;
         private Label lbMagnitudeLimits;
+        private TabPage tabObjectSymbols;
+        private Controls.WinForms.SolarSystemObjectConfigurator solarSystemObjectConfigurator1;
     }
 }

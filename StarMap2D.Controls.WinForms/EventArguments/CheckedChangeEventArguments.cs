@@ -24,28 +24,18 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Controls.WinForms.EventArguments;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// Event arguments for checked value change event.
+/// Implements the <see cref="System.EventArgs" />
 /// </summary>
-public interface IRightAscensionHms
+/// <seealso cref="System.EventArgs" />
+public class CheckedChangeEventArguments: EventArgs
 {
     /// <summary>
-    /// Gets or sets the right ascension hours.
+    /// Gets or sets a value indicating whether the control is checked.
     /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension minutes.
-    /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    /// <value><c>true</c> if checked; otherwise, <c>false</c>.</value>
+    public bool Checked { get; set; }
 }

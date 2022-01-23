@@ -26,7 +26,7 @@ SOFTWARE.
 
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using StarMap2D.Drawing;
+using StarMap2D.Controls.WinForms.Drawing;
 using Svg;
 
 namespace StarMap2D.Miscellaneous;
@@ -36,7 +36,7 @@ public partial class FormTestDrawing : Form
     public FormTestDrawing()
     {
         InitializeComponent();
-        pictureBox1.Image = ColorizeSvgTest();
+        //pictureBox1.Image = ColorizeSvgTest();
     }
 
     private void panel1_Paint(object sender, PaintEventArgs e)
@@ -69,23 +69,23 @@ public partial class FormTestDrawing : Form
         }
     }
 
-    private Image ColorizeSvgTest()
-    {
-        var svg = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar);
-        foreach (var svgElement in svg.Descendants())
-        {
-            if (svgElement is SvgCircle circle)
-            {
-                circle.Fill = new SvgColourServer(Color.Aqua);
-                circle.Stroke = SvgPaintServer.None;
-            }
+    //private Image ColorizeSvgTest()
+    //{
+    //    var svg = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar);
+    //    foreach (var svgElement in svg.Descendants())
+    //    {
+    //        if (svgElement is SvgCircle circle)
+    //        {
+    //            circle.Fill = new SvgColourServer(Color.Aqua);
+    //            circle.Stroke = SvgPaintServer.None;
+    //        }
 
-            if (svgElement is SvgPath path)
-            {
-                path.Fill = new SvgColourServer(Color.Yellow);
-            }
-        }
+    //        if (svgElement is SvgPath path)
+    //        {
+    //            path.Fill = new SvgColourServer(Color.Yellow);
+    //        }
+    //    }
 
-        return svg.Draw(100, 100);
-    }
+    //    return svg.Draw(100, 100);
+    //}
 }

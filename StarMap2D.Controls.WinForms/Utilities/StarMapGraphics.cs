@@ -24,28 +24,17 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+using StarMap2D.Controls.WinForms.Interfaces;
+
+namespace StarMap2D.Controls.WinForms.Utilities;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// A class to provide graphics for a single object in the <see cref="Map2D"/> star map.
+/// Implements the <see cref="IMap2DGraphics" />
 /// </summary>
-public interface IRightAscensionHms
+/// <seealso cref="IMap2DGraphics" />
+public class StarMapGraphics: IMap2DGraphics
 {
-    /// <summary>
-    /// Gets or sets the right ascension hours.
-    /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension minutes.
-    /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    /// <inheritdoc cref="IMap2DGraphics.GetImage"/>
+    public IMap2DGraphics.GetImageDelegate? GetImage { get; set; }
 }

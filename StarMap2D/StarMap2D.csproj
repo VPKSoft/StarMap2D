@@ -7,8 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <DocumentationFile>bin\$(Configuration)\StarMap2D.xml</DocumentationFile>
-    <PackageIcon>ursa-major.jpg</PackageIcon>
-    <ApplicationIcon>ursa-major.ico</ApplicationIcon>
+    <PackageIcon>big-dipper.png</PackageIcon>
+    <ApplicationIcon>dipper2_vpksoft.ico</ApplicationIcon>
     <Company>VPKSoft</Company>
     <Product>StarMap2D</Product>
     <Description>A program to display sky chart with utilities.</Description>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="ursa-major.ico" />
+    <Content Include="dipper2_vpksoft.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,14 +61,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\ursa-major.jpg">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\StarMap2D.Calculations\StarMap2D.Calculations.csproj" />
+    <ProjectReference Include="..\Starmap2D.Controls.WinForms\StarMap2D.Controls.WinForms.csproj" />
     <ProjectReference Include="..\VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj" />
   </ItemGroup>
 

@@ -57,49 +57,33 @@ namespace StarMap2D.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSkyMap2D));
             this.tmSetTime = new System.Windows.Forms.Timer(this.components);
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.btPlayPause = new System.Windows.Forms.Button();
-            this.btGo = new System.Windows.Forms.Button();
+            this.dtpMapDateTime = new System.Windows.Forms.DateTimePicker();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.map2d = new StarMap2D.CustomControls.Map2D();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.map2d = new StarMap2D.Controls.WinForms.Map2D();
+            this.tlpMapControls = new System.Windows.Forms.TableLayoutPanel();
+            this.pnDateTime = new System.Windows.Forms.Panel();
+            this.btGo = new StarMap2D.Controls.WinForms.ImageButton();
+            this.btPlayPause = new StarMap2D.Controls.WinForms.ImageButton();
             this.tlpMain.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tlpMapControls.SuspendLayout();
+            this.pnDateTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmSetTime
             // 
             this.tmSetTime.Tick += new System.EventHandler(this.tmSetTime_Tick);
             // 
-            // dateTimePicker1
+            // dtpMapDateTime
             // 
-            this.dateTimePicker1.CustomFormat = "dd\'.\'MM\'.\'yyyy HH\':\'mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(3, 3);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(91, 23);
-            this.dateTimePicker1.TabIndex = 2;
-            // 
-            // btPlayPause
-            // 
-            this.btPlayPause.Location = new System.Drawing.Point(100, 402);
-            this.btPlayPause.Name = "btPlayPause";
-            this.btPlayPause.Size = new System.Drawing.Size(71, 23);
-            this.btPlayPause.TabIndex = 3;
-            this.btPlayPause.Text = ">";
-            this.btPlayPause.UseVisualStyleBackColor = true;
-            this.btPlayPause.Click += new System.EventHandler(this.btPlayPause_Click);
-            // 
-            // btGo
-            // 
-            this.btGo.Location = new System.Drawing.Point(3, 402);
-            this.btGo.Name = "btGo";
-            this.btGo.Size = new System.Drawing.Size(71, 23);
-            this.btGo.TabIndex = 4;
-            this.btGo.Text = "-->";
-            this.btGo.UseVisualStyleBackColor = true;
-            this.btGo.Click += new System.EventHandler(this.btGo_Click);
+            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpMapDateTime.CustomFormat = "dd\'.\'MM\'.\'yyyy HH\':\'mm";
+            this.dtpMapDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpMapDateTime.Location = new System.Drawing.Point(3, 6);
+            this.dtpMapDateTime.Name = "dtpMapDateTime";
+            this.dtpMapDateTime.ShowUpDown = true;
+            this.dtpMapDateTime.Size = new System.Drawing.Size(137, 23);
+            this.dtpMapDateTime.TabIndex = 2;
             // 
             // tlpMain
             // 
@@ -107,7 +91,7 @@ namespace StarMap2D.Forms
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tlpMain.Controls.Add(this.map2d, 0, 0);
-            this.tlpMain.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tlpMain.Controls.Add(this.tlpMapControls, 1, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Margin = new System.Windows.Forms.Padding(0);
@@ -123,7 +107,7 @@ namespace StarMap2D.Forms
             this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.map2d.ConstellationBorderLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 18, 18, 14, 11, 743);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 22, 13, 54, 54, 997);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map2d.Location = new System.Drawing.Point(0, 0);
             this.map2d.MagnitudeMaximum = -500D;
@@ -136,24 +120,69 @@ namespace StarMap2D.Forms
             this.map2d.StarColors = new System.Drawing.Color[0];
             this.map2d.StarSizes = new int[0];
             this.map2d.TabIndex = 0;
-            this.map2d.CoordinatesChanged += new StarMap2D.CustomControls.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
+            this.map2d.CoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
             // 
-            // tableLayoutPanel3
+            // tlpMapControls
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.dateTimePicker1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btPlayPause, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btGo, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(770, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(194, 798);
-            this.tableLayoutPanel3.TabIndex = 1;
+            this.tlpMapControls.ColumnCount = 2;
+            this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMapControls.Controls.Add(this.pnDateTime, 0, 0);
+            this.tlpMapControls.Controls.Add(this.btPlayPause, 0, 1);
+            this.tlpMapControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMapControls.Location = new System.Drawing.Point(770, 3);
+            this.tlpMapControls.Name = "tlpMapControls";
+            this.tlpMapControls.RowCount = 4;
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpMapControls.Size = new System.Drawing.Size(194, 798);
+            this.tlpMapControls.TabIndex = 1;
+            // 
+            // pnDateTime
+            // 
+            this.pnDateTime.AutoSize = true;
+            this.tlpMapControls.SetColumnSpan(this.pnDateTime, 2);
+            this.pnDateTime.Controls.Add(this.dtpMapDateTime);
+            this.pnDateTime.Controls.Add(this.btGo);
+            this.pnDateTime.Location = new System.Drawing.Point(3, 3);
+            this.pnDateTime.Name = "pnDateTime";
+            this.pnDateTime.Size = new System.Drawing.Size(188, 32);
+            this.pnDateTime.TabIndex = 5;
+            // 
+            // btGo
+            // 
+            this.btGo.Checked = false;
+            this.btGo.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btGo.DisabledColor = System.Drawing.Color.LightGray;
+            this.btGo.Enabled = false;
+            this.btGo.ImageCheckedSvg = null;
+            this.btGo.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btGo.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btGo.ImageSvg = "ic_fluent_arrow_right_48_filled";
+            this.btGo.IsCheckedButton = false;
+            this.btGo.Location = new System.Drawing.Point(146, 6);
+            this.btGo.Name = "btGo";
+            this.btGo.Size = new System.Drawing.Size(36, 23);
+            this.btGo.TabIndex = 6;
+            this.btGo.Click += new System.EventHandler(this.btGo_Click);
+            // 
+            // btPlayPause
+            // 
+            this.btPlayPause.Checked = false;
+            this.btPlayPause.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btPlayPause.DisabledColor = System.Drawing.Color.LightGray;
+            this.btPlayPause.ImageCheckedSvg = "ic_fluent_pause_48_filled";
+            this.btPlayPause.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btPlayPause.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btPlayPause.ImageSvg = "ic_fluent_play_circle_48_filled";
+            this.btPlayPause.IsCheckedButton = true;
+            this.btPlayPause.Location = new System.Drawing.Point(3, 41);
+            this.btPlayPause.Name = "btPlayPause";
+            this.btPlayPause.Size = new System.Drawing.Size(91, 85);
+            this.btPlayPause.TabIndex = 6;
+            this.btPlayPause.CheckedChanged += new System.EventHandler<StarMap2D.Controls.WinForms.EventArguments.CheckedChangeEventArguments>(this.btPlayPause_CheckedChanged);
             // 
             // FormSkyMap2D
             // 
@@ -166,18 +195,21 @@ namespace StarMap2D.Forms
             this.Text = "Sky Map";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSkyMap2D_FormClosed);
             this.tlpMain.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tlpMapControls.ResumeLayout(false);
+            this.tlpMapControls.PerformLayout();
+            this.pnDateTime.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Timer tmSetTime;
-        private DateTimePicker dateTimePicker1;
-        private Button btPlayPause;
-        private Button btGo;
+        private DateTimePicker dtpMapDateTime;
         private TableLayoutPanel tlpMain;
-        private CustomControls.Map2D map2d;
-        private TableLayoutPanel tableLayoutPanel3;
+        private StarMap2D.Controls.WinForms.Map2D map2d;
+        private TableLayoutPanel tlpMapControls;
+        private Panel pnDateTime;
+        private StarMap2D.Controls.WinForms.ImageButton btGo;
+        private Controls.WinForms.ImageButton btPlayPause;
     }
 }

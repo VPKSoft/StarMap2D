@@ -24,28 +24,15 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Controls.WinForms.Drawing;
 
-/// <summary>
-/// An interface for star data with right ascension in hms format.
-/// </summary>
-public interface IRightAscensionHms
+public static class DrawStarImage
 {
-    /// <summary>
-    /// Gets or sets the right ascension hours.
-    /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension minutes.
-    /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+
+    public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
+    {
+        var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);
+        using var solidBrush = new SolidBrush(starColor);
+        graphics.FillEllipse(solidBrush, new Rectangle(startPoint, new Size(starSize, starSize)));
+    }
 }

@@ -24,16 +24,9 @@ SOFTWARE.
 */
 #endregion
 
-using System.Diagnostics;
-using System.Text;
-using StarMap2D.Calculations.Constellations.StaticData;
-using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
-using StarMap2D.Miscellaneous;
 using VPKSoft.LangLib;
-using VPKSoft.StarCatalogs.Providers;
-using VPKSoft.StarCatalogs.Utilities;
 
 namespace StarMap2D;
 

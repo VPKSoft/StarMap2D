@@ -24,28 +24,23 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+namespace StarMap2D.Controls.WinForms.Interfaces;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// Interface for the objects in the <see cref="Map2D"/> star map control.
 /// </summary>
-public interface IRightAscensionHms
+public interface IMap2DGraphics
 {
     /// <summary>
-    /// Gets or sets the right ascension hours.
+    /// A delegate to provide an image for a specified diameter of the 2D star map.
     /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
+    /// <param name="diameter">The diameter of the 2D star map.</param>
+    /// <param name="magnitude">An optional magnitude of the 2D star map object.</param>
+    /// <returns>An image suitable to be used in a 2D star map of diameter of the <paramref name="diameter"/>.</returns>
+    public delegate Image GetImageDelegate(double diameter, double? magnitude);
+
     /// <summary>
-    /// Gets or sets the right ascension minutes.
+    /// A delegate to get an image for the 2D graphics object.
     /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    GetImageDelegate? GetImage { get; set; }
 }

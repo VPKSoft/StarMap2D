@@ -24,28 +24,33 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.Interfaces;
+using StarMap2D.Controls.WinForms.Interfaces;
+using VPKSoft.StarCatalogs.Interfaces;
+
+namespace StarMap2D.Controls.WinForms.Utilities;
 
 /// <summary>
-/// An interface for star data with right ascension in hms format.
+/// A class to indicate a single object in the <see cref="Map2D"/> star map.
+/// Implements the <see cref="IStarMapObject2D{T}" />
 /// </summary>
-public interface IRightAscensionHms
+/// <seealso cref="IStarMapObject2D{T}" />
+public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 {
-    /// <summary>
-    /// Gets or sets the right ascension hours.
-    /// </summary>
-    /// <value>The right ascension hours.</value>
-    public double RAh { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension minutes.
-    /// </summary>
-    /// <value>The right ascension minutes.</value>
-    public double RAm { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the right ascension seconds.
-    /// </summary>
-    /// <value>The right ascension seconds.</value>
-    public double RAs { get; set; }
+    /// <inheritdoc cref="IStarMapObject2D{T}.IsLocationCalculated"/>
+    public bool IsLocationCalculated { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.CalculatePosition"/>
+    public IStarMapObject2D<IMap2DGraphics>.CalculatePositionDelegate? CalculatePosition { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.RightAscension"/>
+    public double RightAscension { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.Declination"/>
+    public double Declination { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.ObjectGraphics"/>
+    public IMap2DGraphics? ObjectGraphics { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.Magnitude"/>
+    public double Magnitude { get; set; }
 }

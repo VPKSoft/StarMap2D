@@ -11,7 +11,7 @@
     <Copyright>Copyright © VPKSoft 2022</Copyright>
     <RepositoryType>git</RepositoryType>
 	  <DocumentationFile>bin\$(Configuration)\StarMap2D.Calculations.xml</DocumentationFile>
-	  <PackageIcon>ursa-major.jpg</PackageIcon>
+	  <PackageIcon>dipper2_vpksoft.png</PackageIcon>
 	  <Authors>StarMap2D.Calculations</Authors>
 	  <PackageId>StarMap2D.Calculations</PackageId>
 	  <Company>VPKSoft</Company>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\ursa-major.jpg">
+    <None Include="..\dipper2_vpksoft.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
