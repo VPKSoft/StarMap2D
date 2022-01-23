@@ -578,8 +578,9 @@ public class SolarSystemObjectGraphics
             {
                 // TODO::...
             }
-            
         }
+
+        return result;
     }
 
     /// <summary>
