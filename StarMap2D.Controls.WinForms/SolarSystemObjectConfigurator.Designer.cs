@@ -58,6 +58,7 @@ namespace StarMap2D.Controls.WinForms
             this.ceColor = new Cyotek.Windows.Forms.ColorEditor();
             this.cwColor = new Cyotek.Windows.Forms.ColorWheel();
             this.pn = new System.Windows.Forms.Panel();
+            this.cbDontUse = new System.Windows.Forms.CheckBox();
             this.lbSelectedSymbolName = new System.Windows.Forms.Label();
             this.lbSelectedSymbol = new System.Windows.Forms.Label();
             this.gpColorTo = new System.Windows.Forms.GroupBox();
@@ -65,9 +66,10 @@ namespace StarMap2D.Controls.WinForms
             this.rbCircle = new System.Windows.Forms.RadioButton();
             this.nudStarSize = new System.Windows.Forms.NumericUpDown();
             this.lbObjectDiameter = new System.Windows.Forms.Label();
-            this.lbSolarSystemObjects = new System.Windows.Forms.ListBox();
+            this.lbSolarSystemObjects = new StarMap2D.Controls.WinForms.ListBoxExtended();
             this.pnMapSymbol = new System.Windows.Forms.Panel();
-            this.cbDontUse = new System.Windows.Forms.CheckBox();
+            this.lbObjectName = new System.Windows.Forms.Label();
+            this.tbObjectName = new System.Windows.Forms.TextBox();
             this.tlpMain.SuspendLayout();
             this.pn.SuspendLayout();
             this.gpColorTo.SuspendLayout();
@@ -123,6 +125,8 @@ namespace StarMap2D.Controls.WinForms
             // pn
             // 
             this.tlpMain.SetColumnSpan(this.pn, 3);
+            this.pn.Controls.Add(this.tbObjectName);
+            this.pn.Controls.Add(this.lbObjectName);
             this.pn.Controls.Add(this.cbDontUse);
             this.pn.Controls.Add(this.lbSelectedSymbolName);
             this.pn.Controls.Add(this.lbSelectedSymbol);
@@ -135,6 +139,17 @@ namespace StarMap2D.Controls.WinForms
             this.pn.Name = "pn";
             this.pn.Size = new System.Drawing.Size(594, 72);
             this.pn.TabIndex = 6;
+            // 
+            // cbDontUse
+            // 
+            this.cbDontUse.AutoSize = true;
+            this.cbDontUse.Location = new System.Drawing.Point(131, 5);
+            this.cbDontUse.Name = "cbDontUse";
+            this.cbDontUse.Size = new System.Drawing.Size(132, 19);
+            this.cbDontUse.TabIndex = 13;
+            this.cbDontUse.Text = "Don\'t use the object";
+            this.cbDontUse.UseVisualStyleBackColor = true;
+            this.cbDontUse.CheckedChanged += new System.EventHandler(this.cbDontUse_CheckedChanged);
             // 
             // lbSelectedSymbolName
             // 
@@ -203,7 +218,7 @@ namespace StarMap2D.Controls.WinForms
             0,
             0});
             this.nudStarSize.Name = "nudStarSize";
-            this.nudStarSize.Size = new System.Drawing.Size(85, 23);
+            this.nudStarSize.Size = new System.Drawing.Size(43, 23);
             this.nudStarSize.TabIndex = 9;
             this.nudStarSize.Value = new decimal(new int[] {
             1,
@@ -247,16 +262,22 @@ namespace StarMap2D.Controls.WinForms
             this.pnMapSymbol.Size = new System.Drawing.Size(216, 72);
             this.pnMapSymbol.TabIndex = 8;
             // 
-            // cbDontUse
+            // lbObjectName
             // 
-            this.cbDontUse.AutoSize = true;
-            this.cbDontUse.Location = new System.Drawing.Point(131, 5);
-            this.cbDontUse.Name = "cbDontUse";
-            this.cbDontUse.Size = new System.Drawing.Size(132, 19);
-            this.cbDontUse.TabIndex = 13;
-            this.cbDontUse.Text = "Don\'t use the object";
-            this.cbDontUse.UseVisualStyleBackColor = true;
-            this.cbDontUse.CheckedChanged += new System.EventHandler(this.cbDontUse_CheckedChanged);
+            this.lbObjectName.AutoSize = true;
+            this.lbObjectName.Location = new System.Drawing.Point(180, 23);
+            this.lbObjectName.Name = "lbObjectName";
+            this.lbObjectName.Size = new System.Drawing.Size(75, 15);
+            this.lbObjectName.TabIndex = 14;
+            this.lbObjectName.Text = "Object name";
+            // 
+            // tbObjectName
+            // 
+            this.tbObjectName.Location = new System.Drawing.Point(180, 41);
+            this.tbObjectName.Name = "tbObjectName";
+            this.tbObjectName.Size = new System.Drawing.Size(156, 23);
+            this.tbObjectName.TabIndex = 15;
+            this.tbObjectName.TextChanged += new System.EventHandler(this.tbObjectName_TextChanged);
             // 
             // SolarSystemObjectConfigurator
             // 
@@ -284,7 +305,7 @@ namespace StarMap2D.Controls.WinForms
         private Panel pn;
         private NumericUpDown nudStarSize;
         private Label lbObjectDiameter;
-        private ListBox lbSolarSystemObjects;
+        private ListBoxExtended lbSolarSystemObjects;
         private Panel pnMapSymbol;
         private Label lbSelectedSymbolName;
         private Label lbSelectedSymbol;
@@ -292,5 +313,7 @@ namespace StarMap2D.Controls.WinForms
         private RadioButton rbSymbol;
         private RadioButton rbCircle;
         private CheckBox cbDontUse;
+        private TextBox tbObjectName;
+        private Label lbObjectName;
     }
 }

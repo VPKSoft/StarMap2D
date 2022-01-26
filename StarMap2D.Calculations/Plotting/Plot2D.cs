@@ -98,8 +98,9 @@ public class Plot2D
     /// Project2s the specified horizontal coordinate to 2D coordinate.
     /// </summary>
     /// <param name="coordinate">The coordinate to project.</param>
+    /// <param name="invertEastWest">A value indicating whether to invert to projection in east-west direction.</param>
     /// <returns>The 2D coordinate.</returns>
-    public AAS2DCoordinate Project2D(AAS2DCoordinate coordinate)
+    public AAS2DCoordinate Project2D(AAS2DCoordinate coordinate, bool invertEastWest)
     {
         var azimuth = ((coordinate.X + 180) % 360).ToRadians();
         var altitude = (coordinate.Y).ToRadians();
@@ -114,7 +115,7 @@ public class Plot2D
         var xR = r * (1 - x1);
         var yR = r * (1 - y1);
 
-        return new AAS2DCoordinate() { X = xR, Y = yR};
+        return new AAS2DCoordinate() { X = invertEastWest ? Radius - xR : xR, Y = yR};
     }
 
     /// <summary>

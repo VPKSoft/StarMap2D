@@ -84,6 +84,7 @@ namespace StarMap2D.Forms.Dialogs
             this.lbMagnitudeLimits = new System.Windows.Forms.Label();
             this.starMagnitudeEditor1 = new StarMap2D.Controls.WinForms.StarMagnitudeEditor();
             this.tabObjectSymbols = new System.Windows.Forms.TabPage();
+            this.btResetSymbols = new System.Windows.Forms.Button();
             this.solarSystemObjectConfigurator1 = new StarMap2D.Controls.WinForms.SolarSystemObjectConfigurator();
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
@@ -443,18 +444,31 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tabObjectSymbols
             // 
+            this.tabObjectSymbols.Controls.Add(this.btResetSymbols);
             this.tabObjectSymbols.Controls.Add(this.solarSystemObjectConfigurator1);
             this.tabObjectSymbols.Location = new System.Drawing.Point(4, 24);
             this.tabObjectSymbols.Name = "tabObjectSymbols";
             this.tabObjectSymbols.Padding = new System.Windows.Forms.Padding(3);
             this.tabObjectSymbols.Size = new System.Drawing.Size(688, 465);
             this.tabObjectSymbols.TabIndex = 3;
-            this.tabObjectSymbols.Text = "tabPage1";
+            this.tabObjectSymbols.Text = "Known object symbols";
             this.tabObjectSymbols.UseVisualStyleBackColor = true;
+            // 
+            // btResetSymbols
+            // 
+            this.btResetSymbols.Location = new System.Drawing.Point(6, 366);
+            this.btResetSymbols.Name = "btResetSymbols";
+            this.btResetSymbols.Size = new System.Drawing.Size(75, 23);
+            this.btResetSymbols.TabIndex = 1;
+            this.btResetSymbols.Text = "Reset";
+            this.btResetSymbols.UseVisualStyleBackColor = true;
+            this.btResetSymbols.Click += new System.EventHandler(this.btResetSymbols_Click);
             // 
             // solarSystemObjectConfigurator1
             // 
+            this.solarSystemObjectConfigurator1.Locale = "en-US";
             this.solarSystemObjectConfigurator1.Location = new System.Drawing.Point(3, 3);
+            this.solarSystemObjectConfigurator1.MapBackgroundColor = System.Drawing.SystemColors.Window;
             this.solarSystemObjectConfigurator1.Margin = new System.Windows.Forms.Padding(0);
             this.solarSystemObjectConfigurator1.Name = "solarSystemObjectConfigurator1";
             this.solarSystemObjectConfigurator1.Size = new System.Drawing.Size(594, 360);
@@ -548,5 +562,6 @@ namespace StarMap2D.Forms.Dialogs
         private Label lbMagnitudeLimits;
         private TabPage tabObjectSymbols;
         private Controls.WinForms.SolarSystemObjectConfigurator solarSystemObjectConfigurator1;
+        private Button btResetSymbols;
     }
 }

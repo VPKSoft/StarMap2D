@@ -24,26 +24,109 @@ SOFTWARE.
 */
 #endregion
 
+using System.ComponentModel;
 using POCs.Sanjay.SharpSnippets.Drawing;
 using StarMap2D.Controls.WinForms.Utilities;
 
 namespace StarMap2D.Controls.WinForms;
 
+/// <summary>
+/// A control to configure solar system symbols.
+/// Implements the <see cref="System.Windows.Forms.UserControl" />
+/// </summary>
+/// <seealso cref="System.Windows.Forms.UserControl" />
 public partial class SolarSystemObjectConfigurator : UserControl
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SolarSystemObjectConfigurator"/> class.
+    /// </summary>
     public SolarSystemObjectConfigurator()
     {
         InitializeComponent();
 
-        lbSolarSystemObjects.Items.AddRange(SolarSystemObjectGraphics.CreateDefaultList("fi-Fi", 10).Select(f => (object)f)
-            .ToArray());
+        lbSolarSystemObjects.Items.AddRange(ObjectGraphics.Cast<object>().ToArray());
 
         textBrushSelection = new SolidBrush(SystemColors.Highlight.GetContrast(false));
     }
 
+    #region PrivateFields
     private Brush? listTextBrush;
     private readonly Brush textBrushSelection;
+    private static string? locale;
+    private SolarSystemObjectGraphics[] objectGraphics = SolarSystemObjectGraphics.CreateDefaultList(locale).ToArray();
+    private bool suspendEvents;
+    #endregion
 
+
+    /// <summary>
+    /// Gets or sets the background color of the star map.
+    /// </summary>
+    /// <value>Gets or sets the background color of the star map.</value>
+    [Category("Appearance")]
+    [Browsable(true)]
+    [Description("The background color of the star map.")]
+    public Color MapBackgroundColor
+    {
+        get => lbSolarSystemObjects.BackColor;
+
+        set
+        {
+            lbSolarSystemObjects.BackColor = value;
+            pnMapSymbol.BackColor = value;
+            lbSolarSystemObjects.ForeColor = value.GetContrast(true);
+            listTextBrush?.Dispose();
+            listTextBrush = new SolidBrush(value.GetContrast(true));
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the locale for the <see cref="SolarSystemObjectGraphics.Name"/> localization.
+    /// </summary>
+    /// <value>The locale for the <see cref="SolarSystemObjectGraphics.Name"/> localization.</value>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public string Locale
+    {
+        get => locale ?? "en-US";
+
+        set
+        {
+            if (value != locale)
+            {
+                foreach (var objectGraphic in objectGraphics)
+                {
+                    objectGraphic.Locale = value;
+                }
+
+                locale = value;
+
+                lbSolarSystemObjects.RefreshItems();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the object graphic settings.
+    /// </summary>
+    /// <value>The object graphic settings.</value>
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public SolarSystemObjectGraphics[] ObjectGraphics
+    {
+        get => objectGraphics;
+
+        set
+        {
+            if (locale != null)
+            {
+                objectGraphics = SolarSystemObjectGraphics.MergeWithDefaults(value, locale).ToArray();
+                lbSolarSystemObjects.Items.Clear();
+                lbSolarSystemObjects.Items.AddRange(ObjectGraphics.Cast<object>().ToArray());
+            }
+        }
+    }
+
+    #region InternalEvents
     private void lbSolarSystemObjects_DrawItem(object sender, DrawItemEventArgs e)
     {
         e.DrawBackground();
@@ -67,24 +150,6 @@ public partial class SolarSystemObjectConfigurator : UserControl
             new PointF(2 + SolarSystemObjectGraphics.StaticDiameter, e.Bounds.Top));
     }
 
-    /// <summary>
-    /// Gets or sets the background color of the star map.
-    /// </summary>
-    /// <value>Gets or sets the background color of the star map.</value>
-    public Color MapBackgroundColor
-    {
-        get => lbSolarSystemObjects.BackColor;
-
-        set
-        {
-            lbSolarSystemObjects.BackColor = value;
-            pnMapSymbol.BackColor = value;
-            lbSolarSystemObjects.ForeColor = value.GetContrast(true);
-            listTextBrush?.Dispose();
-            listTextBrush = new SolidBrush(value.GetContrast(true));
-        }
-    }
-
     private void lbSolarSystemObjects_MeasureItem(object sender, MeasureItemEventArgs e)
     {
         var listBox = (ListBox)sender;
@@ -103,8 +168,6 @@ public partial class SolarSystemObjectConfigurator : UserControl
         e.ItemWidth = (int)e.Graphics.ClipBounds.Width;
     }
 
-    private bool suspendEvents;
-
     private void nudStarSize_ValueChanged(object sender, EventArgs e)
     {
         if (suspendEvents)
@@ -115,25 +178,6 @@ public partial class SolarSystemObjectConfigurator : UserControl
         foreach (var selectedItem in lbSolarSystemObjects.SelectedItems)
         {
             var item = (SolarSystemObjectGraphics)selectedItem;
-            item.Diameter = (int)nudStarSize.Value;
-        }
-
-        UpdatePreviewImage();
-    }
-
-    private void SetColor(Color value)
-    {
-        foreach (var selectedItem in lbSolarSystemObjects.SelectedItems)
-        {
-            var item = (SolarSystemObjectGraphics)selectedItem;
-            if (rbCircle.Checked)
-            {
-                item.ObjectCircleColor = value;
-            }
-            else
-            {
-                item.ObjectSymbolColor = value;
-            }
             item.Diameter = (int)nudStarSize.Value;
         }
 
@@ -157,31 +201,12 @@ public partial class SolarSystemObjectConfigurator : UserControl
         nudStarSize.Value = item.Diameter;
         cwColor.Color = rbCircle.Checked ? item.ObjectCircleColor : item.ObjectSymbolColor;
         ceColor.Color = rbCircle.Checked ? item.ObjectCircleColor : item.ObjectSymbolColor;
+        tbObjectName.Text = item.Name;
         suspendEvents = false;
 
         lbSelectedSymbolName.Text = item.Name;
 
         UpdatePreviewImage();
-    }
-
-    private Image previousImage;
-
-    private void UpdatePreviewImage()
-    {
-        var listBox = lbSolarSystemObjects;
-
-        var index = listBox.SelectedIndex;
-
-        if (index < 0 || index >= listBox.Items.Count)
-        {
-            pnMapSymbol.BackgroundImage = null;
-            return;
-        }
-
-
-        var item = (SolarSystemObjectGraphics)listBox.SelectedItem;
-        pnMapSymbol.BackgroundImage = item.Image;
-        previousImage = item.Image;
     }
 
     private void cwColor_ColorChanged(object sender, EventArgs e)
@@ -205,8 +230,79 @@ public partial class SolarSystemObjectConfigurator : UserControl
         suspendEvents = false;
     }
 
+    private void tbObjectName_TextChanged(object sender, EventArgs e)
+    {
+        if (suspendEvents)
+        {
+            return;
+        }
+        
+        var textBox = (TextBox)sender;
+        if (!string.IsNullOrWhiteSpace(textBox.Text) && lbSolarSystemObjects.SelectedItem != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbSolarSystemObjects.SelectedItem;
+            item.Name = textBox.Text;
+            lbSolarSystemObjects.RefreshItems();
+        }
+    }
+
     private void cbDontUse_CheckedChanged(object sender, EventArgs e)
     {
+        var enabled = !((CheckBox)sender).Checked;
 
+        foreach (var selectedItem in lbSolarSystemObjects.SelectedItems)
+        {
+            var item = (SolarSystemObjectGraphics)selectedItem;
+            item.Enabled = enabled;
+        }
     }
+    #endregion
+
+    #region PrivateMethodsAndProperties
+    private void SetColor(Color value)
+    {
+        foreach (var selectedItem in lbSolarSystemObjects.SelectedItems)
+        {
+            var item = (SolarSystemObjectGraphics)selectedItem;
+            if (rbCircle.Checked)
+            {
+                item.ObjectCircleColor = value;
+            }
+            else
+            {
+                item.ObjectSymbolColor = value;
+            }
+            item.Diameter = (int)nudStarSize.Value;
+        }
+
+        UpdatePreviewImage();
+    }
+    
+    private void UpdatePreviewImage()
+    {
+        var listBox = lbSolarSystemObjects;
+
+        var index = listBox.SelectedIndex;
+
+        if (index < 0 || index >= listBox.Items.Count)
+        {
+            pnMapSymbol.BackgroundImage = null;
+            return;
+        }
+
+
+        var item = (SolarSystemObjectGraphics)listBox.SelectedItem;
+        pnMapSymbol.BackgroundImage = item.Image;
+    }
+    #endregion
+
+    #region PublicMethods
+    /// <summary>
+    /// Resets the <see cref="SolarSystemObjectGraphics"/> objects to default values.
+    /// </summary>
+    public void Reset()
+    {
+        ObjectGraphics = SolarSystemObjectGraphics.CreateDefaultList(locale).ToArray();
+    }
+    #endregion
 }

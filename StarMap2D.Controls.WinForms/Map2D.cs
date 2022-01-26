@@ -215,7 +215,7 @@ public partial class Map2D : UserControl
                     var coordinate = new AAS2DCoordinate
                         { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
-                    var pointD = Plot2D.Project2D(coordinate);
+                    var pointD = Plot2D.Project2D(coordinate, invertEastWest);
 
                     var location = new Point((int)pointD.X, (int)pointD.Y);
 
@@ -297,8 +297,8 @@ public partial class Map2D : UserControl
             var point2 = new AAS2DCoordinate
                 { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
-            var pointD1 = Plot2D.Project2D(point1);
-            var pointD2 = Plot2D.Project2D(point2);
+            var pointD1 = Plot2D.Project2D(point1, invertEastWest);
+            var pointD2 = Plot2D.Project2D(point2, invertEastWest);
 
             var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
             var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
@@ -341,8 +341,8 @@ public partial class Map2D : UserControl
                     { X = star2.RightAscension, Y = star2.Declination }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
-            var pointD1 = Plot2D.Project2D(point1);
-            var pointD2 = Plot2D.Project2D(point2);
+            var pointD1 = Plot2D.Project2D(point1, invertEastWest);
+            var pointD2 = Plot2D.Project2D(point2, invertEastWest);
 
             var drawPoint1 = new Point((int)pointD1.X + OffsetX, (int)pointD1.Y + OffsetY);
             var drawPoint2 = new Point((int)pointD2.X + OffsetX, (int)pointD2.Y + OffsetY);
@@ -385,6 +385,22 @@ public partial class Map2D : UserControl
     {
         get => base.BorderStyle;
         set => base.BorderStyle = value;
+    }
+
+    private bool invertEastWest;
+
+    public bool InvertEastWest
+    {
+        get => invertEastWest;
+
+        set
+        {
+            if (value != invertEastWest)
+            {
+                invertEastWest = value;
+                DrawMapImage();
+            }
+        }
     }
 
     /// <summary>
@@ -647,7 +663,7 @@ public partial class Map2D : UserControl
         }
     }
 
-       private bool mouseDown;
+    private bool mouseDown;
     private Point mousePoint;
 
     private void Map2D_MouseDown(object sender, MouseEventArgs e)

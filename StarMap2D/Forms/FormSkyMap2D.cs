@@ -29,9 +29,9 @@ using AASharp;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
+using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
-using StarMap2D.Controls.WinForms;
-using StarMap2D.Controls.WinForms.Drawing;
+using StarMap2D.Controls.WinForms.Enumerations;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using VPKSoft.LangLib;
@@ -53,6 +53,9 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     {
         InitializeComponent();
 
+        solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Properties.Settings.Default.KnownObjects,
+            Properties.Settings.Default.UiLanguage);
+
         if (Utils.ShouldLocalize() != null)
         {
             DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
@@ -67,70 +70,18 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
-        map2d.MapCircleColor = Color.Black;
+        map2d.MapCircleColor = Properties.Settings.Default.MapCircleColor;
 
         map2d.Plot2D = new(Properties.Settings.Default.Latitude, Properties.Settings.Default.Longitude)
         {
             Radius = Math.Min(map2d.Width, map2d.Height)
         };
 
-        base.Text = DBLangEngine.GetMessage("", "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}]|A title for a window containing a sky map control with latitude and longitude coordinates.", map2d.Plot2D.Latitude, map2d.Plot2D.Longitude);
+        SetTitle();
 
-        // TODO::Parametrize! (base64 in settings?)
-        //cache.SetImage("Mars", Properties.Resources.planet_mars);
-        //cache.SetImage("Sun", Properties.Resources.sun_svg);
-        //cache.SetImage("Mercury", Properties.Resources.planet_mercury);
-        //cache.SetImage("Venus", Properties.Resources.planet_venus);
-        //cache.SetImage("Moon", Properties.Resources.moon_svg);
-        //cache.SetImage("Ceres", Properties.Resources.minor_planet_ceres);
+        CreateSolarSystemObjects();
 
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude)),
-            ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Sun", Color.Yellow, Color.Black, new Size(16, 16)]! },
-            IsLocationCalculated = true
-        });
-
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude)),
-            ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Moon", Color.Yellow, Color.Black, new Size(16, 16)]! },
-            IsLocationCalculated = true
-        });
-
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.MERCURY, aaDate, precision, longitude, latitude)),
-            ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Mercury", Color.Yellow, Color.Black, new Size(16, 16)]! },
-            IsLocationCalculated = true
-        });
-            
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            CalculatePosition = (aaDate, precision, latitude, longitude, radius) => 
-                map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.VENUS, aaDate, precision, longitude, latitude)),
-            ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Venus", Color.Yellow, Color.Black, new Size(16, 16)]! },
-            IsLocationCalculated = true
-        });
-
-        var bodies = new SmallBodies();
-
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            CalculatePosition = (aaDate, precision, latitude, longitude, radius) =>
-            {
-                var ceres = bodies[SolarSystemSmallBodies.Ceres];
-                var details = AASElliptical.Calculate(aaDate.Julian, ref ceres, false);
-                var coordinate = new AAS2DCoordinate
-                    { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
-                return map2d.Plot2D.Project2D(coordinate);
-            },
-            ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => cache["Ceres", Color.Yellow, Color.Black, new Size(16, 16)]! },
-            IsLocationCalculated = true
-        });
+        ListTimeIntervals();
 
         map2d.StarMapObjects.Add(new StarMapObject
         {
@@ -161,10 +112,173 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         instances.Add(this);
     }
 
-    private SvgImageCache cache = new();
+    
+
+    private readonly List<SolarSystemObjectGraphics> solarSystemObjects;
 
     private static FormSkyMap2D? singletonInstance;
 
+    #region PrivateMethodsAndProperties
+
+    private void SetTitle(double? latitude = null, double? longitude = null)
+    {
+        Text = DBLangEngine.GetMessage("msgSkyMap",
+            "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.",
+            latitude ?? map2d.Plot2D?.Latitude, longitude ?? map2d.Plot2D?.Longitude, map2d.CurrentTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture));
+    }
+
+    private void ListTimeIntervals()
+    {
+        cmbTimeType.Items.Clear();
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Millisecond,
+            DBLangEngine.GetMessage("msgTimeIntervalMillisecond",
+                "ms|An abbreviation for milliseconds.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Second,
+            DBLangEngine.GetMessage("msgTimeIntervalSecond",
+                "s|An abbreviation for seconds.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Minute,
+            DBLangEngine.GetMessage("msgTimeIntervalMinute",
+                "min|An abbreviation for seconds.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Hour,
+            DBLangEngine.GetMessage("msgTimeIntervalHour",
+                "h|An abbreviation for hours.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Day,
+            DBLangEngine.GetMessage("msgTimeIntervalDay",
+                "d|An abbreviation for days.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Week,
+            DBLangEngine.GetMessage("msgTimeIntervalWeek",
+                "w|An abbreviation for weeks.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Month,
+            DBLangEngine.GetMessage("msgTimeIntervalMonth",
+                "m|An abbreviation for months.")));
+
+        cmbTimeType.Items.Add(new KeyValuePair<TimeInterval, string>(TimeInterval.Year,
+            DBLangEngine.GetMessage("msgTimeIntervalYear",
+                "y|An abbreviation for years.")));
+
+        cmbTimeType.SelectedItem = new KeyValuePair<TimeInterval, string>(TimeInterval.Second,
+            DBLangEngine.GetMessage("msgTimeIntervalSecond",
+                "s|An abbreviation for seconds."));
+    }
+
+    private void ResetSpeed()
+    {
+        btPlayPause.Checked = false;
+        cmbTimeType.SelectedItem = new KeyValuePair<TimeInterval, string>(TimeInterval.Second,
+            DBLangEngine.GetMessage("msgTimeIntervalSecond",
+                "s|An abbreviation for seconds."));
+
+        map2d.CurrentTimeUtc = DateTime.UtcNow;
+        numericUpDown1.Value = 1;
+        SetTitle();
+
+    }
+
+    private bool InvertEastWest => map2d.InvertEastWest;
+
+    private void CreateSolarSystemObjects()
+    {
+        if (map2d.Plot2D == null)
+        {
+            return;
+        }
+
+        var bodies = new SmallBodies();
+
+        foreach (SolarSystemSmallBodies value in Enum.GetValues(typeof(SolarSystemSmallBodies)))
+        {
+            var solarSystemObject = solarSystemObjects.First(f => (int)f.ObjectType == (int)value);
+
+            if (!solarSystemObject.Enabled)
+            {
+                continue;
+            }
+
+            map2d.StarMapObjects.Add(new StarMapObject
+            {
+                CalculatePosition = (aaDate, _, latitude, longitude, _) =>
+                {
+                    var body = bodies[value];
+                    var details = AASElliptical.Calculate(aaDate.Julian, ref body, false);
+                    var coordinate = new AAS2DCoordinate
+                        { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
+                    return map2d.Plot2D.Project2D(coordinate, InvertEastWest);
+                },
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
+                IsLocationCalculated = true
+            });
+        }
+
+        foreach (AASEllipticalObject value in Enum.GetValues(typeof(AASEllipticalObject)))
+        {
+            if (value == AASEllipticalObject.SUN)
+            {
+                continue;
+            }
+
+            var solarSystemObject = solarSystemObjects.First(f => (int)f.ObjectType == (int)value);
+
+            if (!solarSystemObject.Enabled)
+            {
+                continue;
+            }
+
+            map2d.StarMapObjects.Add(new StarMapObject
+            {
+                CalculatePosition = (aaDate, precision, latitude, longitude, _) => 
+                    map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(value, aaDate, precision, longitude, latitude), InvertEastWest),
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
+                IsLocationCalculated = true
+            });
+        }
+
+        var sun = solarSystemObjects.First(f => f.ObjectType == ObjectsWithGraphics.Sun);
+        if (sun.Enabled)
+        {
+            map2d.StarMapObjects.Add(new StarMapObject
+            {
+                CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
+                    map2d.Plot2D.Project2D(
+                        SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude), InvertEastWest),
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
+                IsLocationCalculated = true
+            });
+        }
+
+        var moon = solarSystemObjects.First(f => f.ObjectType == ObjectsWithGraphics.Moon);
+
+        if (moon.Enabled)
+        {
+            map2d.StarMapObjects.Add(new StarMapObject
+            {
+                CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
+                    map2d.Plot2D.Project2D(
+                        SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude), InvertEastWest),
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
+                IsLocationCalculated = true
+            });
+        }
+    }
+    #endregion
+
+    #region CraphicsChangeBroadcast
+
+    private static List<FormSkyMap2D> instances = new();
+    #endregion
+
+    #region PublicMethods
+    /// <summary>
+    /// Changes the color of all the instances of the <see cref="FormSkyMap2D"/> form.
+    /// </summary>
+    /// <param name="color">The color value.</param>
+    /// <param name="mapGraphic">The <see cref="MapGraphicValue"/> enumeration value specifying the target of the color change.</param>
     public static void ChangeColor(Color color, MapGraphicValue mapGraphic)
     {
         foreach (var instance in instances)
@@ -180,13 +294,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 case MapGraphicValue.MapSurroundingsColor:
                     instance.map2d.BackColor = color; break;
             }
-                
         }
     }
-    #region CraphicsChangeBroadcast
-
-    private static List<FormSkyMap2D> instances = new();
-    #endregion
 
     /// <summary>
     /// Displays the <see cref="FormSkyMap2D"/> window.
@@ -205,14 +314,23 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             singletonInstance.BringToFront();
         }
     }
-
+    #endregion
+    
     #region InternalEvents
     private void tmSetTime_Tick(object sender, EventArgs e)
     {
-        map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddMilliseconds(100);
+        var intervalType = (KeyValuePair<TimeInterval, string>)cmbTimeType.SelectedItem;
 
-        Text = DBLangEngine.GetMessage("msgSkyMap", "Sky Map|A title for a window with a sky chart/map.") +
-               @$" [{map2d.Plot2D?.DateTimeUtc.ToLocalTime().ToString(CultureInfo.InvariantCulture)}]";
+        if (numericUpDown1.Value == 1 && intervalType.Key == TimeInterval.Second)
+        {
+            map2d.CurrentTimeUtc = DateTime.UtcNow;
+        }
+        else
+        {
+            map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.AddInterval((double)numericUpDown1.Value / 10.0, intervalType.Key);
+        }
+
+        SetTitle();
     }
 
     private void btGo_Click(object sender, EventArgs e)
@@ -228,17 +346,29 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_CoordinatesChanged(object sender, LocationChangedEventArgs e)
     {
-        Text = DBLangEngine.GetMessage("", "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}]|A title for a window containing a sky map control with latitude and longitude coordinates.", e.Latitude, e.Longitude);
+        SetTitle(e.Latitude, e.Longitude);
     }
 
     private void FormSkyMap2D_FormClosed(object sender, FormClosedEventArgs e)
     {
         singletonInstance = null;
     }
-    #endregion
 
     private void btPlayPause_CheckedChanged(object sender, CheckedChangeEventArguments e)
     {
         tmSetTime.Enabled = e.Checked;
+    }
+
+    private void btRevertSpeed_Click(object sender, EventArgs e)
+    {
+        ResetSpeed();
+    }
+    #endregion
+
+    private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.InvertEastWest = checkBox.Checked;
+        compassView1.InvertEastWest = checkBox.Checked;
     }
 }

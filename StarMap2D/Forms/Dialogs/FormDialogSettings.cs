@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using StarMap2D.Controls.WinForms;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Properties;
 using StarMap2D.Utilities;
@@ -55,6 +54,8 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
+        solarSystemObjectConfigurator1.Locale = Settings.Default.UiLanguage;
+
         cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
 
         tbLocationName.Text = Settings.Default.DefaultLocationName;
@@ -66,8 +67,18 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
         nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
         solarSystemObjectConfigurator1.MapBackgroundColor = Settings.Default.MapCircleColor;
+        solarSystemObjectConfigurator1.ObjectGraphics = SolarSystemObjectGraphics
+            .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
+            .ToArray();
     }
 
+    #region PrivateFields
+    private readonly Cities cities = new();
+    private Control? colorControl;
+    private bool suspendColorChange;
+    #endregion
+
+    #region PrivateMethodsAndProperties
     /// <summary>
     /// Displays the form as modal dialog.
     /// </summary>
@@ -90,11 +101,12 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.StarMagnitudeSizes = starMagnitudeEditor1.StarMagnitudes;
         Settings.Default.MagnitudeMaximum = (double)nudMagnitudeMaximum.Value;
         Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
+        Settings.Default.KnownObjects = string.Join(";", solarSystemObjectConfigurator1.ObjectGraphics.Select(f => f.SaveToString()));
         Settings.Default.Save();
     }
+    #endregion
 
-    private readonly Cities cities = new();
-
+    #region InternalEvents
     private void cmbSelectLocation_SelectedIndexChanged(object sender, EventArgs e)
     {
         var city = (CityLatLonCoordinate)cmbSelectLocation.SelectedItem;
@@ -120,10 +132,6 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         }
         suspendColorChange = false;
     }
-
-    private Control? colorControl;
-
-    private bool suspendColorChange;
 
     private void cwColor_ColorChanged(object sender, EventArgs e)
     {
@@ -172,4 +180,10 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         }
         suspendColorChange = false;
     }
+
+    private void btResetSymbols_Click(object sender, EventArgs e)
+    {
+        solarSystemObjectConfigurator1.Reset();
+    }
+    #endregion
 }

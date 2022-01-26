@@ -26,8 +26,6 @@ SOFTWARE.
 
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using StarMap2D.Controls.WinForms.Drawing;
-using Svg;
 
 namespace StarMap2D.Miscellaneous;
 

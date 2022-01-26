@@ -42,22 +42,64 @@ public class SolarSystemObjectGraphics
     /// Creates a new list of <see cref="SolarSystemObjectGraphics"/> objects with default values.
     /// </summary>
     /// <param name="locale">The locale for the <see cref="SolarSystemObjectGraphics.Name"/> value.</param>
-    /// <param name="radius">The radius for the objects to return.</param>
     /// <returns>A list of <see cref="SolarSystemObjectGraphics"/> objects.</returns>
-    public static List<SolarSystemObjectGraphics> CreateDefaultList(string locale, int radius)
+    public static List<SolarSystemObjectGraphics> CreateDefaultList(string locale)
     {
         var result = new List<SolarSystemObjectGraphics>();
 
         foreach (var objectGraphic in ObjectGraphics)
         {
-            var newGraphic = new SolarSystemObjectGraphics(objectGraphic);
-            newGraphic.Diameter = radius;
-            newGraphic.Locale = locale;
+            var newGraphic = new SolarSystemObjectGraphics(objectGraphic)
+            {
+                Diameter = DefaultDiameter,
+                Locale = locale
+            };
             result.Add(newGraphic);
         }
 
         return result.OrderBy(f => f.Name).ToList();
     }
+
+    /// <summary>
+    /// Merges the specified objects with default objects.
+    /// </summary>
+    /// <param name="serializedGraphics">The serialized graphics delimited with semicolon(';'). See also: <seealso cref="SaveToString"/>.</param>
+    /// <param name="locale">The locale.</param>
+    /// <returns>A list of solar system objects.</returns>
+    public static List<SolarSystemObjectGraphics> MergeWithDefaults(string serializedGraphics, string locale)
+    {
+        return MergeWithDefaults(string.IsNullOrWhiteSpace(serializedGraphics)
+            ? Array.Empty<SolarSystemObjectGraphics>()
+            : serializedGraphics.Split(';').Select(FromString).ToArray(), locale);
+    }
+
+    /// <summary>
+    /// Merges the specified objects with default objects.
+    /// </summary>
+    /// <param name="values">The values to merge with default objects.</param>
+    /// <param name="locale">The locale.</param>
+    /// <returns>A list of solar system objects.</returns>
+    public static List<SolarSystemObjectGraphics> MergeWithDefaults(SolarSystemObjectGraphics[] values, string locale)
+    {
+        var existing = values.Select(f => f.ObjectType).ToList();
+
+        var result = new List<SolarSystemObjectGraphics>();
+
+        var newItems = CreateDefaultList(locale);
+
+        newItems = newItems.Where(f => !existing.Contains(f.ObjectType)).ToList();
+
+        result.AddRange(newItems);
+        result.AddRange(values);
+
+        return result.OrderBy(f => f.Name).ToList();
+    }
+
+    /// <summary>
+    /// Gets or sets the default diameter for the solar system object symbols.
+    /// </summary>
+    /// <value>The default diameter for solar system objects.</value>
+    public static int DefaultDiameter { get; set; } = 20;
 
     /// <summary>
     /// The default solar system object graphics.
@@ -66,117 +108,117 @@ public class SolarSystemObjectGraphics
     {
         new()
         {
-            ObjectType = ObjectsWithGraphics.Sun, Diameter = 10, Name = nameof(ObjectsWithGraphics.Sun),
+            ObjectType = ObjectsWithGraphics.Sun, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Sun),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.sun)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Mercury, Diameter = 10, Name = nameof(ObjectsWithGraphics.Mercury),
+            ObjectType = ObjectsWithGraphics.Mercury, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Mercury),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_mercury)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Venus, Diameter = 10, Name = nameof(ObjectsWithGraphics.Venus),
+            ObjectType = ObjectsWithGraphics.Venus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Venus),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_venus)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Earth, Diameter = 10, Name = nameof(ObjectsWithGraphics.Earth),
+            ObjectType = ObjectsWithGraphics.Earth, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Earth),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.earth)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Moon, Diameter = 10, Name = nameof(ObjectsWithGraphics.Moon),
+            ObjectType = ObjectsWithGraphics.Moon, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Moon),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.moon)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Mars, Diameter = 10, Name = nameof(ObjectsWithGraphics.Mars),
+            ObjectType = ObjectsWithGraphics.Mars, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Mars),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_mars)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Jupiter, Diameter = 10, Name = nameof(ObjectsWithGraphics.Jupiter),
+            ObjectType = ObjectsWithGraphics.Jupiter, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Jupiter),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_jupiter)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Saturn, Diameter = 10, Name = nameof(ObjectsWithGraphics.Saturn),
+            ObjectType = ObjectsWithGraphics.Saturn, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Saturn),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_saturn)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Uranus, Diameter = 10, Name = nameof(ObjectsWithGraphics.Uranus),
+            ObjectType = ObjectsWithGraphics.Uranus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Uranus),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_uranus)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Neptune, Diameter = 10, Name = nameof(ObjectsWithGraphics.Neptune),
+            ObjectType = ObjectsWithGraphics.Neptune, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Neptune),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_neptune)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Ceres, Diameter = 10, Name = nameof(ObjectsWithGraphics.Ceres),
+            ObjectType = ObjectsWithGraphics.Ceres, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Ceres),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_ceres)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Orcus, Diameter = 10, Name = nameof(ObjectsWithGraphics.Orcus),
+            ObjectType = ObjectsWithGraphics.Orcus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Orcus),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_orcus)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Pluto, Diameter = 10, Name = nameof(ObjectsWithGraphics.Pluto),
+            ObjectType = ObjectsWithGraphics.Pluto, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Pluto),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_pluto)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Haumea, Diameter = 10, Name = nameof(ObjectsWithGraphics.Haumea),
+            ObjectType = ObjectsWithGraphics.Haumea, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Haumea),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_haumea)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Quaoar, Diameter = 10, Name = nameof(ObjectsWithGraphics.Quaoar),
+            ObjectType = ObjectsWithGraphics.Quaoar, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Quaoar),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Makemake, Diameter = 10, Name = nameof(ObjectsWithGraphics.Makemake),
+            ObjectType = ObjectsWithGraphics.Makemake, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Makemake),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_makemake)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Gonggong, Diameter = 10, Name = nameof(ObjectsWithGraphics.Gonggong),
+            ObjectType = ObjectsWithGraphics.Gonggong, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Gonggong),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_gonggong)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Eris, Diameter = 10, Name = nameof(ObjectsWithGraphics.Eris),
+            ObjectType = ObjectsWithGraphics.Eris, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Eris),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_eris1)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Sedna, Diameter = 10, Name = nameof(ObjectsWithGraphics.Sedna),
+            ObjectType = ObjectsWithGraphics.Sedna, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Sedna),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_sedna)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Juno, Diameter = 10, Name = nameof(ObjectsWithGraphics.Juno),
+            ObjectType = ObjectsWithGraphics.Juno, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Juno),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_juno)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Vesta, Diameter = 10, Name = nameof(ObjectsWithGraphics.Vesta),
+            ObjectType = ObjectsWithGraphics.Vesta, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Vesta),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_vesta)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Pallas, Diameter = 10, Name = nameof(ObjectsWithGraphics.Pallas),
+            ObjectType = ObjectsWithGraphics.Pallas, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Pallas),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_pallas)
         },
         new()
         {
-            ObjectType = ObjectsWithGraphics.Chiron, Diameter = 10, Name = nameof(ObjectsWithGraphics.Chiron),
+            ObjectType = ObjectsWithGraphics.Chiron, Diameter = DefaultDiameter, Name = nameof(ObjectsWithGraphics.Chiron),
             SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_chiron)
         },
     };
@@ -545,7 +587,9 @@ public class SolarSystemObjectGraphics
             builder.Append($"|{nameof(ObjectImage)}: {imageData}");
         }
 
-        builder.Append($"|{nameof(Enabled)}: {Enabled.ToString(CultureInfo.InvariantCulture)}");
+        builder.Append($"|{nameof(ObjectType)}: {ObjectType}");
+
+        builder.Append($"|{nameof(Enabled)}: {Enabled}");
         builder.Append($"|{nameof(Diameter)}: {Diameter.ToString(CultureInfo.InvariantCulture)}");
 
         builder.Append($"|{nameof(ObjectCircleColor)}: {ColorTranslator.ToHtml(ObjectCircleColor)}");
@@ -554,6 +598,11 @@ public class SolarSystemObjectGraphics
         return builder.ToString();
     }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="SolarSystemObjectGraphics"/> from a string value.
+    /// </summary>
+    /// <param name="value">The string value representing the object.</param>
+    /// <returns>An instance of the <see cref="SolarSystemObjectGraphics"/> class.</returns>
     public static SolarSystemObjectGraphics FromString(string value)
     {
         var dataEntries = value.Split('|');
@@ -576,7 +625,36 @@ public class SolarSystemObjectGraphics
             }
             else if (dataName == nameof(ImageFile))
             {
-                // TODO::...
+                result.ImageFile = dataValue;
+            }
+            else if (dataName == nameof(SvgDocument))
+            {
+                result.SvgDocument = SvgColorize.FromBytes(Convert.FromBase64String(dataValue));
+            }
+            else if (dataName == nameof(ObjectImage))
+            {
+                using var stream = new MemoryStream(Convert.FromBase64String(dataValue));
+                result.ObjectImage = Image.FromStream(stream);
+            }
+            else if (dataName == nameof(ObjectType))
+            {
+                result.ObjectType = Enum.Parse<ObjectsWithGraphics>(dataValue);
+            }
+            else if (dataName == nameof(Enabled))
+            {
+                result.Enabled = bool.Parse(dataValue);
+            }
+            else if (dataName == nameof(Diameter))
+            {
+                result.Diameter = int.Parse(dataValue, CultureInfo.InvariantCulture);
+            }
+            else if (dataName == nameof(ObjectCircleColor))
+            {
+                result.ObjectCircleColor = ColorTranslator.FromHtml(dataValue);
+            }
+            else if (dataName == nameof(ObjectSymbolColor))
+            {
+                result.ObjectSymbolColor = ColorTranslator.FromHtml(dataValue);
             }
         }
 

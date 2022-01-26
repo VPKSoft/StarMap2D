@@ -59,6 +59,7 @@ namespace StarMap2D.Miscellaneous
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.compassView1 = new StarMap2D.Controls.WinForms.CompassView();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -111,11 +112,19 @@ namespace StarMap2D.Miscellaneous
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // compassView1
+            // 
+            this.compassView1.Location = new System.Drawing.Point(288, 28);
+            this.compassView1.Name = "compassView1";
+            this.compassView1.Size = new System.Drawing.Size(392, 402);
+            this.compassView1.TabIndex = 9;
+            // 
             // FormTestDrawing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(925, 558);
+            this.Controls.Add(this.compassView1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.trackBar1);
@@ -137,5 +146,6 @@ namespace StarMap2D.Miscellaneous
         private TrackBar trackBar2;
         private FontDialog fontDialog1;
         private PictureBox pictureBox1;
+        private Controls.WinForms.CompassView compassView1;
     }
 }

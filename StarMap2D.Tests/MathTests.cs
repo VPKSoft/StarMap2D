@@ -24,13 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-using System.Linq;
 using AASharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StarMap2D.Calculations.Constellations.ConstellationClasses;
-using StarMap2D.Calculations.Constellations.Enumerations;
-using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Helpers.Math;
 
 namespace StarMap2D.Tests;

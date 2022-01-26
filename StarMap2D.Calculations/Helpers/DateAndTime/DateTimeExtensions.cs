@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Calculations.Enumerations;
+
 namespace StarMap2D.Calculations.Helpers.DateAndTime;
 
 /// <summary>
@@ -49,5 +51,37 @@ public static class DateTimeExtensions
     public static double ToDecimalHourFraction(this DateTime dt)
     {
         return dt.ToDecimalHour() / 24.0;
+    }
+
+    /// <summary>
+    /// Adds the value of specified interval to the date and time.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <param name="value">The value to add.</param>
+    /// <param name="interval">The interval type to add.</param>
+    /// <returns>A new <see cref="DateTime"/> object adjusted with the specified value of interval amount.</returns>
+    public static DateTime AddInterval(this DateTime dateTime, double value, TimeInterval interval)
+    {
+        switch (interval)
+        {
+            case TimeInterval.Millisecond:
+                return dateTime.AddMilliseconds(value);
+            case TimeInterval.Second:
+                return dateTime.AddSeconds(value);
+            case TimeInterval.Minute:
+                return dateTime.AddMinutes(value);
+            case TimeInterval.Hour:
+                return dateTime.AddHours(value);
+            case TimeInterval.Day:
+                return dateTime.AddDays(value);
+            case TimeInterval.Week:
+                return dateTime.AddDays(7.0 * value);
+            case TimeInterval.Month:
+                return dateTime.AddDays(30.436875 * value);
+            case TimeInterval.Year:
+                return dateTime.AddDays(365.2425 * value);
+            default:
+                return dateTime.AddSeconds(0);
+        }
     }
 }

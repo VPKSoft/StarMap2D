@@ -118,9 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="msgSkyMap" xml:space="preserve">
-    <value>Sky Map|A title for a window containing a sky map control.</value>
+    <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.</value>
   </data>
-  <data name="msgSkyMapWithLatLon" xml:space="preserve">
-    <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}]|A title for a window containing a sky map control with latitude and longitude coordinates.</value>
+  <data name="msgTimeIntervalDay" xml:space="preserve">
+    <value>d|An abbreviation for days.</value>
+  </data>
+  <data name="msgTimeIntervalHour" xml:space="preserve">
+    <value>h|An abbreviation for hours.</value>
+  </data>
+  <data name="msgTimeIntervalMillisecond" xml:space="preserve">
+    <value>ms|An abbreviation for milliseconds.</value>
+  </data>
+  <data name="msgTimeIntervalMinute" xml:space="preserve">
+    <value>min|An abbreviation for seconds.</value>
+  </data>
+  <data name="msgTimeIntervalMonth" xml:space="preserve">
+    <value>m|An abbreviation for months.</value>
+  </data>
+  <data name="msgTimeIntervalSecond" xml:space="preserve">
+    <value>s|An abbreviation for seconds.</value>
+  </data>
+  <data name="msgTimeIntervalWeek" xml:space="preserve">
+    <value>w|An abbreviation for weeks.</value>
+  </data>
+  <data name="msgTimeIntervalYear" xml:space="preserve">
+    <value>y|An abbreviation for years.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>s|An abbreviation for seconds.</value>
   </data>
 </root>

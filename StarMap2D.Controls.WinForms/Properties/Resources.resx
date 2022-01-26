@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="compass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\compass.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="copyright" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copyright.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -126,6 +129,9 @@
   </data>
   <data name="ic_fluent_arrow_right_48_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ic_fluent_arrow_right_48_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ic_fluent_arrow_undo_48_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_fluent_arrow_undo_48_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ic_fluent_pause_48_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ic_fluent_pause_48_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

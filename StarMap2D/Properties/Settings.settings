@@ -38,5 +38,8 @@
     <Setting Name="MagnitudeMinimum" Type="System.Double" Scope="User">
       <Value Profile="(Default)">5.5</Value>
     </Setting>
+    <Setting Name="KnownObjects" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
