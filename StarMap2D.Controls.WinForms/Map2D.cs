@@ -387,6 +387,36 @@ public partial class Map2D : UserControl
         set => base.BorderStyle = value;
     }
 
+    /// <inheritdoc cref="Plot2D.Latitude"/>
+    public double Latitude
+    {
+        get => plot2D?.Latitude ?? 0;
+
+        set
+        {
+            if (plot2D != null)
+            {
+                plot2D.Latitude = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    /// <inheritdoc cref="Plot2D.Longitude"/>
+    public double Longitude
+    {
+        get => plot2D?.Longitude ?? 0;
+
+        set
+        {
+            if (plot2D != null)
+            {
+                plot2D.Longitude = value;
+                DrawMapImage();
+            }
+        }
+    }
+
     private bool invertEastWest;
 
     public bool InvertEastWest
@@ -696,8 +726,8 @@ public partial class Map2D : UserControl
         if (mouseDown && e.Button.HasFlag(MouseButtons.Right))
         {
             var newPoint = e.Location;
-            var xChange = (double)(mousePoint.X - newPoint.X) / 10.0;
-            var yChange = (double)(mousePoint.Y - newPoint.Y) / 10.0;
+            var xChange = (mousePoint.X - newPoint.X) / 10.0;
+            var yChange = (mousePoint.Y - newPoint.Y) / 10.0;
             if (Plot2D != null)
             {
                 var latitude = Plot2D.Latitude - yChange;

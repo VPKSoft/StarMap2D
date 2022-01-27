@@ -180,5 +180,17 @@ namespace StarMap2D.Properties {
                 this["KnownObjects"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InvertEastWest {
+            get {
+                return ((bool)(this["InvertEastWest"]));
+            }
+            set {
+                this["InvertEastWest"] = value;
+            }
+        }
     }
 }

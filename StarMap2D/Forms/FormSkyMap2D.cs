@@ -34,6 +34,7 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Controls.WinForms.Enumerations;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
+using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
 
@@ -110,10 +111,13 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         }
 
         instances.Add(this);
+
+        cbInvertEastWest.Checked = Properties.Settings.Default.InvertEastWest;
+
+        cmbJumpToLocation.Items.AddRange(new Cities().CityList.ToArray<object>());
+        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
     }
-
     
-
     private readonly List<SolarSystemObjectGraphics> solarSystemObjects;
 
     private static FormSkyMap2D? singletonInstance;
@@ -266,6 +270,33 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             });
         }
     }
+
+    private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.InvertEastWest = checkBox.Checked;
+        compassView1.InvertEastWest = checkBox.Checked;
+    }
+
+    private void cmbJumpToLocation_SelectedValueChanged(object sender, EventArgs e)
+    {
+        var comboBox = (ComboBox)sender;
+
+        var value = (CityLatLonCoordinate)comboBox.SelectedItem;
+
+        if (value != null && map2d.Plot2D != null)
+        {
+            map2d.Latitude = value.Latitude;
+            map2d.Longitude = value.Longitude;
+        }
+    }
+
+    private void btResetLocation_Click(object sender, EventArgs e)
+    {
+        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
+        map2d.Latitude = Properties.Settings.Default.Latitude;
+        map2d.Longitude = Properties.Settings.Default.Longitude;
+    }
     #endregion
 
     #region CraphicsChangeBroadcast
@@ -364,11 +395,4 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         ResetSpeed();
     }
     #endregion
-
-    private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
-    {
-        var checkBox = (CheckBox)sender;
-        map2d.InvertEastWest = checkBox.Checked;
-        compassView1.InvertEastWest = checkBox.Checked;
-    }
 }

@@ -61,6 +61,10 @@ namespace StarMap2D.Forms
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.map2d = new StarMap2D.Controls.WinForms.Map2D();
             this.tlpMapControls = new System.Windows.Forms.TableLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbJumpToLocation = new System.Windows.Forms.ComboBox();
+            this.btResetLocation = new StarMap2D.Controls.WinForms.ImageButton();
+            this.lbJumpToLocation = new System.Windows.Forms.Label();
             this.pnDateTime = new System.Windows.Forms.Panel();
             this.btGo = new StarMap2D.Controls.WinForms.ImageButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -74,6 +78,7 @@ namespace StarMap2D.Forms
             this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.pnDateTime.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -118,9 +123,12 @@ namespace StarMap2D.Forms
             this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.map2d.ConstellationBorderLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 26, 18, 15, 18, 948);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 27, 5, 17, 58, 787);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.map2d.InvertEastWest = false;
+            this.map2d.Latitude = 0D;
             this.map2d.Location = new System.Drawing.Point(0, 0);
+            this.map2d.Longitude = 0D;
             this.map2d.MagnitudeMaximum = -500D;
             this.map2d.MagnitudeMinimum = 5.5D;
             this.map2d.MapCircleColor = System.Drawing.Color.Black;
@@ -138,6 +146,7 @@ namespace StarMap2D.Forms
             this.tlpMapControls.ColumnCount = 2;
             this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMapControls.Controls.Add(this.panel3, 0, 4);
             this.tlpMapControls.Controls.Add(this.pnDateTime, 0, 0);
             this.tlpMapControls.Controls.Add(this.panel1, 0, 1);
             this.tlpMapControls.Controls.Add(this.btPlayPause, 0, 2);
@@ -149,14 +158,64 @@ namespace StarMap2D.Forms
             this.tlpMapControls.RowCount = 8;
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMapControls.Size = new System.Drawing.Size(244, 798);
             this.tlpMapControls.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.tlpMapControls.SetColumnSpan(this.panel3, 2);
+            this.panel3.Controls.Add(this.cmbJumpToLocation);
+            this.panel3.Controls.Add(this.btResetLocation);
+            this.panel3.Controls.Add(this.lbJumpToLocation);
+            this.panel3.Location = new System.Drawing.Point(3, 238);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(238, 62);
+            this.panel3.TabIndex = 10;
+            // 
+            // cmbJumpToLocation
+            // 
+            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbJumpToLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbJumpToLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbJumpToLocation.FormattingEnabled = true;
+            this.cmbJumpToLocation.Location = new System.Drawing.Point(3, 28);
+            this.cmbJumpToLocation.Name = "cmbJumpToLocation";
+            this.cmbJumpToLocation.Size = new System.Drawing.Size(229, 23);
+            this.cmbJumpToLocation.TabIndex = 8;
+            this.cmbJumpToLocation.SelectedValueChanged += new System.EventHandler(this.cmbJumpToLocation_SelectedValueChanged);
+            // 
+            // btResetLocation
+            // 
+            this.btResetLocation.Checked = false;
+            this.btResetLocation.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btResetLocation.DisabledColor = System.Drawing.Color.LightGray;
+            this.btResetLocation.ImageCheckedSvg = null;
+            this.btResetLocation.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btResetLocation.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btResetLocation.ImageSvg = "ic_fluent_arrow_undo_48_filled";
+            this.btResetLocation.IsCheckedButton = false;
+            this.btResetLocation.Location = new System.Drawing.Point(196, 3);
+            this.btResetLocation.Name = "btResetLocation";
+            this.btResetLocation.Size = new System.Drawing.Size(36, 23);
+            this.btResetLocation.TabIndex = 7;
+            this.btResetLocation.Click += new System.EventHandler(this.btResetLocation_Click);
+            // 
+            // lbJumpToLocation
+            // 
+            this.lbJumpToLocation.AutoSize = true;
+            this.lbJumpToLocation.Location = new System.Drawing.Point(3, 10);
+            this.lbJumpToLocation.Name = "lbJumpToLocation";
+            this.lbJumpToLocation.Size = new System.Drawing.Size(96, 15);
+            this.lbJumpToLocation.TabIndex = 0;
+            this.lbJumpToLocation.Text = "Jump to location";
             // 
             // pnDateTime
             // 
@@ -286,7 +345,7 @@ namespace StarMap2D.Forms
             // 
             this.tlpMapControls.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.compassView1);
-            this.panel2.Location = new System.Drawing.Point(3, 549);
+            this.panel2.Location = new System.Drawing.Point(3, 550);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(238, 244);
             this.panel2.TabIndex = 8;
@@ -294,15 +353,24 @@ namespace StarMap2D.Forms
             // compassView1
             // 
             this.compassView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.compassView1.EastName = "E";
+            this.compassView1.InvertEastWest = false;
             this.compassView1.Location = new System.Drawing.Point(0, 0);
             this.compassView1.Name = "compassView1";
+            this.compassView1.NorthEastName = "NE";
+            this.compassView1.NorthName = "N";
+            this.compassView1.NorthWestName = "NW";
             this.compassView1.Size = new System.Drawing.Size(238, 244);
+            this.compassView1.SouthEastName = "SE";
+            this.compassView1.SouthName = "S";
+            this.compassView1.SouthWestName = "SW";
             this.compassView1.TabIndex = 0;
+            this.compassView1.WestName = "W";
             // 
             // cbInvertEastWest
             // 
             this.cbInvertEastWest.AutoSize = true;
-            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 197);
+            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 213);
             this.cbInvertEastWest.Name = "cbInvertEastWest";
             this.cbInvertEastWest.Size = new System.Drawing.Size(109, 19);
             this.cbInvertEastWest.TabIndex = 9;
@@ -323,6 +391,8 @@ namespace StarMap2D.Forms
             this.tlpMain.ResumeLayout(false);
             this.tlpMapControls.ResumeLayout(false);
             this.tlpMapControls.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.pnDateTime.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -349,5 +419,9 @@ namespace StarMap2D.Forms
         private Panel panel2;
         private Controls.WinForms.CompassView compassView1;
         private CheckBox cbInvertEastWest;
+        private Panel panel3;
+        private ComboBox cmbJumpToLocation;
+        private Controls.WinForms.ImageButton btResetLocation;
+        private Label lbJumpToLocation;
     }
 }

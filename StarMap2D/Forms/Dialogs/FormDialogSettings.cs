@@ -58,18 +58,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
         cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
 
-        tbLocationName.Text = Settings.Default.DefaultLocationName;
-        nudLongitude.Value = (decimal)Settings.Default.Longitude;
-        nudLatitude.Value = (decimal)Settings.Default.Latitude;
-
-        starMagnitudeEditor1.StarMagnitudeColors = Settings.Default.StarMagnitudeColors;
-        starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
-        nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
-        nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
-        solarSystemObjectConfigurator1.MapBackgroundColor = Settings.Default.MapCircleColor;
-        solarSystemObjectConfigurator1.ObjectGraphics = SolarSystemObjectGraphics
-            .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
-            .ToArray();
+        LoadSettings();
     }
 
     #region PrivateFields
@@ -92,6 +81,23 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         }
     }
 
+    private void LoadSettings()
+    {
+        tbLocationName.Text = Settings.Default.DefaultLocationName;
+        nudLongitude.Value = (decimal)Settings.Default.Longitude;
+        nudLatitude.Value = (decimal)Settings.Default.Latitude;
+
+        starMagnitudeEditor1.StarMagnitudeColors = Settings.Default.StarMagnitudeColors;
+        starMagnitudeEditor1.StarMagnitudes = Settings.Default.StarMagnitudeSizes;
+        nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
+        nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
+        solarSystemObjectConfigurator1.MapBackgroundColor = Settings.Default.MapCircleColor;
+        solarSystemObjectConfigurator1.ObjectGraphics = SolarSystemObjectGraphics
+            .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
+            .ToArray();
+        cbInvertEastWest.Checked = Settings.Default.InvertEastWest;
+    }
+
     private void SaveSettings()
     {
         Settings.Default.DefaultLocationName = tbLocationName.Text;
@@ -102,6 +108,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.MagnitudeMaximum = (double)nudMagnitudeMaximum.Value;
         Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
         Settings.Default.KnownObjects = string.Join(";", solarSystemObjectConfigurator1.ObjectGraphics.Select(f => f.SaveToString()));
+        Settings.Default.InvertEastWest = cbInvertEastWest.Checked;
         Settings.Default.Save();
     }
     #endregion

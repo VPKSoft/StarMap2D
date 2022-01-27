@@ -56,7 +56,7 @@ namespace StarMap2D.Forms.Dialogs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
-            this.tpLocation = new System.Windows.Forms.TabPage();
+            this.tpCommon = new System.Windows.Forms.TabPage();
             this.lbSelectLocation = new System.Windows.Forms.Label();
             this.cmbSelectLocation = new System.Windows.Forms.ComboBox();
             this.nudLongitude = new System.Windows.Forms.NumericUpDown();
@@ -89,8 +89,9 @@ namespace StarMap2D.Forms.Dialogs
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
-            this.tpLocation.SuspendLayout();
+            this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
             this.tabColorSettings.SuspendLayout();
@@ -105,7 +106,7 @@ namespace StarMap2D.Forms.Dialogs
             this.tcSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcSettings.Controls.Add(this.tpLocation);
+            this.tcSettings.Controls.Add(this.tpCommon);
             this.tcSettings.Controls.Add(this.tabColorSettings);
             this.tcSettings.Controls.Add(this.tabStarMagnitudeSettings);
             this.tcSettings.Controls.Add(this.tabObjectSymbols);
@@ -115,23 +116,24 @@ namespace StarMap2D.Forms.Dialogs
             this.tcSettings.Size = new System.Drawing.Size(696, 493);
             this.tcSettings.TabIndex = 1;
             // 
-            // tpLocation
+            // tpCommon
             // 
-            this.tpLocation.Controls.Add(this.lbSelectLocation);
-            this.tpLocation.Controls.Add(this.cmbSelectLocation);
-            this.tpLocation.Controls.Add(this.nudLongitude);
-            this.tpLocation.Controls.Add(this.lbLongitude);
-            this.tpLocation.Controls.Add(this.nudLatitude);
-            this.tpLocation.Controls.Add(this.lbLatitude);
-            this.tpLocation.Controls.Add(this.tbLocationName);
-            this.tpLocation.Controls.Add(this.lbLocationName);
-            this.tpLocation.Location = new System.Drawing.Point(4, 24);
-            this.tpLocation.Name = "tpLocation";
-            this.tpLocation.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLocation.Size = new System.Drawing.Size(688, 465);
-            this.tpLocation.TabIndex = 0;
-            this.tpLocation.Text = "Location";
-            this.tpLocation.UseVisualStyleBackColor = true;
+            this.tpCommon.Controls.Add(this.cbInvertEastWest);
+            this.tpCommon.Controls.Add(this.lbSelectLocation);
+            this.tpCommon.Controls.Add(this.cmbSelectLocation);
+            this.tpCommon.Controls.Add(this.nudLongitude);
+            this.tpCommon.Controls.Add(this.lbLongitude);
+            this.tpCommon.Controls.Add(this.nudLatitude);
+            this.tpCommon.Controls.Add(this.lbLatitude);
+            this.tpCommon.Controls.Add(this.tbLocationName);
+            this.tpCommon.Controls.Add(this.lbLocationName);
+            this.tpCommon.Location = new System.Drawing.Point(4, 24);
+            this.tpCommon.Name = "tpCommon";
+            this.tpCommon.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCommon.Size = new System.Drawing.Size(688, 465);
+            this.tpCommon.TabIndex = 0;
+            this.tpCommon.Text = "Common";
+            this.tpCommon.UseVisualStyleBackColor = true;
             // 
             // lbSelectLocation
             // 
@@ -466,7 +468,6 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // solarSystemObjectConfigurator1
             // 
-            this.solarSystemObjectConfigurator1.Locale = "en-US";
             this.solarSystemObjectConfigurator1.Location = new System.Drawing.Point(3, 3);
             this.solarSystemObjectConfigurator1.MapBackgroundColor = System.Drawing.SystemColors.Window;
             this.solarSystemObjectConfigurator1.Margin = new System.Windows.Forms.Padding(0);
@@ -496,6 +497,16 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
+            // cbInvertEastWest
+            // 
+            this.cbInvertEastWest.AutoSize = true;
+            this.cbInvertEastWest.Location = new System.Drawing.Point(7, 147);
+            this.cbInvertEastWest.Name = "cbInvertEastWest";
+            this.cbInvertEastWest.Size = new System.Drawing.Size(193, 19);
+            this.cbInvertEastWest.TabIndex = 10;
+            this.cbInvertEastWest.Text = "Invert east-west axis of the map";
+            this.cbInvertEastWest.UseVisualStyleBackColor = true;
+            // 
             // FormDialogSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -512,8 +523,8 @@ namespace StarMap2D.Forms.Dialogs
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "StarMap2D - Settings";
             this.tcSettings.ResumeLayout(false);
-            this.tpLocation.ResumeLayout(false);
-            this.tpLocation.PerformLayout();
+            this.tpCommon.ResumeLayout(false);
+            this.tpCommon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
             this.tabColorSettings.ResumeLayout(false);
@@ -530,7 +541,7 @@ namespace StarMap2D.Forms.Dialogs
         #endregion
 
         private TabControl tcSettings;
-        private TabPage tpLocation;
+        private TabPage tpCommon;
         private NumericUpDown nudLatitude;
         private Label lbLatitude;
         private TextBox tbLocationName;
@@ -563,5 +574,6 @@ namespace StarMap2D.Forms.Dialogs
         private TabPage tabObjectSymbols;
         private Controls.WinForms.SolarSystemObjectConfigurator solarSystemObjectConfigurator1;
         private Button btResetSymbols;
+        private CheckBox cbInvertEastWest;
     }
 }
