@@ -59,4 +59,11 @@ public class MathTests
 
         Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));
     }
+
+    [TestMethod]
+    public void TestDmsConversion()
+    {
+        var degrees = DmsConvert.DmsToDegrees(-04, 51.73, 0);
+        Assert.AreEqual(-4.862167, degrees, 0.0001);
+    }
 }

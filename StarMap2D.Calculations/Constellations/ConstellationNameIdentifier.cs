@@ -24,8 +24,10 @@ SOFTWARE.
 */
 #endregion
 
+using System.Globalization;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
+using StarMap2D.Calculations.Enumerations;
 
 namespace StarMap2D.Calculations.Constellations;
 
@@ -53,4 +55,37 @@ public class ConstellationNameIdentifier: IConstellationNameIdentifier
     /// <remarks>See: https://en.wikipedia.org/wiki/IAU_designated_constellations_by_area</remarks>
     // ReSharper disable once InconsistentNaming, The IAU is written in upper case.
     public int IAURank { get; init; }
+
+    /// <summary>
+    /// Gets or sets the quadrant in the sky.
+    /// </summary>
+    /// <value>The quadrant in the sky.</value>
+    public Quadrant Quadrant { get; set; }
+
+    /// <summary>
+    /// Gets or sets the right ascension.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    public double RightAscension { get; set; }
+
+    /// <summary>
+    /// Gets or sets the declination.
+    /// </summary>
+    /// <value>The declination.</value>
+    public double Declination { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this serpens is the whole Serpens constellation with head and tail.
+    /// </summary>
+    public bool SerpensOfficial { get; set; }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+        return
+            $"new() {{ {nameof(Identifier)} = \"{Identifier}\", {nameof(Name)} = \"{Name}\", {nameof(IdentifierCased)} = \"{IdentifierCased}\", {nameof(IdentifierValue)} = {nameof(ConstellationValue)}.{IdentifierValue}, {nameof(IAURank)} = {IAURank}, {nameof(Quadrant)} = {nameof(Quadrant)}.{Quadrant}, {nameof(RightAscension)} = {RightAscension.ToString(CultureInfo.InvariantCulture)}, {nameof(Declination)} = {Declination.ToString(CultureInfo.InvariantCulture)}, {nameof(SerpensOfficial)} = {(SerpensOfficial ? "true" : "false")}, }},";
+    }
 }

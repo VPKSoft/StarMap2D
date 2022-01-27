@@ -40,7 +40,7 @@ public class DmsConvert
     /// <returns>The specified degrees, minutes and seconds converted into degrees.</returns>
     public static double DmsToDegrees(double degrees, double minutes, double seconds)
     {
-        return degrees + minutes / 60.0 + seconds / 3600.0;
+        return (System.Math.Abs(degrees) + minutes / 60.0 + seconds / 3600.0) * System.Math.Sign(degrees);
     }
 
     /// <summary>

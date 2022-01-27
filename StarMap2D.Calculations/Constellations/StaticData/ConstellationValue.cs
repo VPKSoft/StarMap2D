@@ -412,6 +412,11 @@ public enum ConstellationValue
     SerpensCaput,
 
     /// <summary>
+    /// The constellation serpens (Caput & Cauda).
+    /// </summary>
+    Serpens,
+
+    /// <summary>
     /// The constellation Serpens Cauda.
     /// </summary>
     SerpensCauda,
