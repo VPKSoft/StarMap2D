@@ -25,7 +25,7 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
-using AASharp;
+using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs.Interfaces;
 
 namespace VPKSoft.StarCatalogs.Providers;
@@ -311,7 +311,7 @@ public class YaleBrightStarData: StarData, IRightAscensionHms, IDeclinationDms
         {
             if (!FetchMemory[nameof(Declination)])
             {
-                declination ??= AASCoordinateTransformation.DMSToDegrees(DeD, Dem, Des);
+                declination ??= DmsConvert.DmsToDegrees(DeD, Dem, Des);
                 FetchMemory[nameof(Declination)] = true;
             }
 

@@ -54,29 +54,16 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     {
         InitializeComponent();
 
-        solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Properties.Settings.Default.KnownObjects,
-            Properties.Settings.Default.UiLanguage);
-
         if (Utils.ShouldLocalize() != null)
         {
             DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages", Utils.ShouldLocalize(), false);
             return; // After localization don't do anything more..
         }
 
-        map2d.StarColors = Properties.Settings.Default.StarMagnitudeColors.Split(";")
-            .Select(ColorTranslator.FromHtml).ToArray();
-
-        map2d.StarSizes = Properties.Settings.Default.StarMagnitudeSizes.Split(';').Select(int.Parse).ToArray();
-
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
-        map2d.MapCircleColor = Properties.Settings.Default.MapCircleColor;
-
-        map2d.Plot2D = new(Properties.Settings.Default.Latitude, Properties.Settings.Default.Longitude)
-        {
-            Radius = Math.Min(map2d.Width, map2d.Height)
-        };
+        LoadSettings();
 
         SetTitle();
 
@@ -111,18 +98,45 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         }
 
         instances.Add(this);
-
-        cbInvertEastWest.Checked = Properties.Settings.Default.InvertEastWest;
-
-        cmbJumpToLocation.Items.AddRange(new Cities().CityList.ToArray<object>());
-        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
     }
     
-    private readonly List<SolarSystemObjectGraphics> solarSystemObjects;
+    private List<SolarSystemObjectGraphics> solarSystemObjects = new();
 
     private static FormSkyMap2D? singletonInstance;
 
     #region PrivateMethodsAndProperties
+
+    private void LoadSettings()
+    {
+        solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Properties.Settings.Default.KnownObjects,
+            Properties.Settings.Default.UiLanguage);
+
+        map2d.StarColors = Properties.Settings.Default.StarMagnitudeColors.Split(";")
+            .Select(ColorTranslator.FromHtml).ToArray();
+
+        cmbJumpToLocation.Items.AddRange(new Cities().CityList.ToArray<object>());
+
+        map2d.StarSizes = Properties.Settings.Default.StarMagnitudeSizes.Split(';').Select(int.Parse).ToArray();
+
+        map2d.MapCircleColor = Properties.Settings.Default.MapCircleColor;
+        map2d.ForeColor = Properties.Settings.Default.MapTextColor;
+        map2d.ConstellationLineColor = Properties.Settings.Default.ConstellationLineColor;
+        map2d.ConstellationBorderLineColor = Properties.Settings.Default.ConstellationBorderLineColor;
+        map2d.BackColor = Properties.Settings.Default.MapSurroundingsColor;
+
+        map2d.DrawConstellationBoundaries = Properties.Settings.Default.DrawConstellationBorders;
+        map2d.DrawConstellations = Properties.Settings.Default.DrawConstellationLines;
+        map2d.DrawConstellationNames = Properties.Settings.Default.DrawConstellationLabels;
+
+        cbInvertEastWest.Checked = Properties.Settings.Default.InvertEastWest;
+
+        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
+
+        map2d.Plot2D = new(Properties.Settings.Default.Latitude, Properties.Settings.Default.Longitude)
+        {
+            Radius = Math.Min(map2d.Width, map2d.Height)
+        };
+    }
 
     private void SetTitle(double? latitude = null, double? longitude = null)
     {
@@ -182,7 +196,6 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         map2d.CurrentTimeUtc = DateTime.UtcNow;
         numericUpDown1.Value = 1;
         SetTitle();
-
     }
 
     private bool InvertEastWest => map2d.InvertEastWest;
@@ -324,6 +337,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                     instance.map2d.ConstellationBorderLineColor = color; break;
                 case MapGraphicValue.MapSurroundingsColor:
                     instance.map2d.BackColor = color; break;
+                case MapGraphicValue.MapTextColor:
+                    instance.map2d.ForeColor = color; break;
             }
         }
     }

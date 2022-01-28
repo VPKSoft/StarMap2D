@@ -57,6 +57,10 @@ namespace StarMap2D.Forms.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpCommon = new System.Windows.Forms.TabPage();
+            this.cbDrawConstellationBorders = new System.Windows.Forms.CheckBox();
+            this.cbDrawConstellationLabels = new System.Windows.Forms.CheckBox();
+            this.cbDrawConstellations = new System.Windows.Forms.CheckBox();
+            this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
             this.lbSelectLocation = new System.Windows.Forms.Label();
             this.cmbSelectLocation = new System.Windows.Forms.ComboBox();
             this.nudLongitude = new System.Windows.Forms.NumericUpDown();
@@ -66,6 +70,8 @@ namespace StarMap2D.Forms.Dialogs
             this.tbLocationName = new System.Windows.Forms.TextBox();
             this.lbLocationName = new System.Windows.Forms.Label();
             this.tabColorSettings = new System.Windows.Forms.TabPage();
+            this.pnMapTextColor = new System.Windows.Forms.Panel();
+            this.lbMapTextColor = new System.Windows.Forms.Label();
             this.pnMapSurroundingsColor = new System.Windows.Forms.Panel();
             this.lbMapSurroundingsColor = new System.Windows.Forms.Label();
             this.pnMapCircleColor = new System.Windows.Forms.Panel();
@@ -89,7 +95,8 @@ namespace StarMap2D.Forms.Dialogs
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
+            this.cmbSelectLanguageValue = new System.Windows.Forms.ComboBox();
+            this.lbSelectLanguageDescription = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
@@ -118,6 +125,11 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tpCommon
             // 
+            this.tpCommon.Controls.Add(this.lbSelectLanguageDescription);
+            this.tpCommon.Controls.Add(this.cmbSelectLanguageValue);
+            this.tpCommon.Controls.Add(this.cbDrawConstellationBorders);
+            this.tpCommon.Controls.Add(this.cbDrawConstellationLabels);
+            this.tpCommon.Controls.Add(this.cbDrawConstellations);
             this.tpCommon.Controls.Add(this.cbInvertEastWest);
             this.tpCommon.Controls.Add(this.lbSelectLocation);
             this.tpCommon.Controls.Add(this.cmbSelectLocation);
@@ -134,6 +146,47 @@ namespace StarMap2D.Forms.Dialogs
             this.tpCommon.TabIndex = 0;
             this.tpCommon.Text = "Common";
             this.tpCommon.UseVisualStyleBackColor = true;
+            // 
+            // cbDrawConstellationBorders
+            // 
+            this.cbDrawConstellationBorders.AutoSize = true;
+            this.cbDrawConstellationBorders.Location = new System.Drawing.Point(6, 222);
+            this.cbDrawConstellationBorders.Name = "cbDrawConstellationBorders";
+            this.cbDrawConstellationBorders.Size = new System.Drawing.Size(167, 19);
+            this.cbDrawConstellationBorders.TabIndex = 13;
+            this.cbDrawConstellationBorders.Text = "Draw constellation borders";
+            this.cbDrawConstellationBorders.UseVisualStyleBackColor = true;
+            // 
+            // cbDrawConstellationLabels
+            // 
+            this.cbDrawConstellationLabels.AutoSize = true;
+            this.cbDrawConstellationLabels.Location = new System.Drawing.Point(24, 197);
+            this.cbDrawConstellationLabels.Name = "cbDrawConstellationLabels";
+            this.cbDrawConstellationLabels.Size = new System.Drawing.Size(157, 19);
+            this.cbDrawConstellationLabels.TabIndex = 12;
+            this.cbDrawConstellationLabels.Text = "Draw constellation labels";
+            this.cbDrawConstellationLabels.UseVisualStyleBackColor = true;
+            // 
+            // cbDrawConstellations
+            // 
+            this.cbDrawConstellations.AutoSize = true;
+            this.cbDrawConstellations.Location = new System.Drawing.Point(6, 172);
+            this.cbDrawConstellations.Name = "cbDrawConstellations";
+            this.cbDrawConstellations.Size = new System.Drawing.Size(129, 19);
+            this.cbDrawConstellations.TabIndex = 11;
+            this.cbDrawConstellations.Text = "Draw constellations";
+            this.cbDrawConstellations.UseVisualStyleBackColor = true;
+            this.cbDrawConstellations.CheckedChanged += new System.EventHandler(this.cbDrawConstellations_CheckedChanged);
+            // 
+            // cbInvertEastWest
+            // 
+            this.cbInvertEastWest.AutoSize = true;
+            this.cbInvertEastWest.Location = new System.Drawing.Point(7, 147);
+            this.cbInvertEastWest.Name = "cbInvertEastWest";
+            this.cbInvertEastWest.Size = new System.Drawing.Size(193, 19);
+            this.cbInvertEastWest.TabIndex = 10;
+            this.cbInvertEastWest.Text = "Invert east-west axis of the map";
+            this.cbInvertEastWest.UseVisualStyleBackColor = true;
             // 
             // lbSelectLocation
             // 
@@ -231,6 +284,8 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tabColorSettings
             // 
+            this.tabColorSettings.Controls.Add(this.pnMapTextColor);
+            this.tabColorSettings.Controls.Add(this.lbMapTextColor);
             this.tabColorSettings.Controls.Add(this.pnMapSurroundingsColor);
             this.tabColorSettings.Controls.Add(this.lbMapSurroundingsColor);
             this.tabColorSettings.Controls.Add(this.pnMapCircleColor);
@@ -248,6 +303,27 @@ namespace StarMap2D.Forms.Dialogs
             this.tabColorSettings.TabIndex = 1;
             this.tabColorSettings.Text = "Map color settings";
             this.tabColorSettings.UseVisualStyleBackColor = true;
+            // 
+            // pnMapTextColor
+            // 
+            this.pnMapTextColor.BackColor = System.Drawing.Color.DarkViolet;
+            this.pnMapTextColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnMapTextColor.Location = new System.Drawing.Point(223, 110);
+            this.pnMapTextColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnMapTextColor.Name = "pnMapTextColor";
+            this.pnMapTextColor.Size = new System.Drawing.Size(113, 23);
+            this.pnMapTextColor.TabIndex = 12;
+            this.pnMapTextColor.Tag = "MapTextColor";
+            this.pnMapTextColor.Click += new System.EventHandler(this.colorPanel_Click);
+            // 
+            // lbMapTextColor
+            // 
+            this.lbMapTextColor.AutoSize = true;
+            this.lbMapTextColor.Location = new System.Drawing.Point(6, 114);
+            this.lbMapTextColor.Name = "lbMapTextColor";
+            this.lbMapTextColor.Size = new System.Drawing.Size(183, 15);
+            this.lbMapTextColor.TabIndex = 11;
+            this.lbMapTextColor.Text = "Map text color (object labels, etc)";
             // 
             // pnMapSurroundingsColor
             // 
@@ -497,15 +573,30 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
-            // cbInvertEastWest
+            // cmbSelectLanguageValue
             // 
-            this.cbInvertEastWest.AutoSize = true;
-            this.cbInvertEastWest.Location = new System.Drawing.Point(7, 147);
-            this.cbInvertEastWest.Name = "cbInvertEastWest";
-            this.cbInvertEastWest.Size = new System.Drawing.Size(193, 19);
-            this.cbInvertEastWest.TabIndex = 10;
-            this.cbInvertEastWest.Text = "Invert east-west axis of the map";
-            this.cbInvertEastWest.UseVisualStyleBackColor = true;
+            this.cmbSelectLanguageValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSelectLanguageValue.DisplayMember = "DisplayName";
+            this.cmbSelectLanguageValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSelectLanguageValue.FormattingEnabled = true;
+            this.cmbSelectLanguageValue.Location = new System.Drawing.Point(8, 281);
+            this.cmbSelectLanguageValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbSelectLanguageValue.Name = "cmbSelectLanguageValue";
+            this.cmbSelectLanguageValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbSelectLanguageValue.TabIndex = 28;
+            // 
+            // lbSelectLanguageDescription
+            // 
+            this.lbSelectLanguageDescription.AutoSize = true;
+            this.lbSelectLanguageDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbSelectLanguageDescription.Location = new System.Drawing.Point(7, 261);
+            this.lbSelectLanguageDescription.Margin = new System.Windows.Forms.Padding(20, 17, 20, 17);
+            this.lbSelectLanguageDescription.Name = "lbSelectLanguageDescription";
+            this.lbSelectLanguageDescription.Size = new System.Drawing.Size(153, 13);
+            this.lbSelectLanguageDescription.TabIndex = 29;
+            this.lbSelectLanguageDescription.Text = "Language (a restart is required)";
+            this.lbSelectLanguageDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormDialogSettings
             // 
@@ -575,5 +666,12 @@ namespace StarMap2D.Forms.Dialogs
         private Controls.WinForms.SolarSystemObjectConfigurator solarSystemObjectConfigurator1;
         private Button btResetSymbols;
         private CheckBox cbInvertEastWest;
+        private Panel pnMapTextColor;
+        private Label lbMapTextColor;
+        private CheckBox cbDrawConstellationBorders;
+        private CheckBox cbDrawConstellationLabels;
+        private CheckBox cbDrawConstellations;
+        private Label lbSelectLanguageDescription;
+        private ComboBox cmbSelectLanguageValue;
     }
 }

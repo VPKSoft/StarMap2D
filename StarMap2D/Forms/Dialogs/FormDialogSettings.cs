@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using System.Globalization;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Properties;
 using StarMap2D.Utilities;
@@ -59,6 +60,13 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
 
         LoadSettings();
+
+        // list the translated cultures..
+        List<CultureInfo> cultures = DBLangEngine.GetLocalizedCultures();
+
+        // a the translated cultures to the selection combo box..
+        // ReSharper disable once CoVariantArrayConversion
+        cmbSelectLanguageValue.Items.AddRange(cultures.ToArray());
     }
 
     #region PrivateFields
@@ -92,6 +100,20 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         nudMagnitudeMaximum.Value = (decimal)Settings.Default.MagnitudeMaximum;
         nudMagnitudeMinimum.Value = (decimal)Settings.Default.MagnitudeMinimum;
         solarSystemObjectConfigurator1.MapBackgroundColor = Settings.Default.MapCircleColor;
+
+        // Constellations
+        cbDrawConstellationBorders.Checked = Settings.Default.DrawConstellationBorders;
+        cbDrawConstellationLabels.Checked = Settings.Default.DrawConstellationLabels;
+        cbDrawConstellations.Checked = Settings.Default.DrawConstellationLines;
+
+        // Colors.
+        pnConstellationBorderLineColor.BackColor = Settings.Default.ConstellationBorderLineColor;
+        pnMapCircleColor.BackColor = Settings.Default.MapCircleColor;
+        pnConstellationBorderLineColor.BackColor = Settings.Default.ConstellationBorderLineColor;
+        pnConstellationLineColor.BackColor = Settings.Default.ConstellationLineColor;
+        pnMapSurroundingsColor.BackColor = Settings.Default.MapSurroundingsColor;
+        pnMapTextColor.BackColor = Settings.Default.MapTextColor;
+
         solarSystemObjectConfigurator1.ObjectGraphics = SolarSystemObjectGraphics
             .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
             .ToArray();
@@ -105,6 +127,20 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.Latitude = (double)nudLatitude.Value;
         Settings.Default.StarMagnitudeColors = starMagnitudeEditor1.StarMagnitudeColors;
         Settings.Default.StarMagnitudeSizes = starMagnitudeEditor1.StarMagnitudes;
+        
+        // Colors.
+        Settings.Default.ConstellationBorderLineColor = pnConstellationBorderLineColor.BackColor;
+        Settings.Default.MapCircleColor = pnMapCircleColor.BackColor;
+        Settings.Default.ConstellationBorderLineColor = pnConstellationBorderLineColor.BackColor;
+        Settings.Default.ConstellationLineColor = pnConstellationLineColor.BackColor;
+        Settings.Default.MapSurroundingsColor = pnMapSurroundingsColor.BackColor;
+        Settings.Default.MapTextColor = pnMapTextColor.BackColor;
+
+        // Constellations
+        Settings.Default.DrawConstellationBorders = cbDrawConstellationBorders.Checked;
+        Settings.Default.DrawConstellationLabels = cbDrawConstellationLabels.Checked;
+        Settings.Default.DrawConstellationLines = cbDrawConstellations.Checked;
+
         Settings.Default.MagnitudeMaximum = (double)nudMagnitudeMaximum.Value;
         Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
         Settings.Default.KnownObjects = string.Join(";", solarSystemObjectConfigurator1.ObjectGraphics.Select(f => f.SaveToString()));
@@ -193,4 +229,18 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         solarSystemObjectConfigurator1.Reset();
     }
     #endregion
+
+    private void cbDrawConstellations_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        if (!checkBox.Checked)
+        {
+            cbDrawConstellationLabels.Checked = false;
+            cbDrawConstellationLabels.Enabled = false;
+        }
+        else
+        {
+            cbDrawConstellationLabels.Enabled = true;
+        }
+    }
 }

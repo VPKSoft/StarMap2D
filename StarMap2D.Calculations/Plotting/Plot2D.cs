@@ -115,7 +115,7 @@ public class Plot2D
         var xR = r * (1 - x1);
         var yR = r * (1 - y1);
 
-        return new AAS2DCoordinate() { X = invertEastWest ? Radius - xR : xR, Y = yR};
+        return new AAS2DCoordinate { X = invertEastWest ? Radius - xR : xR, Y = yR};
     }
 
     /// <summary>

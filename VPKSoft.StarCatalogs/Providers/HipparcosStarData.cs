@@ -25,7 +25,7 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
-using AASharp;
+using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs.Interfaces;
 
 namespace VPKSoft.StarCatalogs.Providers;
@@ -322,7 +322,7 @@ public class HipparcosStarData : StarData, IRightAscensionHms, IDeclinationDms
         {
             if (!FetchMemory["Declination"])
             {
-                declination = AASCoordinateTransformation.DMSToDegrees(DeD, Dem, Des);
+                declination = DmsConvert.DmsToDegrees(DeD, Dem, Des);
                 FetchMemory["Declination"] = true;
             }
 

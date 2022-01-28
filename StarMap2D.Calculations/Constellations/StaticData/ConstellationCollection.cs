@@ -132,13 +132,13 @@ public class ConstellationCollection
         },
         new()
         {
-            Identifier = "SEC", Name = "Serpens", IdentifierCased = "Sec",
+            Identifier = "SEC", Name = "Serpens Cauda", IdentifierCased = "Sec",
             IdentifierValue = ConstellationValue.SerpensCauda, IAURank = 23, Quadrant = Quadrant.Nq3,
             RightAscension = 18.126666666666665, Declination = -4.851166666666667, SerpensOfficial = false,
         },
         new()
         {
-            Identifier = "SCA", Name = "Serpens", IdentifierCased = "Ser",
+            Identifier = "SER", Name = "Serpens Caput", IdentifierCased = "Ser",
             IdentifierValue = ConstellationValue.SerpensCaput, IAURank = 23, Quadrant = Quadrant.Nq3,
             RightAscension = 15.774833333333333, Declination = 10.97, SerpensOfficial = false,
         },

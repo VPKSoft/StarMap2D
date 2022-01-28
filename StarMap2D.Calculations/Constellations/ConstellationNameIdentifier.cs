@@ -80,12 +80,18 @@ public class ConstellationNameIdentifier: IConstellationNameIdentifier
     public bool SerpensOfficial { get; set; }
 
     /// <summary>
+    /// Gets the constellation name without white space character(s).
+    /// </summary>
+    /// <value>The name without white space character(s).</value>
+    public string NameNoWhiteSpace => Name?.Replace(" ", "") ?? IdentifierValue.ToString();
+
+    /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
     /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
     public override string ToString()
     {
         return
-            $"new() {{ {nameof(Identifier)} = \"{Identifier}\", {nameof(Name)} = \"{Name}\", {nameof(IdentifierCased)} = \"{IdentifierCased}\", {nameof(IdentifierValue)} = {nameof(ConstellationValue)}.{IdentifierValue}, {nameof(IAURank)} = {IAURank}, {nameof(Quadrant)} = {nameof(Quadrant)}.{Quadrant}, {nameof(RightAscension)} = {RightAscension.ToString(CultureInfo.InvariantCulture)}, {nameof(Declination)} = {Declination.ToString(CultureInfo.InvariantCulture)}, {nameof(SerpensOfficial)} = {(SerpensOfficial ? "true" : "false")}, }},";
+            $"{{ {nameof(Identifier)} = \"{Identifier}\", {nameof(Name)} = \"{Name}\", {nameof(IdentifierCased)} = \"{IdentifierCased}\", {nameof(IdentifierValue)} = {nameof(ConstellationValue)}.{IdentifierValue}, {nameof(IAURank)} = {IAURank}, {nameof(Quadrant)} = {nameof(Quadrant)}.{Quadrant}, {nameof(RightAscension)} = {RightAscension.ToString(CultureInfo.InvariantCulture)}, {nameof(Declination)} = {Declination.ToString(CultureInfo.InvariantCulture)}, {nameof(SerpensOfficial)} = {(SerpensOfficial ? "true" : "false")}, }},";
     }
 }

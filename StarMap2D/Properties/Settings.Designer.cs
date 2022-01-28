@@ -192,5 +192,53 @@ namespace StarMap2D.Properties {
                 this["InvertEastWest"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("231, 23, 180")]
+        public global::System.Drawing.Color MapTextColor {
+            get {
+                return ((global::System.Drawing.Color)(this["MapTextColor"]));
+            }
+            set {
+                this["MapTextColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DrawConstellationLines {
+            get {
+                return ((bool)(this["DrawConstellationLines"]));
+            }
+            set {
+                this["DrawConstellationLines"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DrawConstellationLabels {
+            get {
+                return ((bool)(this["DrawConstellationLabels"]));
+            }
+            set {
+                this["DrawConstellationLabels"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DrawConstellationBorders {
+            get {
+                return ((bool)(this["DrawConstellationBorders"]));
+            }
+            set {
+                this["DrawConstellationBorders"] = value;
+            }
+        }
     }
 }

@@ -44,5 +44,17 @@
     <Setting Name="InvertEastWest" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="MapTextColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">231, 23, 180</Value>
+    </Setting>
+    <Setting Name="DrawConstellationLines" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DrawConstellationLabels" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DrawConstellationBorders" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

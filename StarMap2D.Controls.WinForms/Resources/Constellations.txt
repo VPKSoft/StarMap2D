@@ -1,0 +1,187 @@
+This is the simple tab-delimited localization file.
+As you can see only the "[]" tags and tab delimited key-value pairs matter for the localization.
+The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
+
+[en-US]
+textHydra	Hydra
+textAquarius	Aquarius
+textOphiuchus	Ophiuchus
+textLeo	Leo
+textBoötes	Boötes
+textPisces	Pisces
+textSagittarius	Sagittarius
+textCygnus	Cygnus
+textTaurus	Taurus
+textCamelopardalis	Camelopardalis
+textAndromeda	Andromeda
+textVirgo	Virgo
+textPuppis	Puppis
+textAuriga	Auriga
+textAquila	Aquila
+textSerpensCauda	Serpens Cauda
+textSerpensCaput	Serpens Caput
+textSerpens	Serpens
+textPerseus	Perseus
+textCassiopeia	Cassiopeia
+textOrion	Orion
+textCepheus	Cepheus
+textLynx	Lynx
+textLibra	Libra
+textUrsaMajor	Ursa Major
+textGemini	Gemini
+textCancer	Cancer
+textVela	Vela
+textScorpius	Scorpius
+textCarina	Carina
+textMonoceros	Monoceros
+textSculptor	Sculptor
+textPhoenix	Phoenix
+textCanesVenatici	Canes Venatici
+textAries	Aries
+textCetus	Cetus
+textCapricornus	Capricornus
+textFornax	Fornax
+textComaBerenices	Coma Berenices
+textCanisMajor	Canis Major
+textPavo	Pavo
+textGrus	Grus
+textLupus	Lupus
+textSextans	Sextans
+textTucana	Tucana
+textIndus	Indus
+textHercules	Hercules
+textOctans	Octans
+textLepus	Lepus
+textLyra	Lyra
+textCrater	Crater
+textColumba	Columba
+textVulpecula	Vulpecula
+textUrsaMinor	Ursa Minor
+textTelescopium	Telescopium
+textHorologium	Horologium
+textPictor	Pictor
+textEridanus	Eridanus
+textPiscisAustrinus	Piscis Austrinus
+textHydrus	Hydrus
+textAntlia	Antlia
+textAra	Ara
+textLeoMinor	Leo Minor
+textPyxis	Pyxis
+textMicroscopium	Microscopium
+textApus	Apus
+textLacerta	Lacerta
+textDelphinus	Delphinus
+textPegasus	Pegasus
+textCorvus	Corvus
+textCanisMinor	Canis Minor
+textDorado	Dorado
+textCoronaBorealis	Corona Borealis
+textNorma	Norma
+textMensa	Mensa
+textVolans	Volans
+textMusca	Musca
+textTriangulum	Triangulum
+textChamaeleon	Chamaeleon
+textDraco	Draco
+textCoronaAustralis	Corona Australis
+textCaelum	Caelum
+textReticulum	Reticulum
+textTriangulumAustrale	Triangulum Australe
+textScutum	Scutum
+textCircinus	Circinus
+textSagitta	Sagitta
+textEquuleus	Equuleus
+textCrux	Crux
+textCentaurus	Centaurus
+
+[fi-FI]
+textHydra	Vesikäärme
+textAquarius	Vesimies
+textOphiuchus	Käärmeenkantaja
+textLeo	Leijona
+textBoötes	Karhunvartija
+textPisces	Kalat
+textSagittarius	Jousimies
+textCygnus	Joutsen
+textTaurus	Härkä
+textCamelopardalis	Kirahvi
+textAndromeda	Andromeda
+textVirgo	Neitsyt
+textPuppis	Peräkeula
+textAuriga	Ajomies
+textAquila	Kotka
+textSerpensCauda	Käärmeen häntä
+textSerpensCaput	Käärmeen pää
+textSerpens	Käärme
+textPerseus	Perseus
+textCassiopeia	Kassiopeia
+textOrion	Orion
+textCepheus	Kefeus
+textLynx	Ilves
+textLibra	Vaaka
+textUrsaMajor	Iso karhu
+textGemini	Kaksoset
+textCancer	Krapu
+textVela	Purje
+textScorpius	Skorpioni
+textCarina	Köli
+textMonoceros	Yksisarvinen
+textSculptor	Kuvanveistäjä
+textPhoenix	Feeniks
+textCanesVenatici	jokoirat
+textAries	Oinas
+textCetus	Valaskala
+textCapricornus	Kauris
+textFornax	Sulatusuuni
+textComaBerenices	Bereniken hiukset
+textCanisMajor	Iso koira
+textPavo	Riikinkukko
+textGrus	Kurki
+textLupus	Susi
+textSextans	Sekstantti
+textTucana	Tukaani
+textIndus	Intiaani
+textHercules	Herkules
+textOctans	Oktantti
+textLepus	Jänis
+textLyra	Lyyra
+textCrater	Malja
+textColumba	Kyyhkynen
+textVulpecula	Kettu
+textUrsaMinor	Pieni karhu
+textTelescopium	Kaukoputki
+textHorologium	Heilurikello
+textPictor	Maalari
+textEridanus	Eridanus
+textPiscisAustrinus	Etelän kala
+textHydrus	Etelän vesikäärme
+textAntlia	Ilmapumppu
+textAra	Alttari
+textLeoMinor	Pieni leijona
+textPyxis	Kompassi
+textMicroscopium	Mikroskooppi
+textApus	Paratiisilintu
+textLacerta	Sisilisko
+textDelphinus	Delfiini
+textPegasus	Pegasus
+textCorvus	Korppi
+textCanisMinor	Pieni koira
+textDorado	Kultakala
+textCoronaBorealis	Pohjan kruunu
+textNorma	Kulmaviivoitin
+textMensa	Pöytävuori
+textVolans	Lentokala
+textMusca	Kärpänen
+textTriangulum	Kolmio
+textChamaeleon	Kameleontti
+textDraco	Lohikäärme
+textCoronaAustralis	Etelän kruunu
+textCaelum	Veistotaltta
+textReticulum	Verkko
+textTriangulumAustrale	Etelän kolmio
+textScutum	Kilpi
+textCircinus	Harppi
+textSagitta	Nuoli
+textEquuleus	Pieni hevonen
+textCrux	Etelän risti
+textCentaurus	Kentauri

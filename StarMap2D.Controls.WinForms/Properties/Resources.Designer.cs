@@ -71,6 +71,31 @@ namespace StarMap2D.Controls.WinForms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is the simple tab-delimited localization file.
+        ///As you can see only the &quot;[]&quot; tags and tab delimited key-value pairs matter for the localization.
+        ///The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
+        ///
+        ///[en-US]
+        ///textHydra	Hydra
+        ///textAquarius	Aquarius
+        ///textOphiuchus	Ophiuchus
+        ///textLeo	Leo
+        ///textBoötes	Boötes
+        ///textPisces	Pisces
+        ///textSagittarius	Sagittarius
+        ///textCygnus	Cygnus
+        ///textTaurus	Taurus
+        ///textCamelopardalis	Camelopardalis
+        ///textAndromeda	Andromeda
+        ///textVirgo	Virg [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Constellations {
+            get {
+                return ResourceManager.GetString("Constellations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The symbols images for files:
         ///* minor_planet_eris1.svg
         ///* minor_planet_eris2.svg

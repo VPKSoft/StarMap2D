@@ -50,4 +50,9 @@ public enum MapGraphicValue
     /// The map surroundings color.
     /// </summary>
     MapSurroundingsColor,
+
+    /// <summary>
+    /// The map text color (labels, etc).
+    /// </summary>
+    MapTextColor,
 }

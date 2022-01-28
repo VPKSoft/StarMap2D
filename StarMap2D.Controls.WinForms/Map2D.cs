@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Globalization;
 using AASharp;
 using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Constellations.Interfaces;
@@ -59,7 +60,9 @@ public partial class Map2D : UserControl
         backgroundBrush = new SolidBrush(BackColor);
         constellationLinePen = new Pen(constellationLineColor);
         constellationBorderPen = new Pen(constellationBorderLineColor);
+        textBrush = new SolidBrush(ForeColor);
         base.DoubleBuffered = true;
+        constellationNames.GetLocalizedTexts(Properties.Resources.Constellations);
         DrawMapImage();
         HandleCreated += Map2D_NeedsRepaint;
         base.BackgroundImageLayout = ImageLayout.None;
@@ -90,6 +93,7 @@ public partial class Map2D : UserControl
     #endregion
 
     #region PrivateFields
+    TabDeliLocalization constellationNames = new ();
     private Color mapCircleColor = Color.Black;
     private Color constellationLineColor = Color.DeepSkyBlue;
     private Color constellationBorderLineColor = Color.FromArgb(13, 23, 125);
@@ -103,6 +107,7 @@ public partial class Map2D : UserControl
     private readonly List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
     private int[] starSizes = Array.Empty<int>();
     private Color[] starColors = Array.Empty<Color>();
+    private string? locale;
     #endregion
 
     #region PrivateProperties
@@ -284,7 +289,7 @@ public partial class Map2D : UserControl
     /// <param name="graphics">The graphics to draw the constellation boundary on.</param>
     private void DrawConstellationBoundary(IConstellation<ConstellationArea, ConstellationLine> constellation, Graphics graphics)
     {
-        if (Plot2D == null)
+        if (Plot2D == null || !DrawConstellationBoundaries)
         {
             return;
         }
@@ -308,7 +313,7 @@ public partial class Map2D : UserControl
                 continue;
             }
 
-            graphics.DrawLine(constellationBorderPen!, drawPoint1, drawPoint2);
+            graphics.DrawLine(constellationBorderPen, drawPoint1, drawPoint2);
         }
     }
 
@@ -320,7 +325,7 @@ public partial class Map2D : UserControl
     private void DrawConstellation(IConstellation<ConstellationArea, ConstellationLine> constellation,
         Graphics graphics)
     {
-        if (Plot2D == null)
+        if (Plot2D == null || !DrawConstellations)
         {
             return;
         }
@@ -352,9 +357,33 @@ public partial class Map2D : UserControl
                 continue;
             }
 
-            graphics.DrawLine(constellationLinePen!, drawPoint1, drawPoint2);
+            graphics.DrawLine(constellationLinePen, drawPoint1, drawPoint2);
+        }
+
+        if (drawConstellationLabels)
+        {
+            var constellationData = ConstellationCollection.Constellations.First(f =>
+                f.Identifier == constellation.Identifier && f.SerpensOfficial == false);
+
+            var labelPoint = new AAS2DCoordinate
+                    { X = constellationData.RightAscension, Y = constellationData.Declination }
+                .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+
+            labelPoint = Plot2D.Project2D(labelPoint, invertEastWest);
+
+            var name = constellationNames.GetMessage($"text{constellationData.NameNoWhiteSpace}",
+                constellationData.Name ?? string.Empty, Locale);
+
+            var measureSize = graphics.MeasureString(name, Font);
+
+            var drawPoint = new Point((int)labelPoint.X + OffsetX - (int)measureSize.Width / 2,
+                (int)labelPoint.Y + OffsetY - (int)measureSize.Height / 2);
+
+            graphics.DrawString(name, Font, textBrush, drawPoint);
         }
     }
+
+
     #endregion
 
     /// <summary>
@@ -417,8 +446,43 @@ public partial class Map2D : UserControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the locale for the constellation names.
+    /// </summary>
+    /// <value>The locale for the constellation names.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("The locale for the constellation names.")]
+    public string Locale
+    {
+        get => locale ?? CultureInfo.CurrentCulture.ToString();
+
+        set
+        {
+            if (locale != value)
+            {
+                try
+                {
+                    locale = new CultureInfo(value).ToString();
+                    DrawMapImage();
+                }
+                catch
+                {
+                    // Erroneous culture.
+                }
+            }
+        }
+    }
+
     private bool invertEastWest;
 
+    /// <summary>
+    /// Gets or sets a value indicating whether to invert the star map along east-west axis.
+    /// </summary>
+    /// <value><c>true</c> if to invert the star map along east-west axis; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("Value indicating whether to invert the star map along east-west axis")]
     public bool InvertEastWest
     {
         get => invertEastWest;
@@ -428,6 +492,100 @@ public partial class Map2D : UserControl
             if (value != invertEastWest)
             {
                 invertEastWest = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private SolidBrush textBrush;
+
+    /// <summary>
+    /// Gets or sets the foreground color of the control.
+    /// </summary>
+    /// <value>The foreground color of the control.</value>
+    [Category("Appearance")]
+    [Description("The foreground color of the control, which is used to display text.")]
+    [Browsable(true)]
+    public new Color ForeColor
+    {
+        get => base.ForeColor;
+
+        set
+        {
+            if (value != base.ForeColor)
+            {
+                textBrush.Dispose();
+                textBrush = new SolidBrush(value);
+                base.ForeColor = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private bool drawConstellationBoundaries;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to draw constellation boundaries.
+    /// </summary>
+    /// <value><c>true</c> if to draw constellation boundaries; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("Value indicating whether to draw constellation boundaries.")]
+    public bool DrawConstellationBoundaries 
+    { 
+        get => drawConstellationBoundaries;
+
+        set
+        {
+            if (drawConstellationBoundaries != value)
+            {
+                drawConstellationBoundaries = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private bool drawConstellations = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to draw constellations.
+    /// </summary>
+    /// <value><c>true</c> if to draw constellations; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("Value indicating whether to draw constellations.")]
+    public bool DrawConstellations
+    {
+        get => drawConstellations;
+
+        set
+        {
+            if (drawConstellations != value)
+            {
+                drawConstellations = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private bool drawConstellationLabels = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to draw constellation labels.
+    /// </summary>
+    /// <value><c>true</c> if to draw constellation labels; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("Value indicating whether to draw constellation labels.")]
+    public bool DrawConstellationNames
+    {
+        get => drawConstellationLabels;
+
+        set
+        {
+            if (drawConstellationLabels != value)
+            {
+                drawConstellationLabels = value;
                 DrawMapImage();
             }
         }

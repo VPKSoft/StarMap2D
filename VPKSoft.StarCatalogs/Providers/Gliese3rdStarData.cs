@@ -25,7 +25,6 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
-using AASharp;
 using StarMap2D.Calculations.Helpers.Math;
 using VPKSoft.StarCatalogs.Interfaces;
 
@@ -277,7 +276,7 @@ public class Gliese3rdStarData : StarData, IRightAscensionHms, IDeclinationDms
             if (!FetchMemory[nameof(RightAscension)])
             {
                 rightAscension ??= Epochs.ChangeEpochB1950ToJ2000(RAh + RAm / 60 + RAs / 3600,
-                    AASCoordinateTransformation.DMSToDegrees(DeD, Dem, Des)).RightAscension;
+                    DmsConvert.DmsToDegrees(DeD, Dem, Des)).RightAscension;
                 FetchMemory[nameof(RightAscension)] = true;
             }
 
@@ -297,7 +296,7 @@ public class Gliese3rdStarData : StarData, IRightAscensionHms, IDeclinationDms
             if (!FetchMemory[nameof(Declination)])
             {
                 declination ??= Epochs.ChangeEpochB1950ToJ2000(RAh + RAm / 60 + RAs / 3600,
-                    AASCoordinateTransformation.DMSToDegrees(DeD, Dem, Des)).Declination;
+                    DmsConvert.DmsToDegrees(DeD, Dem, Des)).Declination;
                 FetchMemory[nameof(Declination)] = true;
             }
 
