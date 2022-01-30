@@ -57,7 +57,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
         solarSystemObjectConfigurator1.Locale = Settings.Default.UiLanguage;
 
-        cmbSelectLocation.Items.AddRange(cities.CityList.ToArray<object>());
+        cmbSelectLocation.Items.AddRange(Cities.CitiesList.ToArray<object>());
 
         LoadSettings();
 
@@ -70,7 +70,6 @@ public partial class FormDialogSettings : DBLangEngineWinforms
     }
 
     #region PrivateFields
-    private readonly Cities cities = new();
     private Control? colorControl;
     private bool suspendColorChange;
     #endregion

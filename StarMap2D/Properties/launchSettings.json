@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StarMap2D": {
+      "commandName": "Project",
+      "commandLineArgs": "#--dbLang"
+    }
+  }
+}

@@ -24,6 +24,10 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Forms;
+using StarMap2D.Forms.Dialogs;
+using VPKSoft.LangLib;
+
 namespace StarMap2D;
 
 internal static class Program
@@ -34,9 +38,56 @@ internal static class Program
     [STAThread]
     static void Main()
     {
+        DBLangEngine.DataDir = SettingsFolder;
+
+        // localizeProcess (user wishes to localize the software)..
+        var localizeProcess = Utils.CreateDBLocalizeProcess(SettingsFolder);
+
+        // if the localize process was requested via the command line..
+        if (localizeProcess != null)
+        {
+            // start the DBLocalization.exe and return..
+            localizeProcess.Start();
+            return;
+        }
+
+        // Save languages..
+        if (Utils.ShouldLocalize() != null)
+        {
+            // ReSharper disable once ObjectCreationAsStatement
+            new FormMain();
+            // ReSharper disable once ObjectCreationAsStatement
+            new FormDialogSettings();
+            // ReSharper disable once ObjectCreationAsStatement
+            new FormSkyMap2D();
+            return;
+        }
+
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         Application.Run(new FormMain());
+    }
+
+    /// <summary>
+    /// Gets or sets the application settings folder.
+    /// </summary>
+    /// <value>The application settings folder.</value>
+    internal static string SettingsFolder
+    {
+        get
+        {
+            var result = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "VPKSoft",
+                nameof(StarMap2D));
+
+            if (!Directory.Exists(result))
+            {
+                Directory.CreateDirectory(result);
+            }
+
+            return result;
+        }
     }
 }

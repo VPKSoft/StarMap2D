@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
+using System.Xml;
 using AASharp;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
@@ -63,6 +64,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
+        suspendEvents = true;
+
         LoadSettings();
 
         SetTitle();
@@ -70,21 +73,6 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         CreateSolarSystemObjects();
 
         ListTimeIntervals();
-
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-            RightAscension = 2.53030404466667,
-            Declination =   89.26410897,
-            Magnitude = -6.4,
-        });
-            
-        map2d.StarMapObjects.Add(new StarMapObject
-        {
-
-            RightAscension = 5.60355904,
-            Declination =  -1.20191725,
-            Magnitude = -6.4,
-        });
 
         var yaleBrightProvider = new YaleBrightProvider();
 
@@ -94,27 +82,34 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
         foreach (var yaleBrightStar in yaleBrightProvider.StarData)
         {
-            map2d.StarMapObjects.Add(new StarMapObject { RightAscension = yaleBrightStar.RightAscension, Declination = yaleBrightStar.Declination, Magnitude = yaleBrightStar.Magnitude});
+            map2d.StarMapObjects.Add(new StarMapObject
+            {
+                RightAscension = yaleBrightStar.RightAscension, Declination = yaleBrightStar.Declination,
+                Magnitude = yaleBrightStar.Magnitude
+            });
         }
+
+        suspendEvents = false;
 
         instances.Add(this);
     }
     
     private List<SolarSystemObjectGraphics> solarSystemObjects = new();
-
+    private bool suspendEvents;
     private static FormSkyMap2D? singletonInstance;
 
     #region PrivateMethodsAndProperties
 
     private void LoadSettings()
     {
+        suspendEvents = true;
         solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Properties.Settings.Default.KnownObjects,
             Properties.Settings.Default.UiLanguage);
 
         map2d.StarColors = Properties.Settings.Default.StarMagnitudeColors.Split(";")
             .Select(ColorTranslator.FromHtml).ToArray();
 
-        cmbJumpToLocation.Items.AddRange(new Cities().CityList.ToArray<object>());
+        cmbJumpToLocation.Items.AddRange(Cities.CitiesList.ToArray<object>());
 
         map2d.StarSizes = Properties.Settings.Default.StarMagnitudeSizes.Split(';').Select(int.Parse).ToArray();
 
@@ -136,6 +131,14 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         {
             Radius = Math.Min(map2d.Width, map2d.Height)
         };
+
+        nudLatitude.Value = (decimal)Properties.Settings.Default.Latitude;
+        nudLongitude.Value = (decimal)Properties.Settings.Default.Longitude;
+
+        cbShowConstellationBorders.Checked = Properties.Settings.Default.DrawConstellationBorders;
+        cbConstellationLines.Checked = Properties.Settings.Default.DrawConstellationLines;
+        cbConstellationNames.Checked = Properties.Settings.Default.DrawConstellationLabels;
+        suspendEvents = false;
     }
 
     private void SetTitle(double? latitude = null, double? longitude = null)
@@ -283,38 +286,10 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             });
         }
     }
-
-    private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
-    {
-        var checkBox = (CheckBox)sender;
-        map2d.InvertEastWest = checkBox.Checked;
-        compassView1.InvertEastWest = checkBox.Checked;
-    }
-
-    private void cmbJumpToLocation_SelectedValueChanged(object sender, EventArgs e)
-    {
-        var comboBox = (ComboBox)sender;
-
-        var value = (CityLatLonCoordinate)comboBox.SelectedItem;
-
-        if (value != null && map2d.Plot2D != null)
-        {
-            map2d.Latitude = value.Latitude;
-            map2d.Longitude = value.Longitude;
-        }
-    }
-
-    private void btResetLocation_Click(object sender, EventArgs e)
-    {
-        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
-        map2d.Latitude = Properties.Settings.Default.Latitude;
-        map2d.Longitude = Properties.Settings.Default.Longitude;
-    }
     #endregion
 
     #region CraphicsChangeBroadcast
-
-    private static List<FormSkyMap2D> instances = new();
+    private static readonly List<FormSkyMap2D> instances = new();
     #endregion
 
     #region PublicMethods
@@ -363,6 +338,46 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     #endregion
     
     #region InternalEvents
+    private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.InvertEastWest = checkBox.Checked;
+        compassView1.InvertEastWest = checkBox.Checked;
+    }
+
+    private void cmbJumpToLocation_SelectedValueChanged(object sender, EventArgs e)
+    {
+        if (suspendEvents)
+        {
+            return;
+        }
+
+        suspendEvents = true;
+        var comboBox = (ComboBox)sender;
+
+        var value = (CityLatLonCoordinate)comboBox.SelectedItem;
+
+        if (value != null && map2d.Plot2D != null)
+        {
+            map2d.Latitude = value.Latitude;
+            map2d.Longitude = value.Longitude;
+            nudLatitude.Value = (decimal)value.Latitude;
+            nudLongitude.Value = (decimal)value.Longitude;
+        }
+        suspendEvents = false;
+    }
+
+    private void btResetLocation_Click(object sender, EventArgs e)
+    {
+        suspendEvents = true;
+        cmbJumpToLocation.Text = Properties.Settings.Default.DefaultLocationName;
+        map2d.Latitude = Properties.Settings.Default.Latitude;
+        map2d.Longitude = Properties.Settings.Default.Longitude;
+        nudLatitude.Value = (decimal)map2d.Latitude;
+        nudLongitude.Value = (decimal)map2d.Longitude;
+        suspendEvents = false;
+    }
+
     private void tmSetTime_Tick(object sender, EventArgs e)
     {
         var intervalType = (KeyValuePair<TimeInterval, string>)cmbTimeType.SelectedItem;
@@ -392,7 +407,19 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_CoordinatesChanged(object sender, LocationChangedEventArgs e)
     {
+        if (suspendEvents)
+        {
+            return;
+        }
+
+        suspendEvents = true;
+        var city = Cities.GetNearestCity(e.Latitude, e.Longitude);
+        nudLatitude.Value = (decimal)e.Latitude;
+        nudLongitude.Value = (decimal)e.Longitude;
+
+        cmbJumpToLocation.Text = city?.CityName ?? city?.CityNameAscii;
         SetTitle(e.Latitude, e.Longitude);
+        suspendEvents = false;
     }
 
     private void FormSkyMap2D_FormClosed(object sender, FormClosedEventArgs e)
@@ -408,6 +435,56 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     private void btRevertSpeed_Click(object sender, EventArgs e)
     {
         ResetSpeed();
+    }
+
+    private void cbShowConstellationBorders_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.DrawConstellationBoundaries = checkBox.Checked;
+    }
+
+    private void cbConstellationLines_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.DrawConstellations = checkBox.Checked;
+    }
+
+    private void cbConstellationNames_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.DrawConstellationNames = checkBox.Checked;
+    }
+
+    private void cbSkipCalculated_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.SkipCalculatedObjects = checkBox.Checked;
+    }
+
+    private void nudLatitudeLongitude_ValueChanged(object sender, EventArgs e)
+    {
+        if (suspendEvents)
+        {
+            return;
+        }
+
+        suspendEvents = true;
+
+        var numericUpDown = (NumericUpDown)sender;
+
+        if (sender.Equals(nudLatitude))
+        {
+            map2d.Latitude = (double)numericUpDown.Value;
+        }
+        else
+        {
+            map2d.Longitude = (double)numericUpDown.Value;
+        }
+
+        var city = Cities.GetNearestCity(map2d.Latitude, map2d.Longitude);
+        cmbJumpToLocation.Text = city?.CityName ?? city?.CityNameAscii;
+
+        suspendEvents = false;
     }
     #endregion
 }

@@ -62,6 +62,10 @@ namespace StarMap2D.Forms
             this.map2d = new StarMap2D.Controls.WinForms.Map2D();
             this.tlpMapControls = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lbLongitude = new System.Windows.Forms.Label();
+            this.nudLongitude = new System.Windows.Forms.NumericUpDown();
+            this.lbLatitude = new System.Windows.Forms.Label();
+            this.nudLatitude = new System.Windows.Forms.NumericUpDown();
             this.cmbJumpToLocation = new System.Windows.Forms.ComboBox();
             this.btResetLocation = new StarMap2D.Controls.WinForms.ImageButton();
             this.lbJumpToLocation = new System.Windows.Forms.Label();
@@ -76,9 +80,15 @@ namespace StarMap2D.Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.compassView1 = new StarMap2D.Controls.WinForms.CompassView();
             this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
+            this.cbShowConstellationBorders = new System.Windows.Forms.CheckBox();
+            this.cbConstellationLines = new System.Windows.Forms.CheckBox();
+            this.cbConstellationNames = new System.Windows.Forms.CheckBox();
+            this.cbSkipCalculated = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
             this.pnDateTime.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -123,10 +133,14 @@ namespace StarMap2D.Forms
             this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.map2d.ConstellationBorderLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 27, 5, 17, 58, 787);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 30, 15, 39, 21, 556);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.map2d.DrawConstellationBoundaries = false;
+            this.map2d.DrawConstellationNames = true;
+            this.map2d.DrawConstellations = true;
             this.map2d.InvertEastWest = false;
             this.map2d.Latitude = 0D;
+            this.map2d.Locale = "fi-FI";
             this.map2d.Location = new System.Drawing.Point(0, 0);
             this.map2d.Longitude = 0D;
             this.map2d.MagnitudeMaximum = -500D;
@@ -136,6 +150,7 @@ namespace StarMap2D.Forms
             this.map2d.Name = "map2d";
             this.map2d.Plot2D = null;
             this.map2d.Size = new System.Drawing.Size(748, 804);
+            this.map2d.SkipCalculatedObjects = false;
             this.map2d.StarColors = new System.Drawing.Color[0];
             this.map2d.StarSizes = new int[0];
             this.map2d.TabIndex = 0;
@@ -146,38 +161,116 @@ namespace StarMap2D.Forms
             this.tlpMapControls.ColumnCount = 2;
             this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMapControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMapControls.Controls.Add(this.panel3, 0, 4);
+            this.tlpMapControls.Controls.Add(this.panel3, 0, 9);
             this.tlpMapControls.Controls.Add(this.pnDateTime, 0, 0);
             this.tlpMapControls.Controls.Add(this.panel1, 0, 1);
             this.tlpMapControls.Controls.Add(this.btPlayPause, 0, 2);
-            this.tlpMapControls.Controls.Add(this.panel2, 0, 7);
+            this.tlpMapControls.Controls.Add(this.panel2, 0, 12);
             this.tlpMapControls.Controls.Add(this.cbInvertEastWest, 0, 3);
+            this.tlpMapControls.Controls.Add(this.cbShowConstellationBorders, 0, 4);
+            this.tlpMapControls.Controls.Add(this.cbConstellationLines, 0, 5);
+            this.tlpMapControls.Controls.Add(this.cbConstellationNames, 0, 6);
+            this.tlpMapControls.Controls.Add(this.cbSkipCalculated, 0, 7);
             this.tlpMapControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMapControls.Location = new System.Drawing.Point(751, 3);
             this.tlpMapControls.Name = "tlpMapControls";
-            this.tlpMapControls.RowCount = 8;
+            this.tlpMapControls.RowCount = 13;
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.Size = new System.Drawing.Size(244, 798);
             this.tlpMapControls.TabIndex = 1;
             // 
             // panel3
             // 
             this.tlpMapControls.SetColumnSpan(this.panel3, 2);
+            this.panel3.Controls.Add(this.lbLongitude);
+            this.panel3.Controls.Add(this.nudLongitude);
+            this.panel3.Controls.Add(this.lbLatitude);
+            this.panel3.Controls.Add(this.nudLatitude);
             this.panel3.Controls.Add(this.cmbJumpToLocation);
             this.panel3.Controls.Add(this.btResetLocation);
             this.panel3.Controls.Add(this.lbJumpToLocation);
-            this.panel3.Location = new System.Drawing.Point(3, 238);
+            this.panel3.Location = new System.Drawing.Point(3, 316);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(238, 62);
+            this.panel3.Size = new System.Drawing.Size(238, 104);
             this.panel3.TabIndex = 10;
+            // 
+            // lbLongitude
+            // 
+            this.lbLongitude.AutoSize = true;
+            this.lbLongitude.Location = new System.Drawing.Point(119, 54);
+            this.lbLongitude.Name = "lbLongitude";
+            this.lbLongitude.Size = new System.Drawing.Size(61, 15);
+            this.lbLongitude.TabIndex = 12;
+            this.lbLongitude.Text = "Longitude";
+            // 
+            // nudLongitude
+            // 
+            this.nudLongitude.DecimalPlaces = 3;
+            this.nudLongitude.Location = new System.Drawing.Point(119, 72);
+            this.nudLongitude.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.nudLongitude.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.nudLongitude.Name = "nudLongitude";
+            this.nudLongitude.Size = new System.Drawing.Size(110, 23);
+            this.nudLongitude.TabIndex = 11;
+            this.nudLongitude.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLongitude.ValueChanged += new System.EventHandler(this.nudLatitudeLongitude_ValueChanged);
+            // 
+            // lbLatitude
+            // 
+            this.lbLatitude.AutoSize = true;
+            this.lbLatitude.Location = new System.Drawing.Point(3, 54);
+            this.lbLatitude.Name = "lbLatitude";
+            this.lbLatitude.Size = new System.Drawing.Size(50, 15);
+            this.lbLatitude.TabIndex = 10;
+            this.lbLatitude.Text = "Latitude";
+            // 
+            // nudLatitude
+            // 
+            this.nudLatitude.DecimalPlaces = 3;
+            this.nudLatitude.Location = new System.Drawing.Point(3, 72);
+            this.nudLatitude.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.nudLatitude.Minimum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            -2147483648});
+            this.nudLatitude.Name = "nudLatitude";
+            this.nudLatitude.Size = new System.Drawing.Size(110, 23);
+            this.nudLatitude.TabIndex = 9;
+            this.nudLatitude.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLatitude.ValueChanged += new System.EventHandler(this.nudLatitudeLongitude_ValueChanged);
             // 
             // cmbJumpToLocation
             // 
@@ -337,7 +430,7 @@ namespace StarMap2D.Forms
             this.btPlayPause.IsCheckedButton = true;
             this.btPlayPause.Location = new System.Drawing.Point(3, 109);
             this.btPlayPause.Name = "btPlayPause";
-            this.btPlayPause.Size = new System.Drawing.Size(91, 82);
+            this.btPlayPause.Size = new System.Drawing.Size(91, 56);
             this.btPlayPause.TabIndex = 6;
             this.btPlayPause.CheckedChanged += new System.EventHandler<StarMap2D.Controls.WinForms.EventArguments.CheckedChangeEventArguments>(this.btPlayPause_CheckedChanged);
             // 
@@ -370,13 +463,60 @@ namespace StarMap2D.Forms
             // cbInvertEastWest
             // 
             this.cbInvertEastWest.AutoSize = true;
-            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 213);
+            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 171);
             this.cbInvertEastWest.Name = "cbInvertEastWest";
             this.cbInvertEastWest.Size = new System.Drawing.Size(109, 19);
             this.cbInvertEastWest.TabIndex = 9;
             this.cbInvertEastWest.Text = "Invert east-west";
             this.cbInvertEastWest.UseVisualStyleBackColor = true;
             this.cbInvertEastWest.CheckedChanged += new System.EventHandler(this.cbInvertEastWest_CheckedChanged);
+            // 
+            // cbShowConstellationBorders
+            // 
+            this.cbShowConstellationBorders.AutoSize = true;
+            this.tlpMapControls.SetColumnSpan(this.cbShowConstellationBorders, 2);
+            this.cbShowConstellationBorders.Location = new System.Drawing.Point(3, 196);
+            this.cbShowConstellationBorders.Name = "cbShowConstellationBorders";
+            this.cbShowConstellationBorders.Size = new System.Drawing.Size(139, 19);
+            this.cbShowConstellationBorders.TabIndex = 11;
+            this.cbShowConstellationBorders.Text = "Constellation borders";
+            this.cbShowConstellationBorders.UseVisualStyleBackColor = true;
+            this.cbShowConstellationBorders.CheckedChanged += new System.EventHandler(this.cbShowConstellationBorders_CheckedChanged);
+            // 
+            // cbConstellationLines
+            // 
+            this.cbConstellationLines.AutoSize = true;
+            this.tlpMapControls.SetColumnSpan(this.cbConstellationLines, 2);
+            this.cbConstellationLines.Location = new System.Drawing.Point(3, 221);
+            this.cbConstellationLines.Name = "cbConstellationLines";
+            this.cbConstellationLines.Size = new System.Drawing.Size(123, 19);
+            this.cbConstellationLines.TabIndex = 12;
+            this.cbConstellationLines.Text = "Constellation lines";
+            this.cbConstellationLines.UseVisualStyleBackColor = true;
+            this.cbConstellationLines.CheckedChanged += new System.EventHandler(this.cbConstellationLines_CheckedChanged);
+            // 
+            // cbConstellationNames
+            // 
+            this.cbConstellationNames.AutoSize = true;
+            this.cbConstellationNames.Location = new System.Drawing.Point(3, 246);
+            this.cbConstellationNames.Name = "cbConstellationNames";
+            this.cbConstellationNames.Size = new System.Drawing.Size(116, 19);
+            this.cbConstellationNames.TabIndex = 13;
+            this.cbConstellationNames.Text = "Constellation names";
+            this.cbConstellationNames.UseVisualStyleBackColor = true;
+            this.cbConstellationNames.CheckedChanged += new System.EventHandler(this.cbConstellationNames_CheckedChanged);
+            // 
+            // cbSkipCalculated
+            // 
+            this.cbSkipCalculated.AutoSize = true;
+            this.tlpMapControls.SetColumnSpan(this.cbSkipCalculated, 2);
+            this.cbSkipCalculated.Location = new System.Drawing.Point(3, 271);
+            this.cbSkipCalculated.Name = "cbSkipCalculated";
+            this.cbSkipCalculated.Size = new System.Drawing.Size(215, 19);
+            this.cbSkipCalculated.TabIndex = 14;
+            this.cbSkipCalculated.Text = "Skip calculated objects (i.e. the Sun)";
+            this.cbSkipCalculated.UseVisualStyleBackColor = true;
+            this.cbSkipCalculated.CheckedChanged += new System.EventHandler(this.cbSkipCalculated_CheckedChanged);
             // 
             // FormSkyMap2D
             // 
@@ -393,6 +533,8 @@ namespace StarMap2D.Forms
             this.tlpMapControls.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
             this.pnDateTime.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -423,5 +565,13 @@ namespace StarMap2D.Forms
         private ComboBox cmbJumpToLocation;
         private Controls.WinForms.ImageButton btResetLocation;
         private Label lbJumpToLocation;
+        private CheckBox cbShowConstellationBorders;
+        private CheckBox cbConstellationLines;
+        private CheckBox cbConstellationNames;
+        private CheckBox cbSkipCalculated;
+        private Label lbLongitude;
+        private NumericUpDown nudLongitude;
+        private Label lbLatitude;
+        private NumericUpDown nudLatitude;
     }
 }

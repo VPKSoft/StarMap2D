@@ -155,6 +155,26 @@ namespace StarMap2D.Controls.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] ic_fluent_checkbox_checked_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_checkbox_checked_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ic_fluent_checkbox_unchecked_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_checkbox_unchecked_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] ic_fluent_pause_48_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_pause_48_filled", resourceCulture);

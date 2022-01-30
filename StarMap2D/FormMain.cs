@@ -24,8 +24,10 @@ SOFTWARE.
 */
 #endregion
 
+using System.Diagnostics;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
+using VPKSoft.DBLocalization;
 using VPKSoft.LangLib;
 
 namespace StarMap2D;
@@ -70,5 +72,34 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button3_Click(object sender, EventArgs e)
     {
+    }
+
+    private void mnuLocalize_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LocalizeRunner.RunLocalizeWindow(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "VPKSoft",
+                nameof(StarMap2D),
+                // ReSharper disable once StringLiteralTypo
+                "lang.sqlite"));
+        }
+        catch
+        {
+            // The localization failed.
+        }
+    }
+
+    private void mnuDumpLanguage_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Process.Start(Application.ExecutablePath, "--dblang");
+        }
+        catch
+        {
+            // The localization dumping failed.
+        }
     }
 }

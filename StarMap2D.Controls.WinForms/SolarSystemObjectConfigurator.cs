@@ -52,7 +52,7 @@ public partial class SolarSystemObjectConfigurator : UserControl
     #region PrivateFields
     private Brush? listTextBrush;
     private readonly Brush textBrushSelection;
-    private static string? locale;
+    private static string locale = "en-US";
     private SolarSystemObjectGraphics[] objectGraphics = SolarSystemObjectGraphics.CreateDefaultList(locale).ToArray();
     private bool suspendEvents;
     #endregion
@@ -87,7 +87,7 @@ public partial class SolarSystemObjectConfigurator : UserControl
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string Locale
     {
-        get => locale ?? "en-US";
+        get => locale;
 
         set
         {
@@ -117,12 +117,9 @@ public partial class SolarSystemObjectConfigurator : UserControl
 
         set
         {
-            if (locale != null)
-            {
-                objectGraphics = SolarSystemObjectGraphics.MergeWithDefaults(value, locale).ToArray();
-                lbSolarSystemObjects.Items.Clear();
-                lbSolarSystemObjects.Items.AddRange(ObjectGraphics.Cast<object>().ToArray());
-            }
+            objectGraphics = SolarSystemObjectGraphics.MergeWithDefaults(value, locale).ToArray();
+            lbSolarSystemObjects.Items.Clear();
+            lbSolarSystemObjects.Items.AddRange(ObjectGraphics.Cast<object>().ToArray());
         }
     }
 

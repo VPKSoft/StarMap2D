@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Calculations.Helpers.Math;
+
 namespace StarMap2D.Utilities;
 
 /// <summary>
@@ -89,15 +91,13 @@ public class CityLatLonCoordinate
 /// <summary>
 /// A class containing a list of major world cities
 /// </summary>
-public class Cities
+public static class Cities
 {
+    #region CityData    
     /// <summary>
-    /// A list of major world cities
+    /// The cities list data.
     /// </summary>
-    public List<CityLatLonCoordinate> CityList { get; } = new();
-
-    #region CityData
-    private static readonly IReadOnlyList<CityLatLonCoordinate> CitiesInternal = new CityLatLonCoordinate[]
+    public static readonly IReadOnlyList<CityLatLonCoordinate> CitiesList = new CityLatLonCoordinate[]
     {
         new()
         {
@@ -38841,23 +38841,41 @@ public class Cities
     #endregion
 
     /// <summary>
-    /// The class constructor. Initializes the city list.
+    /// Calculates a distance in meters of the two specified latitude/longitude coordinates.
     /// </summary>
-    /// <param name="useAsciiName">
-    /// Whether the CityLatLonCoordinate classes ToString() method should return ascii name or name.
-    /// </param>
-    public Cities(bool useAsciiName = false)
+    /// <param name="latitude1">The first point latitude.</param>
+    /// <param name="longitude1">The first point longitude.</param>
+    /// <param name="latitude2">The second point latitude.</param>
+    /// <param name="longitude2">The second point longitude.</param>
+    /// <returns>The distance in meters of the two specified points.</returns>
+    public static double Distance(double latitude1, double longitude1, double latitude2, double longitude2)
     {
-        foreach (var cityLatLon in CitiesInternal)
-        {
-            CityList.Add(new CityLatLonCoordinate
-            {
-                CityName = cityLatLon.CityName, CityNameAscii = cityLatLon.CityNameAscii,
-                Latitude = cityLatLon.Latitude, Longitude = cityLatLon.Longitude, Country = cityLatLon.Country,
-                Iso2 = cityLatLon.Iso2, Iso3 = cityLatLon.Iso3, Province = cityLatLon.Province,
-                UseAsciiName = useAsciiName
-            });
-        }
+        // Formula (C): https://www.movable-type.co.uk/scripts/latlong.html
+        var earthRadii = 6371e3;
+        var φ1 = DegreeConversion.ConvertToRadians(latitude1);
+        var φ2 = DegreeConversion.ConvertToRadians(latitude2);
+        var Δφ = DegreeConversion.ConvertToRadians(latitude2 - latitude1);
+        var Δλ = DegreeConversion.ConvertToRadians(longitude2 - longitude1);
+
+        var a = Math.Sin(Δφ / 2) * Math.Sin(Δφ / 2) +
+                Math.Cos(φ1) * Math.Cos(φ2) *
+                Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
+
+        var c =  2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+        var distance = earthRadii * c;
+        return distance;
+    }
+
+    /// <summary>
+    /// Gets the nearest city.
+    /// </summary>
+    /// <param name="latitude">The latitude.</param>
+    /// <param name="longitude">The longitude.</param>
+    /// <returns>CityLatLonCoordinate.</returns>
+    public static CityLatLonCoordinate GetNearestCity(double latitude, double longitude)
+    {
+        return CitiesList.OrderBy(f => Distance(f.Latitude, f.Longitude, latitude, longitude)).First();
     }
 
     /// <summary>
@@ -38865,7 +38883,7 @@ public class Cities
     /// </summary>
     /// <param name="findStr">A string to find a city by name with.</param>
     /// <returns>A list of cities that matches the <paramref name="findStr"/> string.</returns>
-    public List<CityLatLonCoordinate> FindCityByName(string findStr)
+    public static List<CityLatLonCoordinate> FindCityByName(string findStr)
     {
         List<CityLatLonCoordinate> returnList = new List<CityLatLonCoordinate>();
         if (findStr == string.Empty)
@@ -38873,7 +38891,7 @@ public class Cities
             return returnList;
         }
 
-        foreach (CityLatLonCoordinate cityLatLon in CityList)
+        foreach (CityLatLonCoordinate cityLatLon in CitiesList)
         {
             if (cityLatLon.CityName?.ToUpperInvariant().Contains(findStr.ToUpperInvariant()) == true ||
                 cityLatLon.CityNameAscii?.ToUpperInvariant().Contains(findStr.ToUpperInvariant()) == true)

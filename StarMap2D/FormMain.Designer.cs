@@ -59,11 +59,16 @@ namespace StarMap2D
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLocalize = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDumpLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 88);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -74,7 +79,7 @@ namespace StarMap2D
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 41);
+            this.button2.Location = new System.Drawing.Point(12, 134);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -102,6 +107,40 @@ namespace StarMap2D
             this.textBox1.TabIndex = 3;
             this.textBox1.WordWrap = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuLocalize});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // mnuLocalize
+            // 
+            this.mnuLocalize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuDumpLanguage});
+            this.mnuLocalize.Name = "mnuLocalize";
+            this.mnuLocalize.Size = new System.Drawing.Size(180, 22);
+            this.mnuLocalize.Text = "Localize";
+            this.mnuLocalize.Click += new System.EventHandler(this.mnuLocalize_Click);
+            // 
+            // mnuDumpLanguage
+            // 
+            this.mnuDumpLanguage.Name = "mnuDumpLanguage";
+            this.mnuDumpLanguage.Size = new System.Drawing.Size(180, 22);
+            this.mnuDumpLanguage.Text = "Dump language";
+            this.mnuDumpLanguage.Click += new System.EventHandler(this.mnuDumpLanguage_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -111,9 +150,13 @@ namespace StarMap2D
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +168,9 @@ namespace StarMap2D
         private Button button2;
         private Button button3;
         private TextBox textBox1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem mnuLocalize;
+        private ToolStripMenuItem mnuDumpLanguage;
     }
 }

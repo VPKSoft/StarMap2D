@@ -196,13 +196,18 @@ public partial class Map2D : UserControl
         {
             foreach (var starMapObject in StarMapObjects)
             {
-                if (starMapObject.Magnitude > magnitudeMinimum || starMapObject.Magnitude < magnitudeMaximum)
+                if (starMapObject.Magnitude > magnitudeMinimum || starMapObject.Magnitude < magnitudeMaximum || starMapObject.SkipObject)
                 {
                     continue;
                 }
 
                 if (starMapObject.IsLocationCalculated)
                 {
+                    if (skipCalculatedObjects)
+                    {
+                        continue;
+                    }
+
                     var position = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
                         Plot2D.Latitude, Plot2D.Longitude, Diameter / 2);
 
@@ -591,6 +596,29 @@ public partial class Map2D : UserControl
         }
     }
 
+    private bool skipCalculatedObjects;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether skip calculated objects (i.e. the Sun and the Moon).
+    /// </summary>
+    /// <value><c>true</c> if to skip calculated objects; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("Value indicating whether to skip calculated objects.")]
+    public bool SkipCalculatedObjects
+    {
+        get => skipCalculatedObjects;
+
+        set
+        {
+            if (skipCalculatedObjects != value)
+            {
+                skipCalculatedObjects = value;
+                DrawMapImage();
+            }
+        }
+    }
+    
     /// <summary>
     /// Gets or sets the star sizes for different magnitudes from -10 to 10.
     /// </summary>

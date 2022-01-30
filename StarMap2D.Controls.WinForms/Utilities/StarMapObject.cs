@@ -53,4 +53,7 @@ public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 
     /// <inheritdoc cref="IStarMapObject2D{T}.Magnitude"/>
     public double Magnitude { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.SkipObject"/>
+    public bool SkipObject { get; set; }
 }

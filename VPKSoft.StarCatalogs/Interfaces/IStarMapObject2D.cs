@@ -80,4 +80,10 @@ public interface IStarMapObject2D<T>
     /// </summary>
     /// <value>The magnitude of the object.</value>
     public double Magnitude { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to skip object from being drawn.
+    /// </summary>
+    /// <value>The value indicating whether to skip object from being drawn.</value>
+    public bool SkipObject { get; set; }
 }
