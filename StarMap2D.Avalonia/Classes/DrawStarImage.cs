@@ -24,51 +24,22 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Enumerations
+using Avalonia;
+using Avalonia.Media;
+using Color = Avalonia.Media.Color;
+
+namespace StarMap2D.Avalonia.Classes;
+
+/// <summary>
+/// A helper class for star drawing on a <see cref="DrawingContext"/>.
+/// </summary>
+public static class DrawStarImage
 {
-    /// <summary>
-    /// An enumeration for quadrants in the sky.
-    /// </summary>
-    public enum Quadrant
+    public static void DrawStar(this DrawingContext context, Point location, int starSize, Color starColor)
     {
-        /// <summary>
-        /// The first northern quadrant.
-        /// </summary>
-        Nq1,
+        var startPoint = new Point(location.X - starSize / 2.0, location.Y - starSize / 2.0);
 
-        /// <summary>
-        /// The second northern quadrant.
-        /// </summary>
-        Nq2,
-
-        /// <summary>
-        /// The third northern quadrant.
-        /// </summary>
-        Nq3,
-
-        /// <summary>
-        /// The fourth northern quadrant.
-        /// </summary>
-        Nq4,
-
-        /// <summary>
-        /// The first southern quadrant.
-        /// </summary>
-        Sq1,
-
-        /// <summary>
-        /// The second southern quadrant.
-        /// </summary>
-        Sq2,
-
-        /// <summary>
-        /// The third southern quadrant.
-        /// </summary>
-        Sq3,
-
-        /// <summary>
-        /// The fourth southern quadrant.
-        /// </summary>
-        Sq4,
+        context.DrawGeometry(new SolidColorBrush(starColor), new Pen(), new EllipseGeometry(
+            new Rect(startPoint.X, startPoint.Y, starSize, starSize)));
     }
 }

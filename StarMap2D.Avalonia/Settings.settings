@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="StarMap2D.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Latitude" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">60.1102605</Value>
+    </Setting>
+    <Setting Name="Longitude" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">22.8782576</Value>
+    </Setting>
+    <Setting Name="UiLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en-US</Value>
+    </Setting>
+    <Setting Name="DefaultLocationName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">N/A</Value>
+    </Setting>
+    <Setting Name="ConstellationLineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">DeepSkyBlue</Value>
+    </Setting>
+    <Setting Name="ConstellationBorderLineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">13, 23, 125</Value>
+    </Setting>
+    <Setting Name="MapCircleColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="MapSurroundingsColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">39, 39, 39</Value>
+    </Setting>
+    <Setting Name="StarMagnitudeColors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff;#ffffff</Value>
+    </Setting>
+    <Setting Name="StarMagnitudeSizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10;10;10;10;10;10;9;8;7;6;5;4;3;3;3;3;3;3;3;3;2</Value>
+    </Setting>
+    <Setting Name="MagnitudeMaximum" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-500</Value>
+    </Setting>
+    <Setting Name="MagnitudeMinimum" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5.5</Value>
+    </Setting>
+    <Setting Name="KnownObjects" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InvertEastWest" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MapTextColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">231, 23, 180</Value>
+    </Setting>
+    <Setting Name="DrawConstellationLines" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DrawConstellationLabels" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DrawConstellationBorders" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

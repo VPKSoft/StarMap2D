@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Controls.WinForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Tests", "StarMap2D.Tests\StarMap2D.Tests.csproj", "{90F165CE-F082-4FD5-AD1A-4A995759549F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{9D748367-0ACB-4874-876D-BA478FF56D7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

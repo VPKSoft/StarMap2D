@@ -28,7 +28,6 @@ namespace StarMap2D.Controls.WinForms.Drawing;
 
 public static class DrawStarImage
 {
-
     public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
     {
         var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);

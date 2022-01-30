@@ -24,51 +24,33 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Enumerations
+using StarMap2D.Avalonia.Interfaces;
+using VPKSoft.StarCatalogs.Interfaces;
+
+namespace StarMap2D.Avalonia.Classes;
+
+/// <summary>
+/// A class to indicate a single object in the <see cref="Map2D"/> star map.
+/// Implements the <see cref="IStarMapObject2D{T}" />
+/// </summary>
+/// <seealso cref="IStarMapObject2D{T}" />
+public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 {
-    /// <summary>
-    /// An enumeration for quadrants in the sky.
-    /// </summary>
-    public enum Quadrant
-    {
-        /// <summary>
-        /// The first northern quadrant.
-        /// </summary>
-        Nq1,
+    /// <inheritdoc cref="IStarMapObject2D{T}.IsLocationCalculated"/>
+    public bool IsLocationCalculated { get; set; }
 
-        /// <summary>
-        /// The second northern quadrant.
-        /// </summary>
-        Nq2,
+    /// <inheritdoc cref="IStarMapObject2D{T}.CalculatePosition"/>
+    public IStarMapObject2D<IMap2DGraphics>.CalculatePositionDelegate? CalculatePosition { get; set; }
 
-        /// <summary>
-        /// The third northern quadrant.
-        /// </summary>
-        Nq3,
+    /// <inheritdoc cref="IStarMapObject2D{T}.RightAscension"/>
+    public double RightAscension { get; set; }
 
-        /// <summary>
-        /// The fourth northern quadrant.
-        /// </summary>
-        Nq4,
+    /// <inheritdoc cref="IStarMapObject2D{T}.Declination"/>
+    public double Declination { get; set; }
 
-        /// <summary>
-        /// The first southern quadrant.
-        /// </summary>
-        Sq1,
+    /// <inheritdoc cref="IStarMapObject2D{T}.ObjectGraphics"/>
+    public IMap2DGraphics? ObjectGraphics { get; set; }
 
-        /// <summary>
-        /// The second southern quadrant.
-        /// </summary>
-        Sq2,
-
-        /// <summary>
-        /// The third southern quadrant.
-        /// </summary>
-        Sq3,
-
-        /// <summary>
-        /// The fourth southern quadrant.
-        /// </summary>
-        Sq4,
-    }
+    /// <inheritdoc cref="IStarMapObject2D{T}.Magnitude"/>
+    public double Magnitude { get; set; }
 }

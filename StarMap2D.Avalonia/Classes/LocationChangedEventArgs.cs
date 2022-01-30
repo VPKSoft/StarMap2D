@@ -24,51 +24,27 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Enumerations
+using Avalonia.Interactivity;
+using StarMap2D.Avalonia.Controls;
+
+namespace StarMap2D.Avalonia.Classes;
+
+/// <summary>
+/// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
+/// Implements the <see cref="System.EventArgs" />
+/// </summary>
+/// <seealso cref="System.EventArgs" />
+public class LocationChangedEventArgs: RoutedEventArgs
 {
     /// <summary>
-    /// An enumeration for quadrants in the sky.
+    /// Gets or sets the new latitude.
     /// </summary>
-    public enum Quadrant
-    {
-        /// <summary>
-        /// The first northern quadrant.
-        /// </summary>
-        Nq1,
+    /// <value>The new latitude.</value>
+    public double Latitude { get; set; }
 
-        /// <summary>
-        /// The second northern quadrant.
-        /// </summary>
-        Nq2,
-
-        /// <summary>
-        /// The third northern quadrant.
-        /// </summary>
-        Nq3,
-
-        /// <summary>
-        /// The fourth northern quadrant.
-        /// </summary>
-        Nq4,
-
-        /// <summary>
-        /// The first southern quadrant.
-        /// </summary>
-        Sq1,
-
-        /// <summary>
-        /// The second southern quadrant.
-        /// </summary>
-        Sq2,
-
-        /// <summary>
-        /// The third southern quadrant.
-        /// </summary>
-        Sq3,
-
-        /// <summary>
-        /// The fourth southern quadrant.
-        /// </summary>
-        Sq4,
-    }
+    /// <summary>
+    /// Gets or sets the new longitude.
+    /// </summary>
+    /// <value>The new longitude.</value>
+    public double Longitude { get; set; }
 }

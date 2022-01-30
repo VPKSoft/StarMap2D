@@ -24,9 +24,12 @@ SOFTWARE.
 */
 #endregion
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
-namespace StarMap2D.Controls.WinForms.Utilities
+namespace StarMap2D.Avalonia.Classes
 {
     /// <summary>
     /// A class for a simple localization using a text file embedded into a resource file.
@@ -62,8 +65,7 @@ namespace StarMap2D.Controls.WinForms.Utilities
         /// <summary>
         /// A list containing messages for localization. Please do fill at least the en-US localization.
         /// </summary>
-        List<LocalizationTextContainer> LocalizationTexts { get; } = 
-            new List<LocalizationTextContainer>();
+        List<LocalizationTextContainer> LocalizationTexts { get; } = new();
 
         /// <summary>
         /// Gets a localized message and gets a string corresponding to that message.
