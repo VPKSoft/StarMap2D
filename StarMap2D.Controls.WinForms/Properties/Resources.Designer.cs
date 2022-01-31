@@ -423,6 +423,34 @@ namespace StarMap2D.Controls.WinForms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is the simple tab-delimited localization file.
+        ///As you can see only the &quot;[]&quot; tags and tab delimited key-value pairs matter for the localization.
+        ///The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
+        ///
+        ///[en-US]
+        ///textSun	Sun
+        ///textMercury	Mercury
+        ///textVenus	Venus
+        ///textEarth	Earth
+        ///textMars	Mars
+        ///textJupiter	Jupiter
+        ///textSaturn	Saturn
+        ///textUranus	Uranus
+        ///textNeptune	Neptune
+        ///textPluto	Pluto
+        ///textCeres	Ceres
+        ///textOrcus	Orcus
+        ///textPluto	Pluto
+        ///textHaumea	Haumea
+        ///textQua [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SolarSystemObjects {
+            get {
+                return ResourceManager.GetString("SolarSystemObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] sun {

@@ -24,29 +24,33 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-using System.ComponentModel;
-using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-
-namespace StarMap2D.Avalonia.Winfows
+namespace StarMap2D.Controls.WinForms.EventArguments
 {
-    public partial class WindowSkyMap2D : Window
+    /// <summary>
+    /// Event arguments for interaction with named object and user with the 2D star map.
+    /// </summary>
+    public class NamedObjectEventArgs
     {
-        public WindowSkyMap2D()
-        {
-            InitializeComponent();
+        /// <summary>
+        /// Gets or sets the name of the object.
+        /// </summary>
+        /// <value>The name of the object.</value>
+        public string Name { get; set; } = string.Empty;
 
-#if DEBUG
-            this.AttachDevTools();
-#endif
-        }
+        /// <summary>
+        /// Gets or sets the identifier for the object.
+        /// </summary>
+        /// <value>The object identifier.</value>
+        public object? Identifier { get; set; }
 
-        private void InitializeComponent()
+        /// <summary>
+        /// Gets the <see cref="Identifier" /> cast to specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
+        /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
+        public T? GetIdentifier<T>()
         {
-            AvaloniaXamlLoader.Load(this);
+            return (T?)Identifier;
         }
     }
 }

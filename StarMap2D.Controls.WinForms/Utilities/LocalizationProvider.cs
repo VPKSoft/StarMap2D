@@ -24,29 +24,39 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-using System.ComponentModel;
-using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-
-namespace StarMap2D.Avalonia.Winfows
+namespace StarMap2D.Controls.WinForms.Utilities
 {
-    public partial class WindowSkyMap2D : Window
+    /// <summary>
+    /// A class to provide localization for specific object(s).
+    /// </summary>
+    public class LocalizationProvider
     {
-        public WindowSkyMap2D()
+        /// <summary>
+        /// Gets the solar system object localization.
+        /// </summary>
+        /// <value>The solar system object localization.</value>
+        public static TabDeliLocalization SolarSystemObjectLocalization
         {
-            InitializeComponent();
-
-#if DEBUG
-            this.AttachDevTools();
-#endif
+            get
+            {
+                var result = new TabDeliLocalization();
+                result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
+                return result;
+            }
         }
 
-        private void InitializeComponent()
+        /// <summary>
+        /// Gets the constellation localization.
+        /// </summary>
+        /// <value>The constellation localization.</value>
+        public static TabDeliLocalization ConstellationLocalization
         {
-            AvaloniaXamlLoader.Load(this);
+            get
+            {
+                var result = new TabDeliLocalization();
+                result.GetLocalizedTexts(Properties.Resources.Constellations);
+                return result;
+            }
         }
     }
 }

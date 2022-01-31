@@ -56,4 +56,10 @@ public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 
     /// <inheritdoc cref="IStarMapObject2D{T}.SkipObject"/>
     public bool SkipObject { get; set; }
+
+    /// <summary>
+    /// Gets or sets the optional name of the object.
+    /// </summary>
+    /// <value>The optional name of the object.</value>
+    public string? ObjectName { get; set; }
 }

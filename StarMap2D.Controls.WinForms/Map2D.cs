@@ -81,6 +81,14 @@ public partial class Map2D : UserControl
     /// <param name="sender">The sender of the event.</param>
     /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
     public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
+
+    /// <summary>
+    /// Delegate OnObjectUserInteraction.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The <see cref="NamedObjectEventArgs"/> instance containing the event data.</param>
+    public delegate void OnObjectUserInteraction(object sender, NamedObjectEventArgs e);
+    // TODO::!!
     #endregion
 
     #region Events        
@@ -108,6 +116,7 @@ public partial class Map2D : UserControl
     private int[] starSizes = Array.Empty<int>();
     private Color[] starColors = Array.Empty<Color>();
     private string? locale;
+    private readonly List<MapObjectMetadata> objectMetadata = new();
     #endregion
 
     #region PrivateProperties
@@ -192,6 +201,8 @@ public partial class Map2D : UserControl
         var previousMagnitude = -11;
         var drawArguments = GetStarDrawArguments(-11);
 
+        objectMetadata.Clear();
+
         if (Plot2D != null)
         {
             foreach (var starMapObject in StarMapObjects)
@@ -217,6 +228,16 @@ public partial class Map2D : UserControl
                         if (image != null)
                         {
                             graphics.DrawImage(image, GetDrawPoint(image, position));
+                            if (starMapObject.ObjectName != null)
+                            {
+                                objectMetadata.Add(new MapObjectMetadata
+                                {
+                                    Name = starMapObject.ObjectName,
+                                    X = position.X + OffsetX,
+                                    Y = position.Y + OffsetY, 
+                                    Radius = image.Width / 2.0,
+                                });
+                            }
                         }
                     }
                 }
@@ -950,6 +971,14 @@ public partial class Map2D : UserControl
                     CoordinatesChanged?.Invoke(this,
                         new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude });
                 }
+            }
+        }
+        else
+        {
+            var metadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
+            if (metadata != null)
+            {
+                
             }
         }
     }

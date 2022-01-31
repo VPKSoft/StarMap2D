@@ -90,4 +90,9 @@ internal static class Program
             return result;
         }
     }
+
+    internal static string GetSettingFile(string fileName)
+    {
+        return Path.Combine(SettingsFolder, fileName);
+    }
 }

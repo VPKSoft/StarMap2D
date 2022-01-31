@@ -1,0 +1,53 @@
+This is the simple tab-delimited localization file.
+As you can see only the "[]" tags and tab delimited key-value pairs matter for the localization.
+The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
+
+[en-US]
+textSun	Sun
+textMercury	Mercury
+textVenus	Venus
+textEarth	Earth
+textMars	Mars
+textJupiter	Jupiter
+textSaturn	Saturn
+textUranus	Uranus
+textNeptune	Neptune
+textPluto	Pluto
+textCeres	Ceres
+textOrcus	Orcus
+textPluto	Pluto
+textHaumea	Haumea
+textQuaoar	Quaoar
+textMakemake	Makemake
+textGonggong	Gonggong
+textEris	Eris
+textSedna	Sedna
+textJuno	Juno
+textVesta	Vesta
+textPallas	Pallas
+textChiron	Chiron
+
+[fi-FI]
+textSun	Aurinko
+textMercury	Merkurius
+textVenus	Venus
+textEarth	Maa
+textMars	Mars
+textJupiter	Jupiter
+textSaturn	Saturnus
+textUranus	Uranus
+textNeptune	Neptunus
+textPluto	Pluto
+textCeres	Ceres
+textOrcus	Orcus
+textPluto	Pluto
+textHaumea	Haumea
+textQuaoar	Quaoar
+textMakemake	Makemake
+textGonggong	Gonggong
+textEris	Eris
+textSedna	Sedna
+textJuno	Juno
+textVesta	Vesta
+textPallas	Pallas
+textChiron	Chiron

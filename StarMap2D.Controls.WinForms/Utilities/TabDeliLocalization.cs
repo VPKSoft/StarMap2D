@@ -43,27 +43,26 @@ namespace StarMap2D.Controls.WinForms.Utilities
             /// Gets or sets the name of the localized message.
             /// </summary>
             /// <value>The name of the localized message.</value>
-            internal string MessageName { get; set; }
+            internal string? MessageName { get; set; }
 
             /// <summary>
             /// Gets or sets the message.
             /// </summary>
             /// <value>The message.</value>
-            internal string Message { get; set; }
+            internal string? Message { get; set; }
 
             /// <summary>
             /// Gets or sets the name of the culture of the localized message.
             /// </summary>
             /// <value>The name of the culture.</value>
-            internal string CultureName { get; set; }
+            internal string? CultureName { get; set; }
         }
 
 
         /// <summary>
         /// A list containing messages for localization. Please do fill at least the en-US localization.
         /// </summary>
-        List<LocalizationTextContainer> LocalizationTexts { get; } = 
-            new List<LocalizationTextContainer>();
+        List<LocalizationTextContainer> LocalizationTexts { get; } = new();
 
         /// <summary>
         /// Gets a localized message and gets a string corresponding to that message.
@@ -77,14 +76,14 @@ namespace StarMap2D.Controls.WinForms.Utilities
         {
             var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
 
-            if (value != null && value.Message == null && locale.Split('-').Length == 2)
+            if (value is { Message: null } && locale.Split('-').Length == 2)
             {
                 value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
             }
-            else if (value != null && value.Message == null) // fall back to a generic culture..
+            else if (value is { Message: null }) // fall back to a generic culture..
             {
                 value = LocalizationTexts.FirstOrDefault(f =>
-                    f.CultureName.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
+                    f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
             }
 
             return value?.Message ?? defaultMessage;
@@ -103,14 +102,14 @@ namespace StarMap2D.Controls.WinForms.Utilities
         {
             var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
 
-            if (value != null && value.Message == null && locale.Split('-').Length == 2)
+            if (value is { Message: null } && locale.Split('-').Length == 2)
             {
                 value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
             }
-            else if (value != null && value.Message == null) // fall back to a generic culture..
+            else if (value is { Message: null }) // fall back to a generic culture..
             {
                 value = LocalizationTexts.FirstOrDefault(f =>
-                    f.CultureName.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
+                    f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
             }
 
             string msg = value?.Message ?? defaultMessage;

@@ -24,27 +24,31 @@ SOFTWARE.
 */
 #endregion
 
-using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml;
-
-namespace StarMap2D.Avalonia
+namespace StarMap2D.Calculations.Helpers.Math
 {
-    public class App : Application
+    /// <summary>
+    /// Calculations for circle shape.
+    /// </summary>
+    public class Circle
     {
-        public override void Initialize()
+        /// <summary>
+        /// Checks if the specified point is inside a specified circle.
+        /// </summary>
+        /// <param name="circleX">The center point X-coordinate of the circle.</param>
+        /// <param name="circleY">The center point Y-coordinate of the circle.</param>
+        /// <param name="radius">The radius of the circle.</param>
+        /// <param name="x">The X-coordinate of the point to check for.</param>
+        /// <param name="y">The Y-coordinate of the point to check for.</param>
+        /// <returns><c>true</c> if the point is inside the circle, <c>false</c> otherwise.</returns>
+        /// <remarks>Copyright (C): https://www.geeksforgeeks.org/find-if-a-point-lies-inside-or-on-circle/.</remarks>
+        public static bool PointIsInside(double circleX, double circleY, double radius, double x, double y)
         {
-            AvaloniaXamlLoader.Load(this);
-        }
-
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if ((x - circleX) * (x - circleX) + (y - circleY) * (y - circleY) <= radius * radius)
             {
-                desktop.MainWindow = new MainWindow();
+                return true;
             }
 
-            base.OnFrameworkInitializationCompleted();
+            return false;
         }
     }
 }

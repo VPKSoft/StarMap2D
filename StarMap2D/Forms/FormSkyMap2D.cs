@@ -205,6 +205,18 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void CreateSolarSystemObjects()
     {
+        string LowerCaseFirstUpper(string value)
+        {
+            value = value.ToLower();
+
+            var upperStart = value[0].ToString().ToUpper()[0];
+
+            value = upperStart + value.Remove(0, 1);
+            return value;
+        }
+
+        var tabDeli = LocalizationProvider.SolarSystemObjectLocalization;
+
         if (map2d.Plot2D == null)
         {
             return;
@@ -232,7 +244,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                     return map2d.Plot2D.Project2D(coordinate, InvertEastWest);
                 },
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
-                IsLocationCalculated = true
+                IsLocationCalculated = true,
+                ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Properties.Settings.Default.Locale),
             });
         }
 
@@ -255,7 +268,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 CalculatePosition = (aaDate, precision, latitude, longitude, _) => 
                     map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(value, aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
-                IsLocationCalculated = true
+                IsLocationCalculated = true,
+                ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Properties.Settings.Default.Locale),
             });
         }
 
@@ -268,7 +282,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                     map2d.Plot2D.Project2D(
                         SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
-                IsLocationCalculated = true
+                IsLocationCalculated = true,
+                ObjectName = tabDeli.GetMessage($"textSun", "Sun", Properties.Settings.Default.Locale),
             });
         }
 
@@ -282,7 +297,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                     map2d.Plot2D.Project2D(
                         SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
-                IsLocationCalculated = true
+                IsLocationCalculated = true,
+                ObjectName = tabDeli.GetMessage($"textSun", "Sun", Properties.Settings.Default.Locale),
             });
         }
     }

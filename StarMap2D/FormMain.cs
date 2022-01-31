@@ -78,12 +78,9 @@ public partial class FormMain : DBLangEngineWinforms
     {
         try
         {
-            LocalizeRunner.RunLocalizeWindow(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "VPKSoft",
-                nameof(StarMap2D),
+            LocalizeRunner.RunLocalizeWindow(
                 // ReSharper disable once StringLiteralTypo
-                "lang.sqlite"));
+                Program.GetSettingFile("lang.sqlite"));
         }
         catch
         {
