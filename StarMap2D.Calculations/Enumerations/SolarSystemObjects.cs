@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using AASharp;
+
 namespace StarMap2D.Calculations.Enumerations;
 
 /// <summary>
@@ -34,50 +36,50 @@ public enum SolarSystemObjects
     /// <summary>
     /// The sun.
     /// </summary>
-    Sun,
+    Sun = AASEllipticalObject.SUN,
 
     /// <summary>
     /// The planet Mercury.
     /// </summary>
-    Mercury,
+    Mercury = AASEllipticalObject.MERCURY,
 
     /// <summary>
     /// The planet Venus.
     /// </summary>
-    Venus,
+    Venus = AASEllipticalObject.VENUS,
 
     /// <summary>
     /// The planet Earth.
     /// </summary>
-    Earth,
+    Earth = 100,
 
     /// <summary>
     /// The moon of the planet Earth.
     /// </summary>
-    Moon,
+    Moon = 101,
 
     /// <summary>
     /// The planet Mars.
     /// </summary>
-    Mars,
+    Mars = AASEllipticalObject.MARS,
 
     /// <summary>
     /// The planet Jupiter.
     /// </summary>
-    Jupiter,
+    Jupiter = AASEllipticalObject.JUPITER,
 
     /// <summary>
     /// The planet Saturn.
     /// </summary>
-    Saturn,
+    Saturn = AASEllipticalObject.SATURN,
 
     /// <summary>
     /// The planet Uranus.
     /// </summary>
-    Uranus,
+    Uranus = AASEllipticalObject.URANUS,
 
     /// <summary>
     /// The planet Neptune.
     /// </summary>
-    Neptune,
+    Neptune = AASEllipticalObject.NEPTUNE,
 }

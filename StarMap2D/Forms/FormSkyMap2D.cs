@@ -226,6 +226,11 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
         foreach (SolarSystemSmallBodies value in Enum.GetValues(typeof(SolarSystemSmallBodies)))
         {
+            if (value == SolarSystemSmallBodies.Pluto) // Pluto, the special "planet".
+            {
+                continue;
+            }
+
             var solarSystemObject = solarSystemObjects.First(f => (int)f.ObjectType == (int)value);
 
             if (!solarSystemObject.Enabled)
@@ -235,17 +240,15 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
             map2d.StarMapObjects.Add(new StarMapObject
             {
-                CalculatePosition = (aaDate, _, latitude, longitude, _) =>
-                {
-                    var body = bodies[value];
-                    var details = AASElliptical.Calculate(aaDate.Julian, ref body, false);
-                    var coordinate = new AAS2DCoordinate
-                        { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
-                    return map2d.Plot2D.Project2D(coordinate, InvertEastWest);
-                },
+                CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
+                    map2d.Plot2D.Project2D(
+                        SolarSystemObjectPositions.GetSmallObjectPosition(value, aaDate, precision, latitude,
+                            longitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Properties.Settings.Default.Locale),
+                ObjectType = solarSystemObject.ObjectType,
+                Identifier = (ulong)value,
             });
         }
 
@@ -270,6 +273,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Properties.Settings.Default.Locale),
+                ObjectType = solarSystemObject.ObjectType,
+                Identifier = (ulong)value,
             });
         }
 
@@ -283,12 +288,13 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                         SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
                 IsLocationCalculated = true,
-                ObjectName = tabDeli.GetMessage($"textSun", "Sun", Properties.Settings.Default.Locale),
+                ObjectName = tabDeli.GetMessage("textSun", "Sun", Properties.Settings.Default.Locale),
+                ObjectType = ObjectsWithGraphics.Sun,
+                Identifier = (ulong)ObjectsWithGraphics.Sun,
             });
         }
 
         var moon = solarSystemObjects.First(f => f.ObjectType == ObjectsWithGraphics.Moon);
-
         if (moon.Enabled)
         {
             map2d.StarMapObjects.Add(new StarMapObject
@@ -298,7 +304,9 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                         SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
                 IsLocationCalculated = true,
-                ObjectName = tabDeli.GetMessage($"textSun", "Sun", Properties.Settings.Default.Locale),
+                ObjectName = tabDeli.GetMessage("textMoon", "Moon", Properties.Settings.Default.Locale),
+                ObjectType = ObjectsWithGraphics.Moon,
+                Identifier = (ulong)ObjectsWithGraphics.Moon,
             });
         }
     }
@@ -503,4 +511,14 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         suspendEvents = false;
     }
     #endregion
+
+    private void map2d_MouseHoverObject(object sender, NamedObjectEventArgs e)
+    {
+        label1.Text = e.Name;
+    }
+
+    private void map2d_MouseLeaveObject(object sender, NamedObjectEventArgs e)
+    {
+        label1.Text = string.Empty;
+    }
 }

@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Controls.WinForms.Enumerations;
 using StarMap2D.Controls.WinForms.Interfaces;
 using VPKSoft.StarCatalogs.Interfaces;
 
@@ -56,6 +57,15 @@ public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
 
     /// <inheritdoc cref="IStarMapObject2D{T}.SkipObject"/>
     public bool SkipObject { get; set; }
+
+    /// <inheritdoc cref="IStarMapObject2D{T}.Identifier"/>
+    public ulong Identifier { get; set; }
+
+    /// <summary>
+    /// Gets or sets the type of the object.
+    /// </summary>
+    /// <value>The type of the object.</value>
+    public ObjectsWithGraphics? ObjectType { get; set; }
 
     /// <summary>
     /// Gets or sets the optional name of the object.

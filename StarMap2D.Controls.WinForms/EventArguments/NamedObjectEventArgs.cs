@@ -44,6 +44,18 @@ namespace StarMap2D.Controls.WinForms.EventArguments
         public object? Identifier { get; set; }
 
         /// <summary>
+        /// Gets or sets the right ascension.
+        /// </summary>
+        /// <value>The right ascension.</value>
+        public double RightAscension { get; set; }
+
+        /// <summary>
+        /// Gets or sets the declination.
+        /// </summary>
+        /// <value>The declination.</value>
+        public double Declination { get; set; }
+
+        /// <summary>
         /// Gets the <see cref="Identifier" /> cast to specified type.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>

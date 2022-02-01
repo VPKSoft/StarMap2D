@@ -73,7 +73,6 @@ public partial class Map2D : UserControl
         }
     }
 
-
     #region EventDelegates        
     /// <summary>
     /// Delegate OnCoordinatesChanged
@@ -95,9 +94,35 @@ public partial class Map2D : UserControl
     /// <summary>
     /// Occurs when the latitude or the longitude coordinates changed.
     /// </summary>
+    [Category("StarMap2D")]
     [Browsable(true)]
     [Description("Occurs when the latitude or the longitude coordinates changed.")]
     public event OnCoordinatesChanged? CoordinatesChanged;
+
+    /// <summary>
+    /// Occurs when mouse hovers over a named object.
+    /// </summary>
+    [Browsable(true)]
+    [Category("StarMap2D")]
+    [Description("Occurs when mouse hovers over a named object.")]
+    public event OnObjectUserInteraction? MouseHoverObject;
+
+
+    /// <summary>
+    /// Occurs when mouse leaves the hovered object.
+    /// </summary>
+    [Browsable(true)]
+    [Category("StarMap2D")]
+    [Description("Occurs when mouse leaves the hovered object.")]
+    public event OnObjectUserInteraction? MouseLeaveObject;
+
+    /// <summary>
+    /// Occurs when the object is clicked via mouse.
+    /// </summary>
+    [Browsable(true)]
+    [Category("StarMap2D")]
+    [Description("Occurs when the object is clicked via mouse.")]
+    public event OnObjectUserInteraction? MouseClickObject;
     #endregion
 
     #region PrivateFields
@@ -928,6 +953,8 @@ public partial class Map2D : UserControl
         mouseDown = false;
     }
 
+    private MapObjectMetadata? metadata;
+
     private void Map2D_MouseMove(object sender, MouseEventArgs e)
     {
         if (mouseDown && e.Button.HasFlag(MouseButtons.Right))
@@ -975,11 +1002,26 @@ public partial class Map2D : UserControl
         }
         else
         {
-            var metadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
-            if (metadata != null)
+            var newMetadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
+            if (newMetadata != null)
             {
-                
+                MouseHoverObject?.Invoke(this,
+                    new NamedObjectEventArgs { Identifier = newMetadata.Identifier, Name = newMetadata.Name });
             }
+            else if (newMetadata == null && metadata != null)
+            {
+                MouseLeaveObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            }
+
+            metadata = newMetadata;
+        }
+    }
+
+    private void Map2D_MouseClick(object sender, MouseEventArgs e)
+    {
+        if (metadata != null)
+        {
+            MouseClickObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
         }
     }
     #endregion

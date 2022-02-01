@@ -171,18 +171,6 @@ namespace StarMap2D.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string KnownObjects {
-            get {
-                return ((string)(this["KnownObjects"]));
-            }
-            set {
-                this["KnownObjects"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InvertEastWest {
             get {
@@ -250,6 +238,18 @@ namespace StarMap2D.Properties {
             }
             set {
                 this["Locale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string KnownObjects {
+            get {
+                return ((string)(this["KnownObjects"]));
+            }
+            set {
+                this["KnownObjects"] = value;
             }
         }
     }

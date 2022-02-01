@@ -25,6 +25,8 @@ SOFTWARE.
 #endregion
 
 using AASharp;
+using StarMap2D.Calculations.Constellations.StaticData;
+using StarMap2D.Calculations.Enumerations;
 
 namespace StarMap2D.Calculations.Helpers.Math;
 
@@ -72,7 +74,7 @@ public class SolarSystemObjectPositions
     /// <summary>
     /// Gets the position of an object specified by the <paramref name="object"/> value.
     /// </summary>
-    /// <param name="object">The one of the <see cref="AASEllipticalObject"/> enumeration value. </param>
+    /// <param name="object">The one of the <see cref="AASEllipticalObject"/> enumeration values.</param>
     /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
     /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
     /// <param name="longitude">The longitude of the observer.</param>
@@ -89,5 +91,24 @@ public class SolarSystemObjectPositions
         return new AAS2DCoordinate
         { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }
             .ToHorizontal(aaDate, latitude, longitude);
+    }
+
+    /// <summary>
+    /// Gets the position of an object specified by the <paramref name="smallBody"/> value.
+    /// </summary>
+    /// <param name="smallBody">The one of the <see cref="SolarSystemSmallBodies"/> enumeration values.</param>
+    /// <param name="aaDate">The <see cref="AASDate"/> date instance.</param>
+    /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
+    /// <param name="longitude">The longitude of the observer.</param>
+    /// <param name="latitude">The latitude of the observer.</param>
+    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the <paramref name="object"/> position in horizontal coordinates.</returns>
+    public static AAS2DCoordinate GetSmallObjectPosition(SolarSystemSmallBodies smallBody, AASDate aaDate, bool highPrecision, double latitude, double longitude)
+    {
+        var bodies = new SmallBodies();
+        var body = bodies[smallBody];
+        var details = AASElliptical.Calculate(aaDate.Julian, ref body, highPrecision);
+        var coordinate = new AAS2DCoordinate
+            { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
+        return coordinate;
     }
 }

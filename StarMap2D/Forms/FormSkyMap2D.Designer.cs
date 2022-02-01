@@ -84,6 +84,8 @@ namespace StarMap2D.Forms
             this.cbConstellationLines = new System.Windows.Forms.CheckBox();
             this.cbConstellationNames = new System.Windows.Forms.CheckBox();
             this.cbSkipCalculated = new System.Windows.Forms.CheckBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,6 +95,7 @@ namespace StarMap2D.Forms
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmSetTime
@@ -133,7 +136,7 @@ namespace StarMap2D.Forms
             this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.map2d.ConstellationBorderLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 1, 30, 15, 39, 21, 556);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 1, 5, 11, 13, 303);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map2d.DrawConstellationBoundaries = false;
             this.map2d.DrawConstellationNames = true;
@@ -155,6 +158,8 @@ namespace StarMap2D.Forms
             this.map2d.StarSizes = new int[0];
             this.map2d.TabIndex = 0;
             this.map2d.CoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
+            this.map2d.MouseHoverObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseHoverObject);
+            this.map2d.MouseLeaveObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseLeaveObject);
             // 
             // tlpMapControls
             // 
@@ -171,6 +176,7 @@ namespace StarMap2D.Forms
             this.tlpMapControls.Controls.Add(this.cbConstellationLines, 0, 5);
             this.tlpMapControls.Controls.Add(this.cbConstellationNames, 0, 6);
             this.tlpMapControls.Controls.Add(this.cbSkipCalculated, 0, 7);
+            this.tlpMapControls.Controls.Add(this.panel4, 0, 10);
             this.tlpMapControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMapControls.Location = new System.Drawing.Point(751, 3);
             this.tlpMapControls.Name = "tlpMapControls";
@@ -188,6 +194,7 @@ namespace StarMap2D.Forms
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMapControls.Size = new System.Drawing.Size(244, 798);
             this.tlpMapControls.TabIndex = 1;
             // 
@@ -518,6 +525,26 @@ namespace StarMap2D.Forms
             this.cbSkipCalculated.UseVisualStyleBackColor = true;
             this.cbSkipCalculated.CheckedChanged += new System.EventHandler(this.cbSkipCalculated_CheckedChanged);
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpMapControls.SetColumnSpan(this.panel4, 2);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Location = new System.Drawing.Point(3, 426);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(238, 56);
+            this.panel4.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
             // FormSkyMap2D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -540,6 +567,8 @@ namespace StarMap2D.Forms
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -573,5 +602,7 @@ namespace StarMap2D.Forms
         private NumericUpDown nudLongitude;
         private Label lbLatitude;
         private NumericUpDown nudLatitude;
+        private Panel panel4;
+        private Label label1;
     }
 }

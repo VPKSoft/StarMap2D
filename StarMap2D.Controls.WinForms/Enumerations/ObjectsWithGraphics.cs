@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using AASharp;
 using StarMap2D.Calculations.Enumerations;
 
 namespace StarMap2D.Controls.WinForms.Enumerations;
@@ -70,7 +71,7 @@ public enum ObjectsWithGraphics
     Orcus = SolarSystemSmallBodies.Orcus,
 
     /// <inheritdoc cref="SolarSystemSmallBodies.Pluto"/>
-    Pluto = SolarSystemSmallBodies.Pluto,
+    Pluto = AASEllipticalObject.PLUTO,
 
     /// <inheritdoc cref="SolarSystemSmallBodies.Haumea"/>
     Haumea = SolarSystemSmallBodies.Haumea,

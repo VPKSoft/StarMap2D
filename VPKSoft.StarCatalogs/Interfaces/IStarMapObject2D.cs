@@ -61,29 +61,35 @@ public interface IStarMapObject2D<T>
     /// Gets or sets the right ascension of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
     /// </summary>
     /// <value>The right ascension of the object.</value>
-    public double RightAscension { get; set; }
+    double RightAscension { get; set; }
 
     /// <summary>
     /// Gets or sets the right declination of the object if the <see cref="IsLocationCalculated"/> is set to <c>false</c>.
     /// </summary>
     /// <value>The declination of the object.</value>
-    public double Declination { get; set; }
+    double Declination { get; set; }
 
     /// <summary>
     /// Gets or sets the object graphics data for plotting the object to a star map.
     /// </summary>
     /// <value>The graphics data for plotting the object to a star map.</value>
-    public T? ObjectGraphics { get; set; }
+    T? ObjectGraphics { get; set; }
 
     /// <summary>
     /// Gets or sets the magnitude of the object.
     /// </summary>
     /// <value>The magnitude of the object.</value>
-    public double Magnitude { get; set; }
+    double Magnitude { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether to skip object from being drawn.
     /// </summary>
     /// <value>The value indicating whether to skip object from being drawn.</value>
-    public bool SkipObject { get; set; }
+    bool SkipObject { get; set; }
+
+    /// <summary>
+    /// Gets or sets the identifier for the star map object.
+    /// </summary>
+    /// <value>The star map object identifier.</value>
+    ulong Identifier { get; set; }
 }
