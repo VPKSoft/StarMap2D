@@ -66,6 +66,7 @@ namespace StarMap2D.Controls.WinForms
             this.Size = new System.Drawing.Size(400, 400);
             this.SizeChanged += new System.EventHandler(this.Map2D_NeedsRepaint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseDown);
             this.MouseLeave += new System.EventHandler(this.Map2D_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Map2D_MouseMove);

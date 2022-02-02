@@ -25,6 +25,8 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Xml;
 using AASharp;
 using StarMap2D.Calculations.Constellations.StaticData;
@@ -32,7 +34,6 @@ using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
-using StarMap2D.Controls.WinForms.Enumerations;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Utilities;
@@ -248,7 +249,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Properties.Settings.Default.Locale),
                 ObjectType = solarSystemObject.ObjectType,
-                Identifier = (ulong)value,
+                Identifier = (int)value,
             });
         }
 
@@ -274,11 +275,11 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Properties.Settings.Default.Locale),
                 ObjectType = solarSystemObject.ObjectType,
-                Identifier = (ulong)value,
+                Identifier = (int)value,
             });
         }
 
-        var sun = solarSystemObjects.First(f => f.ObjectType == ObjectsWithGraphics.Sun);
+        var sun = solarSystemObjects.First(f => f.ObjectType == ObjectsWithPositions.Sun);
         if (sun.Enabled)
         {
             map2d.StarMapObjects.Add(new StarMapObject
@@ -289,12 +290,12 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage("textSun", "Sun", Properties.Settings.Default.Locale),
-                ObjectType = ObjectsWithGraphics.Sun,
-                Identifier = (ulong)ObjectsWithGraphics.Sun,
+                ObjectType = ObjectsWithPositions.Sun,
+                Identifier = (int)ObjectsWithPositions.Sun,
             });
         }
 
-        var moon = solarSystemObjects.First(f => f.ObjectType == ObjectsWithGraphics.Moon);
+        var moon = solarSystemObjects.First(f => f.ObjectType == ObjectsWithPositions.Moon);
         if (moon.Enabled)
         {
             map2d.StarMapObjects.Add(new StarMapObject
@@ -305,8 +306,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage("textMoon", "Moon", Properties.Settings.Default.Locale),
-                ObjectType = ObjectsWithGraphics.Moon,
-                Identifier = (ulong)ObjectsWithGraphics.Moon,
+                ObjectType = ObjectsWithPositions.Moon,
+                Identifier = (int)ObjectsWithPositions.Moon,
             });
         }
     }
@@ -514,11 +515,79 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_MouseHoverObject(object sender, NamedObjectEventArgs e)
     {
-        label1.Text = e.Name;
+        var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D.AaDate, Globals.HighPrecisionCalculations,
+            map2d.Latitude, map2d.Longitude);
+
+        lbObjectNameValue.Text = e.Name;
+        lbRightAscensionValue.Text = $@"{details.RightAscension.ToString("F5", CultureInfo.InvariantCulture)}";
+        lbDeclinationValue.Text = $@"{details.Declination.ToString("F5", CultureInfo.InvariantCulture)}";
+        lbHorizontalXValue.Text = $@"{details.HorizontalDegreesX.ToString("F1", CultureInfo.InvariantCulture)}";
+        lbHorizontalYValue.Text = $@"{details.HorizontalDegreesY.ToString("F1", CultureInfo.InvariantCulture)}";
+        cbAboveHorizonValue.Checked = details.AboveHorizon;
     }
 
     private void map2d_MouseLeaveObject(object sender, NamedObjectEventArgs e)
     {
-        label1.Text = string.Empty;
+        lbObjectNameValue.Text = string.Empty;
+        lbRightAscensionValue.Text = @"-";
+        lbDeclinationValue.Text = @"-";
+        lbHorizontalXValue.Text = @"-";
+        lbHorizontalYValue.Text = @"-";
+        cbAboveHorizonValue.Checked = false;
+    }
+
+    private void map2d_MouseClickObject(object sender, NamedObjectEventArgs e)
+    {
+
+    }
+
+    private void map2d_MouseDoubleClickObject(object sender, NamedObjectEventArgs e)
+    {
+        var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D.AaDate, Globals.HighPrecisionCalculations,
+            map2d.Latitude, map2d.Longitude);
+
+        details.ObjectName = e.Name;
+
+        var builder = new StringBuilder();
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgObjectNameValue",
+            "Object name: {0}{1}|A message describing a name value of any sky object of any kind.", "\t", e.Name));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgDateDataDateTimeValue", "Date and time: {0}{1}|A text indicating a date and time value", "\t",
+            details.DetailDateTime.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgRightAscensionWithValue",
+            "Right ascension: {0}{1}|A text indicating a right ascension value", "\t",
+            details.RightAscension.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgDeclinationWithValue",
+            "Declination: {0}{1}|A text indicating a right ascension value", "\t",
+            details.Declination.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgHorizontalYDegreesWithValue",
+            "Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees", "\t",
+            details.HorizontalDegreesY.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgHorizontalXDegreesWithValue",
+            "Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees", "\t",
+            details.HorizontalDegreesX.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine(DBLangEngine.GetMessage("msgAboveHorizonBooleanValue",
+            "Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon", "\t",
+            details.AboveHorizon ? @"true" : @"false"));
+
+        for (var i = 0; i < 10; i++)
+        {
+            try
+            {
+                Clipboard.SetText(builder.ToString());
+                break;
+            }
+            catch
+            {
+                Thread.Sleep(50);
+                // Let the loop continue
+            }
+        }
     }
 }

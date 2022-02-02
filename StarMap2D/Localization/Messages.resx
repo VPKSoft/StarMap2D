@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="msgAboveHorizonBooleanValue" xml:space="preserve">
+    <value>Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon</value>
+  </data>
+  <data name="msgDateDataDateTimeValue" xml:space="preserve">
+    <value>Date and time: {0}{1}|A text indicating a date and time value</value>
+  </data>
+  <data name="msgDeclinationWithValue" xml:space="preserve">
+    <value>Declination: {0}{1}|A text indicating a right ascension value</value>
+  </data>
+  <data name="msgHorizontalXDegreesWithValue" xml:space="preserve">
+    <value>Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees</value>
+  </data>
+  <data name="msgHorizontalYDegreesWithValue" xml:space="preserve">
+    <value>Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees</value>
+  </data>
+  <data name="msgObjectNameValue" xml:space="preserve">
+    <value>Object name: {0}{1}|A message describing a name value of any sky object of any kind.</value>
+  </data>
+  <data name="msgRightAscensionWithValue" xml:space="preserve">
+    <value>Right ascension: {0}{1}|A text indicating a right ascension value</value>
+  </data>
   <data name="msgSkyMap" xml:space="preserve">
     <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.</value>
   </data>
@@ -143,8 +164,5 @@
   </data>
   <data name="msgTimeIntervalYear" xml:space="preserve">
     <value>y|An abbreviation for years.</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>s|An abbreviation for seconds.</value>
   </data>
 </root>

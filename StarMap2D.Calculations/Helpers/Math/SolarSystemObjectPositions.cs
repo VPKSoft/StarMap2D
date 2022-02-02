@@ -24,9 +24,12 @@ SOFTWARE.
 */
 #endregion
 
+using System.Text.Json.Serialization;
 using AASharp;
+using StarMap2D.Calculations.Classes;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Extensions;
 
 namespace StarMap2D.Calculations.Helpers.Math;
 
@@ -101,7 +104,7 @@ public class SolarSystemObjectPositions
     /// <param name="highPrecision">if set to <c>true</c> use high precision on calculations with the AASharp library.</param>
     /// <param name="longitude">The longitude of the observer.</param>
     /// <param name="latitude">The latitude of the observer.</param>
-    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the <paramref name="object"/> position in horizontal coordinates.</returns>
+    /// <returns>A <see cref="AAS2DCoordinate"/> instance representing the <paramref name="smallBody"/> position in horizontal coordinates.</returns>
     public static AAS2DCoordinate GetSmallObjectPosition(SolarSystemSmallBodies smallBody, AASDate aaDate, bool highPrecision, double latitude, double longitude)
     {
         var bodies = new SmallBodies();
@@ -110,5 +113,118 @@ public class SolarSystemObjectPositions
         var coordinate = new AAS2DCoordinate
             { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
         return coordinate;
+    }
+
+    public static ObjectDetails GetDetails(ObjectsWithPositions objectType, AASDate aaDate, bool highPrecision, double latitude, double longitude)
+    {
+        var result = new ObjectDetails
+        {
+            DetailDateTime = aaDate.ToDateTime(),
+        };
+
+        if (objectType is
+            ObjectsWithPositions.Ceres or
+            ObjectsWithPositions.Chiron or
+            ObjectsWithPositions.Eris or
+            ObjectsWithPositions.Gonggong or
+            ObjectsWithPositions.Haumea or
+            ObjectsWithPositions.Juno or
+            ObjectsWithPositions.Makemake or
+            ObjectsWithPositions.Orcus or
+            ObjectsWithPositions.Pallas or
+            ObjectsWithPositions.Sedna or
+            ObjectsWithPositions.Quaoar or
+            ObjectsWithPositions.Vesta)
+        {
+            var bodies = new SmallBodies();
+            var body = bodies[(SolarSystemSmallBodies)objectType];
+            var details = AASElliptical.Calculate(aaDate.Julian, ref body, highPrecision);
+            details.AstrometricGeocentricRA %= 360;
+            result.RightAscension = HoursConvert.DecimalDegreesToHms(details.AstrometricGeocentricRA);
+            result.Declination = details.AstrometricGeocentricDeclination;
+
+            var horizontal =
+                new AAS2DCoordinate
+                        { X = details.AstrometricGeocentricRA, Y = details.AstrometricGeocentricDeclination }
+                    .ToHorizontal(aaDate, latitude, longitude);
+
+            result.HorizontalDegreesX = (horizontal.X + 180) % 360;
+            result.HorizontalDegreesY = horizontal.Y;
+
+            result.AboveHorizon = horizontal.X > 0;
+        }
+
+        if (objectType is
+            ObjectsWithPositions.Mercury or
+            ObjectsWithPositions.Venus or
+            ObjectsWithPositions.Mars or
+            ObjectsWithPositions.Jupiter or
+            ObjectsWithPositions.Saturn or
+            ObjectsWithPositions.Uranus or
+            ObjectsWithPositions.Neptune or
+            ObjectsWithPositions.Pluto)
+        {
+            var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+
+            var planetaryDetails = AASElliptical.Calculate(jd, (AASEllipticalObject)objectType, Globals.HighPrecisionCalculations);
+
+            result.RightAscension = planetaryDetails.ApparentGeocentricRA;
+            result.Declination = planetaryDetails.ApparentGeocentricDeclination;
+
+            var horizontal = new AAS2DCoordinate
+                    { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }
+                .ToHorizontal(aaDate, latitude, longitude);
+            
+            result.HorizontalDegreesX = (horizontal.X + 180) % 360;
+            result.HorizontalDegreesY = horizontal.Y;
+
+            result.AboveHorizon = horizontal.Y > 0;
+        }
+
+        if (objectType == ObjectsWithPositions.Sun)
+        {
+            var jdSun = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+            var sunLong = AASSun.ApparentEclipticLongitude(jdSun, highPrecision);
+            var sunLat = AASSun.ApparentEclipticLatitude(jdSun, highPrecision);
+
+            var raDec = AASCoordinateTransformation.Ecliptic2Equatorial(sunLong, sunLat, AASNutation.TrueObliquityOfEcliptic(jdSun)); // RA/DEC
+
+            result.RightAscension = raDec.X;
+            result.Declination = raDec.Y;
+
+            var horizontal =
+                new AAS2DCoordinate
+                        { X = sunLong, Y = sunLat }
+                    .HorizontalTransform(longitude, latitude, jdSun); // Horizontal X, Y, 0 = East
+
+            result.HorizontalDegreesX = (horizontal.X + 180) % 360;
+            result.HorizontalDegreesY = horizontal.Y;
+
+            result.AboveHorizon = horizontal.Y > 0;
+        }
+
+        if (objectType == ObjectsWithPositions.Moon)
+        {
+            var jdSun = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+            var moonLong = AASMoon.EclipticLongitude(jdSun);
+            var moonLat = AASMoon.EclipticLatitude(jdSun);
+
+            var raDec = AASCoordinateTransformation.Ecliptic2Equatorial(moonLong, moonLat, AASNutation.TrueObliquityOfEcliptic(jdSun)); // RA/DEC
+
+            result.RightAscension = raDec.X;
+            result.Declination = raDec.Y;
+
+            var horizontal =
+                new AAS2DCoordinate
+                        { X = moonLong, Y = moonLat }
+                    .HorizontalTransform(longitude, latitude, jdSun); // Horizontal X, Y, 0 = East
+
+            result.HorizontalDegreesX = (horizontal.X + 180) % 360;
+            result.HorizontalDegreesY = horizontal.Y;
+
+            result.AboveHorizon = horizontal.Y > 0;
+        }
+
+        return result;
     }
 }

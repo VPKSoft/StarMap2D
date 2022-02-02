@@ -91,5 +91,5 @@ public interface IStarMapObject2D<T>
     /// Gets or sets the identifier for the star map object.
     /// </summary>
     /// <value>The star map object identifier.</value>
-    ulong Identifier { get; set; }
+    int Identifier { get; set; }
 }

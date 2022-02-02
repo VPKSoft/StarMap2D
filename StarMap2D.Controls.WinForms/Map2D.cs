@@ -123,6 +123,14 @@ public partial class Map2D : UserControl
     [Category("StarMap2D")]
     [Description("Occurs when the object is clicked via mouse.")]
     public event OnObjectUserInteraction? MouseClickObject;
+
+    /// <summary>
+    /// Occurs when the object is double-clicked via mouse.
+    /// </summary>
+    [Browsable(true)]
+    [Category("StarMap2D")]
+    [Description("Occurs when the object is double-clicked via mouse.")]
+    public event OnObjectUserInteraction? MouseDoubleClickObject;
     #endregion
 
     #region PrivateFields
@@ -261,6 +269,7 @@ public partial class Map2D : UserControl
                                     X = position.X + OffsetX,
                                     Y = position.Y + OffsetY, 
                                     Radius = image.Width / 2.0,
+                                    Identifier = starMapObject.Identifier,
                                 });
                             }
                         }
@@ -1022,6 +1031,14 @@ public partial class Map2D : UserControl
         if (metadata != null)
         {
             MouseClickObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+        }
+    }
+
+    private void Map2D_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+        if (metadata != null)
+        {
+            MouseDoubleClickObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
         }
     }
     #endregion

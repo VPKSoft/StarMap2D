@@ -67,7 +67,7 @@ public class Plot2D
     /// Gets or sets a value indicating whether to use high precision on calculations with the AASharp library.
     /// </summary>
     /// <value><c>true</c> if to use high precision on calculations with the AASharp library; otherwise, <c>false</c>.</value>
-    public bool HighPrecision { get; set; }
+    public bool HighPrecision { get; set; } = Globals.HighPrecisionCalculations;
 
     /// <summary>
     /// Gets or sets the radius of the 2D plot area.

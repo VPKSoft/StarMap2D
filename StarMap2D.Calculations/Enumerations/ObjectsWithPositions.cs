@@ -25,14 +25,13 @@ SOFTWARE.
 #endregion
 
 using AASharp;
-using StarMap2D.Calculations.Enumerations;
 
-namespace StarMap2D.Controls.WinForms.Enumerations;
+namespace StarMap2D.Calculations.Enumerations;
 
 /// <summary>
-/// An enumeration of objects in the solar system which currently have graphics defined.
+/// An enumeration of objects in the solar system which position can currently be calculated.
 /// </summary>
-public enum ObjectsWithGraphics
+public enum ObjectsWithPositions
 {
     /// <inheritdoc cref="SolarSystemObjects.Sun"/>
     Sun = SolarSystemObjects.Sun,

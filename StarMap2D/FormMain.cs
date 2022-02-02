@@ -25,6 +25,10 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
+using AASharp;
+using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using VPKSoft.DBLocalization;
@@ -72,6 +76,11 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button3_Click(object sender, EventArgs e)
     {
+        var dt = DateTime.UtcNow;
+        MessageBox.Show(SolarSystemObjectPositions.GetDetails(ObjectsWithPositions.Moon,
+                AADateExtension.Now(), Globals.HighPrecisionCalculations, 60.1102605,
+                22.8782576)
+            .ToString());
     }
 
     private void mnuLocalize_Click(object sender, EventArgs e)

@@ -61,6 +61,69 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon.
+        /// </summary>
+        internal static string msgAboveHorizonBooleanValue {
+            get {
+                return ResourceManager.GetString("msgAboveHorizonBooleanValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time: {0}{1}|A text indicating a date and time value.
+        /// </summary>
+        internal static string msgDateDataDateTimeValue {
+            get {
+                return ResourceManager.GetString("msgDateDataDateTimeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Declination: {0}{1}|A text indicating a right ascension value.
+        /// </summary>
+        internal static string msgDeclinationWithValue {
+            get {
+                return ResourceManager.GetString("msgDeclinationWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees.
+        /// </summary>
+        internal static string msgHorizontalXDegreesWithValue {
+            get {
+                return ResourceManager.GetString("msgHorizontalXDegreesWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees.
+        /// </summary>
+        internal static string msgHorizontalYDegreesWithValue {
+            get {
+                return ResourceManager.GetString("msgHorizontalYDegreesWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object name: {0}{1}|A message describing a name value of any sky object of any kind..
+        /// </summary>
+        internal static string msgObjectNameValue {
+            get {
+                return ResourceManager.GetString("msgObjectNameValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right ascension: {0}{1}|A text indicating a right ascension value.
+        /// </summary>
+        internal static string msgRightAscensionWithValue {
+            get {
+                return ResourceManager.GetString("msgRightAscensionWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time..
         /// </summary>
         internal static string msgSkyMap {
@@ -138,15 +201,6 @@ namespace StarMap2D.Localization {
         internal static string msgTimeIntervalYear {
             get {
                 return ResourceManager.GetString("msgTimeIntervalYear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to s|An abbreviation for seconds..
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }
