@@ -117,6 +117,9 @@ public partial class FormDialogSettings : DBLangEngineWinforms
             .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
             .ToArray();
         cbInvertEastWest.Checked = Settings.Default.InvertEastWest;
+
+        cbDrawCrossHair.Checked = Settings.Default.DrawCrossHair;
+        pnCrossHairColor.BackColor = Settings.Default.CrossHairColor;
     }
 
     private void SaveSettings()
@@ -144,6 +147,8 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.MagnitudeMinimum = (double)nudMagnitudeMinimum.Value;
         Settings.Default.KnownObjects = string.Join(";", solarSystemObjectConfigurator1.ObjectGraphics.Select(f => f.SaveToString()));
         Settings.Default.InvertEastWest = cbInvertEastWest.Checked;
+        Settings.Default.DrawCrossHair = cbDrawCrossHair.Checked;
+        Settings.Default.CrossHairColor = pnCrossHairColor.BackColor;
         Settings.Default.Save();
     }
     #endregion

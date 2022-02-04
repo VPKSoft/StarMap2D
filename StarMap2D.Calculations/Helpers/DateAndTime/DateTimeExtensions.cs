@@ -54,6 +54,16 @@ public static class DateTimeExtensions
     }
 
     /// <summary>
+    /// Truncates the <see cref="DateTime"/> to hours removing minutes, seconds and fractional parts.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>A mew <see cref="DateTime"/>.</returns>
+    public static DateTime TruncateToHours(this DateTime dateTime)
+    {
+        return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, 0, 0, dateTime.Kind);
+    }
+
+    /// <summary>
     /// Adds the value of specified interval to the date and time.
     /// </summary>
     /// <param name="dateTime">The date time.</param>

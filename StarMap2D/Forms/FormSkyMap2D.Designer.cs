@@ -76,7 +76,6 @@ namespace StarMap2D.Forms
             this.cmbTimeType = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lbSpeedPerSecond = new System.Windows.Forms.Label();
-            this.btPlayPause = new StarMap2D.Controls.WinForms.ImageButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.compassView1 = new StarMap2D.Controls.WinForms.CompassView();
             this.cbInvertEastWest = new System.Windows.Forms.CheckBox();
@@ -95,6 +94,12 @@ namespace StarMap2D.Forms
             this.lbDeclinationValue = new System.Windows.Forms.Label();
             this.lbRightAscensionValue = new System.Windows.Forms.Label();
             this.lbObjectNameValue = new System.Windows.Forms.Label();
+            this.cbDrawCrossHair = new System.Windows.Forms.CheckBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lbHour1 = new System.Windows.Forms.Label();
+            this.btHourNext = new StarMap2D.Controls.WinForms.ImageButton();
+            this.btHourPrevious = new StarMap2D.Controls.WinForms.ImageButton();
+            this.btPlayPause = new StarMap2D.Controls.WinForms.ImageButton();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -105,6 +110,7 @@ namespace StarMap2D.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmSetTime
@@ -145,11 +151,14 @@ namespace StarMap2D.Forms
             this.map2d.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.map2d.ConstellationBorderLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(23)))), ((int)(((byte)(125)))));
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 2, 18, 4, 49, 590);
+            this.map2d.CrossHairColor = System.Drawing.Color.LimeGreen;
+            this.map2d.CrossHairSize = 20;
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 4, 17, 26, 19, 218);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map2d.DrawConstellationBoundaries = false;
             this.map2d.DrawConstellationNames = true;
             this.map2d.DrawConstellations = true;
+            this.map2d.DrawCrossHair = true;
             this.map2d.InvertEastWest = false;
             this.map2d.Latitude = 0D;
             this.map2d.Locale = "fi-FI";
@@ -180,7 +189,6 @@ namespace StarMap2D.Forms
             this.tlpMapControls.Controls.Add(this.panel3, 0, 9);
             this.tlpMapControls.Controls.Add(this.pnDateTime, 0, 0);
             this.tlpMapControls.Controls.Add(this.panel1, 0, 1);
-            this.tlpMapControls.Controls.Add(this.btPlayPause, 0, 2);
             this.tlpMapControls.Controls.Add(this.panel2, 0, 12);
             this.tlpMapControls.Controls.Add(this.cbInvertEastWest, 0, 3);
             this.tlpMapControls.Controls.Add(this.cbShowConstellationBorders, 0, 4);
@@ -188,6 +196,8 @@ namespace StarMap2D.Forms
             this.tlpMapControls.Controls.Add(this.cbConstellationNames, 0, 6);
             this.tlpMapControls.Controls.Add(this.cbSkipCalculated, 0, 7);
             this.tlpMapControls.Controls.Add(this.panel4, 0, 10);
+            this.tlpMapControls.Controls.Add(this.cbDrawCrossHair, 0, 8);
+            this.tlpMapControls.Controls.Add(this.panel5, 0, 2);
             this.tlpMapControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMapControls.Location = new System.Drawing.Point(751, 3);
             this.tlpMapControls.Name = "tlpMapControls";
@@ -200,7 +210,7 @@ namespace StarMap2D.Forms
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -218,7 +228,7 @@ namespace StarMap2D.Forms
             this.panel3.Controls.Add(this.cmbJumpToLocation);
             this.panel3.Controls.Add(this.btResetLocation);
             this.panel3.Controls.Add(this.lbJumpToLocation);
-            this.panel3.Location = new System.Drawing.Point(3, 285);
+            this.panel3.Location = new System.Drawing.Point(3, 287);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(238, 104);
             this.panel3.TabIndex = 10;
@@ -435,27 +445,11 @@ namespace StarMap2D.Forms
             this.lbSpeedPerSecond.TabIndex = 0;
             this.lbSpeedPerSecond.Text = "Speed / second";
             // 
-            // btPlayPause
-            // 
-            this.btPlayPause.Checked = false;
-            this.btPlayPause.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btPlayPause.DisabledColor = System.Drawing.Color.LightGray;
-            this.btPlayPause.ImageCheckedSvg = "ic_fluent_pause_48_filled";
-            this.btPlayPause.ImageColor = System.Drawing.Color.SteelBlue;
-            this.btPlayPause.ImageColorChecked = System.Drawing.Color.SteelBlue;
-            this.btPlayPause.ImageSvg = "ic_fluent_play_circle_48_filled";
-            this.btPlayPause.IsCheckedButton = true;
-            this.btPlayPause.Location = new System.Drawing.Point(3, 109);
-            this.btPlayPause.Name = "btPlayPause";
-            this.btPlayPause.Size = new System.Drawing.Size(91, 25);
-            this.btPlayPause.TabIndex = 6;
-            this.btPlayPause.CheckedChanged += new System.EventHandler<StarMap2D.Controls.WinForms.EventArguments.CheckedChangeEventArguments>(this.btPlayPause_CheckedChanged);
-            // 
             // panel2
             // 
             this.tlpMapControls.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.compassView1);
-            this.panel2.Location = new System.Drawing.Point(3, 551);
+            this.panel2.Location = new System.Drawing.Point(3, 550);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(238, 244);
             this.panel2.TabIndex = 8;
@@ -480,7 +474,7 @@ namespace StarMap2D.Forms
             // cbInvertEastWest
             // 
             this.cbInvertEastWest.AutoSize = true;
-            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 140);
+            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 137);
             this.cbInvertEastWest.Name = "cbInvertEastWest";
             this.cbInvertEastWest.Size = new System.Drawing.Size(109, 19);
             this.cbInvertEastWest.TabIndex = 9;
@@ -492,7 +486,7 @@ namespace StarMap2D.Forms
             // 
             this.cbShowConstellationBorders.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbShowConstellationBorders, 2);
-            this.cbShowConstellationBorders.Location = new System.Drawing.Point(3, 165);
+            this.cbShowConstellationBorders.Location = new System.Drawing.Point(3, 162);
             this.cbShowConstellationBorders.Name = "cbShowConstellationBorders";
             this.cbShowConstellationBorders.Size = new System.Drawing.Size(139, 19);
             this.cbShowConstellationBorders.TabIndex = 11;
@@ -504,7 +498,7 @@ namespace StarMap2D.Forms
             // 
             this.cbConstellationLines.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbConstellationLines, 2);
-            this.cbConstellationLines.Location = new System.Drawing.Point(3, 190);
+            this.cbConstellationLines.Location = new System.Drawing.Point(3, 187);
             this.cbConstellationLines.Name = "cbConstellationLines";
             this.cbConstellationLines.Size = new System.Drawing.Size(123, 19);
             this.cbConstellationLines.TabIndex = 12;
@@ -515,7 +509,7 @@ namespace StarMap2D.Forms
             // cbConstellationNames
             // 
             this.cbConstellationNames.AutoSize = true;
-            this.cbConstellationNames.Location = new System.Drawing.Point(3, 215);
+            this.cbConstellationNames.Location = new System.Drawing.Point(3, 212);
             this.cbConstellationNames.Name = "cbConstellationNames";
             this.cbConstellationNames.Size = new System.Drawing.Size(116, 19);
             this.cbConstellationNames.TabIndex = 13;
@@ -527,7 +521,7 @@ namespace StarMap2D.Forms
             // 
             this.cbSkipCalculated.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbSkipCalculated, 2);
-            this.cbSkipCalculated.Location = new System.Drawing.Point(3, 240);
+            this.cbSkipCalculated.Location = new System.Drawing.Point(3, 237);
             this.cbSkipCalculated.Name = "cbSkipCalculated";
             this.cbSkipCalculated.Size = new System.Drawing.Size(215, 19);
             this.cbSkipCalculated.TabIndex = 14;
@@ -550,7 +544,7 @@ namespace StarMap2D.Forms
             this.panel4.Controls.Add(this.lbDeclinationValue);
             this.panel4.Controls.Add(this.lbRightAscensionValue);
             this.panel4.Controls.Add(this.lbObjectNameValue);
-            this.panel4.Location = new System.Drawing.Point(3, 395);
+            this.panel4.Location = new System.Drawing.Point(3, 397);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(238, 119);
             this.panel4.TabIndex = 15;
@@ -576,6 +570,8 @@ namespace StarMap2D.Forms
             // lbHorizontalYValue
             // 
             this.lbHorizontalYValue.AutoSize = true;
+            this.lbHorizontalYValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbHorizontalYValue.ForeColor = System.Drawing.Color.SteelBlue;
             this.lbHorizontalYValue.Location = new System.Drawing.Point(101, 63);
             this.lbHorizontalYValue.Name = "lbHorizontalYValue";
             this.lbHorizontalYValue.Size = new System.Drawing.Size(12, 15);
@@ -612,6 +608,8 @@ namespace StarMap2D.Forms
             // lbHorizontalXValue
             // 
             this.lbHorizontalXValue.AutoSize = true;
+            this.lbHorizontalXValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbHorizontalXValue.ForeColor = System.Drawing.Color.SteelBlue;
             this.lbHorizontalXValue.Location = new System.Drawing.Point(15, 63);
             this.lbHorizontalXValue.Name = "lbHorizontalXValue";
             this.lbHorizontalXValue.Size = new System.Drawing.Size(12, 15);
@@ -621,6 +619,8 @@ namespace StarMap2D.Forms
             // lbDeclinationValue
             // 
             this.lbDeclinationValue.AutoSize = true;
+            this.lbDeclinationValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbDeclinationValue.ForeColor = System.Drawing.Color.SteelBlue;
             this.lbDeclinationValue.Location = new System.Drawing.Point(101, 33);
             this.lbDeclinationValue.Name = "lbDeclinationValue";
             this.lbDeclinationValue.Size = new System.Drawing.Size(12, 15);
@@ -630,6 +630,8 @@ namespace StarMap2D.Forms
             // lbRightAscensionValue
             // 
             this.lbRightAscensionValue.AutoSize = true;
+            this.lbRightAscensionValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbRightAscensionValue.ForeColor = System.Drawing.Color.SteelBlue;
             this.lbRightAscensionValue.Location = new System.Drawing.Point(15, 33);
             this.lbRightAscensionValue.Name = "lbRightAscensionValue";
             this.lbRightAscensionValue.Size = new System.Drawing.Size(12, 15);
@@ -639,11 +641,96 @@ namespace StarMap2D.Forms
             // lbObjectNameValue
             // 
             this.lbObjectNameValue.AutoSize = true;
+            this.lbObjectNameValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbObjectNameValue.ForeColor = System.Drawing.Color.SteelBlue;
             this.lbObjectNameValue.Location = new System.Drawing.Point(119, 0);
             this.lbObjectNameValue.Name = "lbObjectNameValue";
             this.lbObjectNameValue.Size = new System.Drawing.Size(12, 15);
             this.lbObjectNameValue.TabIndex = 0;
             this.lbObjectNameValue.Text = "-";
+            // 
+            // cbDrawCrossHair
+            // 
+            this.cbDrawCrossHair.AutoSize = true;
+            this.cbDrawCrossHair.Location = new System.Drawing.Point(3, 262);
+            this.cbDrawCrossHair.Name = "cbDrawCrossHair";
+            this.cbDrawCrossHair.Size = new System.Drawing.Size(106, 19);
+            this.cbDrawCrossHair.TabIndex = 16;
+            this.cbDrawCrossHair.Text = "Draw cross hair";
+            this.cbDrawCrossHair.UseVisualStyleBackColor = true;
+            this.cbDrawCrossHair.CheckedChanged += new System.EventHandler(this.cbDrawCrossHair_CheckedChanged);
+            // 
+            // panel5
+            // 
+            this.tlpMapControls.SetColumnSpan(this.panel5, 2);
+            this.panel5.Controls.Add(this.lbHour1);
+            this.panel5.Controls.Add(this.btHourNext);
+            this.panel5.Controls.Add(this.btHourPrevious);
+            this.panel5.Controls.Add(this.btPlayPause);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(0, 106);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(244, 28);
+            this.panel5.TabIndex = 17;
+            // 
+            // lbHour1
+            // 
+            this.lbHour1.AutoSize = true;
+            this.lbHour1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbHour1.Location = new System.Drawing.Point(106, 4);
+            this.lbHour1.Name = "lbHour1";
+            this.lbHour1.Size = new System.Drawing.Size(30, 21);
+            this.lbHour1.TabIndex = 9;
+            this.lbHour1.Text = "±1";
+            // 
+            // btHourNext
+            // 
+            this.btHourNext.Checked = false;
+            this.btHourNext.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btHourNext.DisabledColor = System.Drawing.Color.LightGray;
+            this.btHourNext.ImageCheckedSvg = "ic_fluent_pause_48_filled";
+            this.btHourNext.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btHourNext.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btHourNext.ImageSvg = "ic_fluent_arrow_next_24_filled";
+            this.btHourNext.IsCheckedButton = false;
+            this.btHourNext.Location = new System.Drawing.Point(134, 3);
+            this.btHourNext.Name = "btHourNext";
+            this.btHourNext.Size = new System.Drawing.Size(34, 22);
+            this.btHourNext.TabIndex = 8;
+            this.btHourNext.Click += new System.EventHandler(this.AddDecHour_Click);
+            // 
+            // btHourPrevious
+            // 
+            this.btHourPrevious.Checked = false;
+            this.btHourPrevious.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btHourPrevious.DisabledColor = System.Drawing.Color.LightGray;
+            this.btHourPrevious.ImageCheckedSvg = "ic_fluent_pause_48_filled";
+            this.btHourPrevious.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btHourPrevious.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btHourPrevious.ImageSvg = "ic_fluent_arrow_previous_24_filled";
+            this.btHourPrevious.IsCheckedButton = false;
+            this.btHourPrevious.Location = new System.Drawing.Point(75, 3);
+            this.btHourPrevious.Name = "btHourPrevious";
+            this.btHourPrevious.Size = new System.Drawing.Size(34, 22);
+            this.btHourPrevious.TabIndex = 7;
+            this.btHourPrevious.Click += new System.EventHandler(this.AddDecHour_Click);
+            // 
+            // btPlayPause
+            // 
+            this.btPlayPause.Checked = false;
+            this.btPlayPause.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btPlayPause.DisabledColor = System.Drawing.Color.LightGray;
+            this.btPlayPause.ImageCheckedSvg = "ic_fluent_pause_48_filled";
+            this.btPlayPause.ImageColor = System.Drawing.Color.SteelBlue;
+            this.btPlayPause.ImageColorChecked = System.Drawing.Color.SteelBlue;
+            this.btPlayPause.ImageSvg = "ic_fluent_play_circle_48_filled";
+            this.btPlayPause.IsCheckedButton = true;
+            this.btPlayPause.Location = new System.Drawing.Point(8, 3);
+            this.btPlayPause.Name = "btPlayPause";
+            this.btPlayPause.Size = new System.Drawing.Size(25, 22);
+            this.btPlayPause.TabIndex = 6;
+            this.btPlayPause.CheckedChanged += new System.EventHandler<StarMap2D.Controls.WinForms.EventArguments.CheckedChangeEventArguments>(this.btPlayPause_CheckedChanged);
             // 
             // FormSkyMap2D
             // 
@@ -669,6 +756,8 @@ namespace StarMap2D.Forms
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -713,5 +802,10 @@ namespace StarMap2D.Forms
         private Label lbObjectName;
         private CheckBox cbAboveHorizonValue;
         private Label lbAboveHorizon;
+        private CheckBox cbDrawCrossHair;
+        private Panel panel5;
+        private Label lbHour1;
+        private Controls.WinForms.ImageButton btHourNext;
+        private Controls.WinForms.ImageButton btHourPrevious;
     }
 }

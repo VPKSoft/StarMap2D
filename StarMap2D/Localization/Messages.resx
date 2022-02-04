@@ -120,6 +120,9 @@
   <data name="msgAboveHorizonBooleanValue" xml:space="preserve">
     <value>Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon</value>
   </data>
+  <data name="msgCopyToClipboard" xml:space="preserve">
+    <value>Copy to clipboard|A message describing a functionality to copy to clipboard.</value>
+  </data>
   <data name="msgDateDataDateTimeValue" xml:space="preserve">
     <value>Date and time: {0}{1}|A text indicating a date and time value</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="msgHorizontalYDegreesWithValue" xml:space="preserve">
     <value>Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees</value>
+  </data>
+  <data name="msgNo" xml:space="preserve">
+    <value>no|A message saying false in form of no.</value>
   </data>
   <data name="msgObjectNameValue" xml:space="preserve">
     <value>Object name: {0}{1}|A message describing a name value of any sky object of any kind.</value>
@@ -164,5 +170,11 @@
   </data>
   <data name="msgTimeIntervalYear" xml:space="preserve">
     <value>y|An abbreviation for years.</value>
+  </data>
+  <data name="msgUnknownVariableValue" xml:space="preserve">
+    <value>unknown|A value describing an unknown value of a physical variable.</value>
+  </data>
+  <data name="msgYes" xml:space="preserve">
+    <value>yes|A message saying true in form of yes.</value>
   </data>
 </root>

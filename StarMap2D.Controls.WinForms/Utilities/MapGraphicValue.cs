@@ -55,4 +55,9 @@ public enum MapGraphicValue
     /// The map text color (labels, etc).
     /// </summary>
     MapTextColor,
+
+    /// <summary>
+    /// The cross hair color of the map.
+    /// </summary>
+    CrossHairColor,
 }

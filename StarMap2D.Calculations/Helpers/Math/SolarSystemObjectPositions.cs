@@ -199,6 +199,7 @@ public class SolarSystemObjectPositions
 
             result.HorizontalDegreesX = (horizontal.X + 180) % 360;
             result.HorizontalDegreesY = horizontal.Y;
+            result.HorizontalDegreesY = horizontal.Y;
 
             result.AboveHorizon = horizontal.Y > 0;
         }

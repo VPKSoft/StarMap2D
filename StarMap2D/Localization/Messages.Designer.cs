@@ -70,6 +70,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy to clipboard|A message describing a functionality to copy to clipboard..
+        /// </summary>
+        internal static string msgCopyToClipboard {
+            get {
+                return ResourceManager.GetString("msgCopyToClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date and time: {0}{1}|A text indicating a date and time value.
         /// </summary>
         internal static string msgDateDataDateTimeValue {
@@ -102,6 +111,15 @@ namespace StarMap2D.Localization {
         internal static string msgHorizontalYDegreesWithValue {
             get {
                 return ResourceManager.GetString("msgHorizontalYDegreesWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no|A message saying false in form of no..
+        /// </summary>
+        internal static string msgNo {
+            get {
+                return ResourceManager.GetString("msgNo", resourceCulture);
             }
         }
         
@@ -201,6 +219,24 @@ namespace StarMap2D.Localization {
         internal static string msgTimeIntervalYear {
             get {
                 return ResourceManager.GetString("msgTimeIntervalYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unknown|A value describing an unknown value of a physical variable..
+        /// </summary>
+        internal static string msgUnknownVariableValue {
+            get {
+                return ResourceManager.GetString("msgUnknownVariableValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yes|A message saying true in form of yes..
+        /// </summary>
+        internal static string msgYes {
+            get {
+                return ResourceManager.GetString("msgYes", resourceCulture);
             }
         }
     }

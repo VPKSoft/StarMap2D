@@ -25,17 +25,17 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Xml;
 using AASharp;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
+using StarMap2D.Forms.Dialogs;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
@@ -140,6 +140,9 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         cbConstellationLines.Checked = Properties.Settings.Default.DrawConstellationLines;
         cbConstellationNames.Checked = Properties.Settings.Default.DrawConstellationLabels;
         suspendEvents = false;
+        map2d.DrawCrossHair = Properties.Settings.Default.DrawCrossHair;
+        map2d.CrossHairColor = Properties.Settings.Default.CrossHairColor;
+        cbDrawCrossHair.Checked = Properties.Settings.Default.DrawCrossHair;
     }
 
     private void SetTitle(double? latitude = null, double? longitude = null)
@@ -198,6 +201,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 "s|An abbreviation for seconds."));
 
         map2d.CurrentTimeUtc = DateTime.UtcNow;
+        dtpMapDateTime.Value = map2d.CurrentTimeUtc.ToLocalTime();
         numericUpDown1.Value = 1;
         SetTitle();
     }
@@ -339,6 +343,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                     instance.map2d.BackColor = color; break;
                 case MapGraphicValue.MapTextColor:
                     instance.map2d.ForeColor = color; break;
+                case MapGraphicValue.CrossHairColor:
+                    instance.map2d.CrossHairColor = color; break;
             }
         }
     }
@@ -368,6 +374,12 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         var checkBox = (CheckBox)sender;
         map2d.InvertEastWest = checkBox.Checked;
         compassView1.InvertEastWest = checkBox.Checked;
+    }
+
+    private void cbDrawCrossHair_CheckedChanged(object sender, EventArgs e)
+    {
+        var checkBox = (CheckBox)sender;
+        map2d.DrawCrossHair = checkBox.Checked;
     }
 
     private void cmbJumpToLocation_SelectedValueChanged(object sender, EventArgs e)
@@ -511,11 +523,10 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
         suspendEvents = false;
     }
-    #endregion
 
     private void map2d_MouseHoverObject(object sender, NamedObjectEventArgs e)
     {
-        var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D.AaDate, Globals.HighPrecisionCalculations,
+        var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D!.AaDate, Globals.HighPrecisionCalculations,
             map2d.Latitude, map2d.Longitude);
 
         lbObjectNameValue.Text = e.Name;
@@ -538,7 +549,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_MouseClickObject(object sender, NamedObjectEventArgs e)
     {
-
+        FormPlanetDetails.Dialog(this, (ObjectsWithPositions)e.Identifier, map2d.Plot2D!.AaDate.ToDateTime(), map2d.Latitude, map2d.Longitude);
     }
 
     private void map2d_MouseDoubleClickObject(object sender, NamedObjectEventArgs e)
@@ -589,5 +600,13 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 // Let the loop continue
             }
         }
+    }
+    #endregion
+
+    private void AddDecHour_Click(object sender, EventArgs e)
+    {
+        map2d.CurrentTimeUtc = map2d.CurrentTimeUtc.TruncateToHours().AddHours(sender.Equals(btHourNext) ? 1 : -1);
+        dtpMapDateTime.Value = map2d.CurrentTimeUtc.ToLocalTime();
+        SetTitle();
     }
 }

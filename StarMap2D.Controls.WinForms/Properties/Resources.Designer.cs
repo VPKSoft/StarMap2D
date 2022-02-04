@@ -135,6 +135,26 @@ namespace StarMap2D.Controls.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] ic_fluent_arrow_next_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_arrow_next_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ic_fluent_arrow_previous_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_arrow_previous_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] ic_fluent_arrow_right_48_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_arrow_right_48_filled", resourceCulture);
@@ -168,6 +188,16 @@ namespace StarMap2D.Controls.WinForms.Properties {
         internal static byte[] ic_fluent_checkbox_unchecked_24_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_checkbox_unchecked_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ic_fluent_copy_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_copy_24_filled", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -57,6 +57,8 @@ namespace StarMap2D.Forms.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpCommon = new System.Windows.Forms.TabPage();
+            this.lbSelectLanguageDescription = new System.Windows.Forms.Label();
+            this.cmbSelectLanguageValue = new System.Windows.Forms.ComboBox();
             this.cbDrawConstellationBorders = new System.Windows.Forms.CheckBox();
             this.cbDrawConstellationLabels = new System.Windows.Forms.CheckBox();
             this.cbDrawConstellations = new System.Windows.Forms.CheckBox();
@@ -95,8 +97,11 @@ namespace StarMap2D.Forms.Dialogs
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.cmbSelectLanguageValue = new System.Windows.Forms.ComboBox();
-            this.lbSelectLanguageDescription = new System.Windows.Forms.Label();
+            this.pnCrossHairColor = new System.Windows.Forms.Panel();
+            this.lbCrossHairColor = new System.Windows.Forms.Label();
+            this.lbCrossHairSize = new System.Windows.Forms.Label();
+            this.nudCrossHairSize = new System.Windows.Forms.NumericUpDown();
+            this.cbDrawCrossHair = new System.Windows.Forms.CheckBox();
             this.tcSettings.SuspendLayout();
             this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
@@ -106,6 +111,7 @@ namespace StarMap2D.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).BeginInit();
             this.tabObjectSymbols.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).BeginInit();
             this.SuspendLayout();
             // 
             // tcSettings
@@ -125,6 +131,9 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tpCommon
             // 
+            this.tpCommon.Controls.Add(this.cbDrawCrossHair);
+            this.tpCommon.Controls.Add(this.nudCrossHairSize);
+            this.tpCommon.Controls.Add(this.lbCrossHairSize);
             this.tpCommon.Controls.Add(this.lbSelectLanguageDescription);
             this.tpCommon.Controls.Add(this.cmbSelectLanguageValue);
             this.tpCommon.Controls.Add(this.cbDrawConstellationBorders);
@@ -146,6 +155,31 @@ namespace StarMap2D.Forms.Dialogs
             this.tpCommon.TabIndex = 0;
             this.tpCommon.Text = "Common";
             this.tpCommon.UseVisualStyleBackColor = true;
+            // 
+            // lbSelectLanguageDescription
+            // 
+            this.lbSelectLanguageDescription.AutoSize = true;
+            this.lbSelectLanguageDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbSelectLanguageDescription.Location = new System.Drawing.Point(5, 300);
+            this.lbSelectLanguageDescription.Margin = new System.Windows.Forms.Padding(20, 17, 20, 17);
+            this.lbSelectLanguageDescription.Name = "lbSelectLanguageDescription";
+            this.lbSelectLanguageDescription.Size = new System.Drawing.Size(153, 13);
+            this.lbSelectLanguageDescription.TabIndex = 29;
+            this.lbSelectLanguageDescription.Text = "Language (a restart is required)";
+            this.lbSelectLanguageDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbSelectLanguageValue
+            // 
+            this.cmbSelectLanguageValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSelectLanguageValue.DisplayMember = "DisplayName";
+            this.cmbSelectLanguageValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSelectLanguageValue.FormattingEnabled = true;
+            this.cmbSelectLanguageValue.Location = new System.Drawing.Point(6, 320);
+            this.cmbSelectLanguageValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbSelectLanguageValue.Name = "cmbSelectLanguageValue";
+            this.cmbSelectLanguageValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbSelectLanguageValue.TabIndex = 28;
             // 
             // cbDrawConstellationBorders
             // 
@@ -284,6 +318,8 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tabColorSettings
             // 
+            this.tabColorSettings.Controls.Add(this.pnCrossHairColor);
+            this.tabColorSettings.Controls.Add(this.lbCrossHairColor);
             this.tabColorSettings.Controls.Add(this.pnMapTextColor);
             this.tabColorSettings.Controls.Add(this.lbMapTextColor);
             this.tabColorSettings.Controls.Add(this.pnMapSurroundingsColor);
@@ -573,30 +609,67 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
-            // cmbSelectLanguageValue
+            // pnCrossHairColor
             // 
-            this.cmbSelectLanguageValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbSelectLanguageValue.DisplayMember = "DisplayName";
-            this.cmbSelectLanguageValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSelectLanguageValue.FormattingEnabled = true;
-            this.cmbSelectLanguageValue.Location = new System.Drawing.Point(8, 281);
-            this.cmbSelectLanguageValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
-            this.cmbSelectLanguageValue.Name = "cmbSelectLanguageValue";
-            this.cmbSelectLanguageValue.Size = new System.Drawing.Size(500, 23);
-            this.cmbSelectLanguageValue.TabIndex = 28;
+            this.pnCrossHairColor.BackColor = System.Drawing.Color.Lime;
+            this.pnCrossHairColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnCrossHairColor.Location = new System.Drawing.Point(223, 136);
+            this.pnCrossHairColor.Margin = new System.Windows.Forms.Padding(0);
+            this.pnCrossHairColor.Name = "pnCrossHairColor";
+            this.pnCrossHairColor.Size = new System.Drawing.Size(113, 23);
+            this.pnCrossHairColor.TabIndex = 14;
+            this.pnCrossHairColor.Tag = "CrossHairColor";
+            this.pnCrossHairColor.Click += new System.EventHandler(this.colorPanel_Click);
             // 
-            // lbSelectLanguageDescription
+            // lbCrossHairColor
             // 
-            this.lbSelectLanguageDescription.AutoSize = true;
-            this.lbSelectLanguageDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbSelectLanguageDescription.Location = new System.Drawing.Point(7, 261);
-            this.lbSelectLanguageDescription.Margin = new System.Windows.Forms.Padding(20, 17, 20, 17);
-            this.lbSelectLanguageDescription.Name = "lbSelectLanguageDescription";
-            this.lbSelectLanguageDescription.Size = new System.Drawing.Size(153, 13);
-            this.lbSelectLanguageDescription.TabIndex = 29;
-            this.lbSelectLanguageDescription.Text = "Language (a restart is required)";
-            this.lbSelectLanguageDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbCrossHairColor.AutoSize = true;
+            this.lbCrossHairColor.Location = new System.Drawing.Point(6, 140);
+            this.lbCrossHairColor.Name = "lbCrossHairColor";
+            this.lbCrossHairColor.Size = new System.Drawing.Size(183, 15);
+            this.lbCrossHairColor.TabIndex = 13;
+            this.lbCrossHairColor.Text = "Map text color (object labels, etc)";
+            // 
+            // lbCrossHairSize
+            // 
+            this.lbCrossHairSize.AutoSize = true;
+            this.lbCrossHairSize.Location = new System.Drawing.Point(226, 248);
+            this.lbCrossHairSize.Name = "lbCrossHairSize";
+            this.lbCrossHairSize.Size = new System.Drawing.Size(81, 15);
+            this.lbCrossHairSize.TabIndex = 30;
+            this.lbCrossHairSize.Text = "Cross hair size";
+            // 
+            // nudCrossHairSize
+            // 
+            this.nudCrossHairSize.Location = new System.Drawing.Point(226, 266);
+            this.nudCrossHairSize.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudCrossHairSize.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudCrossHairSize.Name = "nudCrossHairSize";
+            this.nudCrossHairSize.Size = new System.Drawing.Size(81, 23);
+            this.nudCrossHairSize.TabIndex = 31;
+            this.nudCrossHairSize.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // cbDrawCrossHair
+            // 
+            this.cbDrawCrossHair.AutoSize = true;
+            this.cbDrawCrossHair.Location = new System.Drawing.Point(7, 247);
+            this.cbDrawCrossHair.Name = "cbDrawCrossHair";
+            this.cbDrawCrossHair.Size = new System.Drawing.Size(106, 19);
+            this.cbDrawCrossHair.TabIndex = 32;
+            this.cbDrawCrossHair.Text = "Draw cross hair";
+            this.cbDrawCrossHair.UseVisualStyleBackColor = true;
             // 
             // FormDialogSettings
             // 
@@ -625,6 +698,7 @@ namespace StarMap2D.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMaximum)).EndInit();
             this.tabObjectSymbols.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -673,5 +747,10 @@ namespace StarMap2D.Forms.Dialogs
         private CheckBox cbDrawConstellations;
         private Label lbSelectLanguageDescription;
         private ComboBox cmbSelectLanguageValue;
+        private Panel pnCrossHairColor;
+        private Label lbCrossHairColor;
+        private CheckBox cbDrawCrossHair;
+        private NumericUpDown nudCrossHairSize;
+        private Label lbCrossHairSize;
     }
 }

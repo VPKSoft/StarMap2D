@@ -252,5 +252,29 @@ namespace StarMap2D.Properties {
                 this["KnownObjects"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DrawCrossHair {
+            get {
+                return ((bool)(this["DrawCrossHair"]));
+            }
+            set {
+                this["DrawCrossHair"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Lime")]
+        public global::System.Drawing.Color CrossHairColor {
+            get {
+                return ((global::System.Drawing.Color)(this["CrossHairColor"]));
+            }
+            set {
+                this["CrossHairColor"] = value;
+            }
+        }
     }
 }

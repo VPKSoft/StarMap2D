@@ -60,6 +60,7 @@ public partial class Map2D : UserControl
         backgroundBrush = new SolidBrush(BackColor);
         constellationLinePen = new Pen(constellationLineColor);
         constellationBorderPen = new Pen(constellationBorderLineColor);
+        crossHairPen = new Pen(crossHairColor);
         textBrush = new SolidBrush(ForeColor);
         base.DoubleBuffered = true;
         constellationNames.GetLocalizedTexts(Properties.Resources.Constellations);
@@ -140,6 +141,7 @@ public partial class Map2D : UserControl
     private Color constellationBorderLineColor = Color.FromArgb(13, 23, 125);
     private Color backColor = Color.FromArgb(39, 39, 39);
     private Pen constellationLinePen;
+    private Pen crossHairPen;
     private Pen constellationBorderPen;
     private SolidBrush mapBrush;
     private SolidBrush backgroundBrush;
@@ -311,7 +313,9 @@ public partial class Map2D : UserControl
                 DrawConstellation(constellation, graphics);
             }
         }
-                
+
+        DrawCrossHairFigure(graphics);
+
         BackgroundImage = bitmap;
         previousBitmap?.Dispose();
         previousBitmap = bitmap;
@@ -340,6 +344,23 @@ public partial class Map2D : UserControl
         var y = Height / 2.0;
         var r = (double)Math.Min(Width, Height);
         return Math.Sqrt(Math.Pow(point.X - x, 2) + Math.Pow(point.Y - y, 2)) <= r;
+    }
+
+    /// <summary>
+    /// Draws the cross hair figure onm the map.
+    /// </summary>
+    /// <param name="graphics">The graphics to draw the cross hair figure on.</param>
+    private void DrawCrossHairFigure(Graphics graphics)
+    {
+        if (drawCrossHair)
+        {
+            var point1 = new Point(Size.Width / 2 - crossHairSize, Size.Height / 2);
+            var point2 = new Point(Size.Width / 2 + crossHairSize, Size.Height / 2);
+            graphics.DrawLine(crossHairPen, point1, point2);
+            point1 = new Point(Size.Width / 2, Size.Height / 2 - crossHairSize);
+            point2 = new Point(Size.Width / 2, Size.Height / 2 + crossHairSize);
+            graphics.DrawLine(crossHairPen, point1, point2);
+        }
     }
 
     /// <summary>
@@ -731,13 +752,81 @@ public partial class Map2D : UserControl
         }
     }
 
+    private bool drawCrossHair = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to draw cross hair on the center of the map area.
+    /// </summary>
+    /// <value><c>true</c> if draw cross hair to the center; otherwise, <c>false</c>.</value>
+    [Browsable(true)]
+    [Category("Appearance")]
+    [Description("A value indicating whether to draw cross hair on the center of the map area.")]
+    public bool DrawCrossHair
+    {
+        get => drawCrossHair;
+
+        set
+        {
+            if (drawCrossHair != value)
+            {
+                drawCrossHair = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private int crossHairSize = 20;
+
+    /// <summary>
+    /// Gets or sets the size of the cross hair.
+    /// </summary>
+    /// <value>The size of the cross hair.</value>
+    [Browsable(true)]
+    [Category("Appearance")]
+    [Description("The size of the cross hair.")]
+    public int CrossHairSize
+    {
+        get => crossHairSize;
+
+        set
+        {
+            if (value != crossHairSize)
+            {
+                crossHairSize = value;
+                DrawMapImage();
+            }
+        }
+    }
+
+    private Color crossHairColor = Color.LimeGreen;
+
+    /// <summary>
+    /// Gets or sets the color of the constellation lines.
+    /// </summary>
+    /// <value>The color of the constellation lines.</value>
+    [Browsable(true)]
+    [Category("Appearance")]
+    [Description("The color of the constellation lines.")]
+    public Color CrossHairColor
+    {
+        get => crossHairColor;
+
+        set
+        {
+            if (crossHairColor != value)
+            {
+                crossHairPen.Dispose();
+                crossHairColor = value;
+                crossHairPen = new Pen(value);
+                DrawMapImage();
+            }
+        }
+    }
+
     /// <summary>
     /// Gets or sets the color of the map circle background.
     /// </summary>
     /// <value>The color of the map circle background.</value>
-    [Browsable(true)]
-    [Category("Appearance")]
-    [Description("The color of the map circle background.")]
     public Color MapCircleColor
     {
         get => mapCircleColor;

@@ -130,14 +130,14 @@ namespace StarMap2D
             this.mnuLocalize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuDumpLanguage});
             this.mnuLocalize.Name = "mnuLocalize";
-            this.mnuLocalize.Size = new System.Drawing.Size(180, 22);
+            this.mnuLocalize.Size = new System.Drawing.Size(116, 22);
             this.mnuLocalize.Text = "Localize";
             this.mnuLocalize.Click += new System.EventHandler(this.mnuLocalize_Click);
             // 
             // mnuDumpLanguage
             // 
             this.mnuDumpLanguage.Name = "mnuDumpLanguage";
-            this.mnuDumpLanguage.Size = new System.Drawing.Size(180, 22);
+            this.mnuDumpLanguage.Size = new System.Drawing.Size(159, 22);
             this.mnuDumpLanguage.Text = "Dump language";
             this.mnuDumpLanguage.Click += new System.EventHandler(this.mnuDumpLanguage_Click);
             // 
