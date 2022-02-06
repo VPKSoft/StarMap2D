@@ -205,7 +205,7 @@ namespace StarMap2D.Avalonia.Controls
         /// </summary>
         private void DrawMapImage(DrawingContext context)
         {
-            plot2D.Radius = Diameter;
+            plot2D.Diameter = Diameter;
 
             context.DrawGeometry(new SolidColorBrush(MapBorderColor), new Pen(), new RectangleGeometry(DrawArea));
             context.DrawGeometry(new SolidColorBrush(MapCircleColor), new Pen(), new EllipseGeometry(DrawArea));
@@ -522,7 +522,7 @@ namespace StarMap2D.Avalonia.Controls
                 if (plot2D != value)
                 {
                     plot2D = value;
-                    plot2D.Radius = Math.Min(Width, Height);
+                    plot2D.Diameter = Math.Min(Width, Height);
                     CoordinatesChanged?.Invoke(this,
                         new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude });
                 }
@@ -742,7 +742,7 @@ namespace StarMap2D.Avalonia.Controls
 
         private void Visual_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
         {
-            plot2D.Radius = Diameter;
+            plot2D.Diameter = Diameter;
         }
     }
 }

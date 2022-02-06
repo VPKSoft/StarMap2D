@@ -130,7 +130,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
         map2d.Plot2D = new(Properties.Settings.Default.Latitude, Properties.Settings.Default.Longitude)
         {
-            Radius = Math.Min(map2d.Width, map2d.Height)
+            Diameter = Math.Min(map2d.Width, map2d.Height)
         };
 
         nudLatitude.Value = (decimal)Properties.Settings.Default.Latitude;

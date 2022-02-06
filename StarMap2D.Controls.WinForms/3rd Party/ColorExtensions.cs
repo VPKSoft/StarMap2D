@@ -24,6 +24,10 @@ SOFTWARE.
 */
 #endregion
 
+
+// Actual copyright (C): https://github.com/sanjayatpilcrow/SharpSnippets/blob/master/POCs/POCs/Sanjay/SharpSnippets/Drawing/ColorExtensions.cs
+// https://github.com/sanjayatpilcrow
+// https://sharpsnippets.wordpress.com/author/sharpsnippets/
 namespace POCs.Sanjay.SharpSnippets.Drawing
 {
     public static class ColorExtensions

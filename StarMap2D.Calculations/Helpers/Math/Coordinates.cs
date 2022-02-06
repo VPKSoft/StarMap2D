@@ -53,6 +53,17 @@ public static class Coordinates
         return result;
     }
 
+    /*
+    // TODO::Working version (Local Hour Angle --> Ra/Dec)
+    public static AAS2DCoordinate ToEcliptic(this AAS2DCoordinate coordinate, AASDate aaDate, double latitude,
+        double longitude)
+    {
+        var equatorial =  AASCoordinateTransformation.Horizontal2Equatorial(coordinate.X, coordinate.Y, latitude);
+        return equatorial;
+        //AASCoordinateTransformation.Equatorial2Ecliptic()
+    }
+    */
+
     /// <summary>
     /// Transforms specified ecliptic coordinates into horizontal coordinates.
     /// </summary>

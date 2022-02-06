@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System.Globalization;
 using System.Text.RegularExpressions;
+using VPKSoft.StarCatalogs.PrimitiveProperty;
 
 namespace VPKSoft.StarCatalogs.Interfaces;
 
@@ -57,62 +58,6 @@ public abstract class StarData: IStarData
     public DefaultDictionary<string, bool> FetchMemory { get; } = new();
 
     /// <summary>
-    /// A compiled <see cref="Regex"/> to check whether a string represents a number.
-    /// </summary>
-    /// <remarks>See: https://regexland.com/regex-decimal-numbers/</remarks>
-    public static readonly Regex
-        NumberRegex = new(@"^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)", RegexOptions.Compiled);
-
-    /// <summary>
-    /// Converts a specified string value to primitive type of <typeparamref name="T"/>.
-    /// </summary>
-    /// <typeparam name="T">The primitive type to convert to string value into.</typeparam>
-    /// <param name="value">The value to convert to type of <typeparamref name="T"/>.</param>
-    /// <returns>The value converted to type of <typeparamref name="T"/> if the operation was successful; <c>null</c> otherwise.</returns>
-    public static T? ToPrimitive<T>(string? value)
-    {
-        if (value == null)
-        {
-            return default;
-        }
-
-        try
-        {
-            var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
-
-            if (type == typeof(byte) || 
-                type == typeof(sbyte) || 
-                type == typeof(short) || 
-                type == typeof(ushort) ||
-                type == typeof(int) || 
-                type == typeof(uint) || 
-                type == typeof(long) || 
-                type == typeof(ulong) ||
-                type == typeof(float) || 
-                type == typeof(double) || 
-                type == typeof(decimal) || 
-                type == typeof(nint) || 
-                type == typeof(nuint))
-            {
-                value = value.Trim();
-
-                if (NumberRegex.IsMatch(value))
-                {
-                    return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
-                }
-
-                return default;
-            }
-
-            return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
-        }
-        catch
-        {
-            return default;
-        }
-    }
-
-    /// <summary>
     /// Gets an entry from a (line-formatted) data and tries to convert it to type of <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T">The requested type.</typeparam>
@@ -122,6 +67,6 @@ public abstract class StarData: IStarData
     {
         var value = GetStarData?.Invoke(RawData, name);
 
-        return ToPrimitive<T>(value);
+        return StringToPrimitiveConvert.ToPrimitiveNullable<T>(value);
     }
 }

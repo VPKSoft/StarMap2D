@@ -33,6 +33,7 @@ using AASharp;
 using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
+using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Controls.WinForms.Drawing;
@@ -71,6 +72,26 @@ public partial class Map2D : UserControl
         {
             var constellation = Activator.CreateInstance(constellationClassEnumMap.ConstellationClassType);
             constellations.Add((IConstellation<ConstellationArea, ConstellationLine>)constellation!);
+        }
+
+        MouseWheel += Map2D_MouseWheel;
+    }
+
+    private void Map2D_MouseWheel(object? sender, MouseEventArgs e)
+    {
+        if (ModifierKeys.HasFlag(Keys.Control))
+        {
+            if (e.Delta < 0)
+            {
+                if (Zoom - 0.1 >= 1)
+                {
+                    Zoom -= 0.1;
+                }
+            }
+            else if (e.Delta > 0)
+            {
+                Zoom += 0.1;
+            }
         }
     }
 
@@ -984,6 +1005,33 @@ public partial class Map2D : UserControl
         }
     }
 
+    private double zoom = 1;
+
+    /// <summary>
+    /// Gets or sets the zoom value of the sky map area.
+    /// </summary>
+    /// <value>The zoom.</value>
+    [Browsable(true)]
+    [Category("Behaviour")]
+    [Description("A zoom value of the sky map area.")]
+    public double Zoom
+    {
+        get => zoom;
+
+        set
+        {
+            if (zoom != value)
+            {
+                zoom = value;
+                if (plot2D != null)
+                {
+                    plot2D.Zoom = value;
+                }
+                DrawMapImage();
+            }
+        }
+    }
+
     /// <summary>
     /// Gets the star map objects to draw to the map.
     /// </summary>
@@ -1006,7 +1054,7 @@ public partial class Map2D : UserControl
                 plot2D = value;
                 if (plot2D != null)
                 {
-                    plot2D.Radius = Math.Min(Width, Height);
+                    plot2D.Diameter = Math.Min(Width, Height);
                     CoordinatesChanged?.Invoke(this, new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude});
                 }
             }
@@ -1018,7 +1066,7 @@ public partial class Map2D : UserControl
     {
         if (plot2D != null)
         {
-            plot2D.Radius = Math.Min(Width, Height);
+            plot2D.Diameter = Math.Min(Width, Height);
             DrawMapImage();
         }
     }
@@ -1060,46 +1108,65 @@ public partial class Map2D : UserControl
             var newPoint = e.Location;
             var xChange = (mousePoint.X - newPoint.X) / 10.0;
             var yChange = (mousePoint.Y - newPoint.Y) / 10.0;
+
             if (Plot2D != null)
             {
-                var latitude = Plot2D.Latitude - yChange;
-                var longitude = Plot2D.Longitude - xChange;
-                if (latitude > 90)
+                if (!Plot2D.Zoomed && !Plot2D.CanPanBy(xChange, yChange))
                 {
-                    latitude = 90;
+                    var latitude = Plot2D.Latitude - yChange;
+                    var longitude = Plot2D.Longitude - xChange;
+                    if (latitude > 90)
+                    {
+                        latitude = 90;
+                    }
+
+                    if (latitude < -90)
+                    {
+                        latitude = -90;
+                    }
+
+                    if (longitude > 180)
+                    {
+                        longitude = -180;
+                    }
+
+                    if (longitude < -180)
+                    {
+                        longitude = 180;
+                    }
+
+                    if (latitude != Plot2D.Latitude || longitude != Plot2D.Longitude)
+                    {
+                        Plot2D.Latitude = latitude;
+                        Plot2D.Longitude = longitude;
+
+                        mousePoint = newPoint;
+                        DrawMapImage();
+                        CoordinatesChanged?.Invoke(this,
+                            new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude });
+                    }
                 }
-
-                if (latitude < -90)
+                else if (Plot2D.CanPanBy(-xChange, -yChange))
                 {
-                    latitude = -90;
-                }
-
-                if (longitude > 180)
-                {
-                    longitude = -180;
-                }
-
-                if (longitude < -180)
-                {
-                    longitude = 180;
-                }
-
-                if (latitude != Plot2D.Latitude || longitude != Plot2D.Longitude)
-                {
-                    Plot2D.Latitude = latitude;
-                    Plot2D.Longitude = longitude;
-
-                    Debug.WriteLine($"Latitude: {latitude}, Longitude: {longitude}");
-
-                    mousePoint = newPoint;
+                    plot2D.ZoomPanPointX += xChange;
+                    plot2D.ZoomPanPointY += yChange;
                     DrawMapImage();
-                    CoordinatesChanged?.Invoke(this,
-                        new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude });
+                    mousePoint = newPoint;
                 }
             }
         }
         else
         {
+            // TODO::Working version (Local Hour Angle --> Ra/Dec)
+            /*
+            var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = e.X, Y = e.Y }, invertEastWest).ToHorizontal(plot2D.AaDate, Latitude, Longitude);
+
+            if (point != null)
+            {
+                Debug.WriteLine($"X = {point.X}, Y = {point.Y}");
+            }
+            */
+
             var newMetadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
             if (newMetadata != null)
             {
@@ -1108,7 +1175,7 @@ public partial class Map2D : UserControl
             }
             else if (newMetadata == null && metadata != null)
             {
-                MouseLeaveObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+                MouseLeaveObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
             }
 
             metadata = newMetadata;
@@ -1119,7 +1186,7 @@ public partial class Map2D : UserControl
     {
         if (metadata != null)
         {
-            MouseClickObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            MouseClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
         }
     }
 
@@ -1127,7 +1194,7 @@ public partial class Map2D : UserControl
     {
         if (metadata != null)
         {
-            MouseDoubleClickObject?.Invoke(this,  new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            MouseDoubleClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
         }
     }
     #endregion

@@ -35,7 +35,7 @@ namespace StarMap2D.Forms.Dialogs
             {
                 { lbDateTime, dtpMapDateTime },
                 { lbLatitude, nudLatitude },
-                { lbLongitude, nudLatitude },
+                { lbLongitude, nudLongitude },
                 { lbAboveHorizon, tbAboveHorizonValue },
                 { lbRightAscension, tbRightAscensionValue },
                 { lbDeclination, tbDeclinationValue },
