@@ -24,9 +24,7 @@ SOFTWARE.
 */
 #endregion
 
-using System.Runtime.CompilerServices;
 using AASharp;
-using StarMap2D.Calculations.Helpers.Math;
 
 namespace StarMap2D.Calculations.Plotting;
 
@@ -272,24 +270,7 @@ public class Plot2D
     // This formula derived from (C): https://astronomy.stackexchange.com/questions/35882/how-to-make-projection-from-altitude-and-azimuth-to-screen-with-screen-coordinat
     public AAS2DCoordinate Project2D(AAS2DCoordinate coordinate, bool invertEastWest)
     {
-        var azimuth = ((coordinate.X + 180) % 360).ToRadians();
-        var altitude = (coordinate.Y).ToRadians();
-
-        var x = Math.Sin(azimuth) * Math.Cos(altitude);
-        var y = Math.Cos(azimuth) * Math.Cos(altitude);
-        var z = Math.Sin(altitude);
-
-        var x1 = x / (z + 1);
-        var y1 = y / (z + 1);
-
-        var r = (Diameter * Zoom) / 2;
-        var xR = r * (1 - x1);
-        var yR = r * (1 - y1);
-
-        xR -= ZoomPanPointX;
-        yR -= zoomPanPointY;
-
-        return new AAS2DCoordinate { X = invertEastWest ? Diameter - xR : xR, Y = yR};
+        return Projection.Project2D(coordinate, invertEastWest, Diameter, ZoomPanPointX, zoomPanPointY, Zoom);
     }
 
     /// <summary>
@@ -300,61 +281,26 @@ public class Plot2D
     /// <returns>AASharp.AAS2DCoordinate.</returns>
     public AAS2DCoordinate Invert2DProjection(AAS2DCoordinate coordinate, bool invertEastWest)
     {
-        var xR = coordinate.X + ZoomPanPointX;
-        var yR = coordinate.Y + ZoomPanPointY;
+        var result = Projection.Invert2DProjection(coordinate, invertEastWest, diameter, ZoomPanPointX, ZoomPanPointY, Zoom);
+        if (result.X is > 180 and < 270)
+        {
+            result.X -= 180;
+        }
+        else if (result.X is > 270 and < 360)
+        {
+            result.X -= 180;
+        }
+        else if (result.X is > 0 and < 90)
+        {
+            result.X += 180;
+        }
+        else if (result.X is > 90 and < 180)
+        {
+            result.X += 180;
+        }
 
-        xR = invertEastWest ? diameter - xR : xR;
-
-        var r = (Diameter * Zoom) / 2;
-
-        var x1 = 1 - (xR / r);
-        var y1 = 1 - (yR / r);
-
-        var azimuth = Math.Atan(x1 / y1) + Math.PI;
-
-        var a = Math.Pow(x1, 2) + Math.Pow(y1, 2);
-        var divisor = 1 + a;
-        var dividend = 1 - a;
-
-        var altitude = Math.Asin(dividend / divisor);
-
-        var azimuthDegrees = (azimuth.ToDegrees() + 180) % 360;
-        var altitudeDegrees = altitude.ToDegrees();
-
-        return new AAS2DCoordinate { X = azimuthDegrees, Y = altitudeDegrees };
+        return result;
     }
-
-    public static void Invert2DProjection()
-    {
-        var coordinate = new Plot2D(0, 0){Diameter = 748}.Project2D(new AAS2DCoordinate
-            { X = 48.725312367856269, Y = 23.43063997414065 }, false);
-
-        var ZoomPanPointX = 0.0;
-        var ZoomPanPointY = 0.0;
-        var Zoom = 1.0;
-        var Diameter = 748.0;
-
-        var point = new AAS2DCoordinate { X = 558.52867062335258, Y = 535.96801387385267 };
-        var xR = point.X + ZoomPanPointX;
-        var yR = point.Y + ZoomPanPointY;
-
-        var r = (Diameter * Zoom) / 2;
-
-        var x1 = 1 - (xR / r);
-        var y1 = 1 - (yR / r);
-
-        var azimuth = Math.Atan(x1 / y1) + Math.PI;
-
-        var a = Math.Pow(x1, 2) + Math.Pow(y1, 2);
-        var c = 1 + a;
-        var e = 1 - a;
-
-        var altitude = Math.Asin(e / c); // Tämä + !!
-
-        var azimuthDegrees = (azimuth.ToDegrees() + 180) % 360;
-        var altitudeDegrees = altitude.ToDegrees();
-    }
-
 
     /// <summary>
     /// Gets the date as known by the AASharp library.

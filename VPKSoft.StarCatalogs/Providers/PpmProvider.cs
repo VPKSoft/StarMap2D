@@ -147,6 +147,10 @@ public class PpmProvider: IStarDataProvider<PpmStarData>
 
             var ra = data.Sra0 * MathDegrees.RadiansDegrees;
             var dec = data.Sdec0 * MathDegrees.RadiansDegrees;
+            if (double.IsInfinity(dec))
+            {
+                continue;
+            }
 
             var result = Epochs.ChangeEpochB1950ToJ2000Degrees(ra, dec);
 

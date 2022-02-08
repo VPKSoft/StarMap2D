@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using AASharp;
+using StarMap2D.Calculations.Helpers.DateAndTime;
 
 namespace StarMap2D.Calculations.Helpers.Math;
 
@@ -53,17 +54,6 @@ public static class Coordinates
         return result;
     }
 
-    /*
-    // TODO::Working version (Local Hour Angle --> Ra/Dec)
-    public static AAS2DCoordinate ToEcliptic(this AAS2DCoordinate coordinate, AASDate aaDate, double latitude,
-        double longitude)
-    {
-        var equatorial =  AASCoordinateTransformation.Horizontal2Equatorial(coordinate.X, coordinate.Y, latitude);
-        return equatorial;
-        //AASCoordinateTransformation.Equatorial2Ecliptic()
-    }
-    */
-
     /// <summary>
     /// Transforms specified ecliptic coordinates into horizontal coordinates.
     /// </summary>
@@ -87,5 +77,37 @@ public static class Coordinates
         var coordinate = AASCoordinateTransformation.Equatorial2Horizontal(lha, de, latitude);
 
         return coordinate;
+    }
+
+    /// <summary>
+    /// Converts horizontal coordinates (altitude, azimuth) to ecliptic (right ascension, declination) coordinates.
+    /// </summary>
+    /// <param name="altitude">The altitude in degrees.</param>
+    /// <param name="azimuth">The azimuth in degrees.</param>
+    /// <param name="latitude">The geographical latitude.</param>
+    /// <param name="longitude">The geographical longitude.</param>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>An instance to the <seealso cref="AAS2DCoordinate"/> with X-coordinate indicating right ascension in decimal hours and Y-coordinate indicating declination in degrees.</returns>
+    // (C): https://github.com/Blank2275/AstroCoordsJS
+    public static AAS2DCoordinate AltitudeAzimuthToRightAscensionDeclination(double altitude, double azimuth, double latitude, double longitude, DateTime dateTime)
+    {
+        var lst = dateTime.ToLocalSiderealTime(longitude);
+        var declination = MathDegrees.Asin(MathDegrees.Sin(altitude) * MathDegrees.Sin(latitude) +
+                                           MathDegrees.Cos(altitude) * MathDegrees.Cos(latitude) *
+                                           MathDegrees.Cos(azimuth));
+
+        var comp1 = -MathDegrees.Sin(azimuth) * MathDegrees.Cos(altitude) / MathDegrees.Cos(declination);
+
+        var comp2 = (MathDegrees.Sin(altitude) - MathDegrees.Sin(declination) * MathDegrees.Sin(latitude)) /
+                    (MathDegrees.Cos(declination) * MathDegrees.Cos(latitude));
+
+
+        // Alternate: var hourAngle = MathDegrees.Asin(MathDegrees.Sin(azimuth) * MathDegrees.Cos(altitude) / MathDegrees.Cos(declination));
+
+        var hourAngle = MathDegrees.Atan2(comp1, comp2);
+
+        var rightAscension = ( lst - hourAngle ) % 360;
+
+        return new AAS2DCoordinate { X = rightAscension / 15, Y = declination };
     }
 }

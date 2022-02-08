@@ -263,7 +263,7 @@ public partial class Map2D : UserControl
         {
             foreach (var starMapObject in StarMapObjects)
             {
-                if (starMapObject.Magnitude > magnitudeMinimum || starMapObject.Magnitude < magnitudeMaximum || starMapObject.SkipObject)
+                if (!(starMapObject.Magnitude < magnitudeMinimum && starMapObject.Magnitude > magnitudeMaximum) || starMapObject.SkipObject)
                 {
                     continue;
                 }
@@ -277,6 +277,11 @@ public partial class Map2D : UserControl
 
                     var position = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
                         Plot2D.Latitude, Plot2D.Longitude, Diameter / 2);
+
+                    if (starMapObject.ObjectType == ObjectsWithPositions.Moon)
+                    {
+
+                    }
 
                     if (position != null)
                     {
@@ -1148,8 +1153,8 @@ public partial class Map2D : UserControl
                 }
                 else if (Plot2D.CanPanBy(-xChange, -yChange))
                 {
-                    plot2D.ZoomPanPointX += xChange;
-                    plot2D.ZoomPanPointY += yChange;
+                    Plot2D.ZoomPanPointX += xChange;
+                    Plot2D.ZoomPanPointY += yChange;
                     DrawMapImage();
                     mousePoint = newPoint;
                 }
@@ -1158,14 +1163,19 @@ public partial class Map2D : UserControl
         else
         {
             // TODO::Working version (Local Hour Angle --> Ra/Dec)
-            /*
-            var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = e.X, Y = e.Y }, invertEastWest).ToHorizontal(plot2D.AaDate, Latitude, Longitude);
+
+            var drawPoint = new Point(e.X - OffsetX, e.Y - OffsetY);
+
+            var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y }, invertEastWest);//.ToHorizontal(plot2D.AaDate, Latitude, Longitude);
 
             if (point != null)
             {
-                Debug.WriteLine($"X = {point.X}, Y = {point.Y}");
+//                Debug.WriteLine($"1) X = {drawPoint.X}, Y = {drawPoint.Y}");
+                Debug.WriteLine($"1) X = {point.X}, Y = {point.Y}");
+                point = Coordinates.AltitudeAzimuthToRightAscensionDeclination(point.Y, point.X, Latitude, Longitude, DateTime.UtcNow);
+                Debug.WriteLine($"2) X = {HoursConvert.DecimalDegreesToHms(point.X)}, Y = {point.Y}");
             }
-            */
+            
 
             var newMetadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
             if (newMetadata != null)

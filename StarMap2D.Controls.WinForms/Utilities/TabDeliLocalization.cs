@@ -26,147 +26,145 @@ SOFTWARE.
 
 using System.Globalization;
 
-namespace StarMap2D.Controls.WinForms.Utilities
+namespace StarMap2D.Controls.WinForms.Utilities;
+
+/// <summary>
+/// A class for a simple localization using a text file embedded into a resource file.
+/// </summary>
+// ReSharper disable once UnusedMember.Global
+public class TabDeliLocalization
 {
     /// <summary>
-    /// A class for a simple localization using a text file embedded into a resource file.
+    /// A class to store the localization text.
     /// </summary>
-    // ReSharper disable once UnusedMember.Global
-    public class TabDeliLocalization
+    internal class LocalizationTextContainer
     {
         /// <summary>
-        /// A class to store the localization text.
+        /// Gets or sets the name of the localized message.
         /// </summary>
-        internal class LocalizationTextContainer
+        /// <value>The name of the localized message.</value>
+        internal string? MessageName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
+        /// <value>The message.</value>
+        internal string? Message { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the culture of the localized message.
+        /// </summary>
+        /// <value>The name of the culture.</value>
+        internal string? CultureName { get; set; }
+    }
+
+
+    /// <summary>
+    /// A list containing messages for localization. Please do fill at least the en-US localization.
+    /// </summary>
+    List<LocalizationTextContainer> LocalizationTexts { get; } = new();
+
+    /// <summary>
+    /// Gets a localized message and gets a string corresponding to that message.
+    /// </summary>
+    /// <param name="messageName">The name of the message to get.</param>
+    /// <param name="defaultMessage">The default value for the message if none were found in the <see cref="LocalizationTexts"/> with the locale of <paramref name="locale"/>.</param>
+    /// <param name="locale">A locale expressed as a string.</param>
+    /// <returns>A localized message with the given parameters.</returns>
+    // ReSharper disable once UnusedMember.Global
+    public string GetMessage(string messageName, string defaultMessage, string locale)
+    {
+        var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
+
+        if (value is { Message: null } && locale.Split('-').Length == 2)
         {
-            /// <summary>
-            /// Gets or sets the name of the localized message.
-            /// </summary>
-            /// <value>The name of the localized message.</value>
-            internal string? MessageName { get; set; }
-
-            /// <summary>
-            /// Gets or sets the message.
-            /// </summary>
-            /// <value>The message.</value>
-            internal string? Message { get; set; }
-
-            /// <summary>
-            /// Gets or sets the name of the culture of the localized message.
-            /// </summary>
-            /// <value>The name of the culture.</value>
-            internal string? CultureName { get; set; }
+            value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
+        }
+        else if (value is { Message: null }) // fall back to a generic culture..
+        {
+            value = LocalizationTexts.FirstOrDefault(f =>
+                f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
         }
 
+        return value?.Message ?? defaultMessage;
+    }
 
-        /// <summary>
-        /// A list containing messages for localization. Please do fill at least the en-US localization.
-        /// </summary>
-        List<LocalizationTextContainer> LocalizationTexts { get; } = new();
+    /// <summary>
+    /// Gets a localized message and gets a string corresponding to that message with given arguments.
+    /// </summary>
+    /// <param name="messageName">The name of the message to get.</param>
+    /// <param name="defaultMessage">The default value for the message if none were found in the <see cref="LocalizationTexts"/> with the locale of <paramref name="locale"/>.</param>
+    /// <param name="locale">A locale expressed as a string.</param>
+    /// <param name="args">An object array that contains zero or more objects to format the message.</param>
+    /// <returns>A localized message with the given parameters.</returns>
+    // ReSharper disable once UnusedMember.Global
+    public string GetMessage(string messageName, string defaultMessage, string locale, params object[] args)
+    {
+        var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
 
-        /// <summary>
-        /// Gets a localized message and gets a string corresponding to that message.
-        /// </summary>
-        /// <param name="messageName">The name of the message to get.</param>
-        /// <param name="defaultMessage">The default value for the message if none were found in the <see cref="LocalizationTexts"/> with the locale of <paramref name="locale"/>.</param>
-        /// <param name="locale">A locale expressed as a string.</param>
-        /// <returns>A localized message with the given parameters.</returns>
-        // ReSharper disable once UnusedMember.Global
-        public string GetMessage(string messageName, string defaultMessage, string locale)
+        if (value is { Message: null } && locale.Split('-').Length == 2)
         {
-            var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
-
-            if (value is { Message: null } && locale.Split('-').Length == 2)
-            {
-                value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
-            }
-            else if (value is { Message: null }) // fall back to a generic culture..
-            {
-                value = LocalizationTexts.FirstOrDefault(f =>
-                    f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
-            }
-
-            return value?.Message ?? defaultMessage;
+            value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
+        }
+        else if (value is { Message: null }) // fall back to a generic culture..
+        {
+            value = LocalizationTexts.FirstOrDefault(f =>
+                f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
         }
 
-        /// <summary>
-        /// Gets a localized message and gets a string corresponding to that message with given arguments.
-        /// </summary>
-        /// <param name="messageName">The name of the message to get.</param>
-        /// <param name="defaultMessage">The default value for the message if none were found in the <see cref="LocalizationTexts"/> with the locale of <paramref name="locale"/>.</param>
-        /// <param name="locale">A locale expressed as a string.</param>
-        /// <param name="args">An object array that contains zero or more objects to format the message.</param>
-        /// <returns>A localized message with the given parameters.</returns>
-        // ReSharper disable once UnusedMember.Global
-        public string GetMessage(string messageName, string defaultMessage, string locale, params object[] args)
+        string msg = value?.Message ?? defaultMessage;
+        try
         {
-            var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
-
-            if (value is { Message: null } && locale.Split('-').Length == 2)
-            {
-                value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
-            }
-            else if (value is { Message: null }) // fall back to a generic culture..
-            {
-                value = LocalizationTexts.FirstOrDefault(f =>
-                    f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
-            }
-
-            string msg = value?.Message ?? defaultMessage;
-            try
-            {
-                return string.Format(msg, args);
-            }
-            catch
-            {
-                return msg;
-            }
+            return string.Format(msg, args);
         }
-
-        /// <summary>
-        /// Fills the <see cref="LocalizationTexts"/> array with a given file contents as a list of strings.
-        /// </summary>
-        /// <param name="fileContents"></param>
-        // ReSharper disable once UnusedMember.Global
-        public void GetLocalizedTexts(string fileContents)
+        catch
         {
-            List<string> fileLines = new List<string>();
-            fileLines.AddRange(fileContents.Split(Environment.NewLine.ToArray()));
+            return msg;
+        }
+    }
 
-            string locale = string.Empty;
+    /// <summary>
+    /// Fills the <see cref="LocalizationTexts"/> array with a given file contents as a list of strings.
+    /// </summary>
+    /// <param name="fileContents"></param>
+    // ReSharper disable once UnusedMember.Global
+    public void GetLocalizedTexts(string fileContents)
+    {
+        List<string> fileLines = new List<string>();
+        fileLines.AddRange(fileContents.Split(Environment.NewLine.ToArray()));
 
-            foreach (var fileLine in fileLines)
+        string locale = string.Empty;
+
+        foreach (var fileLine in fileLines)
+        {
+            if (fileLine.StartsWith("["))
             {
-                if (fileLine.StartsWith("["))
+                try
                 {
-                    try
-                    {
-                        locale = fileLine.Trim('[', ']');
-                        locale = new CultureInfo(locale).Name;
-                    }
-                    catch
-                    {
-                        locale = string.Empty;
-                    }
+                    locale = fileLine.Trim('[', ']');
+                    locale = new CultureInfo(locale).Name;
+                }
+                catch
+                {
+                    locale = string.Empty;
+                }
+                continue;
+            }
+
+            if (locale == string.Empty)
+            {
+                continue;
+            }
+
+            string[] delimited = fileLine.Split('\t');
+            if (delimited.Length >= 2)
+            {
+                if (LocalizationTexts.Exists(f => f.CultureName == locale && f.MessageName == delimited[0]))
+                {
                     continue;
                 }
-
-                if (locale == string.Empty)
-                {
-                    continue;
-                }
-
-                string[] delimited = fileLine.Split('\t');
-                if (delimited.Length >= 2)
-                {
-                    if (LocalizationTexts.Exists(f => f.CultureName == locale && f.MessageName == delimited[0]))
-                    {
-                        continue;
-                    }
-                    LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale});
-                }
+                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale});
             }
         }
     }
 }
-

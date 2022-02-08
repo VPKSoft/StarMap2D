@@ -24,45 +24,44 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.EventArguments
+namespace StarMap2D.Controls.WinForms.EventArguments;
+
+/// <summary>
+/// Event arguments for interaction with named object and user with the 2D star map.
+/// </summary>
+public class NamedObjectEventArgs
 {
     /// <summary>
-    /// Event arguments for interaction with named object and user with the 2D star map.
+    /// Gets or sets the name of the object.
     /// </summary>
-    public class NamedObjectEventArgs
+    /// <value>The name of the object.</value>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the identifier for the object.
+    /// </summary>
+    /// <value>The object identifier.</value>
+    public object? Identifier { get; set; }
+
+    /// <summary>
+    /// Gets or sets the right ascension.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    public double? RightAscension { get; set; }
+
+    /// <summary>
+    /// Gets or sets the declination.
+    /// </summary>
+    /// <value>The declination.</value>
+    public double? Declination { get; set; }
+
+    /// <summary>
+    /// Gets the <see cref="Identifier" /> cast to specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
+    /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
+    public T? GetIdentifier<T>()
     {
-        /// <summary>
-        /// Gets or sets the name of the object.
-        /// </summary>
-        /// <value>The name of the object.</value>
-        public string Name { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the identifier for the object.
-        /// </summary>
-        /// <value>The object identifier.</value>
-        public object? Identifier { get; set; }
-
-        /// <summary>
-        /// Gets or sets the right ascension.
-        /// </summary>
-        /// <value>The right ascension.</value>
-        public double? RightAscension { get; set; }
-
-        /// <summary>
-        /// Gets or sets the declination.
-        /// </summary>
-        /// <value>The declination.</value>
-        public double? Declination { get; set; }
-
-        /// <summary>
-        /// Gets the <see cref="Identifier" /> cast to specified type.
-        /// </summary>
-        /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
-        /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
-        public T? GetIdentifier<T>()
-        {
-            return (T?)Identifier;
-        }
+        return (T?)Identifier;
     }
 }

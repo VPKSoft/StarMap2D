@@ -24,51 +24,50 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Enumerations
+namespace StarMap2D.Calculations.Enumerations;
+
+/// <summary>
+/// An enumeration of different time intervals.
+/// </summary>
+public enum TimeInterval
 {
     /// <summary>
-    /// An enumeration of different time intervals.
+    /// The millisecond.
     /// </summary>
-    public enum TimeInterval
-    {
-        /// <summary>
-        /// The millisecond.
-        /// </summary>
-        Millisecond,
+    Millisecond,
 
-        /// <summary>
-        /// The second.
-        /// </summary>
-        Second,
+    /// <summary>
+    /// The second.
+    /// </summary>
+    Second,
 
-        /// <summary>
-        /// The minute.
-        /// </summary>
-        Minute,
+    /// <summary>
+    /// The minute.
+    /// </summary>
+    Minute,
 
-        /// <summary>
-        /// The hour.
-        /// </summary>
-        Hour,
+    /// <summary>
+    /// The hour.
+    /// </summary>
+    Hour,
 
-        /// <summary>
-        /// The day.
-        /// </summary>
-        Day,
+    /// <summary>
+    /// The day.
+    /// </summary>
+    Day,
 
-        /// <summary>
-        /// The week.
-        /// </summary>
-        Week,
+    /// <summary>
+    /// The week.
+    /// </summary>
+    Week,
 
-        /// <summary>
-        /// The month.
-        /// </summary>
-        Month,
+    /// <summary>
+    /// The month.
+    /// </summary>
+    Month,
 
-        /// <summary>
-        /// The year.
-        /// </summary>
-        Year,
-    }
+    /// <summary>
+    /// The year.
+    /// </summary>
+    Year,
 }

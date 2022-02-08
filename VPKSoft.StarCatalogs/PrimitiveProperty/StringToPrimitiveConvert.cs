@@ -27,85 +27,84 @@ SOFTWARE.
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace VPKSoft.StarCatalogs.PrimitiveProperty
+namespace VPKSoft.StarCatalogs.PrimitiveProperty;
+
+/// <summary>
+/// A class for conversions from string to primitive types.
+/// </summary>
+public class StringToPrimitiveConvert
 {
     /// <summary>
-    /// A class for conversions from string to primitive types.
+    /// A compiled <see cref="Regex"/> to check whether a string represents a number.
     /// </summary>
-    public class StringToPrimitiveConvert
+    /// <remarks>See: https://regexland.com/regex-decimal-numbers/</remarks>
+    public static readonly Regex
+        NumberRegex = new(@"^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)", RegexOptions.Compiled);
+
+    /// <summary>
+    /// Converts a specified string value to primitive type of <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The primitive type to convert to string value into.</typeparam>
+    /// <param name="value">The value to convert to type of <typeparamref name="T"/>.</param>
+    /// <returns>The value converted to type of <typeparamref name="T"/>.</returns>
+    /// <exception cref="System.NullReferenceException">value</exception>
+    public static T ToPrimitive<T>(string value)
     {
-        /// <summary>
-        /// A compiled <see cref="Regex"/> to check whether a string represents a number.
-        /// </summary>
-        /// <remarks>See: https://regexland.com/regex-decimal-numbers/</remarks>
-        public static readonly Regex
-            NumberRegex = new(@"^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)", RegexOptions.Compiled);
-
-        /// <summary>
-        /// Converts a specified string value to primitive type of <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The primitive type to convert to string value into.</typeparam>
-        /// <param name="value">The value to convert to type of <typeparamref name="T"/>.</param>
-        /// <returns>The value converted to type of <typeparamref name="T"/>.</returns>
-        /// <exception cref="System.NullReferenceException">value</exception>
-        public static T ToPrimitive<T>(string value)
+        var result = ToPrimitiveNullable<T>(value);
+        if (result == null)
         {
-            var result = ToPrimitiveNullable<T>(value);
-            if (result == null)
-            {
-                throw new NullReferenceException(nameof(value));
-            }
-
-            return result;
+            throw new NullReferenceException(nameof(value));
         }
 
-        /// <summary>
-        /// Converts a specified string value to primitive type of <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The primitive type to convert to string value into.</typeparam>
-        /// <param name="value">The value to convert to type of <typeparamref name="T"/>.</param>
-        /// <returns>The value converted to type of <typeparamref name="T"/> if the operation was successful; <c>null</c> otherwise.</returns>
-        public static T? ToPrimitiveNullable<T>(string? value)
+        return result;
+    }
+
+    /// <summary>
+    /// Converts a specified string value to primitive type of <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The primitive type to convert to string value into.</typeparam>
+    /// <param name="value">The value to convert to type of <typeparamref name="T"/>.</param>
+    /// <returns>The value converted to type of <typeparamref name="T"/> if the operation was successful; <c>null</c> otherwise.</returns>
+    public static T? ToPrimitiveNullable<T>(string? value)
+    {
+        if (value == null)
         {
-            if (value == null)
-            {
-                return default;
-            }
+            return default;
+        }
 
-            try
-            {
-                var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
+        try
+        {
+            var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
 
-                if (type == typeof(byte) || 
-                    type == typeof(sbyte) || 
-                    type == typeof(short) || 
-                    type == typeof(ushort) ||
-                    type == typeof(int) || 
-                    type == typeof(uint) || 
-                    type == typeof(long) || 
-                    type == typeof(ulong) ||
-                    type == typeof(float) || 
-                    type == typeof(double) || 
-                    type == typeof(decimal) || 
-                    type == typeof(nint) || 
-                    type == typeof(nuint))
+            if (type == typeof(byte) || 
+                type == typeof(sbyte) || 
+                type == typeof(short) || 
+                type == typeof(ushort) ||
+                type == typeof(int) || 
+                type == typeof(uint) || 
+                type == typeof(long) || 
+                type == typeof(ulong) ||
+                type == typeof(float) || 
+                type == typeof(double) || 
+                type == typeof(decimal) || 
+                type == typeof(nint) || 
+                type == typeof(nuint))
+            {
+                value = value.Trim();
+
+                if (NumberRegex.IsMatch(value))
                 {
-                    value = value.Trim();
-
-                    if (NumberRegex.IsMatch(value))
-                    {
-                        return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
-                    }
-
-                    return default;
+                    return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
                 }
 
-                return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
-            }
-            catch
-            {
                 return default;
             }
+
+            return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
+        }
+        catch
+        {
+            return default;
         }
     }
 }

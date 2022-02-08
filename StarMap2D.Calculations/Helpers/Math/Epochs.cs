@@ -32,7 +32,6 @@ namespace StarMap2D.Calculations.Helpers.Math;
 // http://www.stargazing.net/kepler/b1950.html#twig07
 public class Epochs
 {
-    // TODO: Test with, raHms = 18.538, dms = 43h53m B1950        
     /// <summary>
     /// Changes the epoch from B1950 to J2000.
     /// </summary>

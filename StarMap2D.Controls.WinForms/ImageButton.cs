@@ -60,9 +60,6 @@ public partial class ImageButton : UserControl
     #endregion
 
     #region Events
-
-    public delegate void ImageCheckedChangedEventHandler(object? sender, CheckedChangeEventArguments args);
-
     /// <summary>
     /// Occurs when the image <see cref="Checked"/> property has changed.
     /// </summary>

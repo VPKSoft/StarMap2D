@@ -58,5 +58,5 @@ public class StarMapObject: IStarMapObject2D<IMap2DGraphics>
     public bool SkipObject { get; set; }
 
     /// <inheritdoc cref="IStarMapObject2D{T}.Identifier"/>
-    public ulong Identifier { get; set; }
+    public int Identifier { get; set; }
 }

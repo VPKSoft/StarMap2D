@@ -24,29 +24,25 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-using System.ComponentModel;
-using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace StarMap2D.Avalonia.Winfows
+namespace StarMap2D.Avalonia.Winfows;
+
+public partial class WindowSkyMap2D : Window
 {
-    public partial class WindowSkyMap2D : Window
+    public WindowSkyMap2D()
     {
-        public WindowSkyMap2D()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
 #if DEBUG
-            this.AttachDevTools();
+        this.AttachDevTools();
 #endif
-        }
+    }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
     }
 }

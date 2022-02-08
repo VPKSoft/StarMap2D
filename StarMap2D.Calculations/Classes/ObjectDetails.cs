@@ -26,68 +26,67 @@ SOFTWARE.
 
 using System.Globalization;
 
-namespace StarMap2D.Calculations.Classes
+namespace StarMap2D.Calculations.Classes;
+
+/// <summary>
+/// Details of a sky object of any kind.
+/// </summary>
+public class ObjectDetails
 {
     /// <summary>
-    /// Details of a sky object of any kind.
+    /// Gets or sets the name of the object.
     /// </summary>
-    public class ObjectDetails
+    /// <value>The name of the object.</value>
+    public string? ObjectName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the right ascension of the object.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    public double RightAscension { get; set; }
+
+    /// <summary>
+    /// Gets or sets the declination of the object.
+    /// </summary>
+    /// <value>The declination.</value>
+    public double Declination { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the object is above horizon at the <see cref="DetailDateTime"/> date and time.
+    /// </summary>
+    /// <value><c>true</c> if the object is above horizon at the <see cref="DetailDateTime"/>; otherwise, <c>false</c>.</value>
+    public bool AboveHorizon { get; set; }
+
+    /// <summary>
+    /// Gets or sets the horizontal X-coordinate in degrees.
+    /// </summary>
+    /// <value>The horizontal X-coordinate in degrees.</value>
+    public double HorizontalDegreesX { get; set; }
+
+    /// <summary>
+    /// Gets or sets the horizontal Y-coordinate in degrees.
+    /// </summary>
+    /// <value>The horizontal Y-coordinate in degrees.</value>
+    public double HorizontalDegreesY { get; set; }
+
+    /// <summary>
+    /// Gets or sets the date and time of the calculation of these object details.
+    /// </summary>
+    /// <value>The calculation date time of the details.</value>
+    public DateTime DetailDateTime { get; set; }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Gets or sets the name of the object.
-        /// </summary>
-        /// <value>The name of the object.</value>
-        public string? ObjectName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the right ascension of the object.
-        /// </summary>
-        /// <value>The right ascension.</value>
-        public double RightAscension { get; set; }
-
-        /// <summary>
-        /// Gets or sets the declination of the object.
-        /// </summary>
-        /// <value>The declination.</value>
-        public double Declination { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the object is above horizon at the <see cref="DetailDateTime"/> date and time.
-        /// </summary>
-        /// <value><c>true</c> if the object is above horizon at the <see cref="DetailDateTime"/>; otherwise, <c>false</c>.</value>
-        public bool AboveHorizon { get; set; }
-
-        /// <summary>
-        /// Gets or sets the horizontal X-coordinate in degrees.
-        /// </summary>
-        /// <value>The horizontal X-coordinate in degrees.</value>
-        public double HorizontalDegreesX { get; set; }
-
-        /// <summary>
-        /// Gets or sets the horizontal Y-coordinate in degrees.
-        /// </summary>
-        /// <value>The horizontal Y-coordinate in degrees.</value>
-        public double HorizontalDegreesY { get; set; }
-
-        /// <summary>
-        /// Gets or sets the date and time of the calculation of these object details.
-        /// </summary>
-        /// <value>The calculation date time of the details.</value>
-        public DateTime DetailDateTime { get; set; }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return
-                @$"{{ RightAscension = {RightAscension.ToString(CultureInfo.InvariantCulture)}, 
+        return
+            @$"{{ RightAscension = {RightAscension.ToString(CultureInfo.InvariantCulture)}, 
 Declination = {Declination.ToString(CultureInfo.InvariantCulture)}, 
 AboveHorizon = {(AboveHorizon ? "true" : "false")}, 
 HorizontalDegreesX = {HorizontalDegreesX.ToString(CultureInfo.InvariantCulture)}, 
 HorizontalDegreesY = {HorizontalDegreesY.ToString(CultureInfo.InvariantCulture)}, 
 DetailDateTime = {DetailDateTime.ToString(CultureInfo.InvariantCulture)},}},";
-        }
     }
 }

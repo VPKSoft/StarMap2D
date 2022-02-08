@@ -24,21 +24,20 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms
+namespace StarMap2D.Controls.WinForms;
+
+/// <summary>
+/// A <see cref="ListBox"/> descendant with few additional features.
+/// Implements the <see cref="System.Windows.Forms.ListBox" />
+/// </summary>
+/// <seealso cref="System.Windows.Forms.ListBox" />
+public class ListBoxExtended: ListBox
 {
     /// <summary>
-    /// A <see cref="ListBox"/> descendant with few additional features.
-    /// Implements the <see cref="System.Windows.Forms.ListBox" />
+    /// Refreshes all <see cref="ListBox"/> items and retrieves new strings for them.
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.ListBox" />
-    public class ListBoxExtended: ListBox
+    public new void RefreshItems()
     {
-        /// <summary>
-        /// Refreshes all <see cref="ListBox"/> items and retrieves new strings for them.
-        /// </summary>
-        public new void RefreshItems()
-        {
-            base.RefreshItems();
-        }
+        base.RefreshItems();
     }
 }

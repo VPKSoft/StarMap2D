@@ -27,27 +27,46 @@ SOFTWARE.
 namespace StarMap2D.Calculations.Helpers.Math;
 
 /// <summary>
-/// Calculations for circle shape.
+/// A class for sidereal time calculations.
 /// </summary>
-public class Circle
+public class SiderealTime
 {
     /// <summary>
-    /// Checks if the specified point is inside a specified circle.
+    /// Calculates the local sidereal time.
     /// </summary>
-    /// <param name="circleX">The center point X-coordinate of the circle.</param>
-    /// <param name="circleY">The center point Y-coordinate of the circle.</param>
-    /// <param name="radius">The radius of the circle.</param>
-    /// <param name="x">The X-coordinate of the point to check for.</param>
-    /// <param name="y">The Y-coordinate of the point to check for.</param>
-    /// <returns><c>true</c> if the point is inside the circle, <c>false</c> otherwise.</returns>
-    /// <remarks>Copyright (C): https://www.geeksforgeeks.org/find-if-a-point-lies-inside-or-on-circle/.</remarks>
-    public static bool PointIsInside(double circleX, double circleY, double radius, double x, double y)
+    /// <param name="dateTime">The date time for the calculation.</param>
+    /// <param name="longitude">The geographic longitude.</param>
+    /// <returns>The local sidereal time.</returns>
+    // (C): https://github.com/Blank2275/AstroCoordsJS
+    public static double CalculateLocalSiderealTime(DateTime dateTime, double longitude)
     {
-        if ((x - circleX) * (x - circleX) + (y - circleY) * (y - circleY) <= radius * radius)
+        dateTime = dateTime.ToUniversalTime();
+        var d2000 = new DateTime(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        var days = (dateTime - d2000).TotalDays;
+        var hours = (double)dateTime.Hour;
+        var minutes = (double)dateTime.Minute;
+        var seconds = (double)dateTime.Second;
+        var ms = (double)dateTime.Millisecond;
+        var utc = (hours * (1000 * 60 * 60) + minutes * (1000 * 60) + seconds * 1000 + ms) /
+            (1000 * 60 * 60 * 24) * 360;
+
+        var lst = 100.46 + (0.985647 * days) + longitude + utc;
+
+        if (lst > 360)
         {
-            return true;
+            while (lst > 360)
+            {
+                lst -= 360;
+            }
+        }
+        else if (lst < 0)
+        {
+            while (lst < 0)
+            {
+                lst += 360;
+            }
         }
 
-        return false;
+        return lst;
     }
 }

@@ -24,8 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-using System.Text.RegularExpressions;
 using VPKSoft.StarCatalogs.PrimitiveProperty;
 
 namespace VPKSoft.StarCatalogs.Interfaces;

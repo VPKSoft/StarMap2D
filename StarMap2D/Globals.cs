@@ -24,18 +24,17 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D
+namespace StarMap2D;
+
+/// <summary>
+/// A class containing the global static parameters.
+/// </summary>
+public static class Globals
 {
     /// <summary>
-    /// A class containing the global static parameters.
+    /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
     /// </summary>
-    public static class Globals
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
-        /// </summary>
-        /// <seealso cref="AASharp"/>
-        /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
-        public static bool HighPrecisionCalculations { get; set; }
-    }
+    /// <seealso cref="AASharp"/>
+    /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
+    public static bool HighPrecisionCalculations { get; set; }
 }

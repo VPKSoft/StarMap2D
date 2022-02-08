@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Helpers.Math;
 
 namespace StarMap2D.Calculations.Helpers.DateAndTime;
 
@@ -93,5 +94,21 @@ public static class DateTimeExtensions
             default:
                 return dateTime.AddSeconds(0);
         }
+    }
+
+    /// <summary>
+    /// Converts the specified <see cref="DateTime" /> into local sidereal time using the specified longitude.
+    /// </summary>
+    /// <param name="value">The <see cref="DateTime" /> value to convert.</param>
+    /// <param name="longitude">The longitude of the geographic location to get the local sidereal time for.</param>
+    /// <returns>The local sidereal time.</returns>
+    /// <remarks>
+    /// The specified date and time is converted into Coordinated Universal Time (UTC) before conversion.
+    /// If the <see cref="DateTime.Kind"/> is already <see cref="DateTimeKind.Utc"/>, no conversion occurs.
+    /// </remarks>
+    // (C): https://github.com/Blank2275/AstroCoordsJS
+    public static double ToLocalSiderealTime(this DateTime value, double longitude)
+    {
+        return SiderealTime.CalculateLocalSiderealTime(value.ToUniversalTime(), longitude);
     }
 }

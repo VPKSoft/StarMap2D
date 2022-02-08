@@ -24,54 +24,53 @@ SOFTWARE.
 */
 #endregion
 
-namespace VPKSoft.StarCatalogs.PrimitiveProperty
+namespace VPKSoft.StarCatalogs.PrimitiveProperty;
+
+/// <summary>
+/// A class representing a not-nullable primitive property.
+/// </summary>
+/// <remarks>The <typeparamref name="T"/> type is expected to be not nullable.</remarks>
+/// <typeparam name="T">The type of the primitive property.</typeparam>
+public class PrimitiveProperty<T> where T:  struct
 {
+    private T value;
+
     /// <summary>
-    /// A class representing a not-nullable primitive property.
+    /// Performs an implicit conversion from <typeparamref name="T"/> to <see cref="PrimitiveProperty{T}"/>.
     /// </summary>
-    /// <remarks>The <typeparamref name="T"/> type is expected to be not nullable.</remarks>
-    /// <typeparam name="T">The type of the primitive property.</typeparam>
-    public class PrimitiveProperty<T> where T:  struct
+    /// <param name="value">The value to convert.</param>
+    /// <returns>An instance of the <see cref="PrimitiveProperty{T}"/> class.</returns>
+    public static implicit operator PrimitiveProperty<T>(T value)
     {
-        private T value;
-
-        /// <summary>
-        /// Performs an implicit conversion from <typeparamref name="T"/> to <see cref="PrimitiveProperty{T}"/>.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <returns>An instance of the <see cref="PrimitiveProperty{T}"/> class.</returns>
-        public static implicit operator PrimitiveProperty<T>(T value)
+        var result = new PrimitiveProperty<T>
         {
-            var result = new PrimitiveProperty<T>
-            {
-                value = value
-            };
-            return result;
-        }
+            value = value
+        };
+        return result;
+    }
 
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="PrimitiveProperty{T}"/> to <typeparamref name="T"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>A value of type of <typeparamref name="T"/>.</returns>
-        public static implicit operator T(PrimitiveProperty<T> value)
-        {
-            return value.value;
-        }
+    /// <summary>
+    /// Performs an implicit conversion from <see cref="PrimitiveProperty{T}"/> to <typeparamref name="T"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>A value of type of <typeparamref name="T"/>.</returns>
+    public static implicit operator T(PrimitiveProperty<T> value)
+    {
+        return value.value;
+    }
 
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="PrimitiveProperty{T}"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>An instance of the <see cref="PrimitiveProperty{T}"/> class.</returns>
-        /// <exception cref="System.NullReferenceException">value</exception>        
-        public static implicit operator PrimitiveProperty<T>(string value)
+    /// <summary>
+    /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="PrimitiveProperty{T}"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>An instance of the <see cref="PrimitiveProperty{T}"/> class.</returns>
+    /// <exception cref="System.NullReferenceException">value</exception>        
+    public static implicit operator PrimitiveProperty<T>(string value)
+    {
+        var result = new PrimitiveProperty<T>
         {
-            var result = new PrimitiveProperty<T>
-            {
-                value = StringToPrimitiveConvert.ToPrimitive<T>(value)
-            };
-            return result;
-        }
+            value = StringToPrimitiveConvert.ToPrimitive<T>(value)
+        };
+        return result;
     }
 }

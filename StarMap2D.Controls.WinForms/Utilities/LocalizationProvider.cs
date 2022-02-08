@@ -24,39 +24,38 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.Utilities
+namespace StarMap2D.Controls.WinForms.Utilities;
+
+/// <summary>
+/// A class to provide localization for specific object(s).
+/// </summary>
+public class LocalizationProvider
 {
     /// <summary>
-    /// A class to provide localization for specific object(s).
+    /// Gets the solar system object localization.
     /// </summary>
-    public class LocalizationProvider
+    /// <value>The solar system object localization.</value>
+    public static TabDeliLocalization SolarSystemObjectLocalization
     {
-        /// <summary>
-        /// Gets the solar system object localization.
-        /// </summary>
-        /// <value>The solar system object localization.</value>
-        public static TabDeliLocalization SolarSystemObjectLocalization
+        get
         {
-            get
-            {
-                var result = new TabDeliLocalization();
-                result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
-                return result;
-            }
+            var result = new TabDeliLocalization();
+            result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
+            return result;
         }
+    }
 
-        /// <summary>
-        /// Gets the constellation localization.
-        /// </summary>
-        /// <value>The constellation localization.</value>
-        public static TabDeliLocalization ConstellationLocalization
+    /// <summary>
+    /// Gets the constellation localization.
+    /// </summary>
+    /// <value>The constellation localization.</value>
+    public static TabDeliLocalization ConstellationLocalization
+    {
+        get
         {
-            get
-            {
-                var result = new TabDeliLocalization();
-                result.GetLocalizedTexts(Properties.Resources.Constellations);
-                return result;
-            }
+            var result = new TabDeliLocalization();
+            result.GetLocalizedTexts(Properties.Resources.Constellations);
+            return result;
         }
     }
 }

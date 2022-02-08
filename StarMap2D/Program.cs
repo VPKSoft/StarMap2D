@@ -55,11 +55,13 @@ internal static class Program
         if (Utils.ShouldLocalize() != null)
         {
             // ReSharper disable once ObjectCreationAsStatement
-            new FormMain();
+            _ = new FormMain();
             // ReSharper disable once ObjectCreationAsStatement
-            new FormDialogSettings();
+            _ = new FormDialogSettings();
             // ReSharper disable once ObjectCreationAsStatement
-            new FormSkyMap2D();
+            _ = new FormSkyMap2D();
+            // ReSharper disable once ObjectCreationAsStatement
+            _ = new FormPlanetDetails();
             return;
         }
 

@@ -26,23 +26,22 @@ SOFTWARE.
 
 using AASharp;
 
-namespace StarMap2D.Calculations.Extensions
+namespace StarMap2D.Calculations.Extensions;
+
+/// <summary>
+/// Extension methods for the <see cref="DateTime"/> conversion from <seealso cref="AASDate"/>
+/// </summary>
+public static class DateTimeAADateExtensions
 {
     /// <summary>
-    /// Extension methods for the <see cref="DateTime"/> conversion from <seealso cref="AASDate"/>
+    /// Converts the specified <see cref="DateTime"/> value to a new <see cref="AASDate"/> value.
     /// </summary>
-    public static class DateTimeAADateExtensions
+    /// <param name="value">The <see cref="DateTime"/> value to convert.</param>
+    /// <returns>An instance to a <see cref="AASDate"/> class.</returns>
+    // ReSharper disable once InconsistentNaming
+    public static AASDate ToAASDate(this DateTime value)
     {
-        /// <summary>
-        /// Converts the specified <see cref="DateTime"/> value to a new <see cref="AASDate"/> value.
-        /// </summary>
-        /// <param name="dateTime">The <see cref="DateTime"/> value to convert.</param>
-        /// <returns>An instance to a <see cref="AASDate"/> class.</returns>
-        // ReSharper disable once InconsistentNaming
-        public static AASDate ToAASDate(this DateTime dateTime)
-        {
-            return new AASDate(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute,
-                dateTime.Second, true);
-        }
+        return new AASDate(value.Year, value.Month, value.Day, value.Hour, value.Minute,
+            value.Second, true);
     }
 }

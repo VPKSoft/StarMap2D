@@ -25,17 +25,11 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
-using AASharp;
-using StarMap2D.Calculations.Enumerations;
-using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
-using StarMap2D.Calculations.Plotting;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using VPKSoft.DBLocalization;
 using VPKSoft.LangLib;
-using VPKSoft.StarCatalogs;
-using VPKSoft.StarCatalogs.PrimitiveProperty;
 
 namespace StarMap2D;
 
@@ -79,7 +73,6 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button3_Click(object sender, EventArgs e)
     {
-        Plot2D.Invert2DProjection();
     }
 
     private void mnuLocalize_Click(object sender, EventArgs e)

@@ -26,8 +26,18 @@ SOFTWARE.
 
 namespace StarMap2D.Controls.WinForms.Drawing;
 
+/// <summary>
+/// A helper class to draw star circles to <see cref="Graphics"/>.
+/// </summary>
 public static class DrawStarImage
 {
+    /// <summary>
+    /// Draws the star to with the specified arguments on the <see cref="Graphics"/> instance.
+    /// </summary>
+    /// <param name="graphics">The graphics instance to draw onto.</param>
+    /// <param name="location">The location for the star circle.</param>
+    /// <param name="starSize">Size of the star circle.</param>
+    /// <param name="starColor">Color of the star circle.</param>
     public static void DrawStar(this Graphics graphics, Point location, int starSize, Color starColor)
     {
         var startPoint = new Point(location.X - starSize / 2, location.Y - starSize / 2);

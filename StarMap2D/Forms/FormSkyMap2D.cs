@@ -526,6 +526,11 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_MouseHoverObject(object sender, NamedObjectEventArgs e)
     {
+        if (e.Identifier == null)
+        {
+            return;
+        }
+
         var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D!.AaDate, Globals.HighPrecisionCalculations,
             map2d.Latitude, map2d.Longitude);
 
@@ -549,11 +554,21 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_MouseClickObject(object sender, NamedObjectEventArgs e)
     {
+        if (e.Identifier == null)
+        {
+            return;
+        }
+
         FormPlanetDetails.Dialog(this, (ObjectsWithPositions)e.Identifier, map2d.Plot2D!.AaDate.ToDateTime(), map2d.Latitude, map2d.Longitude);
     }
 
     private void map2d_MouseDoubleClickObject(object sender, NamedObjectEventArgs e)
     {
+        if (e.Identifier == null || map2d.Plot2D == null)
+        {
+            return;
+        }
+
         var details = SolarSystemObjectPositions.GetDetails((ObjectsWithPositions)e.Identifier, map2d.Plot2D.AaDate, Globals.HighPrecisionCalculations,
             map2d.Latitude, map2d.Longitude);
 

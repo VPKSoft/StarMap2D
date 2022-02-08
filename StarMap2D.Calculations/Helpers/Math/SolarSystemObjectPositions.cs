@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.Text.Json.Serialization;
 using AASharp;
 using StarMap2D.Calculations.Classes;
 using StarMap2D.Calculations.Constellations.StaticData;
@@ -115,6 +114,15 @@ public class SolarSystemObjectPositions
         return coordinate;
     }
 
+    /// <summary>
+    /// Gets the details for the specified solar system object.
+    /// </summary>
+    /// <param name="objectType">Type of the object.</param>
+    /// <param name="aaDate">An instance of the <see cref="AASDate"/> class.</param>
+    /// <param name="highPrecision">A value indicating whether to use high precision with the calculation.</param>
+    /// <param name="latitude">The geographic latitude.</param>
+    /// <param name="longitude">The geographic longitude.</param>
+    /// <returns>Am instance to the <seealso cref="ObjectDetails"/> class with the specified object details.</returns>
     public static ObjectDetails GetDetails(ObjectsWithPositions objectType, AASDate aaDate, bool highPrecision, double latitude, double longitude)
     {
         var result = new ObjectDetails
