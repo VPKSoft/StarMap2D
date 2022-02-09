@@ -95,11 +95,21 @@ namespace StarMap2D.Forms
             this.lbRightAscensionValue = new System.Windows.Forms.Label();
             this.lbObjectNameValue = new System.Windows.Forms.Label();
             this.cbDrawCrossHair = new System.Windows.Forms.CheckBox();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnPlayback = new System.Windows.Forms.Panel();
             this.lbHour1 = new System.Windows.Forms.Label();
             this.btHourNext = new StarMap2D.Controls.WinForms.ImageButton();
             this.btHourPrevious = new StarMap2D.Controls.WinForms.ImageButton();
             this.btPlayPause = new StarMap2D.Controls.WinForms.ImageButton();
+            this.pnCoordinates = new System.Windows.Forms.Panel();
+            this.lbDeclination = new System.Windows.Forms.Label();
+            this.lbDeclinationCoordinateValue = new System.Windows.Forms.Label();
+            this.lbRightAscensionCoordinateValue = new System.Windows.Forms.Label();
+            this.lbRightAscension = new System.Windows.Forms.Label();
+            this.lbAzimuthValue = new System.Windows.Forms.Label();
+            this.lbAzimuth = new System.Windows.Forms.Label();
+            this.lbAltitudeValue = new System.Windows.Forms.Label();
+            this.lbAltitude = new System.Windows.Forms.Label();
+            this.lbCoordinates = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -110,7 +120,8 @@ namespace StarMap2D.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.pnPlayback.SuspendLayout();
+            this.pnCoordinates.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmSetTime
@@ -142,7 +153,7 @@ namespace StarMap2D.Forms
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 1;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Size = new System.Drawing.Size(998, 804);
+            this.tlpMain.Size = new System.Drawing.Size(998, 863);
             this.tlpMain.TabIndex = 3;
             // 
             // map2d
@@ -153,7 +164,7 @@ namespace StarMap2D.Forms
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
             this.map2d.CrossHairColor = System.Drawing.Color.LimeGreen;
             this.map2d.CrossHairSize = 20;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 4, 17, 26, 19, 218);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 9, 6, 6, 54, 343);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map2d.DrawConstellationBoundaries = false;
             this.map2d.DrawConstellationNames = true;
@@ -170,12 +181,14 @@ namespace StarMap2D.Forms
             this.map2d.Margin = new System.Windows.Forms.Padding(0);
             this.map2d.Name = "map2d";
             this.map2d.Plot2D = null;
-            this.map2d.Size = new System.Drawing.Size(748, 804);
+            this.map2d.Size = new System.Drawing.Size(748, 863);
             this.map2d.SkipCalculatedObjects = false;
             this.map2d.StarColors = new System.Drawing.Color[0];
             this.map2d.StarSizes = new int[0];
             this.map2d.TabIndex = 0;
+            this.map2d.Zoom = 1D;
             this.map2d.CoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
+            this.map2d.MouseCoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnMouseCoordinatesChanged(this.map2d_MouseCoordinatesChanged);
             this.map2d.MouseHoverObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseHoverObject);
             this.map2d.MouseLeaveObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseLeaveObject);
             this.map2d.MouseClickObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseClickObject);
@@ -189,7 +202,7 @@ namespace StarMap2D.Forms
             this.tlpMapControls.Controls.Add(this.panel3, 0, 9);
             this.tlpMapControls.Controls.Add(this.pnDateTime, 0, 0);
             this.tlpMapControls.Controls.Add(this.panel1, 0, 1);
-            this.tlpMapControls.Controls.Add(this.panel2, 0, 12);
+            this.tlpMapControls.Controls.Add(this.panel2, 0, 13);
             this.tlpMapControls.Controls.Add(this.cbInvertEastWest, 0, 3);
             this.tlpMapControls.Controls.Add(this.cbShowConstellationBorders, 0, 4);
             this.tlpMapControls.Controls.Add(this.cbConstellationLines, 0, 5);
@@ -197,14 +210,12 @@ namespace StarMap2D.Forms
             this.tlpMapControls.Controls.Add(this.cbSkipCalculated, 0, 7);
             this.tlpMapControls.Controls.Add(this.panel4, 0, 10);
             this.tlpMapControls.Controls.Add(this.cbDrawCrossHair, 0, 8);
-            this.tlpMapControls.Controls.Add(this.panel5, 0, 2);
+            this.tlpMapControls.Controls.Add(this.pnPlayback, 0, 2);
+            this.tlpMapControls.Controls.Add(this.pnCoordinates, 0, 11);
             this.tlpMapControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMapControls.Location = new System.Drawing.Point(751, 3);
             this.tlpMapControls.Name = "tlpMapControls";
-            this.tlpMapControls.RowCount = 13;
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMapControls.RowCount = 14;
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -213,9 +224,13 @@ namespace StarMap2D.Forms
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlpMapControls.Size = new System.Drawing.Size(244, 798);
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMapControls.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMapControls.Size = new System.Drawing.Size(244, 857);
             this.tlpMapControls.TabIndex = 1;
             // 
             // panel3
@@ -228,7 +243,7 @@ namespace StarMap2D.Forms
             this.panel3.Controls.Add(this.cmbJumpToLocation);
             this.panel3.Controls.Add(this.btResetLocation);
             this.panel3.Controls.Add(this.lbJumpToLocation);
-            this.panel3.Location = new System.Drawing.Point(3, 287);
+            this.panel3.Location = new System.Drawing.Point(3, 290);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(238, 104);
             this.panel3.TabIndex = 10;
@@ -449,7 +464,7 @@ namespace StarMap2D.Forms
             // 
             this.tlpMapControls.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.compassView1);
-            this.panel2.Location = new System.Drawing.Point(3, 550);
+            this.panel2.Location = new System.Drawing.Point(3, 610);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(238, 244);
             this.panel2.TabIndex = 8;
@@ -474,7 +489,7 @@ namespace StarMap2D.Forms
             // cbInvertEastWest
             // 
             this.cbInvertEastWest.AutoSize = true;
-            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 137);
+            this.cbInvertEastWest.Location = new System.Drawing.Point(3, 140);
             this.cbInvertEastWest.Name = "cbInvertEastWest";
             this.cbInvertEastWest.Size = new System.Drawing.Size(109, 19);
             this.cbInvertEastWest.TabIndex = 9;
@@ -486,7 +501,7 @@ namespace StarMap2D.Forms
             // 
             this.cbShowConstellationBorders.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbShowConstellationBorders, 2);
-            this.cbShowConstellationBorders.Location = new System.Drawing.Point(3, 162);
+            this.cbShowConstellationBorders.Location = new System.Drawing.Point(3, 165);
             this.cbShowConstellationBorders.Name = "cbShowConstellationBorders";
             this.cbShowConstellationBorders.Size = new System.Drawing.Size(139, 19);
             this.cbShowConstellationBorders.TabIndex = 11;
@@ -498,7 +513,7 @@ namespace StarMap2D.Forms
             // 
             this.cbConstellationLines.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbConstellationLines, 2);
-            this.cbConstellationLines.Location = new System.Drawing.Point(3, 187);
+            this.cbConstellationLines.Location = new System.Drawing.Point(3, 190);
             this.cbConstellationLines.Name = "cbConstellationLines";
             this.cbConstellationLines.Size = new System.Drawing.Size(123, 19);
             this.cbConstellationLines.TabIndex = 12;
@@ -509,7 +524,7 @@ namespace StarMap2D.Forms
             // cbConstellationNames
             // 
             this.cbConstellationNames.AutoSize = true;
-            this.cbConstellationNames.Location = new System.Drawing.Point(3, 212);
+            this.cbConstellationNames.Location = new System.Drawing.Point(3, 215);
             this.cbConstellationNames.Name = "cbConstellationNames";
             this.cbConstellationNames.Size = new System.Drawing.Size(116, 19);
             this.cbConstellationNames.TabIndex = 13;
@@ -521,7 +536,7 @@ namespace StarMap2D.Forms
             // 
             this.cbSkipCalculated.AutoSize = true;
             this.tlpMapControls.SetColumnSpan(this.cbSkipCalculated, 2);
-            this.cbSkipCalculated.Location = new System.Drawing.Point(3, 237);
+            this.cbSkipCalculated.Location = new System.Drawing.Point(3, 240);
             this.cbSkipCalculated.Name = "cbSkipCalculated";
             this.cbSkipCalculated.Size = new System.Drawing.Size(215, 19);
             this.cbSkipCalculated.TabIndex = 14;
@@ -544,7 +559,7 @@ namespace StarMap2D.Forms
             this.panel4.Controls.Add(this.lbDeclinationValue);
             this.panel4.Controls.Add(this.lbRightAscensionValue);
             this.panel4.Controls.Add(this.lbObjectNameValue);
-            this.panel4.Location = new System.Drawing.Point(3, 397);
+            this.panel4.Location = new System.Drawing.Point(3, 400);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(238, 119);
             this.panel4.TabIndex = 15;
@@ -652,7 +667,7 @@ namespace StarMap2D.Forms
             // cbDrawCrossHair
             // 
             this.cbDrawCrossHair.AutoSize = true;
-            this.cbDrawCrossHair.Location = new System.Drawing.Point(3, 262);
+            this.cbDrawCrossHair.Location = new System.Drawing.Point(3, 265);
             this.cbDrawCrossHair.Name = "cbDrawCrossHair";
             this.cbDrawCrossHair.Size = new System.Drawing.Size(106, 19);
             this.cbDrawCrossHair.TabIndex = 16;
@@ -660,19 +675,18 @@ namespace StarMap2D.Forms
             this.cbDrawCrossHair.UseVisualStyleBackColor = true;
             this.cbDrawCrossHair.CheckedChanged += new System.EventHandler(this.cbDrawCrossHair_CheckedChanged);
             // 
-            // panel5
+            // pnPlayback
             // 
-            this.tlpMapControls.SetColumnSpan(this.panel5, 2);
-            this.panel5.Controls.Add(this.lbHour1);
-            this.panel5.Controls.Add(this.btHourNext);
-            this.panel5.Controls.Add(this.btHourPrevious);
-            this.panel5.Controls.Add(this.btPlayPause);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 106);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(244, 28);
-            this.panel5.TabIndex = 17;
+            this.tlpMapControls.SetColumnSpan(this.pnPlayback, 2);
+            this.pnPlayback.Controls.Add(this.lbHour1);
+            this.pnPlayback.Controls.Add(this.btHourNext);
+            this.pnPlayback.Controls.Add(this.btHourPrevious);
+            this.pnPlayback.Controls.Add(this.btPlayPause);
+            this.pnPlayback.Location = new System.Drawing.Point(0, 106);
+            this.pnPlayback.Margin = new System.Windows.Forms.Padding(0);
+            this.pnPlayback.Name = "pnPlayback";
+            this.pnPlayback.Size = new System.Drawing.Size(244, 31);
+            this.pnPlayback.TabIndex = 17;
             // 
             // lbHour1
             // 
@@ -732,11 +746,117 @@ namespace StarMap2D.Forms
             this.btPlayPause.TabIndex = 6;
             this.btPlayPause.CheckedChanged += new System.EventHandler<StarMap2D.Controls.WinForms.EventArguments.CheckedChangeEventArguments>(this.btPlayPause_CheckedChanged);
             // 
+            // pnCoordinates
+            // 
+            this.tlpMapControls.SetColumnSpan(this.pnCoordinates, 2);
+            this.pnCoordinates.Controls.Add(this.lbDeclination);
+            this.pnCoordinates.Controls.Add(this.lbDeclinationCoordinateValue);
+            this.pnCoordinates.Controls.Add(this.lbRightAscensionCoordinateValue);
+            this.pnCoordinates.Controls.Add(this.lbRightAscension);
+            this.pnCoordinates.Controls.Add(this.lbAzimuthValue);
+            this.pnCoordinates.Controls.Add(this.lbAzimuth);
+            this.pnCoordinates.Controls.Add(this.lbAltitudeValue);
+            this.pnCoordinates.Controls.Add(this.lbAltitude);
+            this.pnCoordinates.Controls.Add(this.lbCoordinates);
+            this.pnCoordinates.Location = new System.Drawing.Point(3, 525);
+            this.pnCoordinates.Name = "pnCoordinates";
+            this.pnCoordinates.Size = new System.Drawing.Size(238, 79);
+            this.pnCoordinates.TabIndex = 18;
+            // 
+            // lbDeclination
+            // 
+            this.lbDeclination.AutoSize = true;
+            this.lbDeclination.Location = new System.Drawing.Point(3, 60);
+            this.lbDeclination.Name = "lbDeclination";
+            this.lbDeclination.Size = new System.Drawing.Size(67, 15);
+            this.lbDeclination.TabIndex = 8;
+            this.lbDeclination.Text = "Declination";
+            // 
+            // lbDeclinationCoordinateValue
+            // 
+            this.lbDeclinationCoordinateValue.AutoSize = true;
+            this.lbDeclinationCoordinateValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbDeclinationCoordinateValue.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lbDeclinationCoordinateValue.Location = new System.Drawing.Point(119, 60);
+            this.lbDeclinationCoordinateValue.Name = "lbDeclinationCoordinateValue";
+            this.lbDeclinationCoordinateValue.Size = new System.Drawing.Size(14, 15);
+            this.lbDeclinationCoordinateValue.TabIndex = 7;
+            this.lbDeclinationCoordinateValue.Text = "0";
+            // 
+            // lbRightAscensionCoordinateValue
+            // 
+            this.lbRightAscensionCoordinateValue.AutoSize = true;
+            this.lbRightAscensionCoordinateValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbRightAscensionCoordinateValue.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lbRightAscensionCoordinateValue.Location = new System.Drawing.Point(119, 45);
+            this.lbRightAscensionCoordinateValue.Name = "lbRightAscensionCoordinateValue";
+            this.lbRightAscensionCoordinateValue.Size = new System.Drawing.Size(14, 15);
+            this.lbRightAscensionCoordinateValue.TabIndex = 6;
+            this.lbRightAscensionCoordinateValue.Text = "0";
+            // 
+            // lbRightAscension
+            // 
+            this.lbRightAscension.AutoSize = true;
+            this.lbRightAscension.Location = new System.Drawing.Point(3, 45);
+            this.lbRightAscension.Name = "lbRightAscension";
+            this.lbRightAscension.Size = new System.Drawing.Size(90, 15);
+            this.lbRightAscension.TabIndex = 5;
+            this.lbRightAscension.Text = "Right ascension";
+            // 
+            // lbAzimuthValue
+            // 
+            this.lbAzimuthValue.AutoSize = true;
+            this.lbAzimuthValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbAzimuthValue.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lbAzimuthValue.Location = new System.Drawing.Point(119, 30);
+            this.lbAzimuthValue.Name = "lbAzimuthValue";
+            this.lbAzimuthValue.Size = new System.Drawing.Size(14, 15);
+            this.lbAzimuthValue.TabIndex = 4;
+            this.lbAzimuthValue.Text = "0";
+            // 
+            // lbAzimuth
+            // 
+            this.lbAzimuth.AutoSize = true;
+            this.lbAzimuth.Location = new System.Drawing.Point(3, 30);
+            this.lbAzimuth.Name = "lbAzimuth";
+            this.lbAzimuth.Size = new System.Drawing.Size(52, 15);
+            this.lbAzimuth.TabIndex = 3;
+            this.lbAzimuth.Text = "Azimuth";
+            // 
+            // lbAltitudeValue
+            // 
+            this.lbAltitudeValue.AutoSize = true;
+            this.lbAltitudeValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbAltitudeValue.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lbAltitudeValue.Location = new System.Drawing.Point(119, 15);
+            this.lbAltitudeValue.Name = "lbAltitudeValue";
+            this.lbAltitudeValue.Size = new System.Drawing.Size(14, 15);
+            this.lbAltitudeValue.TabIndex = 2;
+            this.lbAltitudeValue.Text = "0";
+            // 
+            // lbAltitude
+            // 
+            this.lbAltitude.AutoSize = true;
+            this.lbAltitude.Location = new System.Drawing.Point(3, 15);
+            this.lbAltitude.Name = "lbAltitude";
+            this.lbAltitude.Size = new System.Drawing.Size(49, 15);
+            this.lbAltitude.TabIndex = 1;
+            this.lbAltitude.Text = "Altitude";
+            // 
+            // lbCoordinates
+            // 
+            this.lbCoordinates.AutoSize = true;
+            this.lbCoordinates.Location = new System.Drawing.Point(0, 0);
+            this.lbCoordinates.Name = "lbCoordinates";
+            this.lbCoordinates.Size = new System.Drawing.Size(71, 15);
+            this.lbCoordinates.TabIndex = 0;
+            this.lbCoordinates.Text = "Coordinates";
+            // 
             // FormSkyMap2D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 804);
+            this.ClientSize = new System.Drawing.Size(998, 863);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSkyMap2D";
@@ -756,8 +876,10 @@ namespace StarMap2D.Forms
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.pnPlayback.ResumeLayout(false);
+            this.pnPlayback.PerformLayout();
+            this.pnCoordinates.ResumeLayout(false);
+            this.pnCoordinates.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -803,9 +925,19 @@ namespace StarMap2D.Forms
         private CheckBox cbAboveHorizonValue;
         private Label lbAboveHorizon;
         private CheckBox cbDrawCrossHair;
-        private Panel panel5;
+        private Panel pnPlayback;
         private Label lbHour1;
         private Controls.WinForms.ImageButton btHourNext;
         private Controls.WinForms.ImageButton btHourPrevious;
+        private Panel pnCoordinates;
+        private Label lbAzimuthValue;
+        private Label lbAzimuth;
+        private Label lbAltitudeValue;
+        private Label lbAltitude;
+        private Label lbCoordinates;
+        private Label lbDeclination;
+        private Label lbDeclinationCoordinateValue;
+        private Label lbRightAscensionCoordinateValue;
+        private Label lbRightAscension;
     }
 }

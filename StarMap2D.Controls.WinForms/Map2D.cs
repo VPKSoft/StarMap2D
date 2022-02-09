@@ -25,7 +25,6 @@ SOFTWARE.
 #endregion
 
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Globalization;
@@ -104,6 +103,13 @@ public partial class Map2D : UserControl
     public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
 
     /// <summary>
+    /// A delegate for an event when the horizontal or ecliptic coordinates change on mouse position change.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The <see cref="CoordinatesChangedEventArgs"/> instance containing the event data.</param>
+    public delegate void OnMouseCoordinatesChanged(object? sender, CoordinatesChangedEventArgs e);
+
+    /// <summary>
     /// Delegate OnObjectUserInteraction.
     /// </summary>
     /// <param name="sender">The sender of the event.</param>
@@ -120,6 +126,14 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Description("Occurs when the latitude or the longitude coordinates changed.")]
     public event OnCoordinatesChanged? CoordinatesChanged;
+
+    /// <summary>
+    /// Occurs when horizontal or ecliptic coordinates change on mouse move.
+    /// </summary>
+    [Category("StarMap2D")]
+    [Browsable(true)]
+    [Description("Occurs when horizontal or ecliptic coordinates change on mouse move.")]
+    public event OnMouseCoordinatesChanged? MouseCoordinatesChanged;
 
     /// <summary>
     /// Occurs when mouse hovers over a named object.
@@ -198,6 +212,10 @@ public partial class Map2D : UserControl
     private int OffsetX => Width > Height ? (Width - Height) / 2 : 0;
 
     private int OffsetY => Height > Width ? (Height - Width) / 2 : 0;
+
+    private double CenterX => OffsetX + (double)Width / 2;
+    
+    private double CenterY => OffsetY + (double)Height / 2;
 
     private double Diameter => Math.Min(Width, Height);
     #endregion
@@ -1106,6 +1124,8 @@ public partial class Map2D : UserControl
 
     private MapObjectMetadata? metadata;
 
+    private Point previousMousePoint = Point.Empty;
+
     private void Map2D_MouseMove(object sender, MouseEventArgs e)
     {
         if (mouseDown && e.Button.HasFlag(MouseButtons.Right))
@@ -1162,20 +1182,33 @@ public partial class Map2D : UserControl
         }
         else
         {
-            // TODO::Working version (Local Hour Angle --> Ra/Dec)
-
-            var drawPoint = new Point(e.X - OffsetX, e.Y - OffsetY);
-
-            var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y }, invertEastWest);//.ToHorizontal(plot2D.AaDate, Latitude, Longitude);
-
-            if (point != null)
+            if (previousMousePoint != e.Location)
             {
-//                Debug.WriteLine($"1) X = {drawPoint.X}, Y = {drawPoint.Y}");
-                Debug.WriteLine($"1) X = {point.X}, Y = {point.Y}");
-                point = Coordinates.AltitudeAzimuthToRightAscensionDeclination(point.Y, point.X, Latitude, Longitude, DateTime.UtcNow);
-                Debug.WriteLine($"2) X = {HoursConvert.DecimalDegreesToHms(point.X)}, Y = {point.Y}");
+                var drawPoint = new Point(e.X - OffsetX, e.Y - OffsetY);
+
+                if (Circle.PointIsInside(CenterX, CenterY, Diameter / 2, OffsetX + e.X, OffsetY + e.Y))
+                {
+
+                    var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y },
+                        invertEastWest);
+
+                    if (point != null && plot2D != null)
+                    {
+                        var pointRaDec = Coordinates.AltitudeAzimuthToRightAscensionDeclination(point.Y, point.X,
+                            Latitude, Longitude, plot2D.DateTimeUtc);
+                        MouseCoordinatesChanged?.Invoke(this,
+                            new CoordinatesChangedEventArgs
+                            {
+                                Altitude = point.X,
+                                Azimuth = point.Y,
+                                RightAscension = pointRaDec.X,
+                                Declination = pointRaDec.Y,
+                                X = e.X, Y = e.Y,
+                            });
+                    }
+                }
+                previousMousePoint = e.Location;
             }
-            
 
             var newMetadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.X, e.Y));
             if (newMetadata != null)

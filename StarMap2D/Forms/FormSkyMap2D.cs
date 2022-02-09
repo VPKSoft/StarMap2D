@@ -624,4 +624,13 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         dtpMapDateTime.Value = map2d.CurrentTimeUtc.ToLocalTime();
         SetTitle();
     }
+
+    private void map2d_MouseCoordinatesChanged(object sender, CoordinatesChangedEventArgs e)
+    {
+        string format = "000.000000"; // F6
+        lbAzimuthValue.Text = e.Azimuth.ToString(format, CultureInfo.InvariantCulture);
+        lbAltitudeValue.Text = e.Altitude.ToString(format, CultureInfo.InvariantCulture);
+        lbRightAscensionCoordinateValue.Text = e.RightAscension.ToString(format, CultureInfo.InvariantCulture);
+        lbDeclinationCoordinateValue.Text = e.Declination.ToString(format, CultureInfo.InvariantCulture);
+    }
 }
