@@ -1199,8 +1199,8 @@ public partial class Map2D : UserControl
                         MouseCoordinatesChanged?.Invoke(this,
                             new CoordinatesChangedEventArgs
                             {
-                                Altitude = point.X,
-                                Azimuth = point.Y,
+                                Altitude = point.Y,
+                                Azimuth = point.X,
                                 RightAscension = pointRaDec.X,
                                 Declination = pointRaDec.Y,
                                 X = e.X, Y = e.Y,

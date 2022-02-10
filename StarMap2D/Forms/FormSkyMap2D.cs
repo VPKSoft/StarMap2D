@@ -27,6 +27,7 @@ SOFTWARE.
 using System.Globalization;
 using System.Text;
 using AASharp;
+using StarMap2D.Calculations.Compass;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
@@ -627,10 +628,11 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
     private void map2d_MouseCoordinatesChanged(object sender, CoordinatesChangedEventArgs e)
     {
-        string format = "000.000000"; // F6
+        string format = "+000.000000;-000.000000"; // F6
         lbAzimuthValue.Text = e.Azimuth.ToString(format, CultureInfo.InvariantCulture);
         lbAltitudeValue.Text = e.Altitude.ToString(format, CultureInfo.InvariantCulture);
         lbRightAscensionCoordinateValue.Text = e.RightAscension.ToString(format, CultureInfo.InvariantCulture);
         lbDeclinationCoordinateValue.Text = e.Declination.ToString(format, CultureInfo.InvariantCulture);
+        lbCompassDirectionValue.Text = CompassDirection.FromDegrees(e.Azimuth).ValueString;
     }
 }

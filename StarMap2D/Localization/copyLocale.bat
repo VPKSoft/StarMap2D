@@ -1,0 +1,1 @@
+copy "%LOCALAPPDATA%\VPKSoft\StarMap2D\lang.sqlite" .\lang.sqlite

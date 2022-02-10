@@ -59,14 +59,19 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
         cmbSelectLocation.Items.AddRange(Cities.CitiesList.ToArray<object>());
 
-        LoadSettings();
-
         // list the translated cultures..
         List<CultureInfo> cultures = DBLangEngine.GetLocalizedCultures();
+
+        if (cultures.Count == 0)
+        {
+            cultures.Add(new CultureInfo("en-US"));
+        }
 
         // a the translated cultures to the selection combo box..
         // ReSharper disable once CoVariantArrayConversion
         cmbSelectLanguageValue.Items.AddRange(cultures.ToArray());
+
+        LoadSettings();
     }
 
     #region PrivateFields
@@ -118,6 +123,8 @@ public partial class FormDialogSettings : DBLangEngineWinforms
             .ToArray();
         cbInvertEastWest.Checked = Settings.Default.InvertEastWest;
 
+        cmbSelectLanguageValue.SelectedItem = new CultureInfo(Settings.Default.Locale);
+
         cbDrawCrossHair.Checked = Settings.Default.DrawCrossHair;
         pnCrossHairColor.BackColor = Settings.Default.CrossHairColor;
     }
@@ -149,6 +156,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.InvertEastWest = cbInvertEastWest.Checked;
         Settings.Default.DrawCrossHair = cbDrawCrossHair.Checked;
         Settings.Default.CrossHairColor = pnCrossHairColor.BackColor;
+        Settings.Default.Locale = cmbSelectLanguageValue.SelectedItem.ToString();
         Settings.Default.Save();
     }
     #endregion

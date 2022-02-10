@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using System.Globalization;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using VPKSoft.LangLib;
@@ -64,6 +65,8 @@ internal static class Program
             _ = new FormPlanetDetails();
             return;
         }
+
+        DBLangEngine.UseCulture = new CultureInfo(Properties.Settings.Default.Locale);
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.

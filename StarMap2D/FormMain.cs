@@ -25,9 +25,13 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
+using AASharp;
+using StarMap2D.Calculations.Compass;
+using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
+using StarMap2D.Localization;
 using VPKSoft.DBLocalization;
 using VPKSoft.LangLib;
 
@@ -58,6 +62,8 @@ public partial class FormMain : DBLangEngineWinforms
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
+        CompassDirection.GetNameFunc = LocalizeCompassDirection.LocalizeCompassDirectionFunc;
+
         //Properties.Settings.Default.Reset();
     }
 
@@ -73,6 +79,8 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button3_Click(object sender, EventArgs e)
     {
+        MessageBox.Show(CompassDirection.FromDegrees(31.4345).ToString());
+        MessageBox.Show(CompassDirection.FromDegrees(20.654).ToString());
     }
 
     private void mnuLocalize_Click(object sender, EventArgs e)

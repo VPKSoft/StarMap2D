@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="msgAboveHorizonBooleanValue" xml:space="preserve">
     <value>Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon</value>
@@ -129,6 +129,15 @@
   <data name="msgDeclinationWithValue" xml:space="preserve">
     <value>Declination: {0}{1}|A text indicating a right ascension value</value>
   </data>
+  <data name="msgEast" xml:space="preserve">
+    <value>east|The compass direction to east.</value>
+  </data>
+  <data name="msgEastNorthEast" xml:space="preserve">
+    <value>east-north-east|The compass direction to east-north-east.</value>
+  </data>
+  <data name="msgEastSouthEast" xml:space="preserve">
+    <value>east-south-east|The compass direction to east-south-east.</value>
+  </data>
   <data name="msgHorizontalXDegreesWithValue" xml:space="preserve">
     <value>Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees</value>
   </data>
@@ -138,6 +147,21 @@
   <data name="msgNo" xml:space="preserve">
     <value>no|A message saying false in form of no.</value>
   </data>
+  <data name="msgNorth" xml:space="preserve">
+    <value>north|The compass direction to north.</value>
+  </data>
+  <data name="msgNorthEast" xml:space="preserve">
+    <value>north-east|The compass direction to north-east.</value>
+  </data>
+  <data name="msgNorthNorthEast" xml:space="preserve">
+    <value>north-north-east|The compass direction to north-north-east.</value>
+  </data>
+  <data name="msgNorthNorthWest" xml:space="preserve">
+    <value>north-north-west|The compass direction to north-north-west.</value>
+  </data>
+  <data name="msgNorthWest" xml:space="preserve">
+    <value>north-west|The compass direction to north-west.</value>
+  </data>
   <data name="msgObjectNameValue" xml:space="preserve">
     <value>Object name: {0}{1}|A message describing a name value of any sky object of any kind.</value>
   </data>
@@ -146,6 +170,21 @@
   </data>
   <data name="msgSkyMap" xml:space="preserve">
     <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.</value>
+  </data>
+  <data name="msgSouth" xml:space="preserve">
+    <value>south|The compass direction to south.</value>
+  </data>
+  <data name="msgSouthEast" xml:space="preserve">
+    <value>south-east|The compass direction to south-east.</value>
+  </data>
+  <data name="msgSouthSouthEast" xml:space="preserve">
+    <value>south-south-east|The compass direction to south-south-east.</value>
+  </data>
+  <data name="msgSouthSouthWest" xml:space="preserve">
+    <value>south-south-west|The compass direction to south-south-west.</value>
+  </data>
+  <data name="msgSouthWest" xml:space="preserve">
+    <value>south-west|The compass direction to south-west.</value>
   </data>
   <data name="msgTimeIntervalDay" xml:space="preserve">
     <value>d|An abbreviation for days.</value>
@@ -173,6 +212,15 @@
   </data>
   <data name="msgUnknownVariableValue" xml:space="preserve">
     <value>unknown|A value describing an unknown value of a physical variable.</value>
+  </data>
+  <data name="msgWest" xml:space="preserve">
+    <value>west|The compass direction to west.</value>
+  </data>
+  <data name="msgWestNorthWest" xml:space="preserve">
+    <value>west-north-west|The compass direction to west-north-west.</value>
+  </data>
+  <data name="msgWestSouthWest" xml:space="preserve">
+    <value>west-south-west|The compass direction to west-south-west.</value>
   </data>
   <data name="msgYes" xml:space="preserve">
     <value>yes|A message saying true in form of yes.</value>
