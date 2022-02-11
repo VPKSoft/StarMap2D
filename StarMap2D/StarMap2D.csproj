@@ -26,7 +26,9 @@
 
   <ItemGroup>
     <PackageReference Include="AASharp" Version="1.99.1" />
+    <PackageReference Include="ChoETL.NETStandard" Version="1.2.1.42" />
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
+    <PackageReference Include="DG.AdvancedDataGridView" Version="1.2.26609.5" />
     <PackageReference Include="Svg" Version="3.4.0" />
     <PackageReference Include="VPKSoft.LangLib" Version="1.0.9" />
   </ItemGroup>
@@ -71,6 +73,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Miscellaneous\" />
   </ItemGroup>
 
 </Project>

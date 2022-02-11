@@ -41,6 +41,59 @@ namespace StarMap2D.Calculations.StaticData;
 public class PlanetData
 {
     /// <summary>
+    /// Deconstructs the class data.
+    /// </summary>
+    /// <param name="name">The <see cref="Name"/> value.</param>
+    /// <param name="mass">The <see cref="Mass"/> value.</param>
+    /// <param name="diameter">The <see cref="Diameter"/> value.</param>
+    /// <param name="density">The <see cref="Density"/> value.</param>
+    /// <param name="gravity">The <see cref="Gravity"/> value.</param>
+    /// <param name="escapeVelocity">The <see cref="EscapeVelocity"/> value.</param>
+    /// <param name="rotationPeriod">The <see cref="RotationPeriod"/> value.</param>
+    /// <param name="lengthOfDay">The <see cref="LengthOfDay"/> value.</param>
+    /// <param name="distanceFromSun">The <see cref="DistanceFromSun"/> value.</param>
+    /// <param name="perihelion">The <see cref="Perihelion"/> value.</param>
+    /// <param name="aphelion">The <see cref="Aphelion"/> value.</param>
+    /// <param name="orbitalPeriod">The <see cref="OrbitalPeriod"/> value.</param>
+    /// <param name="orbitalVelocity">The <see cref="OrbitalVelocity"/> value.</param>
+    /// <param name="orbitalInclination">The <see cref="OrbitalInclination"/> value.</param>
+    /// <param name="orbitalEccentricity">The <see cref="OrbitalEccentricity"/> value.</param>
+    /// <param name="obliquityToOrbit">The <see cref="ObliquityToOrbit"/> value.</param>
+    /// <param name="meanTemperature">The <see cref="MeanTemperature"/> value.</param>
+    /// <param name="surfacePressure">The <see cref="SurfacePressure"/> value.</param>
+    /// <param name="numberOfMoons">The <see cref="NumberOfMoons"/> value.</param>
+    /// <param name="ringSystem">The <see cref="RingSystem"/> value.</param>
+    /// <param name="globalMagneticField">The <see cref="GlobalMagneticField"/> value.</param>
+    /// <param name="objectType">The <see cref="ObjectType"/> value.</param>
+    /// <param name="dataUrl">The <see cref="DataUrl"/> value.</param>
+    public void Deconstruct(out string name, out double mass, out double diameter, out double density, out double gravity, out double escapeVelocity, out double rotationPeriod, out double lengthOfDay, out double distanceFromSun, out double perihelion, out double aphelion, out double? orbitalPeriod, out double? orbitalVelocity, out double? orbitalInclination, out double? orbitalEccentricity, out double? obliquityToOrbit, out double? meanTemperature, out double? surfacePressure, out int? numberOfMoons, out bool ringSystem, out bool? globalMagneticField, out ObjectsWithPositions objectType, out string? dataUrl)
+    {
+        name = Name;
+        mass = Mass;
+        diameter = Diameter;
+        density = Density;
+        gravity = Gravity;
+        escapeVelocity = EscapeVelocity;
+        rotationPeriod = RotationPeriod;
+        lengthOfDay = LengthOfDay;
+        distanceFromSun = DistanceFromSun;
+        perihelion = Perihelion;
+        aphelion = Aphelion;
+        orbitalPeriod = OrbitalPeriod;
+        orbitalVelocity = OrbitalVelocity;
+        orbitalInclination = OrbitalInclination;
+        orbitalEccentricity = OrbitalEccentricity;
+        obliquityToOrbit = ObliquityToOrbit;
+        meanTemperature = MeanTemperature;
+        surfacePressure = SurfacePressure;
+        numberOfMoons = NumberOfMoons;
+        ringSystem = RingSystem;
+        globalMagneticField = GlobalMagneticField;
+        objectType = ObjectType;
+        dataUrl = DataUrl;
+    }
+
+    /// <summary>
     /// Gets or sets the name of the planet.
     /// </summary>
     /// <value>The name of the planet.</value>
@@ -177,6 +230,48 @@ public class PlanetData
     /// </summary>
     /// <value>The data URL.</value>
     public string? DataUrl { get; set; }
+
+    /// <summary>
+    /// Gets the extended data with dynamic calculated data included.
+    /// </summary>
+    /// <param name="objectType">Type of the object.</param>
+    /// <param name="latitude">The latitude for the dynamic data calculation.</param>
+    /// <param name="longitude">The longitude for the dynamic data calculation.</param>
+    /// <param name="dateTime">The date and time for the dynamic data.</param>
+    /// <returns>An instance od the <see cref="PlanetDataExtended"/> class.</returns>
+    public static PlanetDataExtended GetExtendedData(ObjectsWithPositions objectType, double latitude, double longitude, DateTime dateTime)
+    {
+        var result = new PlanetDataExtended();
+        (result.Name,
+            result.Mass,
+            result.Diameter,
+            result.Density,
+            result.Gravity,
+            result.EscapeVelocity,
+            result.RotationPeriod,
+            result.LengthOfDay,
+            result.DistanceFromSun,
+            result.Perihelion,
+            result.Aphelion,
+            result.OrbitalPeriod,
+            result.OrbitalVelocity,
+            result.OrbitalInclination,
+            result.OrbitalEccentricity,
+            result.ObliquityToOrbit,
+            result.MeanTemperature,
+            result.SurfacePressure,
+            result.NumberOfMoons,
+            result.RingSystem,
+            result.GlobalMagneticField,
+            result.ObjectType,
+            result.DataUrl) = Data.First(f => f.ObjectType == objectType);
+
+        result.Latitude = latitude;
+        result.Longitude = longitude;
+        result.DetailDateTime = dateTime;
+
+        return result;
+    }
 
     /// <summary>
     /// The static planet data.

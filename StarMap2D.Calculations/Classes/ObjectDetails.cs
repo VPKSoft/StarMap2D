@@ -31,48 +31,27 @@ namespace StarMap2D.Calculations.Classes;
 /// <summary>
 /// Details of a sky object of any kind.
 /// </summary>
-public class ObjectDetails
+public class ObjectDetails: IObjectDetails
 {
-    /// <summary>
-    /// Gets or sets the name of the object.
-    /// </summary>
-    /// <value>The name of the object.</value>
+    /// <inheritdoc cref="IObjectDetails.ObjectName"/>
     public string? ObjectName { get; set; }
 
-    /// <summary>
-    /// Gets or sets the right ascension of the object.
-    /// </summary>
-    /// <value>The right ascension.</value>
+    /// <inheritdoc cref="IObjectDetails.RightAscension"/>
     public double RightAscension { get; set; }
 
-    /// <summary>
-    /// Gets or sets the declination of the object.
-    /// </summary>
-    /// <value>The declination.</value>
+    /// <inheritdoc cref="IObjectDetails.Declination"/>
     public double Declination { get; set; }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether the object is above horizon at the <see cref="DetailDateTime"/> date and time.
-    /// </summary>
-    /// <value><c>true</c> if the object is above horizon at the <see cref="DetailDateTime"/>; otherwise, <c>false</c>.</value>
+    /// <inheritdoc cref="IObjectDetails.AboveHorizon"/>
     public bool AboveHorizon { get; set; }
 
-    /// <summary>
-    /// Gets or sets the horizontal X-coordinate in degrees.
-    /// </summary>
-    /// <value>The horizontal X-coordinate in degrees.</value>
+    /// <inheritdoc cref="IObjectDetails.HorizontalDegreesX"/>
     public double HorizontalDegreesX { get; set; }
 
-    /// <summary>
-    /// Gets or sets the horizontal Y-coordinate in degrees.
-    /// </summary>
-    /// <value>The horizontal Y-coordinate in degrees.</value>
+    /// <inheritdoc cref="IObjectDetails.HorizontalDegreesY"/>
     public double HorizontalDegreesY { get; set; }
 
-    /// <summary>
-    /// Gets or sets the date and time of the calculation of these object details.
-    /// </summary>
-    /// <value>The calculation date time of the details.</value>
+    /// <inheritdoc cref="IObjectDetails.DetailDateTime"/>
     public DateTime DetailDateTime { get; set; }
 
     /// <summary>
@@ -88,5 +67,24 @@ AboveHorizon = {(AboveHorizon ? "true" : "false")},
 HorizontalDegreesX = {HorizontalDegreesX.ToString(CultureInfo.InvariantCulture)}, 
 HorizontalDegreesY = {HorizontalDegreesY.ToString(CultureInfo.InvariantCulture)}, 
 DetailDateTime = {DetailDateTime.ToString(CultureInfo.InvariantCulture)},}},";
+    }
+
+    /// <summary>
+    /// Deconstructs the class data.
+    /// </summary>
+    /// <param name="objectName">The <see cref="ObjectName"/> value.</param>
+    /// <param name="rightAscension">The <see cref="RightAscension"/> value.</param>
+    /// <param name="declination">The <see cref="Declination"/> value.</param>
+    /// <param name="aboveHorizon">The <see cref="AboveHorizon"/> value.</param>
+    /// <param name="horizontalDegreesX">The <see cref="HorizontalDegreesX"/> value..</param>
+    /// <param name="horizontalDegreesY">The <see cref="HorizontalDegreesY"/> value..</param>
+    public void Deconstruct(out string? objectName, out double rightAscension, out double declination, out bool aboveHorizon, out double horizontalDegreesX, out double horizontalDegreesY)
+    {
+        objectName = ObjectName;
+        rightAscension = RightAscension;
+        declination = Declination;
+        aboveHorizon = AboveHorizon;
+        horizontalDegreesX = HorizontalDegreesX;
+        horizontalDegreesY = HorizontalDegreesY;
     }
 }

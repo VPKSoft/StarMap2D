@@ -79,8 +79,9 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button3_Click(object sender, EventArgs e)
     {
-        MessageBox.Show(CompassDirection.FromDegrees(31.4345).ToString());
-        MessageBox.Show(CompassDirection.FromDegrees(20.654).ToString());
+        new FormSolarSystemObjectsTable().Show();
+        //MessageBox.Show(CompassDirection.FromDegrees(31.4345).ToString());
+        //MessageBox.Show(CompassDirection.FromDegrees(20.654).ToString());
     }
 
     private void mnuLocalize_Click(object sender, EventArgs e)
