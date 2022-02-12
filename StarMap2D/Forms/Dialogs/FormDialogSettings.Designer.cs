@@ -54,9 +54,12 @@ namespace StarMap2D.Forms.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpCommon = new System.Windows.Forms.TabPage();
+            this.cmbFormattingCultureValue = new System.Windows.Forms.ComboBox();
+            this.lbFormattingCulture = new System.Windows.Forms.Label();
             this.cbDrawCrossHair = new System.Windows.Forms.CheckBox();
             this.nudCrossHairSize = new System.Windows.Forms.NumericUpDown();
             this.lbCrossHairSize = new System.Windows.Forms.Label();
@@ -102,6 +105,7 @@ namespace StarMap2D.Forms.Dialogs
             this.btOk = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.ttMain = new System.Windows.Forms.ToolTip(this.components);
             this.tcSettings.SuspendLayout();
             this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).BeginInit();
@@ -131,6 +135,8 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tpCommon
             // 
+            this.tpCommon.Controls.Add(this.cmbFormattingCultureValue);
+            this.tpCommon.Controls.Add(this.lbFormattingCulture);
             this.tpCommon.Controls.Add(this.cbDrawCrossHair);
             this.tpCommon.Controls.Add(this.nudCrossHairSize);
             this.tpCommon.Controls.Add(this.lbCrossHairSize);
@@ -155,6 +161,31 @@ namespace StarMap2D.Forms.Dialogs
             this.tpCommon.TabIndex = 0;
             this.tpCommon.Text = "Common";
             this.tpCommon.UseVisualStyleBackColor = true;
+            // 
+            // cmbFormattingCultureValue
+            // 
+            this.cmbFormattingCultureValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFormattingCultureValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbFormattingCultureValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbFormattingCultureValue.DisplayMember = "DisplayName";
+            this.cmbFormattingCultureValue.FormattingEnabled = true;
+            this.cmbFormattingCultureValue.Location = new System.Drawing.Point(6, 377);
+            this.cmbFormattingCultureValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbFormattingCultureValue.Name = "cmbFormattingCultureValue";
+            this.cmbFormattingCultureValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbFormattingCultureValue.TabIndex = 35;
+            this.cmbFormattingCultureValue.ValueMember = "Name";
+            this.cmbFormattingCultureValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
+            // 
+            // lbFormattingCulture
+            // 
+            this.lbFormattingCulture.AutoSize = true;
+            this.lbFormattingCulture.Location = new System.Drawing.Point(6, 357);
+            this.lbFormattingCulture.Name = "lbFormattingCulture";
+            this.lbFormattingCulture.Size = new System.Drawing.Size(232, 15);
+            this.lbFormattingCulture.TabIndex = 34;
+            this.lbFormattingCulture.Text = "Data formatting culture (i,.e. numbers, etc)";
             // 
             // cbDrawCrossHair
             // 
@@ -204,17 +235,18 @@ namespace StarMap2D.Forms.Dialogs
             this.lbSelectLanguageDescription.Location = new System.Drawing.Point(5, 300);
             this.lbSelectLanguageDescription.Margin = new System.Windows.Forms.Padding(20, 17, 20, 17);
             this.lbSelectLanguageDescription.Name = "lbSelectLanguageDescription";
-            this.lbSelectLanguageDescription.Size = new System.Drawing.Size(153, 13);
+            this.lbSelectLanguageDescription.Size = new System.Drawing.Size(211, 13);
             this.lbSelectLanguageDescription.TabIndex = 29;
-            this.lbSelectLanguageDescription.Text = "Language (a restart is required)";
+            this.lbSelectLanguageDescription.Text = "Language (localization, a restart is required)";
             this.lbSelectLanguageDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSelectLanguageValue
             // 
             this.cmbSelectLanguageValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSelectLanguageValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbSelectLanguageValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSelectLanguageValue.DisplayMember = "DisplayName";
-            this.cmbSelectLanguageValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSelectLanguageValue.FormattingEnabled = true;
             this.cmbSelectLanguageValue.Location = new System.Drawing.Point(6, 320);
             this.cmbSelectLanguageValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
@@ -222,6 +254,7 @@ namespace StarMap2D.Forms.Dialogs
             this.cmbSelectLanguageValue.Size = new System.Drawing.Size(500, 23);
             this.cmbSelectLanguageValue.TabIndex = 28;
             this.cmbSelectLanguageValue.ValueMember = "Name";
+            this.cmbSelectLanguageValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
             // 
             // cbDrawConstellationBorders
             // 
@@ -753,5 +786,8 @@ namespace StarMap2D.Forms.Dialogs
         private CheckBox cbDrawCrossHair;
         private NumericUpDown nudCrossHairSize;
         private Label lbCrossHairSize;
+        private ComboBox cmbFormattingCultureValue;
+        private Label lbFormattingCulture;
+        private ToolTip ttMain;
     }
 }

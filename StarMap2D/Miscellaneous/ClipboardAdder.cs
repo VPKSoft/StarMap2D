@@ -24,25 +24,33 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-
-namespace StarMap2D;
+namespace StarMap2D.Miscellaneous;
 
 /// <summary>
-/// A class containing the global static parameters.
+/// A helper class to set text to the clipboard.
 /// </summary>
-public static class Globals
+internal class ClipboardAdder
 {
     /// <summary>
-    /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
+    /// Sets the clipboard text.
     /// </summary>
-    /// <seealso cref="AASharp"/>
-    /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
-    public static bool HighPrecisionCalculations { get; set; }
-
-    /// <summary>
-    /// Gets or sets the string formatting culture.
-    /// </summary>
-    /// <value>The string formatting culture.</value>
-    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
+    /// <param name="value">The value to set to the clipboard.</param>
+    /// <param name="retryCount">The retry count to try to set the clipboard text.</param>
+    /// <param name="sleepInterval">The interval to wait before retrying the clipboard set text operation in case of failure.</param>
+    public static void SetClipboardText(string value, int retryCount = 10, int sleepInterval = 50)
+    {
+        for (var i = 0; i < retryCount; i++)
+        {
+            try
+            {
+                Clipboard.SetText(value);
+                break;
+            }
+            catch
+            {
+                Thread.Sleep(sleepInterval);
+                // Let the loop continue
+            }
+        }
+    }
 }

@@ -24,25 +24,24 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-
-namespace StarMap2D;
+namespace StarMap2D.Calculations.Attributes;
 
 /// <summary>
-/// A class containing the global static parameters.
+/// An attribute to issue ordering and formatting to a property which is supposed to be shown in a data grid.
+/// Implements the <see cref="System.Attribute" />
 /// </summary>
-public static class Globals
+/// <seealso cref="System.Attribute" />
+public class DataTableConfigAttribute : Attribute
 {
     /// <summary>
-    /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
+    /// Gets or sets the number format.
     /// </summary>
-    /// <seealso cref="AASharp"/>
-    /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
-    public static bool HighPrecisionCalculations { get; set; }
+    /// <value>The number format.</value>
+    public string? NumberFormat { get; set; }
 
     /// <summary>
-    /// Gets or sets the string formatting culture.
+    /// Gets or sets the column order.
     /// </summary>
-    /// <value>The string formatting culture.</value>
-    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
+    /// <value>The column order.</value>
+    public int ColumnOrder { get; set; }
 }

@@ -61,11 +61,38 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Above horizonAbove horizon|A message describing an elliptical object physical property: Above horizon..
+        /// </summary>
+        internal static string msgAboveHorizon {
+            get {
+                return ResourceManager.GetString("msgAboveHorizon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon.
         /// </summary>
         internal static string msgAboveHorizonBooleanValue {
             get {
                 return ResourceManager.GetString("msgAboveHorizonBooleanValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aphelion (10⁶ km)|A message describing an elliptical object physical property: Aphelion (10⁶ km)..
+        /// </summary>
+        internal static string msgAphelionKm10_6 {
+            get {
+                return ResourceManager.GetString("msgAphelionKm10_6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time|A message describing a date and time of value calculation..
+        /// </summary>
+        internal static string msgCalculationDateTime {
+            get {
+                return ResourceManager.GetString("msgCalculationDateTime", resourceCulture);
             }
         }
         
@@ -79,6 +106,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data URL|A message describing an external URL value for additional data..
+        /// </summary>
+        internal static string msgDataUrl {
+            get {
+                return ResourceManager.GetString("msgDataUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date and time: {0}{1}|A text indicating a date and time value.
         /// </summary>
         internal static string msgDateDataDateTimeValue {
@@ -88,11 +124,56 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Declination (degrees)|A message describing an elliptical object physical property: Declination (degrees)..
+        /// </summary>
+        internal static string msgDeclination {
+            get {
+                return ResourceManager.GetString("msgDeclination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Declination: {0}{1}|A text indicating a right ascension value.
         /// </summary>
         internal static string msgDeclinationWithValue {
             get {
                 return ResourceManager.GetString("msgDeclinationWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density (kg/m³)|A message describing an elliptical object physical property:  density (kg/m³)..
+        /// </summary>
+        internal static string msgDensityKgM3 {
+            get {
+                return ResourceManager.GetString("msgDensityKgM3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Date and time|A message describing a date and time of value calculation..
+        /// </summary>
+        internal static string msgDetailDateTime {
+            get {
+                return ResourceManager.GetString("msgDetailDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diameter (km)|A message describing an elliptical object physical property: Diameter (km)..
+        /// </summary>
+        internal static string msgDiameterKm {
+            get {
+                return ResourceManager.GetString("msgDiameterKm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance from sun (10⁶ km)|A message describing an elliptical object physical property: Distance from sun (10⁶ km)..
+        /// </summary>
+        internal static string msgDistanceFromSunKm10_6 {
+            get {
+                return ResourceManager.GetString("msgDistanceFromSunKm10_6", resourceCulture);
             }
         }
         
@@ -124,6 +205,69 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error|A message indicating that a general error occurred..
+        /// </summary>
+        internal static string msgError {
+            get {
+                return ResourceManager.GetString("msgError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Escape velocity (km/s)|A message describing an elliptical object physical property: Escape velocity (km/s)..
+        /// </summary>
+        internal static string msgEscapeVelocityKmS {
+            get {
+                return ResourceManager.GetString("msgEscapeVelocityKmS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save the data to the file &apos;{0}&apos; with error message of: &apos;{1}&apos;.|A file saving error occurred with the file name and exception message..
+        /// </summary>
+        internal static string msgFileSaveFailedError {
+            get {
+                return ResourceManager.GetString("msgFileSaveFailedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global magnetic field|A message describing an elliptical object physical property: Global magnetic field..
+        /// </summary>
+        internal static string msgGlobalMagneticField {
+            get {
+                return ResourceManager.GetString("msgGlobalMagneticField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gravity (m/s²)|A message describing an elliptical object physical property: Gravity (m/s²)..
+        /// </summary>
+        internal static string msgGravityMS2 {
+            get {
+                return ResourceManager.GetString("msgGravityMS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal, azimuth (degrees)|A message describing an elliptical object physical property: Horizontal, azimuth (degrees)..
+        /// </summary>
+        internal static string msgHorizontalDegreesX {
+            get {
+                return ResourceManager.GetString("msgHorizontalDegreesX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal, altitude (degrees)|A message describing an elliptical object physical property: Horizontal, altitude (degrees)..
+        /// </summary>
+        internal static string msgHorizontalDegreesY {
+            get {
+                return ResourceManager.GetString("msgHorizontalDegreesY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees.
         /// </summary>
         internal static string msgHorizontalXDegreesWithValue {
@@ -138,6 +282,60 @@ namespace StarMap2D.Localization {
         internal static string msgHorizontalYDegreesWithValue {
             get {
                 return ResourceManager.GetString("msgHorizontalYDegreesWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latitude|A message describing latitude..
+        /// </summary>
+        internal static string msgLatitude {
+            get {
+                return ResourceManager.GetString("msgLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length of day (hours)|A message describing an elliptical object physical property: Length of day (hours)..
+        /// </summary>
+        internal static string msgLengthOfDayHrs {
+            get {
+                return ResourceManager.GetString("msgLengthOfDayHrs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longitude|A message describing longitude..
+        /// </summary>
+        internal static string msgLongitude {
+            get {
+                return ResourceManager.GetString("msgLongitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mass (10²⁴ kg)|A message describing an elliptical object physical property: Mass (10²⁴ kg)..
+        /// </summary>
+        internal static string msgMassKg10_24 {
+            get {
+                return ResourceManager.GetString("msgMassKg10_24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean temperature (°C)|A message describing an elliptical object physical property: Mean temperature (°C)..
+        /// </summary>
+        internal static string msgMeanTemperatureDC {
+            get {
+                return ResourceManager.GetString("msgMeanTemperatureDC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name|A message describing a name value of something..
+        /// </summary>
+        internal static string msgName {
+            get {
+                return ResourceManager.GetString("msgName", resourceCulture);
             }
         }
         
@@ -196,6 +394,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of moons|A message describing an elliptical object physical property: Number of moons..
+        /// </summary>
+        internal static string msgNumberOfMoons {
+            get {
+                return ResourceManager.GetString("msgNumberOfMoons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object name: {0}{1}|A message describing a name value of any sky object of any kind..
         /// </summary>
         internal static string msgObjectNameValue {
@@ -205,11 +412,101 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obliquity to orbit (degrees)|A message describing an elliptical object physical property: Obliquity to orbit (degrees)..
+        /// </summary>
+        internal static string msgObliquityToOrbitDeg {
+            get {
+                return ResourceManager.GetString("msgObliquityToOrbitDeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital eccentricity|A message describing an elliptical object physical property: Orbital eccentricity..
+        /// </summary>
+        internal static string msgOrbitalEccentricity {
+            get {
+                return ResourceManager.GetString("msgOrbitalEccentricity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital inclination (degrees)|A message describing an elliptical object physical property: Orbital inclination (degrees)..
+        /// </summary>
+        internal static string msgOrbitalInclinationDeg {
+            get {
+                return ResourceManager.GetString("msgOrbitalInclinationDeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OrbitalPeriod (days)|A message describing an elliptical object physical property: Orbital period (days)..
+        /// </summary>
+        internal static string msgOrbitalPeriodDays {
+            get {
+                return ResourceManager.GetString("msgOrbitalPeriodDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OrbitalVelocity (km/s)|A message describing an elliptical object physical property: Orbital velocity (km/s)..
+        /// </summary>
+        internal static string msgOrbitalVelocityKmS {
+            get {
+                return ResourceManager.GetString("msgOrbitalVelocityKmS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perihelion (10⁶ km)|A message describing an elliptical object physical property: Perihelion (10⁶ km)..
+        /// </summary>
+        internal static string msgPerihelionKm10_6 {
+            get {
+                return ResourceManager.GetString("msgPerihelionKm10_6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to start a process for the file &apos;{0}&apos; with error message of: &apos;{1}&apos;.|A process start error occurred with the file name and exception message..
+        /// </summary>
+        internal static string msgProcessStartFailed {
+            get {
+                return ResourceManager.GetString("msgProcessStartFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right ascension (hours)|A message describing an elliptical object physical property: Right ascension (hours)..
+        /// </summary>
+        internal static string msgRightAscension {
+            get {
+                return ResourceManager.GetString("msgRightAscension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right ascension: {0}{1}|A text indicating a right ascension value.
         /// </summary>
         internal static string msgRightAscensionWithValue {
             get {
                 return ResourceManager.GetString("msgRightAscensionWithValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ring systemRing system|A message describing an elliptical object physical property: Ring system..
+        /// </summary>
+        internal static string msgRingSystem {
+            get {
+                return ResourceManager.GetString("msgRingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotation period (hours)|A message describing an elliptical object physical property: Rotation period (hours)..
+        /// </summary>
+        internal static string msgRotationPeriodHrs {
+            get {
+                return ResourceManager.GetString("msgRotationPeriodHrs", resourceCulture);
             }
         }
         
@@ -264,6 +561,15 @@ namespace StarMap2D.Localization {
         internal static string msgSouthWest {
             get {
                 return ResourceManager.GetString("msgSouthWest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surface pressure (bars)|A message describing an elliptical object physical property: Surface pressure (bars)..
+        /// </summary>
+        internal static string msgSurfacePressureBars {
+            get {
+                return ResourceManager.GetString("msgSurfacePressureBars", resourceCulture);
             }
         }
         

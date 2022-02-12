@@ -117,17 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="msgAboveHorizon" xml:space="preserve">
+    <value>Above horizonAbove horizon|A message describing an elliptical object physical property: Above horizon.</value>
+  </data>
   <data name="msgAboveHorizonBooleanValue" xml:space="preserve">
     <value>Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon</value>
+  </data>
+  <data name="msgAphelionKm10_6" xml:space="preserve">
+    <value>Aphelion (10⁶ km)|A message describing an elliptical object physical property: Aphelion (10⁶ km).</value>
+  </data>
+  <data name="msgCalculationDateTime" xml:space="preserve">
+    <value>Date and time|A message describing a date and time of value calculation.</value>
   </data>
   <data name="msgCopyToClipboard" xml:space="preserve">
     <value>Copy to clipboard|A message describing a functionality to copy to clipboard.</value>
   </data>
+  <data name="msgDataUrl" xml:space="preserve">
+    <value>Data URL|A message describing an external URL value for additional data.</value>
+  </data>
   <data name="msgDateDataDateTimeValue" xml:space="preserve">
     <value>Date and time: {0}{1}|A text indicating a date and time value</value>
   </data>
+  <data name="msgDeclination" xml:space="preserve">
+    <value>Declination (degrees)|A message describing an elliptical object physical property: Declination (degrees).</value>
+  </data>
   <data name="msgDeclinationWithValue" xml:space="preserve">
     <value>Declination: {0}{1}|A text indicating a right ascension value</value>
+  </data>
+  <data name="msgDensityKgM3" xml:space="preserve">
+    <value>Density (kg/m³)|A message describing an elliptical object physical property:  density (kg/m³).</value>
+  </data>
+  <data name="msgDetailDateTime" xml:space="preserve">
+    <value>"Date and time|A message describing a date and time of value calculation.</value>
+  </data>
+  <data name="msgDiameterKm" xml:space="preserve">
+    <value>Diameter (km)|A message describing an elliptical object physical property: Diameter (km).</value>
+  </data>
+  <data name="msgDistanceFromSunKm10_6" xml:space="preserve">
+    <value>Distance from sun (10⁶ km)|A message describing an elliptical object physical property: Distance from sun (10⁶ km).</value>
   </data>
   <data name="msgEast" xml:space="preserve">
     <value>east|The compass direction to east.</value>
@@ -138,11 +165,50 @@
   <data name="msgEastSouthEast" xml:space="preserve">
     <value>east-south-east|The compass direction to east-south-east.</value>
   </data>
+  <data name="msgError" xml:space="preserve">
+    <value>Error|A message indicating that a general error occurred.</value>
+  </data>
+  <data name="msgEscapeVelocityKmS" xml:space="preserve">
+    <value>Escape velocity (km/s)|A message describing an elliptical object physical property: Escape velocity (km/s).</value>
+  </data>
+  <data name="msgFileSaveFailedError" xml:space="preserve">
+    <value>Failed to save the data to the file '{0}' with error message of: '{1}'.|A file saving error occurred with the file name and exception message.</value>
+  </data>
+  <data name="msgGlobalMagneticField" xml:space="preserve">
+    <value>Global magnetic field|A message describing an elliptical object physical property: Global magnetic field.</value>
+  </data>
+  <data name="msgGravityMS2" xml:space="preserve">
+    <value>Gravity (m/s²)|A message describing an elliptical object physical property: Gravity (m/s²).</value>
+  </data>
+  <data name="msgHorizontalDegreesX" xml:space="preserve">
+    <value>Horizontal, azimuth (degrees)|A message describing an elliptical object physical property: Horizontal, azimuth (degrees).</value>
+  </data>
+  <data name="msgHorizontalDegreesY" xml:space="preserve">
+    <value>Horizontal, altitude (degrees)|A message describing an elliptical object physical property: Horizontal, altitude (degrees).</value>
+  </data>
   <data name="msgHorizontalXDegreesWithValue" xml:space="preserve">
     <value>Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees</value>
   </data>
   <data name="msgHorizontalYDegreesWithValue" xml:space="preserve">
     <value>Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees</value>
+  </data>
+  <data name="msgLatitude" xml:space="preserve">
+    <value>Latitude|A message describing latitude.</value>
+  </data>
+  <data name="msgLengthOfDayHrs" xml:space="preserve">
+    <value>Length of day (hours)|A message describing an elliptical object physical property: Length of day (hours).</value>
+  </data>
+  <data name="msgLongitude" xml:space="preserve">
+    <value>Longitude|A message describing longitude.</value>
+  </data>
+  <data name="msgMassKg10_24" xml:space="preserve">
+    <value>Mass (10²⁴ kg)|A message describing an elliptical object physical property: Mass (10²⁴ kg).</value>
+  </data>
+  <data name="msgMeanTemperatureDC" xml:space="preserve">
+    <value>Mean temperature (°C)|A message describing an elliptical object physical property: Mean temperature (°C).</value>
+  </data>
+  <data name="msgName" xml:space="preserve">
+    <value>Name|A message describing a name value of something.</value>
   </data>
   <data name="msgNo" xml:space="preserve">
     <value>no|A message saying false in form of no.</value>
@@ -162,11 +228,44 @@
   <data name="msgNorthWest" xml:space="preserve">
     <value>north-west|The compass direction to north-west.</value>
   </data>
+  <data name="msgNumberOfMoons" xml:space="preserve">
+    <value>Number of moons|A message describing an elliptical object physical property: Number of moons.</value>
+  </data>
   <data name="msgObjectNameValue" xml:space="preserve">
     <value>Object name: {0}{1}|A message describing a name value of any sky object of any kind.</value>
   </data>
+  <data name="msgObliquityToOrbitDeg" xml:space="preserve">
+    <value>Obliquity to orbit (degrees)|A message describing an elliptical object physical property: Obliquity to orbit (degrees).</value>
+  </data>
+  <data name="msgOrbitalEccentricity" xml:space="preserve">
+    <value>Orbital eccentricity|A message describing an elliptical object physical property: Orbital eccentricity.</value>
+  </data>
+  <data name="msgOrbitalInclinationDeg" xml:space="preserve">
+    <value>Orbital inclination (degrees)|A message describing an elliptical object physical property: Orbital inclination (degrees).</value>
+  </data>
+  <data name="msgOrbitalPeriodDays" xml:space="preserve">
+    <value>OrbitalPeriod (days)|A message describing an elliptical object physical property: Orbital period (days).</value>
+  </data>
+  <data name="msgOrbitalVelocityKmS" xml:space="preserve">
+    <value>OrbitalVelocity (km/s)|A message describing an elliptical object physical property: Orbital velocity (km/s).</value>
+  </data>
+  <data name="msgPerihelionKm10_6" xml:space="preserve">
+    <value>Perihelion (10⁶ km)|A message describing an elliptical object physical property: Perihelion (10⁶ km).</value>
+  </data>
+  <data name="msgProcessStartFailed" xml:space="preserve">
+    <value>Failed to start a process for the file '{0}' with error message of: '{1}'.|A process start error occurred with the file name and exception message.</value>
+  </data>
+  <data name="msgRightAscension" xml:space="preserve">
+    <value>Right ascension (hours)|A message describing an elliptical object physical property: Right ascension (hours).</value>
+  </data>
   <data name="msgRightAscensionWithValue" xml:space="preserve">
     <value>Right ascension: {0}{1}|A text indicating a right ascension value</value>
+  </data>
+  <data name="msgRingSystem" xml:space="preserve">
+    <value>Ring systemRing system|A message describing an elliptical object physical property: Ring system.</value>
+  </data>
+  <data name="msgRotationPeriodHrs" xml:space="preserve">
+    <value>Rotation period (hours)|A message describing an elliptical object physical property: Rotation period (hours).</value>
   </data>
   <data name="msgSkyMap" xml:space="preserve">
     <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.</value>
@@ -185,6 +284,9 @@
   </data>
   <data name="msgSouthWest" xml:space="preserve">
     <value>south-west|The compass direction to south-west.</value>
+  </data>
+  <data name="msgSurfacePressureBars" xml:space="preserve">
+    <value>Surface pressure (bars)|A message describing an elliptical object physical property: Surface pressure (bars).</value>
   </data>
   <data name="msgTimeIntervalDay" xml:space="preserve">
     <value>d|An abbreviation for days.</value>

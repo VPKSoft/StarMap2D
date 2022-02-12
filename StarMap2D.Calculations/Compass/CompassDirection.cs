@@ -104,7 +104,7 @@ namespace StarMap2D.Calculations.Compass
         public override string ToString()
         {
             return
-                @$"{{ {nameof(Point)} = {Point}, {nameof(Degrees)} = {Degrees.ToString(CultureInfo.InvariantCulture)}, {nameof(PointOffset)} = {PointOffset.ToString(CultureInfo.InvariantCulture)}, }}";
+                @$"{{ {nameof(Point)} = {Point}, {nameof(Degrees)} = {Degrees.ToString(Globals.FormattingCulture)}, {nameof(PointOffset)} = {PointOffset.ToString(Globals.FormattingCulture)}, }}";
         }
 
         /// <summary>
@@ -112,6 +112,6 @@ namespace StarMap2D.Calculations.Compass
         /// </summary>
         /// <value>The compass direction value string.</value>
         public string ValueString =>
-            $"{GetNameFunc(Point)} {(PointOffset < 0 ? "-" : "+")} {Math.Abs(PointOffset).ToString("F1", CultureInfo.InvariantCulture)}°, {Degrees.ToString("F1", CultureInfo.InvariantCulture)}";
+            $"{GetNameFunc(Point)} {(PointOffset < 0 ? "-" : "+")} {Math.Abs(PointOffset).ToString("F1", Globals.FormattingCulture)}°, {Degrees.ToString("F1", Globals.FormattingCulture)}";
     }
 }

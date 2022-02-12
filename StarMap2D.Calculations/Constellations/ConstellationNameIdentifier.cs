@@ -92,6 +92,6 @@ public class ConstellationNameIdentifier: IConstellationNameIdentifier
     public override string ToString()
     {
         return
-            $"{{ {nameof(Identifier)} = \"{Identifier}\", {nameof(Name)} = \"{Name}\", {nameof(IdentifierCased)} = \"{IdentifierCased}\", {nameof(IdentifierValue)} = {nameof(ConstellationValue)}.{IdentifierValue}, {nameof(IAURank)} = {IAURank}, {nameof(Quadrant)} = {nameof(Quadrant)}.{Quadrant}, {nameof(RightAscension)} = {RightAscension.ToString(CultureInfo.InvariantCulture)}, {nameof(Declination)} = {Declination.ToString(CultureInfo.InvariantCulture)}, {nameof(SerpensOfficial)} = {(SerpensOfficial ? "true" : "false")}, }},";
+            $"{{ {nameof(Identifier)} = \"{Identifier}\", {nameof(Name)} = \"{Name}\", {nameof(IdentifierCased)} = \"{IdentifierCased}\", {nameof(IdentifierValue)} = {nameof(ConstellationValue)}.{IdentifierValue}, {nameof(IAURank)} = {IAURank}, {nameof(Quadrant)} = {nameof(Quadrant)}.{Quadrant}, {nameof(RightAscension)} = {RightAscension.ToString(Globals.FormattingCulture)}, {nameof(Declination)} = {Declination.ToString(Globals.FormattingCulture)}, {nameof(SerpensOfficial)} = {(SerpensOfficial ? "true" : "false")}, }},";
     }
 }

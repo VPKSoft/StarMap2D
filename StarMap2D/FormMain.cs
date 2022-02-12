@@ -25,10 +25,7 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
-using AASharp;
 using StarMap2D.Calculations.Compass;
-using StarMap2D.Calculations.Extensions;
-using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Localization;
@@ -74,14 +71,12 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button2_Click(object sender, EventArgs ee)
     {
-        FormSkyMap2D.Display(this);
+        FormSkyMap2D.Display();
     }
 
     private void button3_Click(object sender, EventArgs e)
     {
         new FormSolarSystemObjectsTable().Show();
-        //MessageBox.Show(CompassDirection.FromDegrees(31.4345).ToString());
-        //MessageBox.Show(CompassDirection.FromDegrees(20.654).ToString());
     }
 
     private void mnuLocalize_Click(object sender, EventArgs e)

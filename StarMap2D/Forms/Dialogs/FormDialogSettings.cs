@@ -55,7 +55,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         // initialize the language/localization database..
         DBLangEngine.InitializeLanguage("StarMap2D.Localization.Messages");
 
-        solarSystemObjectConfigurator1.Locale = Settings.Default.UiLanguage;
+        solarSystemObjectConfigurator1.Locale = Settings.Default.Locale;
 
         cmbSelectLocation.Items.AddRange(Cities.CitiesList.ToArray<object>());
 
@@ -70,6 +70,8 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         // a the translated cultures to the selection combo box..
         // ReSharper disable once CoVariantArrayConversion
         cmbSelectLanguageValue.Items.AddRange(cultures.ToArray());
+
+        cmbFormattingCultureValue.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>().ToArray());
 
         LoadSettings();
     }
@@ -119,9 +121,13 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         pnMapTextColor.BackColor = Settings.Default.MapTextColor;
 
         solarSystemObjectConfigurator1.ObjectGraphics = SolarSystemObjectGraphics
-            .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.UiLanguage)
+            .MergeWithDefaults(Settings.Default.KnownObjects, Settings.Default.Locale)
             .ToArray();
         cbInvertEastWest.Checked = Settings.Default.InvertEastWest;
+
+        cmbFormattingCultureValue.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.FormattingLocale)
+            ? CultureInfo.CurrentUICulture
+            : new CultureInfo(Settings.Default.FormattingLocale);
 
         cmbSelectLanguageValue.SelectedItem = new CultureInfo(Settings.Default.Locale);
 
@@ -156,7 +162,9 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.InvertEastWest = cbInvertEastWest.Checked;
         Settings.Default.DrawCrossHair = cbDrawCrossHair.Checked;
         Settings.Default.CrossHairColor = pnCrossHairColor.BackColor;
+
         Settings.Default.Locale = cmbSelectLanguageValue.SelectedItem.ToString();
+        Settings.Default.FormattingLocale = cmbFormattingCultureValue.SelectedItem.ToString();
         Settings.Default.Save();
     }
     #endregion
@@ -254,5 +262,23 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         {
             cbDrawConstellationLabels.Enabled = true;
         }
+    }
+
+    private void combobox_ValidateSelection(object sender, EventArgs e)
+    {
+        var comboBox = (ComboBox)sender;
+        // Don't cancel, just indicate an error.
+        if (comboBox.SelectedIndex < 0 || comboBox.SelectedItem == null)
+        {
+            ttMain.SetToolTip(comboBox,
+                DBLangEngine.GetMessage("msgPleaseSelectAValue",
+                    "Select a value|A message indicating to the user to select a value from a control with selection."));
+            comboBox.BackColor = Color.PaleVioletRed;
+            btOk.Enabled = false;
+            return;
+        }
+        btOk.Enabled = true;
+        ttMain.SetToolTip(comboBox, null);
+        comboBox.BackColor = SystemColors.Window;
     }
 }

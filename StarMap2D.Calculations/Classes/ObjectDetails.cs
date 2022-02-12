@@ -61,12 +61,12 @@ public class ObjectDetails: IObjectDetails
     public override string ToString()
     {
         return
-            @$"{{ RightAscension = {RightAscension.ToString(CultureInfo.InvariantCulture)}, 
-Declination = {Declination.ToString(CultureInfo.InvariantCulture)}, 
+            @$"{{ RightAscension = {RightAscension.ToString(Globals.FormattingCulture)}, 
+Declination = {Declination.ToString(Globals.FormattingCulture)}, 
 AboveHorizon = {(AboveHorizon ? "true" : "false")}, 
-HorizontalDegreesX = {HorizontalDegreesX.ToString(CultureInfo.InvariantCulture)}, 
-HorizontalDegreesY = {HorizontalDegreesY.ToString(CultureInfo.InvariantCulture)}, 
-DetailDateTime = {DetailDateTime.ToString(CultureInfo.InvariantCulture)},}},";
+HorizontalDegreesX = {HorizontalDegreesX.ToString(Globals.FormattingCulture)}, 
+HorizontalDegreesY = {HorizontalDegreesY.ToString(Globals.FormattingCulture)}, 
+DetailDateTime = {DetailDateTime.ToString(Globals.FormattingCulture)},}},";
     }
 
     /// <summary>

@@ -28,7 +28,6 @@ using System.Globalization;
 using System.Text;
 using AASharp;
 using StarMap2D.Calculations.Compass;
-using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers;
@@ -37,6 +36,7 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Forms.Dialogs;
+using StarMap2D.Miscellaneous;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
@@ -79,34 +79,33 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         var yaleBrightProvider = new YaleBrightProvider();
 
         using var reader = new StreamReader(new MemoryStream(Properties.Resources.YaleBrightStars));
-            
+
         yaleBrightProvider.LoadData(reader.ReadAllLines());
 
         foreach (var yaleBrightStar in yaleBrightProvider.StarData)
         {
             map2d.StarMapObjects.Add(new StarMapObject
             {
-                RightAscension = yaleBrightStar.RightAscension, Declination = yaleBrightStar.Declination,
+                RightAscension = yaleBrightStar.RightAscension,
+                Declination = yaleBrightStar.Declination,
                 Magnitude = yaleBrightStar.Magnitude
             });
         }
 
         suspendEvents = false;
 
-        instances.Add(this);
+        Instances.Add(this);
     }
-    
+
     private List<SolarSystemObjectGraphics> solarSystemObjects = new();
     private bool suspendEvents;
-    private static FormSkyMap2D? singletonInstance;
 
     #region PrivateMethodsAndProperties
-
     private void LoadSettings()
     {
         suspendEvents = true;
         solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Properties.Settings.Default.KnownObjects,
-            Properties.Settings.Default.UiLanguage);
+            Properties.Settings.Default.Locale);
 
         map2d.StarColors = Properties.Settings.Default.StarMagnitudeColors.Split(";")
             .Select(ColorTranslator.FromHtml).ToArray();
@@ -228,8 +227,6 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             return;
         }
 
-        var bodies = new SmallBodies();
-
         foreach (SolarSystemSmallBodies value in Enum.GetValues(typeof(SolarSystemSmallBodies)))
         {
             if (value == SolarSystemSmallBodies.Pluto) // Pluto, the special "planet".
@@ -274,7 +271,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
             map2d.StarMapObjects.Add(new StarMapObject
             {
-                CalculatePosition = (aaDate, precision, latitude, longitude, _) => 
+                CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
                     map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(value, aaDate, precision, longitude, latitude), InvertEastWest),
                 ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
                 IsLocationCalculated = true,
@@ -319,7 +316,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     #endregion
 
     #region CraphicsChangeBroadcast
-    private static readonly List<FormSkyMap2D> instances = new();
+    private static readonly List<FormSkyMap2D> Instances = new();
     #endregion
 
     #region PublicMethods
@@ -330,7 +327,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     /// <param name="mapGraphic">The <see cref="MapGraphicValue"/> enumeration value specifying the target of the color change.</param>
     public static void ChangeColor(Color color, MapGraphicValue mapGraphic)
     {
-        foreach (var instance in instances)
+        foreach (var instance in Instances)
         {
             switch (mapGraphic)
             {
@@ -353,22 +350,12 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     /// <summary>
     /// Displays the <see cref="FormSkyMap2D"/> window.
     /// </summary>
-    /// <param name="owner">The owner of the form.</param>
-    public static void Display(IWin32Window? owner)
+    public static void Display()
     {
-        singletonInstance ??= new FormSkyMap2D();
-
-        if (!singletonInstance.Visible)
-        {
-            singletonInstance.Show(owner);
-        }
-        else
-        {
-            singletonInstance.BringToFront();
-        }
+        new FormSkyMap2D().Show();
     }
     #endregion
-    
+
     #region InternalEvents
     private void cbInvertEastWest_CheckedChanged(object sender, EventArgs e)
     {
@@ -460,11 +447,6 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         suspendEvents = false;
     }
 
-    private void FormSkyMap2D_FormClosed(object sender, FormClosedEventArgs e)
-    {
-        singletonInstance = null;
-    }
-
     private void btPlayPause_CheckedChanged(object sender, CheckedChangeEventArguments e)
     {
         tmSetTime.Enabled = e.Checked;
@@ -536,10 +518,10 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             map2d.Latitude, map2d.Longitude);
 
         lbObjectNameValue.Text = e.Name;
-        lbRightAscensionValue.Text = $@"{details.RightAscension.ToString("F5", CultureInfo.InvariantCulture)}";
-        lbDeclinationValue.Text = $@"{details.Declination.ToString("F5", CultureInfo.InvariantCulture)}";
-        lbHorizontalXValue.Text = $@"{details.HorizontalDegreesX.ToString("F1", CultureInfo.InvariantCulture)}";
-        lbHorizontalYValue.Text = $@"{details.HorizontalDegreesY.ToString("F1", CultureInfo.InvariantCulture)}";
+        lbRightAscensionValue.Text = $@"{details.RightAscension.ToString("F5", Globals.FormattingCulture)}";
+        lbDeclinationValue.Text = $@"{details.Declination.ToString("F5", Globals.FormattingCulture)}";
+        lbHorizontalXValue.Text = $@"{details.HorizontalDegreesX.ToString("F1", Globals.FormattingCulture)}";
+        lbHorizontalYValue.Text = $@"{details.HorizontalDegreesY.ToString("F1", Globals.FormattingCulture)}";
         cbAboveHorizonValue.Checked = details.AboveHorizon;
     }
 
@@ -581,43 +563,30 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
             "Object name: {0}{1}|A message describing a name value of any sky object of any kind.", "\t", e.Name));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgDateDataDateTimeValue", "Date and time: {0}{1}|A text indicating a date and time value", "\t",
-            details.DetailDateTime.ToString(CultureInfo.InvariantCulture)));
+            details.DetailDateTime.ToString(Globals.FormattingCulture)));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgRightAscensionWithValue",
             "Right ascension: {0}{1}|A text indicating a right ascension value", "\t",
-            details.RightAscension.ToString(CultureInfo.InvariantCulture)));
+            details.RightAscension.ToString(Globals.FormattingCulture)));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgDeclinationWithValue",
             "Declination: {0}{1}|A text indicating a right ascension value", "\t",
-            details.Declination.ToString(CultureInfo.InvariantCulture)));
+            details.Declination.ToString(Globals.FormattingCulture)));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgHorizontalYDegreesWithValue",
             "Horizontal Y coordinate degrees: {0}{1}|A text indicating a horizontal Y-coordinate value in degrees", "\t",
-            details.HorizontalDegreesY.ToString(CultureInfo.InvariantCulture)));
+            details.HorizontalDegreesY.ToString(Globals.FormattingCulture)));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgHorizontalXDegreesWithValue",
             "Horizontal X coordinate degrees: {0}{1}|A text indicating a horizontal X-coordinate value in degrees", "\t",
-            details.HorizontalDegreesX.ToString(CultureInfo.InvariantCulture)));
+            details.HorizontalDegreesX.ToString(Globals.FormattingCulture)));
 
         builder.AppendLine(DBLangEngine.GetMessage("msgAboveHorizonBooleanValue",
             "Above horizon: {0}{1}|A text indicating a boolean value if something is above the horizon", "\t",
             details.AboveHorizon ? @"true" : @"false"));
 
-        for (var i = 0; i < 10; i++)
-        {
-            try
-            {
-                Clipboard.SetText(builder.ToString());
-                break;
-            }
-            catch
-            {
-                Thread.Sleep(50);
-                // Let the loop continue
-            }
-        }
+        ClipboardAdder.SetClipboardText(builder.ToString());
     }
-    #endregion
 
     private void AddDecHour_Click(object sender, EventArgs e)
     {
@@ -629,10 +598,11 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     private void map2d_MouseCoordinatesChanged(object sender, CoordinatesChangedEventArgs e)
     {
         string format = "+000.000000;-000.000000"; // F6
-        lbAzimuthValue.Text = e.Azimuth.ToString(format, CultureInfo.InvariantCulture);
-        lbAltitudeValue.Text = e.Altitude.ToString(format, CultureInfo.InvariantCulture);
-        lbRightAscensionCoordinateValue.Text = e.RightAscension.ToString(format, CultureInfo.InvariantCulture);
-        lbDeclinationCoordinateValue.Text = e.Declination.ToString(format, CultureInfo.InvariantCulture);
+        lbAzimuthValue.Text = e.Azimuth.ToString(format, Globals.FormattingCulture);
+        lbAltitudeValue.Text = e.Altitude.ToString(format, Globals.FormattingCulture);
+        lbRightAscensionCoordinateValue.Text = e.RightAscension.ToString(format, Globals.FormattingCulture);
+        lbDeclinationCoordinateValue.Text = e.Declination.ToString(format, Globals.FormattingCulture);
         lbCompassDirectionValue.Text = CompassDirection.FromDegrees(e.Azimuth).ValueString;
     }
+    #endregion
 }

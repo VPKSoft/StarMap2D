@@ -97,127 +97,127 @@ public class PlanetData
     /// Gets or sets the name of the planet.
     /// </summary>
     /// <value>The name of the planet.</value>
-    public string Name { get; set; } = string.Empty;
+    public virtual string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the mass in kilograms.
     /// </summary>
     /// <value>The mass.</value>
-    public double Mass { get; set; }
+    public virtual double Mass { get; set; }
 
     /// <summary>
     /// Gets or sets the diameter in kilometers.
     /// </summary>
     /// <value>The diameter.</value>
-    public double Diameter { get; set; }
+    public virtual double Diameter { get; set; }
 
     /// <summary>
     /// Gets or sets the density in kg/m³.
     /// </summary>
     /// <value>The density.</value>
-    public double Density { get; set; }
+    public virtual double Density { get; set; }
 
     /// <summary>
     /// Gets or sets the gravity in m/s².
     /// </summary>
     /// <value>The gravity.</value>
-    public double Gravity { get; set; }
+    public virtual double Gravity { get; set; }
 
     /// <summary>
     /// Gets or sets the escape velocity in km/s.
     /// </summary>
     /// <value>The escape velocity.</value>
-    public double EscapeVelocity { get; set; }
+    public virtual double EscapeVelocity { get; set; }
 
     /// <summary>
     /// Gets or sets the rotation period in hours.
     /// </summary>
     /// <value>The rotation period.</value>
-    public double RotationPeriod { get; set; }
+    public virtual double RotationPeriod { get; set; }
 
     /// <summary>
     /// Gets or sets the length of day in hours.
     /// </summary>
     /// <value>The length of day.</value>
-    public double LengthOfDay { get; set; }
+    public virtual double LengthOfDay { get; set; }
 
     /// <summary>
     /// Gets or sets the distance from sun in 10⁶ kilometers.
     /// </summary>
     /// <value>The distance from sun.</value>
-    public double DistanceFromSun { get; set; }
+    public virtual double DistanceFromSun { get; set; }
 
     /// <summary>
     /// Gets or sets the perihelion in 10⁶ kilometers.
     /// </summary>
     /// <value>The perihelion.</value>
-    public double Perihelion { get; set; }
+    public virtual double Perihelion { get; set; }
 
     /// <summary>
     /// Gets or sets the aphelion in 10⁶ kilometers.
     /// </summary>
     /// <value>The aphelion.</value>
-    public double Aphelion { get; set; }
+    public virtual double Aphelion { get; set; }
 
     /// <summary>
     /// Gets or sets the orbital period in days.
     /// </summary>
     /// <value>The orbital period.</value>
-    public double? OrbitalPeriod { get; set; }
+    public virtual double? OrbitalPeriod { get; set; }
 
     /// <summary>
     /// Gets or sets the orbital velocity in km/s.
     /// </summary>
     /// <value>The orbital velocity.</value>
-    public double? OrbitalVelocity { get; set; }
+    public virtual double? OrbitalVelocity { get; set; }
 
     /// <summary>
     /// Gets or sets the orbital inclination in degrees.
     /// </summary>
     /// <value>The orbital inclination.</value>
-    public double? OrbitalInclination { get; set; }
+    public virtual double? OrbitalInclination { get; set; }
 
     /// <summary>
     /// Gets or sets the orbital eccentricity.
     /// </summary>
     /// <value>The orbital eccentricity.</value>
-    public double? OrbitalEccentricity { get; set; }
+    public virtual double? OrbitalEccentricity { get; set; }
 
     /// <summary>
     /// Gets or sets the obliquity to orbit in degrees.
     /// </summary>
     /// <value>The obliquity to orbit.</value>
-    public double? ObliquityToOrbit { get; set; }
+    public virtual double? ObliquityToOrbit { get; set; }
 
     /// <summary>
     /// Gets or sets the mean temperature in °C.
     /// </summary>
     /// <value>The mean temperature.</value>
-    public double? MeanTemperature { get; set; }
+    public virtual double? MeanTemperature { get; set; }
 
     /// <summary>
     /// Gets or sets the surface pressure in bars.
     /// </summary>
     /// <value>The surface pressure.</value>
-    public double? SurfacePressure { get; set; }
+    public virtual double? SurfacePressure { get; set; }
 
     /// <summary>
     /// Gets or sets the number of moons.
     /// </summary>
     /// <value>The number of moons.</value>
-    public int? NumberOfMoons { get; set; }
+    public virtual int? NumberOfMoons { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether planet has a ring system.
     /// </summary>
     /// <value><c>true</c> if the planet has a ring system; otherwise, <c>false</c>.</value>
-    public bool RingSystem { get; set; }
+    public virtual bool RingSystem { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the planet has a global magnetic field.
     /// </summary>
     /// <value><c>null</c> if unknown contains no value, <c>true</c> if the planet has a global magnetic field; otherwise, <c>false</c>.</value>
-    public bool? GlobalMagneticField { get; set; }
+    public virtual bool? GlobalMagneticField { get; set; }
 
     /// <summary>
     /// Gets or sets the type of the object.
@@ -229,7 +229,7 @@ public class PlanetData
     /// Gets or sets the data URL for the physical parameters.
     /// </summary>
     /// <value>The data URL.</value>
-    public string? DataUrl { get; set; }
+    public virtual string? DataUrl { get; set; }
 
     /// <summary>
     /// Gets the extended data with dynamic calculated data included.
@@ -285,7 +285,7 @@ public class PlanetData
             Aphelion = 69.8, OrbitalPeriod = 88.0, OrbitalVelocity = 47.4, OrbitalInclination = 7.0,
             OrbitalEccentricity = 0.206, ObliquityToOrbit = 0.034, MeanTemperature = 167, SurfacePressure = 0,
             NumberOfMoons = 0, RingSystem = false, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Mercury,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -294,7 +294,7 @@ public class PlanetData
             Aphelion = 108.9, OrbitalPeriod = 224.7, OrbitalVelocity = 35.0, OrbitalInclination = 3.4,
             OrbitalEccentricity = 0.007, ObliquityToOrbit = 177.4, MeanTemperature = 464, SurfacePressure = 92,
             NumberOfMoons = 0, RingSystem = false, GlobalMagneticField = false, ObjectType = ObjectsWithPositions.Venus,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -303,7 +303,7 @@ public class PlanetData
             Aphelion = 152.1, OrbitalPeriod = 365.2, OrbitalVelocity = 29.8, OrbitalInclination = 0.0,
             OrbitalEccentricity = 0.017, ObliquityToOrbit = 23.4, MeanTemperature = 15, SurfacePressure = 1,
             NumberOfMoons = 1, RingSystem = false, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Earth,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -312,7 +312,7 @@ public class PlanetData
             Aphelion = 0.406, OrbitalPeriod = 27.3, OrbitalVelocity = 1.0, OrbitalInclination = 5.1,
             OrbitalEccentricity = 0.055, ObliquityToOrbit = 6.7, MeanTemperature = -20, SurfacePressure = 0,
             NumberOfMoons = 0, RingSystem = false, GlobalMagneticField = false, ObjectType = ObjectsWithPositions.Moon,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -321,7 +321,7 @@ public class PlanetData
             Aphelion = 249.3, OrbitalPeriod = 687.0, OrbitalVelocity = 24.1, OrbitalInclination = 1.8,
             OrbitalEccentricity = 0.094, ObliquityToOrbit = 25.2, MeanTemperature = -65, SurfacePressure = 0.01,
             NumberOfMoons = 2, RingSystem = false, GlobalMagneticField = false, ObjectType = ObjectsWithPositions.Mars,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -330,7 +330,7 @@ public class PlanetData
             Perihelion = 740.6, Aphelion = 816.4, OrbitalPeriod = 4331, OrbitalVelocity = 13.1,
             OrbitalInclination = 1.3, OrbitalEccentricity = 0.049, ObliquityToOrbit = 3.1, MeanTemperature = -110,
             NumberOfMoons = 79, RingSystem = true, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Jupiter,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -339,7 +339,7 @@ public class PlanetData
             Aphelion = 1506.5, OrbitalPeriod = 10747, OrbitalVelocity = 9.7, OrbitalInclination = 2.5,
             OrbitalEccentricity = 0.052, ObliquityToOrbit = 26.7, MeanTemperature = -140, NumberOfMoons = 82,
             RingSystem = true, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Saturn,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -348,7 +348,7 @@ public class PlanetData
             Aphelion = 3001.4, OrbitalPeriod = 30589, OrbitalVelocity = 6.8, OrbitalInclination = 0.8,
             OrbitalEccentricity = 0.047, ObliquityToOrbit = 97.8, MeanTemperature = -195, NumberOfMoons = 27,
             RingSystem = true, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Uranus,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -357,7 +357,7 @@ public class PlanetData
             Aphelion = 4558.9, OrbitalPeriod = 598, OrbitalVelocity = 5.4, OrbitalInclination = 1.8,
             OrbitalEccentricity = 0.010, ObliquityToOrbit = 28.3, MeanTemperature = -200, NumberOfMoons = 14,
             RingSystem = true, GlobalMagneticField = true, ObjectType = ObjectsWithPositions.Neptune,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -366,7 +366,7 @@ public class PlanetData
             Aphelion = 7375.9, OrbitalPeriod = 9056, OrbitalVelocity = 4.7, OrbitalInclination = 17.2,
             OrbitalEccentricity = 0.244, ObliquityToOrbit = 122.5, MeanTemperature = -225,
             SurfacePressure = 0.00001, NumberOfMoons = 5, RingSystem = false, ObjectType = ObjectsWithPositions.Pluto,
-            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/", 
+            DataUrl = "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
         },
         new()
         {
@@ -378,7 +378,7 @@ public class PlanetData
         },
         new()
         {
-            Name = "Ceres", Mass = 938.416 / 1000000, Diameter = 469.7 * 2, Density = 2.162 * 1000, Gravity = 0.27, EscapeVelocity = 0.51, 
+            Name = "Ceres", Mass = 938.416 / 1000000, Diameter = 469.7 * 2, Density = 2.162 * 1000, Gravity = 0.27, EscapeVelocity = 0.51,
             RotationPeriod = 0.378 * 24, LengthOfDay = 0.378 * 24,
             OrbitalPeriod = 4.61 * 365.2425,
             ObjectType = ObjectsWithPositions.Ceres,
@@ -386,7 +386,7 @@ public class PlanetData
         },
         new()
         {
-            Name = "Eris", Mass = 16600.0 / 1000000, Diameter = 1200 * 2, Density = 2.3 * 1000, Gravity = 0.77, EscapeVelocity = 1.36, 
+            Name = "Eris", Mass = 16600.0 / 1000000, Diameter = 1200 * 2, Density = 2.3 * 1000, Gravity = 0.77, EscapeVelocity = 1.36,
             RotationPeriod = 1.079 * 24, LengthOfDay = 1.079 * 24,
             OrbitalPeriod = 557.56 * 365.2425,
             ObjectType = ObjectsWithPositions.Eris,
@@ -394,7 +394,7 @@ public class PlanetData
         },
         new()
         {
-            Name = "Makemake", Mass = 3100.0 / 1000000, Diameter = 714 * 2, Density = 2.1 * 1000, Gravity = 0.40, EscapeVelocity = 0.76, 
+            Name = "Makemake", Mass = 3100.0 / 1000000, Diameter = 714 * 2, Density = 2.1 * 1000, Gravity = 0.40, EscapeVelocity = 0.76,
             RotationPeriod = 0.937 * 24, LengthOfDay = 0.937 * 24,
             OrbitalPeriod = 307.54 * 365.2425,
             ObjectType = ObjectsWithPositions.Makemake,
@@ -402,7 +402,7 @@ public class PlanetData
         },
         new()
         {
-            Name = "Haumea", Mass = 4006.0 / 1000000, Diameter = 717 * 2, Density = 2.6 * 1000, Gravity = 0.37, EscapeVelocity = 0.78, 
+            Name = "Haumea", Mass = 4006.0 / 1000000, Diameter = 717 * 2, Density = 2.6 * 1000, Gravity = 0.37, EscapeVelocity = 0.78,
             RotationPeriod = 0.1631 * 24, LengthOfDay = 0.1631 * 24,
             OrbitalPeriod = 284.81 * 365.2425,
             ObjectType = ObjectsWithPositions.Haumea,

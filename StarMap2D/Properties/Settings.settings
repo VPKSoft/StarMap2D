@@ -8,8 +8,8 @@
     <Setting Name="Longitude" Type="System.Double" Scope="User">
       <Value Profile="(Default)">22.8782576</Value>
     </Setting>
-    <Setting Name="UiLanguage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en-US</Value>
+    <Setting Name="FormattingLocale" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DefaultLocationName" Type="System.String" Scope="User">
       <Value Profile="(Default)">N/A</Value>

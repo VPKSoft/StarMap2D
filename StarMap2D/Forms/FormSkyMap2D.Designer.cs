@@ -132,7 +132,7 @@ namespace StarMap2D.Forms
             // 
             // dtpMapDateTime
             // 
-            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpMapDateTime.CustomFormat = "dd\'.\'MM\'.\'yyyy HH\':\'mm";
             this.dtpMapDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -318,7 +318,7 @@ namespace StarMap2D.Forms
             // 
             // cmbJumpToLocation
             // 
-            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbJumpToLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbJumpToLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -548,7 +548,7 @@ namespace StarMap2D.Forms
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMapControls.SetColumnSpan(this.panel4, 2);
             this.panel4.Controls.Add(this.cbAboveHorizonValue);
@@ -885,7 +885,6 @@ namespace StarMap2D.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSkyMap2D";
             this.Text = "Sky Map";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSkyMap2D_FormClosed);
             this.tlpMain.ResumeLayout(false);
             this.tlpMapControls.ResumeLayout(false);
             this.tlpMapControls.PerformLayout();

@@ -55,16 +55,19 @@ internal static class Program
         // Save languages..
         if (Utils.ShouldLocalize() != null)
         {
-            // ReSharper disable once ObjectCreationAsStatement
             _ = new FormMain();
-            // ReSharper disable once ObjectCreationAsStatement
             _ = new FormDialogSettings();
-            // ReSharper disable once ObjectCreationAsStatement
             _ = new FormSkyMap2D();
-            // ReSharper disable once ObjectCreationAsStatement
             _ = new FormPlanetDetails();
+            _ = new FormSolarSystemObjectsTable();
             return;
         }
+
+        Globals.FormattingCulture = string.IsNullOrWhiteSpace(Properties.Settings.Default.FormattingLocale)
+            ? CultureInfo.CurrentUICulture
+            : new CultureInfo(Properties.Settings.Default.FormattingLocale);
+
+        StarMap2D.Calculations.Globals.FormattingCulture = Globals.FormattingCulture;
 
         DBLangEngine.UseCulture = new CultureInfo(Properties.Settings.Default.Locale);
 

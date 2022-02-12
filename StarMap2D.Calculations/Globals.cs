@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using System.Globalization;
+
 namespace StarMap2D.Calculations;
 
 /// <summary>
@@ -37,4 +39,10 @@ public static class Globals
     /// <seealso cref="AASharp"/>
     /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
     public static bool HighPrecisionCalculations { get; set; }
+
+    /// <summary>
+    /// Gets or sets the string formatting culture.
+    /// </summary>
+    /// <value>The string formatting culture.</value>
+    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
 }

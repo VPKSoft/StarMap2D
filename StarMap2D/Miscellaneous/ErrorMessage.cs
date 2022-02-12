@@ -24,25 +24,24 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
+using VPKSoft.LangLib;
 
-namespace StarMap2D;
+namespace StarMap2D.Miscellaneous;
 
 /// <summary>
-/// A class containing the global static parameters.
+/// A class to notify user of errors.
 /// </summary>
-public static class Globals
+internal class ErrorMessage
 {
     /// <summary>
-    /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
+    /// Shows an error message.
     /// </summary>
-    /// <seealso cref="AASharp"/>
-    /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
-    public static bool HighPrecisionCalculations { get; set; }
+    /// <param name="message">The message to display to the user.</param>
+    public static void ShowError(string message)
+    {
+        MessageBox.Show(message,
+            DBLangEngine.GetStatMessage("msgError", "Error|A message indicating that a general error occurred."),
+            MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
 
-    /// <summary>
-    /// Gets or sets the string formatting culture.
-    /// </summary>
-    /// <value>The string formatting culture.</value>
-    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
+    }
 }

@@ -46,6 +46,10 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
     /// </summary>
     public FormPlanetDetails()
     {
+        string firstUpper(string value)
+        {
+            return value[0].ToString().ToUpper() + value.Substring(1).ToLower();
+        }
         InitializeComponent();
 
         ValueControls = new Dictionary<Label, Control>();
@@ -91,6 +95,9 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
             { lbGlobalMagneticField, tbGlobalMagneticFieldValue }
         };
 
+        MessageBox.Show(string.Join(Environment.NewLine, ValueControls.Select(f => "\"" + f.Key.Text + $"{firstUpper(f.Key.Text)}|A message describing a elliptical object physical property: {firstUpper(f.Key.Text)}\"")));
+
+
         ListPlanets();
     }
 
@@ -131,7 +138,7 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
         {
             return;
         }
-            
+
         var form = new FormPlanetDetails();
         form.planet = value;
         form.currentDate = dateTime;
@@ -217,7 +224,7 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
         {
             return DBLangEngine.GetMessage("msgUnknownVariableValue", "unknown|A value describing an unknown value of a physical variable.");
         }
-        return value.Value.ToString($"F{decimals}", CultureInfo.InvariantCulture);
+        return value.Value.ToString($"F{decimals}", Globals.FormattingCulture);
     }
 
     private string DisplayInteger(int? value)
@@ -226,7 +233,7 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
         {
             return DBLangEngine.GetMessage("msgUnknownVariableValue", "unknown|A value describing an unknown value of a physical variable.");
         }
-        return value.Value.ToString(CultureInfo.InvariantCulture);
+        return value.Value.ToString(Globals.FormattingCulture);
     }
 
     private string DisplayBoolean(bool? value)
@@ -309,12 +316,12 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
         {
             if (control.Value is NumericUpDown upDown)
             {
-                builder.AppendLine($"{control.Key.Text} = {upDown.Value.ToString(CultureInfo.InvariantCulture)}");
+                builder.AppendLine($"{control.Key.Text} = {upDown.Value.ToString(Globals.FormattingCulture)}");
             }
 
             if (control.Value is DateTimePicker picker)
             {
-                builder.AppendLine($"{control.Key.Text} = {picker.Value.ToString(CultureInfo.InvariantCulture)}");
+                builder.AppendLine($"{control.Key.Text} = {picker.Value.ToString(Globals.FormattingCulture)}");
             }
 
             if (control.Value is TextBox textBox)
