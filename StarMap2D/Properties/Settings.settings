@@ -65,5 +65,8 @@
     <Setting Name="CrossHairColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Lime</Value>
     </Setting>
+    <Setting Name="ColumnsGridObjectDetails" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

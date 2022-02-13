@@ -30,9 +30,9 @@ using Zuby.ADGV;
 namespace StarMap2D.Miscellaneous;
 
 /// <summary>
-/// A helper class for exporting the <see cref="Zuby.ADGV.AdvancedDataGridView"/> data into text format.
+/// Extension methods for the <see cref="Zuby.ADGV.AdvancedDataGridView"/> control.
 /// </summary>
-public static class DataGridExport
+public static class DataGridExtensions
 {
     /// <summary>
     /// Gets the delimited data from the specified <see cref="AdvancedDataGridView"/> delimited with the specified delimiter.
@@ -47,6 +47,11 @@ public static class DataGridExport
         // First the header line.
         for (var i = 0; i < gridView.Columns.Count; i++)
         {
+            if (!gridView.Columns[i].Visible)
+            {
+                continue;
+            }
+
             builder.Append(gridView.Columns[i].HeaderText);
             if (i + 1 < gridView.Columns.Count)
             {
@@ -63,6 +68,11 @@ public static class DataGridExport
         {
             for (var j = 0; j < gridView.Columns.Count; j++)
             {
+                if (!gridView.Columns[j].Visible)
+                {
+                    continue;
+                }
+
                 builder.Append(gridView.Rows[i].Cells[j].FormattedValue);
 
                 if (j + 1 < gridView.Columns.Count)
@@ -77,5 +87,64 @@ public static class DataGridExport
         }
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    /// Gets the column save data for the grid columns.
+    /// </summary>
+    /// <param name="gridView">The grid view.</param>
+    /// <returns>A data string to save to allow restoring the column layout.</returns>
+    public static string GetColumnSaveData(this AdvancedDataGridView gridView)
+    {
+        var builder = new StringBuilder();
+        for (var i = 0; i < gridView.Columns.Count; i++)
+        {
+            builder.Append(
+                $"{gridView.Columns[i].DisplayIndex};{gridView.Columns[i].Index};{gridView.Columns[i].Visible};{gridView.Columns[i].Width}");
+            if (i + 1 < gridView.Columns.Count)
+            {
+                builder.Append('|');
+            }
+        }
+
+        return builder.ToString();
+    }
+
+    /// <summary>
+    /// Restores the grid column layout from the saved column data.
+    /// </summary>
+    /// <param name="gridView">The grid view.</param>
+    /// <param name="restoreValue">The restore value.</param>
+    public static void RestoreSavedColumnData(this AdvancedDataGridView gridView, string restoreValue)
+    {
+        if (string.IsNullOrWhiteSpace(restoreValue))
+        {
+            return;
+        }
+
+        try
+        {
+            var restoreData = restoreValue.Split('|').Select(f => new
+            {
+                DisplayIndex = int.Parse(f.Split(';')[0]),
+                Index = int.Parse(f.Split(';')[1]),
+                Visible = bool.Parse(f.Split(';')[2]),
+                Width = int.Parse(f.Split(';')[3]),
+            }).OrderByDescending(f => f.DisplayIndex).ToList();
+
+            foreach (var data in restoreData)
+            {
+                if (data.Index < gridView.Columns.Count && data.DisplayIndex < gridView.Columns.Count)
+                {
+                    gridView.Columns[data.Index].DisplayIndex = data.DisplayIndex;
+                    gridView.Columns[data.Index].Width = data.Width;
+                    gridView.Columns[data.Index].Visible = data.Visible;
+                }
+            }
+        }
+        catch
+        {
+            // The linq failed.
+        }
     }
 }

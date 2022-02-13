@@ -148,8 +148,8 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     private void SetTitle(double? latitude = null, double? longitude = null)
     {
         Text = DBLangEngine.GetMessage("msgSkyMap",
-            "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.",
-            latitude ?? map2d.Plot2D?.Latitude, longitude ?? map2d.Plot2D?.Longitude, map2d.CurrentTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture));
+            "Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}], [Sidereal time: {3}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time and sidereal time.",
+            latitude ?? map2d.Plot2D?.Latitude, longitude ?? map2d.Plot2D?.Longitude, map2d.CurrentTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture), (map2d.SiderealTime / 15).ToString("F4", Globals.FormattingCulture));
     }
 
     private void ListTimeIntervals()

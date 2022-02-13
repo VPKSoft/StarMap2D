@@ -511,7 +511,7 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time..
+        ///   Looks up a localized string similar to Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}], [Sidereal time: {3}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time and sidereal time..
         /// </summary>
         internal static string msgSkyMap {
             get {
@@ -687,6 +687,15 @@ namespace StarMap2D.Localization {
         internal static string msgYes {
             get {
                 return ResourceManager.GetString("msgYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

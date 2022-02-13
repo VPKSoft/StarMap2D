@@ -276,5 +276,17 @@ namespace StarMap2D.Properties {
                 this["CrossHairColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ColumnsGridObjectDetails {
+            get {
+                return ((string)(this["ColumnsGridObjectDetails"]));
+            }
+            set {
+                this["ColumnsGridObjectDetails"] = value;
+            }
+        }
     }
 }

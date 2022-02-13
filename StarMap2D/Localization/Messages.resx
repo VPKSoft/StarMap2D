@@ -268,7 +268,7 @@
     <value>Rotation period (hours)|A message describing an elliptical object physical property: Rotation period (hours).</value>
   </data>
   <data name="msgSkyMap" xml:space="preserve">
-    <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time.</value>
+    <value>Sky Map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}], [Sidereal time: {3}]|A title for a window containing a sky map control with latitude and longitude coordinates, date and time and sidereal time.</value>
   </data>
   <data name="msgSouth" xml:space="preserve">
     <value>south|The compass direction to south.</value>
@@ -326,5 +326,8 @@
   </data>
   <data name="msgYes" xml:space="preserve">
     <value>yes|A message saying true in form of yes.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

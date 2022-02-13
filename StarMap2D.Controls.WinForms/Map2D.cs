@@ -33,6 +33,7 @@ using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Controls.WinForms.Drawing;
@@ -170,7 +171,7 @@ public partial class Map2D : UserControl
     #endregion
 
     #region PrivateFields
-    TabDeliLocalization constellationNames = new ();
+    TabDeliLocalization constellationNames = new();
     private Color mapCircleColor = Color.Black;
     private Color constellationLineColor = Color.DeepSkyBlue;
     private Color constellationBorderLineColor = Color.FromArgb(13, 23, 125);
@@ -214,7 +215,7 @@ public partial class Map2D : UserControl
     private int OffsetY => Height > Width ? (Height - Width) / 2 : 0;
 
     private double CenterX => OffsetX + (double)Width / 2;
-    
+
     private double CenterY => OffsetY + (double)Height / 2;
 
     private double Diameter => Math.Min(Width, Height);
@@ -313,7 +314,7 @@ public partial class Map2D : UserControl
                                 {
                                     Name = starMapObject.ObjectName,
                                     X = position.X + OffsetX,
-                                    Y = position.Y + OffsetY, 
+                                    Y = position.Y + OffsetY,
                                     Radius = image.Width / 2.0,
                                     Identifier = starMapObject.Identifier,
                                 });
@@ -324,7 +325,7 @@ public partial class Map2D : UserControl
                 else
                 {
                     var coordinate = new AAS2DCoordinate
-                        { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+                    { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                     var pointD = Plot2D.Project2D(coordinate, invertEastWest);
 
@@ -422,10 +423,10 @@ public partial class Map2D : UserControl
         for (var i = 0; i < constellation.Boundary.Count - 1; i++)
         {
             var point1 = new AAS2DCoordinate
-                { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+            { X = constellation.Boundary[i].RightAscension % 360, Y = constellation.Boundary[i].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var point2 = new AAS2DCoordinate
-                { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
+            { X = constellation.Boundary[i + 1].RightAscension % 360, Y = constellation.Boundary[i + 1].Declination }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var pointD1 = Plot2D.Project2D(point1, invertEastWest);
             var pointD2 = Plot2D.Project2D(point2, invertEastWest);
@@ -464,11 +465,11 @@ public partial class Map2D : UserControl
                 f.InternalId == constellationLine.EndIdentifier);
 
             var point1 = new AAS2DCoordinate
-                    { X = star1.RightAscension, Y = star1.Declination }
+            { X = star1.RightAscension, Y = star1.Declination }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var point2 = new AAS2DCoordinate
-                    { X = star2.RightAscension, Y = star2.Declination }
+            { X = star2.RightAscension, Y = star2.Declination }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var pointD1 = Plot2D.Project2D(point1, invertEastWest);
@@ -491,7 +492,7 @@ public partial class Map2D : UserControl
                 f.Identifier == constellation.Identifier && f.SerpensOfficial == false);
 
             var labelPoint = new AAS2DCoordinate
-                    { X = constellationData.RightAscension, Y = constellationData.Declination }
+            { X = constellationData.RightAscension, Y = constellationData.Declination }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             labelPoint = Plot2D.Project2D(labelPoint, invertEastWest);
@@ -656,8 +657,8 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Category("Behaviour")]
     [Description("Value indicating whether to draw constellation boundaries.")]
-    public bool DrawConstellationBoundaries 
-    { 
+    public bool DrawConstellationBoundaries
+    {
         get => drawConstellationBoundaries;
 
         set
@@ -738,7 +739,7 @@ public partial class Map2D : UserControl
             }
         }
     }
-    
+
     /// <summary>
     /// Gets or sets the star sizes for different magnitudes from -10 to 10.
     /// </summary>
@@ -1000,6 +1001,13 @@ public partial class Map2D : UserControl
     }
 
     /// <summary>
+    /// Gets the sidereal time.
+    /// </summary>
+    /// <value>The sidereal time.</value>
+    [Browsable(false)]
+    public double SiderealTime => CurrentTimeUtc.ToLocalSiderealTime(Longitude);
+
+    /// <summary>
     /// Gets or sets the current time in UTC.
     /// </summary>
     /// <value>The current time in UTC.</value>
@@ -1078,7 +1086,7 @@ public partial class Map2D : UserControl
                 if (plot2D != null)
                 {
                     plot2D.Diameter = Math.Min(Width, Height);
-                    CoordinatesChanged?.Invoke(this, new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude});
+                    CoordinatesChanged?.Invoke(this, new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude });
                 }
             }
         }
@@ -1203,7 +1211,8 @@ public partial class Map2D : UserControl
                                 Azimuth = point.X,
                                 RightAscension = pointRaDec.X,
                                 Declination = pointRaDec.Y,
-                                X = e.X, Y = e.Y,
+                                X = e.X,
+                                Y = e.Y,
                             });
                     }
                 }

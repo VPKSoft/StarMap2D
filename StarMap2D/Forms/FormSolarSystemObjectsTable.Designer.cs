@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSolarSystemObjectsTable));
             this.adgSolarObjects = new Zuby.ADGV.AdvancedDataGridView();
             this.lbLongitude = new System.Windows.Forms.Label();
@@ -45,12 +45,13 @@
             this.imageButton1 = new StarMap2D.Controls.WinForms.ImageButton();
             this.imageButton2 = new StarMap2D.Controls.WinForms.ImageButton();
             this.sdCSV = new System.Windows.Forms.SaveFileDialog();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.columnContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuHideColumn = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuResetColumns = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.adgSolarObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
+            this.columnContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // adgSolarObjects
@@ -58,8 +59,8 @@
             this.adgSolarObjects.AllowUserToAddRows = false;
             this.adgSolarObjects.AllowUserToDeleteRows = false;
             this.adgSolarObjects.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.adgSolarObjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.adgSolarObjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.adgSolarObjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -75,6 +76,7 @@
             this.adgSolarObjects.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.adgSolarObjects.TabIndex = 0;
             this.adgSolarObjects.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView1_SortStringChanged);
+            this.adgSolarObjects.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.adgSolarObjects_CellMouseDown);
             // 
             // lbLongitude
             // 
@@ -253,18 +255,27 @@
             this.sdCSV.DefaultExt = "*.csv";
             this.sdCSV.Filter = "*.csv|Delimited data files";
             // 
-            // contextMenuStrip1
+            // columnContextMenu
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHideColumn});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 26);
+            this.columnContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHideColumn,
+            this.mnuResetColumns});
+            this.columnContextMenu.Name = "contextMenuStrip1";
+            this.columnContextMenu.Size = new System.Drawing.Size(181, 70);
             // 
             // mnuHideColumn
             // 
             this.mnuHideColumn.Name = "mnuHideColumn";
-            this.mnuHideColumn.Size = new System.Drawing.Size(143, 22);
+            this.mnuHideColumn.Size = new System.Drawing.Size(180, 22);
             this.mnuHideColumn.Text = "Hide column";
+            this.mnuHideColumn.Click += new System.EventHandler(this.mnuHideColumn_Click);
+            // 
+            // mnuResetColumns
+            // 
+            this.mnuResetColumns.Name = "mnuResetColumns";
+            this.mnuResetColumns.Size = new System.Drawing.Size(180, 22);
+            this.mnuResetColumns.Text = "Reset columns";
+            this.mnuResetColumns.Click += new System.EventHandler(this.mnuResetColumns_Click);
             // 
             // FormSolarSystemObjectsTable
             // 
@@ -288,10 +299,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSolarSystemObjectsTable";
             this.Text = "Solar system object data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSolarSystemObjectsTable_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.adgSolarObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.columnContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,7 +324,8 @@
         private Controls.WinForms.ImageButton imageButton1;
         private Controls.WinForms.ImageButton imageButton2;
         private SaveFileDialog sdCSV;
-        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip columnContextMenu;
         private ToolStripMenuItem mnuHideColumn;
+        private ToolStripMenuItem mnuResetColumns;
     }
 }

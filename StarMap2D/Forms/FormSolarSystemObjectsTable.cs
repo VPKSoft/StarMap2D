@@ -33,6 +33,7 @@ using StarMap2D.Calculations.StaticData;
 using StarMap2D.Miscellaneous;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
+using Zuby.ADGV;
 
 namespace StarMap2D.Forms;
 
@@ -140,8 +141,13 @@ public partial class FormSolarSystemObjectsTable : DBLangEngineWinforms
         };
     }
 
-    private void FillDataGrid(double latitude, double longitude, DateTime dateTime)
+    private void FillDataGrid(double latitude, double longitude, DateTime dateTime, bool reset = false)
     {
+        if (adgSolarObjects.ColumnCount > 0 && !reset)
+        {
+            Properties.Settings.Default.ColumnsGridObjectDetails = adgSolarObjects.GetColumnSaveData();
+        }
+
         dateTime = dateTime.ToUniversalTime();
         adgSolarObjects.Columns.Clear();
 
@@ -207,7 +213,7 @@ public partial class FormSolarSystemObjectsTable : DBLangEngineWinforms
                     ValueType = typeof(string),
                     DataPropertyName = cell.Name,
                     HeaderText = GetHeaderText(cell.Name),
-                    ContextMenuStrip = contextMenuStrip1,
+                    ContextMenuStrip = columnContextMenu,
                 });
             }
 
@@ -249,6 +255,12 @@ public partial class FormSolarSystemObjectsTable : DBLangEngineWinforms
         foreach (DataGridViewColumn dataGridViewColumn in adgSolarObjects.Columns)
         {
             dataGridViewColumn.ReadOnly = true;
+            dataGridViewColumn.HeaderCell.ContextMenuStrip = columnContextMenu;
+        }
+
+        if (!reset)
+        {
+            adgSolarObjects.RestoreSavedColumnData(Properties.Settings.Default.ColumnsGridObjectDetails);
         }
     }
 
@@ -340,5 +352,34 @@ public partial class FormSolarSystemObjectsTable : DBLangEngineWinforms
                     ex.Message));
             }
         }
+    }
+
+    private void FormSolarSystemObjectsTable_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        Properties.Settings.Default.ColumnsGridObjectDetails = adgSolarObjects.GetColumnSaveData();
+        Properties.Settings.Default.Save();
+    }
+
+    private int cellClickColumn = -1;
+
+    private void mnuHideColumn_Click(object sender, EventArgs e)
+    {
+        if (cellClickColumn != -1)
+        {
+            adgSolarObjects.Columns[cellClickColumn].Visible = false;
+        }
+    }
+
+    private void adgSolarObjects_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Right)
+        {
+            cellClickColumn = e.ColumnIndex;
+        }
+    }
+
+    private void mnuResetColumns_Click(object sender, EventArgs e)
+    {
+        FillDataGrid((double)nudLatitude.Value, (double)nudLongitude.Value, dtpMapDateTime.Value, true);
     }
 }
