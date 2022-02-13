@@ -46,19 +46,19 @@ public class TabDeliLocalization
         /// Gets or sets the name of the localized message.
         /// </summary>
         /// <value>The name of the localized message.</value>
-        internal string MessageName { get; set; }
+        internal string MessageName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
-        internal string Message { get; set; }
+        internal string Message { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the name of the culture of the localized message.
         /// </summary>
         /// <value>The name of the culture.</value>
-        internal string CultureName { get; set; }
+        internal string CultureName { get; set; } = string.Empty;
     }
 
 
@@ -166,7 +166,7 @@ public class TabDeliLocalization
                 {
                     continue;
                 }
-                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale});
+                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale });
             }
         }
     }

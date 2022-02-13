@@ -101,6 +101,7 @@ namespace StarMap2D.Forms
             this.btHourPrevious = new StarMap2D.Controls.WinForms.ImageButton();
             this.btPlayPause = new StarMap2D.Controls.WinForms.ImageButton();
             this.pnCoordinates = new System.Windows.Forms.Panel();
+            this.lbCompassDirectionValue = new System.Windows.Forms.Label();
             this.lbCompassDirection = new System.Windows.Forms.Label();
             this.lbDeclination = new System.Windows.Forms.Label();
             this.lbDeclinationCoordinateValue = new System.Windows.Forms.Label();
@@ -111,7 +112,6 @@ namespace StarMap2D.Forms
             this.lbAltitudeValue = new System.Windows.Forms.Label();
             this.lbAltitude = new System.Windows.Forms.Label();
             this.lbCoordinates = new System.Windows.Forms.Label();
-            this.lbCompassDirectionValue = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.tlpMapControls.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,7 +132,7 @@ namespace StarMap2D.Forms
             // 
             // dtpMapDateTime
             // 
-            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpMapDateTime.CustomFormat = "dd\'.\'MM\'.\'yyyy HH\':\'mm";
             this.dtpMapDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -166,7 +166,7 @@ namespace StarMap2D.Forms
             this.map2d.ConstellationLineColor = System.Drawing.Color.DeepSkyBlue;
             this.map2d.CrossHairColor = System.Drawing.Color.LimeGreen;
             this.map2d.CrossHairSize = 20;
-            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 9, 18, 17, 45, 196);
+            this.map2d.CurrentTimeUtc = new System.DateTime(2022, 2, 13, 12, 20, 2, 184);
             this.map2d.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map2d.DrawConstellationBoundaries = false;
             this.map2d.DrawConstellationNames = true;
@@ -318,7 +318,7 @@ namespace StarMap2D.Forms
             // 
             // cmbJumpToLocation
             // 
-            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbJumpToLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbJumpToLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -548,7 +548,7 @@ namespace StarMap2D.Forms
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMapControls.SetColumnSpan(this.panel4, 2);
             this.panel4.Controls.Add(this.cbAboveHorizonValue);
@@ -767,6 +767,17 @@ namespace StarMap2D.Forms
             this.pnCoordinates.Size = new System.Drawing.Size(238, 117);
             this.pnCoordinates.TabIndex = 18;
             // 
+            // lbCompassDirectionValue
+            // 
+            this.lbCompassDirectionValue.AutoSize = true;
+            this.lbCompassDirectionValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbCompassDirectionValue.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lbCompassDirectionValue.Location = new System.Drawing.Point(15, 90);
+            this.lbCompassDirectionValue.Name = "lbCompassDirectionValue";
+            this.lbCompassDirectionValue.Size = new System.Drawing.Size(12, 15);
+            this.lbCompassDirectionValue.TabIndex = 10;
+            this.lbCompassDirectionValue.Text = "-";
+            // 
             // lbCompassDirection
             // 
             this.lbCompassDirection.AutoSize = true;
@@ -864,17 +875,6 @@ namespace StarMap2D.Forms
             this.lbCoordinates.Size = new System.Drawing.Size(71, 15);
             this.lbCoordinates.TabIndex = 0;
             this.lbCoordinates.Text = "Coordinates";
-            // 
-            // lbCompassDirectionValue
-            // 
-            this.lbCompassDirectionValue.AutoSize = true;
-            this.lbCompassDirectionValue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbCompassDirectionValue.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lbCompassDirectionValue.Location = new System.Drawing.Point(15, 90);
-            this.lbCompassDirectionValue.Name = "lbCompassDirectionValue";
-            this.lbCompassDirectionValue.Size = new System.Drawing.Size(12, 15);
-            this.lbCompassDirectionValue.TabIndex = 10;
-            this.lbCompassDirectionValue.Text = "-";
             // 
             // FormSkyMap2D
             // 

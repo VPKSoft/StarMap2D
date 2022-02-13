@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DocumentationFile>bin\$(Configuration)\StarMap2D.xml</DocumentationFile>
     <PackageIcon>big-dipper.png</PackageIcon>
-    <ApplicationIcon>dipper2_vpksoft.ico</ApplicationIcon>
+    <ApplicationIcon>StarMap2D.ico</ApplicationIcon>
     <Company>VPKSoft</Company>
     <Product>StarMap2D</Product>
     <Description>A program to display sky chart with utilities.</Description>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="dipper2_vpksoft.ico" />
+    <Content Include="StarMap2D.ico" />
   </ItemGroup>
 
   <ItemGroup>

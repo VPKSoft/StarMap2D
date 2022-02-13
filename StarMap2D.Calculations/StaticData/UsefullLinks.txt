@@ -1,0 +1,6 @@
+﻿http://www.stargazing.net/kepler/altaz.html#twig04
+https://github.com/Blank2275/AstroCoordsJS
+https://se.mathworks.com/matlabcentral/fileexchange/24581-convert-azimuth-and-elevation-to-right-ascension-and-declination
+http://cosinekitty.com/solar_system.html
+https://www.fourmilab.ch/yoursky/catalogues/catalogues.html
+https://www.ursa.fi/tahtikartta-classic.html

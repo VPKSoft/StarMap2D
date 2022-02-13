@@ -206,7 +206,8 @@ public partial class FormSolarSystemObjectsTable : DBLangEngineWinforms
                     Name = cell.Name,
                     ValueType = typeof(string),
                     DataPropertyName = cell.Name,
-                    HeaderText = GetHeaderText(cell.Name)
+                    HeaderText = GetHeaderText(cell.Name),
+                    ContextMenuStrip = contextMenuStrip1,
                 });
             }
 

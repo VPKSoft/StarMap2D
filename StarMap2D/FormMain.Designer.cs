@@ -55,31 +55,25 @@ namespace StarMap2D
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSkyMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuObjectDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuLocalize = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDumpLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 88);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Settings";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 134);
+            this.button2.Location = new System.Drawing.Point(12, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 23);
             this.button2.TabIndex = 1;
@@ -89,7 +83,7 @@ namespace StarMap2D
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 179);
+            this.button3.Location = new System.Drawing.Point(158, 27);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 23);
             this.button3.TabIndex = 2;
@@ -110,12 +104,37 @@ namespace StarMap2D
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem});
+            this.mnuFile,
+            this.helpToolStripMenuItem,
+            this.mnuTools});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mnuFile
+            // 
+            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSkyMap,
+            this.mnuObjectDetails});
+            this.mnuFile.Name = "mnuFile";
+            this.mnuFile.Size = new System.Drawing.Size(37, 20);
+            this.mnuFile.Text = "File";
+            // 
+            // mnuSkyMap
+            // 
+            this.mnuSkyMap.Name = "mnuSkyMap";
+            this.mnuSkyMap.Size = new System.Drawing.Size(180, 22);
+            this.mnuSkyMap.Text = "Sky map";
+            this.mnuSkyMap.Click += new System.EventHandler(this.mnuSkyMap_Click);
+            // 
+            // mnuObjectDetails
+            // 
+            this.mnuObjectDetails.Name = "mnuObjectDetails";
+            this.mnuObjectDetails.Size = new System.Drawing.Size(180, 22);
+            this.mnuObjectDetails.Text = "Object details";
+            this.mnuObjectDetails.Click += new System.EventHandler(this.mnuObjectDetails_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -141,15 +160,40 @@ namespace StarMap2D
             this.mnuDumpLanguage.Text = "Dump language";
             this.mnuDumpLanguage.Click += new System.EventHandler(this.mnuDumpLanguage_Click);
             // 
+            // mnuTools
+            // 
+            this.mnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSettings});
+            this.mnuTools.Name = "mnuTools";
+            this.mnuTools.Size = new System.Drawing.Size(46, 20);
+            this.mnuTools.Text = "Tools";
+            // 
+            // mnuSettings
+            // 
+            this.mnuSettings.Name = "mnuSettings";
+            this.mnuSettings.Size = new System.Drawing.Size(116, 22);
+            this.mnuSettings.Text = "Settings";
+            this.mnuSettings.Click += new System.EventHandler(this.mnuSettings_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(158, 215);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -163,8 +207,6 @@ namespace StarMap2D
         }
 
         #endregion
-
-        private Button button1;
         private Button button2;
         private Button button3;
         private TextBox textBox1;
@@ -172,5 +214,11 @@ namespace StarMap2D
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem mnuLocalize;
         private ToolStripMenuItem mnuDumpLanguage;
+        private ToolStripMenuItem mnuTools;
+        private ToolStripMenuItem mnuSettings;
+        private ToolStripMenuItem mnuFile;
+        private ToolStripMenuItem mnuSkyMap;
+        private ToolStripMenuItem mnuObjectDetails;
+        private Button button1;
     }
 }

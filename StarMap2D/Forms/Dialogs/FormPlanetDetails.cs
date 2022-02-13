@@ -95,9 +95,6 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
             { lbGlobalMagneticField, tbGlobalMagneticFieldValue }
         };
 
-        MessageBox.Show(string.Join(Environment.NewLine, ValueControls.Select(f => "\"" + f.Key.Text + $"{firstUpper(f.Key.Text)}|A message describing a elliptical object physical property: {firstUpper(f.Key.Text)}\"")));
-
-
         ListPlanets();
     }
 

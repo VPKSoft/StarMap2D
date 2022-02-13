@@ -26,11 +26,14 @@ SOFTWARE.
 
 using System.Diagnostics;
 using StarMap2D.Calculations.Compass;
+using StarMap2D.Calculations.Helpers;
+using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Localization;
 using VPKSoft.DBLocalization;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D;
 
@@ -62,11 +65,6 @@ public partial class FormMain : DBLangEngineWinforms
         CompassDirection.GetNameFunc = LocalizeCompassDirection.LocalizeCompassDirectionFunc;
 
         //Properties.Settings.Default.Reset();
-    }
-
-    private void button1_Click(object sender, EventArgs e)
-    {
-        FormDialogSettings.Display(this);
     }
 
     private void button2_Click(object sender, EventArgs ee)
@@ -103,5 +101,24 @@ public partial class FormMain : DBLangEngineWinforms
         {
             // The localization dumping failed.
         }
+    }
+
+    private void mnuSettings_Click(object sender, EventArgs e)
+    {
+        FormDialogSettings.Display(this);
+    }
+
+    private void mnuSkyMap_Click(object sender, EventArgs e)
+    {
+        FormSkyMap2D.Display();
+    }
+
+    private void mnuObjectDetails_Click(object sender, EventArgs e)
+    {
+        new FormSolarSystemObjectsTable().Show();
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
     }
 }

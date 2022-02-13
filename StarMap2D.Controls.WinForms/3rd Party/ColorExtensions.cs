@@ -24,9 +24,12 @@ SOFTWARE.
 */
 #endregion
 
-// Actual copyright (C): https://github.com/sanjayatpilcrow/SharpSnippets/blob/master/POCs/POCs/Sanjay/SharpSnippets/Drawing/ColorExtensions.cs
+// Actual copyright, CC BY 4.0 (C): https://github.com/sanjayatpilcrow/SharpSnippets/blob/master/POCs/POCs/Sanjay/SharpSnippets/Drawing/ColorExtensions.cs
 // https://github.com/sanjayatpilcrow
 // https://sharpsnippets.wordpress.com/author/sharpsnippets/
+// https://github.com/sanjayatpilcrow/SharpSnippets
+// ReSharper disable All
+#pragma warning disable CS1591
 namespace POCs.Sanjay.SharpSnippets.Drawing;
 
 public static class ColorExtensions
@@ -120,7 +123,7 @@ public static class ColorExtensions
         double r = rgb.R;
         double g = rgb.G;
         double b = rgb.B;
- 
+
         double max = Max(r, g, b);
         double min = Min(r, g, b);
         double chroma = max - min;

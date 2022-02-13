@@ -46,6 +46,7 @@
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpTime.Location = new System.Drawing.Point(133, 0);
             this.dtpTime.Name = "dtpTime";
+            this.dtpTime.ShowUpDown = true;
             this.dtpTime.Size = new System.Drawing.Size(114, 23);
             this.dtpTime.TabIndex = 1;
             this.dtpTime.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);

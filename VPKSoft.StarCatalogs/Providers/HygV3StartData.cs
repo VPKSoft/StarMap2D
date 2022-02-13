@@ -34,7 +34,7 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarData" />
 /// </summary>
 /// <seealso cref="IStarData" />
-public class HygV3StartData: StarData
+public class HygV3StartData : StarData
 {
     /// <summary>
     /// Gets or sets the proper name of the star if any.
@@ -49,14 +49,40 @@ public class HygV3StartData: StarData
                 proper = GetEntryByName<string?>("proper")?.Trim();
                 FetchMemory["proper"] = true;
             }
-                
+
             return proper;
         }
-            
+
         set
         {
             FetchMemory["proper"] = true;
             proper = value;
+        }
+    }
+
+    private string? bayerFlamsteed;
+
+    /// <summary>
+    /// Gets or sets the Bayer-Flamsteed name for the star if any.
+    /// </summary>
+    /// <value>The Bayer-Flamsteed name.</value>
+    public string? BayerFlamsteed
+    {
+        get
+        {
+            if (!FetchMemory["bf"])
+            {
+                bayerFlamsteed = GetEntryByName<string?>("bf")?.Trim();
+                FetchMemory["bf"] = true;
+            }
+
+            return bayerFlamsteed;
+        }
+
+        set
+        {
+            FetchMemory["bf"] = true;
+            bayerFlamsteed = value;
         }
     }
 
@@ -74,10 +100,10 @@ public class HygV3StartData: StarData
                 hip = GetEntryByName<int?>("hip");
                 FetchMemory["hip"] = true;
             }
-                
+
             return hip;
         }
-            
+
         set
         {
             FetchMemory["hip"] = true;
@@ -101,7 +127,7 @@ public class HygV3StartData: StarData
                 declination ??= GetEntryByName<double>("dec");
                 FetchMemory["dec"] = true;
             }
-                
+
             return declination ?? 0;
         }
 
@@ -122,7 +148,7 @@ public class HygV3StartData: StarData
                 rightAscension ??= GetEntryByName<double>("ra");
                 FetchMemory["ra"] = true;
             }
-                
+
             return rightAscension ?? 0;
         }
 
@@ -130,11 +156,11 @@ public class HygV3StartData: StarData
         {
             FetchMemory["dec"] = true;
             rightAscension = value;
-        } 
+        }
     }
 
     /// <inheritdoc cref="IStarData.Magnitude"/>
-    public override double Magnitude 
+    public override double Magnitude
     {
         get
         {
@@ -143,7 +169,7 @@ public class HygV3StartData: StarData
                 magnitude ??= GetEntryByName<double>("mag");
                 FetchMemory["mag"] = true;
             }
-                
+
             return magnitude ?? 0;
         }
 
@@ -152,7 +178,7 @@ public class HygV3StartData: StarData
         {
             FetchMemory["mag"] = true;
             magnitude = value;
-        } 
+        }
     }
 
     /// <summary>

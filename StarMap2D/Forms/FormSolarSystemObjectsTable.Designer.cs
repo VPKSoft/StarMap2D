@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSolarSystemObjectsTable));
             this.adgSolarObjects = new Zuby.ADGV.AdvancedDataGridView();
@@ -44,9 +45,12 @@
             this.imageButton1 = new StarMap2D.Controls.WinForms.ImageButton();
             this.imageButton2 = new StarMap2D.Controls.WinForms.ImageButton();
             this.sdCSV = new System.Windows.Forms.SaveFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuHideColumn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.adgSolarObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // adgSolarObjects
@@ -249,6 +253,19 @@
             this.sdCSV.DefaultExt = "*.csv";
             this.sdCSV.Filter = "*.csv|Delimited data files";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHideColumn});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(144, 26);
+            // 
+            // mnuHideColumn
+            // 
+            this.mnuHideColumn.Name = "mnuHideColumn";
+            this.mnuHideColumn.Size = new System.Drawing.Size(143, 22);
+            this.mnuHideColumn.Text = "Hide column";
+            // 
             // FormSolarSystemObjectsTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -274,6 +291,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.adgSolarObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,5 +312,7 @@
         private Controls.WinForms.ImageButton imageButton1;
         private Controls.WinForms.ImageButton imageButton2;
         private SaveFileDialog sdCSV;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem mnuHideColumn;
     }
 }

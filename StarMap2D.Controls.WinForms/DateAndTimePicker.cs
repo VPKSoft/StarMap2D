@@ -44,8 +44,6 @@ public partial class DateAndTimePicker : UserControl
         InitializeComponent();
     }
 
-    private bool showUpButton;
-
     /// <summary>
     /// Gets or sets a value indicating whether a spin button control (also known as an up-down control) is
     /// used to adjust the date/time value.
@@ -56,17 +54,9 @@ public partial class DateAndTimePicker : UserControl
     [Browsable(true)]
     public bool ShowUpButton
     {
-        get => showUpButton;
+        get => dtpDate.ShowUpDown;
 
-        set
-        {
-            if (showUpButton != value)
-            {
-                dtpDate.ShowUpDown = value;
-                dtpTime.ShowUpDown = value;
-                showUpButton = value;
-            }
-        }
+        set => dtpDate.ShowUpDown = value;
     }
 
     /// <summary>
