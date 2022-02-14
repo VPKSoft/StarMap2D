@@ -214,6 +214,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The star catalog file &apos;{0}&apos; could not be loaded. Using the default instead.|A message describing to the user that a star catalog with a specified file name could not be loaded and the default is going to be used instead..
+        /// </summary>
+        internal static string msgErrorLoadingStarCatalog {
+            get {
+                return ResourceManager.GetString("msgErrorLoadingStarCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Escape velocity (km/s)|A message describing an elliptical object physical property: Escape velocity (km/s)..
         /// </summary>
         internal static string msgEscapeVelocityKmS {
@@ -687,15 +696,6 @@ namespace StarMap2D.Localization {
         internal static string msgYes {
             get {
                 return ResourceManager.GetString("msgYes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

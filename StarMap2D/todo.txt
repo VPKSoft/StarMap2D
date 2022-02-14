@@ -1,0 +1,1 @@
+﻿* Add stream loading along with the normal read all lines into memory loading to the VPKSoft.StarCatalogs providers.

@@ -39,7 +39,9 @@ using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.Files;
 using VPKSoft.StarCatalogs.Providers;
+using VPKSoft.StarCatalogs.StaticData;
 
 namespace StarMap2D.Forms;
 
@@ -76,6 +78,34 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
 
         ListTimeIntervals();
 
+
+        if (string.IsNullOrWhiteSpace(Properties.Settings.Default.StarCatalog))
+        {
+            LoadEmbeddedCatalog();
+        }
+        else
+        {
+            if (!LoadTypedCatalog())
+            {
+                ErrorMessage.ShowError(DBLangEngine.GetMessage("msgErrorLoadingStarCatalog",
+                    "The star catalog file '{0}' could not be loaded. Using the default instead.|A message describing to the user that a star catalog with a specified file name could not be loaded and the default is going to be used instead.",
+                    CatalogFileProvider.GetCatalogFileName(CatalogNames.TypeNames
+                        .FirstOrDefault(f => f.Key.Name == Properties.Settings.Default.StarCatalog).Key)));
+            }
+        }
+
+        suspendEvents = false;
+
+        Instances.Add(this);
+    }
+
+    private List<SolarSystemObjectGraphics> solarSystemObjects = new();
+    private bool suspendEvents;
+
+    #region PrivateMethodsAndProperties
+
+    private void LoadEmbeddedCatalog()
+    {
         var yaleBrightProvider = new YaleBrightProvider();
 
         using var reader = new StreamReader(new MemoryStream(Properties.Resources.YaleBrightStars));
@@ -91,16 +121,34 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 Magnitude = yaleBrightStar.Magnitude
             });
         }
-
-        suspendEvents = false;
-
-        Instances.Add(this);
     }
 
-    private List<SolarSystemObjectGraphics> solarSystemObjects = new();
-    private bool suspendEvents;
+    private bool LoadTypedCatalog()
+    {
+        try
+        {
+            var provider = CatalogFileProvider.GetCatalog(CatalogNames.TypeNames
+                .FirstOrDefault(f => f.Key.Name == Properties.Settings.Default.StarCatalog).Key);
 
-    #region PrivateMethodsAndProperties
+            foreach (var starData in provider.StarData)
+            {
+                map2d.StarMapObjects.Add(new StarMapObject
+                {
+                    RightAscension = starData.RightAscension,
+                    Declination = starData.Declination,
+                    Magnitude = starData.Magnitude
+                });
+            }
+
+            return true;
+        }
+        catch
+        {
+            LoadEmbeddedCatalog();
+            return false;
+        }
+    }
+
     private void LoadSettings()
     {
         suspendEvents = true;

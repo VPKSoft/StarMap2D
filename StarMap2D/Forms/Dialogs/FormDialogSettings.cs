@@ -29,6 +29,8 @@ using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Properties;
 using StarMap2D.Utilities;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.Providers;
+using VPKSoft.StarCatalogs.StaticData;
 
 namespace StarMap2D.Forms.Dialogs;
 
@@ -67,14 +69,22 @@ public partial class FormDialogSettings : DBLangEngineWinforms
             cultures.Add(new CultureInfo("en-US"));
         }
 
-        // a the translated cultures to the selection combo box..
-        // ReSharper disable once CoVariantArrayConversion
-        cmbSelectLanguageValue.Items.AddRange(cultures.ToArray());
+        // A the translated cultures to the selection combo box.
+        cmbSelectLanguageValue.Items.AddRange(cultures.Cast<object>().ToArray());
 
         cmbFormattingCultureValue.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>().ToArray());
 
+        cmbStarCatalogValue.Items.Add(new KeyValuePair<Type, string>(typeof(YaleBrightProvider),
+            DBLangEngine.GetMessage("msgEmbeddedValue",
+                "Embedded ({0})|A text describing something embedded with value or data name.",
+                CatalogNames.TypeNames[typeof(YaleBrightProvider)])));
+
+        cmbStarCatalogValue.Items.AddRange(CatalogNames.TypeNames.Cast<object>().ToArray());
+
         LoadSettings();
     }
+
+
 
     #region PrivateFields
     private Control? colorControl;
@@ -97,6 +107,17 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
     private void LoadSettings()
     {
+        var defaultCatalog = new KeyValuePair<Type, string>(typeof(YaleBrightProvider),
+            DBLangEngine.GetMessage("msgEmbeddedValue",
+                "Embedded ({0})|A text describing something embedded with value or data name.",
+                CatalogNames.TypeNames[typeof(YaleBrightProvider)]));
+
+        var defaultFileCatalog = CatalogNames.TypeNames.FirstOrDefault(f => f.Key.Name == Settings.Default.StarCatalog);
+
+        cmbStarCatalogValue.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.StarCatalog)
+            ? defaultCatalog
+            : defaultFileCatalog;
+
         tbLocationName.Text = Settings.Default.DefaultLocationName;
         nudLongitude.Value = (decimal)Settings.Default.Longitude;
         nudLatitude.Value = (decimal)Settings.Default.Latitude;
@@ -137,12 +158,14 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
     private void SaveSettings()
     {
+        Settings.Default.StarCatalog = ((KeyValuePair<Type, string>)cmbStarCatalogValue.SelectedItem).Key.Name;
+
         Settings.Default.DefaultLocationName = tbLocationName.Text;
         Settings.Default.Longitude = (double)nudLongitude.Value;
         Settings.Default.Latitude = (double)nudLatitude.Value;
         Settings.Default.StarMagnitudeColors = starMagnitudeEditor1.StarMagnitudeColors;
         Settings.Default.StarMagnitudeSizes = starMagnitudeEditor1.StarMagnitudes;
-        
+
         // Colors.
         Settings.Default.ConstellationBorderLineColor = pnConstellationBorderLineColor.BackColor;
         Settings.Default.MapCircleColor = pnMapCircleColor.BackColor;

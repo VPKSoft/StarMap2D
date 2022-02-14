@@ -33,13 +33,19 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="IStarDataProvider{T}" />
-public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
+public class TychoProvider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<TychoStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         var dataEntries = new List<string>();
         dataEntries.AddRange(lines);
@@ -48,8 +54,14 @@ public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
         {
             var data = new TychoStarData
             {
-                GetStarData = TychoStarData.GetDataRaw, RawData = rawDataEntry,
+                GetStarData = TychoStarData.GetDataRaw,
+                RawData = rawDataEntry,
             };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
 
             // We don't need the sun (in this case).
             if (data.Name == "Sun")
@@ -68,6 +80,12 @@ public class TychoProvider: IStarDataProvider<TychoStarData>, ILoadDataLines
         LoadData(lines);
     }
 
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
+    }
 
     /// <summary>
     /// A static method to test the <see cref="TychoProvider"/> class.

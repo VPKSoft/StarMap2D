@@ -168,6 +168,9 @@
   <data name="msgError" xml:space="preserve">
     <value>Error|A message indicating that a general error occurred.</value>
   </data>
+  <data name="msgErrorLoadingStarCatalog" xml:space="preserve">
+    <value>The star catalog file '{0}' could not be loaded. Using the default instead.|A message describing to the user that a star catalog with a specified file name could not be loaded and the default is going to be used instead.</value>
+  </data>
   <data name="msgEscapeVelocityKmS" xml:space="preserve">
     <value>Escape velocity (km/s)|A message describing an elliptical object physical property: Escape velocity (km/s).</value>
   </data>
@@ -326,8 +329,5 @@
   </data>
   <data name="msgYes" xml:space="preserve">
     <value>yes|A message saying true in form of yes.</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
 </root>

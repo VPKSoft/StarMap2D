@@ -33,13 +33,19 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="IStarDataProvider{T}" />
-public class HipparcosProvider : IStarDataProvider<HipparcosStarData>, ILoadDataLines
+public class HipparcosProvider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<HipparcosStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         var dataEntries = new List<string>();
 
@@ -49,8 +55,14 @@ public class HipparcosProvider : IStarDataProvider<HipparcosStarData>, ILoadData
         {
             var data = new HipparcosStarData
             {
-                RawData = rawDataEntry, GetStarData = HipparcosStarData.GetDataRaw,
+                RawData = rawDataEntry,
+                GetStarData = HipparcosStarData.GetDataRaw,
             };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
 
             // We don't need the sun (in this case).
             if (data.Name == "Sun")
@@ -74,8 +86,6 @@ public class HipparcosProvider : IStarDataProvider<HipparcosStarData>, ILoadData
             var provider = new HipparcosProvider();
             provider.LoadData(fileName);
 
-            _ = provider.StarData.Count(f => f.HIP != null);
-
             // Enumerate one set of lazy nullable doubles.
             _ = provider.StarData.Where(f => f.Declination != 0);
 
@@ -98,5 +108,12 @@ public class HipparcosProvider : IStarDataProvider<HipparcosStarData>, ILoadData
     {
         var lines = File.ReadAllLines(fileName);
         LoadData(lines);
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
     }
 }

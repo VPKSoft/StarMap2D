@@ -34,24 +34,38 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="IStarDataProvider{T}" />
-public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>, ILoadDataLines
+public class YaleSmallProvider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<YaleSmallStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         foreach (var line in lines)
         {
             var lineData = line.Replace(" ", string.Empty);
             var lineDataSplit = lineData.Split(',');
-            StarData.Add(new YaleSmallStarData
+
+            var data = new YaleSmallStarData
             {
-                Declination = double.Parse(lineDataSplit[1], CultureInfo.InvariantCulture), 
+                Declination = double.Parse(lineDataSplit[1], CultureInfo.InvariantCulture),
                 RightAscension = double.Parse(lineDataSplit[0], CultureInfo.InvariantCulture),
                 Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture)
-            });
+            };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
+
+            StarData.Add(data);
         }
     }
 
@@ -60,6 +74,13 @@ public class YaleSmallProvider: IStarDataProvider<YaleSmallStarData>, ILoadDataL
     {
         var lines = File.ReadAllLines(fileName);
         LoadData(lines);
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
     }
 
     /// <summary>

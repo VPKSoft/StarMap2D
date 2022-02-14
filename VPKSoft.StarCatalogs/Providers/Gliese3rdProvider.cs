@@ -35,13 +35,19 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// <seealso cref="IStarDataProvider{T}" />
 // ReSharper disable once IdentifierTypo
 // ReSharper disable once InconsistentNaming
-public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadDataLines
+public class Gliese3rdProvider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<Gliese3rdStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         var dataEntries = new List<string>();
 
@@ -54,8 +60,14 @@ public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadData
         {
             var data = new Gliese3rdStarData
             {
-                RawData = rawDataEntry, GetStarData = Gliese3rdStarData.GetDataRaw,
+                RawData = rawDataEntry,
+                GetStarData = Gliese3rdStarData.GetDataRaw,
             };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
 
             // We don't need the sun (in this case).
             if (data.Name == "Sun")
@@ -65,6 +77,7 @@ public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadData
 
             StarData.Add(data);
         }
+
     }
 
     /// <summary>
@@ -100,7 +113,13 @@ public class Gliese3rdProvider : IStarDataProvider<Gliese3rdStarData>, ILoadData
     public void LoadData(string fileName)
     {
         var lines = File.ReadAllLines(fileName);
-
         LoadData(lines);
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
     }
 }

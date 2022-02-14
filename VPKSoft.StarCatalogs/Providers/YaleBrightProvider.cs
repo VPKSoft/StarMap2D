@@ -33,13 +33,19 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="IStarDataProvider{T}" />
-public class YaleBrightProvider: IStarDataProvider<YaleBrightStarData>, ILoadDataLines
+public class YaleBrightProvider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<YaleBrightStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         var dataEntries = new List<string>();
         dataEntries.AddRange(lines);
@@ -50,8 +56,14 @@ public class YaleBrightProvider: IStarDataProvider<YaleBrightStarData>, ILoadDat
             {
                 var newData = new YaleBrightStarData
                 {
-                    RawData = rawDataEntry, GetStarData = YaleBrightStarData.GetDataRaw,
+                    RawData = rawDataEntry,
+                    GetStarData = YaleBrightStarData.GetDataRaw,
                 };
+
+                if (newData.Magnitude > magnitudeLimit)
+                {
+                    continue;
+                }
 
                 // We don't need the sun (in this case).
                 if (newData.Name == "Sun")
@@ -73,6 +85,13 @@ public class YaleBrightProvider: IStarDataProvider<YaleBrightStarData>, ILoadDat
     {
         var lines = File.ReadAllLines(fileName);
         LoadData(lines);
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
     }
 
     /// <summary>

@@ -36,7 +36,7 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="VPKSoft.StarCatalogs.Interfaces.IStarDataProvider{T}" />
-public class PpmProvider: IStarDataProvider<PpmStarData>
+public class PpmProvider : IStarDataProvider<IStarData>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PpmProvider"/> class.
@@ -48,7 +48,7 @@ public class PpmProvider: IStarDataProvider<PpmStarData>
     }
 
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<PpmStarData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <summary>
     /// Gets or sets a value indicating whether the file format is PPMRa or PPM.
@@ -105,6 +105,16 @@ public class PpmProvider: IStarDataProvider<PpmStarData>
     /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
     public void LoadData(string fileName)
     {
+        LoadData(fileName, 1000);
+    }
+
+    /// <summary>
+    /// Loads the star data.
+    /// </summary>
+    /// <param name="fileName">Name of the file to load the star data from.</param>
+    /// <param name="magnitudeLimit">The magnitude limit of smallest magnitude to not to load into the memory.</param>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
         using var fileStream = new FileStream(fileName, FileMode.Open,
             FileAccess.Read, FileShare.ReadWrite);
 
@@ -120,7 +130,7 @@ public class PpmProvider: IStarDataProvider<PpmStarData>
          * 0 if no star i.d. numbers are present
          * 1 if star i.d. numbers are in catalog file
          * 2 if star i.d. numbers are  in file
-         */
+        */
         Stnum = reader.ReadInt32BigEndian();
 
         Mprop = reader.ReadInt32BigEndian() != -1; // True if proper motion is included. False if no proper motion is included.
@@ -142,6 +152,11 @@ public class PpmProvider: IStarDataProvider<PpmStarData>
                 Xrpm = reader.ReadSingleBigEndian(), // R.A. proper motion (radians per year).
                 Xdpm = reader.ReadSingleBigEndian(), // Dec. proper motion (radians per year).
             };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
 
             data.Magnitude = data.Mag / 100.0;
 

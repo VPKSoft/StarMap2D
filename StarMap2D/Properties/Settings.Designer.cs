@@ -288,5 +288,17 @@ namespace StarMap2D.Properties {
                 this["ColumnsGridObjectDetails"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StarCatalog {
+            get {
+                return ((string)(this["StarCatalog"]));
+            }
+            set {
+                this["StarCatalog"] = value;
+            }
+        }
     }
 }

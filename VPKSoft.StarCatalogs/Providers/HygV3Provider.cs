@@ -33,13 +33,19 @@ namespace VPKSoft.StarCatalogs.Providers;
 /// Implements the <see cref="IStarDataProvider{T}" />
 /// </summary>
 /// <seealso cref="IStarDataProvider{T}" />
-public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
+public class HygV3Provider : IStarDataProvider<IStarData>, ILoadDataLines
 {
     /// <inheritdoc cref="IStarDataProvider{T}.StarData"/>
-    public List<HygV3StartData> StarData { get; } = new();
+    public List<IStarData> StarData { get; } = new();
 
     /// <inheritdoc cref="ILoadDataLines.LoadData(string[])"/>
     public void LoadData(string[] lines)
+    {
+        LoadData(lines, 1000);
+    }
+
+    /// <inheritdoc cref="ILoadDataLines.LoadData(string[],double)"/>
+    public void LoadData(string[] lines, double magnitudeLimit)
     {
         var dataEntries = new List<string>();
 
@@ -50,11 +56,18 @@ public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
 
         foreach (var rawDataEntry in dataEntries)
         {
-            StarData.Add(new HygV3StartData
+            var data = new HygV3StartData
             {
                 GetStarData = HygV3StartData.GetDataRaw,
                 RawData = rawDataEntry,
-            });
+            };
+
+            if (data.Magnitude > magnitudeLimit)
+            {
+                continue;
+            }
+
+            StarData.Add(data);
         }
     }
 
@@ -71,7 +84,7 @@ public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
             provider.LoadData(fileName);
 
             // Enumerate one set of lazy nullable doubles.
-            _ = provider.StarData.Where(f => f.HIP == null).ToList();
+            _ = provider.StarData.Where(f => f.Declination > 0).ToList();
 
             return true;
         }
@@ -86,5 +99,12 @@ public class HygV3Provider: IStarDataProvider<HygV3StartData>, ILoadDataLines
     {
         var lines = File.ReadAllLines(fileName);
         LoadData(lines);
+    }
+
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string,double)"/>
+    public void LoadData(string fileName, double magnitudeLimit)
+    {
+        var lines = File.ReadAllLines(fileName);
+        LoadData(lines, magnitudeLimit);
     }
 }

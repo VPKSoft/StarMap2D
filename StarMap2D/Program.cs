@@ -28,6 +28,7 @@ using System.Globalization;
 using StarMap2D.Forms;
 using StarMap2D.Forms.Dialogs;
 using VPKSoft.LangLib;
+using VPKSoft.StarCatalogs.Files;
 
 namespace StarMap2D;
 
@@ -70,6 +71,7 @@ internal static class Program
         StarMap2D.Calculations.Globals.FormattingCulture = Globals.FormattingCulture;
 
         DBLangEngine.UseCulture = new CultureInfo(Properties.Settings.Default.Locale);
+        CatalogFileProvider.BaseFolder = SettingsFolder;
 
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.

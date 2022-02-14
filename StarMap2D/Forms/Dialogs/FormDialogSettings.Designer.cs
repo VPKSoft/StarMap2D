@@ -106,6 +106,8 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
+            this.cmbStarCatalogValue = new System.Windows.Forms.ComboBox();
+            this.lbStarCatalog = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).BeginInit();
@@ -135,6 +137,8 @@ namespace StarMap2D.Forms.Dialogs
             // 
             // tpCommon
             // 
+            this.tpCommon.Controls.Add(this.cmbStarCatalogValue);
+            this.tpCommon.Controls.Add(this.lbStarCatalog);
             this.tpCommon.Controls.Add(this.cmbFormattingCultureValue);
             this.tpCommon.Controls.Add(this.lbFormattingCulture);
             this.tpCommon.Controls.Add(this.cbDrawCrossHair);
@@ -170,7 +174,7 @@ namespace StarMap2D.Forms.Dialogs
             this.cmbFormattingCultureValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbFormattingCultureValue.DisplayMember = "DisplayName";
             this.cmbFormattingCultureValue.FormattingEnabled = true;
-            this.cmbFormattingCultureValue.Location = new System.Drawing.Point(6, 377);
+            this.cmbFormattingCultureValue.Location = new System.Drawing.Point(6, 368);
             this.cmbFormattingCultureValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
             this.cmbFormattingCultureValue.Name = "cmbFormattingCultureValue";
             this.cmbFormattingCultureValue.Size = new System.Drawing.Size(500, 23);
@@ -181,7 +185,7 @@ namespace StarMap2D.Forms.Dialogs
             // lbFormattingCulture
             // 
             this.lbFormattingCulture.AutoSize = true;
-            this.lbFormattingCulture.Location = new System.Drawing.Point(6, 357);
+            this.lbFormattingCulture.Location = new System.Drawing.Point(6, 348);
             this.lbFormattingCulture.Name = "lbFormattingCulture";
             this.lbFormattingCulture.Size = new System.Drawing.Size(232, 15);
             this.lbFormattingCulture.TabIndex = 34;
@@ -705,6 +709,31 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
+            // cmbStarCatalogValue
+            // 
+            this.cmbStarCatalogValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbStarCatalogValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbStarCatalogValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStarCatalogValue.DisplayMember = "Value";
+            this.cmbStarCatalogValue.FormattingEnabled = true;
+            this.cmbStarCatalogValue.Location = new System.Drawing.Point(6, 415);
+            this.cmbStarCatalogValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbStarCatalogValue.Name = "cmbStarCatalogValue";
+            this.cmbStarCatalogValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbStarCatalogValue.TabIndex = 37;
+            this.cmbStarCatalogValue.ValueMember = "Key";
+            this.cmbStarCatalogValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
+            // 
+            // lbStarCatalog
+            // 
+            this.lbStarCatalog.AutoSize = true;
+            this.lbStarCatalog.Location = new System.Drawing.Point(6, 395);
+            this.lbStarCatalog.Name = "lbStarCatalog";
+            this.lbStarCatalog.Size = new System.Drawing.Size(104, 15);
+            this.lbStarCatalog.TabIndex = 36;
+            this.lbStarCatalog.Text = "Star catalog to use";
+            // 
             // FormDialogSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -789,5 +818,7 @@ namespace StarMap2D.Forms.Dialogs
         private ComboBox cmbFormattingCultureValue;
         private Label lbFormattingCulture;
         private ToolTip ttMain;
+        private ComboBox cmbStarCatalogValue;
+        private Label lbStarCatalog;
     }
 }

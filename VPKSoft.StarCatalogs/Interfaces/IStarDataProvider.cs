@@ -30,7 +30,7 @@ namespace VPKSoft.StarCatalogs.Interfaces;
 /// An interface to provide star data.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IStarDataProvider<T> where T: IStarData
+public interface IStarDataProvider<T> where T : IStarData
 {
     /// <summary>
     /// Gets the star data.
@@ -43,4 +43,11 @@ public interface IStarDataProvider<T> where T: IStarData
     /// </summary>
     /// <param name="fileName">Name of the file to load the star data from.</param>
     void LoadData(string fileName);
+
+    /// <summary>
+    /// Loads the star data.
+    /// </summary>
+    /// <param name="fileName">Name of the file to load the star data from.</param>
+    /// <param name="magnitudeLimit">The magnitude limit of smallest magnitude to not to load into the memory.</param>
+    void LoadData(string fileName, double magnitudeLimit);
 }
