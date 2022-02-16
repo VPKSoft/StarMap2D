@@ -102,7 +102,7 @@ public class PpmProvider : IStarDataProvider<IStarData>
     /// <value>The Number of bytes per star entry.</value>
     public int Nbent { get; set; }
 
-    /// <inheritdoc cref="IStarDataProvider{T}.LoadData"/>
+    /// <inheritdoc cref="IStarDataProvider{T}.LoadData(string)"/>
     public void LoadData(string fileName)
     {
         LoadData(fileName, 1000);

@@ -46,10 +46,6 @@ public partial class FormPlanetDetails : DBLangEngineWinforms
     /// </summary>
     public FormPlanetDetails()
     {
-        string firstUpper(string value)
-        {
-            return value[0].ToString().ToUpper() + value.Substring(1).ToLower();
-        }
         InitializeComponent();
 
         ValueControls = new Dictionary<Label, Control>();

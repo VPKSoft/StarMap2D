@@ -72,14 +72,17 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         // A the translated cultures to the selection combo box.
         cmbSelectLanguageValue.Items.AddRange(cultures.Cast<object>().ToArray());
 
-        cmbFormattingCultureValue.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>().ToArray());
+        cmbFormattingCultureValue.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>()
+            .ToArray());
 
-        cmbStarCatalogValue.Items.Add(new KeyValuePair<Type, string>(typeof(YaleBrightProvider),
+        cmbStarCatalogValue.Items.Add(new KeyValuePair<Type?, string>(
+            null, // Null for the embedded catalog.
             DBLangEngine.GetMessage("msgEmbeddedValue",
                 "Embedded ({0})|A text describing something embedded with value or data name.",
                 CatalogNames.TypeNames[typeof(YaleBrightProvider)])));
 
-        cmbStarCatalogValue.Items.AddRange(CatalogNames.TypeNames.Cast<object>().ToArray());
+        cmbStarCatalogValue.Items.AddRange(CatalogNames.TypeNames
+            .Select(f => new KeyValuePair<Type?, string>(f.Key, f.Value)).Cast<object>().ToArray());
 
         LoadSettings();
     }
@@ -107,12 +110,13 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
     private void LoadSettings()
     {
-        var defaultCatalog = new KeyValuePair<Type, string>(typeof(YaleBrightProvider),
+        var defaultCatalog = new KeyValuePair<Type?, string>(null,
             DBLangEngine.GetMessage("msgEmbeddedValue",
                 "Embedded ({0})|A text describing something embedded with value or data name.",
                 CatalogNames.TypeNames[typeof(YaleBrightProvider)]));
 
-        var defaultFileCatalog = CatalogNames.TypeNames.FirstOrDefault(f => f.Key.Name == Settings.Default.StarCatalog);
+        var defaultFileCatalog = CatalogNames.TypeNames.Select(f => new KeyValuePair<Type?, string>(f.Key, f.Value))
+            .FirstOrDefault(f => f.Key?.Name == nameof(YaleBrightProvider));
 
         cmbStarCatalogValue.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.StarCatalog)
             ? defaultCatalog
@@ -158,7 +162,10 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
     private void SaveSettings()
     {
-        Settings.Default.StarCatalog = ((KeyValuePair<Type, string>)cmbStarCatalogValue.SelectedItem).Key.Name;
+        var selectedItem = ((KeyValuePair<Type?, string>)cmbStarCatalogValue.SelectedItem);
+        Settings.Default.StarCatalog = selectedItem.Key == null
+            ? string.Empty // The embedded catalog.
+            : ((KeyValuePair<Type, string>)cmbStarCatalogValue.SelectedItem).Key.Name;
 
         Settings.Default.DefaultLocationName = tbLocationName.Text;
         Settings.Default.Longitude = (double)nudLongitude.Value;

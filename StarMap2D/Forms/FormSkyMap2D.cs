@@ -102,8 +102,10 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
     private List<SolarSystemObjectGraphics> solarSystemObjects = new();
     private bool suspendEvents;
 
-    #region PrivateMethodsAndProperties
-
+    #region PrivateMethodsAndProperties    
+    /// <summary>
+    /// Loads the embedded star catalog to be used by the map.
+    /// </summary>
     private void LoadEmbeddedCatalog()
     {
         var yaleBrightProvider = new YaleBrightProvider();
@@ -123,6 +125,10 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         }
     }
 
+    /// <summary>
+    /// Loads a star catalog from a file to be used by the map. The catalog type is specified in the program settings.
+    /// </summary>
+    /// <returns><c>true</c> if the catalog was successfully loaded, <c>false</c> otherwise.</returns>
     private bool LoadTypedCatalog()
     {
         try
@@ -149,6 +155,9 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         }
     }
 
+    /// <summary>
+    /// Loads the program settings.
+    /// </summary>
     private void LoadSettings()
     {
         suspendEvents = true;

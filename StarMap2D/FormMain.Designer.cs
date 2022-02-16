@@ -125,14 +125,14 @@ namespace StarMap2D
             // mnuSkyMap
             // 
             this.mnuSkyMap.Name = "mnuSkyMap";
-            this.mnuSkyMap.Size = new System.Drawing.Size(180, 22);
+            this.mnuSkyMap.Size = new System.Drawing.Size(146, 22);
             this.mnuSkyMap.Text = "Sky map";
             this.mnuSkyMap.Click += new System.EventHandler(this.mnuSkyMap_Click);
             // 
             // mnuObjectDetails
             // 
             this.mnuObjectDetails.Name = "mnuObjectDetails";
-            this.mnuObjectDetails.Size = new System.Drawing.Size(180, 22);
+            this.mnuObjectDetails.Size = new System.Drawing.Size(146, 22);
             this.mnuObjectDetails.Text = "Object details";
             this.mnuObjectDetails.Click += new System.EventHandler(this.mnuObjectDetails_Click);
             // 

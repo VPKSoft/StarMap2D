@@ -46,6 +46,17 @@ public static class AADateExtension
     }
 
     /// <summary>
+    /// Gets the Julian Days (JD) of the specified <see cref="AASDate"/> value.
+    /// </summary>
+    /// <param name="value">The value to get the Julian Date for.</param>
+    /// <returns>The Julian Date (JD).</returns>
+    // ReSharper disable once InconsistentNaming
+    public static double GetJD(this AASDate value)
+    {
+        return AASDate.DateToJD(value.Year, value.Month, value.Day, value.InGregorianCalendar);
+    }
+
+    /// <summary>
     /// Gets a new instance of the <see cref="AASDate"/> with specified time values.
     /// </summary>
     /// <param name="value">The <see cref="AASDate"/> value.</param>

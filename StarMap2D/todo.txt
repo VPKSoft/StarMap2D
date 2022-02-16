@@ -1,1 +1,4 @@
 ﻿* Add stream loading along with the normal read all lines into memory loading to the VPKSoft.StarCatalogs providers.
+* Add few galaxies to the map
+* Detect mouse over star and do something
+* Rise and set times

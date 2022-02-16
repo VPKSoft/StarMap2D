@@ -25,7 +25,9 @@ SOFTWARE.
 #endregion
 
 using System.Diagnostics;
+using AASharp;
 using StarMap2D.Calculations.Compass;
+using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Forms;
@@ -120,5 +122,6 @@ public partial class FormMain : DBLangEngineWinforms
 
     private void button1_Click(object sender, EventArgs e)
     {
+
     }
 }
