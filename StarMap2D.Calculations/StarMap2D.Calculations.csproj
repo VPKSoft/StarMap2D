@@ -33,7 +33,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AASharp" Version="1.99.1" />
+	  <PackageReference Include="unofficial.AASharp" Version="1.99.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="RiseSet\" />
 	</ItemGroup>
 
 </Project>

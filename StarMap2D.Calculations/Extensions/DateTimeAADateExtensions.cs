@@ -31,6 +31,7 @@ namespace StarMap2D.Calculations.Extensions;
 /// <summary>
 /// Extension methods for the <see cref="DateTime"/> conversion from <seealso cref="AASDate"/>
 /// </summary>
+// ReSharper disable once InconsistentNaming
 public static class DateTimeAADateExtensions
 {
     /// <summary>
@@ -43,5 +44,16 @@ public static class DateTimeAADateExtensions
     {
         return new AASDate(value.Year, value.Month, value.Day, value.Hour, value.Minute,
             value.Second, true);
+    }
+
+    /// <summary>
+    /// Converts the specified <see cref="DateTime"/> value to a new <see cref="AASDate"/> truncated value.
+    /// </summary>
+    /// <param name="value">The <see cref="DateTime"/> value to convert.</param>
+    /// <returns>An instance to a <see cref="AASDate"/> class with hours, minutes and seconds set to zero.</returns>
+    // ReSharper disable once InconsistentNaming
+    public static AASDate ToAASDateTruncated(this DateTime value)
+    {
+        return new AASDate(value.Year, value.Month, value.Day, true);
     }
 }

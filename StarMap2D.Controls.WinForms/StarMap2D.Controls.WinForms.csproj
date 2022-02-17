@@ -30,7 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AASharp" Version="1.99.1" />
 		<PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="2.0.0-beta.7" />
 		<PackageReference Include="Svg" Version="3.4.0" />
 	</ItemGroup>

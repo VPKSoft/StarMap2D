@@ -46,6 +46,53 @@ public static class AADateExtension
     }
 
     /// <summary>
+    /// Adds the specified amount of seconds to the specified <see cref="AASDate"/> class instance without <see cref="DateTime"/> conversion in between.
+    /// </summary>
+    /// <param name="value">The <see cref="AASDate"/> value.</param>
+    /// <param name="seconds">The amount of seconds to add.</param>
+    /// <returns>A new instance to a <see cref="AASDate"/> class with specified amount of seconds added into.</returns>
+    public static AASDate AddSecondsFast(this AASDate value, double seconds)
+    {
+        var secondsInDay = 24 * 60 * 60D;
+        var jd = value.Julian + seconds / secondsInDay;
+
+        return new AASDate(jd, value.InGregorianCalendar);
+    }
+
+    /// <summary>
+    /// Gets the decimal hours of the specified <see cref="AASDate"/> instance.
+    /// </summary>
+    /// <param name="value">The <see cref="AASDate"/> value.</param>
+    /// <returns>The decimal hours of the <see cref="AASDate"/> instance.</returns>
+    public static double Hours(this AASDate value)
+    {
+        return value.Hour + value.Minute / 60.0 + value.Second / 3600.0;
+    }
+
+    /// <summary>
+    /// Gets the decimal hours of the specified <see cref="AASDate"/> instance.
+    /// </summary>
+    /// <param name="value">The <see cref="AASDate"/> value.</param>
+    /// <param name="addHours">An amount of hours to add to the value.</param>
+    /// <returns>The decimal hours of the <see cref="AASDate"/> instance.</returns>
+    public static double Hours(this AASDate value, double addHours)
+    {
+        return (value.Hour + value.Minute / 60.0 + value.Second / 3600.0 + addHours) % 24;
+    }
+
+
+    /// <summary>
+    /// Converts the value of the specified <see cref="AASDate"/> instance to the equivalent OLE Automation date.
+    /// </summary>
+    /// <param name="value">The <see cref="AASDate"/> value.</param>
+    /// <returns>A double-precision floating-point number that contains an OLE Automation date equivalent to the value of this instance.</returns>
+    // ReSharper disable once InconsistentNaming
+    public static double ToAODate(this AASDate value)
+    {
+        return value.Julian - 2415018.5;
+    }
+
+    /// <summary>
     /// Gets the Julian Days (JD) of the specified <see cref="AASDate"/> value.
     /// </summary>
     /// <param name="value">The value to get the Julian Date for.</param>
@@ -92,5 +139,16 @@ public static class AADateExtension
         dateTime = dateTime.AddSeconds(seconds);
         return new AASDate(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute,
             dateTime.Second, true);
+    }
+
+    /// <summary>
+    /// Adds the specified amount of days to the specified <see cref="AASDate"/> class instance.
+    /// </summary>
+    /// <param name="value">The <see cref="AASDate"/> value.</param>
+    /// <param name="days">The amount of days to add.</param>
+    /// <returns>A new instance to a <see cref="AASDate"/> class with specified amount of days added into.</returns>
+    public static AASDate AddDays(this AASDate value, double days)
+    {
+        return value.AddSeconds(days * 24.0 * 60.0 * 60.0);
     }
 }
