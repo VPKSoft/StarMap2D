@@ -2,3 +2,5 @@
 * Add few galaxies to the map
 * Detect mouse over star and do something
 * Rise and set times
+* Separate culture settings for the date and time formatting
+* To Eto.Forms?
