@@ -33,6 +33,8 @@ using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Common.EventsAndDelegates;
+using StarMap2D.Common.Utilities;
 using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Forms.Dialogs;

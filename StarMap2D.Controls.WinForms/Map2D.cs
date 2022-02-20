@@ -36,8 +36,9 @@ using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
+using StarMap2D.Common.EventsAndDelegates;
+using StarMap2D.Common.Utilities;
 using StarMap2D.Controls.WinForms.Drawing;
-using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using VPKSoft.StarCatalogs;
 
@@ -64,7 +65,7 @@ public partial class Map2D : UserControl
         crossHairPen = new Pen(crossHairColor);
         textBrush = new SolidBrush(ForeColor);
         base.DoubleBuffered = true;
-        constellationNames.GetLocalizedTexts(Properties.Resources.Constellations);
+        constellationNames.GetLocalizedTexts(Common.Properties.Resources.Constellations);
         DrawMapImage();
         HandleCreated += Map2D_NeedsRepaint;
         base.BackgroundImageLayout = ImageLayout.None;
@@ -96,27 +97,6 @@ public partial class Map2D : UserControl
     }
 
     #region EventDelegates        
-    /// <summary>
-    /// Delegate OnCoordinatesChanged
-    /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
-    public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
-
-    /// <summary>
-    /// A delegate for an event when the horizontal or ecliptic coordinates change on mouse position change.
-    /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The <see cref="CoordinatesChangedEventArgs"/> instance containing the event data.</param>
-    public delegate void OnMouseCoordinatesChanged(object? sender, CoordinatesChangedEventArgs e);
-
-    /// <summary>
-    /// Delegate OnObjectUserInteraction.
-    /// </summary>
-    /// <param name="sender">The sender of the event.</param>
-    /// <param name="e">The <see cref="NamedObjectEventArgs"/> instance containing the event data.</param>
-    public delegate void OnObjectUserInteraction(object sender, NamedObjectEventArgs e);
-    // TODO::!!
     #endregion
 
     #region Events        
@@ -126,7 +106,7 @@ public partial class Map2D : UserControl
     [Category("StarMap2D")]
     [Browsable(true)]
     [Description("Occurs when the latitude or the longitude coordinates changed.")]
-    public event OnCoordinatesChanged? CoordinatesChanged;
+    public event MapInteractionDelegates.OnCoordinatesChanged? CoordinatesChanged;
 
     /// <summary>
     /// Occurs when horizontal or ecliptic coordinates change on mouse move.
@@ -134,7 +114,7 @@ public partial class Map2D : UserControl
     [Category("StarMap2D")]
     [Browsable(true)]
     [Description("Occurs when horizontal or ecliptic coordinates change on mouse move.")]
-    public event OnMouseCoordinatesChanged? MouseCoordinatesChanged;
+    public event MapInteractionDelegates.OnMouseCoordinatesChanged? MouseCoordinatesChanged;
 
     /// <summary>
     /// Occurs when mouse hovers over a named object.
@@ -142,7 +122,7 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Category("StarMap2D")]
     [Description("Occurs when mouse hovers over a named object.")]
-    public event OnObjectUserInteraction? MouseHoverObject;
+    public event MapInteractionDelegates.OnObjectUserInteraction? MouseHoverObject;
 
 
     /// <summary>
@@ -151,7 +131,7 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Category("StarMap2D")]
     [Description("Occurs when mouse leaves the hovered object.")]
-    public event OnObjectUserInteraction? MouseLeaveObject;
+    public event MapInteractionDelegates.OnObjectUserInteraction? MouseLeaveObject;
 
     /// <summary>
     /// Occurs when the object is clicked via mouse.
@@ -159,7 +139,7 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Category("StarMap2D")]
     [Description("Occurs when the object is clicked via mouse.")]
-    public event OnObjectUserInteraction? MouseClickObject;
+    public event MapInteractionDelegates.OnObjectUserInteraction? MouseClickObject;
 
     /// <summary>
     /// Occurs when the object is double-clicked via mouse.
@@ -167,7 +147,7 @@ public partial class Map2D : UserControl
     [Browsable(true)]
     [Category("StarMap2D")]
     [Description("Occurs when the object is double-clicked via mouse.")]
-    public event OnObjectUserInteraction? MouseDoubleClickObject;
+    public event MapInteractionDelegates.OnObjectUserInteraction? MouseDoubleClickObject;
     #endregion
 
     #region PrivateFields
@@ -296,11 +276,6 @@ public partial class Map2D : UserControl
 
                     var position = starMapObject.CalculatePosition?.Invoke(Plot2D.AaDate, Plot2D.HighPrecision,
                         Plot2D.Latitude, Plot2D.Longitude, Diameter / 2);
-
-                    if (starMapObject.ObjectType == ObjectsWithPositions.Moon)
-                    {
-
-                    }
 
                     if (position != null)
                     {

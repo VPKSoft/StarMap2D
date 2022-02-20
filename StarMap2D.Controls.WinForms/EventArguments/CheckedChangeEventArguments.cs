@@ -31,7 +31,7 @@ namespace StarMap2D.Controls.WinForms.EventArguments;
 /// Implements the <see cref="System.EventArgs" />
 /// </summary>
 /// <seealso cref="System.EventArgs" />
-public class CheckedChangeEventArguments: EventArgs
+public class CheckedChangeEventArguments : EventArgs
 {
     /// <summary>
     /// Gets or sets a value indicating whether the control is checked.

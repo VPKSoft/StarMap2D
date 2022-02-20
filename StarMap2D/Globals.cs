@@ -45,4 +45,10 @@ public static class Globals
     /// </summary>
     /// <value>The string formatting culture.</value>
     public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
+
+    /// <summary>
+    /// Gets or sets the date and time formatting culture.
+    /// </summary>
+    /// <value>The date and time formatting culture.</value>
+    public static CultureInfo DateTimeFormattingCulture { get; set; } = CultureInfo.CurrentCulture;
 }

@@ -24,50 +24,48 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.Utilities;
+namespace StarMap2D.Common.EventsAndDelegates;
 
 /// <summary>
-/// A class for metadata for user trackable object.
+/// Event arguments for map coordinates change on mouse move.
+/// Implements the <see cref="System.EventArgs" />
 /// </summary>
-public class MapObjectMetadata
+/// <seealso cref="System.EventArgs" />
+public class CoordinatesChangedEventArgs : EventArgs
 {
     /// <summary>
-    /// Gets or sets the name of the object.
+    /// Gets or sets the horizontal altitude coordinate in degrees.
     /// </summary>
-    /// <value>The name of the object.</value>
-    public string Name { get; set; } = string.Empty;
+    /// <value>The horizontal altitude in degrees.</value>
+    public double Altitude { get; set; }
 
     /// <summary>
-    /// Gets or sets the X-coordinate of the object.
+    /// Gets or sets the horizontal azimuth coordinate in degrees.
     /// </summary>
-    /// <value>The X-coordinate of the object.</value>
+    /// <value>The horizontal azimuth in degrees.</value>
+    public double Azimuth { get; set; }
+
+    /// <summary>
+    /// Gets or sets the right ascension in decimal hours.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    public double RightAscension { get; set; }
+
+    /// <summary>
+    /// Gets or sets the declination in degrees.
+    /// </summary>
+    /// <value>The declination.</value>
+    public double Declination { get; set; }
+
+    /// <summary>
+    /// Gets or sets the mouse X-coordinate.
+    /// </summary>
+    /// <value>The mouse X-coordinate.</value>
     public double X { get; set; }
 
     /// <summary>
-    /// Gets or sets the Y-coordinate of the object.
+    /// Gets or sets the mouse Y-coordinate.
     /// </summary>
-    /// <value>The Y-coordinate of the object.</value>
+    /// <value>The mouse Y-coordinate.</value>
     public double Y { get; set; }
-
-    /// <summary>
-    /// Gets or sets the radius of the object.
-    /// </summary>
-    /// <value>The radius of the object.</value>
-    public double Radius { get; set; }
-
-    /// <summary>
-    /// Gets or sets the identifier for the object.
-    /// </summary>
-    /// <value>The object identifier.</value>
-    public object? Identifier { get; set; }
-
-    /// <summary>
-    /// Gets the <see cref="Identifier" /> cast to specified type.
-    /// </summary>
-    /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
-    /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
-    public T? GetIdentifier<T>()
-    {
-        return (T?)Identifier;
-    }
 }

@@ -1,0 +1,77 @@
+<Project Sdk="Eto.Forms/2.5.11">
+
+  <!--
+    Set the BuildPlatform property to the Eto platform you wish to build for.
+    The default is the platform you are building on.
+    Valid values: Wpf, Windows, Mac64, XamMac2, Gtk, Direct2D
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Company>VPKSoft</Company>
+    <ApplicationIcon>StarMap2D.ico</ApplicationIcon>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\StarMap2D.Eto.xml</DocumentationFile>
+    <Copyright>Copyright © VPKSoft 2022</Copyright>
+    <Description>A program to display sky chart with utilities.</Description>
+    <Product>StarMap2D.Eto</Product>
+    <PackageProjectUrl>https://github.com/VPKSoft/StarMap2D</PackageProjectUrl>
+    <PackageIcon>StarMap2D.png</PackageIcon>
+    <RepositoryUrl>https://github.com/VPKSoft/StarMap2D</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sky map star</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="StarMap2D.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\StarMap2D.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Eto.Forms" Version="2.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Eto.Platform.Wpf" Version="2.6.1" />
+  </ItemGroup>
+
+</Project>

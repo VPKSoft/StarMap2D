@@ -58,8 +58,8 @@ namespace StarMap2D.Forms.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogSettings));
             this.tcSettings = new System.Windows.Forms.TabControl();
             this.tpCommon = new System.Windows.Forms.TabPage();
-            this.cmbFormattingCultureValue = new System.Windows.Forms.ComboBox();
-            this.lbFormattingCulture = new System.Windows.Forms.Label();
+            this.cmbStarCatalogValue = new System.Windows.Forms.ComboBox();
+            this.lbStarCatalog = new System.Windows.Forms.Label();
             this.cbDrawCrossHair = new System.Windows.Forms.CheckBox();
             this.nudCrossHairSize = new System.Windows.Forms.NumericUpDown();
             this.lbCrossHairSize = new System.Windows.Forms.Label();
@@ -77,6 +77,11 @@ namespace StarMap2D.Forms.Dialogs
             this.lbLatitude = new System.Windows.Forms.Label();
             this.tbLocationName = new System.Windows.Forms.TextBox();
             this.lbLocationName = new System.Windows.Forms.Label();
+            this.tabFormattingSettings = new System.Windows.Forms.TabPage();
+            this.lbDateTimeFormattingCulture = new System.Windows.Forms.Label();
+            this.cmbDateTimeFormattingCulture = new System.Windows.Forms.ComboBox();
+            this.lbFormattingCulture = new System.Windows.Forms.Label();
+            this.cmbFormattingCultureValue = new System.Windows.Forms.ComboBox();
             this.tabColorSettings = new System.Windows.Forms.TabPage();
             this.pnCrossHairColor = new System.Windows.Forms.Panel();
             this.lbCrossHairColor = new System.Windows.Forms.Label();
@@ -106,13 +111,12 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ttMain = new System.Windows.Forms.ToolTip(this.components);
-            this.cmbStarCatalogValue = new System.Windows.Forms.ComboBox();
-            this.lbStarCatalog = new System.Windows.Forms.Label();
             this.tcSettings.SuspendLayout();
             this.tpCommon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).BeginInit();
+            this.tabFormattingSettings.SuspendLayout();
             this.tabColorSettings.SuspendLayout();
             this.tabStarMagnitudeSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMagnitudeMinimum)).BeginInit();
@@ -126,6 +130,7 @@ namespace StarMap2D.Forms.Dialogs
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcSettings.Controls.Add(this.tpCommon);
+            this.tcSettings.Controls.Add(this.tabFormattingSettings);
             this.tcSettings.Controls.Add(this.tabColorSettings);
             this.tcSettings.Controls.Add(this.tabStarMagnitudeSettings);
             this.tcSettings.Controls.Add(this.tabObjectSymbols);
@@ -139,8 +144,6 @@ namespace StarMap2D.Forms.Dialogs
             // 
             this.tpCommon.Controls.Add(this.cmbStarCatalogValue);
             this.tpCommon.Controls.Add(this.lbStarCatalog);
-            this.tpCommon.Controls.Add(this.cmbFormattingCultureValue);
-            this.tpCommon.Controls.Add(this.lbFormattingCulture);
             this.tpCommon.Controls.Add(this.cbDrawCrossHair);
             this.tpCommon.Controls.Add(this.nudCrossHairSize);
             this.tpCommon.Controls.Add(this.lbCrossHairSize);
@@ -166,30 +169,30 @@ namespace StarMap2D.Forms.Dialogs
             this.tpCommon.Text = "Common";
             this.tpCommon.UseVisualStyleBackColor = true;
             // 
-            // cmbFormattingCultureValue
+            // cmbStarCatalogValue
             // 
-            this.cmbFormattingCultureValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbStarCatalogValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbFormattingCultureValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbFormattingCultureValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbFormattingCultureValue.DisplayMember = "DisplayName";
-            this.cmbFormattingCultureValue.FormattingEnabled = true;
-            this.cmbFormattingCultureValue.Location = new System.Drawing.Point(6, 368);
-            this.cmbFormattingCultureValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
-            this.cmbFormattingCultureValue.Name = "cmbFormattingCultureValue";
-            this.cmbFormattingCultureValue.Size = new System.Drawing.Size(500, 23);
-            this.cmbFormattingCultureValue.TabIndex = 35;
-            this.cmbFormattingCultureValue.ValueMember = "Name";
-            this.cmbFormattingCultureValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
+            this.cmbStarCatalogValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbStarCatalogValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStarCatalogValue.DisplayMember = "Value";
+            this.cmbStarCatalogValue.FormattingEnabled = true;
+            this.cmbStarCatalogValue.Location = new System.Drawing.Point(6, 371);
+            this.cmbStarCatalogValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbStarCatalogValue.Name = "cmbStarCatalogValue";
+            this.cmbStarCatalogValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbStarCatalogValue.TabIndex = 37;
+            this.cmbStarCatalogValue.ValueMember = "Key";
+            this.cmbStarCatalogValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
             // 
-            // lbFormattingCulture
+            // lbStarCatalog
             // 
-            this.lbFormattingCulture.AutoSize = true;
-            this.lbFormattingCulture.Location = new System.Drawing.Point(6, 348);
-            this.lbFormattingCulture.Name = "lbFormattingCulture";
-            this.lbFormattingCulture.Size = new System.Drawing.Size(232, 15);
-            this.lbFormattingCulture.TabIndex = 34;
-            this.lbFormattingCulture.Text = "Data formatting culture (i,.e. numbers, etc)";
+            this.lbStarCatalog.AutoSize = true;
+            this.lbStarCatalog.Location = new System.Drawing.Point(6, 351);
+            this.lbStarCatalog.Name = "lbStarCatalog";
+            this.lbStarCatalog.Size = new System.Drawing.Size(104, 15);
+            this.lbStarCatalog.TabIndex = 36;
+            this.lbStarCatalog.Text = "Star catalog to use";
             // 
             // cbDrawCrossHair
             // 
@@ -394,6 +397,71 @@ namespace StarMap2D.Forms.Dialogs
             this.lbLocationName.Size = new System.Drawing.Size(86, 15);
             this.lbLocationName.TabIndex = 0;
             this.lbLocationName.Text = "Location name";
+            // 
+            // tabFormattingSettings
+            // 
+            this.tabFormattingSettings.Controls.Add(this.lbDateTimeFormattingCulture);
+            this.tabFormattingSettings.Controls.Add(this.cmbDateTimeFormattingCulture);
+            this.tabFormattingSettings.Controls.Add(this.lbFormattingCulture);
+            this.tabFormattingSettings.Controls.Add(this.cmbFormattingCultureValue);
+            this.tabFormattingSettings.Location = new System.Drawing.Point(4, 24);
+            this.tabFormattingSettings.Name = "tabFormattingSettings";
+            this.tabFormattingSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFormattingSettings.Size = new System.Drawing.Size(688, 465);
+            this.tabFormattingSettings.TabIndex = 4;
+            this.tabFormattingSettings.Text = "Date & number formatting";
+            this.tabFormattingSettings.UseVisualStyleBackColor = true;
+            // 
+            // lbDateTimeFormattingCulture
+            // 
+            this.lbDateTimeFormattingCulture.AutoSize = true;
+            this.lbDateTimeFormattingCulture.Location = new System.Drawing.Point(6, 54);
+            this.lbDateTimeFormattingCulture.Name = "lbDateTimeFormattingCulture";
+            this.lbDateTimeFormattingCulture.Size = new System.Drawing.Size(181, 15);
+            this.lbDateTimeFormattingCulture.TabIndex = 36;
+            this.lbDateTimeFormattingCulture.Text = "Date and time formatting culture";
+            // 
+            // cmbDateTimeFormattingCulture
+            // 
+            this.cmbDateTimeFormattingCulture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDateTimeFormattingCulture.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbDateTimeFormattingCulture.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbDateTimeFormattingCulture.DisplayMember = "DisplayName";
+            this.cmbDateTimeFormattingCulture.FormattingEnabled = true;
+            this.cmbDateTimeFormattingCulture.Location = new System.Drawing.Point(6, 74);
+            this.cmbDateTimeFormattingCulture.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbDateTimeFormattingCulture.Name = "cmbDateTimeFormattingCulture";
+            this.cmbDateTimeFormattingCulture.Size = new System.Drawing.Size(500, 23);
+            this.cmbDateTimeFormattingCulture.TabIndex = 37;
+            this.cmbDateTimeFormattingCulture.ValueMember = "Name";
+            this.cmbDateTimeFormattingCulture.SelectedIndexChanged += new System.EventHandler(this.combobox_ValidateSelection);
+            this.cmbDateTimeFormattingCulture.TextUpdate += new System.EventHandler(this.combobox_ValidateSelection);
+            // 
+            // lbFormattingCulture
+            // 
+            this.lbFormattingCulture.AutoSize = true;
+            this.lbFormattingCulture.Location = new System.Drawing.Point(6, 3);
+            this.lbFormattingCulture.Name = "lbFormattingCulture";
+            this.lbFormattingCulture.Size = new System.Drawing.Size(232, 15);
+            this.lbFormattingCulture.TabIndex = 34;
+            this.lbFormattingCulture.Text = "Data formatting culture (i,.e. numbers, etc)";
+            // 
+            // cmbFormattingCultureValue
+            // 
+            this.cmbFormattingCultureValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFormattingCultureValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbFormattingCultureValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbFormattingCultureValue.DisplayMember = "DisplayName";
+            this.cmbFormattingCultureValue.FormattingEnabled = true;
+            this.cmbFormattingCultureValue.Location = new System.Drawing.Point(6, 23);
+            this.cmbFormattingCultureValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
+            this.cmbFormattingCultureValue.Name = "cmbFormattingCultureValue";
+            this.cmbFormattingCultureValue.Size = new System.Drawing.Size(500, 23);
+            this.cmbFormattingCultureValue.TabIndex = 35;
+            this.cmbFormattingCultureValue.ValueMember = "Name";
+            this.cmbFormattingCultureValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
             // 
             // tabColorSettings
             // 
@@ -709,31 +777,6 @@ namespace StarMap2D.Forms.Dialogs
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
-            // cmbStarCatalogValue
-            // 
-            this.cmbStarCatalogValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbStarCatalogValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbStarCatalogValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbStarCatalogValue.DisplayMember = "Value";
-            this.cmbStarCatalogValue.FormattingEnabled = true;
-            this.cmbStarCatalogValue.Location = new System.Drawing.Point(6, 415);
-            this.cmbStarCatalogValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
-            this.cmbStarCatalogValue.Name = "cmbStarCatalogValue";
-            this.cmbStarCatalogValue.Size = new System.Drawing.Size(500, 23);
-            this.cmbStarCatalogValue.TabIndex = 37;
-            this.cmbStarCatalogValue.ValueMember = "Key";
-            this.cmbStarCatalogValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
-            // 
-            // lbStarCatalog
-            // 
-            this.lbStarCatalog.AutoSize = true;
-            this.lbStarCatalog.Location = new System.Drawing.Point(6, 395);
-            this.lbStarCatalog.Name = "lbStarCatalog";
-            this.lbStarCatalog.Size = new System.Drawing.Size(104, 15);
-            this.lbStarCatalog.TabIndex = 36;
-            this.lbStarCatalog.Text = "Star catalog to use";
-            // 
             // FormDialogSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -755,6 +798,8 @@ namespace StarMap2D.Forms.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.nudCrossHairSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLongitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLatitude)).EndInit();
+            this.tabFormattingSettings.ResumeLayout(false);
+            this.tabFormattingSettings.PerformLayout();
             this.tabColorSettings.ResumeLayout(false);
             this.tabColorSettings.PerformLayout();
             this.tabStarMagnitudeSettings.ResumeLayout(false);
@@ -820,5 +865,8 @@ namespace StarMap2D.Forms.Dialogs
         private ToolTip ttMain;
         private ComboBox cmbStarCatalogValue;
         private Label lbStarCatalog;
+        private TabPage tabFormattingSettings;
+        private Label lbDateTimeFormattingCulture;
+        private ComboBox cmbDateTimeFormattingCulture;
     }
 }

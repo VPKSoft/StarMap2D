@@ -75,6 +75,9 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         cmbFormattingCultureValue.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>()
             .ToArray());
 
+        cmbDateTimeFormattingCulture.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>()
+            .ToArray());
+
         cmbStarCatalogValue.Items.Add(new KeyValuePair<Type?, string>(
             null, // Null for the embedded catalog.
             DBLangEngine.GetMessage("msgEmbeddedValue",
@@ -121,6 +124,10 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         cmbStarCatalogValue.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.StarCatalog)
             ? defaultCatalog
             : defaultFileCatalog;
+
+        cmbDateTimeFormattingCulture.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.DateFormattingCulture)
+            ? CultureInfo.CurrentCulture
+            : new CultureInfo(Settings.Default.DateFormattingCulture);
 
         tbLocationName.Text = Settings.Default.DefaultLocationName;
         nudLongitude.Value = (decimal)Settings.Default.Longitude;
@@ -193,6 +200,7 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         Settings.Default.DrawCrossHair = cbDrawCrossHair.Checked;
         Settings.Default.CrossHairColor = pnCrossHairColor.BackColor;
 
+        Settings.Default.DateFormattingCulture = cmbDateTimeFormattingCulture.SelectedItem.ToString();
         Settings.Default.Locale = cmbSelectLanguageValue.SelectedItem.ToString();
         Settings.Default.FormattingLocale = cmbFormattingCultureValue.SelectedItem.ToString();
         Settings.Default.Save();

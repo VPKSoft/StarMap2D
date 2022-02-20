@@ -26,7 +26,7 @@ SOFTWARE.
 
 using System.Globalization;
 
-namespace StarMap2D.Controls.WinForms.Utilities;
+namespace StarMap2D.Common.Utilities;
 
 /// <summary>
 /// A class for a simple localization using a text file embedded into a resource file.
@@ -163,7 +163,7 @@ public class TabDeliLocalization
                 {
                     continue;
                 }
-                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale});
+                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale });
             }
         }
     }

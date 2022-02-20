@@ -24,24 +24,25 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.EventArguments;
+using Eto.Drawing;
+
+namespace StarMap2D.Eto.Controls.Interfaces;
 
 /// <summary>
-/// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
-/// Implements the <see cref="System.EventArgs" />
+/// Interface for the objects in the <see cref="Map2D"/> star map control.
 /// </summary>
-/// <seealso cref="System.EventArgs" />
-public class LocationChangedEventArgs: EventArgs
+public interface IMap2DGraphics
 {
     /// <summary>
-    /// Gets or sets the new latitude.
+    /// A delegate to provide an image for a specified diameter of the 2D star map.
     /// </summary>
-    /// <value>The new latitude.</value>
-    public double Latitude { get; set; }
+    /// <param name="diameter">The diameter of the 2D star map.</param>
+    /// <param name="magnitude">An optional magnitude of the 2D star map object.</param>
+    /// <returns>An image suitable to be used in a 2D star map of diameter of the <paramref name="diameter"/>.</returns>
+    public delegate Image GetImageDelegate(double diameter, double? magnitude);
 
     /// <summary>
-    /// Gets or sets the new longitude.
+    /// A delegate to get an image for the 2D graphics object.
     /// </summary>
-    /// <value>The new longitude.</value>
-    public double Longitude { get; set; }
+    GetImageDelegate? GetImage { get; set; }
 }

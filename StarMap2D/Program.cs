@@ -68,6 +68,10 @@ internal static class Program
             ? CultureInfo.CurrentUICulture
             : new CultureInfo(Properties.Settings.Default.FormattingLocale);
 
+        Globals.DateTimeFormattingCulture = string.IsNullOrWhiteSpace(Properties.Settings.Default.DateFormattingCulture)
+            ? CultureInfo.CurrentCulture
+            : new CultureInfo(Properties.Settings.Default.DateFormattingCulture);
+
         StarMap2D.Calculations.Globals.FormattingCulture = Globals.FormattingCulture;
 
         DBLangEngine.UseCulture = new CultureInfo(Properties.Settings.Default.Locale);

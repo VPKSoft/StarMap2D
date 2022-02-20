@@ -24,48 +24,44 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.EventArguments;
+namespace StarMap2D.Common.EventsAndDelegates;
 
 /// <summary>
-/// Event arguments for map coordinates change on mouse move.
-/// Implements the <see cref="System.EventArgs" />
+/// Event arguments for interaction with named object and user with the 2D star map.
 /// </summary>
-/// <seealso cref="System.EventArgs" />
-public class CoordinatesChangedEventArgs: EventArgs
+public class NamedObjectEventArgs
 {
     /// <summary>
-    /// Gets or sets the horizontal altitude coordinate in degrees.
+    /// Gets or sets the name of the object.
     /// </summary>
-    /// <value>The horizontal altitude in degrees.</value>
-    public double Altitude { get; set; }
+    /// <value>The name of the object.</value>
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the horizontal azimuth coordinate in degrees.
+    /// Gets or sets the identifier for the object.
     /// </summary>
-    /// <value>The horizontal azimuth in degrees.</value>
-    public double Azimuth { get; set; }
+    /// <value>The object identifier.</value>
+    public object? Identifier { get; set; }
 
     /// <summary>
-    /// Gets or sets the right ascension in decimal hours.
+    /// Gets or sets the right ascension.
     /// </summary>
     /// <value>The right ascension.</value>
-    public double RightAscension { get; set; }
+    public double? RightAscension { get; set; }
 
     /// <summary>
-    /// Gets or sets the declination in degrees.
+    /// Gets or sets the declination.
     /// </summary>
     /// <value>The declination.</value>
-    public double Declination { get; set; }
+    public double? Declination { get; set; }
 
     /// <summary>
-    /// Gets or sets the mouse X-coordinate.
+    /// Gets the <see cref="Identifier" /> cast to specified type.
     /// </summary>
-    /// <value>The mouse X-coordinate.</value>
-    public double X { get; set; }
-
-    /// <summary>
-    /// Gets or sets the mouse Y-coordinate.
-    /// </summary>
-    /// <value>The mouse Y-coordinate.</value>
-    public double Y { get; set; }
+    /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
+    /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
+    public T? GetIdentifier<T>()
+    {
+        return (T?)Identifier;
+    }
 }

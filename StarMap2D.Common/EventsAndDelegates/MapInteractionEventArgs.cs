@@ -24,38 +24,15 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-/// <summary>
-/// A class to provide localization for specific object(s).
-/// </summary>
-public class LocalizationProvider
+namespace StarMap2D.Common.EventsAndDelegates
 {
-    /// <summary>
-    /// Gets the solar system object localization.
-    /// </summary>
-    /// <value>The solar system object localization.</value>
-    public static TabDeliLocalization SolarSystemObjectLocalization
+    public class MapInteractionEventArgs
     {
-        get
-        {
-            var result = new TabDeliLocalization();
-            result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
-            return result;
-        }
-    }
-
-    /// <summary>
-    /// Gets the constellation localization.
-    /// </summary>
-    /// <value>The constellation localization.</value>
-    public static TabDeliLocalization ConstellationLocalization
-    {
-        get
-        {
-            var result = new TabDeliLocalization();
-            result.GetLocalizedTexts(Properties.Resources.Constellations);
-            return result;
-        }
     }
 }

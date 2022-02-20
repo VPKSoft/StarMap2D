@@ -1,4 +1,4 @@
-This is the simple tab-delimited localization file.
+﻿This is the simple tab-delimited localization file.
 As you can see only the "[]" tags and tab delimited key-value pairs matter for the localization.
 The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
 

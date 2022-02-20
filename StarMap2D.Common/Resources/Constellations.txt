@@ -1,4 +1,4 @@
-This is the simple tab-delimited localization file.
+ÔªøThis is the simple tab-delimited localization file.
 As you can see only the "[]" tags and tab delimited key-value pairs matter for the localization.
 The tab-delimited text can also include comments, etc. by adding a new tab-delimited field.
 
@@ -7,7 +7,7 @@ textHydra	Hydra
 textAquarius	Aquarius
 textOphiuchus	Ophiuchus
 textLeo	Leo
-textBoˆtes	Boˆtes
+textBo√∂tes	Bo√∂tes
 textPisces	Pisces
 textSagittarius	Sagittarius
 textCygnus	Cygnus
@@ -95,24 +95,24 @@ textCrux	Crux
 textCentaurus	Centaurus
 
 [fi-FI]
-textHydra	Vesik‰‰rme
+textHydra	Vesik√§√§rme
 textAquarius	Vesimies
-textOphiuchus	K‰‰rmeenkantaja
+textOphiuchus	K√§√§rmeenkantaja
 textLeo	Leijona
-textBoˆtes	Karhunvartija
+textBo√∂tes	Karhunvartija
 textPisces	Kalat
 textSagittarius	Jousimies
 textCygnus	Joutsen
-textTaurus	H‰rk‰
+textTaurus	H√§rk√§
 textCamelopardalis	Kirahvi
 textAndromeda	Andromeda
 textVirgo	Neitsyt
-textPuppis	Per‰keula
+textPuppis	Per√§keula
 textAuriga	Ajomies
 textAquila	Kotka
-textSerpensCauda	K‰‰rmeen h‰nt‰
-textSerpensCaput	K‰‰rmeen p‰‰
-textSerpens	K‰‰rme
+textSerpensCauda	K√§√§rmeen h√§nt√§
+textSerpensCaput	K√§√§rmeen p√§√§
+textSerpens	K√§√§rme
 textPerseus	Perseus
 textCassiopeia	Kassiopeia
 textOrion	Orion
@@ -124,9 +124,9 @@ textGemini	Kaksoset
 textCancer	Krapu
 textVela	Purje
 textScorpius	Skorpioni
-textCarina	Kˆli
+textCarina	K√∂li
 textMonoceros	Yksisarvinen
-textSculptor	Kuvanveist‰j‰
+textSculptor	Kuvanveist√§j√§
 textPhoenix	Feeniks
 textCanesVenatici	jokoirat
 textAries	Oinas
@@ -143,7 +143,7 @@ textTucana	Tukaani
 textIndus	Intiaani
 textHercules	Herkules
 textOctans	Oktantti
-textLepus	J‰nis
+textLepus	J√§nis
 textLyra	Lyyra
 textCrater	Malja
 textColumba	Kyyhkynen
@@ -153,8 +153,8 @@ textTelescopium	Kaukoputki
 textHorologium	Heilurikello
 textPictor	Maalari
 textEridanus	Eridanus
-textPiscisAustrinus	Etel‰n kala
-textHydrus	Etel‰n vesik‰‰rme
+textPiscisAustrinus	Etel√§n kala
+textHydrus	Etel√§n vesik√§√§rme
 textAntlia	Ilmapumppu
 textAra	Alttari
 textLeoMinor	Pieni leijona
@@ -169,19 +169,19 @@ textCanisMinor	Pieni koira
 textDorado	Kultakala
 textCoronaBorealis	Pohjan kruunu
 textNorma	Kulmaviivoitin
-textMensa	Pˆyt‰vuori
+textMensa	P√∂yt√§vuori
 textVolans	Lentokala
-textMusca	K‰rp‰nen
+textMusca	K√§rp√§nen
 textTriangulum	Kolmio
 textChamaeleon	Kameleontti
-textDraco	Lohik‰‰rme
-textCoronaAustralis	Etel‰n kruunu
+textDraco	Lohik√§√§rme
+textCoronaAustralis	Etel√§n kruunu
 textCaelum	Veistotaltta
 textReticulum	Verkko
-textTriangulumAustrale	Etel‰n kolmio
+textTriangulumAustrale	Etel√§n kolmio
 textScutum	Kilpi
 textCircinus	Harppi
 textSagitta	Nuoli
 textEquuleus	Pieni hevonen
-textCrux	Etel‰n risti
+textCrux	Etel√§n risti
 textCentaurus	Kentauri

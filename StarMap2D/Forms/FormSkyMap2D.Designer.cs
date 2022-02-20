@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Common.EventsAndDelegates;
+
 namespace StarMap2D.Forms
 {
     partial class FormSkyMap2D
@@ -132,7 +134,7 @@ namespace StarMap2D.Forms
             // 
             // dtpMapDateTime
             // 
-            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dtpMapDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpMapDateTime.CustomFormat = "dd\'.\'MM\'.\'yyyy HH\':\'mm";
             this.dtpMapDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -189,12 +191,12 @@ namespace StarMap2D.Forms
             this.map2d.StarSizes = new int[0];
             this.map2d.TabIndex = 0;
             this.map2d.Zoom = 1D;
-            this.map2d.CoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
-            this.map2d.MouseCoordinatesChanged += new StarMap2D.Controls.WinForms.Map2D.OnMouseCoordinatesChanged(this.map2d_MouseCoordinatesChanged);
-            this.map2d.MouseHoverObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseHoverObject);
-            this.map2d.MouseLeaveObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseLeaveObject);
-            this.map2d.MouseClickObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseClickObject);
-            this.map2d.MouseDoubleClickObject += new StarMap2D.Controls.WinForms.Map2D.OnObjectUserInteraction(this.map2d_MouseDoubleClickObject);
+            this.map2d.CoordinatesChanged += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnCoordinatesChanged(this.map2d_CoordinatesChanged);
+            this.map2d.MouseCoordinatesChanged += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnMouseCoordinatesChanged(this.map2d_MouseCoordinatesChanged);
+            this.map2d.MouseHoverObject += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnObjectUserInteraction(this.map2d_MouseHoverObject);
+            this.map2d.MouseLeaveObject += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnObjectUserInteraction(this.map2d_MouseLeaveObject);
+            this.map2d.MouseClickObject += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnObjectUserInteraction(this.map2d_MouseClickObject);
+            this.map2d.MouseDoubleClickObject += new StarMap2D.Common.EventsAndDelegates.MapInteractionDelegates.OnObjectUserInteraction(this.map2d_MouseDoubleClickObject);
             // 
             // tlpMapControls
             // 
@@ -318,7 +320,7 @@ namespace StarMap2D.Forms
             // 
             // cmbJumpToLocation
             // 
-            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cmbJumpToLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbJumpToLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbJumpToLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -548,7 +550,7 @@ namespace StarMap2D.Forms
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMapControls.SetColumnSpan(this.panel4, 2);
             this.panel4.Controls.Add(this.cbAboveHorizonValue);

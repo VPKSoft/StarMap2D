@@ -24,44 +24,38 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Controls.WinForms.EventArguments;
+namespace StarMap2D.Common.Utilities;
 
 /// <summary>
-/// Event arguments for interaction with named object and user with the 2D star map.
+/// A class to provide localization for specific object(s).
 /// </summary>
-public class NamedObjectEventArgs
+public class LocalizationProvider
 {
     /// <summary>
-    /// Gets or sets the name of the object.
+    /// Gets the solar system object localization.
     /// </summary>
-    /// <value>The name of the object.</value>
-    public string Name { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the identifier for the object.
-    /// </summary>
-    /// <value>The object identifier.</value>
-    public object? Identifier { get; set; }
-
-    /// <summary>
-    /// Gets or sets the right ascension.
-    /// </summary>
-    /// <value>The right ascension.</value>
-    public double? RightAscension { get; set; }
-
-    /// <summary>
-    /// Gets or sets the declination.
-    /// </summary>
-    /// <value>The declination.</value>
-    public double? Declination { get; set; }
-
-    /// <summary>
-    /// Gets the <see cref="Identifier" /> cast to specified type.
-    /// </summary>
-    /// <typeparam name="T">The type of the <see cref="Identifier" />.</typeparam>
-    /// <returns>A System.Nullable&lt;T&gt; value with the <see cref="Identifier"/> data.</returns>
-    public T? GetIdentifier<T>()
+    /// <value>The solar system object localization.</value>
+    public static TabDeliLocalization SolarSystemObjectLocalization
     {
-        return (T?)Identifier;
+        get
+        {
+            var result = new TabDeliLocalization();
+            result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
+            return result;
+        }
+    }
+
+    /// <summary>
+    /// Gets the constellation localization.
+    /// </summary>
+    /// <value>The constellation localization.</value>
+    public static TabDeliLocalization ConstellationLocalization
+    {
+        get
+        {
+            var result = new TabDeliLocalization();
+            result.GetLocalizedTexts(Properties.Resources.Constellations);
+            return result;
+        }
     }
 }

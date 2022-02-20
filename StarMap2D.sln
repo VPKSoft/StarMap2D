@@ -13,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Controls.WinForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Tests", "StarMap2D.Tests\StarMap2D.Tests.csproj", "{90F165CE-F082-4FD5-AD1A-4A995759549F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{9D748367-0ACB-4874-876D-BA478FF56D7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{9D748367-0ACB-4874-876D-BA478FF56D7A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto", "StarMap2D.Eto\StarMap2D.Eto.csproj", "{56EF54CE-0268-4825-B097-0A9EB55570E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto.Controls", "StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.csproj", "{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Common", "StarMap2D.Common\StarMap2D.Common.csproj", "{0EA35A10-5776-47D7-BAEB-F273076E17D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,9 +48,19 @@ Global
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

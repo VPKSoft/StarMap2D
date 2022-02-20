@@ -300,5 +300,17 @@ namespace StarMap2D.Properties {
                 this["StarCatalog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DateFormattingCulture {
+            get {
+                return ((string)(this["DateFormattingCulture"]));
+            }
+            set {
+                this["DateFormattingCulture"] = value;
+            }
+        }
     }
 }

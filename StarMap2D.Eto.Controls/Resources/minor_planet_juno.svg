@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="minor_planet_juno.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="200mm"
+   width="200mm">
+  <metadata
+     id="metadata9">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="-8"
+     inkscape:window-x="-8"
+     inkscape:window-height="1377"
+     inkscape:window-width="3440"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="452.63834"
+     inkscape:cx="298.65803"
+     inkscape:zoom="0.53279415"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Taso 1">
+    <circle
+       r="148.47354"
+       cy="148.5"
+       cx="105"
+       id="path833"
+       style="fill:#000000;stroke:#231f20;stroke-width:0.0529167" />
+    <path
+       d="M 39.223862,60.055289 56.378939,43.039684 91.665398,78.326143 V 28.67405 h 24.965522 v 49.512621 l 35.14698,-35.146987 17.15508,17.015605 -39.6101,39.610096 h 54.81257 v 17.294545 h -53.83626 l 38.63379,38.6338 -17.0156,17.15507 -35.28646,-35.28646 v 82.84647 h 37.93643 v 17.29455 h -37.93643 v 35.84435 H 91.525926 v -35.84435 h -37.93643 v -17.29455 h 37.93643 V 137.46234 L 56.239467,172.7488 39.223862,155.59373 77.857653,116.95993 H 24.021395 V 99.665385 h 54.812564 z"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:285.639px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffffff;stroke-width:0.264583px"
+       id="path834" />
+  </g>
+</svg>
