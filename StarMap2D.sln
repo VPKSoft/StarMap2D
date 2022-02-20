@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto", "StarMap2D.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto.Controls", "StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.csproj", "{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Common", "StarMap2D.Common\StarMap2D.Common.csproj", "{0EA35A10-5776-47D7-BAEB-F273076E17D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Common", "StarMap2D.Common\StarMap2D.Common.csproj", "{0EA35A10-5776-47D7-BAEB-F273076E17D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPKSoft.ApplicationSettingsJson", "VPKSoft.ApplicationSettingsJson\VPKSoft.ApplicationSettingsJson.csproj", "{C387DF62-A7AB-49CC-B481-00A0A1C9B905}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C387DF62-A7AB-49CC-B481-00A0A1C9B905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C387DF62-A7AB-49CC-B481-00A0A1C9B905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C387DF62-A7AB-49CC-B481-00A0A1C9B905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C387DF62-A7AB-49CC-B481-00A0A1C9B905}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,9 @@ namespace StarMap2D.Eto
         [STAThread]
         static void Main(string[] args)
         {
+            Globals.Settings.CreateApplicationSettingsFolder(nameof(StarMap2D));
+            Globals.Settings.Load(Globals.Settings.GetApplicationSettingsFile(nameof(StarMap2D)));
+
             new Application().Run(new MainForm());
             //new Application(Eto.Platform.Detect).Run(new MainForm());
         }

@@ -21,6 +21,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>sky map star</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Nullable>enable</Nullable>
 
   </PropertyGroup>
 
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.csproj" />
+    <ProjectReference Include="..\VPKSoft.ApplicationSettingsJson\VPKSoft.ApplicationSettingsJson.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,11 +47,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -57,13 +54,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      <Generator>SettingsSingleFileGenerator</Generator>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

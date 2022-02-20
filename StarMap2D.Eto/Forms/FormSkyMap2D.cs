@@ -50,7 +50,7 @@ namespace StarMap2D.Eto.Forms
 
             MinimumSize = new Size(1200, 1000);
 
-            map2d.Plot2D = new(Settings.Default.Latitude, Settings.Default.Longitude)
+            map2d.Plot2D = new(Globals.Settings.Latitude, Globals.Settings.Longitude)
             {
                 Diameter = Math.Min(map2d.Width, map2d.Height)
             };
@@ -107,7 +107,7 @@ namespace StarMap2D.Eto.Forms
                                 longitude), InvertEastWest),
                     ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
                     IsLocationCalculated = true,
-                    ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Settings.Default.Locale),
+                    ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Globals.Settings.Locale!),
                     ObjectType = solarSystemObject.ObjectType,
                     Identifier = (int)value,
                 });
@@ -133,7 +133,7 @@ namespace StarMap2D.Eto.Forms
                         map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(value, aaDate, precision, longitude, latitude), InvertEastWest),
                     ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
                     IsLocationCalculated = true,
-                    ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Settings.Default.Locale),
+                    ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Globals.Settings.Locale!),
                     ObjectType = solarSystemObject.ObjectType,
                     Identifier = (int)value,
                 });
@@ -149,7 +149,7 @@ namespace StarMap2D.Eto.Forms
                             SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                     ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
                     IsLocationCalculated = true,
-                    ObjectName = tabDeli.GetMessage("textSun", "Sun", Settings.Default.Locale),
+                    ObjectName = tabDeli.GetMessage("textSun", "Sun", Globals.Settings.Locale!),
                     ObjectType = ObjectsWithPositions.Sun,
                     Identifier = (int)ObjectsWithPositions.Sun,
                 });
@@ -165,7 +165,7 @@ namespace StarMap2D.Eto.Forms
                             SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude), InvertEastWest),
                     ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
                     IsLocationCalculated = true,
-                    ObjectName = tabDeli.GetMessage("textMoon", "Moon", Settings.Default.Locale),
+                    ObjectName = tabDeli.GetMessage("textMoon", "Moon", Globals.Settings.Locale!),
                     ObjectType = ObjectsWithPositions.Moon,
                     Identifier = (int)ObjectsWithPositions.Moon,
                 });
@@ -203,11 +203,11 @@ namespace StarMap2D.Eto.Forms
         {
             map2d.Locale = "fi";
 
-            map2d.Plot2D.Latitude = Settings.Default.Latitude;
-            map2d.Plot2D.Longitude = Settings.Default.Longitude;
+            map2d.Plot2D.Latitude = Globals.Settings.Latitude;
+            map2d.Plot2D.Longitude = Globals.Settings.Longitude;
 
-            solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Settings.Default.KnownObjects,
-                Settings.Default.Locale);
+            solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Globals.Settings.KnownObjects!,
+                Globals.Settings.Locale!);
         }
     }
 }
