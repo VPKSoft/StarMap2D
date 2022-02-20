@@ -383,7 +383,7 @@ namespace StarMap2D.Eto.Controls
             }
         }
 
-        private Font font = new("Segoe UI", 9);
+        private Font font = new("Cabin", 9);
 
         /// <summary>
         /// Gets or sets the font to draw labels to the map.

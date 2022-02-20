@@ -73,6 +73,7 @@ public class SvgToImage
 
         pngImage.SaveTo(outStream);
 
+        outStream.Position = 0;
         var bitmap = new Bitmap(outStream);
 
         return bitmap;
