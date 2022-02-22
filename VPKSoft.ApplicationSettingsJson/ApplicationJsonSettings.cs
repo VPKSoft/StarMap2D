@@ -81,11 +81,12 @@ public abstract class ApplicationJsonSettings
     /// <summary>
     /// Creates the application settings folder if it does not exist.
     /// </summary>
+    /// <param name="company">The company of the application copyright.</param>
     /// <param name="applicationName">Name of the application.</param>
     /// <returns>The application settings folder location.</returns>
-    public virtual string CreateApplicationSettingsFolder(string applicationName)
+    public virtual string CreateApplicationSettingsFolder(string company, string applicationName)
     {
-        var path = GetApplicationSettingsFolder(applicationName);
+        var path = GetApplicationSettingsFolder(company, applicationName);
 
         if (Directory.Exists(path))
         {
@@ -98,9 +99,10 @@ public abstract class ApplicationJsonSettings
     /// <summary>
     /// Gets the application settings folder name combined with the application name.
     /// </summary>
+    /// <param name="company">The company of the application copyright.</param>
     /// <param name="applicationName">Name of the application.</param>
     /// <returns>The application settings path.</returns>
-    public virtual string GetApplicationSettingsFolder(string applicationName)
+    public virtual string GetApplicationSettingsFolder(string company, string applicationName)
     {
         foreach (var nameChar in Path.GetInvalidFileNameChars())
         {
@@ -109,9 +111,15 @@ public abstract class ApplicationJsonSettings
             {
                 applicationName = applicationName.Remove(index, 1);
             }
+
+            while ((index = company.IndexOf(nameChar)) != -1)
+            {
+                company = company.Remove(index, 1);
+            }
         }
 
         var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            company,
             applicationName);
 
         return path;
@@ -120,9 +128,10 @@ public abstract class ApplicationJsonSettings
     /// <summary>
     /// Gets the application settings file and path.
     /// </summary>
+    /// <param name="company">The company of the application copyright.</param>
     /// <param name="applicationName">Name of the application.</param>
     /// <returns>The application settings file name with path.</returns>
-    public virtual string GetApplicationSettingsFile(string applicationName)
+    public virtual string GetApplicationSettingsFile(string company, string applicationName)
     {
         foreach (var nameChar in Path.GetInvalidFileNameChars())
         {
@@ -131,9 +140,15 @@ public abstract class ApplicationJsonSettings
             {
                 applicationName = applicationName.Remove(index, 1);
             }
+
+            while ((index = company.IndexOf(nameChar)) != -1)
+            {
+                company = company.Remove(index, 1);
+            }
         }
 
         var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            company,
             applicationName, $"{applicationName}.json");
 
         return path;
@@ -147,6 +162,7 @@ public abstract class ApplicationJsonSettings
     {
         File.WriteAllText(fileName,
             JsonConvert.SerializeObject(this,
-                new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver() }));
+                new JsonSerializerSettings
+                { ContractResolver = new JsonIgnoreResolver(), Formatting = Formatting.Indented }));
     }
 }

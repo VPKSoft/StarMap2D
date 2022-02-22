@@ -24,26 +24,16 @@ SOFTWARE.
 */
 #endregion
 
-using StarMap2D.Eto.ApplicationSettings;
-
-namespace StarMap2D.Eto;
-
-/// <summary>
-/// A class containing the global static parameters.
-/// </summary>
-public class Globals
+namespace StarMap2D.Localization
 {
     /// <summary>
-    /// Gets or sets the application settings.
+    /// A class for static properties for the localization.
     /// </summary>
-    /// <value>The application settings.</value>
-    public static Settings Settings { get; set; } = new();
-
-    /// <summary>
-    /// Saves the application settings.
-    /// </summary>
-    public static void SaveSettings()
+    public static class Properties
     {
-        Settings.Save(Settings.GetApplicationSettingsFile("VPKSoft", nameof(StarMap2D)));
+        /// <summary>
+        /// The localized languages in this library.
+        /// </summary>
+        public static readonly string[] Languages = { "en", "fi" };
     }
 }

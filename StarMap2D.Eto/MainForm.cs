@@ -3,6 +3,7 @@ using Eto.Forms;
 using System;
 using StarMap2D.Eto.Controls;
 using StarMap2D.Eto.Forms;
+using Xceed.Wpf.AvalonDock.Properties;
 
 namespace StarMap2D.Eto
 {
@@ -10,7 +11,7 @@ namespace StarMap2D.Eto
     {
         public MainForm()
         {
-            Title = "My Eto Form";
+            Title = Localization.UI.StarMap2D;
             MinimumSize = new Size(400, 300);
 
             Content = new StackLayout
@@ -24,9 +25,13 @@ namespace StarMap2D.Eto
             };
 
             // create a few commands that can be used for the menu and toolbar
-            var clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
+            var clickMe = new Command { MenuText = "Star map", ToolBarText = "Star map" };
             clickMe.Executed += (sender, e) => new FormSkyMap2D().Show();
             //            clickMe.Executed += (sender, e) => MessageBox.Show(this, "I was clicked!");
+
+            var settingsMenu = new Command { MenuText = "Settings", ToolBarText = "Settings" };
+            settingsMenu.Executed += (sender, e) => new FormDialogSettings().ShowModal();
+
 
             var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
@@ -47,10 +52,10 @@ namespace StarMap2D.Eto
                 ApplicationItems =
                 {
 					// application (OS X) or file menu (others)
-					new ButtonMenuItem { Text = "&Preferences..." },
+					new ButtonMenuItem { Text = "&Preferences...", Items = { settingsMenu }},
                 },
                 QuitItem = quitCommand,
-                AboutItem = aboutCommand
+                AboutItem = aboutCommand,
             };
 
             // create toolbar			

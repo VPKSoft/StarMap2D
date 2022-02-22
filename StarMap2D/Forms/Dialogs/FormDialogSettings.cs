@@ -25,9 +25,9 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
+using StarMap2D.Common.Utilities;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Properties;
-using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Providers;
 using VPKSoft.StarCatalogs.StaticData;

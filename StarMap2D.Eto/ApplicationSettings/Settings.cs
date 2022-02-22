@@ -75,7 +75,7 @@ namespace StarMap2D.Eto.ApplicationSettings
         [Settings(Default = true)]
         public bool DrawConstellationLines { get; set; }
 
-        [Settings(Default = false)]
+        [Settings(Default = true)]
         public bool DrawConstellationLabels { get; set; }
 
         [Settings(Default = false)]
@@ -101,5 +101,8 @@ namespace StarMap2D.Eto.ApplicationSettings
 
         [Settings(Default = "")]
         public string? DateFormattingCulture { get; set; }
+
+        [Settings(Default = 20)]
+        public int CrossHairSize { get; set; }
     }
 }

@@ -570,8 +570,8 @@ public class SolarSystemObjectGraphics
         builder.Append($"|{nameof(Enabled)}: {Enabled}");
         builder.Append($"|{nameof(Diameter)}: {Diameter.ToString(CultureInfo.InvariantCulture)}");
 
-        //builder.Append($"|{nameof(ObjectCircleColor)}: {ColorTranslator.ToHtml(ObjectCircleColor)}");
-        //builder.Append($"|{nameof(ObjectSymbolColor)}: {ColorTranslator.ToHtml(ObjectSymbolColor)}");
+        builder.Append($"|{nameof(ObjectCircleColor)}: {ObjectCircleColor.ToHex(ColorStyles.ExcludeAlpha)}");
+        builder.Append($"|{nameof(ObjectSymbolColor)}: {ObjectSymbolColor.ToHex(ColorStyles.ExcludeAlpha)}");
 
         return builder.ToString();
     }
@@ -628,11 +628,11 @@ public class SolarSystemObjectGraphics
             }
             else if (dataName == nameof(ObjectCircleColor))
             {
-                //result.ObjectCircleColor = ColorTranslator.FromHtml(dataValue);
+                result.ObjectCircleColor = Color.Parse(dataValue);
             }
             else if (dataName == nameof(ObjectSymbolColor))
             {
-                //result.ObjectSymbolColor = ColorTranslator.FromHtml(dataValue);
+                result.ObjectSymbolColor = Color.Parse(dataValue);
             }
         }
 

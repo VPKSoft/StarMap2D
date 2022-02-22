@@ -702,7 +702,7 @@ namespace StarMap2D.Eto.Controls
                 return;
             }
 
-            using var pen = new Pen(constellationBorderLineColor);
+            using var pen = new Pen(constellationLineColor);
             using var textBrush = new SolidBrush(foreColor);
 
             foreach (var constellationLine in constellation.ConstellationLines)

@@ -26,7 +26,7 @@ SOFTWARE.
 
 using StarMap2D.Calculations.Helpers.Math;
 
-namespace StarMap2D.Utilities;
+namespace StarMap2D.Common.Utilities;
 
 /// <summary>
 /// A class for holding data for a city name, latitude and longitude
@@ -38861,7 +38861,7 @@ public static class Cities
                 Math.Cos(φ1) * Math.Cos(φ2) *
                 Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
 
-        var c =  2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
         var distance = earthRadii * c;
         return distance;
