@@ -30,7 +30,7 @@ namespace StarMap2D.Eto.ApplicationSettings
 {
     public class Settings : ApplicationJsonSettings
     {
-        [Settings(Default = 60.1102605)]
+        [Settings(Default = 60.17556337)]
         public double Latitude { get; set; }
 
         [Settings(Default = 22.8782576)]
