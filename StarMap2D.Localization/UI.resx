@@ -159,6 +159,9 @@
   <data name="SelectLocation" xml:space="preserve">
     <value>Select location</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="StarCatalogSelection" xml:space="preserve">
     <value>Star catalog to use</value>
   </data>

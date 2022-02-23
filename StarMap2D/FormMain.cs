@@ -135,17 +135,17 @@ public partial class FormMain : DBLangEngineWinforms
         var riseSet = AASRiseTransitSet2.Calculate(date1.Julian, date2.Julian, AASRiseTransitSet2.Objects.MOON, -longitude, latitude,
             -0.8333);
 
-        var jdRise = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Rise)?.JD ?? 0;
-        var jdSet = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Set)?.JD ?? 0;
-        tbMoonRiseValue.Text = new AASDate(jdRise, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
-        tbMoonSetValue.Text = new AASDate(jdSet, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        var jdRise = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Rise)?.JD;
+        var jdSet = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Set)?.JD;
+        tbMoonRiseValue.Text = jdRise == null ? "-" : new AASDate(jdRise.Value, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        tbMoonSetValue.Text = jdSet == null ? "-" : new AASDate(jdSet.Value, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
 
         riseSet = AASRiseTransitSet2.Calculate(date1.Julian, date2.Julian, AASRiseTransitSet2.Objects.SUN, -longitude, latitude,
             -0.8333);
-        jdRise = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Rise)?.JD ?? 0;
-        jdSet = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Set)?.JD ?? 0;
-        tblbSunRiseValue.Text = new AASDate(jdRise, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
-        tbSunSetValue.Text = new AASDate(jdSet, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        jdRise = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Rise)?.JD;
+        jdSet = riseSet.FirstOrDefault(f => f.type == AASRiseTransitSetDetails2.Type.Set)?.JD;
+        tblbSunRiseValue.Text = jdRise == null ? "-" : new AASDate(jdRise.Value, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        tbSunSetValue.Text = jdSet == null ? "-" : new AASDate(jdSet.Value, true).ToDateTime().ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
     }
 
     private Crosshair? sunCrossHair;

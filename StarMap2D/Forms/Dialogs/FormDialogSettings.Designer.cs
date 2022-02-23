@@ -175,14 +175,14 @@ namespace StarMap2D.Forms.Dialogs
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStarCatalogValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbStarCatalogValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbStarCatalogValue.DisplayMember = "Value";
+            this.cmbStarCatalogValue.DisplayMember = "Name";
             this.cmbStarCatalogValue.FormattingEnabled = true;
             this.cmbStarCatalogValue.Location = new System.Drawing.Point(6, 371);
             this.cmbStarCatalogValue.Margin = new System.Windows.Forms.Padding(15, 14, 15, 14);
             this.cmbStarCatalogValue.Name = "cmbStarCatalogValue";
             this.cmbStarCatalogValue.Size = new System.Drawing.Size(500, 23);
             this.cmbStarCatalogValue.TabIndex = 37;
-            this.cmbStarCatalogValue.ValueMember = "Key";
+            this.cmbStarCatalogValue.ValueMember = "Identifier";
             this.cmbStarCatalogValue.TextChanged += new System.EventHandler(this.combobox_ValidateSelection);
             // 
             // lbStarCatalog

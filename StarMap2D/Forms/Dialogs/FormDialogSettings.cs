@@ -78,19 +78,23 @@ public partial class FormDialogSettings : DBLangEngineWinforms
         cmbDateTimeFormattingCulture.Items.AddRange(CultureInfo.GetCultures(CultureTypes.AllCultures).Cast<object>()
             .ToArray());
 
-        cmbStarCatalogValue.Items.Add(new KeyValuePair<Type?, string>(
-            null, // Null for the embedded catalog.
-            DBLangEngine.GetMessage("msgEmbeddedValue",
-                "Embedded ({0})|A text describing something embedded with value or data name.",
-                CatalogNames.TypeNames[typeof(YaleBrightProvider)])));
+        starCatalogs = new List<StarCatalogData>
+        {
+            new()
+            {
+                IsBuildIn = true, Name = DBLangEngine.GetMessage("msgEmbeddedValue",
+                    "Embedded ({0})|A text describing something embedded with value or data name.", CatalogNames.BuiltInName)
+            },
+        };
 
-        cmbStarCatalogValue.Items.AddRange(CatalogNames.TypeNames
-            .Select(f => new KeyValuePair<Type?, string>(f.Key, f.Value)).Cast<object>().ToArray());
+        starCatalogs.AddRange(CatalogNames.TypeNames);
+
+        cmbStarCatalogValue.Items.AddRange(starCatalogs.Cast<object>().ToArray());
 
         LoadSettings();
     }
 
-
+    private List<StarCatalogData> starCatalogs = new();
 
     #region PrivateFields
     private Control? colorControl;
@@ -113,13 +117,17 @@ public partial class FormDialogSettings : DBLangEngineWinforms
 
     private void LoadSettings()
     {
-        var defaultCatalog = new KeyValuePair<Type?, string>(null,
-            DBLangEngine.GetMessage("msgEmbeddedValue",
+        var defaultCatalog = new StarCatalogData
+        {
+            IsBuildIn = true,
+            Name = DBLangEngine.GetMessage("msgEmbeddedValue",
                 "Embedded ({0})|A text describing something embedded with value or data name.",
-                CatalogNames.TypeNames[typeof(YaleBrightProvider)]));
+                CatalogNames.BuiltInName),
+            Type = typeof(YaleBrightProvider)
+        };
 
-        var defaultFileCatalog = CatalogNames.TypeNames.Select(f => new KeyValuePair<Type?, string>(f.Key, f.Value))
-            .FirstOrDefault(f => f.Key?.Name == nameof(YaleBrightProvider));
+        var defaultFileCatalog =
+            CatalogNames.TypeNames.FirstOrDefault(f => f.Type == typeof(YaleBrightProvider) && !f.IsBuildIn);
 
         cmbStarCatalogValue.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.StarCatalog)
             ? defaultCatalog

@@ -24,21 +24,15 @@ SOFTWARE.
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Common.Utilities;
-using StarMap2D.Eto.Controls;
-using VPKSoft.StarCatalogs.Providers;
+using StarMap2D.Eto.Controls.Utilities;
 using VPKSoft.StarCatalogs.StaticData;
 using Button = Eto.Forms.Button;
-using Control = Eto.Forms.Control;
-using Label = Eto.Forms.Label;
 using TabControl = Eto.Forms.TabControl;
 using TextBox = Eto.Forms.TextBox;
 
@@ -46,59 +40,58 @@ using UI = StarMap2D.Localization.UI;
 
 namespace StarMap2D.Eto.Forms
 {
+    /// <summary>
+    /// A dialog to specify settings for the StarMap2D software.
+    /// Implements the <see cref="Dialog{T}" />
+    /// </summary>
+    /// <seealso cref="Dialog{T}" />
     public class FormDialogSettings : Dialog<bool>
     {
-        private TableLayout tableLayout;
-        private TabControl tabControl;
-        private TabPage tabCommon;
-        private TableLayout tabCommonLayout;
-        private TextBox textBoxLocation;
-        private NumericStepper latitudeStepper;
-        private NumericStepper longitudeStepper;
-        private NumericStepper crossHairStepper;
-        private ComboBox comboBoxLocations;
-        private CheckBox cbInvertAxis;
-        private CheckBox cbDrawConstellations;
-        private CheckBox cbDrawConstellationLabels;
-        private CheckBox cbDrawConstellationBoundaries;
-        private CheckBox cbDrawCrossHair;
-        private ComboBox cmbUiLocale;
-        private ComboBox cmbStarCatalog;
-        private Button btOK;
-        private Button btCancel;
+        private TableLayout? tableLayout;
+        private TabControl? tabControl;
+        private TabPage? tabCommon;
+        private TableLayout? tabCommonLayout;
+        private TextBox? textBoxLocation;
+        private NumericStepper? latitudeStepper;
+        private NumericStepper? longitudeStepper;
+        private NumericStepper? crossHairStepper;
+        private ComboBox? comboBoxLocations;
+        private CheckBox? cbInvertAxis;
+        private CheckBox? cbDrawConstellations;
+        private CheckBox? cbDrawConstellationLabels;
+        private CheckBox? cbDrawConstellationBoundaries;
+        private CheckBox? cbDrawCrossHair;
+        private ComboBox? cmbUiLocale;
+        private ComboBox? cmbStarCatalog;
+        private Button? btOk;
+        private Button? btCancel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
+        /// </summary>
         public FormDialogSettings()
         {
-            base.MinimumSize = new Size(300, 200);
+            MinimumSize = new Size(300, 200);
+
+            // Set the software localization.
+            UI.Culture = Globals.Locale;
+
+            // Create the UI controls.
             InitializeView();
         }
 
-        private TableLayout LabelWrap(string text, Control control)
-        {
-            return new TableLayout(new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = text }), true)),
-                new TableRow(new TableCell(control, true)))
-            { Padding = new Padding(5) };
-        }
-
-        private Panel PaddingBottomWrap(Control control, int padding = 5)
-        {
-            return new Panel { Content = control, Padding = new Padding(0, 0, 0, padding) };
-        }
-
-
-        private Panel PaddingWrap(Control control, int padding = 5)
-        {
-            return new Panel { Content = control, Padding = new Padding(padding) };
-        }
-
+        /// <summary>
+        /// Initializes the view.
+        /// </summary>
         private void InitializeView()
         {
-            UI.Culture = new CultureInfo("fi");
+            Title = UI.Settings;
 
             tableLayout = new TableLayout();
 
             Content = tableLayout;
 
+            // The first tab page.
             tabControl = new TabControl();
             tabCommon = new TabPage { Text = UI.Common };
             tabControl.Pages.Add(tabCommon);
@@ -111,20 +104,20 @@ namespace StarMap2D.Eto.Forms
 
             tabCommon.Content = tabCommonLayout;
 
-            textBoxLocation = new TextBox { Text = Globals.Settings.DefaultLocationName };
+            textBoxLocation = new TextBox();
 
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(LabelWrap(UI.LocationName, textBoxLocation), true)));
+            tabCommonLayout.Rows.Add(new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.LocationName, textBoxLocation), true)));
 
-            latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, Value = Globals.Settings.Latitude };
-            longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180, Value = Globals.Settings.Longitude };
-            crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70, Value = Globals.Settings.CrossHairSize };
+            latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
+            longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
+            crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70 };
 
             tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
                 new TableCell(
-                    LabelWrap(UI.Latitude, latitudeStepper),
+                    EtoHelpers.LabelWrap(UI.Latitude, latitudeStepper),
                     true),
                 new TableCell(
-                    LabelWrap(UI.Longitude, longitudeStepper),
+                    EtoHelpers.LabelWrap(UI.Longitude, longitudeStepper),
                     true))));
 
             comboBoxLocations = new ComboBox { AutoComplete = true };
@@ -145,98 +138,160 @@ namespace StarMap2D.Eto.Forms
             };
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                LabelWrap(UI.SelectLocation,
+                EtoHelpers.LabelWrap(UI.SelectLocation,
                     comboBoxLocations), true)));
 
-            cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis, Checked = Globals.Settings.InvertEastWest };
-            cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations, Checked = Globals.Settings.DrawConstellationLines };
-            cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames, Checked = Globals.Settings.DrawConstellationLabels };
-            cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries, Checked = Globals.Settings.DrawConstellationBorders };
-            cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair, Checked = Globals.Settings.DrawCrossHair };
+            cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis };
+            cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations };
+            cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames };
+            cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries };
+            cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair };
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                PaddingWrap(cbInvertAxis), true)));
+                EtoHelpers.PaddingWrap(cbInvertAxis), true)));
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                PaddingWrap(cbDrawConstellations), true)));
+                EtoHelpers.PaddingWrap(cbDrawConstellations), true)));
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                PaddingWrap(cbDrawConstellationLabels), true)));
+                EtoHelpers.PaddingWrap(cbDrawConstellationLabels), true)));
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                PaddingWrap(cbDrawConstellationBoundaries), true)));
+                EtoHelpers.PaddingWrap(cbDrawConstellationBoundaries), true)));
 
             tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
                 new TableCell(
-                    PaddingWrap(cbDrawCrossHair),
+                    EtoHelpers.PaddingWrap(cbDrawCrossHair),
                     true),
                 new TableCell(
-                    LabelWrap(UI.CrossHairSize, crossHairStepper),
+                    EtoHelpers.LabelWrap(UI.CrossHairSize, crossHairStepper),
                     true))));
 
             tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
 
-            cmbUiLocale = new ComboBox { AutoComplete = true };
-            cmbUiLocale.Items.AddRange(Localization.Properties.Languages.Select(f => new CultureInfo(f))
-                .Select(l => new ListItem { Key = l.Name, Tag = l, Text = l.DisplayName }));
+            cmbUiLocale = new ComboBox
+            {
+                AutoComplete = true,
+                ItemTextBinding = new PropertyBinding<string>(nameof(CultureInfo.DisplayName)),
+            };
 
-            var cultureDefault = new CultureInfo("en");
-            var cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.Locale)
-                ? cultureDefault
-                : new CultureInfo(Globals.Settings.Locale);
-
-            cmbUiLocale.SelectedValue =
-                new ListItem { Key = cultureSelected.Name, Tag = cultureSelected, Text = cultureSelected.DisplayName };
+            cmbUiLocale.DataStore = Localization.Properties.Languages.Select(f => new CultureExtended(f, true));
 
             cmbStarCatalog = new ComboBox { AutoComplete = true };
-            cmbStarCatalog.Items.Add(new ListItem
-            {
-                Key = string.Format(UI.EmbeddedParameter, CatalogNames.TypeNames[typeof(YaleBrightProvider)]),
-                Text = string.Format(UI.EmbeddedParameter, CatalogNames.TypeNames[typeof(YaleBrightProvider)]),
-                Tag = new KeyValuePair<Type?, string>(),
-            });
 
-            cmbStarCatalog.Items.AddRange(CatalogNames.TypeNames
-                .Select(f => new ListItem { Key = f.Key.ToString(), Text = f.Value, Tag = f }));
+            starCatalogs = new List<StarCatalogData>
+            {
+                new()
+                {
+                    IsBuildIn = true, Name = string.Format(UI.EmbeddedParameter, CatalogNames.BuiltInName),
+                },
+            };
+
+            starCatalogs.AddRange(CatalogNames.TypeNames);
+
+            cmbStarCatalog.DataStore = starCatalogs;
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                LabelWrap(UI.StarCatalogSelection,
+                EtoHelpers.LabelWrap(UI.StarCatalogSelection,
                     cmbStarCatalog), true)));
 
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
+                EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
 
-            btOK = new Button { Text = UI.OK };
-            btOK.Click += delegate { SaveSettings(); Close(true); };
+            btOk = new Button { Text = UI.OK };
+            btOk.Click += delegate { SaveSettings(); Close(true); };
 
             btCancel = new Button { Text = UI.Cancel };
             btCancel.Click += delegate { Close(false); };
 
-            DefaultButton = btOK;
+            DefaultButton = btOk;
             AbortButton = btCancel;
 
-            PositiveButtons.Add(btOK);
+            PositiveButtons.Add(btOk);
 
             NegativeButtons.Add(btCancel);
+
+            LoadSettings();
         }
 
+        private List<StarCatalogData> starCatalogs = new();
+
+        /// <summary>
+        /// Due to a bug in Eto.Forms (WPF) the ComboBox selected item text must be overridden (See: https://github.com/picoe/Eto/issues/414)
+        /// Implements the <see cref="System.Globalization.CultureInfo" />
+        /// </summary>
+        /// <seealso cref="System.Globalization.CultureInfo" />
+        internal class CultureExtended : CultureInfo
+        {
+            private readonly bool local;
+
+            public CultureExtended(string name, bool local) : base(name)
+            {
+                this.local = local;
+            }
+
+
+            public override string ToString()
+            {
+                return local ? base.DisplayName : base.EnglishName;
+            }
+        }
+
+        /// <summary>
+        /// Loads the program settings.
+        /// </summary>
+        private void LoadSettings()
+        {
+            var cultureDefault = new CultureExtended("en", true);
+            var cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.Locale)
+                ? cultureDefault
+                : new CultureExtended(Globals.Settings.Locale.Split('-')[0], true);
+
+            cmbUiLocale!.SelectedValue = cultureSelected;
+
+            var selectedCatalog = string.IsNullOrWhiteSpace(Globals.Settings.StarCatalog)
+                ? starCatalogs.First(f => f.Identifier == 0)
+                : starCatalogs.First(f => !f.IsBuildIn && f.Type.Name == Globals.Settings.StarCatalog);
+
+            cmbStarCatalog!.SelectedValue = selectedCatalog;
+
+            longitudeStepper!.Value = Globals.Settings.Longitude;
+            latitudeStepper!.Value = Globals.Settings.Latitude;
+            crossHairStepper!.Value = Globals.Settings.CrossHairSize;
+            textBoxLocation!.Text = Globals.Settings.DefaultLocationName;
+            cbInvertAxis!.Checked = Globals.Settings.InvertEastWest;
+            cbDrawConstellations!.Checked = Globals.Settings.DrawConstellationLines;
+            cbDrawConstellationLabels!.Checked = Globals.Settings.DrawConstellationLabels;
+            cbDrawConstellationBoundaries!.Checked = Globals.Settings.DrawConstellationBorders;
+            cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
+        }
+
+        /// <summary>
+        /// Saves the program settings.
+        /// </summary>
         private void SaveSettings()
         {
-            Globals.Settings.Longitude = longitudeStepper.Value;
-            Globals.Settings.Latitude = longitudeStepper.Value;
-            Globals.Settings.CrossHairSize = (int)crossHairStepper.Value;
-            Globals.Settings.DefaultLocationName = textBoxLocation.Text;
-            Globals.Settings.InvertEastWest = cbInvertAxis.Checked!.Value;
-            Globals.Settings.DrawConstellationLines = cbDrawConstellations.Checked!.Value;
-            Globals.Settings.DrawConstellationLabels = cbDrawConstellationLabels.Checked!.Value;
-            Globals.Settings.DrawConstellationBorders = cbDrawConstellationBoundaries.Checked!.Value;
-            Globals.Settings.DrawCrossHair = cbDrawCrossHair.Checked!.Value;
+            Globals.Settings.Longitude = longitudeStepper!.Value;
+            Globals.Settings.Latitude = latitudeStepper!.Value;
+            Globals.Settings.CrossHairSize = (int)crossHairStepper!.Value;
+            Globals.Settings.DefaultLocationName = textBoxLocation!.Text;
+            Globals.Settings.InvertEastWest = cbInvertAxis!.Checked ?? false;
+            Globals.Settings.DrawConstellationLines = cbDrawConstellations!.Checked ?? false;
+            Globals.Settings.DrawConstellationLabels = cbDrawConstellationLabels!.Checked ?? false;
+            Globals.Settings.DrawConstellationBorders = cbDrawConstellationBoundaries!.Checked ?? false;
+            Globals.Settings.DrawCrossHair = cbDrawCrossHair!.Checked ?? false;
 
-            var selectedCatalog = ((KeyValuePair<Type?, string>)((ListItem)cmbStarCatalog.SelectedValue).Tag).Key?.Name;
+            if (cmbUiLocale!.SelectedValue != null)
+            {
+                var culture = (CultureInfo)cmbUiLocale.SelectedValue;
+                Globals.Settings.Locale = culture.Name;
+            }
 
-            string locale = ((ListItem)cmbUiLocale.SelectedValue).Tag.ToString();
-
-            Globals.Settings.StarCatalog = selectedCatalog;
+            if (cmbStarCatalog!.SelectedValue != null)
+            {
+                var catalog = (StarCatalogData)cmbStarCatalog.SelectedValue;
+                Globals.Settings.StarCatalog = catalog.Identifier == 0 ? null : catalog.Type.Name;
+            }
 
             Globals.SaveSettings();
         }

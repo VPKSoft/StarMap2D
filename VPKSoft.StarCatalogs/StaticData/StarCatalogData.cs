@@ -24,49 +24,40 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-using StarMap2D.Eto.ApplicationSettings;
-
-namespace StarMap2D.Eto;
+namespace VPKSoft.StarCatalogs.StaticData;
 
 /// <summary>
-/// A class containing the global static parameters.
+/// A class to list star catalog data.
 /// </summary>
-public class Globals
+public class StarCatalogData
 {
     /// <summary>
-    /// Gets or sets the application settings.
+    /// Gets or sets the type op the star catalog provider.
     /// </summary>
-    /// <value>The application settings.</value>
-    public static Settings Settings { get; set; } = new();
+    public Type Type { get; set; } = typeof(object);
 
     /// <summary>
-    /// Gets or sets the locale for UI localization.
+    /// Gets or sets the identifier of the <see cref="StarCatalogData"/> instance.
     /// </summary>
-    /// <value>The UI localization locale.</value>
-    public static CultureInfo Locale
-    {
-        get
-
-        {
-            try // Can not allow this to crash the program.
-            {
-                return new(string.IsNullOrWhiteSpace(Settings.Locale)
-                    ? CultureInfo.CurrentUICulture.Name.Split('-')[0]
-                    : Settings.Locale.Split('-')[0]);
-            }
-            catch
-            {
-                return CultureInfo.CurrentUICulture;
-            }
-        }
-    }
+    public int Identifier { get; set; }
 
     /// <summary>
-    /// Saves the application settings.
+    /// Gets or sets the name of the star.
     /// </summary>
-    public static void SaveSettings()
+    /// <value>The name.</value>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the star catalog is build-in. I.e. in a resource.
+    /// </summary>
+    public bool IsBuildIn { get; set; }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
     {
-        Settings.Save(Settings.GetApplicationSettingsFile("VPKSoft", nameof(StarMap2D)));
+        return Name;
     }
 }

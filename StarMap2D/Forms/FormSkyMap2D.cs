@@ -39,7 +39,6 @@ using StarMap2D.Controls.WinForms.EventArguments;
 using StarMap2D.Controls.WinForms.Utilities;
 using StarMap2D.Forms.Dialogs;
 using StarMap2D.Miscellaneous;
-using StarMap2D.Utilities;
 using VPKSoft.LangLib;
 using VPKSoft.StarCatalogs.Files;
 using VPKSoft.StarCatalogs.Providers;
@@ -92,7 +91,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
                 ErrorMessage.ShowError(DBLangEngine.GetMessage("msgErrorLoadingStarCatalog",
                     "The star catalog file '{0}' could not be loaded. Using the default instead.|A message describing to the user that a star catalog with a specified file name could not be loaded and the default is going to be used instead.",
                     CatalogFileProvider.GetCatalogFileName(CatalogNames.TypeNames
-                        .FirstOrDefault(f => f.Key.Name == Properties.Settings.Default.StarCatalog).Key)));
+                        .FirstOrDefault(f => f.Type.Name == Properties.Settings.Default.StarCatalog)!.Type)));
             }
         }
 
@@ -136,7 +135,7 @@ public partial class FormSkyMap2D : DBLangEngineWinforms
         try
         {
             var provider = CatalogFileProvider.GetCatalog(CatalogNames.TypeNames
-                .FirstOrDefault(f => f.Key.Name == Properties.Settings.Default.StarCatalog).Key);
+                .FirstOrDefault(f => f.Type.Name == Properties.Settings.Default.StarCatalog)!.Type);
 
             foreach (var starData in provider.StarData)
             {

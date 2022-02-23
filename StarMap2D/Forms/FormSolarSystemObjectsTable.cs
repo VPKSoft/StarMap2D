@@ -30,10 +30,9 @@ using System.Reflection;
 using ChoETL;
 using StarMap2D.Calculations.Attributes;
 using StarMap2D.Calculations.StaticData;
+using StarMap2D.Common.Utilities;
 using StarMap2D.Miscellaneous;
-using StarMap2D.Utilities;
 using VPKSoft.LangLib;
-using Zuby.ADGV;
 
 namespace StarMap2D.Forms;
 
