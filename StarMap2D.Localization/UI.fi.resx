@@ -126,6 +126,15 @@
   <data name="CrossHairSize" xml:space="preserve">
     <value>Keskiristikon koko</value>
   </data>
+  <data name="DataFormattingCulture" xml:space="preserve">
+    <value>Datan muotoilun kultuuri (esim. numeron, jne)</value>
+  </data>
+  <data name="DateAndNumberFormattingSettings" xml:space="preserve">
+    <value>Päiväys- ja numeromuotoilu</value>
+  </data>
+  <data name="DateAndTimeFormattingCulture" xml:space="preserve">
+    <value>Päiväyksen ja ajan muotoilun kultuuri</value>
+  </data>
   <data name="DrawConstellationBoundaries" xml:space="preserve">
     <value>Piirrä tähtikuvioiden rajat</value>
   </data>
@@ -162,8 +171,14 @@
   <data name="Settings" xml:space="preserve">
     <value>Asetukset</value>
   </data>
+  <data name="SpecifyDateTimeTitle" xml:space="preserve">
+    <value>Valitse ajankohta</value>
+  </data>
   <data name="StarCatalogSelection" xml:space="preserve">
     <value>Käytettävä tähtiluettelo</value>
+  </data>
+  <data name="StarMap" xml:space="preserve">
+    <value>Tähtikartta</value>
   </data>
   <data name="StarMap2D" xml:space="preserve">
     <value>StarMap2D</value>

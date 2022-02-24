@@ -1,8 +1,11 @@
 using Eto.Drawing;
 using Eto.Forms;
 using System;
+using StarMap2D.Common.SvgColorization;
 using StarMap2D.Eto.Controls;
+using StarMap2D.Eto.Controls.Utilities;
 using StarMap2D.Eto.Forms;
+using StarMap2D.Localization;
 using Xceed.Wpf.AvalonDock.Properties;
 
 namespace StarMap2D.Eto
@@ -11,7 +14,10 @@ namespace StarMap2D.Eto
     {
         public MainForm()
         {
-            Title = Localization.UI.StarMap2D;
+            // Set the software localization.
+            UI.Culture = Globals.Locale;
+
+            Title = UI.StarMap2D;
             MinimumSize = new Size(400, 300);
 
             Content = new StackLayout
@@ -19,18 +25,16 @@ namespace StarMap2D.Eto
                 Padding = 10,
                 Items =
                 {
-                    "Hello World!",
                     // add more controls here
                 }
             };
 
             // create a few commands that can be used for the menu and toolbar
-            var clickMe = new Command { MenuText = "Star map", ToolBarText = "Star map" };
-            clickMe.Executed += (sender, e) => new FormSkyMap2D().Show();
-            //            clickMe.Executed += (sender, e) => MessageBox.Show(this, "I was clicked!");
+            var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap };
+            starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
 
-            var settingsMenu = new Command { MenuText = "Settings", ToolBarText = "Settings" };
-            settingsMenu.Executed += (sender, e) => new FormDialogSettings().ShowModal();
+            var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
+            settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
 
             var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
@@ -45,7 +49,7 @@ namespace StarMap2D.Eto
                 Items =
                 {
 					// File submenu
-					new SubMenuItem { Text = "&File", Items = { clickMe } },
+					new SubMenuItem { Text = "&File", Items = { starMapCommand } },
 					// new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
 					// new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
 				},
@@ -59,7 +63,7 @@ namespace StarMap2D.Eto
             };
 
             // create toolbar			
-            ToolBar = new ToolBar { Items = { clickMe } };
+            ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
         }
     }
 }

@@ -29,15 +29,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AASharp;
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
 using StarMap2D.Eto.Controls;
 using StarMap2D.Eto.Controls.Utilities;
 using StarMap2D.Eto.Properties;
+using StarMap2D.Localization;
 using VPKSoft.StarCatalogs.Providers;
 
 namespace StarMap2D.Eto.Forms
@@ -46,20 +49,56 @@ namespace StarMap2D.Eto.Forms
     {
         public FormSkyMap2D()
         {
-            Content = map2d;
+            // Set the software localization.
+            UI.Culture = Globals.Locale;
 
-            MinimumSize = new Size(1200, 1000);
 
+            MinimumSize = new Size(1024, 768);
+
+            InitializeView();
+
+            LoadEmbeddedCatalog();
+            LoadSettings();
+            CreateSolarSystemObjects();
+            this.Shown += FormSkyMap2D_Shown;
+        }
+
+        private void FormSkyMap2D_Shown(object? sender, EventArgs e)
+        {
+            splitter!.Position = ClientSize.Width - 250;
+        }
+
+        private Splitter? splitter;
+        private TableLayout? mapControlLayout;
+        private DateTimePicker? dateTimePickerJump;
+
+        private void InitializeView()
+        {
+            //            Content = map2d;
             map2d.Plot2D = new(Globals.Settings.Latitude, Globals.Settings.Longitude)
             {
                 Diameter = Math.Min(map2d.Width, map2d.Height)
             };
 
-            LoadEmbeddedCatalog();
-            LoadSettings();
-            CreateSolarSystemObjects();
 
+            splitter = new Splitter { Orientation = Orientation.Horizontal };
+
+
+            Content = splitter;
+            splitter.Panel1 = map2d;
+
+            mapControlLayout = new TableLayout();
+            splitter.Panel2 = mapControlLayout;
+
+            dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now };
+
+            mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithButton(UI.SpecifyDateTimeTitle, null,
+                dateTimePickerJump, (sender, args) => MessageBox.Show("Clicked!"),
+                StarMap2D.Eto.Controls.Properties.Resources.ic_fluent_arrow_right_48_filled, Colors.SteelBlue));
+
+            mapControlLayout.Rows.Add(new TableRow { ScaleHeight = true });
         }
+
 
         private bool InvertEastWest => map2d.InvertEastWest;
 

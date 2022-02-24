@@ -47,8 +47,14 @@ namespace StarMap2D.Eto.Forms
     /// <seealso cref="Dialog{T}" />
     public class FormDialogSettings : Dialog<bool>
     {
+        #region GeneralControls
+        private TabControl? tabControlSettings;
+        private Button? btOk;
+        private Button? btCancel;
         private TableLayout? tableLayout;
-        private TabControl? tabControl;
+        #endregion
+
+        #region CommonSettingsControls
         private TabPage? tabCommon;
         private TableLayout? tabCommonLayout;
         private TextBox? textBoxLocation;
@@ -63,8 +69,14 @@ namespace StarMap2D.Eto.Forms
         private CheckBox? cbDrawCrossHair;
         private ComboBox? cmbUiLocale;
         private ComboBox? cmbStarCatalog;
-        private Button? btOk;
-        private Button? btCancel;
+        #endregion
+
+        #region DateAndNumberFormattingSettingsControls
+        private TabPage? tabNumberFormatting;
+        private TableLayout? tabNumberFormattingLayout;
+        private ComboBox? cmbDataFormattingCulture;
+        private ComboBox? cmbDateAndTimeFormattingCulture;
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
@@ -90,14 +102,82 @@ namespace StarMap2D.Eto.Forms
             tableLayout = new TableLayout();
 
             Content = tableLayout;
+            tabControlSettings = new TabControl();
 
             // The first tab page.
-            tabControl = new TabControl();
-            tabCommon = new TabPage { Text = UI.Common };
-            tabControl.Pages.Add(tabCommon);
+            LayoutTabPageCommon();
 
-            tableLayout.Rows.Add(new TableRow(
-                new TableCell(tabControl, true)));
+            // The second tab page.
+            LayoutTabPageFormatting();
+
+            btOk = new Button { Text = UI.OK };
+            btOk.Click += delegate { SaveSettings(); Close(true); };
+
+            btCancel = new Button { Text = UI.Cancel };
+            btCancel.Click += delegate { Close(false); };
+
+            DefaultButton = btOk;
+            AbortButton = btCancel;
+
+            PositiveButtons.Add(btOk);
+
+            NegativeButtons.Add(btCancel);
+
+            LoadSettings();
+        }
+
+        /// <summary>
+        /// Creates the controls for the date and number formatting settings tab page.
+        /// </summary>
+        private void LayoutTabPageFormatting()
+        {
+            // The base layout.
+            tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings };
+            tabControlSettings!.Pages.Add(tabNumberFormatting);
+            tabNumberFormattingLayout = new TableLayout();
+            tabNumberFormattingLayout.Padding = new Padding(5);
+            tabNumberFormatting.Content = tabNumberFormattingLayout;
+
+            // The actual controls.
+            cmbDataFormattingCulture = new ComboBox
+            {
+                ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
+                AutoComplete = true,
+            };
+
+            tabNumberFormattingLayout.Rows.Add(
+                new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DataFormattingCulture, cmbDataFormattingCulture))));
+
+            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                .Select(f => new CultureExtended(f.Name, true)).ToList();
+
+            cmbDataFormattingCulture.DataStore = cultures;
+
+            cmbDateAndTimeFormattingCulture = new ComboBox
+            {
+                ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
+                AutoComplete = true,
+            };
+
+            tabNumberFormattingLayout.Rows.Add(
+                new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DateAndTimeFormattingCulture, cmbDateAndTimeFormattingCulture))));
+
+            cmbDateAndTimeFormattingCulture.DataStore = cultures;
+
+            // Scale the last row to the maximum.
+            tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
+        }
+
+        /// <summary>
+        /// Creates the controls for the common settings tab page.
+        /// </summary>
+        private void LayoutTabPageCommon()
+        {
+            tabCommon = new TabPage { Text = UI.Common };
+            tabControlSettings!.Pages.Add(tabCommon);
+
+            tableLayout!.Rows.Add(new TableRow(
+                new TableCell(tabControlSettings, true)));
 
             tabCommonLayout = new TableLayout();
             tabCommon.Padding = new Padding(5);
@@ -167,8 +247,6 @@ namespace StarMap2D.Eto.Forms
                     EtoHelpers.LabelWrap(UI.CrossHairSize, crossHairStepper),
                     true))));
 
-            tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
-
             cmbUiLocale = new ComboBox
             {
                 AutoComplete = true,
@@ -198,20 +276,8 @@ namespace StarMap2D.Eto.Forms
             tabCommonLayout.Rows.Add(new TableRow(new TableCell(
                 EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
 
-            btOk = new Button { Text = UI.OK };
-            btOk.Click += delegate { SaveSettings(); Close(true); };
-
-            btCancel = new Button { Text = UI.Cancel };
-            btCancel.Click += delegate { Close(false); };
-
-            DefaultButton = btOk;
-            AbortButton = btCancel;
-
-            PositiveButtons.Add(btOk);
-
-            NegativeButtons.Add(btCancel);
-
-            LoadSettings();
+            // Scale the last row to the maximum.
+            tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
         }
 
         private List<StarCatalogData> starCatalogs = new();
@@ -229,7 +295,6 @@ namespace StarMap2D.Eto.Forms
             {
                 this.local = local;
             }
-
 
             public override string ToString()
             {
@@ -254,6 +319,16 @@ namespace StarMap2D.Eto.Forms
                 : starCatalogs.First(f => !f.IsBuildIn && f.Type.Name == Globals.Settings.StarCatalog);
 
             cmbStarCatalog!.SelectedValue = selectedCatalog;
+
+            cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.FormattingLocale)
+                ? cultureDefault
+                : new CultureExtended(Globals.Settings.FormattingLocale, true);
+            cmbDataFormattingCulture!.SelectedValue = cultureSelected;
+
+            cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.DateFormattingCulture)
+                ? cultureDefault
+                : new CultureExtended(Globals.Settings.DateFormattingCulture, true);
+            cmbDateAndTimeFormattingCulture!.SelectedValue = cultureSelected;
 
             longitudeStepper!.Value = Globals.Settings.Longitude;
             latitudeStepper!.Value = Globals.Settings.Latitude;
@@ -291,6 +366,18 @@ namespace StarMap2D.Eto.Forms
             {
                 var catalog = (StarCatalogData)cmbStarCatalog.SelectedValue;
                 Globals.Settings.StarCatalog = catalog.Identifier == 0 ? null : catalog.Type.Name;
+            }
+
+            if (cmbDataFormattingCulture!.SelectedValue != null)
+            {
+                var culture = (CultureInfo)cmbDataFormattingCulture.SelectedValue;
+                Globals.Settings.FormattingLocale = culture.Name;
+            }
+
+            if (cmbDateAndTimeFormattingCulture!.SelectedValue != null)
+            {
+                var culture = (CultureInfo)cmbDateAndTimeFormattingCulture.SelectedValue;
+                Globals.Settings.DateFormattingCulture = culture.Name;
             }
 
             Globals.SaveSettings();

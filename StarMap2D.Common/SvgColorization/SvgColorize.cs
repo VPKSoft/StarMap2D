@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -148,13 +149,28 @@ public class SvgColorize
     /// <param name="fill">if set to <c>true</c> change the 'fill' property of the SVG, otherwise 'stroke'.</param>
     private void ProcessNodes(XElement element, SvgElement elementType, Regex regex, SvgColor? color, bool fill)
     {
-        if ((element.Name.LocalName == NodeName(elementType) || elementType == SvgElement.All) && element.Attribute("style")?.Value != null)
+        if (element.Name.LocalName == NodeName(elementType) || elementType == SvgElement.All)
         {
             var value = element.Attribute("style")?.Value;
             if (value != null)
             {
                 value = regex.Replace(value, color == null ? string.Empty : $"{(fill ? "fill:" : "stroke:")}" + color + ";");
                 element.SetAttributeValue("style", value);
+            }
+
+            foreach (var a in element.Attributes())
+            {
+                Debug.WriteLine(a);
+            }
+
+            value = element.Attribute(fill ? "fill" : "stroke")?.Value;
+            if (value != null)
+            {
+                if (value != "none")
+                {
+                    value = color == null ? "none" : $"{color}";
+                    element.SetAttributeValue(fill ? "fill" : "stroke", value);
+                }
             }
         }
 

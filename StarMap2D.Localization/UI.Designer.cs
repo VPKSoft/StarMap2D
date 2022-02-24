@@ -88,6 +88,33 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data formatting culture (i.e. numbers, etc).
+        /// </summary>
+        public static string DataFormattingCulture {
+            get {
+                return ResourceManager.GetString("DataFormattingCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and number formatting.
+        /// </summary>
+        public static string DateAndNumberFormattingSettings {
+            get {
+                return ResourceManager.GetString("DateAndNumberFormattingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time formatting culture.
+        /// </summary>
+        public static string DateAndTimeFormattingCulture {
+            get {
+                return ResourceManager.GetString("DateAndTimeFormattingCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw constellation boundaries.
         /// </summary>
         public static string DrawConstellationBoundaries {
@@ -196,11 +223,29 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify date and time.
+        /// </summary>
+        public static string SpecifyDateTimeTitle {
+            get {
+                return ResourceManager.GetString("SpecifyDateTimeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Star catalog to use.
         /// </summary>
         public static string StarCatalogSelection {
             get {
                 return ResourceManager.GetString("StarCatalogSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Star map.
+        /// </summary>
+        public static string StarMap {
+            get {
+                return ResourceManager.GetString("StarMap", resourceCulture);
             }
         }
         

@@ -126,6 +126,15 @@
   <data name="CrossHairSize" xml:space="preserve">
     <value>Cross hair size</value>
   </data>
+  <data name="DataFormattingCulture" xml:space="preserve">
+    <value>Data formatting culture (i.e. numbers, etc)</value>
+  </data>
+  <data name="DateAndNumberFormattingSettings" xml:space="preserve">
+    <value>Date and number formatting</value>
+  </data>
+  <data name="DateAndTimeFormattingCulture" xml:space="preserve">
+    <value>Date and time formatting culture</value>
+  </data>
   <data name="DrawConstellationBoundaries" xml:space="preserve">
     <value>Draw constellation boundaries</value>
   </data>
@@ -162,8 +171,14 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SpecifyDateTimeTitle" xml:space="preserve">
+    <value>Specify date and time</value>
+  </data>
   <data name="StarCatalogSelection" xml:space="preserve">
     <value>Star catalog to use</value>
+  </data>
+  <data name="StarMap" xml:space="preserve">
+    <value>Star map</value>
   </data>
   <data name="StarMap2D" xml:space="preserve">
     <value>StarMap2D</value>
