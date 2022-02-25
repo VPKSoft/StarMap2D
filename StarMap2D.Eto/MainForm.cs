@@ -1,16 +1,11 @@
 using Eto.Drawing;
 using Eto.Forms;
-using System;
-using StarMap2D.Common.SvgColorization;
-using StarMap2D.Eto.Controls;
-using StarMap2D.Eto.Controls.Utilities;
 using StarMap2D.Eto.Forms;
 using StarMap2D.Localization;
-using Xceed.Wpf.AvalonDock.Properties;
 
 namespace StarMap2D.Eto
 {
-    public partial class MainForm : Form
+    public class MainForm : Form
     {
         public MainForm()
         {

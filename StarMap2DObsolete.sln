@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D", "StarMap2D\StarMap2D.csproj", "{826F2717-73C6-4A9A-A073-A9F53699D2FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Controls.WinForms", "StarMap2D.Controls.WinForms\StarMap2D.Controls.WinForms.csproj", "{4E69DE46-20E0-4B75-8D9D-14AD4D42FCD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{94EC8BF4-035C-4867-AC4F-E0592DCCD397}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{826F2717-73C6-4A9A-A073-A9F53699D2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826F2717-73C6-4A9A-A073-A9F53699D2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826F2717-73C6-4A9A-A073-A9F53699D2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826F2717-73C6-4A9A-A073-A9F53699D2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E69DE46-20E0-4B75-8D9D-14AD4D42FCD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E69DE46-20E0-4B75-8D9D-14AD4D42FCD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E69DE46-20E0-4B75-8D9D-14AD4D42FCD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E69DE46-20E0-4B75-8D9D-14AD4D42FCD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9ECFBF5-F337-4D99-A8DC-EDE00A12F949}
+	EndGlobalSection
+EndGlobal

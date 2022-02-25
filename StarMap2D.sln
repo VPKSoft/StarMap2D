@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D", "StarMap2D\StarMap2D.csproj", "{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Calculations", "StarMap2D.Calculations\StarMap2D.Calculations.csproj", "{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPKSoft.StarCatalogs", "VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj", "{0402D926-866A-443B-9C01-281C417C11DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Controls.WinForms", "Starmap2D.Controls.WinForms\StarMap2D.Controls.WinForms.csproj", "{F2963C14-71E1-4C70-8025-02DC7ACEFE32}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Tests", "StarMap2D.Tests\StarMap2D.Tests.csproj", "{90F165CE-F082-4FD5-AD1A-4A995759549F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{9D748367-0ACB-4874-876D-BA478FF56D7A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto", "StarMap2D.Eto\StarMap2D.Eto.csproj", "{56EF54CE-0268-4825-B097-0A9EB55570E7}"
 EndProject
@@ -23,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Common", "StarMap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPKSoft.ApplicationSettingsJson", "VPKSoft.ApplicationSettingsJson\VPKSoft.ApplicationSettingsJson.csproj", "{C387DF62-A7AB-49CC-B481-00A0A1C9B905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarMap2D.Localization", "StarMap2D.Localization\StarMap2D.Localization.csproj", "{51F2C2CB-B687-4F15-A5B0-7C2EF041041C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Localization", "StarMap2D.Localization\StarMap2D.Localization.csproj", "{51F2C2CB-B687-4F15-A5B0-7C2EF041041C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42596F56-35C8-4FE6-97FC-DAB5CCD04B69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FEBDAC7-DADD-4560-B72A-81AD4B6A63D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,16 +33,10 @@ Global
 		{0402D926-866A-443B-9C01-281C417C11DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0402D926-866A-443B-9C01-281C417C11DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0402D926-866A-443B-9C01-281C417C11DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2963C14-71E1-4C70-8025-02DC7ACEFE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2963C14-71E1-4C70-8025-02DC7ACEFE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2963C14-71E1-4C70-8025-02DC7ACEFE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2963C14-71E1-4C70-8025-02DC7ACEFE32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D748367-0ACB-4874-876D-BA478FF56D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Release|Any CPU.ActiveCfg = Release|Any CPU

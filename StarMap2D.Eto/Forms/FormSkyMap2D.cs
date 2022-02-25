@@ -60,7 +60,7 @@ namespace StarMap2D.Eto.Forms
             LoadEmbeddedCatalog();
             LoadSettings();
             CreateSolarSystemObjects();
-            this.Shown += FormSkyMap2D_Shown;
+            Shown += FormSkyMap2D_Shown;
         }
 
         private void FormSkyMap2D_Shown(object? sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace StarMap2D.Eto.Forms
             mapControlLayout = new TableLayout();
             splitter.Panel2 = mapControlLayout;
 
-            dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now };
+            dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
 
             mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithButton(UI.SpecifyDateTimeTitle, null,
                 dateTimePickerJump, (sender, args) => MessageBox.Show("Clicked!"),
