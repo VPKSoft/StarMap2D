@@ -44,8 +44,9 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: StarMap2D.Eto.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
+      Solution_Name: StarMap2D.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       Test_Project_Path: StarMap2D.Tests/StarMap2D.Tests.csproj   # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      App_Project_Path: StarMap2D/StarMap2D.Eto.csproj
 
     steps:
     - name: Checkout
@@ -69,6 +70,6 @@ jobs:
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: msbuild $env:App_Project_Path /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
