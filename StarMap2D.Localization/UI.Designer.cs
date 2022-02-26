@@ -115,6 +115,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Draw constellation borders.
+        /// </summary>
+        public static string DrawConstellationBorders {
+            get {
+                return ResourceManager.GetString("DrawConstellationBorders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw constellation boundaries.
         /// </summary>
         public static string DrawConstellationBoundaries {
@@ -160,11 +169,47 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hour - 1.
+        /// </summary>
+        public static string HourMinusOne {
+            get {
+                return ResourceManager.GetString("HourMinusOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hour + 1.
+        /// </summary>
+        public static string HourPlusOne {
+            get {
+                return ResourceManager.GetString("HourPlusOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invert east-west.
+        /// </summary>
+        public static string InvertEastWest {
+            get {
+                return ResourceManager.GetString("InvertEastWest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invert east-west axis of the map.
         /// </summary>
         public static string InvertEastWestAxis {
             get {
                 return ResourceManager.GetString("InvertEastWestAxis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jump to location.
+        /// </summary>
+        public static string JumpToLcation {
+            get {
+                return ResourceManager.GetString("JumpToLcation", resourceCulture);
             }
         }
         
@@ -223,6 +268,24 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skip calculated objects.
+        /// </summary>
+        public static string SkipCalculatedObjects {
+            get {
+                return ResourceManager.GetString("SkipCalculatedObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SkyMap2D - Sky map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}], [Sidereal time: {3}].
+        /// </summary>
+        public static string SkyMapTitle {
+            get {
+                return ResourceManager.GetString("SkyMapTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify date and time.
         /// </summary>
         public static string SpecifyDateTimeTitle {
@@ -264,6 +327,15 @@ namespace StarMap2D.Localization {
         public static string StarMap2D {
             get {
                 return ResourceManager.GetString("StarMap2D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
             }
         }
         

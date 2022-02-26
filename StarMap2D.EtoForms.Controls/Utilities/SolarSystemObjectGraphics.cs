@@ -303,7 +303,7 @@ public class SolarSystemObjectGraphics
         {
             if (imageFile != value)
             {
-                if (Path.GetExtension(value?.ToLowerInvariant()) == ".svg")
+                if (value != null && Path.GetExtension(value.ToLowerInvariant()) == ".svg")
                 {
                     SvgDocument = SvgColorize.LoadFromFile(value);
                     redrawRequired = true;

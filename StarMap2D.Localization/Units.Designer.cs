@@ -61,6 +61,78 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E.
+        /// </summary>
+        public static string CompassEastShort {
+            get {
+                return ResourceManager.GetString("CompassEastShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NE.
+        /// </summary>
+        public static string CompassNorthEastShort {
+            get {
+                return ResourceManager.GetString("CompassNorthEastShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N.
+        /// </summary>
+        public static string CompassNorthShort {
+            get {
+                return ResourceManager.GetString("CompassNorthShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NW.
+        /// </summary>
+        public static string CompassNorthWestShort {
+            get {
+                return ResourceManager.GetString("CompassNorthWestShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SE.
+        /// </summary>
+        public static string CompassSouthEastShort {
+            get {
+                return ResourceManager.GetString("CompassSouthEastShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S.
+        /// </summary>
+        public static string CompassSouthShort {
+            get {
+                return ResourceManager.GetString("CompassSouthShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SW.
+        /// </summary>
+        public static string CompassSouthWestShort {
+            get {
+                return ResourceManager.GetString("CompassSouthWestShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W.
+        /// </summary>
+        public static string CompassWestShort {
+            get {
+                return ResourceManager.GetString("CompassWestShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to days.
         /// </summary>
         public static string Days {

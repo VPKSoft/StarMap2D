@@ -46,6 +46,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\StarMap2D.Calculations\StarMap2D.Calculations.csproj" />
 		<ProjectReference Include="..\StarMap2D.Common\StarMap2D.Common.csproj" />
+		<ProjectReference Include="..\StarMap2D.Localization\StarMap2D.Localization.csproj" />
 		<ProjectReference Include="..\VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj" />
 	</ItemGroup>
 

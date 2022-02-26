@@ -175,17 +175,28 @@ public class EtoHelpers
     }
 
     /// <summary>
+    /// Gets or sets the resize loop limit for the <see cref="CreateImageButton"/> method as some layouts
+    /// may cause the button resize pixel by pixel causing heavy calculation loop.
+    /// </summary>
+    /// <value>The resize loop limit.</value>
+    public static int ResizeLoopLimit { get; set; } = 15;
+
+    /// <summary>
     /// Creates a new instance of a <see cref="Button"/> control with auto-scaling SVG image.
     /// </summary>
     /// <param name="svgColorize">An instance of the <see cref="SvgColorize"/> class containing the SVG data..</param>
     /// <param name="svgColor">The <see cref="Color"/> for the SVG image color.</param>
     /// <param name="imagePadding">The amount of pixels the image should be smaller than the button height.</param>
     /// <param name="clickHandler">The click handler for the <see cref="Button"/>.</param>
+    /// <param name="buttonText">The text for the button.</param>
+    /// <param name="customPosition">An optional custom image position.</param>
     /// <returns>A new instance to a <see cref="Button"/> control.</returns>
-    public static Button CreateImageButton(SvgColorize svgColorize, Color svgColor, int imagePadding, EventHandler<EventArgs> clickHandler)
+    public static Button CreateImageButton(SvgColorize svgColorize, Color svgColor, int imagePadding, EventHandler<EventArgs> clickHandler, string? buttonText = null, ButtonImagePosition? customPosition = null)
     {
         var button = new Button(clickHandler);
-        button.ImagePosition = ButtonImagePosition.Below;
+        button.ImagePosition = buttonText == null
+            ? customPosition ?? ButtonImagePosition.Below
+            : customPosition ?? ButtonImagePosition.Left;
 
         bool allowImageDraw = false;
 
@@ -193,6 +204,8 @@ public class EtoHelpers
         {
             allowImageDraw = true;
         };
+
+        button.Text = buttonText;
 
         var sizeWh = Math.Min(button.Width, button.Height) - imagePadding;
 
@@ -202,13 +215,17 @@ public class EtoHelpers
             .ColorizeElementsStroke(SvgElement.All, color);
         button.Image = SvgToImage.ImageFromSvg(svgData.ToBytes(), new Size(16, 16));
 
+        var resizeCount = 0;
+
         button.SizeChanged += delegate
         {
             var newSize = Math.Min(button.Width, button.Height) - imagePadding;
-            if (!allowImageDraw || sizeWh == newSize || newSize < 1)
+            if (!allowImageDraw || sizeWh == newSize || newSize < 1 || resizeCount >= ResizeLoopLimit)
             {
                 return;
             }
+
+            resizeCount++;
 
             sizeWh = newSize;
 

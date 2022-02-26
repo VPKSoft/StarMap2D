@@ -135,6 +135,9 @@
   <data name="DateAndTimeFormattingCulture" xml:space="preserve">
     <value>Päiväyksen ja ajan muotoilun kultuuri</value>
   </data>
+  <data name="DrawConstellationBorders" xml:space="preserve">
+    <value>Tähtikuvioiden rajat</value>
+  </data>
   <data name="DrawConstellationBoundaries" xml:space="preserve">
     <value>Piirrä tähtikuvioiden rajat</value>
   </data>
@@ -150,8 +153,20 @@
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Sisällytetty ({0})</value>
   </data>
+  <data name="HourMinusOne" xml:space="preserve">
+    <value>Tunti - 1</value>
+  </data>
+  <data name="HourPlusOne" xml:space="preserve">
+    <value>Tunti + 1</value>
+  </data>
+  <data name="InvertEastWest" xml:space="preserve">
+    <value>Käännä itä-länsi</value>
+  </data>
   <data name="InvertEastWestAxis" xml:space="preserve">
     <value>Käännä kartta itä-länsiakselin suhteen</value>
+  </data>
+  <data name="JumpToLcation" xml:space="preserve">
+    <value>Hyppää sijaintiin</value>
   </data>
   <data name="Latitude" xml:space="preserve">
     <value>Leveysasteet</value>
@@ -171,6 +186,12 @@
   <data name="Settings" xml:space="preserve">
     <value>Asetukset</value>
   </data>
+  <data name="SkipCalculatedObjects" xml:space="preserve">
+    <value>Jätä pois laskettavat objektit</value>
+  </data>
+  <data name="SkyMapTitle" xml:space="preserve">
+    <value>SkyMap2D - Tähtikartta [Leveys: {0:F5}, Pituus: {1:F5}], [Aika: {2}], [Tähtiaika: {3}]</value>
+  </data>
   <data name="SpecifyDateTimeTitle" xml:space="preserve">
     <value>Valitse ajankohta</value>
   </data>
@@ -185,6 +206,9 @@
   </data>
   <data name="StarMap2D" xml:space="preserve">
     <value>StarMap2D</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Aika</value>
   </data>
   <data name="UiLanguageRequireRestart" xml:space="preserve">
     <value>Käyttöliittymän kieli (uudelleenkäynnistys tarvitaan)</value>

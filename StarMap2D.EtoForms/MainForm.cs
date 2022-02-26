@@ -31,8 +31,16 @@ using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms
 {
+    /// <summary>
+    /// The main window of the application.
+    /// Implements the <see cref="Eto.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="Eto.Forms.Form" />
     public class MainForm : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             // Set the software localization.

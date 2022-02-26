@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using AASharp;
@@ -33,6 +34,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
+using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
@@ -70,25 +72,58 @@ namespace StarMap2D.EtoForms.Forms
             LoadSettings();
             CreateSolarSystemObjects();
             Shown += FormSkyMap2D_Shown;
+            SizeChanged += FormSkyMap2D_SizeChanged;
+            Closing += FormSkyMap2D_Closing;
         }
+
+        private void FormSkyMap2D_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void FormSkyMap2D_SizeChanged(object? sender, EventArgs e)
+        {
+            splitterMain!.PositionChanged -= SplitterMainPositionChanged;
+            splitterMain!.Position = ClientSize.Width - PreviousSplitterSize;
+            splitterMain.PositionChanged += SplitterMainPositionChanged;
+        }
+
+        private int PreviousSplitterSize { get; set; } = 280;
 
         private void FormSkyMap2D_Shown(object? sender, EventArgs e)
         {
-            splitter!.Position = ClientSize.Width - 250;
+            splitterMain!.PositionChanged -= SplitterMainPositionChanged;
+            splitterMain!.Position = ClientSize.Width - PreviousSplitterSize;
+            splitterMain.PositionChanged += SplitterMainPositionChanged;
         }
 
-        private Splitter? splitter;
+        private void SplitterMainPositionChanged(object? sender, EventArgs e)
+        {
+            if (sender is Splitter splitter)
+            {
+                PreviousSplitterSize = ClientSize.Width - splitter.Position;
+            }
+        }
+
+        private Splitter? splitterMain;
         private TableLayout? mapControlLayout;
         private DateTimePicker? dateTimePickerJump;
         private NumericStepper? nsSpeedPerTimeAmount;
         private ComboBox? cmbTimeUnit;
-        private UITimer timer = new() { Interval = 0.2, };
+        private readonly UITimer timer = new() { Interval = 0.2, };
         private CheckedButton? buttonPlayPause;
+        private CheckBox? cbInvertEastWest;
+        private CheckBox? cbDrawConstellationBorders;
+        private CheckBox? cbDrawConstellations;
+        private CheckBox? cbDrawConstellationNames;
+        private CheckBox? cbSkipCalculatedObjects;
+        private CheckBox? cbDrawCrossHair;
+        private readonly Map2D map2d = new();
+        private ComboBox? cmbJumpLocation;
+        private NumericStepper? nsLatitude;
+        private NumericStepper? nsLongitude;
+        private CompassView? cwCompass;
 
-        private void ElapsedHandler(object? sender, EventArgs e)
-        {
-            map2d.DateTimeUtc = DateTime.UtcNow;
-        }
 
         private readonly List<EnumStringItem<TimeInterval>> timeDataSource = new(new[]
         {
@@ -111,22 +146,24 @@ namespace StarMap2D.EtoForms.Forms
             };
 
 
-            splitter = new Splitter { Orientation = Orientation.Horizontal };
+            splitterMain = new Splitter { Orientation = Orientation.Horizontal };
+            splitterMain.PositionChanged += SplitterMainPositionChanged;
 
-            Content = splitter;
-            splitter.Panel1 = map2d;
+            Content = splitterMain;
+            splitterMain.Panel1 = map2d;
 
             mapControlLayout = new TableLayout();
-            splitter.Panel2 = mapControlLayout;
+            splitterMain.Panel2 = mapControlLayout;
 
             dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
 
             mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithButton(UI.SpecifyDateTimeTitle, null,
                 dateTimePickerJump, (_, _) => map2d.DateTimeUtc = dateTimePickerJump.Value?.ToUniversalTime() ?? DateTime.UtcNow,
-                StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_right_48_filled, Colors.SteelBlue));
+                EtoForms.Controls.Properties.Resources.ic_fluent_arrow_right_48_filled, Colors.SteelBlue));
 
 
-            nsSpeedPerTimeAmount = new NumericStepper { MinValue = 1, MaxValue = int.MaxValue, };
+            // The time unit value and it's type selector combo box.
+            nsSpeedPerTimeAmount = new NumericStepper { MinValue = 1, MaxValue = int.MaxValue, DecimalPlaces = 3 };
 
             cmbTimeUnit = new ComboBox { ItemTextBinding = new PropertyBinding<string>(nameof(EnumStringItem<TimeInterval>.EnumName)) };
 
@@ -134,12 +171,13 @@ namespace StarMap2D.EtoForms.Forms
                 EtoHelpers.LabelWrapperWithControls(UI.SpeedPerTimeUnit, 5, 5, nsSpeedPerTimeAmount,
                     cmbTimeUnit,
                     // A reset button for the date and time jumping.
-                    EtoHelpers.CreateImageButton(SvgColorize.FromBytes(StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled), Colors.SteelBlue, 6,
+                    EtoHelpers.CreateImageButton(SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled), Colors.SteelBlue, 6,
                         (_, _) =>
                         {
                             TimeUpdate = false;
                             dateTimePickerJump.Value = DateTime.Now;
                             map2d.DateTimeUtc = DateTime.UtcNow;
+                            SetTitle();
                         })));
 
             cmbTimeUnit.DataStore = timeDataSource;
@@ -155,18 +193,171 @@ namespace StarMap2D.EtoForms.Forms
                 UncheckedSvgImage = SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_play_48_filled),
             };
 
-            mapControlLayout.Rows.Add(EtoHelpers.LabelWrap("PlayPause", buttonPlayPause));
+            // The play button, jump hour +/- buttons.
+            mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithControls(UI.Time, 5, 5,
+                buttonPlayPause,
+                EtoHelpers.CreateImageButton(
+                    SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
+                    Colors.SteelBlue, 6, (sender, args) =>
+                    {
+                        map2d.DateTimeUtc = map2d.DateTimeUtc.TruncateToHours().AddHours(-1);
+                        dateTimePickerJump.Value = map2d.DateTimeUtc.ToLocalTime();
+                        SetTitle();
+                    }, UI.HourMinusOne),
+                EtoHelpers.CreateImageButton(
+                    SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
+                    Colors.SteelBlue, 6, (sender, args) =>
+                    {
+                        map2d.DateTimeUtc = map2d.DateTimeUtc.TruncateToHours().AddHours(1);
+                        dateTimePickerJump.Value = map2d.DateTimeUtc.ToLocalTime();
+                        SetTitle();
+                    }, UI.HourPlusOne, ButtonImagePosition.Right)
+            ));
 
+            // Handler for the timer.
             timer.Elapsed += ElapsedHandler;
 
-            // Leave this to the last!
+            // The check box controls.
+            cbInvertEastWest = new CheckBox { Text = UI.InvertEastWest, ThreeState = false };
+            cbInvertEastWest.CheckedChanged += CbInvertEastWest_CheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbInvertEastWest, 5));
+
+            cbDrawConstellationBorders = new CheckBox { Text = UI.DrawConstellationBorders, ThreeState = false };
+            cbDrawConstellationBorders.CheckedChanged += CbDrawConstellationBorders_CheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellationBorders, 5));
+
+            cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations, ThreeState = false };
+            cbDrawConstellations.CheckedChanged += CbDrawConstellationsCheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellations, 5));
+
+            cbDrawConstellationNames = new CheckBox { Text = UI.DrawConstellationNames, ThreeState = false };
+            cbDrawConstellationNames.CheckedChanged += CbDrawConstellationNamesCheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellationNames, 5));
+
+            cbSkipCalculatedObjects = new CheckBox { Text = UI.SkipCalculatedObjects, ThreeState = false };
+            cbSkipCalculatedObjects.CheckedChanged += CbSkipCalculatedObjects_CheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbSkipCalculatedObjects, 5));
+
+            cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair, ThreeState = false };
+            cbDrawCrossHair.CheckedChanged += CbDrawCrossHair_CheckedChanged;
+            mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawCrossHair, 5));
+
+            // The geographic location change controls.
+            cmbJumpLocation = new ComboBox { AutoComplete = true };
+            cmbJumpLocation.DataStore = Cities.CitiesList;
+            cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
+
+            mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithControls(UI.JumpToLcation, 5, 5,
+                cmbJumpLocation,
+                EtoHelpers.CreateImageButton(
+                    SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled),
+                    Colors.SteelBlue, 6, RevertLocation_Click)
+            ));
+
+            nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
+            nsLongitude = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
+
+            mapControlLayout.Rows.Add(new TableLayout(new TableRow(
+                new TableCell(
+                    EtoHelpers.LabelWrap(UI.Latitude, nsLatitude),
+                    true),
+                new TableCell(
+                    EtoHelpers.LabelWrap(UI.Longitude, nsLongitude),
+                    true))));
+
+            cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;
+            nsLatitude.ValueChanged += NsLatitude_ValueChanged;
+            nsLongitude.ValueChanged += NsLongitude_ValueChanged;
+
+            cwCompass = new CompassView { Width = PreviousSplitterSize, Height = PreviousSplitterSize };
+
+            SetTitle();
+
+            // Leave this and the compass to the last!
             mapControlLayout.Rows.Add(new TableRow { ScaleHeight = true });
+            mapControlLayout.Rows.Add(cwCompass);
         }
 
         private bool InvertEastWest => map2d.InvertEastWest;
         private bool timeUpdate;
         private List<SolarSystemObjectGraphics> solarSystemObjects = new();
 
+        #region InternalEvents
+        private void NsLongitude_ValueChanged(object? sender, EventArgs e)
+        {
+            map2d.Longitude = nsLongitude!.Value;
+        }
+
+        private void NsLatitude_ValueChanged(object? sender, EventArgs e)
+        {
+            map2d.Latitude = nsLatitude!.Value;
+        }
+
+        private void RevertLocation_Click(object? sender, EventArgs e)
+        {
+            cmbJumpLocation!.Text = Globals.Settings.DefaultLocationName;
+            map2d.Latitude = Globals.Settings.Latitude;
+            map2d.Longitude = Globals.Settings.Longitude;
+            nsLatitude!.Value = Globals.Settings.Latitude;
+            nsLongitude!.Value = Globals.Settings.Longitude;
+            SetTitle();
+        }
+
+        private void CmbJumpLocation_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            if (cmbJumpLocation!.SelectedValue == null)
+            {
+                return;
+            }
+
+            var value = (CityLatLonCoordinate)cmbJumpLocation.SelectedValue;
+            nsLatitude!.Value = value.Latitude;
+            nsLongitude!.Value = value.Longitude;
+            map2d.Latitude = value.Latitude;
+            map2d.Longitude = value.Longitude;
+        }
+
+        private void ElapsedHandler(object? sender, EventArgs e)
+        {
+            var dateTime = DateTime.UtcNow;
+            dateTimePickerJump!.Value = dateTime.ToLocalTime();
+            map2d.DateTimeUtc = dateTime;
+            SetTitle();
+        }
+
+        private void CbDrawCrossHair_CheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.DrawCrossHair = cbDrawCrossHair!.Checked == true;
+        }
+
+        private void CbSkipCalculatedObjects_CheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.SkipCalculatedObjects = cbSkipCalculatedObjects!.Checked == true;
+        }
+
+        private void CbDrawConstellationNamesCheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.DrawConstellationNames = cbDrawConstellationNames!.Checked == true;
+        }
+
+        private void CbInvertEastWest_CheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.InvertEastWest = cbInvertEastWest!.Checked == true;
+            cwCompass!.InvertEastWestAxis = cbInvertEastWest!.Checked == true;
+        }
+
+        private void CbDrawConstellationsCheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.DrawConstellations = cbDrawConstellations!.Checked == true;
+        }
+
+        private void CbDrawConstellationBorders_CheckedChanged(object? sender, EventArgs e)
+        {
+            map2d.DrawConstellationBoundaries = cbDrawConstellationBorders!.Checked == true;
+        }
+        #endregion
+
+        #region InteralMethodsAndProperties
         private bool TimeUpdate
         {
             get => timeUpdate;
@@ -294,8 +485,6 @@ namespace StarMap2D.EtoForms.Forms
             }
         }
 
-        private Map2D map2d = new();
-
         /// <summary>
         /// Loads the embedded star catalog to be used by the map.
         /// </summary>
@@ -318,18 +507,39 @@ namespace StarMap2D.EtoForms.Forms
             }
         }
 
+        private void SetTitle()
+        {
+            Title = string.Format(UI.SkyMapTitle, map2d.Latitude, map2d.Longitude,
+                map2d.DateTimeUtc.ToLocalTime().ToString(CultureInfo.CurrentCulture),
+                (map2d.SiderealTime / 15).ToString("F4", Globals.FormattingCulture));
+        }
+        #endregion
+
+
+
+
         /// <summary>
         /// Loads the program settings.
         /// </summary>
         private void LoadSettings()
         {
-            map2d.Locale = "fi";
+            map2d.Locale = Globals.Settings.Locale!;
 
-            map2d.Plot2D.Latitude = Globals.Settings.Latitude;
+            map2d.Plot2D!.Latitude = Globals.Settings.Latitude;
             map2d.Plot2D.Longitude = Globals.Settings.Longitude;
 
             solarSystemObjects = SolarSystemObjectGraphics.MergeWithDefaults(Globals.Settings.KnownObjects!,
                 Globals.Settings.Locale!);
+
+            cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
+            cbDrawConstellationBorders!.Checked = Globals.Settings.DrawConstellationBorders;
+            cbDrawConstellationNames!.Checked = Globals.Settings.DrawConstellationLabels;
+            cbDrawConstellations!.Checked = Globals.Settings.DrawConstellationLines;
+
+            cmbJumpLocation!.Text = Globals.Settings.DefaultLocationName;
+
+            nsLatitude!.Value = Globals.Settings.Latitude;
+            nsLongitude!.Value = Globals.Settings.Longitude;
         }
     }
 }

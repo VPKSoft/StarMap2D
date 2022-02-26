@@ -25,9 +25,10 @@ SOFTWARE.
 #endregion
 
 using System.Globalization;
-using StarMap2D.EtoForms.ApplicationSettings;
+using System.Threading;
+using StarMap2D.Localization;
 
-namespace StarMap2D.EtoForms;
+namespace StarMap2D.EtoForms.Controls;
 
 /// <summary>
 /// A class containing the global static parameters.
@@ -35,44 +36,18 @@ namespace StarMap2D.EtoForms;
 public class Globals
 {
     /// <summary>
-    /// Gets or sets the application settings.
+    /// Overrides the current thread's <see cref="Thread.CurrentUICulture"/> property for all
+    /// resource lookups using strongly typed resource classes in this library.
     /// </summary>
-    /// <value>The application settings.</value>
-    public static Settings Settings { get; set; } = new();
-
-    /// <summary>
-    /// Gets or sets the locale for UI localization.
-    /// </summary>
-    /// <value>The UI localization locale.</value>
-    public static CultureInfo Locale
+    public static CultureInfo Culture
     {
-        get
-
+        set
         {
-            try // Can not allow this to crash the program.
-            {
-                return new(string.IsNullOrWhiteSpace(Settings.Locale)
-                    ? CultureInfo.CurrentUICulture.Name.Split('-')[0]
-                    : Settings.Locale.Split('-')[0]);
-            }
-            catch
-            {
-                return CultureInfo.CurrentUICulture;
-            }
+
+            Units.Culture = value;
+            UI.Culture = value;
         }
-    }
 
-    /// <summary>
-    /// Gets or sets the string formatting culture.
-    /// </summary>
-    /// <value>The string formatting culture.</value>
-    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
-
-    /// <summary>
-    /// Saves the application settings.
-    /// </summary>
-    public static void SaveSettings()
-    {
-        Settings.Save(Settings.GetApplicationSettingsFile("VPKSoft", nameof(StarMap2D)));
+        get => Units.Culture;
     }
 }

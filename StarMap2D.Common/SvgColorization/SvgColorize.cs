@@ -158,11 +158,6 @@ public class SvgColorize
                 element.SetAttributeValue("style", value);
             }
 
-            foreach (var a in element.Attributes())
-            {
-                Debug.WriteLine(a);
-            }
-
             value = element.Attribute(fill ? "fill" : "stroke")?.Value;
             if (value != null)
             {

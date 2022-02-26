@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.Globalization;
 using Eto.Forms;
 
 namespace StarMap2D.EtoForms
@@ -39,6 +40,15 @@ namespace StarMap2D.EtoForms
 
             Globals.Settings.CreateApplicationSettingsFolder("VPKSoft", nameof(StarMap2D));
             Globals.Settings.Load(Globals.Settings.GetApplicationSettingsFile("VPKSoft", nameof(StarMap2D)));
+
+            Globals.FormattingCulture = string.IsNullOrWhiteSpace(Globals.Settings.FormattingLocale)
+                ? CultureInfo.CurrentUICulture
+                : new CultureInfo(Globals.Settings.FormattingLocale);
+
+            if (!string.IsNullOrWhiteSpace(Globals.Settings.Locale))
+            {
+                Controls.Globals.Culture = new CultureInfo(Globals.Settings.Locale);
+            }
 
             new Application().Run(new MainForm());
         }

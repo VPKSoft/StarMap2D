@@ -135,6 +135,9 @@
   <data name="DateAndTimeFormattingCulture" xml:space="preserve">
     <value>Date and time formatting culture</value>
   </data>
+  <data name="DrawConstellationBorders" xml:space="preserve">
+    <value>Draw constellation borders</value>
+  </data>
   <data name="DrawConstellationBoundaries" xml:space="preserve">
     <value>Draw constellation boundaries</value>
   </data>
@@ -150,8 +153,20 @@
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Embedded ({0})</value>
   </data>
+  <data name="HourMinusOne" xml:space="preserve">
+    <value>Hour - 1</value>
+  </data>
+  <data name="HourPlusOne" xml:space="preserve">
+    <value>Hour + 1</value>
+  </data>
+  <data name="InvertEastWest" xml:space="preserve">
+    <value>Invert east-west</value>
+  </data>
   <data name="InvertEastWestAxis" xml:space="preserve">
     <value>Invert east-west axis of the map</value>
+  </data>
+  <data name="JumpToLcation" xml:space="preserve">
+    <value>Jump to location</value>
   </data>
   <data name="Latitude" xml:space="preserve">
     <value>Latitude</value>
@@ -171,6 +186,12 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SkipCalculatedObjects" xml:space="preserve">
+    <value>Skip calculated objects</value>
+  </data>
+  <data name="SkyMapTitle" xml:space="preserve">
+    <value>SkyMap2D - Sky map [Latitude: {0:F5}, Longitude: {1:F5}], [Time: {2}], [Sidereal time: {3}]</value>
+  </data>
   <data name="SpecifyDateTimeTitle" xml:space="preserve">
     <value>Specify date and time</value>
   </data>
@@ -185,6 +206,9 @@
   </data>
   <data name="StarMap2D" xml:space="preserve">
     <value>StarMap2D</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
   </data>
   <data name="UiLanguageRequireRestart" xml:space="preserve">
     <value>Language (localization, a restart is required)</value>

@@ -8,6 +8,7 @@ using Eto.Forms;
 using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
+using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Common.EventsAndDelegates;
@@ -18,8 +19,16 @@ using VPKSoft.StarCatalogs;
 
 namespace StarMap2D.EtoForms.Controls
 {
+    /// <summary>
+    /// A <see cref="Control"/> to display a 2D sky map.
+    /// Implements the <see cref="Eto.Forms.Drawable" />
+    /// </summary>
+    /// <seealso cref="Eto.Forms.Drawable" />
     public class Map2D : Drawable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Map2D"/> class.
+        /// </summary>
         public Map2D()
         {
             Paint += Map2D_Paint;
@@ -37,7 +46,7 @@ namespace StarMap2D.EtoForms.Controls
 
         private void Map2D_SizeChanged(object? sender, EventArgs e)
         {
-            plot2D.Diameter = Diameter;
+            plot2D!.Diameter = Diameter;
             Invalidate();
         }
 
@@ -83,6 +92,43 @@ namespace StarMap2D.EtoForms.Controls
         #endregion
 
         #region PublicProperties        
+        /// <summary>
+        /// Gets the sidereal time.
+        /// </summary>
+        /// <value>The sidereal time.</value>
+        public double SiderealTime => DateTimeUtc.ToLocalSiderealTime(Longitude);
+
+        /// <inheritdoc cref="Plot2D.Latitude"/>
+        public double Latitude
+        {
+            get => plot2D?.Latitude ?? 0;
+
+            set
+            {
+                if (plot2D != null)
+                {
+                    plot2D.Latitude = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        /// <inheritdoc cref="Plot2D.Longitude"/>
+        public double Longitude
+        {
+            get => plot2D?.Longitude ?? 0;
+
+            set
+            {
+                if (plot2D != null)
+                {
+                    plot2D.Longitude = value;
+                    Invalidate();
+                }
+            }
+        }
+
+
         /// <summary>
         /// Gets or sets the nap date and time in UTC.
         /// </summary>
@@ -186,7 +232,7 @@ namespace StarMap2D.EtoForms.Controls
         /// <summary>
         /// Gets or sets the background color for the control.
         /// </summary>
-        /// <value>A <see cref="Color"/> that represents the background color of the control.
+        /// <value>A <see cref="Color"/> that represents the background color of the control</value>.
         public Color BackColor
         {
             get => backColor;
@@ -481,7 +527,6 @@ namespace StarMap2D.EtoForms.Controls
         #endregion
 
         #region PrivateProperties
-
         private RectangleF DrawArea
         {
             get
@@ -673,7 +718,7 @@ namespace StarMap2D.EtoForms.Controls
                 return;
             }
 
-            using var pen = new Pen(constellationLineColor);
+            using var pen = new Pen(constellationBorderLineColor);
 
             for (var i = 0; i < constellation.Boundary.Count - 1; i++)
             {

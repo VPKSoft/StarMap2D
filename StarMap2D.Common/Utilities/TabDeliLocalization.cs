@@ -80,7 +80,14 @@ public class TabDeliLocalization
         {
             value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
         }
-        else if (value is { Message: null }) // fall back to a generic culture..
+
+        if (value is null or { Message: null } && locale.Split('-').Length == 1)
+        {
+            value = LocalizationTexts.FirstOrDefault(f =>
+                f.CultureName != null && f.CultureName.StartsWith(locale) && f.MessageName == messageName);
+        }
+
+        if (value is null or { Message: null }) // fall back to a generic culture..
         {
             value = LocalizationTexts.FirstOrDefault(f =>
                 f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
