@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPKSoft.StarCatalogs", "VPK
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Tests", "StarMap2D.Tests\StarMap2D.Tests.csproj", "{90F165CE-F082-4FD5-AD1A-4A995759549F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto", "StarMap2D.Eto\StarMap2D.Eto.csproj", "{56EF54CE-0268-4825-B097-0A9EB55570E7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Eto.Controls", "StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.csproj", "{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Common", "StarMap2D.Common\StarMap2D.Common.csproj", "{0EA35A10-5776-47D7-BAEB-F273076E17D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPKSoft.ApplicationSettingsJson", "VPKSoft.ApplicationSettingsJson\VPKSoft.ApplicationSettingsJson.csproj", "{C387DF62-A7AB-49CC-B481-00A0A1C9B905}"
@@ -23,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet-desktop.yml = .github\workflows\dotnet-desktop.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.EtoForms", "StarMap2D.EtoForms\StarMap2D.EtoForms.csproj", "{00C25A5C-A98A-4B7B-8F50-049A9BAD78BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.EtoForms.Controls", "StarMap2D.EtoForms.Controls\StarMap2D.EtoForms.Controls.csproj", "{1B4495B1-E956-415F-8F2E-06910DECD763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,14 +42,6 @@ Global
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F165CE-F082-4FD5-AD1A-4A995759549F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56EF54CE-0268-4825-B097-0A9EB55570E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D5A90BE-7BB2-4476-A184-AE7563D8AEFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA35A10-5776-47D7-BAEB-F273076E17D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,6 +54,14 @@ Global
 		{51F2C2CB-B687-4F15-A5B0-7C2EF041041C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51F2C2CB-B687-4F15-A5B0-7C2EF041041C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51F2C2CB-B687-4F15-A5B0-7C2EF041041C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C25A5C-A98A-4B7B-8F50-049A9BAD78BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C25A5C-A98A-4B7B-8F50-049A9BAD78BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C25A5C-A98A-4B7B-8F50-049A9BAD78BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C25A5C-A98A-4B7B-8F50-049A9BAD78BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4495B1-E956-415F-8F2E-06910DECD763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4495B1-E956-415F-8F2E-06910DECD763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4495B1-E956-415F-8F2E-06910DECD763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4495B1-E956-415F-8F2E-06910DECD763}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

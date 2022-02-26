@@ -232,6 +232,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Speed per time unit.
+        /// </summary>
+        public static string SpeedPerTimeUnit {
+            get {
+                return ResourceManager.GetString("SpeedPerTimeUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Star catalog to use.
         /// </summary>
         public static string StarCatalogSelection {

@@ -117,76 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Days" xml:space="preserve">
+    <value>days</value>
   </data>
-  <data name="Common" xml:space="preserve">
-    <value>Common</value>
+  <data name="Hours" xml:space="preserve">
+    <value>hours</value>
   </data>
-  <data name="CrossHairSize" xml:space="preserve">
-    <value>Cross hair size</value>
+  <data name="MilliSeconds" xml:space="preserve">
+    <value>milliseconds</value>
   </data>
-  <data name="DataFormattingCulture" xml:space="preserve">
-    <value>Data formatting culture (i.e. numbers, etc)</value>
+  <data name="Minutes" xml:space="preserve">
+    <value>minuters</value>
   </data>
-  <data name="DateAndNumberFormattingSettings" xml:space="preserve">
-    <value>Date and number formatting</value>
+  <data name="Months" xml:space="preserve">
+    <value>months</value>
   </data>
-  <data name="DateAndTimeFormattingCulture" xml:space="preserve">
-    <value>Date and time formatting culture</value>
+  <data name="Seconds" xml:space="preserve">
+    <value>seconds</value>
   </data>
-  <data name="DrawConstellationBoundaries" xml:space="preserve">
-    <value>Draw constellation boundaries</value>
+  <data name="Weeks" xml:space="preserve">
+    <value>weeks</value>
   </data>
-  <data name="DrawConstellationNames" xml:space="preserve">
-    <value>Draw constellation labels</value>
-  </data>
-  <data name="DrawConstellations" xml:space="preserve">
-    <value>Draw constellations</value>
-  </data>
-  <data name="DrawCrossHair" xml:space="preserve">
-    <value>Draw cross hair</value>
-  </data>
-  <data name="EmbeddedParameter" xml:space="preserve">
-    <value>Embedded ({0})</value>
-  </data>
-  <data name="InvertEastWestAxis" xml:space="preserve">
-    <value>Invert east-west axis of the map</value>
-  </data>
-  <data name="Latitude" xml:space="preserve">
-    <value>Latitude</value>
-  </data>
-  <data name="LocationName" xml:space="preserve">
-    <value>Location name</value>
-  </data>
-  <data name="Longitude" xml:space="preserve">
-    <value>Longitude</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="SelectLocation" xml:space="preserve">
-    <value>Select location</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="SpecifyDateTimeTitle" xml:space="preserve">
-    <value>Specify date and time</value>
-  </data>
-  <data name="SpeedPerTimeUnit" xml:space="preserve">
-    <value>Speed per time unit</value>
-  </data>
-  <data name="StarCatalogSelection" xml:space="preserve">
-    <value>Star catalog to use</value>
-  </data>
-  <data name="StarMap" xml:space="preserve">
-    <value>Star map</value>
-  </data>
-  <data name="StarMap2D" xml:space="preserve">
-    <value>StarMap2D</value>
-  </data>
-  <data name="UiLanguageRequireRestart" xml:space="preserve">
-    <value>Language (localization, a restart is required)</value>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
   </data>
 </root>

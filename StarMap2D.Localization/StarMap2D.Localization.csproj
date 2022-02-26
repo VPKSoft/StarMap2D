@@ -13,6 +13,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UI.resx</DependentUpon>
     </Compile>
+    <Compile Update="Units.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Units.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +27,10 @@
     <EmbeddedResource Update="UI.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Units.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Units.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
