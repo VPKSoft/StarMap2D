@@ -88,7 +88,7 @@ public abstract class ApplicationJsonSettings
     {
         var path = GetApplicationSettingsFolder(company, applicationName);
 
-        if (Directory.Exists(path))
+        if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
         }
