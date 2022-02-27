@@ -61,6 +61,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Above horizon.
+        /// </summary>
+        public static string AboveHorizon {
+            get {
+                return ResourceManager.GetString("AboveHorizon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -75,6 +84,15 @@ namespace StarMap2D.Localization {
         public static string Common {
             get {
                 return ResourceManager.GetString("Common", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coordinates.
+        /// </summary>
+        public static string Coordinates {
+            get {
+                return ResourceManager.GetString("Coordinates", resourceCulture);
             }
         }
         
@@ -111,6 +129,15 @@ namespace StarMap2D.Localization {
         public static string DateAndTimeFormattingCulture {
             get {
                 return ResourceManager.GetString("DateAndTimeFormattingCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Declination.
+        /// </summary>
+        public static string Declination {
+            get {
+                return ResourceManager.GetString("Declination", resourceCulture);
             }
         }
         
@@ -165,6 +192,15 @@ namespace StarMap2D.Localization {
         public static string EmbeddedParameter {
             get {
                 return ResourceManager.GetString("EmbeddedParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horizontal coordinates in degrees.
+        /// </summary>
+        public static string HorizontalCoordinatesInDegrees {
+            get {
+                return ResourceManager.GetString("HorizontalCoordinatesInDegrees", resourceCulture);
             }
         }
         
@@ -241,11 +277,38 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        public static string NAChar {
+            get {
+                return ResourceManager.GetString("NAChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object name.
+        /// </summary>
+        public static string ObjectName {
+            get {
+                return ResourceManager.GetString("ObjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right ascension.
+        /// </summary>
+        public static string RightAscension {
+            get {
+                return ResourceManager.GetString("RightAscension", resourceCulture);
             }
         }
         

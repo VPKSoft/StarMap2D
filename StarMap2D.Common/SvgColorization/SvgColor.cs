@@ -40,6 +40,13 @@ public readonly struct SvgColor
     public SvgColor(string color)
     {
         color = color.TrimStart('#').Trim();
+
+        // Remove the alpha channel information.
+        if (color.Length == 8)
+        {
+            color = color[2..];
+        }
+
         R = byte.Parse(color[..2], NumberStyles.HexNumber);
         G = byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
         B = byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
@@ -56,6 +63,15 @@ public readonly struct SvgColor
         R = (byte)r;
         G = (byte)g;
         B = (byte)b;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SvgColor"/> struct.
+    /// </summary>
+    /// <param name="value">The object value which string representation is used to create a new <see cref="SvgColor"/> struct.</param>
+    public SvgColor(object value) : this(value.ToString() ?? "#000000")
+    {
+
     }
 
     /// <summary>

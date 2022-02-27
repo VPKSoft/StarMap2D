@@ -26,9 +26,11 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.Localization;
 
@@ -100,9 +102,89 @@ public class CompassView : Drawable
 
         set
         {
-            if (Math.Abs(textAreaSize - value) > 0.00001)
+            if (Math.Abs(textAreaSize - value) > Globals.FloatingPointTolerance)
             {
                 textAreaSize = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private Color compassColor = Colors.Black;
+
+    /// <summary>
+    /// Gets or sets the color of the compass.image.
+    /// </summary>
+    /// <value>The color of the compass image.</value>
+    public Color CompassColor
+    {
+        get => compassColor;
+
+        set
+        {
+            if (value != compassColor)
+            {
+                compassColor = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private Color compassMainPointsColor = Colors.Black;
+
+    /// <summary>
+    /// Gets or sets the color of the compass main points.
+    /// </summary>
+    /// <value>The color of the compass main points.</value>
+    public Color CompassMainPointsColor
+    {
+        get => compassMainPointsColor;
+
+        set
+        {
+            if (value != compassMainPointsColor)
+            {
+                compassMainPointsColor = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private Color compassMiddlePointsColor = Colors.Black;
+
+    /// <summary>
+    /// Gets or sets the color of the compass middle points.
+    /// </summary>
+    /// <value>The color of the compass middle points.</value>
+    public Color CompassMiddlePointsColor
+    {
+        get => compassMiddlePointsColor;
+
+        set
+        {
+            if (compassMiddlePointsColor != value)
+            {
+                compassMiddlePointsColor = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private byte[] compassSvgImageData = EtoForms.Controls.Properties.Resources.compass;
+
+    /// <summary>
+    /// Gets or sets the compass SVG image data.
+    /// </summary>
+    /// <value>The compass SVG image data.</value>
+    public byte[] CompassSvgImageData
+    {
+        get => compassSvgImageData;
+
+        set
+        {
+            if (!value.SequenceEqual(compassSvgImageData))
+            {
+                compassSvgImageData = value;
                 Invalidate();
             }
         }
@@ -116,12 +198,18 @@ public class CompassView : Drawable
         wh -= textAreaSize / 2f;
 
         var size = new Size(whCompass, whCompass);
-        var image = SvgToImage.ImageFromSvg(EtoForms.Controls.Properties.Resources.compass, size);
+
+        var svgBytes = SvgColorize.FromBytes(compassSvgImageData)
+            .ColorizeElementsStroke(SvgElement.All, new SvgColor(compassColor))
+            .ToBytes();
+
+        var image = SvgToImage.ImageFromSvg(svgBytes, size);
 
         var x = (e.ClipRectangle.Width - whCompass) / 2;
         var y = (e.ClipRectangle.Height - whCompass) / 2;
 
-        using var brush = new SolidBrush(Colors.Black);
+        using var brushPointsMain = new SolidBrush(compassMainPointsColor);
+        using var brushPointsMiddle = new SolidBrush(compassMiddlePointsColor);
 
         e.Graphics.DrawImage(image, x, y);
 
@@ -131,6 +219,8 @@ public class CompassView : Drawable
                 e.ClipRectangle.MiddleX, e.ClipRectangle.MiddleY);
 
             var textSize = e.Graphics.MeasureString(Font, compassDirectionValue.Value);
+
+            var brush = compassDirectionValue.Key % 90 == 0 ? brushPointsMain : brushPointsMiddle;
 
             e.Graphics.DrawText(Font, brush, (float)compassPoint.x - textSize.Width / 2,
                 (float)compassPoint.y - textSize.Height / 2, compassDirectionValue.Value);

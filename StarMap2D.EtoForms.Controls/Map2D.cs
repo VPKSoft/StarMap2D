@@ -41,7 +41,14 @@ namespace StarMap2D.EtoForms.Controls
 
             constellationNames.GetLocalizedTexts(Common.Properties.Resources.Constellations);
 
+            LostFocus += Map2D_LostFocus;
             SizeChanged += Map2D_SizeChanged;
+            MouseMove += Map2D_MouseMove;
+            MouseDown += Map2D_MouseDown;
+            MouseLeave += Map2D_MouseLeave;
+            MouseUp += Map2D_MouseUp;
+            MouseDoubleClick += Map2D_MouseDoubleClick;
+            MouseWheel += Map2D_MouseWheel;
         }
 
         private void Map2D_SizeChanged(object? sender, EventArgs e)
@@ -86,19 +93,44 @@ namespace StarMap2D.EtoForms.Controls
         #endregion
 
         #region PrivateFields
-        TabDeliLocalization constellationNames = new();
+
+        readonly TabDeliLocalization constellationNames = new();
         private readonly List<MapObjectMetadata> objectMetadata = new();
         private readonly List<IConstellation<ConstellationArea, ConstellationLine>> constellations = new();
         #endregion
 
-        #region PublicProperties        
+        #region PublicProperties
+        private double zoom = 1;
+
+        /// <summary>
+        /// Gets or sets the zoom value of the sky map area.
+        /// </summary>
+        /// <value>The zoom.</value>
+        public double Zoom
+        {
+            get => zoom;
+
+            set
+            {
+                if (Math.Abs(zoom - value) > Globals.FloatingPointTolerance)
+                {
+                    zoom = value;
+                    if (plot2D != null)
+                    {
+                        plot2D.Zoom = value;
+                    }
+                    Invalidate();
+                }
+            }
+        }
+
         /// <summary>
         /// Gets the sidereal time.
         /// </summary>
         /// <value>The sidereal time.</value>
         public double SiderealTime => DateTimeUtc.ToLocalSiderealTime(Longitude);
 
-        /// <inheritdoc cref="Plot2D.Latitude"/>
+        /// <inheritdoc cref="StarMap2D.Calculations.Plotting.Plot2D.Latitude"/>
         public double Latitude
         {
             get => plot2D?.Latitude ?? 0;
@@ -113,7 +145,7 @@ namespace StarMap2D.EtoForms.Controls
             }
         }
 
-        /// <inheritdoc cref="Plot2D.Longitude"/>
+        /// <inheritdoc cref="StarMap2D.Calculations.Plotting.Plot2D.Longitude"/>
         public double Longitude
         {
             get => plot2D?.Longitude ?? 0;
@@ -127,7 +159,6 @@ namespace StarMap2D.EtoForms.Controls
                 }
             }
         }
-
 
         /// <summary>
         /// Gets or sets the nap date and time in UTC.
@@ -527,25 +558,6 @@ namespace StarMap2D.EtoForms.Controls
         #endregion
 
         #region PrivateProperties
-        private RectangleF DrawArea
-        {
-            get
-            {
-                RectangleF drawArea;
-
-                if (Width > Height)
-                {
-                    drawArea = new RectangleF((Width - Height) / 2f, 0, Height - 1, Height - 1);
-                }
-                else
-                {
-                    drawArea = new RectangleF(0, (Height - Width) / 2f, Width - 1, Width - 1);
-                }
-
-                return drawArea;
-            }
-        }
-
         private float OffsetX => Width > Height ? (Width - Height) / 2f : 0;
 
         private float OffsetY => Height > Width ? (Height - Width) / 2f : 0;
@@ -556,9 +568,9 @@ namespace StarMap2D.EtoForms.Controls
 
         private double Diameter => Math.Min(Width, Height);
 
-        private int[] starSizes = Array.Empty<int>();
+        private readonly int[] starSizes = Array.Empty<int>();
 
-        private Color[] starColors = Array.Empty<Color>();
+        private readonly Color[] starColors = Array.Empty<Color>();
 
         #endregion
 
@@ -603,7 +615,6 @@ namespace StarMap2D.EtoForms.Controls
 
         private void Map2D_Paint(object? sender, PaintEventArgs e)
         {
-            var topLeft = GetTopLeftPoint(e.ClipRectangle);
             var mapRect = GetCenterSquare(e.ClipRectangle);
 
             using var backgroundBrush = new SolidBrush(backColor);
@@ -869,6 +880,194 @@ namespace StarMap2D.EtoForms.Controls
                 (int)centerPoint.Y - image.Height / 2f + OffsetY);
         }
 
+        #endregion
+
+
+        #region MouseInteraction
+        // Mouse interaction events. TODO::Document this!
+        private bool mouseDown;
+        private PointF mousePoint;
+        private PointF previousMousePoint;
+        private MapObjectMetadata? metadata;
+
+        private void Map2D_MouseWheel(object? sender, MouseEventArgs e)
+        {
+            if (e.Modifiers.HasFlag(Keys.Control))
+            {
+                if (e.Delta.Height < 0)
+                {
+                    if (Zoom - 0.1 >= 1)
+                    {
+                        Zoom -= 0.1;
+                    }
+                }
+                else if (e.Delta.Height > 0)
+                {
+                    Zoom += 0.1;
+                }
+            }
+        }
+
+        private void Map2D_MouseDown(object? sender, MouseEventArgs e)
+        {
+            if (e.Buttons == MouseButtons.Alternate)
+            {
+                mouseDown = true;
+                Cursor = Cursors.Move;
+                mousePoint = e.Location;
+            }
+
+            if (e.Buttons == MouseButtons.Primary)
+            {
+                RiseMouseClickObject();
+            }
+        }
+
+        private void RiseMouseClickObject()
+        {
+            if (metadata != null)
+            {
+                MouseClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            }
+        }
+
+        private void RiseMouseDoubleClickObject()
+        {
+            if (metadata != null)
+            {
+                MouseDoubleClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            }
+        }
+
+        private void Map2D_MouseDoubleClick(object? sender, MouseEventArgs e)
+        {
+            RiseMouseDoubleClickObject();
+        }
+
+        private void Map2D_MouseLeave(object? sender, MouseEventArgs e)
+        {
+            ReleaseMouse();
+        }
+
+        private void Map2D_LostFocus(object? sender, EventArgs e)
+        {
+            ReleaseMouse();
+        }
+
+        private void ReleaseMouse()
+        {
+            Cursor = Cursors.Default;
+            mouseDown = false;
+        }
+
+        private void Map2D_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (mouseDown && e.Buttons.HasFlag(MouseButtons.Alternate))
+            {
+                var newPoint = e.Location;
+                var xChange = (mousePoint.X - newPoint.X) / 10;
+                var yChange = (mousePoint.Y - newPoint.Y) / 10;
+
+                if (Plot2D != null)
+                {
+                    if (!Plot2D.Zoomed && !Plot2D.CanPanBy(xChange, yChange))
+                    {
+                        var latitude = Plot2D.Latitude - yChange;
+                        var longitude = Plot2D.Longitude - xChange;
+                        if (latitude > 90)
+                        {
+                            latitude = 90;
+                        }
+
+                        if (latitude < -90)
+                        {
+                            latitude = -90;
+                        }
+
+                        if (longitude > 180)
+                        {
+                            longitude = -180;
+                        }
+
+                        if (longitude < -180)
+                        {
+                            longitude = 180;
+                        }
+
+                        if (Math.Abs(latitude - Plot2D.Latitude) > Globals.FloatingPointTolerance ||
+                            Math.Abs(longitude - Plot2D.Longitude) > Globals.FloatingPointTolerance)
+                        {
+                            Plot2D.Latitude = latitude;
+                            Plot2D.Longitude = longitude;
+
+                            mousePoint = newPoint;
+                            Invalidate();
+                            CoordinatesChanged?.Invoke(this,
+                                new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude });
+                        }
+                    }
+                    else if (Plot2D.CanPanBy(-xChange, -yChange))
+                    {
+                        Plot2D.ZoomPanPointX += xChange;
+                        Plot2D.ZoomPanPointY += yChange;
+                        Invalidate();
+                        mousePoint = newPoint;
+                    }
+                }
+            }
+            else
+            {
+                if (previousMousePoint != e.Location)
+                {
+                    var drawPoint = new PointF(e.Location.X - OffsetX, e.Location.Y - OffsetY);
+
+                    if (Circle.PointIsInside(CenterX, CenterY, Diameter / 2, OffsetX + e.Location.X,
+                            OffsetY + e.Location.Y))
+                    {
+                        var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y },
+                            invertEastWest);
+
+                        if (point != null && plot2D != null)
+                        {
+                            var pointRaDec = Coordinates.AltitudeAzimuthToRightAscensionDeclination(point.Y, point.X,
+                                Latitude, Longitude, plot2D.DateTimeUtc);
+                            MouseCoordinatesChanged?.Invoke(this,
+                                new CoordinatesChangedEventArgs
+                                {
+                                    Altitude = point.Y,
+                                    Azimuth = point.X,
+                                    RightAscension = pointRaDec.X,
+                                    Declination = pointRaDec.Y,
+                                    X = e.Location.X,
+                                    Y = e.Location.Y,
+                                });
+                        }
+                    }
+                    previousMousePoint = e.Location;
+                }
+
+                var newMetadata = objectMetadata.FirstOrDefault(f => Circle.PointIsInside(f.X, f.Y, f.Radius, e.Location.X, e.Location.Y));
+                if (newMetadata != null)
+                {
+                    MouseHoverObject?.Invoke(this,
+                        new NamedObjectEventArgs { Identifier = newMetadata.Identifier, Name = newMetadata.Name });
+                }
+                else if (newMetadata == null && metadata != null)
+                {
+                    MouseLeaveObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+                }
+
+                metadata = newMetadata;
+            }
+        }
+
+        private void Map2D_MouseUp(object? sender, MouseEventArgs e)
+        {
+            if (e.Buttons.HasFlag(MouseButtons.Alternate))
+            {
+                ReleaseMouse();
+            }
+        }
         #endregion
     }
 }

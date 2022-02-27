@@ -170,8 +170,6 @@ public class EtoHelpers
             new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = labelText }))),
             new TableRow(new TableLayout(result, new TableRow(new TableCell(new Panel(), true)))))
         { Padding = new Padding(padding) });
-
-
     }
 
     /// <summary>

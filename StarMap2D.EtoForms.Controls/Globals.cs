@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using System.Globalization;
 using System.Threading;
 using StarMap2D.Localization;
@@ -50,4 +51,10 @@ public class Globals
 
         get => Units.Culture;
     }
+
+    /// <summary>
+    /// Gets or sets the floating point comparison tolerance.
+    /// </summary>
+    /// <value>The floating point comparison tolerance.</value>
+    public static double FloatingPointTolerance { get; set; } = 0.000000001;
 }
