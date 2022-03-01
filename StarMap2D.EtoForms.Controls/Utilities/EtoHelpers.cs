@@ -166,9 +166,11 @@ public class EtoHelpers
             }
         }
 
+        result.Cells.Add(new TableCell(new Panel()) {ScaleWidth = true});
+        
         return new TableRow(new TableLayout(
             new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = labelText }))),
-            new TableRow(new TableLayout(result, new TableRow(new TableCell(new Panel(), true)))))
+            new TableRow(new TableLayout(result)))
         { Padding = new Padding(padding) });
     }
 

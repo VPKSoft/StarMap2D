@@ -132,7 +132,7 @@ namespace StarMap2D.EtoForms.Controls
             PaintUncheckedImage();
         }
 
-        private int SizeWidthHeight => Math.Min(Width, Height) - ImagePadding < 16 ? 16 : Math.Min(Width, Height) - ImagePadding;
+        private int SizeWidthHeight => Math.Min(Width, Height) - ImagePadding < 16 || Platform.IsGtk ? 16 : Math.Min(Width, Height) - ImagePadding;
         #endregion
 
         private SvgColorize? uncheckedSvgImage;
