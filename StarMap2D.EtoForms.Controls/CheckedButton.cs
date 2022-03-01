@@ -132,6 +132,7 @@ namespace StarMap2D.EtoForms.Controls
             PaintUncheckedImage();
         }
 
+        // Weird button size increasing occurs on GTK if the button image size resizes along with the button size, Thus: Platform.IsGtk --> 16px.
         private int SizeWidthHeight => Math.Min(Width, Height) - ImagePadding < 16 || Platform.IsGtk ? 16 : Math.Min(Width, Height) - ImagePadding;
         #endregion
 

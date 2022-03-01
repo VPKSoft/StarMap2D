@@ -45,6 +45,11 @@ public class SvgToImage
     // (C): Original code: https://gist.github.com/punker76/67bd048ff403c1c73737905183f819a9
     public static Image ImageFromSvg(byte[] svgBytes, Size desiredSize)
     {
+        if (desiredSize.Width < 1 || desiredSize.Height < 1)
+        {
+            desiredSize = new Size(1, 1);
+        }
+
         using var memoryStream = new MemoryStream(svgBytes);
         using var svg = new SKSvg();
         svg.Load(memoryStream);
