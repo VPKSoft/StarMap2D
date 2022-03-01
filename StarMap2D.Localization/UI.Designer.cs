@@ -70,6 +70,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Azimuth.
+        /// </summary>
+        public static string Azimuth {
+            get {
+                return ResourceManager.GetString("Azimuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -84,6 +93,15 @@ namespace StarMap2D.Localization {
         public static string Common {
             get {
                 return ResourceManager.GetString("Common", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compass direction.
+        /// </summary>
+        public static string CompassDirection {
+            get {
+                return ResourceManager.GetString("CompassDirection", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace StarMap2D.Localization {
         public static string EmbeddedParameter {
             get {
                 return ResourceManager.GetString("EmbeddedParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string Height {
+            get {
+                return ResourceManager.GetString("Height", resourceCulture);
             }
         }
         

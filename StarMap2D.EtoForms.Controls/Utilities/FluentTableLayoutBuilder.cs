@@ -45,6 +45,8 @@ namespace StarMap2D.EtoForms.Controls.Utilities
 
         public TableLayout? RootTableLayout { get; set; }
 
+        public int? Spacing { get; set; }
+
         public static FluentTableLayoutBuilder New()
         {
             var result = new FluentTableLayoutBuilder();
@@ -52,6 +54,44 @@ namespace StarMap2D.EtoForms.Controls.Utilities
             result.RootTableLayout = new TableLayout();
 
             return result;
+        }
+
+        public FluentTableLayoutBuilder WithSpacing(int spacing)
+        {
+            Spacing = spacing;
+
+            return this;
+        }
+
+        public FluentTableLayoutBuilder WithRootRow(params Control[] controls)
+        {
+            return WithRootRow(Spacing!.Value, controls);
+        }
+
+        public FluentTableLayoutBuilder WithRootRow(int spacing, params Control[] controls)
+        {
+            var tableRow = new TableRow();
+
+            for (int i = 0; i < controls.Length; i++)
+            {
+                if (i + 1 < controls.Length)
+                {
+                    tableRow.Cells.Add(new TableCell(controls[i]));
+                    tableRow.Cells.Add(new Panel { Width = spacing });
+                }
+                else
+                {
+                    tableRow.Cells.Add(new TableCell(controls[i]));
+                }
+            }
+
+            RootTableLayout!.Rows.Add(tableRow);
+            return this;
+        }
+
+        public FluentTableLayoutBuilder WithRow(params Control[] controls)
+        {
+            return WithRow(Spacing!.Value, controls);
         }
 
         public FluentTableLayoutBuilder WithRow(int spacing, params Control[] controls)

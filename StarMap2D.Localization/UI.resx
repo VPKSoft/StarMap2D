@@ -120,11 +120,17 @@
   <data name="AboveHorizon" xml:space="preserve">
     <value>Above horizon</value>
   </data>
+  <data name="Azimuth" xml:space="preserve">
+    <value>Azimuth</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Common" xml:space="preserve">
     <value>Common</value>
+  </data>
+  <data name="CompassDirection" xml:space="preserve">
+    <value>Compass direction</value>
   </data>
   <data name="Coordinates" xml:space="preserve">
     <value>Coordinates</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Embedded ({0})</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
   </data>
   <data name="HorizontalCoordinatesInDegrees" xml:space="preserve">
     <value>Horizontal coordinates in degrees</value>

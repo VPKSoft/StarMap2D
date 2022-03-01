@@ -120,11 +120,17 @@
   <data name="AboveHorizon" xml:space="preserve">
     <value>Horisontin yläpuolella</value>
   </data>
+  <data name="Azimuth" xml:space="preserve">
+    <value>Atsimuutti</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Peruuta</value>
   </data>
   <data name="Common" xml:space="preserve">
     <value>Yleistä</value>
+  </data>
+  <data name="CompassDirection" xml:space="preserve">
+    <value>Kompassin suunta</value>
   </data>
   <data name="Coordinates" xml:space="preserve">
     <value>Koordinaatit</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Sisällytetty ({0})</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Korkeus</value>
   </data>
   <data name="HorizontalCoordinatesInDegrees" xml:space="preserve">
     <value>Horisontaalikoordinaatit asteissa</value>

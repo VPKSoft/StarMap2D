@@ -32,6 +32,7 @@ using System.Linq;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Compass;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.DateAndTime;
@@ -76,6 +77,17 @@ namespace StarMap2D.EtoForms.Forms
             map2d.CoordinatesChanged += Map2d_CoordinatesChanged;
             map2d.MouseHoverObject += Map2d_MouseHoverObject;
             map2d.MouseLeaveObject += Map2d_MouseLeaveObject;
+            map2d.MouseCoordinatesChanged += Map2d_MouseCoordinatesChanged;
+        }
+
+        private void Map2d_MouseCoordinatesChanged(object? sender, Common.EventsAndDelegates.CoordinatesChangedEventArgs e)
+        {
+            string format = "+000.000000;-000.000000"; // F6
+            lbMouseCoordinateAzimuthValue!.Text = e.Azimuth.ToString(format, Globals.FormattingCulture);
+            lbMouseCoordinateHeightValue!.Text = e.Altitude.ToString(format, Globals.FormattingCulture);
+            lbMouseCoordinateRightAscensionValue!.Text = e.RightAscension.ToString(format, Globals.FormattingCulture);
+            lbMouseCoordinateDeclinationValue!.Text = e.Declination.ToString(format, Globals.FormattingCulture);
+            lbCompassDirectionValue!.Text = CompassDirection.FromDegrees(e.Azimuth).ValueString;
         }
 
         private void Map2d_MouseHoverObject(object sender, Common.EventsAndDelegates.NamedObjectEventArgs e)
@@ -112,6 +124,7 @@ namespace StarMap2D.EtoForms.Forms
         private TableLayout? mapControlLayout;
         private TableLayout? objectInfoTableNameRaDec;
         private TableLayout? objectInfoTableHorizontalCoordinates;
+        private TableLayout? mousePositionLayout;
         private DateTimePicker? dateTimePickerJump;
         private NumericStepper? nsSpeedPerTimeAmount;
         private ComboBox? cmbTimeUnit;
@@ -134,6 +147,11 @@ namespace StarMap2D.EtoForms.Forms
         private Label? lbHorizontalXValue;
         private Label? lbHorizontalYValue;
         private CheckBox? cbAboveHorizonValue;
+        private Label? lbMouseCoordinateHeightValue;
+        private Label? lbMouseCoordinateAzimuthValue;
+        private Label? lbMouseCoordinateRightAscensionValue;
+        private Label? lbMouseCoordinateDeclinationValue;
+        private Label? lbCompassDirectionValue;
 
         private readonly List<EnumStringItem<TimeInterval>> timeDataSource = new(new[]
         {
@@ -305,6 +323,24 @@ namespace StarMap2D.EtoForms.Forms
             mapControlLayout.Rows.Add(objectInfoTableHorizontalCoordinates);
             mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbAboveHorizonValue));
             mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(new Label { Text = UI.Coordinates }));
+
+            lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            lbMouseCoordinateRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            lbMouseCoordinateDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+
+            mousePositionLayout = FluentTableLayoutBuilder.New()
+                .WithSpacing(Globals.DefaultPadding)
+                .WithRootRow(new Label { Text = UI.Height }, lbMouseCoordinateHeightValue)
+                .WithRootRow(new Label { Text = UI.Azimuth }, lbMouseCoordinateAzimuthValue)
+                .WithRootRow(new Label { Text = UI.RightAscension }, lbMouseCoordinateRightAscensionValue)
+                .WithRootRow(new Label { Text = UI.Declination }, lbMouseCoordinateDeclinationValue)
+                .GetTable();
+
+            mapControlLayout.Rows.Add(mousePositionLayout);
+
+            lbCompassDirectionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            mapControlLayout.Rows.Add(EtoHelpers.LabelWrap(UI.CompassDirection, EtoHelpers.PaddingWrap(lbCompassDirectionValue), Globals.DefaultPadding));
 
             cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;
             nsLatitude.ValueChanged += NsLatitude_ValueChanged;
