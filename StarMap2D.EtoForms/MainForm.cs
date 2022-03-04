@@ -24,9 +24,11 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.EtoForms.Forms;
+using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms
@@ -65,6 +67,8 @@ namespace StarMap2D.EtoForms
             var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
             settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
+            var testStuff = new Command { MenuText = "Test something", };
+            testStuff.Executed += delegate { new FormDialogCelestialObject().ShowModal(); };
 
             var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
@@ -79,6 +83,7 @@ namespace StarMap2D.EtoForms
                 {
 					// File submenu
 					new SubMenuItem { Text = "&File", Items = { starMapCommand } },
+                    new SubMenuItem { Text = "Test stuff", Items = { testStuff }},
 					// new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
 					// new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
 				},

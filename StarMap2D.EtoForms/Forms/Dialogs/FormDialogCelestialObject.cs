@@ -1,0 +1,522 @@
+﻿#region License
+/*
+MIT License
+
+Copyright(c) 2022 Petteri Kautonen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using Eto.Drawing;
+using Eto.Forms;
+using StarMap2D.Calculations.Enumerations;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Calculations.StaticData;
+using StarMap2D.Common.SvgColorization;
+using StarMap2D.Common.Utilities;
+using StarMap2D.EtoForms.Classes;
+using StarMap2D.EtoForms.Controls.Utilities;
+using CO = StarMap2D.Localization.CelestialObjects;
+using UI = StarMap2D.Localization.UI;
+using Units = StarMap2D.Localization.Units;
+
+
+namespace StarMap2D.EtoForms.Forms.Dialogs
+{
+    /// <summary>
+    /// A dialog to display celestial object detail data.
+    /// Implements the <see cref="Eto.Forms.Dialog" />
+    /// </summary>
+    /// <seealso cref="Eto.Forms.Dialog" />
+    public class FormDialogCelestialObject : Dialog
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormDialogCelestialObject"/> class.
+        /// </summary>
+        public FormDialogCelestialObject()
+        {
+            MinimumSize = new Size(600, 300);
+
+            // Set the software localization.
+            Localization.Globals.Culture = Globals.Locale;
+
+            InitializeView();
+            DisplayObjectData();
+        }
+
+        /// <summary>
+        /// Shows the dialog modally, blocking the current thread until it is closed.
+        /// </summary>
+        /// <param name="displayObject">The object which data to display in the dialog initially.</param>
+        /// <param name="owner">The owner control that is showing the form</param>
+        /// <remarks>The <paramref name="owner" /> specifies the control on the window that will be blocked from user input until
+        /// the dialog is closed.
+        /// Calling this method is identical to setting the <see cref="P:Eto.Forms.Window.Owner" /> property and calling <see cref="M:Eto.Forms.Dialog.ShowModal" />.</remarks>
+        /// <param name="dateTime">The date and time to calculate the object coordinates.</param>
+        /// <param name="latitude">The latitude of the observer.</param>
+        /// <param name="longitude">The longitude of the observer.</param>
+        public static void ShowModal(Control? owner, ObjectsWithPositions displayObject, DateTime dateTime, double latitude, double longitude)
+        {
+            if (!SupportedObjects.Contains(displayObject))
+            {
+                return;
+            }
+
+            var form = new FormDialogCelestialObject();
+
+            form.ActiveObject = displayObject;
+
+            form.nsLongitude!.Value = longitude;
+            form.nsLatitude!.Value = latitude;
+
+            form.cmbObjectSelect!.SelectedValue =
+                form.objectsWithPositions.FirstOrDefault(f => f.EnumValue == displayObject);
+
+            if (owner == null)
+            {
+                form.ShowModal();
+            }
+            else
+            {
+                form.ShowModal(owner);
+            }
+        }
+
+        /// <summary>
+        /// Shows the dialog modally, blocking the current thread until it is closed.
+        /// </summary>
+        /// <param name="displayObject">The object which data to display in the dialog initially.</param>
+        /// <param name="dateTime">The date and time to calculate the object coordinates.</param>
+        /// <param name="latitude">The latitude of the observer.</param>
+        /// <param name="longitude">The longitude of the observer.</param>
+        public static void ShowModal(ObjectsWithPositions displayObject, DateTime dateTime, double latitude, double longitude)
+        {
+            ShowModal(null, displayObject, dateTime, latitude, longitude);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private ObjectsWithPositions activeObject = ObjectsWithPositions.Sun;
+
+        private ObjectsWithPositions ActiveObject
+        {
+            get => activeObject;
+
+            set
+            {
+                if (value != activeObject)
+                {
+                    activeObject = value;
+                    if (cmbObjectSelect != null && objectsWithPositions.Count > 0)
+                    {
+                        cmbObjectSelect.SelectedValue =
+                            objectsWithPositions.FirstOrDefault(f => f.EnumValue == activeObject);
+                    }
+
+                    DisplayObjectData();
+                }
+            }
+        }
+
+        private TableLayout? tlMain;
+        private TableLayout? tlTopControls;
+        private TableLayout? tlBottomControls;
+        private TableLayout? tlExtraData;
+        private ComboBox? cmbObjectSelect;
+        private NumericStepper? nsLatitude;
+        private NumericStepper? nsLongitude;
+        private DateTimePicker? dateTimePickerJump;
+        private ComboBox? cmbJumpLocation;
+        private Button? btnCopyToClipboard;
+
+        private Label? lbAboveHorizon;
+        private Label? lbAdditionalDataLink;
+
+        private Label? lbRightAscensionHours;
+        private Label? lbDeclinationDegrees;
+        private Label? lbHorizontalX;
+        private Label? lbHorizontalY;
+
+        private Label? lbMassKg;
+        private Label? lbDiameter;
+        private Label? lbDensity;
+        private Label? lbGravity;
+
+        private Label? lbEscapeVelocity;
+        private Label? lbRotationPeriod;
+        private Label? lbLengthOfDay;
+        private Label? lbDistanceFromSun;
+
+        private Label? lbPerihelion;
+        private Label? lbAphelion;
+        private Label? lbOrbitalPeriod;
+        private Label? lbOrbitalVelocity;
+
+        private Label? lbOrbitalInclination;
+        private Label? lbOrbitalEccentricity;
+        private Label? lbObliquityToOrbit;
+        private Label? lbMeanTemperature;
+
+        private Label? lbSurfacePressure;
+        private Label? lbNumberOfMoons;
+        private Label? lbRingSystem;
+        private Label? lbGlobalMagneticField;
+
+        private readonly List<EnumStringItem<ObjectsWithPositions>> objectsWithPositions = new();
+
+        private Label CreateLabel(string fontFamily)
+        {
+            var labelWidth = 135;
+            var labelColor = Colors.SteelBlue;
+            return new Label
+            {
+                Width = labelWidth,
+                TextAlignment = TextAlignment.Left,
+                Font = new Font(fontFamily, 9, FontStyle.Bold),
+                TextColor = labelColor,
+            };
+        }
+
+        private void DisplayObjectData()
+        {
+            var detail = PlanetData.Data.First(f =>
+                f.ObjectType == ((EnumStringItem<ObjectsWithPositions>)cmbObjectSelect!.SelectedValue).EnumValue);
+
+            if (lbDensity != null)
+            {
+                lbMassKg!.Text = DisplayFloating(detail.Mass, 2);
+                lbDiameter!.Text = DisplayFloating(detail.Diameter, 2);
+                lbDensity.Text = DisplayFloating(detail.Density, 2);
+                lbGravity!.Text = DisplayFloating(detail.Gravity, 3);
+
+                lbEscapeVelocity!.Text = DisplayFloating(detail.EscapeVelocity, 3);
+                lbRotationPeriod!.Text = DisplayFloating(detail.RotationPeriod, 3);
+                lbLengthOfDay!.Text = DisplayFloating(detail.LengthOfDay, 4);
+                lbDistanceFromSun!.Text = DisplayFloating(detail.DistanceFromSun, 2);
+
+                lbPerihelion!.Text = DisplayFloating(detail.Perihelion, 4);
+                lbAphelion!.Text = DisplayFloating(detail.Aphelion, 4);
+                lbOrbitalPeriod!.Text = DisplayFloating(detail.OrbitalPeriod, 4);
+                lbOrbitalVelocity!.Text = DisplayFloating(detail.OrbitalVelocity, 4);
+
+                lbOrbitalInclination!.Text = DisplayFloating(detail.OrbitalInclination, 4);
+                lbOrbitalEccentricity!.Text = DisplayFloating(detail.OrbitalEccentricity, 4);
+                lbObliquityToOrbit!.Text = DisplayFloating(detail.ObliquityToOrbit, 4);
+                lbMeanTemperature!.Text = DisplayFloating(detail.MeanTemperature, 4);
+
+                lbSurfacePressure!.Text = DisplayFloating(detail.SurfacePressure, 4);
+                lbNumberOfMoons!.Text = DisplayInteger(detail.NumberOfMoons);
+                lbRingSystem!.Text = DisplayBoolean(detail.RingSystem);
+                lbGlobalMagneticField!.Text = DisplayBoolean(detail.GlobalMagneticField);
+
+                lbAdditionalDataLink!.Text = detail.DataUrl;
+            }
+
+            DisplayCalculatedData();
+
+            ActiveObject = detail.ObjectType;
+        }
+
+        private void DisplayCalculatedData()
+        {
+            if (nsLongitude == null)
+            {
+                return;
+            }
+
+            var details = SolarSystemObjectPositions.GetDetails(ActiveObject, DateTime.Now.ToAASDate(), Globals.HighPrecisionCalculations,
+                nsLatitude!.Value, nsLongitude!.Value);
+
+            lbRightAscensionHours!.Text = DisplayFloating(details.RightAscension, 8);
+            lbDeclinationDegrees!.Text = DisplayFloating(details.Declination, 8);
+            lbHorizontalX!.Text = DisplayFloating(details.HorizontalDegreesX, 8);
+            lbHorizontalY!.Text = DisplayFloating(details.HorizontalDegreesY, 8);
+            lbAboveHorizon!.Text = DisplayBoolean(details.AboveHorizon);
+        }
+
+        private void InitializeView()
+        {
+            tlMain = new TableLayout();
+
+            tlTopControls = new TableLayout();
+            cmbObjectSelect = new ComboBox { AutoComplete = true, Width = 150, };
+            cmbObjectSelect.SelectedValueChanged += delegate { DisplayObjectData(); };
+            ListObjects();
+
+            nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, Width = 150, };
+            nsLongitude = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180, Width = 150, };
+
+            dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
+
+            tlTopControls.Rows.Add(new TableRow(
+                EtoHelpers.LabelWrap(UI.CelestialObject, cmbObjectSelect),
+                EtoHelpers.LabelWrap(UI.Latitude, nsLatitude),
+                EtoHelpers.LabelWrap(UI.Longitude, nsLongitude),
+                new TableCell { ScaleWidth = true }
+            ));
+
+            cmbJumpLocation = new ComboBox { AutoComplete = true };
+            cmbJumpLocation.DataStore = Cities.CitiesList;
+            cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
+
+            btnCopyToClipboard = EtoHelpers.CreateImageButton(
+                SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_copy_24_filled),
+                Colors.SteelBlue, 6, (_, _) =>
+                {
+                }, UI.CopyToClipboard);
+
+            tlTopControls.Rows.Add(new TableRow(
+                EtoHelpers.LabelWrap(UI.SpecifyDateTimeTitle, dateTimePickerJump),
+                EtoHelpers.LabelWrap(UI.JumpToLcation, cmbJumpLocation),
+                EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnCopyToClipboard, Globals.DefaultPadding), false),
+                new TableCell { ScaleWidth = true }
+            ));
+
+            var fontFamily = "Arial";
+
+            lbRightAscensionHours = CreateLabel(fontFamily);
+            lbDeclinationDegrees = CreateLabel(fontFamily);
+            lbHorizontalX = CreateLabel(fontFamily);
+            lbHorizontalY = CreateLabel(fontFamily);
+
+            lbMassKg = CreateLabel(fontFamily);
+            lbDiameter = CreateLabel(fontFamily);
+            lbDensity = CreateLabel(fontFamily);
+            lbGravity = CreateLabel(fontFamily);
+
+            lbEscapeVelocity = CreateLabel(fontFamily);
+            lbRotationPeriod = CreateLabel(fontFamily);
+            lbLengthOfDay = CreateLabel(fontFamily);
+            lbDistanceFromSun = CreateLabel(fontFamily);
+
+            lbPerihelion = CreateLabel(fontFamily);
+            lbAphelion = CreateLabel(fontFamily);
+            lbOrbitalPeriod = CreateLabel(fontFamily);
+            lbOrbitalVelocity = CreateLabel(fontFamily);
+
+            lbOrbitalInclination = CreateLabel(fontFamily);
+            lbOrbitalEccentricity = CreateLabel(fontFamily);
+            lbObliquityToOrbit = CreateLabel(fontFamily);
+            lbMeanTemperature = CreateLabel(fontFamily);
+
+            lbSurfacePressure = CreateLabel(fontFamily);
+            lbNumberOfMoons = CreateLabel(fontFamily);
+            lbRingSystem = CreateLabel(fontFamily);
+            lbGlobalMagneticField = CreateLabel(fontFamily);
+
+            lbAboveHorizon = CreateLabel(fontFamily);
+
+
+            lbAdditionalDataLink = CreateLabel(fontFamily);
+            lbAdditionalDataLink.Width = MinimumSize.Width - 50;
+            lbAdditionalDataLink.Cursor = Cursors.Pointer;
+            lbAdditionalDataLink.MouseDown += (_, _) =>
+            {
+                Application.Instance.Open(lbAdditionalDataLink.Text);
+            };
+
+            tlBottomControls = new TableLayout
+            {
+                Rows =
+                {
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(UI.AboveHorizon, lbAboveHorizon)),
+                            new TableCell(),
+                            new TableCell(),
+                            new TableCell(),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(UI.DeclinationDegrees, lbRightAscensionHours)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.DeclinationDegrees, lbDeclinationDegrees)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAtzimuthDegrees, lbHorizontalY)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAltitudeDegrees, lbHorizontalX)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(Units.MassKg_10_24, lbMassKg)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.DiameterKm, lbDiameter)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.DensityKgPerM3, lbDensity)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.GravityMPerS2, lbGravity)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(Units.EscapeVelocityKmPerS, lbEscapeVelocity)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.RotationPeriodHours, lbRotationPeriod)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.LengthOfDayHours, lbLengthOfDay)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.DistanceFromSun_10_6_Km, lbDistanceFromSun)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(Units.Perihelion_10_6_Km, lbPerihelion)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.Aphelion_10_6_Km, lbAphelion)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.OrbitalPeriodDays, lbOrbitalPeriod)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.OrbitalVelocityKmPerS, lbOrbitalVelocity)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(Units.OrbitalInclinationDegrees, lbOrbitalInclination)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.OrbitalEccentricity, lbOrbitalEccentricity)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.ObliquityToOrbitDegrees, lbObliquityToOrbit)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.MeanTemperatureDegreesC, lbMeanTemperature)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(Units.SurfacePressureBars, lbSurfacePressure)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.NumberOfMoons, lbNumberOfMoons)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.RingSystem, lbRingSystem)),
+                            new TableCell(EtoHelpers.LabelWrap(Units.GlobalMagneticField, lbGlobalMagneticField)),
+                            new TableCell { ScaleWidth = true},
+                        }
+                    },
+                },
+            };
+
+            tlExtraData = new TableLayout
+            {
+                Rows =
+                {
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            new TableCell(EtoHelpers.LabelWrap(UI.AdditionalData, lbAdditionalDataLink)),
+                            new TableCell { ScaleWidth = true },
+                        }
+                    },
+                }
+            };
+
+            tlMain.Rows.Add(tlTopControls);
+            tlMain.Rows.Add(tlBottomControls);
+            tlMain.Rows.Add(tlExtraData);
+
+            tlMain.Rows.Add(new TableRow { ScaleHeight = true });
+
+            Content = tlMain;
+        }
+
+        private static List<ObjectsWithPositions> SupportedObjects { get; } = new(new[]
+        {
+            ObjectsWithPositions.Mercury,
+            ObjectsWithPositions.Venus,
+            ObjectsWithPositions.Earth,
+            ObjectsWithPositions.Mars,
+            ObjectsWithPositions.Jupiter,
+            ObjectsWithPositions.Saturn,
+            ObjectsWithPositions.Uranus,
+            ObjectsWithPositions.Neptune,
+            ObjectsWithPositions.Pluto,
+            ObjectsWithPositions.Moon,
+            ObjectsWithPositions.Sun,
+            ObjectsWithPositions.Ceres,
+            ObjectsWithPositions.Eris,
+            ObjectsWithPositions.Makemake,
+            ObjectsWithPositions.Haumea,
+        });
+
+        private void ListObjects()
+        {
+            objectsWithPositions.Clear();
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Mercury, CO.Mercury));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Venus, CO.Venus));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Earth, CO.Earth));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Mars, CO.Mars));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Jupiter, CO.Jupiter));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Saturn, CO.Saturn));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Uranus, CO.Uranus));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Neptune, CO.Neptune));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Pluto, CO.Pluto));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Moon, CO.Moon));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Sun, CO.Sun));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Ceres, CO.Ceres));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Eris, CO.Eris));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Makemake, CO.Makemake));
+            objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Haumea, CO.Haumea));
+
+            cmbObjectSelect!.DataStore = objectsWithPositions;
+            cmbObjectSelect.ItemTextBinding =
+                new PropertyBinding<string>(nameof(EnumStringItem<ObjectsWithPositions>.EnumName));
+
+            cmbObjectSelect.SelectedIndex = 0;
+        }
+
+        private string DisplayFloating(double? value, int decimals)
+        {
+            if (value == null)
+            {
+                return Units.ValueUnknown;
+            }
+
+            return value.Value.ToString($"F{decimals}", Globals.FormattingCulture);
+        }
+
+        private string DisplayInteger(int? value)
+        {
+            if (value == null)
+            {
+                return Units.ValueUnknown;
+            }
+
+            return value.Value.ToString(Globals.FormattingCulture);
+        }
+
+        private string DisplayBoolean(bool? value)
+        {
+            if (value == null)
+            {
+                return Units.ValueUnknown;
+            }
+
+            return value.Value ? Units.ValueYes : Units.ValueNo;
+        }
+    }
+}

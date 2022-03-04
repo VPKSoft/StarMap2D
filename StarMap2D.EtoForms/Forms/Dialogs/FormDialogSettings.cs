@@ -38,7 +38,7 @@ using TextBox = Eto.Forms.TextBox;
 
 using UI = StarMap2D.Localization.UI;
 
-namespace StarMap2D.EtoForms.Forms
+namespace StarMap2D.EtoForms.Forms.Dialogs
 {
     /// <summary>
     /// A dialog to specify settings for the StarMap2D software.

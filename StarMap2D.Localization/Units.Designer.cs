@@ -61,6 +61,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aphelion (10⁶ km).
+        /// </summary>
+        public static string Aphelion_10_6_Km {
+            get {
+                return ResourceManager.GetString("Aphelion_10_6_Km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E.
         /// </summary>
         public static string CompassEastShort {
@@ -142,11 +151,92 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Density (kg/m³).
+        /// </summary>
+        public static string DensityKgPerM3 {
+            get {
+                return ResourceManager.GetString("DensityKgPerM3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diameter (km).
+        /// </summary>
+        public static string DiameterKm {
+            get {
+                return ResourceManager.GetString("DiameterKm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance from the Sun (10⁶ km).
+        /// </summary>
+        public static string DistanceFromSun_10_6_Km {
+            get {
+                return ResourceManager.GetString("DistanceFromSun_10_6_Km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Escape velocity (km/s).
+        /// </summary>
+        public static string EscapeVelocityKmPerS {
+            get {
+                return ResourceManager.GetString("EscapeVelocityKmPerS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global magnetic field.
+        /// </summary>
+        public static string GlobalMagneticField {
+            get {
+                return ResourceManager.GetString("GlobalMagneticField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gravity (m/s²).
+        /// </summary>
+        public static string GravityMPerS2 {
+            get {
+                return ResourceManager.GetString("GravityMPerS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to hours.
         /// </summary>
         public static string Hours {
             get {
                 return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length of day (hours).
+        /// </summary>
+        public static string LengthOfDayHours {
+            get {
+                return ResourceManager.GetString("LengthOfDayHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mass (10²⁴ kg).
+        /// </summary>
+        public static string MassKg_10_24 {
+            get {
+                return ResourceManager.GetString("MassKg_10_24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mean temperature (°C).
+        /// </summary>
+        public static string MeanTemperatureDegreesC {
+            get {
+                return ResourceManager.GetString("MeanTemperatureDegreesC", resourceCulture);
             }
         }
         
@@ -178,11 +268,128 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of moons.
+        /// </summary>
+        public static string NumberOfMoons {
+            get {
+                return ResourceManager.GetString("NumberOfMoons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obliquity to orbit (degrees).
+        /// </summary>
+        public static string ObliquityToOrbitDegrees {
+            get {
+                return ResourceManager.GetString("ObliquityToOrbitDegrees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital eccentricity.
+        /// </summary>
+        public static string OrbitalEccentricity {
+            get {
+                return ResourceManager.GetString("OrbitalEccentricity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital inclination (degrees).
+        /// </summary>
+        public static string OrbitalInclinationDegrees {
+            get {
+                return ResourceManager.GetString("OrbitalInclinationDegrees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital period (days).
+        /// </summary>
+        public static string OrbitalPeriodDays {
+            get {
+                return ResourceManager.GetString("OrbitalPeriodDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orbital velocity (km/s).
+        /// </summary>
+        public static string OrbitalVelocityKmPerS {
+            get {
+                return ResourceManager.GetString("OrbitalVelocityKmPerS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perihelion (10⁶ km).
+        /// </summary>
+        public static string Perihelion_10_6_Km {
+            get {
+                return ResourceManager.GetString("Perihelion_10_6_Km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ring system.
+        /// </summary>
+        public static string RingSystem {
+            get {
+                return ResourceManager.GetString("RingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotation period (hours).
+        /// </summary>
+        public static string RotationPeriodHours {
+            get {
+                return ResourceManager.GetString("RotationPeriodHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to seconds.
         /// </summary>
         public static string Seconds {
             get {
                 return ResourceManager.GetString("Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surface pressure (bars).
+        /// </summary>
+        public static string SurfacePressureBars {
+            get {
+                return ResourceManager.GetString("SurfacePressureBars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        public static string ValueNo {
+            get {
+                return ResourceManager.GetString("ValueNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unknown.
+        /// </summary>
+        public static string ValueUnknown {
+            get {
+                return ResourceManager.GetString("ValueUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yes.
+        /// </summary>
+        public static string ValueYes {
+            get {
+                return ResourceManager.GetString("ValueYes", resourceCulture);
             }
         }
         

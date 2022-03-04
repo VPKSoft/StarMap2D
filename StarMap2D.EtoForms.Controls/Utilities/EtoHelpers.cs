@@ -166,8 +166,8 @@ public class EtoHelpers
             }
         }
 
-        result.Cells.Add(new TableCell(new Panel()) {ScaleWidth = true});
-        
+        result.Cells.Add(new TableCell(new Panel()) { ScaleWidth = true });
+
         return new TableRow(new TableLayout(
             new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = labelText }))),
             new TableRow(new TableLayout(result)))
@@ -180,6 +180,19 @@ public class EtoHelpers
     /// </summary>
     /// <value>The resize loop limit.</value>
     public static int ResizeLoopLimit { get; set; } = 15;
+
+    /// <summary>
+    /// Wraps the specified control in a <see cref="TableLayout"/> with two columns preventing the control's height to scale beyond is minimum height.
+    /// </summary>
+    /// <param name="control">The control to wrap.</param>
+    /// <param name="upperCell">A value indicating whether to put the control in the upper or the lower cell of the internal <seealso cref="TableLayout"/>.</param>
+    /// <returns>A new table cell containing the control.</returns>
+    public static TableCell HeightLimitWrap(Control control, bool upperCell)
+    {
+        return upperCell
+            ? new TableCell(new TableLayout { Rows = { control, new TableRow { ScaleHeight = true } } })
+            : new TableCell(new TableLayout { Rows = { new TableRow { ScaleHeight = true }, control } });
+    }
 
     /// <summary>
     /// Creates a new instance of a <see cref="Button"/> control with auto-scaling SVG image.

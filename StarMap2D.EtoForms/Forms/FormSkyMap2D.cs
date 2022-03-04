@@ -43,6 +43,7 @@ using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.EventArguments;
 using StarMap2D.EtoForms.Controls.Utilities;
+using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.EtoForms.Properties;
 using StarMap2D.Localization;
 using VPKSoft.StarCatalogs.Providers;
@@ -78,6 +79,16 @@ namespace StarMap2D.EtoForms.Forms
             map2d.MouseHoverObject += Map2d_MouseHoverObject;
             map2d.MouseLeaveObject += Map2d_MouseLeaveObject;
             map2d.MouseCoordinatesChanged += Map2d_MouseCoordinatesChanged;
+            map2d.MouseClickObject += Map2d_MouseClickObject;
+        }
+
+        private void Map2d_MouseClickObject(object sender, Common.EventsAndDelegates.NamedObjectEventArgs e)
+        {
+            if (e.Identifier != null)
+            {
+                FormDialogCelestialObject.ShowModal((ObjectsWithPositions)e.Identifier, map2d.DateTimeUtc, map2d.Latitude,
+                    map2d.Longitude);
+            }
         }
 
         private void Map2d_MouseCoordinatesChanged(object? sender, Common.EventsAndDelegates.CoordinatesChangedEventArgs e)
@@ -194,6 +205,8 @@ namespace StarMap2D.EtoForms.Forms
             nsSpeedPerTimeAmount = new NumericStepper { MinValue = 1, MaxValue = int.MaxValue, DecimalPlaces = 3 };
 
             cmbTimeUnit = new ComboBox { ItemTextBinding = new PropertyBinding<string>(nameof(EnumStringItem<TimeInterval>.EnumName)) };
+            cmbTimeUnit.DataStore = timeDataSource;
+            cmbTimeUnit.SelectedValue = timeDataSource.First(f => f.EnumValue == TimeInterval.Second);
 
             mapControlLayout.Rows.Add(
                 EtoHelpers.LabelWrapperWithControls(UI.SpeedPerTimeUnit, 5, 5, nsSpeedPerTimeAmount,
@@ -205,11 +218,13 @@ namespace StarMap2D.EtoForms.Forms
                             TimeUpdate = false;
                             dateTimePickerJump.Value = DateTime.Now;
                             map2d.DateTimeUtc = DateTime.UtcNow;
+                            buttonPlayPause!.Checked = false;
+                            previousDateCalculation = default;
+                            previousDateTime = default;
+                            cmbTimeUnit.SelectedValue = timeDataSource.First(f => f.EnumValue == TimeInterval.Second);
+                            nsSpeedPerTimeAmount.Value = 1;
                             SetTitle();
                         })));
-
-            cmbTimeUnit.DataStore = timeDataSource;
-            cmbTimeUnit.SelectedValue = timeDataSource.First(f => f.EnumValue == TimeInterval.Second);
 
             buttonPlayPause = new CheckedButton(delegate (object? _, CheckedChangeEventArguments args)
                 {
@@ -233,7 +248,7 @@ namespace StarMap2D.EtoForms.Forms
                         SetTitle();
                     }, UI.HourMinusOne),
                 EtoHelpers.CreateImageButton(
-                    SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
+                    SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
                     Colors.SteelBlue, 6, (_, _) =>
                     {
                         map2d.DateTimeUtc = map2d.DateTimeUtc.TruncateToHours().AddHours(1);
@@ -432,11 +447,35 @@ namespace StarMap2D.EtoForms.Forms
             map2d.Longitude = value.Longitude;
         }
 
+        private DateTime previousDateTime;
+        private DateTime previousDateCalculation;
+
         private void ElapsedHandler(object? sender, EventArgs e)
         {
-            var dateTime = DateTime.UtcNow;
-            dateTimePickerJump!.Value = dateTime.ToLocalTime();
-            map2d.DateTimeUtc = dateTime;
+            if (!IsRealTimeSpeed)
+            {
+                if (previousDateTime != default && previousDateCalculation != default)
+                {
+                    var timePassed = (DateTime.UtcNow - previousDateCalculation).TotalSeconds;
+                    previousDateTime = previousDateTime.AddSeconds(timePassed / 1.0 * TimeIncrementSecond);
+                    dateTimePickerJump!.Value = previousDateTime.ToLocalTime();
+                    map2d.DateTimeUtc = previousDateTime;
+                    previousDateCalculation = DateTime.UtcNow;
+                }
+                else
+                {
+                    previousDateCalculation = DateTime.UtcNow;
+                    previousDateTime = DateTime.UtcNow;
+                    dateTimePickerJump!.Value = previousDateTime.ToLocalTime();
+                    map2d.DateTimeUtc = previousDateTime;
+                }
+            }
+            else
+            {
+                var dateTime = DateTime.UtcNow;
+                dateTimePickerJump!.Value = dateTime.ToLocalTime();
+                map2d.DateTimeUtc = dateTime;
+            }
             SetTitle();
         }
 
@@ -473,6 +512,42 @@ namespace StarMap2D.EtoForms.Forms
         #endregion
 
         #region PrivateMethodsAndProperties
+
+        private bool IsRealTimeSpeed => Math.Abs((nsSpeedPerTimeAmount?.Value ?? 1) - 1) <
+                                        EtoForms.Controls.Globals.FloatingPointTolerance &&
+                                        ((EnumStringItem<TimeInterval>?)cmbTimeUnit?.SelectedValue)?.EnumValue ==
+                                        TimeInterval.Second;
+
+        private double TimeIncrementSecond
+        {
+            get
+            {
+                if (IsRealTimeSpeed)
+                {
+                    return 1;
+                }
+
+                var unit = ((EnumStringItem<TimeInterval>?)cmbTimeUnit?.SelectedValue)?.EnumValue;
+
+                if (unit == null)
+                {
+                    return 1;
+                }
+
+                return unit switch
+                {
+                    TimeInterval.Millisecond => nsSpeedPerTimeAmount!.Value / 1000.0,
+                    TimeInterval.Second => nsSpeedPerTimeAmount!.Value,
+                    TimeInterval.Minute => nsSpeedPerTimeAmount!.Value * 60,
+                    TimeInterval.Hour => nsSpeedPerTimeAmount!.Value * 3600,
+                    TimeInterval.Day => nsSpeedPerTimeAmount!.Value * 86400,
+                    TimeInterval.Week => nsSpeedPerTimeAmount!.Value * 604800,
+                    TimeInterval.Month => nsSpeedPerTimeAmount!.Value * 30.436875 * 86400,
+                    TimeInterval.Year => nsSpeedPerTimeAmount!.Value * 365.2425 * 86400,
+                    _ => 1
+                };
+            }
+        }
         private bool TimeUpdate
         {
             get => timeUpdate;

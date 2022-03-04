@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Aphelion_10_6_Km" xml:space="preserve">
+    <value>Apheli (10⁶ km)</value>
+  </data>
   <data name="CompassEastShort" xml:space="preserve">
     <value>I</value>
   </data>
@@ -144,17 +147,86 @@
   <data name="Days" xml:space="preserve">
     <value>päivää</value>
   </data>
+  <data name="DensityKgPerM3" xml:space="preserve">
+    <value>Tiheys (kg/m³)</value>
+  </data>
+  <data name="DiameterKm" xml:space="preserve">
+    <value>Halkaisija (km)</value>
+  </data>
+  <data name="DistanceFromSun_10_6_Km" xml:space="preserve">
+    <value>Eträisyys auringosta (10⁶ km)</value>
+  </data>
+  <data name="EscapeVelocityKmPerS" xml:space="preserve">
+    <value>Pakonopeus (km/s)</value>
+  </data>
+  <data name="GlobalMagneticField" xml:space="preserve">
+    <value>Globaali magneettikenttä</value>
+  </data>
+  <data name="GravityMPerS2" xml:space="preserve">
+    <value>Painovoima (m/s²)</value>
+  </data>
   <data name="Hours" xml:space="preserve">
     <value>tuntia</value>
+  </data>
+  <data name="LengthOfDayHours" xml:space="preserve">
+    <value>Vuorokauden pituus (tuntia)</value>
+  </data>
+  <data name="MassKg_10_24" xml:space="preserve">
+    <value>Massa (10²⁴ kg)</value>
+  </data>
+  <data name="MeanTemperatureDegreesC" xml:space="preserve">
+    <value>Keskilämpötila (°C)</value>
   </data>
   <data name="MilliSeconds" xml:space="preserve">
     <value>millisekuntia</value>
   </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minuuttia</value>
+  </data>
   <data name="Months" xml:space="preserve">
     <value>kuukautta</value>
   </data>
+  <data name="NumberOfMoons" xml:space="preserve">
+    <value>Kuiden lukumäärä</value>
+  </data>
+  <data name="ObliquityToOrbitDegrees" xml:space="preserve">
+    <value>Akselin kaltevuus (astetta)</value>
+  </data>
+  <data name="OrbitalEccentricity" xml:space="preserve">
+    <value>Kiertoradan eksentrisyys</value>
+  </data>
+  <data name="OrbitalInclinationDegrees" xml:space="preserve">
+    <value>Kiertoradan inklinaatio (astetta)</value>
+  </data>
+  <data name="OrbitalPeriodDays" xml:space="preserve">
+    <value>Kiertoaika (päivää)</value>
+  </data>
+  <data name="OrbitalVelocityKmPerS" xml:space="preserve">
+    <value>Ratanopeus (km/s)</value>
+  </data>
+  <data name="Perihelion_10_6_Km" xml:space="preserve">
+    <value>Periheli (10⁶ km)</value>
+  </data>
+  <data name="RingSystem" xml:space="preserve">
+    <value>Rengasjärjestelmä</value>
+  </data>
+  <data name="RotationPeriodHours" xml:space="preserve">
+    <value>Pyörähdysaika (tuntia)</value>
+  </data>
   <data name="Seconds" xml:space="preserve">
     <value>sekuntia</value>
+  </data>
+  <data name="SurfacePressureBars" xml:space="preserve">
+    <value>Paine pinnalla (baaria)</value>
+  </data>
+  <data name="ValueNo" xml:space="preserve">
+    <value>ei</value>
+  </data>
+  <data name="ValueUnknown" xml:space="preserve">
+    <value>ei tiedosssa</value>
+  </data>
+  <data name="ValueYes" xml:space="preserve">
+    <value>kyllä</value>
   </data>
   <data name="Weeks" xml:space="preserve">
     <value>viikkoa</value>
