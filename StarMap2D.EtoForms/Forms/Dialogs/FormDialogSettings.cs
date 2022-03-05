@@ -27,7 +27,6 @@ SOFTWARE.
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Forms.VisualStyles;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Common.Utilities;
