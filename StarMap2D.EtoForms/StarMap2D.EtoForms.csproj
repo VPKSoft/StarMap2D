@@ -37,6 +37,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="ScottPlot.Eto" Version="4.1.34" />
+	  <PackageReference Include="unofficial.AASharp" Version="1.99.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\StarMap2D.EtoForms.Controls\StarMap2D.EtoForms.Controls.csproj" />
 		<ProjectReference Include="..\StarMap2D.Localization\StarMap2D.Localization.csproj" />
 		<ProjectReference Include="..\VPKSoft.ApplicationSettingsJson\VPKSoft.ApplicationSettingsJson.csproj" />
