@@ -50,8 +50,18 @@ public class JsonIgnoreResolver : DefaultContractResolver
     {
         var jsonProperties = base.CreateProperties(type, memberSerialization);
 
-        var propertyNames = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-            .Where(f => f.GetCustomAttribute<SettingsAttribute>() != null).Select(f => f.Name).ToList();
+        List<string> propertyNames;
+
+        if (type.BaseType == typeof(ApplicationJsonSettings))
+        {
+            propertyNames = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(f => f.GetCustomAttribute<SettingsAttribute>() != null).Select(f => f.Name).ToList();
+        }
+        else // Don't limit member class / struct serialization.
+        {
+            propertyNames = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Select(f => f.Name).ToList();
+        }
 
         return jsonProperties.Where(f => f.PropertyName != null && propertyNames.Contains(f.PropertyName)).ToList();
     }

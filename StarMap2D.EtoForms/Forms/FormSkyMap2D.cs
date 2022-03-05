@@ -39,6 +39,7 @@ using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.EventArguments;
@@ -311,12 +312,14 @@ namespace StarMap2D.EtoForms.Forms
 
             // The object information controls.
 
-            lbObjectNameValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
-            lbRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue };
-            lbDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue };
-            lbHorizontalXValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue };
-            lbHorizontalYValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue };
-            cbAboveHorizonValue = new CheckBox { ThreeState = false, Text = UI.AboveHorizon };
+            Font font = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+
+            lbObjectNameValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbHorizontalXValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbHorizontalYValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            cbAboveHorizonValue = new CheckBox { ThreeState = false, Text = UI.AboveHorizon, };
 
             objectInfoTableNameRaDec =
                 FluentTableLayoutBuilder.New()
@@ -339,10 +342,10 @@ namespace StarMap2D.EtoForms.Forms
             mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbAboveHorizonValue));
             mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(new Label { Text = UI.Coordinates }));
 
-            lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
-            lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
-            lbMouseCoordinateRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
-            lbMouseCoordinateDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbMouseCoordinateRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+            lbMouseCoordinateDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
 
             mousePositionLayout = FluentTableLayoutBuilder.New()
                 .WithSpacing(Globals.DefaultPadding)
@@ -354,7 +357,7 @@ namespace StarMap2D.EtoForms.Forms
 
             mapControlLayout.Rows.Add(mousePositionLayout);
 
-            lbCompassDirectionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, };
+            lbCompassDirectionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
             mapControlLayout.Rows.Add(EtoHelpers.LabelWrap(UI.CompassDirection, EtoHelpers.PaddingWrap(lbCompassDirectionValue), Globals.DefaultPadding));
 
             cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;

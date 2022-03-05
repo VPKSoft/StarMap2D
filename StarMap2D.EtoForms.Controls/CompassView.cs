@@ -71,7 +71,7 @@ public class CompassView : Drawable
         }
     }
 
-    private Font font = new("Cabin", 9);
+    private Font font = Globals.Font;
 
     /// <summary>
     /// Gets or sets the font to draw labels to the compass.

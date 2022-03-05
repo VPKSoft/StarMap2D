@@ -180,6 +180,15 @@
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Sisällytetty ({0})</value>
   </data>
+  <data name="Font" xml:space="preserve">
+    <value>Kirjasin</value>
+  </data>
+  <data name="FontMonospaced" xml:space="preserve">
+    <value>Kirjasin (tasavälinen)</value>
+  </data>
+  <data name="FontsAndAppearance" xml:space="preserve">
+    <value>Kirjasimet ja ulkoasu</value>
+  </data>
   <data name="Height" xml:space="preserve">
     <value>Korkeus</value>
   </data>
@@ -263,5 +272,8 @@
   </data>
   <data name="UiLanguageRequireRestart" xml:space="preserve">
     <value>Käyttöliittymän kieli (uudelleenkäynnistys tarvitaan)</value>
+  </data>
+  <data name="CelestialObjects" xml:space="preserve">
+    <value>Taivaankappaleet</value>
   </data>
 </root>

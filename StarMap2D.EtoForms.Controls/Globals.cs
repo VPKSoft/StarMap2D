@@ -27,6 +27,7 @@ SOFTWARE.
 using System;
 using System.Globalization;
 using System.Threading;
+using Eto.Drawing;
 using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms.Controls;
@@ -50,6 +51,19 @@ public class Globals
         }
 
         get => Units.Culture;
+    }
+
+    private static Font? font;
+
+    /// <summary>
+    /// Gets or sets the <see cref="Font"/> to use with the controls of this library.
+    /// </summary>
+    /// <value>The font.</value>
+    public static Font Font
+    {
+        get => font ?? new Font("Sans", 9);
+
+        set => font = value;
     }
 
     /// <summary>

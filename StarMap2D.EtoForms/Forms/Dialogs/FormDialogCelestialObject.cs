@@ -37,6 +37,7 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.StaticData;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls.Utilities;
 using CO = StarMap2D.Localization.CelestialObjects;
@@ -59,6 +60,8 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
         public FormDialogCelestialObject()
         {
             MinimumSize = new Size(600, 300);
+
+            Title = UI.CelestialObjects;
 
             // Set the software localization.
             Localization.Globals.Culture = Globals.Locale;
@@ -187,7 +190,7 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
 
         private readonly List<EnumStringItem<ObjectsWithPositions>> objectsWithPositions = new();
 
-        private Label CreateLabel(string fontFamily)
+        private Label CreateLabel()
         {
             var labelWidth = 135;
             var labelColor = Colors.SteelBlue;
@@ -195,7 +198,7 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             {
                 Width = labelWidth,
                 TextAlignment = TextAlignment.Left,
-                Font = new Font(fontFamily, 9, FontStyle.Bold),
+                Font = Globals.Settings.DataFont ?? SettingsFontData.Empty,
                 TextColor = labelColor,
             };
         }
@@ -304,42 +307,40 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
                 new TableCell { ScaleWidth = true }
             ));
 
-            var fontFamily = "Arial";
+            lbRightAscensionHours = CreateLabel();
+            lbDeclinationDegrees = CreateLabel();
+            lbHorizontalX = CreateLabel();
+            lbHorizontalY = CreateLabel();
 
-            lbRightAscensionHours = CreateLabel(fontFamily);
-            lbDeclinationDegrees = CreateLabel(fontFamily);
-            lbHorizontalX = CreateLabel(fontFamily);
-            lbHorizontalY = CreateLabel(fontFamily);
+            lbMassKg = CreateLabel();
+            lbDiameter = CreateLabel();
+            lbDensity = CreateLabel();
+            lbGravity = CreateLabel();
 
-            lbMassKg = CreateLabel(fontFamily);
-            lbDiameter = CreateLabel(fontFamily);
-            lbDensity = CreateLabel(fontFamily);
-            lbGravity = CreateLabel(fontFamily);
+            lbEscapeVelocity = CreateLabel();
+            lbRotationPeriod = CreateLabel();
+            lbLengthOfDay = CreateLabel();
+            lbDistanceFromSun = CreateLabel();
 
-            lbEscapeVelocity = CreateLabel(fontFamily);
-            lbRotationPeriod = CreateLabel(fontFamily);
-            lbLengthOfDay = CreateLabel(fontFamily);
-            lbDistanceFromSun = CreateLabel(fontFamily);
+            lbPerihelion = CreateLabel();
+            lbAphelion = CreateLabel();
+            lbOrbitalPeriod = CreateLabel();
+            lbOrbitalVelocity = CreateLabel();
 
-            lbPerihelion = CreateLabel(fontFamily);
-            lbAphelion = CreateLabel(fontFamily);
-            lbOrbitalPeriod = CreateLabel(fontFamily);
-            lbOrbitalVelocity = CreateLabel(fontFamily);
+            lbOrbitalInclination = CreateLabel();
+            lbOrbitalEccentricity = CreateLabel();
+            lbObliquityToOrbit = CreateLabel();
+            lbMeanTemperature = CreateLabel();
 
-            lbOrbitalInclination = CreateLabel(fontFamily);
-            lbOrbitalEccentricity = CreateLabel(fontFamily);
-            lbObliquityToOrbit = CreateLabel(fontFamily);
-            lbMeanTemperature = CreateLabel(fontFamily);
+            lbSurfacePressure = CreateLabel();
+            lbNumberOfMoons = CreateLabel();
+            lbRingSystem = CreateLabel();
+            lbGlobalMagneticField = CreateLabel();
 
-            lbSurfacePressure = CreateLabel(fontFamily);
-            lbNumberOfMoons = CreateLabel(fontFamily);
-            lbRingSystem = CreateLabel(fontFamily);
-            lbGlobalMagneticField = CreateLabel(fontFamily);
-
-            lbAboveHorizon = CreateLabel(fontFamily);
+            lbAboveHorizon = CreateLabel();
 
 
-            lbAdditionalDataLink = CreateLabel(fontFamily);
+            lbAdditionalDataLink = CreateLabel();
             lbAdditionalDataLink.Width = MinimumSize.Width - 50;
             lbAdditionalDataLink.Cursor = Cursors.Pointer;
             lbAdditionalDataLink.MouseDown += (_, _) =>

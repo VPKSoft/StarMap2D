@@ -180,6 +180,15 @@
   <data name="EmbeddedParameter" xml:space="preserve">
     <value>Embedded ({0})</value>
   </data>
+  <data name="Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="FontMonospaced" xml:space="preserve">
+    <value>Font (monospaced)</value>
+  </data>
+  <data name="FontsAndAppearance" xml:space="preserve">
+    <value>Fonts and appearance</value>
+  </data>
   <data name="Height" xml:space="preserve">
     <value>Height</value>
   </data>
@@ -263,5 +272,8 @@
   </data>
   <data name="UiLanguageRequireRestart" xml:space="preserve">
     <value>Language (localization, a restart is required)</value>
+  </data>
+  <data name="CelestialObjects" xml:space="preserve">
+    <value>Celestial objects</value>
   </data>
 </root>

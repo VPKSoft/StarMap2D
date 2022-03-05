@@ -106,6 +106,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Celestial objects.
+        /// </summary>
+        public static string CelestialObjects {
+            get {
+                return ResourceManager.GetString("CelestialObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Common.
         /// </summary>
         public static string Common {
@@ -246,6 +255,33 @@ namespace StarMap2D.Localization {
         public static string EmbeddedParameter {
             get {
                 return ResourceManager.GetString("EmbeddedParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font.
+        /// </summary>
+        public static string Font {
+            get {
+                return ResourceManager.GetString("Font", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font (monospaced).
+        /// </summary>
+        public static string FontMonospaced {
+            get {
+                return ResourceManager.GetString("FontMonospaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fonts and appearance.
+        /// </summary>
+        public static string FontsAndAppearance {
+            get {
+                return ResourceManager.GetString("FontsAndAppearance", resourceCulture);
             }
         }
         

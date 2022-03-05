@@ -27,6 +27,7 @@ SOFTWARE.
 using System;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
@@ -45,6 +46,8 @@ namespace StarMap2D.EtoForms
         /// </summary>
         public MainForm()
         {
+            EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
+
             // Set the software localization.
             UI.Culture = Globals.Locale;
 
@@ -71,7 +74,7 @@ namespace StarMap2D.EtoForms
             testStuff.Executed += delegate { new FormDialogCelestialObject().ShowModal(); };
 
             var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
-            quitCommand.Executed += (sender, e) => Application.Instance.Quit();
+            quitCommand.Executed += (_, _) => Application.Instance.Quit();
 
             var aboutCommand = new Command { MenuText = "About..." };
             aboutCommand.Executed += (sender, e) => new AboutDialog().ShowDialog(this);

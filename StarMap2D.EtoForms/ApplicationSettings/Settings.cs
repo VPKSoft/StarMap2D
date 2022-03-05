@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls.Utilities;
 using VPKSoft.ApplicationSettingsJson;
 
@@ -210,5 +211,19 @@ namespace StarMap2D.EtoForms.ApplicationSettings
         /// <value>The size of the cross hair.</value>
         [Settings(Default = 20)]
         public int CrossHairSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font for normal text formatting.
+        /// </summary>
+        /// <value>The font for normal text.</value>
+        [Settings]
+        public SettingsFontData? Font { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font for data formatting preferably a monospaced font.
+        /// </summary>
+        /// <value>The font for data text.</value>
+        [Settings]
+        public SettingsFontData? DataFont { get; set; }
     }
 }

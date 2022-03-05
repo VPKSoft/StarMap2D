@@ -27,9 +27,11 @@ SOFTWARE.
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms.VisualStyles;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Common.Utilities;
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls.Utilities;
 using VPKSoft.StarCatalogs.StaticData;
 using Button = Eto.Forms.Button;
@@ -78,6 +80,13 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
         private ComboBox? cmbDateAndTimeFormattingCulture;
         #endregion
 
+        #region Fonts
+        private TabPage? tabFonts;
+        private TableLayout? tlFonts;
+        private FontPicker? fpNormal;
+        private FontPicker? fpMonospaced;
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
         /// </summary>
@@ -108,6 +117,9 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             LayoutTabPageCommon();
 
             // The second tab page.
+            LayoutFontSettings();
+
+            // The third tab page.
             LayoutTabPageFormatting();
 
             btOk = new Button { Text = UI.OK };
@@ -166,6 +178,24 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
 
             // Scale the last row to the maximum.
             tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
+        }
+
+        private void LayoutFontSettings()
+        {
+            tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding) };
+            tabControlSettings!.Pages.Add(tabFonts);
+
+            tlFonts = new TableLayout();
+            tabFonts.Content = tlFonts;
+
+            fpNormal = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
+
+            tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
+            fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
+            tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
+
+            // Scale the last row to the maximum.
+            tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
         }
 
         /// <summary>
@@ -339,6 +369,8 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             cbDrawConstellationLabels!.Checked = Globals.Settings.DrawConstellationLabels;
             cbDrawConstellationBoundaries!.Checked = Globals.Settings.DrawConstellationBorders;
             cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
+            fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
+            fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
         }
 
         /// <summary>
@@ -379,6 +411,9 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
                 var culture = (CultureInfo)cmbDateAndTimeFormattingCulture.SelectedValue;
                 Globals.Settings.DateFormattingCulture = culture.Name;
             }
+
+            Globals.Settings.Font = fpNormal!.Value;
+            Globals.Settings.DataFont = fpMonospaced!.Value;
 
             Globals.SaveSettings();
         }
