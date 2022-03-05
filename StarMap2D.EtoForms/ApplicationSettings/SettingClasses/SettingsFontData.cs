@@ -35,7 +35,7 @@ namespace StarMap2D.EtoForms.ApplicationSettings.SettingClasses
     /// <summary>
     /// A class to store font data into the settings.
     /// </summary>
-    public struct SettingsFontData
+    public class SettingsFontData
     {
         /// <summary>
         /// Gets or sets the font family.
