@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Enumerations;
@@ -84,9 +85,10 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
                 return;
             }
 
-            var form = new FormDialogCelestialObject();
-
-            form.ActiveObject = displayObject;
+            var form = new FormDialogCelestialObject
+            {
+                ActiveObject = displayObject
+            };
 
             form.nsLongitude!.Value = longitude;
             form.nsLatitude!.Value = latitude;
@@ -245,7 +247,8 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
                 return;
             }
 
-            var details = SolarSystemObjectPositions.GetDetails(ActiveObject, DateTime.Now.ToAASDate(), Globals.HighPrecisionCalculations,
+            var details = SolarSystemObjectPositions.GetDetails(ActiveObject,
+                dateTimePickerJump!.Value!.Value.ToUniversalTime().ToAASDate(), Globals.HighPrecisionCalculations,
                 nsLatitude!.Value, nsLongitude!.Value);
 
             lbRightAscensionHours!.Text = DisplayFloating(details.RightAscension, 8);
@@ -254,6 +257,8 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             lbHorizontalY!.Text = DisplayFloating(details.HorizontalDegreesY, 8);
             lbAboveHorizon!.Text = DisplayBoolean(details.AboveHorizon);
         }
+
+        private Dictionary<Label, string> ValueControls { get; set; } = new();
 
         private void InitializeView()
         {
@@ -266,8 +271,11 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
 
             nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, Width = 150, };
             nsLongitude = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180, Width = 150, };
+            nsLatitude.ValueChanged += LatLonDateOnValueChanged;
+            nsLongitude.ValueChanged += LatLonDateOnValueChanged;
 
             dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
+            dateTimePickerJump.ValueChanged += LatLonDateOnValueChanged;
 
             tlTopControls.Rows.Add(new TableRow(
                 EtoHelpers.LabelWrap(UI.CelestialObject, cmbObjectSelect),
@@ -279,12 +287,15 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             cmbJumpLocation = new ComboBox { AutoComplete = true };
             cmbJumpLocation.DataStore = Cities.CitiesList;
             cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
+            cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;
 
             btnCopyToClipboard = EtoHelpers.CreateImageButton(
                 SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_copy_24_filled),
                 Colors.SteelBlue, 6, (_, _) =>
                 {
                 }, UI.CopyToClipboard);
+
+            btnCopyToClipboard.Click += BtnCopyToClipboard_Click;
 
             tlTopControls.Rows.Add(new TableRow(
                 EtoHelpers.LabelWrap(UI.SpecifyDateTimeTitle, dateTimePickerJump),
@@ -355,10 +366,10 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
                     {
                         Cells =
                         {
-                            new TableCell(EtoHelpers.LabelWrap(UI.DeclinationDegrees, lbRightAscensionHours)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.RightAscensionHours, lbRightAscensionHours)),
                             new TableCell(EtoHelpers.LabelWrap(UI.DeclinationDegrees, lbDeclinationDegrees)),
-                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAtzimuthDegrees, lbHorizontalY)),
-                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAltitudeDegrees, lbHorizontalX)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAltitudeDegrees, lbHorizontalY)),
+                            new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAtzimuthDegrees, lbHorizontalX)),
                             new TableCell { ScaleWidth = true},
                         }
                     },
@@ -442,8 +453,74 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             tlMain.Rows.Add(new TableRow { ScaleHeight = true });
 
             Content = tlMain;
+
+            ValueControls = new Dictionary<Label, string>
+            {
+                { lbAboveHorizon, UI.AboveHorizon },
+                { lbRightAscensionHours, UI.RightAscensionHours },
+                { lbDeclinationDegrees, UI.DeclinationDegrees },
+                { lbHorizontalX, UI.HorizontalAtzimuthDegrees },
+                { lbHorizontalY, UI.HorizontalAltitudeDegrees },
+                { lbMassKg, Units.MassKg_10_24 },
+                { lbDiameter, Units.DiameterKm },
+                { lbDensity, Units.DensityKgPerM3 },
+                { lbGravity, Units.GravityMPerS2 },
+                { lbEscapeVelocity, Units.EscapeVelocityKmPerS },
+                { lbRotationPeriod, Units.RotationPeriodHours },
+                { lbLengthOfDay, Units.LengthOfDayHours },
+                { lbDistanceFromSun, Units.DistanceFromSun_10_6_Km },
+                { lbPerihelion, Units.Perihelion_10_6_Km },
+                { lbAphelion, Units.Aphelion_10_6_Km },
+                { lbOrbitalPeriod, Units.OrbitalPeriodDays },
+                { lbOrbitalVelocity, Units.OrbitalVelocityKmPerS },
+                { lbOrbitalInclination, Units.OrbitalInclinationDegrees },
+                { lbOrbitalEccentricity, Units.OrbitalEccentricity },
+                { lbObliquityToOrbit, Units.ObliquityToOrbitDegrees },
+                { lbMeanTemperature, Units.MeanTemperatureDegreesC },
+                { lbSurfacePressure, Units.SurfacePressureBars },
+                { lbNumberOfMoons, Units.NumberOfMoons },
+                { lbRingSystem, Units.RingSystem },
+                { lbGlobalMagneticField, Units.GlobalMagneticField },
+                { lbAdditionalDataLink, UI.AdditionalData },
+            };
         }
 
+        private void BtnCopyToClipboard_Click(object? sender, EventArgs e)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"{UI.CelestialObject} = {((EnumStringItem<ObjectsWithPositions>)cmbObjectSelect!.SelectedValue).EnumName}");
+            builder.AppendLine($"{UI.SpecifyDateTimeTitle} = {dateTimePickerJump!.Value!.Value}");
+            builder.AppendLine($"{UI.Latitude} = {DisplayFloating(nsLatitude!.Value, 10)}");
+            builder.AppendLine($"{UI.Longitude} = {DisplayFloating(nsLongitude!.Value, 10)}");
+            foreach (var valueControl in ValueControls)
+            {
+                builder.AppendLine($"{valueControl.Value} = {valueControl.Key.Text}");
+            }
+
+            Clipboard.Instance.Text = builder.ToString();
+        }
+
+        private void LatLonDateOnValueChanged(object? sender, EventArgs e)
+        {
+            DisplayObjectData();
+        }
+
+        private void CmbJumpLocation_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            if (cmbJumpLocation!.SelectedValue == null)
+            {
+                return;
+            }
+
+            var value = (CityLatLonCoordinate)cmbJumpLocation.SelectedValue;
+            nsLatitude!.Value = value.Latitude;
+            nsLongitude!.Value = value.Longitude;
+            DisplayObjectData();
+        }
+
+        /// <summary>
+        /// Creates a collection of celestial objects currently supported by the view.
+        /// </summary>
         private static List<ObjectsWithPositions> SupportedObjects { get; } = new(new[]
         {
             ObjectsWithPositions.Mercury,
@@ -463,6 +540,9 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             ObjectsWithPositions.Haumea,
         });
 
+        /// <summary>
+        /// Creates a collection of celestial objects currently supported by the view with their localized names.
+        /// </summary>
         private void ListObjects()
         {
             objectsWithPositions.Clear();
@@ -489,6 +569,12 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             cmbObjectSelect.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Displays a nullable floating point value.
+        /// </summary>
+        /// <param name="value">The value of the floating point.</param>
+        /// <param name="decimals">The number of decimals to display in the string representation.</param>
+        /// <returns>A <see cref="System.String"/> representing the floating point value.</returns>
         private string DisplayFloating(double? value, int decimals)
         {
             if (value == null)
@@ -499,6 +585,11 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             return value.Value.ToString($"F{decimals}", Globals.FormattingCulture);
         }
 
+        /// <summary>
+        /// Displays a nullable integer value.
+        /// </summary>
+        /// <param name="value">The value of the integer.</param>
+        /// <returns>A <see cref="System.String"/> representing the integer value.</returns>
         private string DisplayInteger(int? value)
         {
             if (value == null)
@@ -509,6 +600,11 @@ namespace StarMap2D.EtoForms.Forms.Dialogs
             return value.Value.ToString(Globals.FormattingCulture);
         }
 
+        /// <summary>
+        /// Displays a nullable boolean value.
+        /// </summary>
+        /// <param name="value">The value of the boolean.</param>
+        /// <returns>A <see cref="System.String"/> representing the boolean value.</returns>
         private string DisplayBoolean(bool? value)
         {
             if (value == null)
