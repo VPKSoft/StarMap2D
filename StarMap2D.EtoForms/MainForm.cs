@@ -25,8 +25,6 @@ SOFTWARE.
 #endregion
 
 using System;
-using System.Diagnostics;
-using System.Windows.Media.Imaging;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
