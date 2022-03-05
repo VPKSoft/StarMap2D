@@ -25,8 +25,14 @@ SOFTWARE.
 #endregion
 
 using System;
+using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using ScottPlot;
+using ScottPlot.Eto;
+using ScottPlot.Plottable;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
@@ -54,13 +60,19 @@ namespace StarMap2D.EtoForms
             Title = UI.StarMap2D;
             MinimumSize = new Size(400, 300);
 
-            Content = new StackLayout
+            Content = new TableLayout
             {
                 Padding = 10,
-                Items =
+                Rows =
                 {
-                    // add more controls here
-                }
+                    new TableRow
+                    {
+                        Cells =
+                        {
+                            sunMoonPlot,
+                        }
+                    },
+                },
             };
 
             // create a few commands that can be used for the menu and toolbar
@@ -70,14 +82,14 @@ namespace StarMap2D.EtoForms
             var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
             settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
-            var testStuff = new Command { MenuText = "Test something", };
+            var testStuff = new Command { MenuText = UI.TestStuff, };
             testStuff.Executed += delegate { new FormDialogCelestialObject().ShowModal(); };
 
-            var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (_, _) => Application.Instance.Quit();
 
-            var aboutCommand = new Command { MenuText = "About..." };
-            aboutCommand.Executed += (sender, e) => new AboutDialog().ShowDialog(this);
+            var aboutCommand = new Command { MenuText = UI.About };
+            aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
 
             // create menu
             base.Menu = new MenuBar
@@ -85,22 +97,138 @@ namespace StarMap2D.EtoForms
                 Items =
                 {
 					// File submenu
-					new SubMenuItem { Text = "&File", Items = { starMapCommand } },
-                    new SubMenuItem { Text = "Test stuff", Items = { testStuff }},
-					// new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
-					// new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
-				},
+                    new SubMenuItem { Text = UI.TestStuff, Items = { testStuff }},
+                },
                 ApplicationItems =
                 {
+                    starMapCommand,
 					// application (OS X) or file menu (others)
-					new ButtonMenuItem { Text = "&Preferences...", Items = { settingsMenu }},
                 },
                 QuitItem = quitCommand,
                 AboutItem = aboutCommand,
             };
 
+            base.Menu.HelpMenu.Text = UI.Help;
+            base.Menu.ApplicationMenu.Text = UI.File;
+
             // create toolbar			
             ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
+
+            PlotSunMoon();
+            MouseMove += MainForm_MouseMove;
+
+            sunMoonPlot.Focus();
+        }
+
+        private void MainForm_MouseMove(object? sender, MouseEventArgs e)
+        {
+            SunMoonPlot_MouseMove(sender, e);
+        }
+
+        private Crosshair? sunCrossHair;
+        private Crosshair? moonCrossHair;
+
+        private ScatterPlot? sunPlot;
+        private ScatterPlot? moonPlot;
+
+        private readonly PlotView sunMoonPlot = new() { Width = 50, Height = 50, };
+
+        private void PlotSunMoon()
+        {
+            sunMoonPlot.MouseMove += SunMoonPlot_MouseMove;
+            sunMoonPlot.MouseDown += SunMoonPlot_MouseDown;
+
+            var xSunDoubles = new double[60 * 24];
+            var ySunDoubles = new double[60 * 24];
+
+            var xMoonDoubles = new double[60 * 24];
+            var yMoonDoubles = new double[60 * 24];
+
+            var dateTime = DateTime.UtcNow;
+
+            var offset = DateTimeOffset.Now.Offset.TotalHours;
+
+            dateTime =
+                new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
+
+            var date = dateTime.ToAASDate();
+
+            var latitude = Globals.Settings.Latitude;
+            var longitude = Globals.Settings.Longitude;
+
+            for (int i = 0; i < 60 * 24; i++)
+            {
+                date = date.AddSecondsFast(60);
+                var x = date.Hours(offset);
+                xSunDoubles[i] = x;
+                xMoonDoubles[i] = x;
+
+                var position = SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.SUN, date, false, longitude, latitude);
+                ySunDoubles[i] = position.Y;
+
+                position = SolarSystemObjectPositions.GetMoonPosition(date, true, longitude, latitude);
+                yMoonDoubles[i] = position.Y;
+            }
+
+            sunPlot = sunMoonPlot.Plot.AddScatterLines(xSunDoubles, ySunDoubles);
+            sunPlot.XAxisIndex = 0;
+            sunPlot.YAxisIndex = 0;
+            sunMoonPlot.Plot.XAxis.Color(sunPlot.Color);
+            sunMoonPlot.Plot.YAxis.Color(sunPlot.Color);
+
+            moonPlot = sunMoonPlot.Plot.AddScatterLines(xMoonDoubles, yMoonDoubles);
+            moonPlot.XAxisIndex = 1;
+            moonPlot.YAxisIndex = 1;
+            sunMoonPlot.Plot.XAxis2.Color(moonPlot.Color);
+            sunMoonPlot.Plot.YAxis2.Color(moonPlot.Color);
+
+
+            sunCrossHair = sunMoonPlot.Plot.AddCrosshair(0, 0);
+            sunCrossHair.VerticalLine.PositionFormatter = hours => TimeSpan.FromHours(hours).ToString(@"hh\:mm\:ss");
+            sunCrossHair.Color = sunPlot.Color;
+
+            moonCrossHair = sunMoonPlot.Plot.AddCrosshair(0, 0);
+            moonCrossHair.VerticalLine.PositionFormatter = hours => TimeSpan.FromHours(hours).ToString(@"hh\:mm\:ss");
+            moonCrossHair.Color = moonPlot.Color;
+            moonCrossHair.HorizontalLine.PositionLabelOppositeAxis = true;
+            moonCrossHair.VerticalLine.PositionLabelOppositeAxis = true;
+
+            sunMoonPlot.Plot.XAxis.Label(UI.SunTime);
+            sunMoonPlot.Plot.YAxis.Label(UI.SunDegrees);
+
+            sunMoonPlot.Plot.XAxis2.Label(UI.MoonTime);
+            sunMoonPlot.Plot.YAxis2.Label(UI.MoonDegrees);
+
+            sunMoonPlot.Refresh();
+
+            sunMoonPlot.Plot.YAxis2.LockLimits();
+            sunMoonPlot.Plot.YAxis.LockLimits();
+            sunMoonPlot.Plot.XAxis.LockLimits();
+            sunMoonPlot.Plot.XAxis2.LockLimits();
+        }
+
+        private void SunMoonPlot_MouseDown(object? sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SunMoonPlot_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (sunPlot != null && sunCrossHair != null && moonCrossHair != null && moonPlot != null)
+            {
+                var (mouseCoordinateX, _) = sunMoonPlot.GetMouseCoordinates();
+                var (pointX, pointY, _) = sunPlot.GetPointNearestX(mouseCoordinateX);
+
+                sunMoonPlot.GetMouseCoordinates();
+
+                sunCrossHair.X = pointX;
+                sunCrossHair.Y = pointY;
+                (pointX, pointY, _) = moonPlot.GetPointNearestX(mouseCoordinateX);
+                moonCrossHair.X = pointX;
+                moonCrossHair.Y = pointY;
+            }
+
+            sunMoonPlot.RefreshRequest(RenderType.HighQualityDelayed);
         }
     }
 }

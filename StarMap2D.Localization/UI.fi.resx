@@ -276,4 +276,31 @@
   <data name="CelestialObjects" xml:space="preserve">
     <value>Taivaankappaleet</value>
   </data>
+  <data name="File" xml:space="preserve">
+    <value>&amp;Tiedosto</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Lopeta</value>
+  </data>
+  <data name="TestStuff" xml:space="preserve">
+    <value>Testaa juttuja</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Apu</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Tietoja</value>
+  </data>
+  <data name="SunTime" xml:space="preserve">
+    <value>Aika (aurinko)</value>
+  </data>
+  <data name="SunDegrees" xml:space="preserve">
+    <value>Auringon korkeus °</value>
+  </data>
+  <data name="MoonTime" xml:space="preserve">
+    <value>Aika (kuu)</value>
+  </data>
+  <data name="MoonDegrees" xml:space="preserve">
+    <value>Kuun korkeus °</value>
+  </data>
 </root>

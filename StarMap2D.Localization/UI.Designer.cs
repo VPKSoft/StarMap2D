@@ -61,6 +61,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Above horizon.
         /// </summary>
         public static string AboveHorizon {
@@ -259,6 +268,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;File.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Font.
         /// </summary>
         public static string Font {
@@ -291,6 +309,15 @@ namespace StarMap2D.Localization {
         public static string Height {
             get {
                 return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
             }
         }
         
@@ -394,6 +421,24 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moon height °.
+        /// </summary>
+        public static string MoonDegrees {
+            get {
+                return ResourceManager.GetString("MoonDegrees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time (the Moon).
+        /// </summary>
+        public static string MoonTime {
+            get {
+                return ResourceManager.GetString("MoonTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -.
         /// </summary>
         public static string NAChar {
@@ -417,6 +462,15 @@ namespace StarMap2D.Localization {
         public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit.
+        /// </summary>
+        public static string Quit {
+            get {
+                return ResourceManager.GetString("Quit", resourceCulture);
             }
         }
         
@@ -516,6 +570,33 @@ namespace StarMap2D.Localization {
         public static string StarMap2D {
             get {
                 return ResourceManager.GetString("StarMap2D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sun height °.
+        /// </summary>
+        public static string SunDegrees {
+            get {
+                return ResourceManager.GetString("SunDegrees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time (the Sun).
+        /// </summary>
+        public static string SunTime {
+            get {
+                return ResourceManager.GetString("SunTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test stuff.
+        /// </summary>
+        public static string TestStuff {
+            get {
+                return ResourceManager.GetString("TestStuff", resourceCulture);
             }
         }
         

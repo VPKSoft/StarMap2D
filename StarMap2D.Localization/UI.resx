@@ -276,4 +276,31 @@
   <data name="CelestialObjects" xml:space="preserve">
     <value>Celestial objects</value>
   </data>
+  <data name="File" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="TestStuff" xml:space="preserve">
+    <value>Test stuff</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SunTime" xml:space="preserve">
+    <value>Time (the Sun)</value>
+  </data>
+  <data name="SunDegrees" xml:space="preserve">
+    <value>Sun height °</value>
+  </data>
+  <data name="MoonTime" xml:space="preserve">
+    <value>Time (the Moon)</value>
+  </data>
+  <data name="MoonDegrees" xml:space="preserve">
+    <value>Moon height °</value>
+  </data>
 </root>
