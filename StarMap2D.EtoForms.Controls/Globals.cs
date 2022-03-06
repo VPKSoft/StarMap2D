@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System;
 using System.Globalization;
 using System.Threading;
 using Eto.Drawing;

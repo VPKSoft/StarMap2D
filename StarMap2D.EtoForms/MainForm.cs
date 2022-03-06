@@ -24,9 +24,15 @@ SOFTWARE.
 */
 #endregion
 
+using System;
+using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
+using StarMap2D.EtoForms.Controls;
+using StarMap2D.EtoForms.Controls.Plotting;
 using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
@@ -53,6 +59,8 @@ namespace StarMap2D.EtoForms
             Title = UI.StarMap2D;
             MinimumSize = new Size(400, 300);
 
+            var plot = new TimeValuePlot { BackgroundColor = Colors.Black };
+
             Content = new TableLayout
             {
                 Padding = 10,
@@ -62,6 +70,7 @@ namespace StarMap2D.EtoForms
                     {
                         Cells =
                         {
+                            plot,
                         }
                     },
                 },
@@ -105,6 +114,37 @@ namespace StarMap2D.EtoForms
 
             // create toolbar			
             ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
+
+
+            var ySunDoubles = new double[60 * 24];
+
+            var yMoonDoubles = new double[60 * 24];
+
+            var dateTime = DateTime.UtcNow;
+
+            var offset = DateTimeOffset.Now.Offset.TotalHours;
+
+            dateTime =
+                new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
+
+            var date = dateTime.ToAASDate();
+
+            var longitude = Globals.Settings.Longitude;
+            var latitude = Globals.Settings.Latitude;
+
+            for (int i = 0; i < 60 * 24; i++)
+            {
+                date = date.AddSecondsFast(60);
+
+                var position = SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.SUN, date, false, longitude, latitude);
+                ySunDoubles[i] = position.Y;
+
+                position = SolarSystemObjectPositions.GetMoonPosition(date, true, longitude, latitude);
+                yMoonDoubles[i] = position.Y;
+            }
+
+            plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange });
+            plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue });
         }
     }
 }

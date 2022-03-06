@@ -24,19 +24,13 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace StarMap2D.Calculations.Classes
 {
     /// <summary>
     /// An interface for solar system object details.
     /// </summary>
     public interface IObjectDetails
-    {    
+    {
         /// <summary>
         /// Gets or sets the name of the object.
         /// </summary>

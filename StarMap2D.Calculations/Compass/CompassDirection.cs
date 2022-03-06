@@ -24,8 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-
 namespace StarMap2D.Calculations.Compass
 {
     /// <summary>

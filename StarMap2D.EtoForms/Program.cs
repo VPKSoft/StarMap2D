@@ -27,7 +27,6 @@ SOFTWARE.
 using System;
 using System.Globalization;
 using Eto.Forms;
-using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 
 namespace StarMap2D.EtoForms
 {

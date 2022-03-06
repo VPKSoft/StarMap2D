@@ -24,7 +24,6 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
 using StarMap2D.Calculations.Constellations.Interfaces;
 using StarMap2D.Calculations.Constellations.StaticData;
 using StarMap2D.Calculations.Enumerations;
@@ -34,7 +33,7 @@ namespace StarMap2D.Calculations.Constellations;
 /// <summary>
 /// An class to combine constellation names and their identifiers.
 /// </summary>
-public class ConstellationNameIdentifier: IConstellationNameIdentifier
+public class ConstellationNameIdentifier : IConstellationNameIdentifier
 {
     /// <inheritdoc cref="IConstellationNameIdentifier.Identifier"/>
     public string? Identifier { get; init; }

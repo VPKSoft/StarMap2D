@@ -27,8 +27,6 @@ SOFTWARE.
 using System;
 using System.Globalization;
 using Eto.Drawing;
-using Newtonsoft.Json;
-using VPKSoft.ApplicationSettingsJson;
 
 namespace StarMap2D.EtoForms.ApplicationSettings.SettingClasses
 {

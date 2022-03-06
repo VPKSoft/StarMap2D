@@ -24,14 +24,12 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-
 namespace StarMap2D.Calculations.Classes;
 
 /// <summary>
 /// Details of a sky object of any kind.
 /// </summary>
-public class ObjectDetails: IObjectDetails
+public class ObjectDetails : IObjectDetails
 {
     /// <inheritdoc cref="IObjectDetails.ObjectName"/>
     public string? ObjectName { get; set; }
