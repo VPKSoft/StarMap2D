@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Controls.WinForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Avalonia", "StarMap2D.Avalonia\StarMap2D.Avalonia.csproj", "{94EC8BF4-035C-4867-AC4F-E0592DCCD397}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Calculations", "StarMap2D.Calculations\StarMap2D.Calculations.csproj", "{7FF64329-D6D8-478A-9961-A181C522BF5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarMap2D.Common", "StarMap2D.Common\StarMap2D.Common.csproj", "{E9A2DAB2-CA15-4873-B283-FAD120B3E91F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPKSoft.StarCatalogs", "VPKSoft.StarCatalogs\VPKSoft.StarCatalogs.csproj", "{16E5E35C-A122-4334-A231-8847E0AB6A95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94EC8BF4-035C-4867-AC4F-E0592DCCD397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF64329-D6D8-478A-9961-A181C522BF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF64329-D6D8-478A-9961-A181C522BF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF64329-D6D8-478A-9961-A181C522BF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF64329-D6D8-478A-9961-A181C522BF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A2DAB2-CA15-4873-B283-FAD120B3E91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A2DAB2-CA15-4873-B283-FAD120B3E91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A2DAB2-CA15-4873-B283-FAD120B3E91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A2DAB2-CA15-4873-B283-FAD120B3E91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E5E35C-A122-4334-A231-8847E0AB6A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E5E35C-A122-4334-A231-8847E0AB6A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E5E35C-A122-4334-A231-8847E0AB6A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E5E35C-A122-4334-A231-8847E0AB6A95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
