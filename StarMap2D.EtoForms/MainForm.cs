@@ -59,7 +59,7 @@ namespace StarMap2D.EtoForms
             Title = UI.StarMap2D;
             MinimumSize = new Size(400, 300);
 
-            var plot = new TimeValuePlot { BackgroundColor = Colors.Black };
+            var plot = new TimeValuePlot { BackgroundColor = Colors.Black, DrawCrossHairs = true };
 
             Content = new TableLayout
             {

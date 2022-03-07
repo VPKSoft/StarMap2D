@@ -48,6 +48,27 @@ namespace StarMap2D.EtoForms.Controls
             Paint += PlotAltitudeAzimuth_Paint;
             SizeChanged += PlotAltitudeAzimuth_SizeChanged;
             AxisData.CollectionChanged += AxisData_CollectionChanged;
+            MouseMove += TimeValuePlot_MouseMove;
+        }
+
+        private void TimeValuePlot_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (previousPlotArea?.Contains(e.Location) == true)
+            {
+                if (e.Location != mouseCoordinates)
+                {
+                    Invalidate();
+                }
+                mouseCoordinates = e.Location;
+
+                return;
+            }
+
+            if (mouseCoordinates != null)
+            {
+                mouseCoordinates = null;
+                Invalidate();
+            }
         }
 
         private void AxisData_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -102,6 +123,9 @@ namespace StarMap2D.EtoForms.Controls
             DrawGraph(e.Graphics, e.ClipRectangle);
         }
 
+        private PointF? mouseCoordinates;
+        private RectangleF? previousPlotArea;
+
         /// <summary>
         /// Draws the graph(s) and axes to the specified graphics.
         /// </summary>
@@ -109,6 +133,9 @@ namespace StarMap2D.EtoForms.Controls
         /// <param name="drawArea">The drawing area rectangle.</param>
         private void DrawGraph(Graphics graphics, RectangleF drawArea)
         {
+            previousPlotArea =
+                new RectangleF(new PointF(drawArea.Left + AxisPadding.Left, drawArea.Top + AxisPadding.Top),
+                    new PointF(drawArea.Right - AxisPadding.Right, drawArea.Bottom - AxisPadding.Bottom));
             using var backgroundBrush = new SolidBrush(base.BackgroundColor);
             graphics.FillRectangle(backgroundBrush, drawArea);
 
@@ -200,6 +227,44 @@ namespace StarMap2D.EtoForms.Controls
             bottomRight = new PointF(drawArea.Right - AxisPadding.Right, drawArea.Bottom - AxisPadding.Bottom);
             graphics.DrawLine(AxisLineColor, topLeft, topRight);
             graphics.DrawLine(AxisLineColor, topRight, bottomRight);
+
+            // Draw the cross hairs if configured to do so.
+            if (DrawCrossHairs && mouseCoordinates != null)
+            {
+                foreach (var axisData in AxisData)
+                {
+                    using var crossHairPen = new Pen(axisData.PlotColor) { DashStyle = new DashStyle(10, 5) };
+                    var yValue =
+                        (float)axisData.GetYAxisValueAtXPoint(mouseCoordinates.Value.X - AxisPadding.Left -
+                                                              drawArea.Left);
+                    var yPoint = yCenter - yValue * multiplier;
+
+                    // Draw the vertical cross hair line.
+                    var vertical1 = new PointF(mouseCoordinates.Value.X, drawArea.Top + AxisPadding.Top);
+                    var vertical2 = new PointF(mouseCoordinates.Value.X, drawArea.Bottom - axisPadding.Bottom);
+                    graphics.DrawLine(crossHairPen, vertical1, vertical2);
+
+                    // Draw the horizontal cross hair line.
+                    var horizontal1 = new PointF(drawArea.Left + AxisPadding.Left, yPoint);
+                    var horizontal2 = new PointF(drawArea.Right - AxisPadding.Right, yPoint);
+                    graphics.DrawLine(crossHairPen, horizontal1, horizontal2);
+
+                    // Draw the X-axis value label.
+                    var xValue = axisData.GetXAxisValueAtPoint(mouseCoordinates.Value.X - AxisPadding.Left - drawArea.Left);
+
+                    var timeLabelValue = TimeSpan.FromMinutes(xValue).ToString(CrossHairTimeLabelFormat);
+                    var size = graphics.MeasureString(Font, timeLabelValue);
+                    var timeLabelPoint = new PointF(vertical1.X - size.Width / 2f, vertical1.Y - size.Height - 10);
+                    graphics.DrawText(Font, axisData.PlotColor, timeLabelPoint, timeLabelValue);
+
+                    // Draw the Y-axis value label.
+                    var yLabelValue = string.Format(YCrossHairLabelFormat, yValue);
+                    size = graphics.MeasureString(Font, yLabelValue);
+                    var labelYPoint = new PointF(horizontal2.X, horizontal2.Y - size.Width / 2);
+                    graphics.DrawText(Font, axisData.PlotColor, labelYPoint, yLabelValue);
+
+                }
+            }
         }
 
         #region PublicProperties
@@ -402,6 +467,28 @@ namespace StarMap2D.EtoForms.Controls
             }
         }
 
+        private string yCrossHairLabelFormat = "{0:F2}°";
+
+        /// <summary>
+        /// Gets or sets the Y-axis cross hair label value format.
+        /// </summary>
+        /// <value>The Y-axis cross hair label value format.</value>
+        public string YCrossHairLabelFormat
+        {
+            get => yCrossHairLabelFormat;
+
+            set
+            {
+                if (yCrossHairLabelFormat != value && mouseCoordinates != null)
+                {
+                    yCrossHairLabelFormat = value;
+                    Invalidate();
+                }
+
+                yCrossHairLabelFormat = value;
+            }
+        }
+
         private string timeLabelFormat = "hh";
 
         /// <summary>
@@ -427,6 +514,57 @@ namespace StarMap2D.EtoForms.Controls
                 }
             }
         }
+
+        private string crossHairTimeLabelFormat = @"hh\:mm";
+
+        /// <summary>
+        /// Gets or sets the cross hair time label format.
+        /// </summary>
+        /// <value>The cross hair time label format.</value>
+        /// <remarks>
+        /// The format is for method <see cref="TimeSpan.ToString(string)"/> method. For more info see: <para/>
+        /// * https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings<para/>
+        /// * https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-timespan-format-strings<para/>
+        /// E.g. "hh\:mm\:ss".
+        /// </remarks>
+        public string CrossHairTimeLabelFormat
+        {
+            get => crossHairTimeLabelFormat;
+
+            set
+            {
+                if (crossHairTimeLabelFormat != value && mouseCoordinates != null)
+                {
+                    crossHairTimeLabelFormat = value;
+                    Invalidate();
+                }
+
+                crossHairTimeLabelFormat = value;
+            }
+        }
+
+        private bool drawCrossHairs;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to draw cross hairs to track the value at mouse location.
+        /// </summary>
+        /// <value><c>true</c> if draw cross hairs to track to value at mouse location; otherwise, <c>false</c>.</value>
+        public bool DrawCrossHairs
+        {
+            get => drawCrossHairs;
+
+            set
+            {
+                if (drawCrossHairs != value && mouseCoordinates != null)
+                {
+                    drawCrossHairs = value;
+                    Invalidate();
+                }
+
+                drawCrossHairs = value;
+            }
+        }
+
 
         /// <summary>
         /// Gets the axes data collection.

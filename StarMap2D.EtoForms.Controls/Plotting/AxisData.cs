@@ -64,6 +64,32 @@ namespace StarMap2D.EtoForms.Controls.Plotting
         internal double[] YValues { get; set; } = Array.Empty<double>();
 
         /// <summary>
+        /// Gets the Y-axis value at X-point in pixels.
+        /// </summary>
+        /// <param name="xPoint">The X-coordinate point.</param>
+        /// <returns>The Y-coordinate value in pixels.</returns>
+        internal double GetYAxisValueAtXPoint(double xPoint)
+        {
+            var point = (int)xPoint;
+            if (point > 0 && point < YValues.Length)
+            {
+                return YValues[point];
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Gets the X-axis value at coordinate point.
+        /// </summary>
+        /// <param name="xPoint">The X-coordinate point value.</param>
+        /// <returns>The value at the specified X-coordinate.</returns>
+        internal double GetXAxisValueAtPoint(double xPoint)
+        {
+            return xPoint / XAxisWidth * (EndTime - StarTime).TotalMinutes;
+        }
+
+        /// <summary>
         /// Gets the X-axis length in minutes.
         /// </summary>
         /// <value>The X-axis length in minutes.</value>
