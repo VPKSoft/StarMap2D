@@ -37,114 +37,113 @@ using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
 
-namespace StarMap2D.EtoForms
+namespace StarMap2D.EtoForms;
+
+/// <summary>
+/// The main window of the application.
+/// Implements the <see cref="Eto.Forms.Form" />
+/// </summary>
+/// <seealso cref="Eto.Forms.Form" />
+public class MainForm : Form
 {
     /// <summary>
-    /// The main window of the application.
-    /// Implements the <see cref="Eto.Forms.Form" />
+    /// Initializes a new instance of the <see cref="MainForm"/> class.
     /// </summary>
-    /// <seealso cref="Eto.Forms.Form" />
-    public class MainForm : Form
+    public MainForm()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainForm"/> class.
-        /// </summary>
-        public MainForm()
+        EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
+
+        // Set the software localization.
+        UI.Culture = Globals.Locale;
+
+        Title = UI.StarMap2D;
+        MinimumSize = new Size(400, 300);
+
+        var plot = new TimeValuePlot { BackgroundColor = Colors.Black, DrawCrossHairs = true };
+
+        Content = new TableLayout
         {
-            EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
-
-            // Set the software localization.
-            UI.Culture = Globals.Locale;
-
-            Title = UI.StarMap2D;
-            MinimumSize = new Size(400, 300);
-
-            var plot = new TimeValuePlot { BackgroundColor = Colors.Black, DrawCrossHairs = true };
-
-            Content = new TableLayout
+            Padding = 10,
+            Rows =
             {
-                Padding = 10,
-                Rows =
+                new TableRow
                 {
-                    new TableRow
+                    Cells =
                     {
-                        Cells =
-                        {
-                            plot,
-                        }
-                    },
+                        plot,
+                    }
                 },
-            };
+            },
+        };
 
-            // create a few commands that can be used for the menu and toolbar
-            var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap };
-            starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
+        // create a few commands that can be used for the menu and toolbar
+        var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap };
+        starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
 
-            var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
-            settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
+        var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
+        settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
-            var testStuff = new Command { MenuText = UI.TestStuff, };
-            testStuff.Executed += delegate { new FormDialogCelestialObject().ShowModal(); };
+        var testStuff = new Command { MenuText = UI.TestStuff, };
+        testStuff.Executed += delegate { new FormCelestialObjectData().Show(); };
 
-            var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q };
-            quitCommand.Executed += (_, _) => Application.Instance.Quit();
+        var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q };
+        quitCommand.Executed += (_, _) => Application.Instance.Quit();
 
-            var aboutCommand = new Command { MenuText = UI.About };
-            aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
+        var aboutCommand = new Command { MenuText = UI.About };
+        aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
 
-            // create menu
-            base.Menu = new MenuBar
+        // create menu
+        base.Menu = new MenuBar
+        {
+            Items =
             {
-                Items =
-                {
-					// File submenu
-                    new SubMenuItem { Text = UI.TestStuff, Items = { testStuff }},
-                },
-                ApplicationItems =
-                {
-                    starMapCommand,
-					// application (OS X) or file menu (others)
-                },
-                QuitItem = quitCommand,
-                AboutItem = aboutCommand,
-            };
-
-            base.Menu.HelpMenu.Text = UI.Help;
-            base.Menu.ApplicationMenu.Text = UI.File;
-
-            // create toolbar			
-            ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
-
-
-            var ySunDoubles = new double[60 * 24];
-
-            var yMoonDoubles = new double[60 * 24];
-
-            var dateTime = DateTime.UtcNow;
-
-            var offset = DateTimeOffset.Now.Offset.TotalHours;
-
-            dateTime =
-                new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
-
-            var date = dateTime.ToAASDate();
-
-            var longitude = Globals.Settings.Longitude;
-            var latitude = Globals.Settings.Latitude;
-
-            for (int i = 0; i < 60 * 24; i++)
+                // File submenu
+                new SubMenuItem { Text = UI.TestStuff, Items = { testStuff }},
+            },
+            ApplicationItems =
             {
-                date = date.AddSecondsFast(60);
+                starMapCommand,
+                // application (OS X) or file menu (others)
+            },
+            QuitItem = quitCommand,
+            AboutItem = aboutCommand,
+        };
 
-                var position = SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.SUN, date, false, longitude, latitude);
-                ySunDoubles[i] = position.Y;
+        base.Menu.HelpMenu.Text = UI.Help;
+        base.Menu.ApplicationMenu.Text = UI.File;
 
-                position = SolarSystemObjectPositions.GetMoonPosition(date, true, longitude, latitude);
-                yMoonDoubles[i] = position.Y;
-            }
+        // create toolbar			
+        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
 
-            plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange });
-            plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue });
+
+        var ySunDoubles = new double[60 * 24];
+
+        var yMoonDoubles = new double[60 * 24];
+
+        var dateTime = DateTime.UtcNow;
+
+        var offset = DateTimeOffset.Now.Offset.TotalHours;
+
+        dateTime =
+            new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
+
+        var date = dateTime.ToAASDate();
+
+        var longitude = Globals.Settings.Longitude;
+        var latitude = Globals.Settings.Latitude;
+
+        for (int i = 0; i < 60 * 24; i++)
+        {
+            date = date.AddSecondsFast(60);
+
+            var position = SolarSystemObjectPositions.GetObjectPosition(AASEllipticalObject.SUN, date, false, longitude, latitude);
+            ySunDoubles[i] = position.Y;
+
+            position = SolarSystemObjectPositions.GetMoonPosition(date, true, longitude, latitude);
+            yMoonDoubles[i] = position.Y;
         }
+
+        plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange });
+        plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue });
     }
 }

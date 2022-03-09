@@ -45,75 +45,75 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     public override string Name { get; set; } = string.Empty;
 
     /// <inheritdoc cref="PlanetData.Mass"/>
-    [DataTableConfig(ColumnOrder = 6, NumberFormat = "N0")]
+    [DataTableConfig(ColumnOrder = 6, NumberFormat = "F0")]
     public override double Mass { get; set; }
 
     /// <inheritdoc cref="PlanetData.Diameter"/>
-    [DataTableConfig(ColumnOrder = 7, NumberFormat = "N0")]
+    [DataTableConfig(ColumnOrder = 7, NumberFormat = "F0")]
     public override double Diameter { get; set; }
 
     /// <inheritdoc cref="PlanetData.Density"/>
-    [DataTableConfig(ColumnOrder = 8, NumberFormat = "N0")]
+    [DataTableConfig(ColumnOrder = 8, NumberFormat = "F0")]
     public override double Density { get; set; }
 
     /// <inheritdoc cref="PlanetData.Gravity"/>
-    [DataTableConfig(ColumnOrder = 9, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 9, NumberFormat = "F3")]
     public override double Gravity { get; set; }
 
     /// <inheritdoc cref="PlanetData.EscapeVelocity"/>
-    [DataTableConfig(ColumnOrder = 10, NumberFormat = "N1")]
+    [DataTableConfig(ColumnOrder = 10, NumberFormat = "F1")]
     public override double EscapeVelocity { get; set; }
 
     /// <inheritdoc cref="PlanetData.RotationPeriod"/>
-    [DataTableConfig(ColumnOrder = 11, NumberFormat = "N2")]
+    [DataTableConfig(ColumnOrder = 11, NumberFormat = "F2")]
     public override double RotationPeriod { get; set; }
 
     /// <inheritdoc cref="PlanetData.LengthOfDay"/>
-    [DataTableConfig(ColumnOrder = 12, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 12, NumberFormat = "F3")]
     public override double LengthOfDay { get; set; }
 
     /// <inheritdoc cref="PlanetData.DistanceFromSun"/>
-    [DataTableConfig(ColumnOrder = 13, NumberFormat = "N2")]
+    [DataTableConfig(ColumnOrder = 13, NumberFormat = "F2")]
     public override double DistanceFromSun { get; set; }
 
     /// <inheritdoc cref="PlanetData.Perihelion"/>
-    [DataTableConfig(ColumnOrder = 14, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 14, NumberFormat = "F3")]
     public override double Perihelion { get; set; }
 
     /// <inheritdoc cref="PlanetData.Aphelion"/>
-    [DataTableConfig(ColumnOrder = 15, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 15, NumberFormat = "F3")]
     public override double Aphelion { get; set; }
 
     /// <inheritdoc cref="PlanetData.OrbitalPeriod"/>
-    [DataTableConfig(ColumnOrder = 16, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 16, NumberFormat = "F3")]
     public override double? OrbitalPeriod { get; set; }
 
     /// <inheritdoc cref="PlanetData.OrbitalVelocity"/>
-    [DataTableConfig(ColumnOrder = 17, NumberFormat = "N1")]
+    [DataTableConfig(ColumnOrder = 17, NumberFormat = "F1")]
     public override double? OrbitalVelocity { get; set; }
 
     /// <inheritdoc cref="PlanetData.OrbitalInclination"/>
-    [DataTableConfig(ColumnOrder = 18, NumberFormat = "N1")]
+    [DataTableConfig(ColumnOrder = 18, NumberFormat = "F1")]
     public override double? OrbitalInclination { get; set; }
 
     /// <inheritdoc cref="PlanetData.OrbitalEccentricity"/>
-    [DataTableConfig(ColumnOrder = 19, NumberFormat = "N4")]
+    [DataTableConfig(ColumnOrder = 19, NumberFormat = "F4")]
     public override double? OrbitalEccentricity { get; set; }
 
     /// <inheritdoc cref="PlanetData.ObliquityToOrbit"/>
-    [DataTableConfig(ColumnOrder = 20, NumberFormat = "N3")]
+    [DataTableConfig(ColumnOrder = 20, NumberFormat = "F3")]
     public override double? ObliquityToOrbit { get; set; }
 
     /// <inheritdoc cref="PlanetData.MeanTemperature"/>
-    [DataTableConfig(ColumnOrder = 21, NumberFormat = "N1")]
+    [DataTableConfig(ColumnOrder = 21, NumberFormat = "F1")]
     public override double? MeanTemperature { get; set; }
 
     /// <inheritdoc cref="PlanetData.SurfacePressure"/>
-    [DataTableConfig(ColumnOrder = 22, NumberFormat = "N2")]
+    [DataTableConfig(ColumnOrder = 22, NumberFormat = "F2")]
     public override double? SurfacePressure { get; set; }
 
     /// <inheritdoc cref="PlanetData.NumberOfMoons"/>
-    [DataTableConfig(ColumnOrder = 23, NumberFormat = "N0")]
+    [DataTableConfig(ColumnOrder = 23, NumberFormat = "F0")]
     public override int? NumberOfMoons { get; set; }
 
     /// <inheritdoc cref="PlanetData.RingSystem"/>
@@ -132,11 +132,11 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     public string? ObjectName { get; set; }
 
     /// <inheritdoc cref="IObjectDetails.RightAscension"/>
-    [DataTableConfig(ColumnOrder = 1, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 1, NumberFormat = "F10")]
     public double RightAscension { get; set; }
 
     /// <inheritdoc cref="IObjectDetails.Declination"/>
-    [DataTableConfig(ColumnOrder = 2, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 2, NumberFormat = "F10")]
     public double Declination { get; set; }
 
     /// <inheritdoc cref="IObjectDetails.AboveHorizon"/>
@@ -144,11 +144,11 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     public bool AboveHorizon { get; set; }
 
     /// <inheritdoc cref="IObjectDetails.HorizontalDegreesX"/>
-    [DataTableConfig(ColumnOrder = 4, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 4, NumberFormat = "F10")]
     public double HorizontalDegreesX { get; set; }
 
     /// <inheritdoc cref="IObjectDetails.HorizontalDegreesY"/>
-    [DataTableConfig(ColumnOrder = 3, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 3, NumberFormat = "F10")]
     public double HorizontalDegreesY { get; set; }
 
     private double latitude { get; set; }
@@ -157,7 +157,7 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     /// Gets or sets the latitude of the object.
     /// </summary>
     /// <value>The object latitude.</value>
-    [DataTableConfig(ColumnOrder = 26, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 26, NumberFormat = "F10")]
     public double Latitude
     {
         get => latitude;
@@ -178,7 +178,7 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     /// Gets or sets the longitude of the object.
     /// </summary>
     /// <value>The object longitude.</value>
-    [DataTableConfig(ColumnOrder = 27, NumberFormat = "N10")]
+    [DataTableConfig(ColumnOrder = 27, NumberFormat = "F10")]
     public double Longitude
     {
         get => longitude;

@@ -39,382 +39,381 @@ using TextBox = Eto.Forms.TextBox;
 
 using UI = StarMap2D.Localization.UI;
 
-namespace StarMap2D.EtoForms.Forms.Dialogs
+namespace StarMap2D.EtoForms.Forms.Dialogs;
+
+/// <summary>
+/// A dialog to specify settings for the StarMap2D software.
+/// Implements the <see cref="Dialog{T}" />
+/// </summary>
+/// <seealso cref="Dialog{T}" />
+public class FormDialogSettings : Dialog<bool>
 {
+    #region GeneralControls
+    private TabControl? tabControlSettings;
+    private Button? btOk;
+    private Button? btCancel;
+    private TableLayout? tableLayout;
+    #endregion
+
+    #region CommonSettingsControls
+    private TabPage? tabCommon;
+    private TableLayout? tabCommonLayout;
+    private TextBox? textBoxLocation;
+    private NumericStepper? latitudeStepper;
+    private NumericStepper? longitudeStepper;
+    private NumericStepper? crossHairStepper;
+    private ComboBox? comboBoxLocations;
+    private CheckBox? cbInvertAxis;
+    private CheckBox? cbDrawConstellations;
+    private CheckBox? cbDrawConstellationLabels;
+    private CheckBox? cbDrawConstellationBoundaries;
+    private CheckBox? cbDrawCrossHair;
+    private ComboBox? cmbUiLocale;
+    private ComboBox? cmbStarCatalog;
+    #endregion
+
+    #region DateAndNumberFormattingSettingsControls
+    private TabPage? tabNumberFormatting;
+    private TableLayout? tabNumberFormattingLayout;
+    private ComboBox? cmbDataFormattingCulture;
+    private ComboBox? cmbDateAndTimeFormattingCulture;
+    #endregion
+
+    #region Fonts
+    private TabPage? tabFonts;
+    private TableLayout? tlFonts;
+    private FontPicker? fpNormal;
+    private FontPicker? fpMonospaced;
+    #endregion
+
     /// <summary>
-    /// A dialog to specify settings for the StarMap2D software.
-    /// Implements the <see cref="Dialog{T}" />
+    /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
     /// </summary>
-    /// <seealso cref="Dialog{T}" />
-    public class FormDialogSettings : Dialog<bool>
+    public FormDialogSettings()
     {
-        #region GeneralControls
-        private TabControl? tabControlSettings;
-        private Button? btOk;
-        private Button? btCancel;
-        private TableLayout? tableLayout;
-        #endregion
+        MinimumSize = new Size(300, 200);
 
-        #region CommonSettingsControls
-        private TabPage? tabCommon;
-        private TableLayout? tabCommonLayout;
-        private TextBox? textBoxLocation;
-        private NumericStepper? latitudeStepper;
-        private NumericStepper? longitudeStepper;
-        private NumericStepper? crossHairStepper;
-        private ComboBox? comboBoxLocations;
-        private CheckBox? cbInvertAxis;
-        private CheckBox? cbDrawConstellations;
-        private CheckBox? cbDrawConstellationLabels;
-        private CheckBox? cbDrawConstellationBoundaries;
-        private CheckBox? cbDrawCrossHair;
-        private ComboBox? cmbUiLocale;
-        private ComboBox? cmbStarCatalog;
-        #endregion
+        // Set the software localization.
+        UI.Culture = Globals.Locale;
 
-        #region DateAndNumberFormattingSettingsControls
-        private TabPage? tabNumberFormatting;
-        private TableLayout? tabNumberFormattingLayout;
-        private ComboBox? cmbDataFormattingCulture;
-        private ComboBox? cmbDateAndTimeFormattingCulture;
-        #endregion
+        // Create the UI controls.
+        InitializeView();
+    }
 
-        #region Fonts
-        private TabPage? tabFonts;
-        private TableLayout? tlFonts;
-        private FontPicker? fpNormal;
-        private FontPicker? fpMonospaced;
-        #endregion
+    /// <summary>
+    /// Initializes the view.
+    /// </summary>
+    private void InitializeView()
+    {
+        Title = UI.Settings;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormDialogSettings"/> class.
-        /// </summary>
-        public FormDialogSettings()
+        tableLayout = new TableLayout();
+
+        Content = tableLayout;
+        tabControlSettings = new TabControl();
+
+        // The first tab page.
+        LayoutTabPageCommon();
+
+        // The second tab page.
+        LayoutFontSettings();
+
+        // The third tab page.
+        LayoutTabPageFormatting();
+
+        btOk = new Button { Text = UI.OK };
+        btOk.Click += delegate { SaveSettings(); Close(true); };
+
+        btCancel = new Button { Text = UI.Cancel };
+        btCancel.Click += delegate { Close(false); };
+
+        DefaultButton = btOk;
+        AbortButton = btCancel;
+
+        PositiveButtons.Add(btOk);
+
+        NegativeButtons.Add(btCancel);
+
+        LoadSettings();
+    }
+
+    /// <summary>
+    /// Creates the controls for the date and number formatting settings tab page.
+    /// </summary>
+    private void LayoutTabPageFormatting()
+    {
+        // The base layout.
+        tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings };
+        tabControlSettings!.Pages.Add(tabNumberFormatting);
+        tabNumberFormattingLayout = new TableLayout();
+        tabNumberFormattingLayout.Padding = new Padding(5);
+        tabNumberFormatting.Content = tabNumberFormattingLayout;
+
+        // The actual controls.
+        cmbDataFormattingCulture = new ComboBox
         {
-            MinimumSize = new Size(300, 200);
+            ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
+            AutoComplete = true,
+        };
 
-            // Set the software localization.
-            UI.Culture = Globals.Locale;
+        tabNumberFormattingLayout.Rows.Add(
+            new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DataFormattingCulture, cmbDataFormattingCulture))));
 
-            // Create the UI controls.
-            InitializeView();
-        }
+        var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
+            .Select(f => new CultureExtended(f.Name, true)).ToList();
 
-        /// <summary>
-        /// Initializes the view.
-        /// </summary>
-        private void InitializeView()
+        cmbDataFormattingCulture.DataStore = cultures;
+
+        cmbDateAndTimeFormattingCulture = new ComboBox
         {
-            Title = UI.Settings;
+            ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
+            AutoComplete = true,
+        };
 
-            tableLayout = new TableLayout();
+        tabNumberFormattingLayout.Rows.Add(
+            new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DateAndTimeFormattingCulture, cmbDateAndTimeFormattingCulture))));
 
-            Content = tableLayout;
-            tabControlSettings = new TabControl();
+        cmbDateAndTimeFormattingCulture.DataStore = cultures;
 
-            // The first tab page.
-            LayoutTabPageCommon();
+        // Scale the last row to the maximum.
+        tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
+    }
 
-            // The second tab page.
-            LayoutFontSettings();
+    private void LayoutFontSettings()
+    {
+        tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding) };
+        tabControlSettings!.Pages.Add(tabFonts);
 
-            // The third tab page.
-            LayoutTabPageFormatting();
+        tlFonts = new TableLayout();
+        tabFonts.Content = tlFonts;
 
-            btOk = new Button { Text = UI.OK };
-            btOk.Click += delegate { SaveSettings(); Close(true); };
+        fpNormal = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
 
-            btCancel = new Button { Text = UI.Cancel };
-            btCancel.Click += delegate { Close(false); };
+        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
+        fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
+        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
 
-            DefaultButton = btOk;
-            AbortButton = btCancel;
+        // Scale the last row to the maximum.
+        tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
+    }
 
-            PositiveButtons.Add(btOk);
+    /// <summary>
+    /// Creates the controls for the common settings tab page.
+    /// </summary>
+    private void LayoutTabPageCommon()
+    {
+        tabCommon = new TabPage { Text = UI.Common };
+        tabControlSettings!.Pages.Add(tabCommon);
 
-            NegativeButtons.Add(btCancel);
+        tableLayout!.Rows.Add(new TableRow(
+            new TableCell(tabControlSettings, true)));
 
-            LoadSettings();
-        }
+        tabCommonLayout = new TableLayout();
+        tabCommon.Padding = new Padding(5);
 
-        /// <summary>
-        /// Creates the controls for the date and number formatting settings tab page.
-        /// </summary>
-        private void LayoutTabPageFormatting()
+        tabCommon.Content = tabCommonLayout;
+
+        textBoxLocation = new TextBox();
+
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.LocationName, textBoxLocation), true)));
+
+        latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
+        longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
+        crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70 };
+
+        tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
+            new TableCell(
+                EtoHelpers.LabelWrap(UI.Latitude, latitudeStepper),
+                true),
+            new TableCell(
+                EtoHelpers.LabelWrap(UI.Longitude, longitudeStepper),
+                true))));
+
+        comboBoxLocations = new ComboBox { AutoComplete = true };
+        comboBoxLocations.Items.AddRange(Cities.CitiesList.Select(f => new ListItem
+        { Key = f.CityName, Text = f.CityName, Tag = f }));
+
+        comboBoxLocations.SelectedValueChanged += delegate
         {
-            // The base layout.
-            tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings };
-            tabControlSettings!.Pages.Add(tabNumberFormatting);
-            tabNumberFormattingLayout = new TableLayout();
-            tabNumberFormattingLayout.Padding = new Padding(5);
-            tabNumberFormatting.Content = tabNumberFormattingLayout;
-
-            // The actual controls.
-            cmbDataFormattingCulture = new ComboBox
+            if (comboBoxLocations.SelectedValue == null)
             {
-                ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
-                AutoComplete = true,
-            };
-
-            tabNumberFormattingLayout.Rows.Add(
-                new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DataFormattingCulture, cmbDataFormattingCulture))));
-
-            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
-                .Select(f => new CultureExtended(f.Name, true)).ToList();
-
-            cmbDataFormattingCulture.DataStore = cultures;
-
-            cmbDateAndTimeFormattingCulture = new ComboBox
-            {
-                ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
-                AutoComplete = true,
-            };
-
-            tabNumberFormattingLayout.Rows.Add(
-                new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DateAndTimeFormattingCulture, cmbDateAndTimeFormattingCulture))));
-
-            cmbDateAndTimeFormattingCulture.DataStore = cultures;
-
-            // Scale the last row to the maximum.
-            tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
-        }
-
-        private void LayoutFontSettings()
-        {
-            tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding) };
-            tabControlSettings!.Pages.Add(tabFonts);
-
-            tlFonts = new TableLayout();
-            tabFonts.Content = tlFonts;
-
-            fpNormal = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
-
-            tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
-            fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
-            tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
-
-            // Scale the last row to the maximum.
-            tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
-        }
-
-        /// <summary>
-        /// Creates the controls for the common settings tab page.
-        /// </summary>
-        private void LayoutTabPageCommon()
-        {
-            tabCommon = new TabPage { Text = UI.Common };
-            tabControlSettings!.Pages.Add(tabCommon);
-
-            tableLayout!.Rows.Add(new TableRow(
-                new TableCell(tabControlSettings, true)));
-
-            tabCommonLayout = new TableLayout();
-            tabCommon.Padding = new Padding(5);
-
-            tabCommon.Content = tabCommonLayout;
-
-            textBoxLocation = new TextBox();
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.LocationName, textBoxLocation), true)));
-
-            latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
-            longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
-            crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70 };
-
-            tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
-                new TableCell(
-                    EtoHelpers.LabelWrap(UI.Latitude, latitudeStepper),
-                    true),
-                new TableCell(
-                    EtoHelpers.LabelWrap(UI.Longitude, longitudeStepper),
-                    true))));
-
-            comboBoxLocations = new ComboBox { AutoComplete = true };
-            comboBoxLocations.Items.AddRange(Cities.CitiesList.Select(f => new ListItem
-            { Key = f.CityName, Text = f.CityName, Tag = f }));
-
-            comboBoxLocations.SelectedValueChanged += delegate
-            {
-                if (comboBoxLocations.SelectedValue == null)
-                {
-                    return;
-                }
-
-                var value = (CityLatLonCoordinate)((ListItem)comboBoxLocations.SelectedValue).Tag;
-                latitudeStepper.Value = value.Latitude;
-                longitudeStepper.Value = value.Longitude;
-                textBoxLocation.Text = value.CityName;
-            };
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.LabelWrap(UI.SelectLocation,
-                    comboBoxLocations), true)));
-
-            cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis };
-            cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations };
-            cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames };
-            cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries };
-            cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair };
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.PaddingWrap(cbInvertAxis), true)));
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.PaddingWrap(cbDrawConstellations), true)));
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.PaddingWrap(cbDrawConstellationLabels), true)));
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.PaddingWrap(cbDrawConstellationBoundaries), true)));
-
-            tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
-                new TableCell(
-                    EtoHelpers.PaddingWrap(cbDrawCrossHair),
-                    true),
-                new TableCell(
-                    EtoHelpers.LabelWrap(UI.CrossHairSize, crossHairStepper),
-                    true))));
-
-            cmbUiLocale = new ComboBox
-            {
-                AutoComplete = true,
-                ItemTextBinding = new PropertyBinding<string>(nameof(CultureInfo.DisplayName)),
-            };
-
-            cmbUiLocale.DataStore = Localization.Properties.Languages.Select(f => new CultureExtended(f, true));
-
-            cmbStarCatalog = new ComboBox { AutoComplete = true };
-
-            starCatalogs = new List<StarCatalogData>
-            {
-                new()
-                {
-                    IsBuildIn = true, Name = string.Format(UI.EmbeddedParameter, CatalogNames.BuiltInName),
-                },
-            };
-
-            starCatalogs.AddRange(CatalogNames.TypeNames);
-
-            cmbStarCatalog.DataStore = starCatalogs;
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.LabelWrap(UI.StarCatalogSelection,
-                    cmbStarCatalog), true)));
-
-            tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-                EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
-
-            // Scale the last row to the maximum.
-            tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
-        }
-
-        private List<StarCatalogData> starCatalogs = new();
-
-        /// <summary>
-        /// Due to a bug in Eto.Forms (WPF) the ComboBox selected item text must be overridden (See: https://github.com/picoe/Eto/issues/414)
-        /// Implements the <see cref="System.Globalization.CultureInfo" />
-        /// </summary>
-        /// <seealso cref="System.Globalization.CultureInfo" />
-        internal class CultureExtended : CultureInfo
-        {
-            private readonly bool local;
-
-            public CultureExtended(string name, bool local) : base(name)
-            {
-                this.local = local;
+                return;
             }
 
-            public override string ToString()
-            {
-                return local ? base.DisplayName : base.EnglishName;
-            }
-        }
+            var value = (CityLatLonCoordinate)((ListItem)comboBoxLocations.SelectedValue).Tag;
+            latitudeStepper.Value = value.Latitude;
+            longitudeStepper.Value = value.Longitude;
+            textBoxLocation.Text = value.CityName;
+        };
 
-        /// <summary>
-        /// Loads the program settings.
-        /// </summary>
-        private void LoadSettings()
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.LabelWrap(UI.SelectLocation,
+                comboBoxLocations), true)));
+
+        cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis };
+        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations };
+        cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames };
+        cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries };
+        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair };
+
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.PaddingWrap(cbInvertAxis), true)));
+
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.PaddingWrap(cbDrawConstellations), true)));
+
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.PaddingWrap(cbDrawConstellationLabels), true)));
+
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.PaddingWrap(cbDrawConstellationBoundaries), true)));
+
+        tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
+            new TableCell(
+                EtoHelpers.PaddingWrap(cbDrawCrossHair),
+                true),
+            new TableCell(
+                EtoHelpers.LabelWrap(UI.CrossHairSize, crossHairStepper),
+                true))));
+
+        cmbUiLocale = new ComboBox
         {
-            var cultureDefault = new CultureExtended("en", true);
-            var cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.Locale)
-                ? cultureDefault
-                : new CultureExtended(Globals.Settings.Locale.Split('-')[0], true);
+            AutoComplete = true,
+            ItemTextBinding = new PropertyBinding<string>(nameof(CultureInfo.DisplayName)),
+        };
 
-            cmbUiLocale!.SelectedValue = cultureSelected;
+        cmbUiLocale.DataStore = Localization.Properties.Languages.Select(f => new CultureExtended(f, true));
 
-            var selectedCatalog = string.IsNullOrWhiteSpace(Globals.Settings.StarCatalog)
-                ? starCatalogs.First(f => f.Identifier == 0)
-                : starCatalogs.First(f => !f.IsBuildIn && f.Type.Name == Globals.Settings.StarCatalog);
+        cmbStarCatalog = new ComboBox { AutoComplete = true };
 
-            cmbStarCatalog!.SelectedValue = selectedCatalog;
-
-            cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.FormattingLocale)
-                ? cultureDefault
-                : new CultureExtended(Globals.Settings.FormattingLocale, true);
-            cmbDataFormattingCulture!.SelectedValue = cultureSelected;
-
-            cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.DateFormattingCulture)
-                ? cultureDefault
-                : new CultureExtended(Globals.Settings.DateFormattingCulture, true);
-            cmbDateAndTimeFormattingCulture!.SelectedValue = cultureSelected;
-
-            longitudeStepper!.Value = Globals.Settings.Longitude;
-            latitudeStepper!.Value = Globals.Settings.Latitude;
-            crossHairStepper!.Value = Globals.Settings.CrossHairSize;
-            textBoxLocation!.Text = Globals.Settings.DefaultLocationName;
-            cbInvertAxis!.Checked = Globals.Settings.InvertEastWest;
-            cbDrawConstellations!.Checked = Globals.Settings.DrawConstellationLines;
-            cbDrawConstellationLabels!.Checked = Globals.Settings.DrawConstellationLabels;
-            cbDrawConstellationBoundaries!.Checked = Globals.Settings.DrawConstellationBorders;
-            cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
-            fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
-            fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
-        }
-
-        /// <summary>
-        /// Saves the program settings.
-        /// </summary>
-        private void SaveSettings()
+        starCatalogs = new List<StarCatalogData>
         {
-            Globals.Settings.Longitude = longitudeStepper!.Value;
-            Globals.Settings.Latitude = latitudeStepper!.Value;
-            Globals.Settings.CrossHairSize = (int)crossHairStepper!.Value;
-            Globals.Settings.DefaultLocationName = textBoxLocation!.Text;
-            Globals.Settings.InvertEastWest = cbInvertAxis!.Checked ?? false;
-            Globals.Settings.DrawConstellationLines = cbDrawConstellations!.Checked ?? false;
-            Globals.Settings.DrawConstellationLabels = cbDrawConstellationLabels!.Checked ?? false;
-            Globals.Settings.DrawConstellationBorders = cbDrawConstellationBoundaries!.Checked ?? false;
-            Globals.Settings.DrawCrossHair = cbDrawCrossHair!.Checked ?? false;
-
-            if (cmbUiLocale!.SelectedValue != null)
+            new()
             {
-                var culture = (CultureInfo)cmbUiLocale.SelectedValue;
-                Globals.Settings.Locale = culture.Name;
-            }
+                IsBuildIn = true, Name = string.Format(UI.EmbeddedParameter, CatalogNames.BuiltInName),
+            },
+        };
 
-            if (cmbStarCatalog!.SelectedValue != null)
-            {
-                var catalog = (StarCatalogData)cmbStarCatalog.SelectedValue;
-                Globals.Settings.StarCatalog = catalog.Identifier == 0 ? null : catalog.Type.Name;
-            }
+        starCatalogs.AddRange(CatalogNames.TypeNames);
 
-            if (cmbDataFormattingCulture!.SelectedValue != null)
-            {
-                var culture = (CultureInfo)cmbDataFormattingCulture.SelectedValue;
-                Globals.Settings.FormattingLocale = culture.Name;
-            }
+        cmbStarCatalog.DataStore = starCatalogs;
 
-            if (cmbDateAndTimeFormattingCulture!.SelectedValue != null)
-            {
-                var culture = (CultureInfo)cmbDateAndTimeFormattingCulture.SelectedValue;
-                Globals.Settings.DateFormattingCulture = culture.Name;
-            }
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.LabelWrap(UI.StarCatalogSelection,
+                cmbStarCatalog), true)));
 
-            Globals.Settings.Font = fpNormal!.Value;
-            Globals.Settings.DataFont = fpMonospaced!.Value;
+        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
+            EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
 
-            Globals.SaveSettings();
+        // Scale the last row to the maximum.
+        tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
+    }
+
+    private List<StarCatalogData> starCatalogs = new();
+
+    /// <summary>
+    /// Due to a bug in Eto.Forms (WPF) the ComboBox selected item text must be overridden (See: https://github.com/picoe/Eto/issues/414)
+    /// Implements the <see cref="System.Globalization.CultureInfo" />
+    /// </summary>
+    /// <seealso cref="System.Globalization.CultureInfo" />
+    internal class CultureExtended : CultureInfo
+    {
+        private readonly bool local;
+
+        public CultureExtended(string name, bool local) : base(name)
+        {
+            this.local = local;
         }
+
+        public override string ToString()
+        {
+            return local ? base.DisplayName : base.EnglishName;
+        }
+    }
+
+    /// <summary>
+    /// Loads the program settings.
+    /// </summary>
+    private void LoadSettings()
+    {
+        var cultureDefault = new CultureExtended("en", true);
+        var cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.Locale)
+            ? cultureDefault
+            : new CultureExtended(Globals.Settings.Locale.Split('-')[0], true);
+
+        cmbUiLocale!.SelectedValue = cultureSelected;
+
+        var selectedCatalog = string.IsNullOrWhiteSpace(Globals.Settings.StarCatalog)
+            ? starCatalogs.First(f => f.Identifier == 0)
+            : starCatalogs.First(f => !f.IsBuildIn && f.Type.Name == Globals.Settings.StarCatalog);
+
+        cmbStarCatalog!.SelectedValue = selectedCatalog;
+
+        cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.FormattingLocale)
+            ? cultureDefault
+            : new CultureExtended(Globals.Settings.FormattingLocale, true);
+        cmbDataFormattingCulture!.SelectedValue = cultureSelected;
+
+        cultureSelected = string.IsNullOrWhiteSpace(Globals.Settings.DateFormattingCulture)
+            ? cultureDefault
+            : new CultureExtended(Globals.Settings.DateFormattingCulture, true);
+        cmbDateAndTimeFormattingCulture!.SelectedValue = cultureSelected;
+
+        longitudeStepper!.Value = Globals.Settings.Longitude;
+        latitudeStepper!.Value = Globals.Settings.Latitude;
+        crossHairStepper!.Value = Globals.Settings.CrossHairSize;
+        textBoxLocation!.Text = Globals.Settings.DefaultLocationName;
+        cbInvertAxis!.Checked = Globals.Settings.InvertEastWest;
+        cbDrawConstellations!.Checked = Globals.Settings.DrawConstellationLines;
+        cbDrawConstellationLabels!.Checked = Globals.Settings.DrawConstellationLabels;
+        cbDrawConstellationBoundaries!.Checked = Globals.Settings.DrawConstellationBorders;
+        cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
+        fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
+        fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+    }
+
+    /// <summary>
+    /// Saves the program settings.
+    /// </summary>
+    private void SaveSettings()
+    {
+        Globals.Settings.Longitude = longitudeStepper!.Value;
+        Globals.Settings.Latitude = latitudeStepper!.Value;
+        Globals.Settings.CrossHairSize = (int)crossHairStepper!.Value;
+        Globals.Settings.DefaultLocationName = textBoxLocation!.Text;
+        Globals.Settings.InvertEastWest = cbInvertAxis!.Checked ?? false;
+        Globals.Settings.DrawConstellationLines = cbDrawConstellations!.Checked ?? false;
+        Globals.Settings.DrawConstellationLabels = cbDrawConstellationLabels!.Checked ?? false;
+        Globals.Settings.DrawConstellationBorders = cbDrawConstellationBoundaries!.Checked ?? false;
+        Globals.Settings.DrawCrossHair = cbDrawCrossHair!.Checked ?? false;
+
+        if (cmbUiLocale!.SelectedValue != null)
+        {
+            var culture = (CultureInfo)cmbUiLocale.SelectedValue;
+            Globals.Settings.Locale = culture.Name;
+        }
+
+        if (cmbStarCatalog!.SelectedValue != null)
+        {
+            var catalog = (StarCatalogData)cmbStarCatalog.SelectedValue;
+            Globals.Settings.StarCatalog = catalog.Identifier == 0 ? null : catalog.Type.Name;
+        }
+
+        if (cmbDataFormattingCulture!.SelectedValue != null)
+        {
+            var culture = (CultureInfo)cmbDataFormattingCulture.SelectedValue;
+            Globals.Settings.FormattingLocale = culture.Name;
+        }
+
+        if (cmbDateAndTimeFormattingCulture!.SelectedValue != null)
+        {
+            var culture = (CultureInfo)cmbDateAndTimeFormattingCulture.SelectedValue;
+            Globals.Settings.DateFormattingCulture = culture.Name;
+        }
+
+        Globals.Settings.Font = fpNormal!.Value;
+        Globals.Settings.DataFont = fpMonospaced!.Value;
+
+        Globals.SaveSettings();
     }
 }

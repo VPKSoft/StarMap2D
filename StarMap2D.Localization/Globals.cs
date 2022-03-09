@@ -26,27 +26,26 @@ SOFTWARE.
 
 using System.Globalization;
 
-namespace StarMap2D.Localization
+namespace StarMap2D.Localization;
+
+/// <summary>
+/// A class containing the global static parameters.
+/// </summary>
+public class Globals
 {
     /// <summary>
-    /// A class containing the global static parameters.
+    /// Overrides the current thread's CurrentUICulture property for all resource lookups.
     /// </summary>
-    public class Globals
+    /// <value>The culture for localization.</value>
+    public static CultureInfo Culture
     {
-        /// <summary>
-        /// Overrides the current thread's CurrentUICulture property for all resource lookups.
-        /// </summary>
-        /// <value>The culture for localization.</value>
-        public static CultureInfo Culture
-        {
-            get => UI.Culture;
+        get => UI.Culture;
 
-            set
-            {
-                UI.Culture = value;
-                Units.Culture = value;
-                CelestialObjects.Culture = value;
-            }
+        set
+        {
+            UI.Culture = value;
+            Units.Culture = value;
+            CelestialObjects.Culture = value;
         }
     }
 }

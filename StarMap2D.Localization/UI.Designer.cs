@@ -115,6 +115,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Celestial object details.
+        /// </summary>
+        public static string CelestialObjectDetails {
+            get {
+                return ResourceManager.GetString("CelestialObjectDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Celestial objects.
         /// </summary>
         public static string CelestialObjects {
@@ -169,6 +178,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSV files.
+        /// </summary>
+        public static string CSVFiles {
+            get {
+                return ResourceManager.GetString("CSVFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data formatting culture (i.e. numbers, etc).
         /// </summary>
         public static string DataFormattingCulture {
@@ -178,11 +196,29 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data URL.
+        /// </summary>
+        public static string DataURL {
+            get {
+                return ResourceManager.GetString("DataURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date and number formatting.
         /// </summary>
         public static string DateAndNumberFormattingSettings {
             get {
                 return ResourceManager.GetString("DateAndNumberFormattingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time.
+        /// </summary>
+        public static string DateAndTime {
+            get {
+                return ResourceManager.GetString("DateAndTime", resourceCulture);
             }
         }
         
@@ -268,6 +304,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export CSV.
+        /// </summary>
+        public static string ExportCSV {
+            get {
+                return ResourceManager.GetString("ExportCSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;File.
         /// </summary>
         public static string File {
@@ -327,15 +372,6 @@ namespace StarMap2D.Localization {
         public static string HorizontalAltitudeDegrees {
             get {
                 return ResourceManager.GetString("HorizontalAltitudeDegrees", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Horizontal, atzimuth (degrees).
-        /// </summary>
-        public static string HorizontalAtzimuthDegrees {
-            get {
-                return ResourceManager.GetString("HorizontalAtzimuthDegrees", resourceCulture);
             }
         }
         
@@ -489,6 +525,15 @@ namespace StarMap2D.Localization {
         public static string RightAscensionHours {
             get {
                 return ResourceManager.GetString("RightAscensionHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save to CSV file.
+        /// </summary>
+        public static string SaveToCSVFile {
+            get {
+                return ResourceManager.GetString("SaveToCSVFile", resourceCulture);
             }
         }
         

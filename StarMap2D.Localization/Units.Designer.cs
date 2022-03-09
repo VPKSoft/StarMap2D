@@ -205,6 +205,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Horizontal, azimuth (degrees).
+        /// </summary>
+        public static string HorizontalAzimuthDegrees {
+            get {
+                return ResourceManager.GetString("HorizontalAzimuthDegrees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to hours.
         /// </summary>
         public static string Hours {
@@ -264,6 +273,15 @@ namespace StarMap2D.Localization {
         public static string Months {
             get {
                 return ResourceManager.GetString("Months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         

@@ -24,92 +24,91 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Compass
+namespace StarMap2D.Calculations.Compass;
+
+/// <summary>
+/// A class to indicate compass direction using specified amount of degrees as a base value.
+/// </summary>
+public class CompassDirection
 {
     /// <summary>
-    /// A class to indicate compass direction using specified amount of degrees as a base value.
+    /// Creates a new instance of the <see cref="CompassDirection"/> class using the specified degrees.
     /// </summary>
-    public class CompassDirection
+    /// <param name="degrees">The degrees.</param>
+    /// <returns>A new instance of the <seealso cref="CompassDirection"/> class.</returns>
+    public static CompassDirection FromDegrees(double degrees)
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="CompassDirection"/> class using the specified degrees.
-        /// </summary>
-        /// <param name="degrees">The degrees.</param>
-        /// <returns>A new instance of the <seealso cref="CompassDirection"/> class.</returns>
-        public static CompassDirection FromDegrees(double degrees)
+        return new CompassDirection
         {
-            return new CompassDirection
-            {
-                Degrees = degrees,
-            };
-        }
+            Degrees = degrees,
+        };
+    }
 
-        /// <summary>
-        /// Gets or sets the direction point value of the compass.
-        /// </summary>
-        /// <value>The point value.</value>
-        public CompassPoint Point { get; private set; }
+    /// <summary>
+    /// Gets or sets the direction point value of the compass.
+    /// </summary>
+    /// <value>The point value.</value>
+    public CompassPoint Point { get; private set; }
 
-        private double degrees;
+    private double degrees;
 
-        /// <summary>
-        /// Gets or sets the compass degrees.
-        /// </summary>
-        /// <value>The degrees.</value>
-        public double Degrees
+    /// <summary>
+    /// Gets or sets the compass degrees.
+    /// </summary>
+    /// <value>The degrees.</value>
+    public double Degrees
+    {
+        get => degrees;
+
+        set
         {
-            get => degrees;
-
-            set
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (degrees != value)
             {
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
-                if (degrees != value)
-                {
-                    degrees = value;
+                degrees = value;
 
-                    var points = Enum.GetValues(typeof(CompassPoint)).Cast<int>().ToList();
+                var points = Enum.GetValues(typeof(CompassPoint)).Cast<int>().ToList();
 
-                    points.Add(3600);
+                points.Add(3600);
 
-                    var nearestPoint = points.OrderBy(f => Math.Abs(f - degrees * 10)).First();
+                var nearestPoint = points.OrderBy(f => Math.Abs(f - degrees * 10)).First();
 
-                    var point = nearestPoint != 3600 ? (CompassPoint)nearestPoint : CompassPoint.North;
+                var point = nearestPoint != 3600 ? (CompassPoint)nearestPoint : CompassPoint.North;
 
-                    // A bit complex logic for the north where 360 == 0.
-                    var degreeOffset = degrees - (point == CompassPoint.North && degrees > 315 ? 3600.0 : (double)point) / 10.0;
+                // A bit complex logic for the north where 360 == 0.
+                var degreeOffset = degrees - (point == CompassPoint.North && degrees > 315 ? 3600.0 : (double)point) / 10.0;
 
-                    PointOffset = degreeOffset;
-                    Point = point;
-                }
+                PointOffset = degreeOffset;
+                Point = point;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the degrees to add to the <see cref="Point"/> to get the exact amount of degrees.
-        /// </summary>
-        /// <value>The point offset.</value>
-        public double PointOffset { get; private set; }
-
-        /// <summary>
-        /// A function to localize the <see cref="Point"/> value.
-        /// </summary>
-        public static Func<CompassPoint, string> GetNameFunc { get; set; } = point => point.ToString();
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return
-                @$"{{ {nameof(Point)} = {Point}, {nameof(Degrees)} = {Degrees.ToString(Globals.FormattingCulture)}, {nameof(PointOffset)} = {PointOffset.ToString(Globals.FormattingCulture)}, }}";
-        }
-
-        /// <summary>
-        /// Gets the compass direction value string.
-        /// </summary>
-        /// <value>The compass direction value string.</value>
-        public string ValueString =>
-            $"{GetNameFunc(Point)} {(PointOffset < 0 ? "-" : "+")} {Math.Abs(PointOffset).ToString("F1", Globals.FormattingCulture)}°, {Degrees.ToString("F1", Globals.FormattingCulture)}";
     }
+
+    /// <summary>
+    /// Gets or sets the degrees to add to the <see cref="Point"/> to get the exact amount of degrees.
+    /// </summary>
+    /// <value>The point offset.</value>
+    public double PointOffset { get; private set; }
+
+    /// <summary>
+    /// A function to localize the <see cref="Point"/> value.
+    /// </summary>
+    public static Func<CompassPoint, string> GetNameFunc { get; set; } = point => point.ToString();
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+        return
+            @$"{{ {nameof(Point)} = {Point}, {nameof(Degrees)} = {Degrees.ToString(Globals.FormattingCulture)}, {nameof(PointOffset)} = {PointOffset.ToString(Globals.FormattingCulture)}, }}";
+    }
+
+    /// <summary>
+    /// Gets the compass direction value string.
+    /// </summary>
+    /// <value>The compass direction value string.</value>
+    public string ValueString =>
+        $"{GetNameFunc(Point)} {(PointOffset < 0 ? "-" : "+")} {Math.Abs(PointOffset).ToString("F1", Globals.FormattingCulture)}°, {Degrees.ToString("F1", Globals.FormattingCulture)}";
 }

@@ -234,4 +234,10 @@
   <data name="Years" xml:space="preserve">
     <value>vuotta</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nimi</value>
+  </data>
+  <data name="HorizontalAzimuthDegrees" xml:space="preserve">
+    <value>Horisontaali, atsimuutti (astetta)</value>
+  </data>
 </root>

@@ -234,4 +234,10 @@
   <data name="Years" xml:space="preserve">
     <value>years</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="HorizontalAzimuthDegrees" xml:space="preserve">
+    <value>Horizontal, azimuth (degrees)</value>
+  </data>
 </root>

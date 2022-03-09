@@ -24,16 +24,15 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Localization
+namespace StarMap2D.Localization;
+
+/// <summary>
+/// A class for static properties for the localization.
+/// </summary>
+public static class Properties
 {
     /// <summary>
-    /// A class for static properties for the localization.
+    /// The localized languages in this library.
     /// </summary>
-    public static class Properties
-    {
-        /// <summary>
-        /// The localized languages in this library.
-        /// </summary>
-        public static readonly string[] Languages = { "en", "fi" };
-    }
+    public static readonly string[] Languages = { "en", "fi" };
 }

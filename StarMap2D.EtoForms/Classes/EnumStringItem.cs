@@ -26,44 +26,43 @@ SOFTWARE.
 
 using System;
 
-namespace StarMap2D.EtoForms.Classes
+namespace StarMap2D.EtoForms.Classes;
+
+/// <summary>
+/// A class to hold a <see cref="Enum"/> value and its describing name.
+/// </summary>
+/// <typeparam name="T">The type of the enum.</typeparam>
+public class EnumStringItem<T> where T : Enum
 {
     /// <summary>
-    /// A class to hold a <see cref="Enum"/> value and its describing name.
+    /// Initializes a new instance of the <see cref="EnumStringItem{T}"/> class.
     /// </summary>
-    /// <typeparam name="T">The type of the enum.</typeparam>
-    public class EnumStringItem<T> where T : Enum
+    /// <param name="enumValue">The enum value.</param>
+    /// <param name="enumName">Name of the enum.</param>
+    public EnumStringItem(T enumValue, string enumName)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EnumStringItem{T}"/> class.
-        /// </summary>
-        /// <param name="enumValue">The enum value.</param>
-        /// <param name="enumName">Name of the enum.</param>
-        public EnumStringItem(T enumValue, string enumName)
-        {
-            EnumName = enumName;
-            EnumValue = enumValue;
-        }
+        EnumName = enumName;
+        EnumValue = enumValue;
+    }
 
-        /// <summary>
-        /// Gets or sets the enum value.
-        /// </summary>
-        /// <value>The enum value.</value>
-        public T EnumValue { get; init; }
+    /// <summary>
+    /// Gets or sets the enum value.
+    /// </summary>
+    /// <value>The enum value.</value>
+    public T EnumValue { get; init; }
 
-        /// <summary>
-        /// Gets or sets the name of the enum.
-        /// </summary>
-        /// <value>The name of the enum.</value>
-        public string EnumName { get; init; }
+    /// <summary>
+    /// Gets or sets the name of the enum.
+    /// </summary>
+    /// <value>The name of the enum.</value>
+    public string EnumName { get; init; }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return EnumName;
-        }
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+        return EnumName;
     }
 }

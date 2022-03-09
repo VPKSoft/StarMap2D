@@ -195,9 +195,6 @@
   <data name="HorizontalAltitudeDegrees" xml:space="preserve">
     <value>Horisontaali korkeus (astetta)</value>
   </data>
-  <data name="HorizontalAtzimuthDegrees" xml:space="preserve">
-    <value>Horisontaali, atsimuutti (astetta)</value>
-  </data>
   <data name="HorizontalCoordinatesInDegrees" xml:space="preserve">
     <value>Horisontaalikoordinaatit asteissa</value>
   </data>
@@ -302,5 +299,23 @@
   </data>
   <data name="MoonDegrees" xml:space="preserve">
     <value>Kuun korkeus °</value>
+  </data>
+  <data name="DataURL" xml:space="preserve">
+    <value>Data URL</value>
+  </data>
+  <data name="ExportCSV" xml:space="preserve">
+    <value>Vie CSV</value>
+  </data>
+  <data name="DateAndTime" xml:space="preserve">
+    <value>Päiväys ja aika</value>
+  </data>
+  <data name="CSVFiles" xml:space="preserve">
+    <value>CSV-tiedostot</value>
+  </data>
+  <data name="SaveToCSVFile" xml:space="preserve">
+    <value>Tallenna CSV-tiedostoon</value>
+  </data>
+  <data name="CelestialObjectDetails" xml:space="preserve">
+    <value>Taivaankappaleiden tietoja</value>
   </data>
 </root>

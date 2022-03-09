@@ -24,56 +24,55 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Calculations.Classes
+namespace StarMap2D.Calculations.Classes;
+
+/// <summary>
+/// An interface for solar system object details.
+/// </summary>
+public interface IObjectDetails
 {
     /// <summary>
-    /// An interface for solar system object details.
+    /// Gets or sets the name of the object.
     /// </summary>
-    public interface IObjectDetails
-    {
-        /// <summary>
-        /// Gets or sets the name of the object.
-        /// </summary>
-        /// <value>The name of the object.</value>
-        string? ObjectName { get; set; }
+    /// <value>The name of the object.</value>
+    string? ObjectName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the right ascension of the object.
-        /// </summary>
-        /// <value>The right ascension.</value>
-        double RightAscension { get; set; }
+    /// <summary>
+    /// Gets or sets the right ascension of the object.
+    /// </summary>
+    /// <value>The right ascension.</value>
+    double RightAscension { get; set; }
 
-        /// <summary>
-        /// Gets or sets the declination of the object.
-        /// </summary>
-        /// <value>The declination.</value>
-        double Declination { get; set; }
+    /// <summary>
+    /// Gets or sets the declination of the object.
+    /// </summary>
+    /// <value>The declination.</value>
+    double Declination { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the object is above horizon at the <see cref="DetailDateTime"/> date and time.
-        /// </summary>
-        /// <value><c>true</c> if the object is above horizon at the <see cref="DetailDateTime"/>; otherwise, <c>false</c>.</value>
-        bool AboveHorizon { get; set; }
+    /// <summary>
+    /// Gets or sets a value indicating whether the object is above horizon at the <see cref="DetailDateTime"/> date and time.
+    /// </summary>
+    /// <value><c>true</c> if the object is above horizon at the <see cref="DetailDateTime"/>; otherwise, <c>false</c>.</value>
+    bool AboveHorizon { get; set; }
 
-        /// <summary>
-        /// Gets or sets the horizontal X-coordinate in degrees.
-        /// </summary>
-        /// <value>The horizontal X-coordinate in degrees.</value>
-        double HorizontalDegreesX { get; set; }
+    /// <summary>
+    /// Gets or sets the horizontal X-coordinate in degrees.
+    /// </summary>
+    /// <value>The horizontal X-coordinate in degrees.</value>
+    double HorizontalDegreesX { get; set; }
 
-        /// <summary>
-        /// Gets or sets the horizontal Y-coordinate in degrees.
-        /// </summary>
-        /// <value>The horizontal Y-coordinate in degrees.</value>
-        double HorizontalDegreesY { get; set; }
+    /// <summary>
+    /// Gets or sets the horizontal Y-coordinate in degrees.
+    /// </summary>
+    /// <value>The horizontal Y-coordinate in degrees.</value>
+    double HorizontalDegreesY { get; set; }
 
-        /// <summary>
-        /// Gets or sets the date and time of the calculation of these object details.
-        /// </summary>
-        /// <value>The calculation date time of the details.</value>
-        /// <remarks>
-        /// The date and time will be converted into UTC in case it is passed as local date and time.
-        /// </remarks>
-        DateTime DetailDateTime { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the date and time of the calculation of these object details.
+    /// </summary>
+    /// <value>The calculation date time of the details.</value>
+    /// <remarks>
+    /// The date and time will be converted into UTC in case it is passed as local date and time.
+    /// </remarks>
+    DateTime DetailDateTime { get; set; }
 }

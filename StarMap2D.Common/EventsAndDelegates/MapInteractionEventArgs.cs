@@ -24,9 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Common.EventsAndDelegates
+namespace StarMap2D.Common.EventsAndDelegates;
+
+public class MapInteractionEventArgs
 {
-    public class MapInteractionEventArgs
-    {
-    }
 }

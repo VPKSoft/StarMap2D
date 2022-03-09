@@ -24,32 +24,31 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Common.EventsAndDelegates
+namespace StarMap2D.Common.EventsAndDelegates;
+
+/// <summary>
+/// Delegates for the graphical star map events.
+/// </summary>
+public class MapInteractionDelegates
 {
     /// <summary>
-    /// Delegates for the graphical star map events.
+    /// Delegate OnCoordinatesChanged
     /// </summary>
-    public class MapInteractionDelegates
-    {
-        /// <summary>
-        /// Delegate OnCoordinatesChanged
-        /// </summary>
-        /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
-        public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The <see cref="LocationChangedEventArgs"/> instance containing the event data.</param>
+    public delegate void OnCoordinatesChanged(object? sender, LocationChangedEventArgs e);
 
-        /// <summary>
-        /// A delegate for an event when the horizontal or ecliptic coordinates change on mouse position change.
-        /// </summary>
-        /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The <see cref="CoordinatesChangedEventArgs"/> instance containing the event data.</param>
-        public delegate void OnMouseCoordinatesChanged(object? sender, CoordinatesChangedEventArgs e);
+    /// <summary>
+    /// A delegate for an event when the horizontal or ecliptic coordinates change on mouse position change.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The <see cref="CoordinatesChangedEventArgs"/> instance containing the event data.</param>
+    public delegate void OnMouseCoordinatesChanged(object? sender, CoordinatesChangedEventArgs e);
 
-        /// <summary>
-        /// Delegate OnObjectUserInteraction.
-        /// </summary>
-        /// <param name="sender">The sender of the event.</param>
-        /// <param name="e">The <see cref="NamedObjectEventArgs"/> instance containing the event data.</param>
-        public delegate void OnObjectUserInteraction(object sender, NamedObjectEventArgs e);
-    }
+    /// <summary>
+    /// Delegate OnObjectUserInteraction.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The <see cref="NamedObjectEventArgs"/> instance containing the event data.</param>
+    public delegate void OnObjectUserInteraction(object sender, NamedObjectEventArgs e);
 }

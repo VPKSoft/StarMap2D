@@ -28,86 +28,85 @@ using System;
 using System.Globalization;
 using Eto.Drawing;
 
-namespace StarMap2D.EtoForms.ApplicationSettings.SettingClasses
+namespace StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
+
+/// <summary>
+/// A class to store font data into the settings.
+/// </summary>
+public class SettingsFontData
 {
     /// <summary>
-    /// A class to store font data into the settings.
+    /// Gets or sets the font family.
     /// </summary>
-    public class SettingsFontData
+    /// <value>The font family.</value>
+    public string FontFamily { get; set; } = "Sans";
+
+    /// <summary>
+    /// Gets or sets the size of the font.
+    /// </summary>
+    /// <value>The size of the font.</value>
+    public float FontSize { get; set; } = 9;
+
+    /// <summary>
+    /// Gets or sets the font style.
+    /// </summary>
+    /// <value>The font style.</value>
+    public FontStyle FontStyle { get; set; }
+
+    /// <summary>
+    /// Performs an implicit conversion from <see cref="Font"/> to <see cref="SettingsFontData"/>.
+    /// </summary>
+    /// <param name="font">The font.</param>
+    /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
+    public static implicit operator SettingsFontData(Font font)
     {
-        /// <summary>
-        /// Gets or sets the font family.
-        /// </summary>
-        /// <value>The font family.</value>
-        public string FontFamily { get; set; } = "Sans";
-
-        /// <summary>
-        /// Gets or sets the size of the font.
-        /// </summary>
-        /// <value>The size of the font.</value>
-        public float FontSize { get; set; } = 9;
-
-        /// <summary>
-        /// Gets or sets the font style.
-        /// </summary>
-        /// <value>The font style.</value>
-        public FontStyle FontStyle { get; set; }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="Font"/> to <see cref="SettingsFontData"/>.
-        /// </summary>
-        /// <param name="font">The font.</param>
-        /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
-        public static implicit operator SettingsFontData(Font font)
+        return new SettingsFontData
         {
-            return new SettingsFontData
-            {
-                FontFamily = font.FamilyName,
-                FontSize = font.Size,
-                FontStyle = font.FontStyle,
-            };
-        }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="SettingsFontData"/> to <see cref="Font"/>.
-        /// </summary>
-        /// <param name="fontData">The font data.</param>
-        /// <returns>A new instance of the <see cref="Font"/> class.</returns>
-        public static implicit operator Font(SettingsFontData fontData)
-        {
-            return new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
-        }
-
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="SettingsFontData"/>.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
-        public static implicit operator SettingsFontData(string value)
-        {
-            var dataStrings = value.Split(';');
-
-            return new SettingsFontData
-            {
-                FontFamily = dataStrings[0],
-                FontSize = float.Parse(dataStrings[0], CultureInfo.InvariantCulture),
-                FontStyle = Enum.Parse<FontStyle>(dataStrings[2]),
-            };
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return $"{FontFamily};{FontSize.ToString(CultureInfo.InvariantCulture)};{FontStyle}";
-        }
-
-        /// <summary>
-        /// Gets or sets the empty <see cref="SettingsFontData"/> value.
-        /// </summary>
-        /// <value>The empty value.</value>
-        public static SettingsFontData Empty = new();
+            FontFamily = font.FamilyName,
+            FontSize = font.Size,
+            FontStyle = font.FontStyle,
+        };
     }
+
+    /// <summary>
+    /// Performs an implicit conversion from <see cref="SettingsFontData"/> to <see cref="Font"/>.
+    /// </summary>
+    /// <param name="fontData">The font data.</param>
+    /// <returns>A new instance of the <see cref="Font"/> class.</returns>
+    public static implicit operator Font(SettingsFontData fontData)
+    {
+        return new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
+    }
+
+    /// <summary>
+    /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="SettingsFontData"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
+    public static implicit operator SettingsFontData(string value)
+    {
+        var dataStrings = value.Split(';');
+
+        return new SettingsFontData
+        {
+            FontFamily = dataStrings[0],
+            FontSize = float.Parse(dataStrings[0], CultureInfo.InvariantCulture),
+            FontStyle = Enum.Parse<FontStyle>(dataStrings[2]),
+        };
+    }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+        return $"{FontFamily};{FontSize.ToString(CultureInfo.InvariantCulture)};{FontStyle}";
+    }
+
+    /// <summary>
+    /// Gets or sets the empty <see cref="SettingsFontData"/> value.
+    /// </summary>
+    /// <value>The empty value.</value>
+    public static SettingsFontData Empty = new();
 }

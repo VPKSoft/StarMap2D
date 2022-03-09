@@ -26,154 +26,153 @@ SOFTWARE.
 
 using Eto.Forms;
 
-namespace StarMap2D.EtoForms.Controls.Utilities
+namespace StarMap2D.EtoForms.Controls.Utilities;
+
+/// <summary>
+/// A class to help create a <see cref="TableLayout"/> layout.
+/// </summary>
+public class FluentTableLayoutBuilder
 {
     /// <summary>
-    /// A class to help create a <see cref="TableLayout"/> layout.
+    /// Prevents a default instance of the <see cref="FluentTableLayoutBuilder"/> class from being created.
     /// </summary>
-    public class FluentTableLayoutBuilder
+    private FluentTableLayoutBuilder()
     {
-        /// <summary>
-        /// Prevents a default instance of the <see cref="FluentTableLayoutBuilder"/> class from being created.
-        /// </summary>
-        private FluentTableLayoutBuilder()
+
+    }
+
+    /// <summary>
+    /// Gets or sets the root <see cref="TableLayout"/> control.
+    /// </summary>
+    /// <value>The root table layout.</value>
+    public TableLayout? RootTableLayout { get; set; }
+
+    /// <summary>
+    /// Gets or sets the control spacing.
+    /// </summary>
+    /// <value>The spacing.</value>
+    public int? Spacing { get; set; }
+
+    /// <summary>
+    /// Creates a new instance of the <seealso cref="FluentTableLayoutBuilder"/> class and initializes the <see cref="RootTableLayout"/> property for it.
+    /// </summary>
+    /// <returns>FluentTableLayoutBuilder.</returns>
+    public static FluentTableLayoutBuilder New()
+    {
+        var result = new FluentTableLayoutBuilder
         {
+            RootTableLayout = new TableLayout()
+        };
 
-        }
+        return result;
+    }
 
-        /// <summary>
-        /// Gets or sets the root <see cref="TableLayout"/> control.
-        /// </summary>
-        /// <value>The root table layout.</value>
-        public TableLayout? RootTableLayout { get; set; }
+    /// <summary>
+    /// Sets the control <see cref="Spacing"/> value.
+    /// </summary>
+    /// <param name="spacing">The spacing value.</param>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithSpacing(int spacing)
+    {
+        Spacing = spacing;
 
-        /// <summary>
-        /// Gets or sets the control spacing.
-        /// </summary>
-        /// <value>The spacing.</value>
-        public int? Spacing { get; set; }
+        return this;
+    }
 
-        /// <summary>
-        /// Creates a new instance of the <seealso cref="FluentTableLayoutBuilder"/> class and initializes the <see cref="RootTableLayout"/> property for it.
-        /// </summary>
-        /// <returns>FluentTableLayoutBuilder.</returns>
-        public static FluentTableLayoutBuilder New()
+    /// <summary>
+    /// Creates a new <see cref="TableRow"/> to the <see cref="RootTableLayout"/> control.
+    /// </summary>
+    /// <param name="controls">The controls for the row.</param>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithRootRow(params Control[] controls)
+    {
+        return WithRootRow(Spacing!.Value, controls);
+    }
+
+    /// <summary>
+    /// Creates a new <see cref="TableRow"/> to the <see cref="RootTableLayout"/> control.
+    /// </summary>
+    /// <param name="spacing">The spacing between the controls within the row.</param>
+    /// <param name="controls">The controls for the row.</param>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithRootRow(int spacing, params Control[] controls)
+    {
+        var tableRow = new TableRow();
+
+        for (int i = 0; i < controls.Length; i++)
         {
-            var result = new FluentTableLayoutBuilder
+            if (i + 1 < controls.Length)
             {
-                RootTableLayout = new TableLayout()
-            };
-
-            return result;
-        }
-
-        /// <summary>
-        /// Sets the control <see cref="Spacing"/> value.
-        /// </summary>
-        /// <param name="spacing">The spacing value.</param>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithSpacing(int spacing)
-        {
-            Spacing = spacing;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="TableRow"/> to the <see cref="RootTableLayout"/> control.
-        /// </summary>
-        /// <param name="controls">The controls for the row.</param>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithRootRow(params Control[] controls)
-        {
-            return WithRootRow(Spacing!.Value, controls);
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="TableRow"/> to the <see cref="RootTableLayout"/> control.
-        /// </summary>
-        /// <param name="spacing">The spacing between the controls within the row.</param>
-        /// <param name="controls">The controls for the row.</param>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithRootRow(int spacing, params Control[] controls)
-        {
-            var tableRow = new TableRow();
-
-            for (int i = 0; i < controls.Length; i++)
-            {
-                if (i + 1 < controls.Length)
-                {
-                    tableRow.Cells.Add(new TableCell(controls[i]));
-                    tableRow.Cells.Add(new Panel { Width = spacing });
-                }
-                else
-                {
-                    tableRow.Cells.Add(new TableCell(controls[i]));
-                }
+                tableRow.Cells.Add(new TableCell(controls[i]));
+                tableRow.Cells.Add(new Panel { Width = spacing });
             }
-
-            RootTableLayout!.Rows.Add(tableRow);
-            return this;
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="TableLayout"/> class instance with the specified controls and adds
-        /// the created layout to the <see cref="RootTableLayout"/> as a new row.
-        /// </summary>
-        /// <param name="controls">The controls for the row.</param>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithRow(params Control[] controls)
-        {
-            return WithRow(Spacing!.Value, controls);
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="TableLayout"/> class instance with the specified controls and adds
-        /// the created layout to the <see cref="RootTableLayout"/> as a new row.
-        /// </summary>
-        /// <param name="spacing">The spacing between the controls within the row.</param>
-        /// <param name="controls">The controls for the row.</param>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithRow(int spacing, params Control[] controls)
-        {
-            var tableRow = new TableRow();
-
-            for (int i = 0; i < controls.Length; i++)
+            else
             {
-                if (i + 1 < controls.Length)
-                {
-                    tableRow.Cells.Add(new TableCell(controls[i]));
-                    tableRow.Cells.Add(new Panel { Width = spacing });
-                }
-                else
-                {
-                    tableRow.Cells.Add(new TableCell(controls[i]));
-                }
+                tableRow.Cells.Add(new TableCell(controls[i]));
             }
-
-            RootTableLayout!.Rows.Add(new TableRow(new TableCell(new TableLayout(tableRow))));
-
-            return this;
         }
 
-        /// <summary>
-        /// Adds a new empty <see cref="TableRow"/> with no controls into the <see cref="RootTableLayout"/>
-        /// with <see cref="TableRow.ScaleHeight"/> set to <c>true</c>.
-        /// </summary>
-        /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
-        public FluentTableLayoutBuilder WithEmptyRow()
+        RootTableLayout!.Rows.Add(tableRow);
+        return this;
+    }
+
+    /// <summary>
+    /// Creates a new <see cref="TableLayout"/> class instance with the specified controls and adds
+    /// the created layout to the <see cref="RootTableLayout"/> as a new row.
+    /// </summary>
+    /// <param name="controls">The controls for the row.</param>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithRow(params Control[] controls)
+    {
+        return WithRow(Spacing!.Value, controls);
+    }
+
+    /// <summary>
+    /// Creates a new <see cref="TableLayout"/> class instance with the specified controls and adds
+    /// the created layout to the <see cref="RootTableLayout"/> as a new row.
+    /// </summary>
+    /// <param name="spacing">The spacing between the controls within the row.</param>
+    /// <param name="controls">The controls for the row.</param>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithRow(int spacing, params Control[] controls)
+    {
+        var tableRow = new TableRow();
+
+        for (int i = 0; i < controls.Length; i++)
         {
-            RootTableLayout!.Rows.Add(new TableRow { ScaleHeight = true });
-            return this;
+            if (i + 1 < controls.Length)
+            {
+                tableRow.Cells.Add(new TableCell(controls[i]));
+                tableRow.Cells.Add(new Panel { Width = spacing });
+            }
+            else
+            {
+                tableRow.Cells.Add(new TableCell(controls[i]));
+            }
         }
 
-        /// <summary>
-        /// Gets the <see cref="RootTableLayout"/> instance value.
-        /// </summary>
-        /// <returns>The <see cref="RootTableLayout"/> instance.</returns>
-        public TableLayout GetTable()
-        {
-            return RootTableLayout!;
-        }
+        RootTableLayout!.Rows.Add(new TableRow(new TableCell(new TableLayout(tableRow))));
+
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a new empty <see cref="TableRow"/> with no controls into the <see cref="RootTableLayout"/>
+    /// with <see cref="TableRow.ScaleHeight"/> set to <c>true</c>.
+    /// </summary>
+    /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
+    public FluentTableLayoutBuilder WithEmptyRow()
+    {
+        RootTableLayout!.Rows.Add(new TableRow { ScaleHeight = true });
+        return this;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="RootTableLayout"/> instance value.
+    /// </summary>
+    /// <returns>The <see cref="RootTableLayout"/> instance.</returns>
+    public TableLayout GetTable()
+    {
+        return RootTableLayout!;
     }
 }

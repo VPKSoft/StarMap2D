@@ -26,33 +26,32 @@ SOFTWARE.
 
 using VPKSoft.StarCatalogs.Providers;
 
-namespace VPKSoft.StarCatalogs.StaticData
+namespace VPKSoft.StarCatalogs.StaticData;
+
+/// <summary>
+/// A class for star catalog names.
+/// </summary>
+public class CatalogNames
 {
     /// <summary>
-    /// A class for star catalog names.
+    /// The built-in star catalog name.
     /// </summary>
-    public class CatalogNames
+    public const string BuiltInName = "The Yale Bright Star Catalogue, 5th Revised Ed.";
+
+    private static int id = 1;
+
+    /// <summary>
+    /// Gets or sets the type-name pairs for the supported star catalogs.
+    /// </summary>
+    public static List<StarCatalogData> TypeNames { get; set; } = new(new[]
     {
-        /// <summary>
-        /// The built-in star catalog name.
-        /// </summary>
-        public const string BuiltInName = "The Yale Bright Star Catalogue, 5th Revised Ed.";
-
-        private static int id = 1;
-
-        /// <summary>
-        /// Gets or sets the type-name pairs for the supported star catalogs.
-        /// </summary>
-        public static List<StarCatalogData> TypeNames { get; set; } = new(new[]
-        {
-            new StarCatalogData { Name = "The Hipparcos Catalogue", Type = typeof(HipparcosProvider), Identifier = id++},
-            new StarCatalogData { Name = "The Tycho Catalogue", Type = typeof(TychoProvider), Identifier = id++ },
-            new StarCatalogData { Name = "The PPM Star Catalog", Type = typeof(PpmProvider), Identifier = id++ },
-            new StarCatalogData
-                { Name = "The Yale Bright Star Catalogue, 5th Revised Ed.", Type = typeof(YaleBrightProvider), Identifier = id++ },
-            new StarCatalogData
-                { Name = "Nearby Stars, Preliminary 3rd Version (Gliese+ 1991)", Type = typeof(Gliese3rdProvider), Identifier = id++ },
-            new StarCatalogData { Name = "Yale small (unknown origin)", Type = typeof(YaleSmallProvider), Identifier = id++ },
-        });
-    }
+        new StarCatalogData { Name = "The Hipparcos Catalogue", Type = typeof(HipparcosProvider), Identifier = id++},
+        new StarCatalogData { Name = "The Tycho Catalogue", Type = typeof(TychoProvider), Identifier = id++ },
+        new StarCatalogData { Name = "The PPM Star Catalog", Type = typeof(PpmProvider), Identifier = id++ },
+        new StarCatalogData
+            { Name = "The Yale Bright Star Catalogue, 5th Revised Ed.", Type = typeof(YaleBrightProvider), Identifier = id++ },
+        new StarCatalogData
+            { Name = "Nearby Stars, Preliminary 3rd Version (Gliese+ 1991)", Type = typeof(Gliese3rdProvider), Identifier = id++ },
+        new StarCatalogData { Name = "Yale small (unknown origin)", Type = typeof(YaleSmallProvider), Identifier = id++ },
+    });
 }
