@@ -79,6 +79,17 @@ public class FormDialogSettings : Dialog<bool>
     private ComboBox? cmbDateAndTimeFormattingCulture;
     #endregion
 
+    #region MapColorSettings
+    private TabPage? tabMapColorSettings;
+    private TableLayout? tlMapColorSettings;
+    private ColorPicker? cpkConstellationLineColor;
+    private ColorPicker? cpkConstellationBorderLineColor;
+    private ColorPicker? cpkMapCircleColor;
+    private ColorPicker? cpkMapSurroundingsColor;
+    private ColorPicker? cpkMapTextColor;
+    private ColorPicker? cpkMapCrossHairColor;
+    #endregion
+
     #region Fonts
     private TabPage? tabFonts;
     private TableLayout? tlFonts;
@@ -124,6 +135,9 @@ public class FormDialogSettings : Dialog<bool>
         // The third tab page.
         LayoutTabPageFormatting();
 
+        // The fourth tab page.
+        LayoutTabMapColorSettings();
+
         btOk = new Button { Text = UI.OK };
         btOk.Click += delegate { SaveSettings(); Close(true); };
 
@@ -138,6 +152,34 @@ public class FormDialogSettings : Dialog<bool>
         NegativeButtons.Add(btCancel);
 
         LoadSettings();
+    }
+
+    /// <summary>
+    /// Layouts the tab of the map color settings.
+    /// </summary>
+    private void LayoutTabMapColorSettings()
+    {
+        tabMapColorSettings = new TabPage { Text = UI.MapColorSettings };
+        tlMapColorSettings = new TableLayout();
+        tabMapColorSettings.Content = tlMapColorSettings;
+
+        cpkConstellationLineColor = new ColorPicker();
+        cpkConstellationBorderLineColor = new ColorPicker();
+        cpkMapCircleColor = new ColorPicker();
+        cpkMapSurroundingsColor = new ColorPicker();
+        cpkMapTextColor = new ColorPicker();
+        cpkMapCrossHairColor = new ColorPicker();
+
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.ConstellationLineColor, cpkConstellationLineColor));
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.ConstellationBorderLineColor, cpkConstellationBorderLineColor));
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.MapCircleColor, cpkMapCircleColor));
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.MapSurroundingsColor, cpkMapSurroundingsColor));
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.MapTextColor, cpkMapTextColor));
+        tlMapColorSettings.Rows.Add(EtoHelpers.LabelWrap(UI.MapCrossHairColor, cpkMapCrossHairColor));
+
+        tabControlSettings!.Pages.Add(tabMapColorSettings);
+        // Scale the last row to the maximum.
+        tlMapColorSettings.Rows.Add(new TableRow { ScaleHeight = true });
     }
 
     /// <summary>
@@ -373,6 +415,13 @@ public class FormDialogSettings : Dialog<bool>
         cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
         fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
         fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+
+        cpkConstellationLineColor!.Value = Color.Parse(Globals.Settings.ConstellationLineColor);
+        cpkConstellationBorderLineColor!.Value = Color.Parse(Globals.Settings.ConstellationBorderLineColor);
+        cpkMapCircleColor!.Value = Color.Parse(Globals.Settings.MapCircleColor);
+        cpkMapSurroundingsColor!.Value = Color.Parse(Globals.Settings.MapSurroundingsColor);
+        cpkMapTextColor!.Value = Color.Parse(Globals.Settings.MapTextColor);
+        cpkMapCrossHairColor!.Value = Color.Parse(Globals.Settings.CrossHairColor);
     }
 
     /// <summary>
@@ -416,6 +465,13 @@ public class FormDialogSettings : Dialog<bool>
 
         Globals.Settings.Font = fpNormal!.Value;
         Globals.Settings.DataFont = fpMonospaced!.Value;
+
+        Globals.Settings.ConstellationLineColor = cpkConstellationLineColor!.Value.ToString();
+        Globals.Settings.ConstellationBorderLineColor = cpkConstellationBorderLineColor!.Value.ToString();
+        Globals.Settings.MapCircleColor = cpkMapCircleColor!.Value.ToString();
+        Globals.Settings.MapSurroundingsColor = cpkMapSurroundingsColor!.Value.ToString();
+        Globals.Settings.MapTextColor = cpkMapTextColor!.Value.ToString();
+        Globals.Settings.CrossHairColor = cpkMapCrossHairColor!.Value.ToString();
 
         Globals.SaveSettings();
     }

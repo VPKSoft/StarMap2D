@@ -151,6 +151,24 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Constellation border line color.
+        /// </summary>
+        public static string ConstellationBorderLineColor {
+            get {
+                return ResourceManager.GetString("ConstellationBorderLineColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constellation line color.
+        /// </summary>
+        public static string ConstellationLineColor {
+            get {
+                return ResourceManager.GetString("ConstellationLineColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Coordinates.
         /// </summary>
         public static string Coordinates {
@@ -453,6 +471,51 @@ namespace StarMap2D.Localization {
         public static string Longitude {
             get {
                 return ResourceManager.GetString("Longitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map circle color.
+        /// </summary>
+        public static string MapCircleColor {
+            get {
+                return ResourceManager.GetString("MapCircleColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map color settings.
+        /// </summary>
+        public static string MapColorSettings {
+            get {
+                return ResourceManager.GetString("MapColorSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map cross hair color.
+        /// </summary>
+        public static string MapCrossHairColor {
+            get {
+                return ResourceManager.GetString("MapCrossHairColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map surroundings color.
+        /// </summary>
+        public static string MapSurroundingsColor {
+            get {
+                return ResourceManager.GetString("MapSurroundingsColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map text color.
+        /// </summary>
+        public static string MapTextColor {
+            get {
+                return ResourceManager.GetString("MapTextColor", resourceCulture);
             }
         }
         

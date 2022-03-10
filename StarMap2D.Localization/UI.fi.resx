@@ -318,4 +318,25 @@
   <data name="CelestialObjectDetails" xml:space="preserve">
     <value>Taivaankappaleiden tietoja</value>
   </data>
+  <data name="MapColorSettings" xml:space="preserve">
+    <value>Kartan värien asetukset</value>
+  </data>
+  <data name="ConstellationLineColor" xml:space="preserve">
+    <value>Tähtikuvion viivan väri</value>
+  </data>
+  <data name="ConstellationBorderLineColor" xml:space="preserve">
+    <value>Tähtikuvion rajaviivan väri</value>
+  </data>
+  <data name="MapCircleColor" xml:space="preserve">
+    <value>Kartan ympyrän väri</value>
+  </data>
+  <data name="MapSurroundingsColor" xml:space="preserve">
+    <value>Kartan ulkoalueen väri</value>
+  </data>
+  <data name="MapTextColor" xml:space="preserve">
+    <value>Kartan tekstin väri</value>
+  </data>
+  <data name="MapCrossHairColor" xml:space="preserve">
+    <value>Keskiristikon väri</value>
+  </data>
 </root>

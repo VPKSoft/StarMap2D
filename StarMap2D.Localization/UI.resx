@@ -318,4 +318,25 @@
   <data name="CelestialObjectDetails" xml:space="preserve">
     <value>Celestial object details</value>
   </data>
+  <data name="MapColorSettings" xml:space="preserve">
+    <value>Map color settings</value>
+  </data>
+  <data name="ConstellationLineColor" xml:space="preserve">
+    <value>Constellation line color</value>
+  </data>
+  <data name="ConstellationBorderLineColor" xml:space="preserve">
+    <value>Constellation border line color</value>
+  </data>
+  <data name="MapCircleColor" xml:space="preserve">
+    <value>Map circle color</value>
+  </data>
+  <data name="MapSurroundingsColor" xml:space="preserve">
+    <value>Map surroundings color</value>
+  </data>
+  <data name="MapTextColor" xml:space="preserve">
+    <value>Map text color</value>
+  </data>
+  <data name="MapCrossHairColor" xml:space="preserve">
+    <value>Map cross hair color</value>
+  </data>
 </root>
