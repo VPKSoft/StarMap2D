@@ -685,7 +685,7 @@ public class FormSkyMap2D : Form
     {
         var yaleBrightProvider = new YaleBrightProvider();
 
-        using var reader = new StreamReader(new MemoryStream(Resources.YaleBrightStars));
+        using var reader = new StreamReader(new MemoryStream(StarMap2D.EtoForms.Properties.Resources.YaleBrightStars));
 
         yaleBrightProvider.LoadData(reader.ReadAllLines());
 

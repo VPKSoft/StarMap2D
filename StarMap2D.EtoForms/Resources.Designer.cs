@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StarMap2D.EtoForms.Properties {
+namespace StarMap2D.EtoForms {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace StarMap2D.EtoForms.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StarMap2D.EtoForms.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StarMap2D.EtoForms.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,26 +57,6 @@ namespace StarMap2D.EtoForms.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] StarMap2D {
-            get {
-                object obj = ResourceManager.GetObject("StarMap2D", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] YaleBrightStars {
-            get {
-                object obj = ResourceManager.GetObject("YaleBrightStars", resourceCulture);
-                return ((byte[])(obj));
             }
         }
     }

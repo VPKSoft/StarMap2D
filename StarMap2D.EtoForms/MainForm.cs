@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.IO;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
@@ -51,6 +52,8 @@ public class MainForm : Form
     /// </summary>
     public MainForm()
     {
+        Icon = new Icon(new MemoryStream(StarMap2D.EtoForms.Properties.Resources.StarMap2D));
+
         EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
 
         // Set the software localization.
