@@ -25,7 +25,6 @@ SOFTWARE.
 #endregion
 
 using System;
-using System.IO;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
@@ -34,6 +33,7 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.Plotting;
+using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
@@ -52,12 +52,16 @@ public class MainForm : Form
     /// </summary>
     public MainForm()
     {
-        Icon = new Icon(new MemoryStream(StarMap2D.EtoForms.Properties.Resources.StarMap2D));
-
         EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
 
         // Set the software localization.
         UI.Culture = Globals.Locale;
+
+        EtoHelpers.IconLoadErrorMessage = Messages.FailedToLoadIconWithMessage0;
+        EtoHelpers.ErrorDialogTitle = Messages.Error;
+
+        // Set the icon for the form.
+        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
 
         Title = UI.StarMap2D;
         MinimumSize = new Size(400, 300);

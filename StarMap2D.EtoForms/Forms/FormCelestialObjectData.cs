@@ -68,6 +68,9 @@ public partial class FormCelestialObjectData : Form
 
         Title = UI.CelestialObjectDetails;
 
+        // Set the icon for the form.
+        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+
         nsLatitude!.Value = Globals.Settings.Latitude;
         nsLongitude!.Value = Globals.Settings.Longitude;
     }

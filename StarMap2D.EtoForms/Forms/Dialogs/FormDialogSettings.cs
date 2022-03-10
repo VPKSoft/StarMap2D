@@ -96,6 +96,9 @@ public class FormDialogSettings : Dialog<bool>
         // Set the software localization.
         UI.Culture = Globals.Locale;
 
+        // Set the icon for the form.
+        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+
         // Create the UI controls.
         InitializeView();
     }

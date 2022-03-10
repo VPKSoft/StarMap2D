@@ -45,7 +45,6 @@ using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.EventArguments;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.EtoForms.Forms.Dialogs;
-using StarMap2D.EtoForms.Properties;
 using StarMap2D.Localization;
 using VPKSoft.StarCatalogs.Providers;
 
@@ -67,6 +66,9 @@ public class FormSkyMap2D : Form
         UI.Culture = Globals.Locale;
 
         MinimumSize = new Size(1024, 768);
+
+        // Set the icon for the form.
+        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
 
         InitializeView();
 

@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.IO;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Common.SvgColorization;
@@ -36,6 +37,36 @@ namespace StarMap2D.EtoForms.Controls.Utilities;
 /// </summary>
 public class EtoHelpers
 {
+    /// <summary>
+    /// Set an icon from specified bytes to a specified <see cref="Form"/>.
+    /// </summary>
+    /// <param name="form">The form to set the icon for.</param>
+    /// <param name="iconData">The icon data.</param>
+    public static void SetIcon(Window form, byte[] iconData)
+    {
+        // Set the icon for the form.
+        try
+        {
+            using var memoryStream = new MemoryStream(iconData);
+            form.Icon = new Icon(memoryStream);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(string.Format(IconLoadErrorMessage, ex.Message), ErrorDialogTitle,
+                MessageBoxButtons.OK, MessageBoxType.Error);
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets a message to display if an icon loading fails.
+    /// </summary>
+    public static string IconLoadErrorMessage { get; set; } = "Failed to load icon with message: '{0}.'";
+
+    /// <summary>
+    /// A message for an error dialog title.
+    /// </summary>
+    public static string ErrorDialogTitle { get; set; } = "Error";
+
     /// <summary>
     /// Creates a new <see cref="TableLayout"/> containing the specified control and a label with specified text.
     /// </summary>

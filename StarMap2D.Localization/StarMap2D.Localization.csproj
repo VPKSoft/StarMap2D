@@ -13,6 +13,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CelestialObjects.resx</DependentUpon>
     </Compile>
+    <Compile Update="Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Update="UI.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -29,6 +34,10 @@
     <EmbeddedResource Update="CelestialObjects.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CelestialObjects.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="UI.fi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

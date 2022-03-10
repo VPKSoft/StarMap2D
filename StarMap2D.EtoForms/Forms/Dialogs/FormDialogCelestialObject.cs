@@ -63,6 +63,9 @@ public class FormDialogCelestialObject : Dialog
 
         Title = UI.CelestialObjects;
 
+        // Set the icon for the form.
+        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+
         // Set the software localization.
         Localization.Globals.Culture = Globals.Locale;
 
