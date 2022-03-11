@@ -51,9 +51,7 @@ public class Globals
         {
             try // Can not allow this to crash the program.
             {
-                return new(string.IsNullOrWhiteSpace(Settings.Locale)
-                    ? CultureInfo.CurrentUICulture.Name.Split('-')[0]
-                    : Settings.Locale.Split('-')[0]);
+                return new CultureInfo(LocaleName);
             }
             catch
             {
@@ -61,6 +59,15 @@ public class Globals
             }
         }
     }
+
+    /// <summary>
+    /// Gets the name of the locale.
+    /// </summary>
+    /// <value>The name of the locale.</value>
+    public static string LocaleName =>
+        string.IsNullOrWhiteSpace(Settings.Locale)
+            ? CultureInfo.CurrentUICulture.Name.Split('-')[0]
+            : Settings.Locale.Split('-')[0];
 
     /// <summary>
     /// Gets or sets the string formatting culture.

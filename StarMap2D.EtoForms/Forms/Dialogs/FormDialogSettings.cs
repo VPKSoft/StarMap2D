@@ -24,19 +24,18 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
-using StarMap2D.Common.Utilities;
+using POCs.Sanjay.SharpSnippets.Drawing;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls.Utilities;
 using VPKSoft.StarCatalogs.StaticData;
 using Button = Eto.Forms.Button;
 using TabControl = Eto.Forms.TabControl;
-using TextBox = Eto.Forms.TextBox;
-
 using UI = StarMap2D.Localization.UI;
 
 namespace StarMap2D.EtoForms.Forms.Dialogs;
@@ -46,39 +45,8 @@ namespace StarMap2D.EtoForms.Forms.Dialogs;
 /// Implements the <see cref="Dialog{T}" />
 /// </summary>
 /// <seealso cref="Dialog{T}" />
-public class FormDialogSettings : Dialog<bool>
+public partial class FormDialogSettings : Dialog<bool>
 {
-    #region GeneralControls
-    private TabControl? tabControlSettings;
-    private Button? btOk;
-    private Button? btCancel;
-    private TableLayout? tableLayout;
-    #endregion
-
-    #region CommonSettingsControls
-    private TabPage? tabCommon;
-    private TableLayout? tabCommonLayout;
-    private TextBox? textBoxLocation;
-    private NumericStepper? latitudeStepper;
-    private NumericStepper? longitudeStepper;
-    private NumericStepper? crossHairStepper;
-    private ComboBox? comboBoxLocations;
-    private CheckBox? cbInvertAxis;
-    private CheckBox? cbDrawConstellations;
-    private CheckBox? cbDrawConstellationLabels;
-    private CheckBox? cbDrawConstellationBoundaries;
-    private CheckBox? cbDrawCrossHair;
-    private ComboBox? cmbUiLocale;
-    private ComboBox? cmbStarCatalog;
-    #endregion
-
-    #region DateAndNumberFormattingSettingsControls
-    private TabPage? tabNumberFormatting;
-    private TableLayout? tabNumberFormattingLayout;
-    private ComboBox? cmbDataFormattingCulture;
-    private ComboBox? cmbDateAndTimeFormattingCulture;
-    #endregion
-
     #region Fonts
     private TabPage? tabFonts;
     private TableLayout? tlFonts;
@@ -124,6 +92,12 @@ public class FormDialogSettings : Dialog<bool>
         // The third tab page.
         LayoutTabPageFormatting();
 
+        // The fourth tab page.
+        LayoutTabMapColorSettings();
+
+        // The fifth tab page.
+        LayoutKnownObjectColorSettings();
+
         btOk = new Button { Text = UI.OK };
         btOk.Click += delegate { SaveSettings(); Close(true); };
 
@@ -140,179 +114,9 @@ public class FormDialogSettings : Dialog<bool>
         LoadSettings();
     }
 
-    /// <summary>
-    /// Creates the controls for the date and number formatting settings tab page.
-    /// </summary>
-    private void LayoutTabPageFormatting()
-    {
-        // The base layout.
-        tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings };
-        tabControlSettings!.Pages.Add(tabNumberFormatting);
-        tabNumberFormattingLayout = new TableLayout();
-        tabNumberFormattingLayout.Padding = new Padding(5);
-        tabNumberFormatting.Content = tabNumberFormattingLayout;
-
-        // The actual controls.
-        cmbDataFormattingCulture = new ComboBox
-        {
-            ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
-            AutoComplete = true,
-        };
-
-        tabNumberFormattingLayout.Rows.Add(
-            new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DataFormattingCulture, cmbDataFormattingCulture))));
-
-        var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
-            .Select(f => new CultureExtended(f.Name, true)).ToList();
-
-        cmbDataFormattingCulture.DataStore = cultures;
-
-        cmbDateAndTimeFormattingCulture = new ComboBox
-        {
-            ItemTextBinding = new PropertyBinding<string>(nameof(CultureExtended.DisplayName)),
-            AutoComplete = true,
-        };
-
-        tabNumberFormattingLayout.Rows.Add(
-            new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.DateAndTimeFormattingCulture, cmbDateAndTimeFormattingCulture))));
-
-        cmbDateAndTimeFormattingCulture.DataStore = cultures;
-
-        // Scale the last row to the maximum.
-        tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
-    }
-
-    private void LayoutFontSettings()
-    {
-        tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding) };
-        tabControlSettings!.Pages.Add(tabFonts);
-
-        tlFonts = new TableLayout();
-        tabFonts.Content = tlFonts;
-
-        fpNormal = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
-
-        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
-        fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
-        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
-
-        // Scale the last row to the maximum.
-        tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
-    }
-
-    /// <summary>
-    /// Creates the controls for the common settings tab page.
-    /// </summary>
-    private void LayoutTabPageCommon()
-    {
-        tabCommon = new TabPage { Text = UI.Common };
-        tabControlSettings!.Pages.Add(tabCommon);
-
-        tableLayout!.Rows.Add(new TableRow(
-            new TableCell(tabControlSettings, true)));
-
-        tabCommonLayout = new TableLayout();
-        tabCommon.Padding = new Padding(5);
-
-        tabCommon.Content = tabCommonLayout;
-
-        textBoxLocation = new TextBox();
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.LocationName, textBoxLocation), true)));
-
-        latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
-        longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
-        crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70 };
-
-        tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
-            new TableCell(
-                EtoHelpers.LabelWrap(UI.Latitude, latitudeStepper),
-                true),
-            new TableCell(
-                EtoHelpers.LabelWrap(UI.Longitude, longitudeStepper),
-                true))));
-
-        comboBoxLocations = new ComboBox { AutoComplete = true };
-        comboBoxLocations.Items.AddRange(Cities.CitiesList.Select(f => new ListItem
-        { Key = f.CityName, Text = f.CityName, Tag = f }));
-
-        comboBoxLocations.SelectedValueChanged += delegate
-        {
-            if (comboBoxLocations.SelectedValue == null)
-            {
-                return;
-            }
-
-            var value = (CityLatLonCoordinate)((ListItem)comboBoxLocations.SelectedValue).Tag;
-            latitudeStepper.Value = value.Latitude;
-            longitudeStepper.Value = value.Longitude;
-            textBoxLocation.Text = value.CityName;
-        };
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.LabelWrap(UI.SelectLocation,
-                comboBoxLocations), true)));
-
-        cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis };
-        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations };
-        cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames };
-        cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries };
-        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair };
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.PaddingWrap(cbInvertAxis), true)));
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.PaddingWrap(cbDrawConstellations), true)));
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.PaddingWrap(cbDrawConstellationLabels), true)));
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.PaddingWrap(cbDrawConstellationBoundaries), true)));
-
-        tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
-            new TableCell(
-                EtoHelpers.PaddingWrap(cbDrawCrossHair),
-                true),
-            new TableCell(
-                EtoHelpers.LabelWrap(UI.CrossHairSize, crossHairStepper),
-                true))));
-
-        cmbUiLocale = new ComboBox
-        {
-            AutoComplete = true,
-            ItemTextBinding = new PropertyBinding<string>(nameof(CultureInfo.DisplayName)),
-        };
-
-        cmbUiLocale.DataStore = Localization.Properties.Languages.Select(f => new CultureExtended(f, true));
-
-        cmbStarCatalog = new ComboBox { AutoComplete = true };
-
-        starCatalogs = new List<StarCatalogData>
-        {
-            new()
-            {
-                IsBuildIn = true, Name = string.Format(UI.EmbeddedParameter, CatalogNames.BuiltInName),
-            },
-        };
-
-        starCatalogs.AddRange(CatalogNames.TypeNames);
-
-        cmbStarCatalog.DataStore = starCatalogs;
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.LabelWrap(UI.StarCatalogSelection,
-                cmbStarCatalog), true)));
-
-        tabCommonLayout.Rows.Add(new TableRow(new TableCell(
-            EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
-
-        // Scale the last row to the maximum.
-        tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
-    }
-
     private List<StarCatalogData> starCatalogs = new();
+    private bool suspendObjectChangeEvents;
+    private SolarSystemObjectGraphics[]? objectGraphics;
 
     /// <summary>
     /// Due to a bug in Eto.Forms (WPF) the ComboBox selected item text must be overridden (See: https://github.com/picoe/Eto/issues/414)
@@ -373,6 +177,54 @@ public class FormDialogSettings : Dialog<bool>
         cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
         fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
         fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+
+        cpkConstellationLineColor!.Value = Color.Parse(Globals.Settings.ConstellationLineColor);
+        cpkConstellationBorderLineColor!.Value = Color.Parse(Globals.Settings.ConstellationBorderLineColor);
+        cpkMapCircleColor!.Value = Color.Parse(Globals.Settings.MapCircleColor);
+        cpkMapSurroundingsColor!.Value = Color.Parse(Globals.Settings.MapSurroundingsColor);
+        cpkMapTextColor!.Value = Color.Parse(Globals.Settings.MapTextColor);
+        cpkMapCrossHairColor!.Value = Color.Parse(Globals.Settings.CrossHairColor);
+
+        try
+        {
+            objectGraphics = SolarSystemObjectGraphics
+                .MergeWithDefaults(Globals.Settings.KnownObjects, Globals.LocaleName)
+                .ToArray();
+        }
+        catch
+        {
+            objectGraphics = SolarSystemObjectGraphics.CreateDefaultList(Globals.LocaleName).ToArray();
+        }
+
+        lbxKnownObjects!.DataStore = objectGraphics;
+        lbxKnownObjects.BackgroundColor = Color.Parse(Globals.Settings.MapCircleColor);
+        lbxKnownObjects.TextColor = lbxKnownObjects.BackgroundColor.GetContrast(true);
+    }
+
+    /// <summary>
+    /// Displays the object data.
+    /// </summary>
+    /// <param name="objectGraphic">The object graphic.</param>
+    private void DisplayObjectData(SolarSystemObjectGraphics? objectGraphic)
+    {
+        if (objectGraphic != null)
+        {
+            suspendObjectChangeEvents = true;
+            lbSelectedSymbolValue!.Text = objectGraphic.Name;
+            tbSelectedSymbolName!.Text = objectGraphic.Name;
+            iwObjectImage!.Image = objectGraphic.Image;
+            cpkSymbolColor!.Value = objectGraphic.ObjectSymbolColor;
+            cpkSymbolCircleColor!.Value = objectGraphic.ObjectCircleColor;
+            nsObjectDiameter!.Value = objectGraphic.Diameter;
+            cbNotUseObject!.Checked = !objectGraphic.Enabled;
+            suspendObjectChangeEvents = false;
+        }
+        else
+        {
+            lbSelectedSymbolValue!.Text = string.Empty;
+            tbSelectedSymbolName!.Text = string.Empty;
+            iwObjectImage!.Image = null;
+        }
     }
 
     /// <summary>
@@ -417,6 +269,114 @@ public class FormDialogSettings : Dialog<bool>
         Globals.Settings.Font = fpNormal!.Value;
         Globals.Settings.DataFont = fpMonospaced!.Value;
 
+        Globals.Settings.ConstellationLineColor = cpkConstellationLineColor!.Value.ToString();
+        Globals.Settings.ConstellationBorderLineColor = cpkConstellationBorderLineColor!.Value.ToString();
+        Globals.Settings.MapCircleColor = cpkMapCircleColor!.Value.ToString();
+        Globals.Settings.MapSurroundingsColor = cpkMapSurroundingsColor!.Value.ToString();
+        Globals.Settings.MapTextColor = cpkMapTextColor!.Value.ToString();
+        Globals.Settings.CrossHairColor = cpkMapCrossHairColor!.Value.ToString();
+
+        Globals.Settings.KnownObjects = string.Join(";", objectGraphics!.Select(f => f.SaveToString()));
+
         Globals.SaveSettings();
     }
+
+    #region InternalEvents
+    private void BtnResetObjectGraphics_Click(object? sender, EventArgs e)
+    {
+        objectGraphics = SolarSystemObjectGraphics.CreateDefaultList(Globals.LocaleName).ToArray();
+        lbxKnownObjects!.DataStore = objectGraphics;
+    }
+
+    private void CbNotUseObject_CheckedChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        if (lbxKnownObjects?.SelectedValue != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbxKnownObjects.SelectedValue;
+            item.Enabled = cbNotUseObject?.Checked == false;
+        }
+    }
+
+    private void TbSelectedSymbolName_TextChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        if (lbxKnownObjects?.SelectedValue != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbxKnownObjects.SelectedValue;
+            if (!string.IsNullOrWhiteSpace(tbSelectedSymbolName!.Text))
+            {
+                item.Name = tbSelectedSymbolName!.Text;
+            }
+        }
+
+        DisplayObjectData((SolarSystemObjectGraphics?)lbxKnownObjects?.SelectedValue);
+    }
+
+    private void FormDialogSettings_ValueChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        if (lbxKnownObjects?.SelectedValue != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbxKnownObjects.SelectedValue;
+            item.ObjectSymbolColor = cpkSymbolColor!.Value;
+        }
+
+        DisplayObjectData((SolarSystemObjectGraphics?)lbxKnownObjects?.SelectedValue);
+    }
+
+    private void CpkSymbolCircleColor_ValueChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        if (lbxKnownObjects?.SelectedValue != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbxKnownObjects.SelectedValue;
+            item.ObjectCircleColor = cpkSymbolCircleColor!.Value;
+        }
+
+        DisplayObjectData((SolarSystemObjectGraphics?)lbxKnownObjects?.SelectedValue);
+    }
+
+    private void NsObjectDiameterOnValueChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        if (lbxKnownObjects?.SelectedValue != null)
+        {
+            var item = (SolarSystemObjectGraphics)lbxKnownObjects.SelectedValue;
+            item.Diameter = (int)nsObjectDiameter!.Value;
+        }
+
+        DisplayObjectData((SolarSystemObjectGraphics?)lbxKnownObjects?.SelectedValue);
+    }
+
+    private void LbxKnownObjects_SelectedValueChanged(object? sender, EventArgs e)
+    {
+        if (suspendObjectChangeEvents)
+        {
+            return;
+        }
+
+        DisplayObjectData((SolarSystemObjectGraphics?)lbxKnownObjects?.SelectedValue);
+    }
+    #endregion
 }
