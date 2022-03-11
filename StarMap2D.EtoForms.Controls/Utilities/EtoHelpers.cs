@@ -226,6 +226,36 @@ public class EtoHelpers
     }
 
     /// <summary>
+    /// Wraps the specified control in a <see cref="TableLayout"/> with two columns preventing the control's width to scale beyond is minimum width.
+    /// </summary>
+    /// <param name="control">The control to wrap.</param>
+    /// <param name="leftCell">A value indicating whether to put the control in the left or the right cell of the internal <seealso cref="TableLayout"/>.</param>
+    /// <returns>A new table cell containing the control.</returns>
+    public static TableCell WidthLimitWrap(Control control, bool leftCell)
+    {
+        return leftCell
+            ? new TableCell(new TableLayout { Rows = { new TableRow(control, new TableCell { ScaleWidth = true }) } })
+            : new TableCell(new TableLayout { Rows = { new TableRow(new TableCell { ScaleWidth = true }, control) } });
+    }
+
+    /// <summary>
+    /// Wraps the specified controls into a new <see cref="TableLayout"/> and returns the contents as a new <see cref="TableRow"/>.
+    /// </summary>
+    /// <param name="controls">The controls to wrap.</param>
+    /// <returns>A new instance to the <see cref="TableRow"/> class.</returns>
+    public static TableRow TableWrap(params Control[] controls)
+    {
+        var row = new TableRow();
+
+        foreach (var control in controls)
+        {
+            row.Cells.Add(control);
+        }
+
+        return new TableRow(new TableLayout(row));
+    }
+
+    /// <summary>
     /// Creates a new instance of a <see cref="Button"/> control with auto-scaling SVG image.
     /// </summary>
     /// <param name="svgColorize">An instance of the <see cref="SvgColorize"/> class containing the SVG data..</param>

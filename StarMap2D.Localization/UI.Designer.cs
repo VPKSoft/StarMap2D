@@ -268,6 +268,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not use the object.
+        /// </summary>
+        public static string DoNotUseTheObject {
+            get {
+                return ResourceManager.GetString("DoNotUseTheObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw constellation borders.
         /// </summary>
         public static string DrawConstellationBorders {
@@ -448,6 +457,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Known object symbols.
+        /// </summary>
+        public static string KnownObjectSymbols {
+            get {
+                return ResourceManager.GetString("KnownObjectSymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latitude.
         /// </summary>
         public static string Latitude {
@@ -547,6 +565,24 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Object details.
+        /// </summary>
+        public static string ObjectDetails {
+            get {
+                return ResourceManager.GetString("ObjectDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object diameter.
+        /// </summary>
+        public static string ObjectDiameter {
+            get {
+                return ResourceManager.GetString("ObjectDiameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object name.
         /// </summary>
         public static string ObjectName {
@@ -574,6 +610,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset object graphics.
+        /// </summary>
+        public static string ResetObjectGraphics {
+            get {
+                return ResourceManager.GetString("ResetObjectGraphics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right ascension.
         /// </summary>
         public static string RightAscension {
@@ -597,6 +642,24 @@ namespace StarMap2D.Localization {
         public static string SaveToCSVFile {
             get {
                 return ResourceManager.GetString("SaveToCSVFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected object.
+        /// </summary>
+        public static string SelectedObject {
+            get {
+                return ResourceManager.GetString("SelectedObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected object name.
+        /// </summary>
+        public static string SelectedObjectName {
+            get {
+                return ResourceManager.GetString("SelectedObjectName", resourceCulture);
             }
         }
         
@@ -696,6 +759,33 @@ namespace StarMap2D.Localization {
         public static string SunTime {
             get {
                 return ResourceManager.GetString("SunTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbol circle color.
+        /// </summary>
+        public static string SymbolCircleColor {
+            get {
+                return ResourceManager.GetString("SymbolCircleColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbol color.
+        /// </summary>
+        public static string SymbolColor {
+            get {
+                return ResourceManager.GetString("SymbolColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbol image.
+        /// </summary>
+        public static string SymbolImage {
+            get {
+                return ResourceManager.GetString("SymbolImage", resourceCulture);
             }
         }
         

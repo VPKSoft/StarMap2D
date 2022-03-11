@@ -339,4 +339,34 @@
   <data name="MapCrossHairColor" xml:space="preserve">
     <value>Keskiristikon väri</value>
   </data>
+  <data name="KnownObjectSymbols" xml:space="preserve">
+    <value>Tunnettujen objektien symbolit</value>
+  </data>
+  <data name="SelectedObject" xml:space="preserve">
+    <value>Valittu objekti</value>
+  </data>
+  <data name="SelectedObjectName" xml:space="preserve">
+    <value>Valitun objektin nimi</value>
+  </data>
+  <data name="ObjectDiameter" xml:space="preserve">
+    <value>Objektin läpimitta</value>
+  </data>
+  <data name="DoNotUseTheObject" xml:space="preserve">
+    <value>Älä käytä objektia</value>
+  </data>
+  <data name="SymbolCircleColor" xml:space="preserve">
+    <value>Symbolin ympyrän väri</value>
+  </data>
+  <data name="SymbolColor" xml:space="preserve">
+    <value>Symbolin väri</value>
+  </data>
+  <data name="SymbolImage" xml:space="preserve">
+    <value>Symbolin kuva</value>
+  </data>
+  <data name="ResetObjectGraphics" xml:space="preserve">
+    <value>Palauta objektien grafiikat</value>
+  </data>
+  <data name="ObjectDetails" xml:space="preserve">
+    <value>Objektien tiedot</value>
+  </data>
 </root>

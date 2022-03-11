@@ -69,7 +69,7 @@ public class SolarSystemObjectGraphics
     /// <param name="serializedGraphics">The serialized graphics delimited with semicolon(';'). See also: <seealso cref="SaveToString"/>.</param>
     /// <param name="locale">The locale.</param>
     /// <returns>A list of solar system objects.</returns>
-    public static List<SolarSystemObjectGraphics> MergeWithDefaults(string serializedGraphics, string locale)
+    public static List<SolarSystemObjectGraphics> MergeWithDefaults(string? serializedGraphics, string locale)
     {
         return MergeWithDefaults(string.IsNullOrWhiteSpace(serializedGraphics)
             ? Array.Empty<SolarSystemObjectGraphics>()
@@ -535,7 +535,7 @@ public class SolarSystemObjectGraphics
     {
         var result = document
             .Clone()
-            .ColorizeElementsFill(SvgElement.Circle, new SvgColor(circleColor.Rb, circleColor.Bb, circleColor.Gb))
+            .ColorizeElementsFill(SvgElement.Circle, new SvgColor(circleColor.Rb, circleColor.Gb, circleColor.Bb))
             .RemoveStroke(SvgElement.Circle)
             .ColorizeElementsFill(SvgElement.Path, new SvgColor(symbolColor.Rb, symbolColor.Gb, symbolColor.Bb));
 
@@ -553,7 +553,7 @@ public class SolarSystemObjectGraphics
 
         if (SvgDocument != null)
         {
-            builder.Append($"|{nameof(SvgDocument)}: {SvgDocument.ToDataString()}");
+            builder.Append($"|{nameof(SvgDocument)}: {Convert.ToBase64String(SvgDocument.ToBytes())}");
         }
 
         if (ObjectImage != null)

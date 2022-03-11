@@ -70,7 +70,7 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load icon with message: &apos;{0}.&apos;.
+        ///   Looks up a localized string similar to Failed to load icon with message: &apos;{0}&apos;..
         /// </summary>
         public static string FailedToLoadIconWithMessage0 {
             get {

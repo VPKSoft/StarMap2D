@@ -99,6 +99,9 @@ public class MainForm : Form
         var aboutCommand = new Command { MenuText = UI.About };
         aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
 
+        var objectDetailsCommend = new Command { MenuText = UI.ObjectDetails, ToolBarText = UI.ObjectDetails };
+        objectDetailsCommend.Executed += (_, _) => new FormCelestialObjectData().Show();
+
         // create menu
         base.Menu = new MenuBar
         {
@@ -120,7 +123,7 @@ public class MainForm : Form
         base.Menu.ApplicationMenu.Text = UI.File;
 
         // create toolbar			
-        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu } };
+        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend } };
 
 
         var ySunDoubles = new double[60 * 24];
