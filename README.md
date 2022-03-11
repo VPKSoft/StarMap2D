@@ -1,6 +1,9 @@
 # StarMap2D
 A 2D sky map and utilities.
 
+### Multi-platform
+Thanks to [Eto.Forms](https://github.com/picoe/Eto) this is a multi-platform application. As for now this has only been tested with Linux & Windows as I don't have a Mac.
+
 **NOTE:Alpha, something works, something is yet to come.**
 
 _The main window_
@@ -18,3 +21,9 @@ _The sky map_
 _Detail data for solar system objects_
 
 ![image](https://user-images.githubusercontent.com/40712699/157938297-c488ad65-fb9f-49b2-b6c8-0c689f96c606.png)
+
+## Thanks to
+* [JetBrains](https://www.jetbrains.com/?from=StarMap2D) for their open source license(s).
+* [![.NET Desktop](https://github.com/VPKSoft/StarMap2D/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/VPKSoft/StarMap2D/actions/workflows/dotnet-desktop.yml)
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
