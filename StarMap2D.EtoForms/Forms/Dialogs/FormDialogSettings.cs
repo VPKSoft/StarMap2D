@@ -199,6 +199,7 @@ public partial class FormDialogSettings : Dialog<bool>
         lbxKnownObjects!.DataStore = objectGraphics;
         lbxKnownObjects.BackgroundColor = Color.Parse(Globals.Settings.MapCircleColor);
         lbxKnownObjects.TextColor = lbxKnownObjects.BackgroundColor.GetContrast(true);
+        iwObjectImage!.BackgroundColor = Color.Parse(Globals.Settings.MapCircleColor);
     }
 
     /// <summary>
