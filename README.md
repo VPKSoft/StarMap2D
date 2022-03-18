@@ -8,7 +8,7 @@ Thanks to [Eto.Forms](https://github.com/picoe/Eto) this is a multi-platform app
 
 _The main window_
 
-![image](https://user-images.githubusercontent.com/40712699/157937633-ef01c174-678c-4167-8efc-29c7c8e72d6a.png)
+![image](https://user-images.githubusercontent.com/40712699/159071437-a69725bb-63ab-4712-9f8b-35649fc087be.png)
 
 _The settings first tab page_
 
