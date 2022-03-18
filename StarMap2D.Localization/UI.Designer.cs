@@ -8,10 +8,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Resources;
+using System.Runtime.CompilerServices;
+
 namespace StarMap2D.Localization {
-    using System;
-    
-    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,27 +24,27 @@ namespace StarMap2D.Localization {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [DebuggerNonUserCode()]
+    [CompilerGenerated()]
     public class UI {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal UI() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StarMap2D.Localization.UI", typeof(UI).Assembly);
+                if (ReferenceEquals(resourceMan, null)) {
+                    ResourceManager temp = new ResourceManager("StarMap2D.Localization.UI", typeof(UI).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,8 +55,8 @@ namespace StarMap2D.Localization {
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -79,11 +84,29 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adapt.
+        /// </summary>
+        public static string Adapt {
+            get {
+                return ResourceManager.GetString("Adapt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Additional data.
         /// </summary>
         public static string AdditionalData {
             get {
                 return ResourceManager.GetString("AdditionalData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always re-scale.
+        /// </summary>
+        public static string AlwaysReScale {
+            get {
+                return ResourceManager.GetString("AlwaysReScale", resourceCulture);
             }
         }
         
@@ -201,6 +224,15 @@ namespace StarMap2D.Localization {
         public static string CSVFiles {
             get {
                 return ResourceManager.GetString("CSVFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current day.
+        /// </summary>
+        public static string CurrentDay {
+            get {
+                return ResourceManager.GetString("CurrentDay", resourceCulture);
             }
         }
         
@@ -538,6 +570,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum axes.
+        /// </summary>
+        public static string MaximumAxes {
+            get {
+                return ResourceManager.GetString("MaximumAxes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moon height °.
         /// </summary>
         public static string MoonDegrees {
@@ -561,6 +602,15 @@ namespace StarMap2D.Localization {
         public static string NAChar {
             get {
                 return ResourceManager.GetString("NAChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next day.
+        /// </summary>
+        public static string NextDay {
+            get {
+                return ResourceManager.GetString("NextDay", resourceCulture);
             }
         }
         
@@ -601,6 +651,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous day.
+        /// </summary>
+        public static string PreviousDay {
+            get {
+                return ResourceManager.GetString("PreviousDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit.
         /// </summary>
         public static string Quit {
@@ -633,6 +692,15 @@ namespace StarMap2D.Localization {
         public static string RightAscensionHours {
             get {
                 return ResourceManager.GetString("RightAscensionHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rise and set graph draw mode.
+        /// </summary>
+        public static string RiseAndSetGraphDrawMode {
+            get {
+                return ResourceManager.GetString("RiseAndSetGraphDrawMode", resourceCulture);
             }
         }
         

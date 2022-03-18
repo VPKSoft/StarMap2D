@@ -369,4 +369,25 @@
   <data name="ObjectDetails" xml:space="preserve">
     <value>Objektien tiedot</value>
   </data>
+  <data name="PreviousDay" xml:space="preserve">
+    <value>Edellinen päivä</value>
+  </data>
+  <data name="NextDay" xml:space="preserve">
+    <value>Seuraava päivä</value>
+  </data>
+  <data name="CurrentDay" xml:space="preserve">
+    <value>Kuluva päivä</value>
+  </data>
+  <data name="AlwaysReScale" xml:space="preserve">
+    <value>Aina uudelleensovitus</value>
+  </data>
+  <data name="Adapt" xml:space="preserve">
+    <value>Mukautuminen</value>
+  </data>
+  <data name="MaximumAxes" xml:space="preserve">
+    <value>Akselien maksimi</value>
+  </data>
+  <data name="RiseAndSetGraphDrawMode" xml:space="preserve">
+    <value>Lasku- ja nousukuvaajan piirtotyyli</value>
+  </data>
 </root>

@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,7 @@ using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Helpers;
 using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Common.EventsAndDelegates;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
@@ -68,7 +70,7 @@ public class FormSkyMap2D : Form
         MinimumSize = new Size(1024, 768);
 
         // Set the icon for the form.
-        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+        EtoHelpers.SetIcon(this, EtoForms.Properties.Resources.StarMap2D);
 
         InitializeView();
 
@@ -85,7 +87,7 @@ public class FormSkyMap2D : Form
         map2d.MouseClickObject += Map2d_MouseClickObject;
     }
 
-    private void Map2d_MouseClickObject(object sender, Common.EventsAndDelegates.NamedObjectEventArgs e)
+    private void Map2d_MouseClickObject(object sender, NamedObjectEventArgs e)
     {
         if (e.Identifier != null)
         {
@@ -94,7 +96,7 @@ public class FormSkyMap2D : Form
         }
     }
 
-    private void Map2d_MouseCoordinatesChanged(object? sender, Common.EventsAndDelegates.CoordinatesChangedEventArgs e)
+    private void Map2d_MouseCoordinatesChanged(object? sender, CoordinatesChangedEventArgs e)
     {
         string format = "+000.000000;-000.000000"; // F6
         lbMouseCoordinateAzimuthValue!.Text = e.Azimuth.ToString(format, Globals.FormattingCulture);
@@ -104,7 +106,7 @@ public class FormSkyMap2D : Form
         lbCompassDirectionValue!.Text = CompassDirection.FromDegrees(e.Azimuth).ValueString;
     }
 
-    private void Map2d_MouseHoverObject(object sender, Common.EventsAndDelegates.NamedObjectEventArgs e)
+    private void Map2d_MouseHoverObject(object sender, NamedObjectEventArgs e)
     {
         if (e.Identifier == null)
         {
@@ -122,7 +124,7 @@ public class FormSkyMap2D : Form
         cbAboveHorizonValue!.Checked = details.AboveHorizon;
     }
 
-    private void Map2d_MouseLeaveObject(object sender, Common.EventsAndDelegates.NamedObjectEventArgs e)
+    private void Map2d_MouseLeaveObject(object sender, NamedObjectEventArgs e)
     {
         lbObjectNameValue!.Text = string.Empty;
         lbRightAscensionValue!.Text = UI.NAChar;
@@ -395,7 +397,7 @@ public class FormSkyMap2D : Form
         }
     }
 
-    private void Map2d_CoordinatesChanged(object? sender, Common.EventsAndDelegates.LocationChangedEventArgs e)
+    private void Map2d_CoordinatesChanged(object? sender, LocationChangedEventArgs e)
     {
         nsLatitude!.Value = e.Latitude;
         nsLongitude!.Value = e.Longitude;
@@ -406,7 +408,7 @@ public class FormSkyMap2D : Form
         SetTitle();
     }
 
-    private void FormSkyMap2D_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    private void FormSkyMap2D_Closing(object? sender, CancelEventArgs e)
     {
         timer.Stop();
     }
@@ -687,7 +689,7 @@ public class FormSkyMap2D : Form
     {
         var yaleBrightProvider = new YaleBrightProvider();
 
-        using var reader = new StreamReader(new MemoryStream(StarMap2D.EtoForms.Properties.Resources.YaleBrightStars));
+        using var reader = new StreamReader(new MemoryStream(EtoForms.Properties.Resources.YaleBrightStars));
 
         yaleBrightProvider.LoadData(reader.ReadAllLines());
 

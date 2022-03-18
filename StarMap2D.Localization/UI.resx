@@ -369,4 +369,25 @@
   <data name="ObjectDetails" xml:space="preserve">
     <value>Object details</value>
   </data>
+  <data name="PreviousDay" xml:space="preserve">
+    <value>Previous day</value>
+  </data>
+  <data name="NextDay" xml:space="preserve">
+    <value>Next day</value>
+  </data>
+  <data name="CurrentDay" xml:space="preserve">
+    <value>Current day</value>
+  </data>
+  <data name="AlwaysReScale" xml:space="preserve">
+    <value>Always re-scale</value>
+  </data>
+  <data name="Adapt" xml:space="preserve">
+    <value>Adapt</value>
+  </data>
+  <data name="MaximumAxes" xml:space="preserve">
+    <value>Maximum axes</value>
+  </data>
+  <data name="RiseAndSetGraphDrawMode" xml:space="preserve">
+    <value>Rise and set graph draw mode</value>
+  </data>
 </root>

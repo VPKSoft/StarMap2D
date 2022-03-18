@@ -70,4 +70,10 @@ public class Globals
     /// </summary>
     /// <value>The floating point comparison tolerance.</value>
     public static double FloatingPointTolerance { get; set; } = 0.000000001;
+
+    /// <summary>
+    /// Gets or sets the floating point comparison tolerance for the single-precision floating point values.
+    /// </summary>
+    /// <value>The floating point comparison tolerance.</value>
+    public static float FloatingPointSingleTolerance { get; set; } = 0.00001f;
 }

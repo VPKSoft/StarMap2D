@@ -30,6 +30,8 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Calculations.RiseSet;
+using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.Plotting;
@@ -61,45 +63,81 @@ public class MainForm : Form
         EtoHelpers.ErrorDialogTitle = Messages.Error;
 
         // Set the icon for the form.
-        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+        EtoHelpers.SetIcon(this, EtoForms.Properties.Resources.StarMap2D);
 
         Title = UI.StarMap2D;
-        MinimumSize = new Size(400, 300);
+        MinimumSize = new Size(800, 600);
 
-        var plot = new TimeValuePlot { BackgroundColor = Colors.Black, DrawCrossHairs = true };
+        plot = new TimeValuePlot { BackgroundColor = Colors.Black, DrawCrossHairs = true, };
+
+        switch (Globals.Settings.MainChartDrawMode)
+        {
+            case 0:
+                plot.RememberAxesMaximum = false;
+                plot.UseStaticMinimumMaximum = false;
+                break;
+            case 1:
+                plot.RememberAxesMaximum = true;
+                plot.UseStaticMinimumMaximum = false;
+                break;
+            case 2:
+                plot.UseStaticMinimumMaximum = true;
+                plot.RememberAxesMaximum = false;
+                break;
+        }
+
+        btnPreviousDay = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
+            Colors.SteelBlue, 10, ClickHandler, UI.PreviousDay);
+
+        btnNextDay = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
+            Colors.SteelBlue, 10, ClickHandler, UI.NextDay);
+
+        btnReset = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
+            Colors.SteelBlue, 10, ClickHandler, UI.CurrentDay);
+
+        dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.Date, Value = DateTime.Now, };
+        dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
         Content = new TableLayout
         {
             Padding = 10,
             Rows =
             {
+                EtoHelpers.TableWrap(true,
+                    EtoHelpers.PaddingWrap(btnPreviousDay, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(btnReset, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(btnNextDay, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(dtpTimeMain, Globals.DefaultPadding)),
                 new TableRow
                 {
                     Cells =
                     {
                         plot,
-                    }
+                    },
                 },
             },
         };
 
         // create a few commands that can be used for the menu and toolbar
-        var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap };
+        var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap, };
         starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
 
-        var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings };
+        var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings, };
         settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
         var testStuff = new Command { MenuText = UI.TestStuff, };
-        testStuff.Executed += delegate { new FormCelestialObjectData().Show(); };
+        testStuff.Executed += delegate { new SunRiseSet(Globals.Settings.Latitude, Globals.Settings.Longitude); };
 
-        var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q };
+        var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q, };
         quitCommand.Executed += (_, _) => Application.Instance.Quit();
 
-        var aboutCommand = new Command { MenuText = UI.About };
+        var aboutCommand = new Command { MenuText = UI.About, };
         aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
 
-        var objectDetailsCommend = new Command { MenuText = UI.ObjectDetails, ToolBarText = UI.ObjectDetails };
+        var objectDetailsCommend = new Command { MenuText = UI.ObjectDetails, ToolBarText = UI.ObjectDetails, };
         objectDetailsCommend.Executed += (_, _) => new FormCelestialObjectData().Show();
 
         // create menu
@@ -108,7 +146,7 @@ public class MainForm : Form
             Items =
             {
                 // File submenu
-                new SubMenuItem { Text = UI.TestStuff, Items = { testStuff }},
+                new SubMenuItem { Text = UI.TestStuff, Items = { testStuff, }, },
             },
             ApplicationItems =
             {
@@ -123,21 +161,74 @@ public class MainForm : Form
         base.Menu.ApplicationMenu.Text = UI.File;
 
         // create toolbar			
-        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend } };
+        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend, }, };
+
+        CurrentDateTime = DateTime.UtcNow;
+    }
+
+    private bool suspendDateTimeChange;
+
+    private void DtpTimeMain_ValueChanged(object? sender, EventArgs e)
+    {
+        if (suspendDateTimeChange)
+        {
+            return;
+        }
+
+        CurrentDateTime = dtpTimeMain!.Value!.Value.ToUniversalTime();
+    }
+
+    private void ClickHandler(object? sender, EventArgs e)
+    {
+        if (sender?.Equals(btnNextDay) == true)
+        {
+            var offset = DateTimeOffset.Now.Offset.TotalHours;
+            CurrentDateTime = CurrentDateTime.AddDays(1).AddHours(offset);
+        }
+
+        if (sender?.Equals(btnPreviousDay) == true)
+        {
+            CurrentDateTime = CurrentDateTime.AddDays(-1);
+        }
+
+        if (sender?.Equals(btnReset) == true)
+        {
+            CurrentDateTime = DateTime.UtcNow;
+        }
+    }
 
 
+    private DateTime currentDateTime = DateTime.Now.Date;
+
+    private DateTime CurrentDateTime
+    {
+        get => currentDateTime;
+
+        set
+        {
+            var offset = DateTimeOffset.Now.Offset.TotalHours;
+            var adjustedDate = new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
+
+            if (value != adjustedDate)
+            {
+                suspendDateTimeChange = true;
+                dtpTimeMain!.Value = value.ToLocalTime();
+                suspendDateTimeChange = false;
+
+                currentDateTime = adjustedDate;
+                PlotDateTime();
+            }
+        }
+    }
+
+    private void PlotDateTime()
+    {
+        plot!.AxisData.Clear();
         var ySunDoubles = new double[60 * 24];
 
         var yMoonDoubles = new double[60 * 24];
 
-        var dateTime = DateTime.UtcNow;
-
-        var offset = DateTimeOffset.Now.Offset.TotalHours;
-
-        dateTime =
-            new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
-
-        var date = dateTime.ToAASDate();
+        var date = CurrentDateTime.ToAASDate();
 
         var longitude = Globals.Settings.Longitude;
         var latitude = Globals.Settings.Latitude;
@@ -153,7 +244,13 @@ public class MainForm : Form
             yMoonDoubles[i] = position.Y;
         }
 
-        plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange });
-        plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue });
+        plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange, });
+        plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue, });
     }
+
+    private Button? btnPreviousDay;
+    private Button? btnNextDay;
+    private Button? btnReset;
+    private TimeValuePlot? plot;
+    private DateTimePicker? dtpTimeMain;
 }

@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using StarMap2D.Common.Properties;
+
 namespace StarMap2D.Common.Utilities;
 
 /// <summary>
@@ -40,7 +42,7 @@ public class LocalizationProvider
         get
         {
             var result = new TabDeliLocalization();
-            result.GetLocalizedTexts(Properties.Resources.SolarSystemObjects);
+            result.GetLocalizedTexts(Resources.SolarSystemObjects);
             return result;
         }
     }
@@ -54,7 +56,7 @@ public class LocalizationProvider
         get
         {
             var result = new TabDeliLocalization();
-            result.GetLocalizedTexts(Properties.Resources.Constellations);
+            result.GetLocalizedTexts(Resources.Constellations);
             return result;
         }
     }

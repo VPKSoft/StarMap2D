@@ -40,9 +40,8 @@ using StarMap2D.Common.Utilities;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls.Utilities;
+using StarMap2D.Localization;
 using CO = StarMap2D.Localization.CelestialObjects;
-using UI = StarMap2D.Localization.UI;
-using Units = StarMap2D.Localization.Units;
 
 
 namespace StarMap2D.EtoForms.Forms.Dialogs;
@@ -64,7 +63,7 @@ public class FormDialogCelestialObject : Dialog
         Title = UI.CelestialObjects;
 
         // Set the icon for the form.
-        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+        EtoHelpers.SetIcon(this, EtoForms.Properties.Resources.StarMap2D);
 
         // Set the software localization.
         Localization.Globals.Culture = Globals.Locale;
@@ -100,7 +99,7 @@ public class FormDialogCelestialObject : Dialog
         form.nsLatitude!.Value = latitude;
 
         form.cmbObjectSelect!.SelectedValue =
-            Enumerable.FirstOrDefault<EnumStringItem<ObjectsWithPositions>>(form.objectsWithPositions, f => f.EnumValue == displayObject);
+            form.objectsWithPositions.FirstOrDefault(f => f.EnumValue == displayObject);
 
         if (owner == null)
         {

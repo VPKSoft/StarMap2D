@@ -33,10 +33,8 @@ using Eto.Forms;
 using POCs.Sanjay.SharpSnippets.Drawing;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls.Utilities;
+using StarMap2D.Localization;
 using VPKSoft.StarCatalogs.StaticData;
-using Button = Eto.Forms.Button;
-using TabControl = Eto.Forms.TabControl;
-using UI = StarMap2D.Localization.UI;
 
 namespace StarMap2D.EtoForms.Forms.Dialogs;
 
@@ -65,7 +63,7 @@ public partial class FormDialogSettings : Dialog<bool>
         UI.Culture = Globals.Locale;
 
         // Set the icon for the form.
-        EtoHelpers.SetIcon(this, StarMap2D.EtoForms.Properties.Resources.StarMap2D);
+        EtoHelpers.SetIcon(this, EtoForms.Properties.Resources.StarMap2D);
 
         // Create the UI controls.
         InitializeView();
@@ -200,6 +198,8 @@ public partial class FormDialogSettings : Dialog<bool>
         lbxKnownObjects.BackgroundColor = Color.Parse(Globals.Settings.MapCircleColor);
         lbxKnownObjects.TextColor = lbxKnownObjects.BackgroundColor.GetContrast(true);
         iwObjectImage!.BackgroundColor = Color.Parse(Globals.Settings.MapCircleColor);
+
+        rblDrawMode!.SelectedIndex = Globals.Settings.MainChartDrawMode!.Value;
     }
 
     /// <summary>
@@ -278,6 +278,8 @@ public partial class FormDialogSettings : Dialog<bool>
         Globals.Settings.CrossHairColor = cpkMapCrossHairColor!.Value.ToString();
 
         Globals.Settings.KnownObjects = string.Join(";", objectGraphics!.Select(f => f.SaveToString()));
+
+        Globals.Settings.MainChartDrawMode = rblDrawMode!.SelectedIndex;
 
         Globals.SaveSettings();
     }

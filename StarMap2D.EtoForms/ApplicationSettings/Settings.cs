@@ -225,4 +225,14 @@ public class Settings : ApplicationJsonSettings
     /// <value>The font for data text.</value>
     [Settings]
     public SettingsFontData? DataFont { get; set; }
+
+    /// <summary>
+    /// Gets or sets the main chart draw mode.
+    /// <para>0. Always adjust.</para>
+    /// <para>1. Adapt.</para>
+    /// <para>2. Static minimum and maximum axes.</para>
+    /// </summary>
+    /// <value>The main chart draw mode.</value>
+    [Settings(Default = 2)]
+    public int? MainChartDrawMode { get; set; }
 }

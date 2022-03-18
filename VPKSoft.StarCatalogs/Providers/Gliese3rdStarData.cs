@@ -427,15 +427,15 @@ public class Gliese3rdStarData : StarData, IRightAscensionHms, IDeclinationDms
             FieldNameList.AddRange(FieldNames);
         }
 
-        if (!Gliese3rdStarData.FieldNames.Contains(dataName))
+        if (!FieldNames.Contains(dataName))
         {
             return string.Empty;
         }
 
-        var index = new List<string>(Gliese3rdStarData.FieldNames).IndexOf(dataName);
+        var index = new List<string>(FieldNames).IndexOf(dataName);
 
-        return ReadRaw(rawDataEntry, Gliese3rdStarData.FieldPositions[index].start,
-            Gliese3rdStarData.FieldPositions[index].end);
+        return ReadRaw(rawDataEntry, FieldPositions[index].start,
+            FieldPositions[index].end);
     }
 
     private static string ReadRaw(string lineEntry, int index, int end)

@@ -39,10 +39,10 @@ public class MathTests
         // Positive coordinates test.
         var coordinates = new[]
         {
-            new AAS2DCoordinate { X = 2, Y = 2 },
-            new AAS2DCoordinate { X = 6, Y = 2 },
-            new AAS2DCoordinate { X = 6, Y = 5 },
-            new AAS2DCoordinate { X = 2, Y = 5 },
+            new AAS2DCoordinate { X = 2, Y = 2, },
+            new AAS2DCoordinate { X = 6, Y = 2, },
+            new AAS2DCoordinate { X = 6, Y = 5, },
+            new AAS2DCoordinate { X = 2, Y = 5, },
         };
 
         Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5));
@@ -51,10 +51,10 @@ public class MathTests
         // Partially negative coordinates test.
         coordinates = new[]
         {
-            new AAS2DCoordinate { X = -2, Y = -2 },
-            new AAS2DCoordinate { X = 6, Y = -2 },
-            new AAS2DCoordinate { X = 6, Y = 3 },
-            new AAS2DCoordinate { X = -2, Y = 3 },
+            new AAS2DCoordinate { X = -2, Y = -2, },
+            new AAS2DCoordinate { X = 6, Y = -2, },
+            new AAS2DCoordinate { X = 6, Y = 3, },
+            new AAS2DCoordinate { X = -2, Y = 3, },
         };
 
         Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));

@@ -31,6 +31,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Common.SvgColorization;
+using StarMap2D.EtoForms.Controls.Properties;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.Localization;
 
@@ -170,7 +171,7 @@ public class CompassView : Drawable
         }
     }
 
-    private byte[] compassSvgImageData = EtoForms.Controls.Properties.Resources.compass;
+    private byte[] compassSvgImageData = Resources.compass;
 
     /// <summary>
     /// Gets or sets the compass SVG image data.

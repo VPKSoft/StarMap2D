@@ -104,7 +104,7 @@ public class PolygonShapes
         var cross_product = CrossProductLength(Ax, Ay, Bx, By, Cx, Cy);
 
         // Calculate the angle.
-        return (double)System.Math.Atan2(cross_product, dot_product);
+        return System.Math.Atan2(cross_product, dot_product);
     }
 
     // Return the dot product AB · BC.

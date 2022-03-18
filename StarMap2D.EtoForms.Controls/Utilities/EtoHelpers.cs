@@ -241,9 +241,10 @@ public class EtoHelpers
     /// <summary>
     /// Wraps the specified controls into a new <see cref="TableLayout"/> and returns the contents as a new <see cref="TableRow"/>.
     /// </summary>
+    /// <param name="addScaleWidthCell">A value indicating whether to add a maximum width scaling cell to the last cell of the row.</param>
     /// <param name="controls">The controls to wrap.</param>
     /// <returns>A new instance to the <see cref="TableRow"/> class.</returns>
-    public static TableRow TableWrap(params Control[] controls)
+    public static TableRow TableWrap(bool addScaleWidthCell, params Control[] controls)
     {
         var row = new TableRow();
 
@@ -252,7 +253,12 @@ public class EtoHelpers
             row.Cells.Add(control);
         }
 
-        return new TableRow(new TableLayout(row));
+        if (addScaleWidthCell)
+        {
+            row.Cells.Add(new TableCell { ScaleWidth = true });
+        }
+
+        return new TableRow(new TableLayout(row, new TableRow { ScaleHeight = true }));
     }
 
     /// <summary>

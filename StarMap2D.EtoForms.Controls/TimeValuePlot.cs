@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
@@ -71,7 +72,7 @@ public class TimeValuePlot : Drawable
         }
     }
 
-    private void AxisData_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private void AxisData_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         RecalculateAndPaint();
     }
@@ -90,23 +91,104 @@ public class TimeValuePlot : Drawable
         Invalidate();
     }
 
+    private float axisMinimum;
+
     /// <summary>
     /// Gets the axis minimum value for all axes specified in the <see cref="AxisData"/> property.
     /// </summary>
     /// <value>The axes minimum.</value>
-    private float AxisMinimum => (float)AxisData.Min(f => f.MinimumValue);
+    private float AxisMinimum
+    {
+        get
+        {
+            if (UseStaticMinimumMaximum)
+            {
+                return YAxesMinimum;
+            }
+
+            var calculateCurrentMinimum = (float)AxisData.Min(f => f.MinimumValue);
+
+            if (!RememberAxesMaximum)
+            {
+                return calculateCurrentMinimum;
+            }
+
+            if (axisMinimum < calculateCurrentMinimum)
+            {
+                return axisMinimum;
+            }
+
+            axisMinimum = calculateCurrentMinimum;
+
+            return calculateCurrentMinimum;
+        }
+    }
+
+    private float axisMaximum;
 
     /// <summary>
     /// Gets the axis maximum value for all axes specified in the <see cref="AxisData"/> property.
     /// </summary>
     /// <value>The axes maximum.</value>
-    private float AxisMaximum => (float)AxisData.Max(f => f.MaximumValue);
+    private float AxisMaximum
+    {
+        get
+        {
+            if (UseStaticMinimumMaximum)
+            {
+                return YAxesMaximum;
+            }
+
+            var calculateCurrentMaximum = (float)AxisData.Max(f => f.MaximumValue);
+
+            if (!RememberAxesMaximum)
+            {
+                return calculateCurrentMaximum;
+            }
+
+            if (axisMaximum > calculateCurrentMaximum)
+            {
+                return axisMaximum;
+            }
+
+            axisMaximum = calculateCurrentMaximum;
+
+            return calculateCurrentMaximum;
+        }
+    }
+
+    private float axisMinMax;
 
     /// <summary>
     /// Gets the axis absolute maximum value for all axes specified in the <see cref="AxisData"/> property.
     /// </summary>
     /// <value>The axes absolute absolute maximum.</value>
-    private float AxisMinMax => Math.Max(Math.Abs(AxisMinimum), Math.Abs(AxisMaximum));
+    private float AxisMinMax
+    {
+        get
+        {
+            if (UseStaticMinimumMaximum)
+            {
+                return Math.Max(Math.Abs(YAxesMinimum), Math.Abs(YAxesMaximum));
+            }
+
+            var calculatedCurrentMinMax = Math.Max(Math.Abs(AxisMinimum), Math.Abs(AxisMaximum));
+
+            if (!RememberAxesMaximum)
+            {
+                return calculatedCurrentMinMax;
+            }
+
+            if (axisMinMax > calculatedCurrentMinMax)
+            {
+                return axisMinMax;
+            }
+
+            axisMinMax = calculatedCurrentMinMax;
+
+            return calculatedCurrentMinMax;
+        }
+    }
 
     private double CombinedDataLengthMinutes
     {
@@ -268,6 +350,89 @@ public class TimeValuePlot : Drawable
     }
 
     #region PublicProperties
+    private bool useStaticMinimumMaximum = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to use static minimum and maximum values
+    /// on the Y-axes specified by the <see cref="YAxesMinimum"/> and <see cref="YAxesMaximum"/> property values.
+    /// </summary>
+    /// <value><c>true</c> if to use static minimum and maximum values for the Y-axes; otherwise, <c>false</c>.</value>
+    public bool UseStaticMinimumMaximum
+    {
+        get => useStaticMinimumMaximum;
+
+        set
+        {
+            if (useStaticMinimumMaximum != value)
+            {
+                useStaticMinimumMaximum = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private float yAxesMinimum = -90;
+
+    /// <summary>
+    /// Gets or sets the static Y-axes minimum value.
+    /// </summary>
+    /// <value>The static Y-axes minimum.</value>
+    public float YAxesMinimum
+    {
+        get => yAxesMinimum;
+
+        set
+        {
+            if (Math.Abs(yAxesMinimum - value) > Globals.FloatingPointSingleTolerance)
+            {
+                yAxesMinimum = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private float yAxesMaximum = 90;
+
+    /// <summary>
+    /// Gets or sets the static Y-axes maximum value.
+    /// </summary>
+    /// <value>The static Y-axes maximum.</value>
+    public float YAxesMaximum
+    {
+        get => yAxesMaximum;
+
+        set
+        {
+            if (Math.Abs(yAxesMaximum - value) > Globals.FloatingPointSingleTolerance)
+            {
+                yAxesMaximum = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private bool rememberAxesMaximum = true;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to remember axes maximum value and not to rescale on data point changes.
+    /// </summary>
+    /// <value><c>true</c> if to remember axes maximum; otherwise, <c>false</c>.</value>
+    public bool RememberAxesMaximum
+    {
+        get => rememberAxesMaximum;
+
+        set
+        {
+            if (value != rememberAxesMaximum)
+            {
+                axisMinimum = default;
+                axisMaximum = default;
+                axisMinMax = default;
+                rememberAxesMaximum = value;
+            }
+        }
+    }
+
     /// <summary>
     /// Gets or sets the color for the background of the control
     /// </summary>

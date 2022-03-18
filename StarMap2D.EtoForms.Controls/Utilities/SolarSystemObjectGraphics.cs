@@ -33,6 +33,7 @@ using System.Text;
 using Eto.Drawing;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Common.SvgColorization;
+using StarMap2D.EtoForms.Controls.Properties;
 
 namespace StarMap2D.EtoForms.Controls.Utilities;
 
@@ -112,117 +113,117 @@ public class SolarSystemObjectGraphics
         new()
         {
             ObjectType = ObjectsWithPositions.Sun, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Sun),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.sun)
+            SvgDocument = SvgColorize.FromBytes(Resources.sun)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Mercury, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Mercury),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_mercury)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_mercury)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Venus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Venus),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_venus)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_venus)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Earth, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Earth),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.earth)
+            SvgDocument = SvgColorize.FromBytes(Resources.earth)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Moon, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Moon),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.moon)
+            SvgDocument = SvgColorize.FromBytes(Resources.moon)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Mars, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Mars),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_mars)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_mars)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Jupiter, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Jupiter),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_jupiter)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_jupiter)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Saturn, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Saturn),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_saturn)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_saturn)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Uranus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Uranus),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_uranus)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_uranus)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Neptune, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Neptune),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.planet_neptune)
+            SvgDocument = SvgColorize.FromBytes(Resources.planet_neptune)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Ceres, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Ceres),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_ceres)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_ceres)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Orcus, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Orcus),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_orcus)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_orcus)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Pluto, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Pluto),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_pluto)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_pluto)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Haumea, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Haumea),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_haumea)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_haumea)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Quaoar, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Quaoar),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_quoar)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_quoar)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Makemake, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Makemake),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_makemake)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_makemake)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Gonggong, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Gonggong),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_gonggong)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_gonggong)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Eris, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Eris),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_eris1)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_eris1)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Sedna, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Sedna),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_sedna)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_sedna)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Juno, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Juno),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_juno)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_juno)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Vesta, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Vesta),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_vesta)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_vesta)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Pallas, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Pallas),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_pallas)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_pallas)
         },
         new()
         {
             ObjectType = ObjectsWithPositions.Chiron, Diameter = DefaultDiameter, Name = nameof(ObjectsWithPositions.Chiron),
-            SvgDocument = SvgColorize.FromBytes(Properties.Resources.minor_planet_chiron)
+            SvgDocument = SvgColorize.FromBytes(Resources.minor_planet_chiron)
         },
     };
 

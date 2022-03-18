@@ -26,6 +26,7 @@ SOFTWARE.
 
 using System;
 using System.Globalization;
+using System.Threading;
 using Eto.Forms;
 
 namespace StarMap2D.EtoForms;
@@ -35,8 +36,8 @@ class Program
     [STAThread]
     static void Main(string[] args)
     {
-        System.Threading.Thread.CurrentThread.CurrentUICulture =
-            System.Threading.Thread.CurrentThread.CurrentCulture;
+        Thread.CurrentThread.CurrentUICulture =
+            Thread.CurrentThread.CurrentCulture;
 
         Globals.Settings.CreateApplicationSettingsFolder("VPKSoft", nameof(StarMap2D));
         Globals.Settings.Load(Globals.Settings.GetApplicationSettingsFile("VPKSoft", nameof(StarMap2D)));

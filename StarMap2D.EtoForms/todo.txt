@@ -4,3 +4,4 @@
 * Rise and set times
 * [Done] Separate culture settings for the date and time formatting
 * [Done] To Eto.Forms?
+* Lock graph axis to previous maximum & add reset possibility to the same feature.

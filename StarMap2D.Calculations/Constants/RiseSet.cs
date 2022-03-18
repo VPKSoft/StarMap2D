@@ -24,37 +24,25 @@ SOFTWARE.
 */
 #endregion
 
-using System.Globalization;
-
-namespace StarMap2D.Calculations;
+namespace StarMap2D.Calculations.Constants;
 
 /// <summary>
-/// A class containing the global static parameters.
+/// Rise and set constants.
 /// </summary>
-public static class Globals
+public class RiseSet
 {
     /// <summary>
-    /// Gets or sets a value indicating whether to use the full VSOP87 theory instead of the truncated version as provided in Meeus's book. 
+    /// The sun height at horizon (rise/set).
     /// </summary>
-    /// <seealso cref="AASharp"/>
-    /// <value><c>true</c> if to use the full VSOP87 theory in calculations; otherwise, <c>false</c>.</value>
-    public static bool HighPrecisionCalculations { get; set; }
+    public const double SunH0 = -0.8333;
 
     /// <summary>
-    /// Gets or sets the string formatting culture.
+    /// The moon height at horizon (rise/set).
     /// </summary>
-    /// <value>The string formatting culture.</value>
-    public static CultureInfo FormattingCulture { get; set; } = CultureInfo.InvariantCulture;
+    public const double MoonH0 = -0.825;
 
     /// <summary>
-    /// Gets or sets the floating point comparison tolerance.
+    /// The stars and plants height at horizon (rise/set).
     /// </summary>
-    /// <value>The floating point comparison tolerance.</value>
-    public static double FloatingPointTolerance { get; set; } = 0.000000001;
-
-    /// <summary>
-    /// Gets or sets the floating point comparison tolerance for the single-precision floating point values.
-    /// </summary>
-    /// <value>The floating point comparison tolerance.</value>
-    public static float FloatingPointSingleTolerance { get; set; } = 0.00001f;
+    public const double StarsPlanetsH0 = -0.5667;
 }

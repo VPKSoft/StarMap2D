@@ -12,6 +12,7 @@ using StarMap2D.Calculations.Helpers.DateAndTime;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.Plotting;
 using StarMap2D.Common.EventsAndDelegates;
+using StarMap2D.Common.Properties;
 using StarMap2D.Common.Utilities;
 using StarMap2D.EtoForms.Controls.Drawing;
 using StarMap2D.EtoForms.Controls.Utilities;
@@ -39,7 +40,7 @@ public class Map2D : Drawable
             constellations.Add((IConstellation<ConstellationArea, ConstellationLine>)constellation!);
         }
 
-        constellationNames.GetLocalizedTexts(Common.Properties.Resources.Constellations);
+        constellationNames.GetLocalizedTexts(Resources.Constellations);
 
         LostFocus += Map2D_LostFocus;
         SizeChanged += Map2D_SizeChanged;

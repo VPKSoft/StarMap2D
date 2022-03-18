@@ -24,6 +24,7 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -69,6 +70,7 @@ public partial class FormDialogSettings
     private TableLayout? tabNumberFormattingLayout;
     private ComboBox? cmbDataFormattingCulture;
     private ComboBox? cmbDateAndTimeFormattingCulture;
+    private RadioButtonList? rblDrawMode;
     #endregion
 
     #region MapColorSettings
@@ -222,6 +224,19 @@ public partial class FormDialogSettings
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
         fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
+
+        rblDrawMode = new RadioButtonList
+        {
+            Items =
+            {
+                UI.AlwaysReScale,
+                UI.Adapt,
+                UI.MaximumAxes,
+            },
+            Spacing = new Size(Globals.DefaultPadding, Globals.DefaultPadding),
+        };
+
+        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.RiseAndSetGraphDrawMode, rblDrawMode));
 
         // Scale the last row to the maximum.
         tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
