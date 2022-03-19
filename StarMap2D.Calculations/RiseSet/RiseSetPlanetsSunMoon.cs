@@ -31,37 +31,43 @@ using StarMap2D.Calculations.Extensions;
 namespace StarMap2D.Calculations.RiseSet;
 
 /// <summary>
-/// A class to calculate sun rise, set and transit times.
+/// A class to calculate rise, transit and set times for the planets, pluto, sun and moon.
 /// Implements the <see cref="StarMap2D.Calculations.RiseSet.RiseSetBase" />
 /// </summary>
 /// <seealso cref="StarMap2D.Calculations.RiseSet.RiseSetBase" />
-public class SunRiseSet : RiseSetBase
+public class RiseSetPlanetsSunMoon : RiseSetBase
 {
+
     /// <summary>
-    /// Initializes a new instance of the <see cref="SunRiseSet"/> class.
+    /// Initializes a new instance of the <see cref="RiseSetPlanetsSunMoon"/> class.
     /// </summary>
-    public SunRiseSet(double latitude, double longitude) : base(latitude, longitude)
+    /// <param name="object">The object which rise, transit and set to calculate.</param>
+    /// <param name="latitude">The latitude of the observer in degrees.</param>
+    /// <param name="longitude">The longitude of the observer in degrees.</param>
+    public RiseSetPlanetsSunMoon(ObjectsWithPositions @object, double latitude, double longitude) : base(latitude, longitude)
     {
-        Object = ObjectsWithPositions.Sun;
+        _ = ToAASharp(@object);
+        Object = @object;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SunRiseSet"/> class.
+    /// Initializes a new instance of the <see cref="RiseSetPlanetsSunMoon"/> class.
     /// </summary>
+    /// <param name="object">The object which rise, transit and set to calculate.</param>
     /// <param name="latitude">The latitude of the observer in degrees.</param>
     /// <param name="longitude">The longitude of the observer in degrees.</param>
-    /// <param name="starTimeUtc">The star time in local time.</param>
-    /// <param name="endTimeUtc">The end time in local time.</param>
-    public SunRiseSet(double latitude, double longitude, DateTime starTimeUtc, DateTime endTimeUtc) : base(
-        latitude, longitude, starTimeUtc, endTimeUtc)
+    /// <param name="starTimeLocal">The star time in local time.</param>
+    /// <param name="endTimeLocal">The end time in local time.</param>
+    public RiseSetPlanetsSunMoon(ObjectsWithPositions @object, double latitude, double longitude, DateTime starTimeLocal, DateTime endTimeLocal) : base(latitude, longitude, starTimeLocal, endTimeLocal)
     {
-        Object = ObjectsWithPositions.Sun;
+        _ = ToAASharp(@object);
+        Object = @object;
     }
 
     /// <summary>
     /// Calculates the rise, set and transform times.
     /// </summary>
-    public override void CalculateRiseSetTransform()
+    public sealed override void CalculateRiseSetTransform()
     {
         if (SuspendCalculation)
         {
@@ -70,8 +76,9 @@ public class SunRiseSet : RiseSetBase
 
         var starJd = StartTimeUtc.ToUniversalTime().ToAASDate().GetJD();
         var endJd = EndTimeUtc.ToUniversalTime().ToAASDate().GetJD();
+
         var results = AASRiseTransitSet2.Calculate(starJd, endJd, ToAASharp(Object), -Longitude,
-            Latitude, Constants.RiseSet.SunH0, bHighPrecision: Globals.HighPrecisionCalculations);
+            Latitude, Constants.RiseSet.MoonH0, bHighPrecision: Globals.HighPrecisionCalculations);
 
         var resultArray = results.ToArray();
 

@@ -390,4 +390,19 @@
   <data name="RiseAndSetGraphDrawMode" xml:space="preserve">
     <value>Lasku- ja nousukuvaajan piirtotyyli</value>
   </data>
+  <data name="SunRise" xml:space="preserve">
+    <value>Auringon nousu</value>
+  </data>
+  <data name="SunSet" xml:space="preserve">
+    <value>Auringon lasku</value>
+  </data>
+  <data name="DayLength" xml:space="preserve">
+    <value>Päivän pituus</value>
+  </data>
+  <data name="MoonRise" xml:space="preserve">
+    <value>Kuun nousu</value>
+  </data>
+  <data name="MoonSet" xml:space="preserve">
+    <value>Kuun lasku</value>
+  </data>
 </root>

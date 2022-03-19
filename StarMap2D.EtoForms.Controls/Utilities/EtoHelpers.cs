@@ -261,6 +261,23 @@ public class EtoHelpers
         return new TableRow(new TableLayout(row, new TableRow { ScaleHeight = true }));
     }
 
+    public static TableLayout TableWrapVertical(bool addScaleHeightCell, params Control[] controls)
+    {
+        var layOut = new TableLayout();
+
+        foreach (var control in controls)
+        {
+            layOut.Rows.Add(control);
+        }
+
+        if (addScaleHeightCell)
+        {
+            layOut.Rows.Add(new TableRow { ScaleHeight = addScaleHeightCell, });
+        }
+
+        return layOut;
+    }
+
     /// <summary>
     /// Creates a new instance of a <see cref="Button"/> control with auto-scaling SVG image.
     /// </summary>

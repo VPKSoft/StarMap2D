@@ -100,11 +100,25 @@ public abstract class RiseSetBase
         }
     }
 
+    private readonly ObjectsWithPositions @object = ObjectsWithPositions.Sun;
+
     /// <summary>
     /// Gets the object which rise and set to calculate.
     /// </summary>
     /// <value>The object.</value>
-    public ObjectsWithPositions Object { get; init; }
+    public ObjectsWithPositions Object
+    {
+        get => @object;
+
+        init
+        {
+            @object = value;
+            if (!suspendCalculation)
+            {
+                CalculateRiseSetTransform();
+            }
+        }
+    }
 
     private DateTime startTimeUtc;
     private DateTime startTimeLocal;
@@ -242,6 +256,15 @@ public abstract class RiseSetBase
     /// <value>The rise, set and transit times.</value>
     public List<KeyValuePair<AASRiseTransitSetDetails2.Type, DateTime>> RiseSetTransitTimes { get; } = new();
 
+    private static T? NullIfDefault<T>(T value) where T : struct
+    {
+        if (Equals(value, default(T)))
+        {
+            return null;
+        }
+
+        return value;
+    }
 
     /// <summary>
     /// Gets the first set time in local time.
@@ -249,8 +272,8 @@ public abstract class RiseSetBase
     /// <value>The first set time.</value>
     /// <remarks>Set is defined when the apparent top edge of the object is exactly on the horizon and the altitude of the object is decreasing.</remarks>
     public DateTime? Set =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.Set).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.Set).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first rise time in local time.
@@ -258,8 +281,8 @@ public abstract class RiseSetBase
     /// <value>The first rise time.</value>
     /// <remarks>Civil Dusk is defined when the geometric center of the Sun is 6 degrees below the horizon and the altitude of the Sun is decreasing (i.e. in the local evening time after the Sun has set).</remarks>
     public DateTime? Rise =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.Rise).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.Rise).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first civil dusk time in local time.
@@ -267,8 +290,8 @@ public abstract class RiseSetBase
     /// <value>The first civil dusk time.</value>
     /// <remarks>Civil Dusk is defined when the geometric center of the Sun is 6 degrees below the horizon and the altitude of the Sun is decreasing (i.e. in the local evening time after the Sun has set).</remarks>
     public DateTime? CivilDusk =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartCivilTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartCivilTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first nautical dusk time in local time.
@@ -276,8 +299,8 @@ public abstract class RiseSetBase
     /// <value>The first nautical dusk time.</value>
     /// <remarks>Nautical Dusk is defined when the geometric center of the Sun is 12 degrees below the horizon and the altitude of the Sun is decreasing (i.e. in the local evening time after the Sun has set).</remarks>
     public DateTime? NauticalDusk =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartNauticalTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartNauticalTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first astronomical dusk time in local time.
@@ -285,8 +308,8 @@ public abstract class RiseSetBase
     /// <value>The first astronomical dusk time.</value>
     /// <remarks>Astronomical Dusk is defined when the geometric center of the Sun is 18 degrees below the horizon and the altitude of the Sun is decreasing (i.e. in the local evening time after the Sun has set).</remarks>
     public DateTime? AstronomicalDusk =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartAstronomicalTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.StartAstronomicalTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first civil dawn time in local time.
@@ -294,8 +317,8 @@ public abstract class RiseSetBase
     /// <value>The first civil dawn time.</value>
     /// <remarks>Civil Dawn is defined when the geometric center of the Sun is 6 degrees below the horizon and the altitude of the Sun is increasing (i.e. in the local morning time before the Sun has risen).</remarks>
     public DateTime? CivilDawn =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndCivilTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndCivilTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first nautical dawn time in local time.
@@ -303,8 +326,8 @@ public abstract class RiseSetBase
     /// <value>The first nautical dawn time.</value>
     /// <remarks>Nautical Dawn is defined when the geometric center of the Sun is 12 degrees below the horizon and the altitude of the Sun is increasing (i.e. in the local morning time before the Sun has risen).</remarks>
     public DateTime? NauticalDawn =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndNauticalTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndNauticalTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
 
     /// <summary>
     /// Gets the first astronomical dawn time in local time.
@@ -312,8 +335,25 @@ public abstract class RiseSetBase
     /// <value>The first astronomical dawn time.</value>
     /// <remarks>Astronomical Dawn is defined when the geometric center of the Sun is 18 degrees below the horizon and the altitude of the Sun is increasing (i.e. in the local morning time before the Sun has risen).</remarks>
     public DateTime? AstronomicalDawn =>
-        RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndAstronomicalTwilight).OrderBy(f => f.Value)
-            .FirstOrDefault().Value;
+        NullIfDefault(RiseSetTransitTimes.Where(f => f.Key == AASRiseTransitSetDetails2.Type.EndAstronomicalTwilight).OrderBy(f => f.Value)
+            .FirstOrDefault().Value);
+
+    /// <summary>
+    /// Gets the <see cref="TimeSpan"/> between the <see cref="Rise"/> and <see cref="Set"/> times.
+    /// </summary>
+    /// <value>The rise set span.</value>
+    public TimeSpan? RiseSetSpan
+    {
+        get
+        {
+            if (Rise == null || Set == null)
+            {
+                return null;
+            }
+
+            return Rise > Set ? Rise - Set : Set - Rise;
+        }
+    }
 
     /// <summary>
     /// Calculates the rise, set and transform times.

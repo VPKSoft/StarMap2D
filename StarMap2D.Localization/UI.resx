@@ -390,4 +390,19 @@
   <data name="RiseAndSetGraphDrawMode" xml:space="preserve">
     <value>Rise and set graph draw mode</value>
   </data>
+  <data name="SunRise" xml:space="preserve">
+    <value>Sun rise</value>
+  </data>
+  <data name="SunSet" xml:space="preserve">
+    <value>Sun set</value>
+  </data>
+  <data name="DayLength" xml:space="preserve">
+    <value>Day length</value>
+  </data>
+  <data name="MoonRise" xml:space="preserve">
+    <value>Moon rise</value>
+  </data>
+  <data name="MoonSet" xml:space="preserve">
+    <value>Moon set</value>
+  </data>
 </root>

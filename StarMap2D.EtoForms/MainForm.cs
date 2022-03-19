@@ -28,6 +28,7 @@ using System;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.RiseSet;
@@ -101,6 +102,18 @@ public class MainForm : Form
         dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.Date, Value = DateTime.Now, };
         dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
+        lbSunRiseValue = new Label();
+        lbSunSetValue = new Label();
+        lbDayLengthValue = new Label();
+        lbMoonRiseValue = new Label();
+        lbMoonSetValue = new Label();
+
+        lbSunRise = new Label { Text = UI.SunRise, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+        lbSunSet = new Label { Text = UI.SunSet, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+        lbDayLength = new Label { Text = UI.DayLength, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+        lbMoonRise = new Label { Text = UI.MoonRise, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+        lbMoonSet = new Label { Text = UI.MoonSet, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+
         Content = new TableLayout
         {
             Padding = 10,
@@ -111,6 +124,17 @@ public class MainForm : Form
                     EtoHelpers.PaddingWrap(btnReset, Globals.DefaultPadding),
                     EtoHelpers.PaddingWrap(btnNextDay, Globals.DefaultPadding),
                     EtoHelpers.PaddingWrap(dtpTimeMain, Globals.DefaultPadding)),
+                EtoHelpers.TableWrap(true,
+                    EtoHelpers.PaddingWrap(EtoHelpers.TableWrapVertical(true, lbSunRise, lbSunRiseValue),
+                        Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(EtoHelpers.TableWrapVertical(true, lbSunSet, lbSunSetValue),
+                        Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(EtoHelpers.TableWrapVertical(true, lbDayLength, lbDayLengthValue),
+                        Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(EtoHelpers.TableWrapVertical(true, lbMoonRise, lbMoonRiseValue),
+                        Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(EtoHelpers.TableWrapVertical(true, lbMoonSet, lbMoonSetValue),
+                        Globals.DefaultPadding)),
                 new TableRow
                 {
                     Cells =
@@ -129,7 +153,11 @@ public class MainForm : Form
         settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
         var testStuff = new Command { MenuText = UI.TestStuff, };
-        testStuff.Executed += delegate { new SunRiseSet(Globals.Settings.Latitude, Globals.Settings.Longitude); };
+        testStuff.Executed += delegate
+        {
+            _ = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Sun, Globals.Settings.Latitude, Globals.Settings.Longitude);
+            _ = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Moon, Globals.Settings.Latitude, Globals.Settings.Longitude);
+        };
 
         var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q, };
         quitCommand.Executed += (_, _) => Application.Instance.Quit();
@@ -215,6 +243,19 @@ public class MainForm : Form
                 dtpTimeMain!.Value = value.ToLocalTime();
                 suspendDateTimeChange = false;
 
+                var riseSetSun = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Sun, Globals.Settings.Latitude,
+                    Globals.Settings.Longitude, value, value.AddDays(1));
+
+                lbSunRiseValue!.Text = riseSetSun.Rise?.ToLongTimeString() ?? UI.NAChar;
+                lbSunSetValue!.Text = riseSetSun.Set?.ToLongTimeString() ?? UI.NAChar;
+                lbDayLengthValue!.Text = riseSetSun.RiseSetSpan?.ToString(@"hh\:mm\:ss") ?? UI.NAChar;
+
+                var riseSetMoon = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Moon, Globals.Settings.Latitude,
+                    Globals.Settings.Longitude, value, value.AddDays(1));
+
+                lbMoonRiseValue!.Text = riseSetMoon.Rise?.ToLongTimeString() ?? UI.NAChar;
+                lbMoonSetValue!.Text = riseSetMoon.Set?.ToLongTimeString() ?? UI.NAChar;
+
                 currentDateTime = adjustedDate;
                 PlotDateTime();
             }
@@ -253,4 +294,15 @@ public class MainForm : Form
     private Button? btnReset;
     private TimeValuePlot? plot;
     private DateTimePicker? dtpTimeMain;
+    private Label? lbSunRiseValue;
+    private Label? lbSunSetValue;
+    private Label? lbDayLengthValue;
+    private Label? lbMoonRiseValue;
+    private Label? lbMoonSetValue;
+
+    private Label? lbSunRise;
+    private Label? lbSunSet;
+    private Label? lbDayLength;
+    private Label? lbMoonRise;
+    private Label? lbMoonSet;
 }
