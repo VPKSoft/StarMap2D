@@ -240,4 +240,52 @@
   <data name="HorizontalAzimuthDegrees" xml:space="preserve">
     <value>Horizontal, azimuth (degrees)</value>
   </data>
+  <data name="North" xml:space="preserve">
+    <value>north</value>
+  </data>
+  <data name="NorthNorthEast" xml:space="preserve">
+    <value>north-north-east</value>
+  </data>
+  <data name="NorthEast" xml:space="preserve">
+    <value>north-east</value>
+  </data>
+  <data name="EastNorthEast" xml:space="preserve">
+    <value>east-north-east</value>
+  </data>
+  <data name="East" xml:space="preserve">
+    <value>east</value>
+  </data>
+  <data name="EastSouthEast" xml:space="preserve">
+    <value>east-south-east</value>
+  </data>
+  <data name="SouthEast" xml:space="preserve">
+    <value>south-east</value>
+  </data>
+  <data name="SouthSouthEast" xml:space="preserve">
+    <value>south-south-east</value>
+  </data>
+  <data name="South" xml:space="preserve">
+    <value>south</value>
+  </data>
+  <data name="SouthSouthWest" xml:space="preserve">
+    <value>south-south-west</value>
+  </data>
+  <data name="SouthWest" xml:space="preserve">
+    <value>south-west</value>
+  </data>
+  <data name="WestSouthWest" xml:space="preserve">
+    <value>west-south-west</value>
+  </data>
+  <data name="West" xml:space="preserve">
+    <value>west</value>
+  </data>
+  <data name="WestNorthWest" xml:space="preserve">
+    <value>west-north-west</value>
+  </data>
+  <data name="NorthWest" xml:space="preserve">
+    <value>north-west</value>
+  </data>
+  <data name="NorthNorthWest" xml:space="preserve">
+    <value>north-north-west</value>
+  </data>
 </root>

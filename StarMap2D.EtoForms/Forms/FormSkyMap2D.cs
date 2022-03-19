@@ -85,6 +85,32 @@ public class FormSkyMap2D : Form
         map2d.MouseLeaveObject += Map2d_MouseLeaveObject;
         map2d.MouseCoordinatesChanged += Map2d_MouseCoordinatesChanged;
         map2d.MouseClickObject += Map2d_MouseClickObject;
+
+        CompassDirection.GetNameFunc = CompassPointNameFunc;
+    }
+
+    private static string CompassPointNameFunc(CompassPoint arg)
+    {
+        return arg switch
+        {
+            CompassPoint.North => Units.North,
+            CompassPoint.NorthNorthEast => Units.NorthNorthEast,
+            CompassPoint.NorthEast => Units.NorthEast,
+            CompassPoint.EastNorthEast => Units.EastNorthEast,
+            CompassPoint.East => Units.East,
+            CompassPoint.EastSouthEast => Units.EastSouthEast,
+            CompassPoint.SouthEast => Units.SouthEast,
+            CompassPoint.SouthSouthEast => Units.SouthSouthEast,
+            CompassPoint.South => Units.South,
+            CompassPoint.SouthSouthWest => Units.SouthSouthWest,
+            CompassPoint.SouthWest => Units.SouthWest,
+            CompassPoint.WestSouthWest => Units.WestSouthWest,
+            CompassPoint.West => Units.West,
+            CompassPoint.WestNorthWest => Units.WestNorthWest,
+            CompassPoint.NorthWest => Units.NorthWest,
+            CompassPoint.NorthNorthWest => Units.NorthNorthWest,
+            _ => throw new NotImplementedException(),
+        };
     }
 
     private void Map2d_MouseClickObject(object sender, NamedObjectEventArgs e)

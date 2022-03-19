@@ -240,4 +240,52 @@
   <data name="HorizontalAzimuthDegrees" xml:space="preserve">
     <value>Horisontaali, atsimuutti (astetta)</value>
   </data>
+  <data name="North" xml:space="preserve">
+    <value>pohjoinen</value>
+  </data>
+  <data name="NorthNorthEast" xml:space="preserve">
+    <value>pohjoiskoilinen</value>
+  </data>
+  <data name="NorthEast" xml:space="preserve">
+    <value>koillinen</value>
+  </data>
+  <data name="EastNorthEast" xml:space="preserve">
+    <value>itäkoillinen</value>
+  </data>
+  <data name="East" xml:space="preserve">
+    <value>itä</value>
+  </data>
+  <data name="EastSouthEast" xml:space="preserve">
+    <value>itäkaakko</value>
+  </data>
+  <data name="SouthEast" xml:space="preserve">
+    <value>kaakko</value>
+  </data>
+  <data name="SouthSouthEast" xml:space="preserve">
+    <value>eteläkaakko</value>
+  </data>
+  <data name="South" xml:space="preserve">
+    <value>etelä</value>
+  </data>
+  <data name="SouthSouthWest" xml:space="preserve">
+    <value>etelälounas</value>
+  </data>
+  <data name="SouthWest" xml:space="preserve">
+    <value>lounas</value>
+  </data>
+  <data name="WestSouthWest" xml:space="preserve">
+    <value>länsilounas</value>
+  </data>
+  <data name="West" xml:space="preserve">
+    <value>länsi</value>
+  </data>
+  <data name="WestNorthWest" xml:space="preserve">
+    <value>länsiluode</value>
+  </data>
+  <data name="NorthWest" xml:space="preserve">
+    <value>luode</value>
+  </data>
+  <data name="NorthNorthWest" xml:space="preserve">
+    <value>pohjoisluode</value>
+  </data>
 </root>

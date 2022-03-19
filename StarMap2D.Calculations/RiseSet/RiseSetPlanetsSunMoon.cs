@@ -77,8 +77,23 @@ public class RiseSetPlanetsSunMoon : RiseSetBase
         var starJd = StartTimeUtc.ToUniversalTime().ToAASDate().GetJD();
         var endJd = EndTimeUtc.ToUniversalTime().ToAASDate().GetJD();
 
+        double h0;
+
+        if (Object == ObjectsWithPositions.Moon)
+        {
+            h0 = Constants.RiseSet.MoonH0;
+        }
+        else if (Object == ObjectsWithPositions.Sun)
+        {
+            h0 = Constants.RiseSet.SunH0;
+        }
+        else
+        {
+            h0 = Constants.RiseSet.StarsPlanetsH0;
+        }
+
         var results = AASRiseTransitSet2.Calculate(starJd, endJd, ToAASharp(Object), -Longitude,
-            Latitude, Constants.RiseSet.MoonH0, bHighPrecision: Globals.HighPrecisionCalculations);
+            Latitude, h0, bHighPrecision: Globals.HighPrecisionCalculations);
 
         var resultArray = results.ToArray();
 
