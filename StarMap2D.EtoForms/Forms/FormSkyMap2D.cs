@@ -212,11 +212,11 @@ public class FormSkyMap2D : Form
         //            Content = map2d;
         map2d.Plot2D = new(Globals.Settings.Latitude, Globals.Settings.Longitude)
         {
-            Diameter = Math.Min(map2d.Width, map2d.Height)
+            Diameter = Math.Min(map2d.Width, map2d.Height),
         };
 
 
-        splitterMain = new Splitter { Orientation = Orientation.Horizontal };
+        splitterMain = new Splitter { Orientation = Orientation.Horizontal, };
         splitterMain.PositionChanged += SplitterMainPositionChanged;
 
         Content = splitterMain;
@@ -233,9 +233,9 @@ public class FormSkyMap2D : Form
 
 
         // The time unit value and it's type selector combo box.
-        nsSpeedPerTimeAmount = new NumericStepper { MinValue = 1, MaxValue = int.MaxValue, DecimalPlaces = 3 };
+        nsSpeedPerTimeAmount = new NumericStepper { MinValue = 1, MaxValue = int.MaxValue, DecimalPlaces = 3, };
 
-        cmbTimeUnit = new ComboBox { ItemTextBinding = new PropertyBinding<string>(nameof(EnumStringItem<TimeInterval>.EnumName)) };
+        cmbTimeUnit = new ComboBox { ItemTextBinding = new PropertyBinding<string>(nameof(EnumStringItem<TimeInterval>.EnumName)), };
         cmbTimeUnit.DataStore = timeDataSource;
         cmbTimeUnit.SelectedValue = timeDataSource.First(f => f.EnumValue == TimeInterval.Second);
 
@@ -292,32 +292,32 @@ public class FormSkyMap2D : Form
         timer.Elapsed += ElapsedHandler;
 
         // The check box controls.
-        cbInvertEastWest = new CheckBox { Text = UI.InvertEastWest, ThreeState = false };
+        cbInvertEastWest = new CheckBox { Text = UI.InvertEastWest, ThreeState = false, };
         cbInvertEastWest.CheckedChanged += CbInvertEastWest_CheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbInvertEastWest, Globals.DefaultPadding));
 
-        cbDrawConstellationBorders = new CheckBox { Text = UI.DrawConstellationBorders, ThreeState = false };
+        cbDrawConstellationBorders = new CheckBox { Text = UI.DrawConstellationBorders, ThreeState = false, };
         cbDrawConstellationBorders.CheckedChanged += CbDrawConstellationBorders_CheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellationBorders, Globals.DefaultPadding));
 
-        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations, ThreeState = false };
+        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations, ThreeState = false, };
         cbDrawConstellations.CheckedChanged += CbDrawConstellationsCheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellations, Globals.DefaultPadding));
 
-        cbDrawConstellationNames = new CheckBox { Text = UI.DrawConstellationNames, ThreeState = false };
+        cbDrawConstellationNames = new CheckBox { Text = UI.DrawConstellationNames, ThreeState = false, };
         cbDrawConstellationNames.CheckedChanged += CbDrawConstellationNamesCheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawConstellationNames, Globals.DefaultPadding));
 
-        cbSkipCalculatedObjects = new CheckBox { Text = UI.SkipCalculatedObjects, ThreeState = false };
+        cbSkipCalculatedObjects = new CheckBox { Text = UI.SkipCalculatedObjects, ThreeState = false, };
         cbSkipCalculatedObjects.CheckedChanged += CbSkipCalculatedObjects_CheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbSkipCalculatedObjects, Globals.DefaultPadding));
 
-        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair, ThreeState = false };
+        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair, ThreeState = false, };
         cbDrawCrossHair.CheckedChanged += CbDrawCrossHair_CheckedChanged;
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbDrawCrossHair, Globals.DefaultPadding));
 
         // The geographic location change controls.
-        cmbJumpLocation = new ComboBox { AutoComplete = true };
+        cmbJumpLocation = new ComboBox { AutoComplete = true, };
         cmbJumpLocation.DataStore = Cities.CitiesList;
         cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
 
@@ -329,8 +329,8 @@ public class FormSkyMap2D : Form
                 Colors.SteelBlue, 6, RevertLocation_Click)
         ));
 
-        nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
-        nsLongitude = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
+        nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, };
+        nsLongitude = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180, };
 
         mapControlLayout.Rows.Add(new TableLayout(new TableRow(
             new TableCell(
@@ -354,7 +354,7 @@ public class FormSkyMap2D : Form
         objectInfoTableNameRaDec =
             FluentTableLayoutBuilder.New()
                 .WithRow(Globals.DefaultPadding,
-                    EtoHelpers.PaddingWrap(new Label { Text = UI.ObjectName }, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(new Label { Text = UI.ObjectName, }, Globals.DefaultPadding),
                     EtoHelpers.PaddingWrap(lbObjectNameValue, Globals.DefaultPadding))
                 .WithRow(Globals.DefaultPadding, EtoHelpers.LabelWrap(UI.RightAscension, lbRightAscensionValue),
                     EtoHelpers.LabelWrap(UI.Declination, lbDeclinationValue))
@@ -362,7 +362,7 @@ public class FormSkyMap2D : Form
 
         objectInfoTableHorizontalCoordinates = FluentTableLayoutBuilder.New()
             .WithRow(Globals.DefaultPadding,
-                EtoHelpers.PaddingWrap(new Label { Text = UI.HorizontalCoordinatesInDegrees }))
+                EtoHelpers.PaddingWrap(new Label { Text = UI.HorizontalCoordinatesInDegrees, }))
             .WithRow(Globals.DefaultPadding, EtoHelpers.PaddingWrap(lbHorizontalXValue),
                 EtoHelpers.PaddingWrap(lbHorizontalYValue))
             .GetTable();
@@ -370,7 +370,7 @@ public class FormSkyMap2D : Form
         mapControlLayout.Rows.Add(objectInfoTableNameRaDec);
         mapControlLayout.Rows.Add(objectInfoTableHorizontalCoordinates);
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbAboveHorizonValue));
-        mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(new Label { Text = UI.Coordinates }));
+        mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(new Label { Text = UI.Coordinates, }));
 
         lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
         lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
@@ -379,10 +379,10 @@ public class FormSkyMap2D : Form
 
         mousePositionLayout = FluentTableLayoutBuilder.New()
             .WithSpacing(Globals.DefaultPadding)
-            .WithRootRow(new Label { Text = UI.Height }, lbMouseCoordinateHeightValue)
-            .WithRootRow(new Label { Text = UI.Azimuth }, lbMouseCoordinateAzimuthValue)
-            .WithRootRow(new Label { Text = UI.RightAscension }, lbMouseCoordinateRightAscensionValue)
-            .WithRootRow(new Label { Text = UI.Declination }, lbMouseCoordinateDeclinationValue)
+            .WithRootRow(new Label { Text = UI.Height, }, lbMouseCoordinateHeightValue)
+            .WithRootRow(new Label { Text = UI.Azimuth, }, lbMouseCoordinateAzimuthValue)
+            .WithRootRow(new Label { Text = UI.RightAscension, }, lbMouseCoordinateRightAscensionValue)
+            .WithRootRow(new Label { Text = UI.Declination, }, lbMouseCoordinateDeclinationValue)
             .GetTable();
 
         mapControlLayout.Rows.Add(mousePositionLayout);
@@ -399,7 +399,7 @@ public class FormSkyMap2D : Form
         SetTitle();
 
         // Leave this and the compass to the last!
-        mapControlLayout.Rows.Add(new TableRow { ScaleHeight = true });
+        mapControlLayout.Rows.Add(new TableRow { ScaleHeight = true, });
         mapControlLayout.Rows.Add(cwCompass);
     }
 
@@ -577,7 +577,7 @@ public class FormSkyMap2D : Form
                 TimeInterval.Week => nsSpeedPerTimeAmount!.Value * 604800,
                 TimeInterval.Month => nsSpeedPerTimeAmount!.Value * 30.436875 * 86400,
                 TimeInterval.Year => nsSpeedPerTimeAmount!.Value * 365.2425 * 86400,
-                _ => 1
+                _ => 1,
             };
         }
     }
@@ -641,7 +641,7 @@ public class FormSkyMap2D : Form
                     map2d.Plot2D.Project2D(
                         SolarSystemObjectPositions.GetSmallObjectPosition(value, aaDate, precision, latitude,
                             longitude), InvertEastWest),
-                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image, },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", value.ToString(), Globals.Settings.Locale!),
                 ObjectType = solarSystemObject.ObjectType,
@@ -667,7 +667,7 @@ public class FormSkyMap2D : Form
             {
                 CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
                     map2d.Plot2D.Project2D(SolarSystemObjectPositions.GetObjectPosition(value, aaDate, precision, longitude, latitude), InvertEastWest),
-                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image },
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => solarSystemObject.Image, },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage($"text{LowerCaseFirstUpper(value.ToString())}", nameof(value), Globals.Settings.Locale!),
                 ObjectType = solarSystemObject.ObjectType,
@@ -683,7 +683,7 @@ public class FormSkyMap2D : Form
                 CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
                     map2d.Plot2D.Project2D(
                         SolarSystemObjectPositions.GetSunPosition(aaDate, precision, longitude, latitude), InvertEastWest),
-                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image },
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => sun.Image, },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage("textSun", "Sun", Globals.Settings.Locale!),
                 ObjectType = ObjectsWithPositions.Sun,
@@ -699,7 +699,7 @@ public class FormSkyMap2D : Form
                 CalculatePosition = (aaDate, precision, latitude, longitude, _) =>
                     map2d.Plot2D.Project2D(
                         SolarSystemObjectPositions.GetMoonPosition(aaDate, precision, longitude, latitude), InvertEastWest),
-                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image },
+                ObjectGraphics = new StarMapGraphics { GetImage = (_, _) => moon.Image, },
                 IsLocationCalculated = true,
                 ObjectName = tabDeli.GetMessage("textMoon", "Moon", Globals.Settings.Locale!),
                 ObjectType = ObjectsWithPositions.Moon,
@@ -725,7 +725,7 @@ public class FormSkyMap2D : Form
             {
                 RightAscension = yaleBrightStar.RightAscension,
                 Declination = yaleBrightStar.Declination,
-                Magnitude = yaleBrightStar.Magnitude
+                Magnitude = yaleBrightStar.Magnitude,
             });
         }
     }

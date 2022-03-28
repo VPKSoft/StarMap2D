@@ -32,74 +32,8 @@ namespace StarMap2D.Calculations.RiseSet;
 /// <summary>
 /// A base class for rise, set and transit time calculations.
 /// </summary>
-public abstract class RiseSetBase
+public abstract class RiseSetBase : LatLonDateCalculation
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RiseSetBase"/> class
-    /// with the <see cref="StartTimeUtc"/> set to start of the current day and the <see cref="EndTimeUtc"/> set to the start of the next day.
-    /// </summary>
-    /// <param name="latitude">The latitude of the observer in degrees.</param>
-    /// <param name="longitude">The longitude of the observer in degrees.</param>
-    protected RiseSetBase(double latitude, double longitude)
-    {
-        SuspendCalculation = true;
-        StartTimeUtc = DateTime.Now;
-        var offset = DateTimeOffset.Now.Offset.TotalHours;
-        EndTimeUtc = StartTimeUtc.AddDays(1).AddHours(offset);
-
-        Latitude = latitude;
-        Longitude = longitude;
-        SuspendCalculation = false;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RiseSetBase"/> class.
-    /// </summary>
-    /// <param name="latitude">The latitude of the observer in degrees.</param>
-    /// <param name="longitude">The longitude of the observer in degrees.</param>
-    /// <param name="starTimeLocal">The star time in local time.</param>
-    /// <param name="endTimeLocal">The end time in local time.</param>
-    protected RiseSetBase(double latitude, double longitude, DateTime starTimeLocal, DateTime endTimeLocal) : this(latitude, longitude)
-    {
-        SuspendCalculation = true;
-        StartTimeLocal = starTimeLocal;
-        EndTimeLocal = endTimeLocal;
-        SuspendCalculation = false;
-    }
-
-    /// <summary>
-    /// Adds the specified amount of days to the <see cref="StartTimeLocal"/> and <see cref="EndTimeLocal"/>.
-    /// </summary>
-    /// <param name="days">The number of days to add.</param>
-    public void AddDays(double days)
-    {
-        var addValue = (int)days <= 0 ? 1 : (int)days;
-        SuspendCalculation = true;
-        StartTimeLocal = StartTimeLocal.AddDays(addValue);
-        EndTimeLocal = StartTimeLocal.AddDays(addValue);
-        SuspendCalculation = false;
-    }
-
-    private bool suspendCalculation;
-
-    internal bool SuspendCalculation
-    {
-        get => suspendCalculation;
-
-        set
-        {
-            if (suspendCalculation != value)
-            {
-                suspendCalculation = value;
-
-                if (!suspendCalculation)
-                {
-                    CalculateRiseSetTransform();
-                }
-            }
-        }
-    }
-
     private readonly ObjectsWithPositions @object = ObjectsWithPositions.Sun;
 
     /// <summary>
@@ -113,139 +47,9 @@ public abstract class RiseSetBase
         init
         {
             @object = value;
-            if (!suspendCalculation)
+            if (!SuspendCalculation)
             {
-                CalculateRiseSetTransform();
-            }
-        }
-    }
-
-    private DateTime startTimeUtc;
-    private DateTime startTimeLocal;
-
-    /// <summary>
-    /// Gets or sets the start time in universal coordinated time (UTC).
-    /// </summary>
-    /// <value>The start time local in universal coordinated time (UTC) time.</value>
-    /// <remarks>When the value is set, the time value (hour, minutes and seconds) is automatically removed and a local time value is converted into UTC at offset <c>0</c>.</remarks>
-    public DateTime StartTimeUtc
-    {
-        get => startTimeUtc;
-
-        set
-        {
-            var offset = DateTimeOffset.Now.Offset.TotalHours;
-            var adjustedDate = new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
-
-            startTimeLocal = value;
-
-            if (startTimeUtc != adjustedDate)
-            {
-                startTimeUtc = adjustedDate;
-                CalculateRiseSetTransform();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the local start time.
-    /// </summary>
-    /// <value>The local start time.</value>
-    public DateTime StartTimeLocal
-    {
-        get => startTimeLocal;
-
-        set
-        {
-            if (value != startTimeLocal)
-            {
-                startTimeLocal = value;
-                StartTimeUtc = value;
-            }
-        }
-    }
-
-    private DateTime endTimeUtc;
-    private DateTime endTimeLocal;
-
-    /// <summary>
-    /// Gets or sets the end time in universal coordinated time (UTC).
-    /// </summary>
-    /// <value>The end time in universal coordinated time (UTC).</value>
-    /// <remarks>When the value is set, the time value (hour, minutes and seconds) is automatically removed and a local time value is converted into UTC at offset <c>0</c>.</remarks>
-    public DateTime EndTimeUtc
-    {
-        get => endTimeUtc;
-
-        set
-        {
-            var offset = DateTimeOffset.Now.Offset.TotalHours;
-            var adjustedDate = new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, DateTimeKind.Utc).AddHours(-offset);
-
-            endTimeLocal = value;
-
-            if (endTimeUtc != adjustedDate)
-            {
-                endTimeUtc = adjustedDate;
-                CalculateRiseSetTransform();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the local end time.
-    /// </summary>
-    /// <value>The local end time.</value>
-    public DateTime EndTimeLocal
-    {
-        get => endTimeLocal;
-
-        set
-        {
-            if (value != endTimeLocal)
-            {
-                endTimeLocal = value;
-                EndTimeUtc = value;
-            }
-        }
-    }
-
-    private double latitude;
-
-    /// <summary>
-    /// Gets or sets the latitude in degrees.
-    /// </summary>
-    /// <value>The latitude.</value>
-    public double Latitude
-    {
-        get => latitude;
-
-        set
-        {
-            if (Math.Abs(latitude - value) > Globals.FloatingPointTolerance)
-            {
-                latitude = value;
-                CalculateRiseSetTransform();
-            }
-        }
-    }
-
-    private double longitude;
-
-    /// <summary>
-    /// Gets or sets the longitude in degrees.
-    /// </summary>
-    /// <value>The longitude.</value>
-    public double Longitude
-    {
-        get => longitude;
-
-        set
-        {
-            if (Math.Abs(longitude - value) > Globals.FloatingPointTolerance)
-            {
-                longitude = value;
-                CalculateRiseSetTransform();
+                Calculate();
             }
         }
     }
@@ -356,11 +160,6 @@ public abstract class RiseSetBase
     }
 
     /// <summary>
-    /// Calculates the rise, set and transform times.
-    /// </summary>
-    public abstract void CalculateRiseSetTransform();
-
-    /// <summary>
     /// Converts the <see cref="ObjectsWithPositions"/> enumeration value into AASharp <see cref="AASRiseTransitSet2.Objects"/> enumeration value.
     /// </summary>
     /// <param name="objectsWithPositions">The value to convert.</param>
@@ -408,5 +207,25 @@ public abstract class RiseSetBase
             AASRiseTransitSet2.Objects.PLUTO => ObjectsWithPositions.Pluto,
             _ => throw new NotImplementedException(nameof(ObjectsWithPositions)),
         };
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RiseSetBase"/> class.
+    /// </summary>
+    /// <param name="latitude">The latitude of the observer in degrees.</param>
+    /// <param name="longitude">The longitude of the observer in degrees.</param>
+    protected RiseSetBase(double latitude, double longitude) : base(latitude, longitude)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RiseSetBase"/> class.
+    /// </summary>
+    /// <param name="latitude">The latitude of the observer in degrees.</param>
+    /// <param name="longitude">The longitude of the observer in degrees.</param>
+    /// <param name="starTimeLocal">The star time in local time.</param>
+    /// <param name="endTimeLocal">The end time in local time.</param>
+    protected RiseSetBase(double latitude, double longitude, DateTime starTimeLocal, DateTime endTimeLocal) : base(latitude, longitude, starTimeLocal, endTimeLocal)
+    {
     }
 }

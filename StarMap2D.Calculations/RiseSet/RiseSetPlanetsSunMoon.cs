@@ -67,7 +67,7 @@ public class RiseSetPlanetsSunMoon : RiseSetBase
     /// <summary>
     /// Calculates the rise, set and transform times.
     /// </summary>
-    public sealed override void CalculateRiseSetTransform()
+    public override void Calculate()
     {
         if (SuspendCalculation)
         {

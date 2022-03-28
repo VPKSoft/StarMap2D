@@ -25,12 +25,15 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.Diagnostics;
 using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Calculations.MoonCalculations;
 using StarMap2D.Calculations.RiseSet;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
@@ -140,6 +143,7 @@ public class MainForm : Form
                     Cells =
                     {
                         plot,
+                        new MoonPhaseVisualization(),
                     },
                 },
             },
@@ -155,7 +159,13 @@ public class MainForm : Form
         var testStuff = new Command { MenuText = UI.TestStuff, };
         testStuff.Executed += delegate
         {
-            _ = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Sun, Globals.Settings.Latitude, Globals.Settings.Longitude);
+            var mp = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude);
+
+            for (int i = 0; i < 24 * 7 * 60; i++)
+            {
+                mp.StartTimeLocal = mp.StartTimeLocal.AddMinutes(1);
+            }
+
             _ = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Moon, Globals.Settings.Latitude, Globals.Settings.Longitude);
         };
 

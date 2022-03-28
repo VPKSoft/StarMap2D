@@ -53,6 +53,12 @@ public class ObjectDetails : IObjectDetails
     public DateTime DetailDateTime { get; set; }
 
     /// <summary>
+    /// Gets or sets the distance from earth.
+    /// </summary>
+    /// <value>The distance from earth.</value>
+    public double DistanceFromEarth { get; set; }
+
+    /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
     /// <returns>A <see cref="System.String" /> that represents this instance.</returns>

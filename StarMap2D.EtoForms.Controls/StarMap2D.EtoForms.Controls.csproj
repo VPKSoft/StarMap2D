@@ -27,10 +27,6 @@
 
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>C:\Users\Petteri Kautonen\source\repos\StarMap2D.Eto\StarMap2D.Eto.Controls\StarMap2D.Eto.Controls.xml</DocumentationFile>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<None Include="..\StarMap2D.png">
 			<Pack>True</Pack>

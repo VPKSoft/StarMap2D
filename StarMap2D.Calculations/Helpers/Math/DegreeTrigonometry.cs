@@ -56,7 +56,7 @@ public class MathDegrees
     /// <inheritdoc cref="System.Math.Tan"/>
     public static double Tan(double a)
     {
-        return System.Math.Tan(a * DegreesRadians) * RadiansDegrees;
+        return System.Math.Tan(a * DegreesRadians);
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class MathDegrees
     /// <returns>An angle, θ, measured in degrees, such that 0 ≤ θ ≤ 180.</returns>
     public static double Acos(double d)
     {
-        return RadiansDegrees * System.Math.Acos(d * DegreesRadians);
+        return RadiansDegrees * System.Math.Acos(d);
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public class MathDegrees
     /// <returns>An angle, θ, measured in degrees, such that -180/2 ≤ θ ≤ 180/2.</returns>
     public static double Atan(double d)
     {
-        return RadiansDegrees * System.Math.Atan(d * DegreesRadians);
+        return RadiansDegrees * System.Math.Atan(d);
     }
 
     /// <summary>

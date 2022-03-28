@@ -41,9 +41,10 @@ public class SvgToImage
     /// </summary>
     /// <param name="svgBytes">The SVG data bytes.</param>
     /// <param name="desiredSize">Size of the desired <seealso cref="Image"/>.</param>
+    /// <param name="rotationAngle">A value to rotate the SVG image to clockwise. The default is <c>null</c> which will ignore rotation.</param>
     /// <returns>An instance to a <see cref="Image"/> class.</returns>
     // (C): Original code: https://gist.github.com/punker76/67bd048ff403c1c73737905183f819a9
-    public static Image ImageFromSvg(byte[] svgBytes, Size desiredSize)
+    public static Image ImageFromSvg(byte[] svgBytes, Size desiredSize, float? rotationAngle = null)
     {
         if (desiredSize.Width < 1 || desiredSize.Height < 1)
         {
@@ -57,6 +58,11 @@ public class SvgToImage
         var imageInfo = new SKImageInfo(desiredSize.Width, desiredSize.Height);
         using var surface = SKSurface.Create(imageInfo);
         using var canvas = surface.Canvas;
+
+        if (rotationAngle != null)
+        {
+            canvas.RotateDegrees(rotationAngle.Value, desiredSize.Width / 2f, desiredSize.Height / 2f);
+        }
 
         if (svg.Picture != null)
         {

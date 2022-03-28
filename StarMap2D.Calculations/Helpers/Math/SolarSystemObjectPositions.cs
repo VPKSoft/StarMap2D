@@ -110,7 +110,7 @@ public class SolarSystemObjectPositions
         var body = bodies[smallBody];
         var details = AASElliptical.Calculate(aaDate.Julian, ref body, highPrecision);
         var coordinate = new AAS2DCoordinate
-            { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
+        { X = details.AstrometricGeocentricRA % 360, Y = details.AstrometricGeocentricDeclination }.ToHorizontal(aaDate, latitude, longitude);
         return coordinate;
     }
 
@@ -153,7 +153,7 @@ public class SolarSystemObjectPositions
 
             var horizontal =
                 new AAS2DCoordinate
-                        { X = details.AstrometricGeocentricRA, Y = details.AstrometricGeocentricDeclination }
+                { X = details.AstrometricGeocentricRA, Y = details.AstrometricGeocentricDeclination }
                     .ToHorizontal(aaDate, latitude, longitude);
 
             result.HorizontalDegreesX = (horizontal.X + 180) % 360;
@@ -180,13 +180,14 @@ public class SolarSystemObjectPositions
             result.Declination = planetaryDetails.ApparentGeocentricDeclination;
 
             var horizontal = new AAS2DCoordinate
-                    { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }
+            { X = planetaryDetails.ApparentGeocentricRA, Y = planetaryDetails.ApparentGeocentricDeclination }
                 .ToHorizontal(aaDate, latitude, longitude);
-            
+
             result.HorizontalDegreesX = (horizontal.X + 180) % 360;
             result.HorizontalDegreesY = horizontal.Y;
 
             result.AboveHorizon = horizontal.Y > 0;
+            result.DistanceFromEarth = planetaryDetails.ApparentGeocentricDistance;
         }
 
         if (objectType == ObjectsWithPositions.Sun)
@@ -202,7 +203,7 @@ public class SolarSystemObjectPositions
 
             var horizontal =
                 new AAS2DCoordinate
-                        { X = sunLong, Y = sunLat }
+                { X = sunLong, Y = sunLat }
                     .HorizontalTransform(longitude, latitude, jdSun); // Horizontal X, Y, 0 = East
 
             result.HorizontalDegreesX = (horizontal.X + 180) % 360;
@@ -225,13 +226,15 @@ public class SolarSystemObjectPositions
 
             var horizontal =
                 new AAS2DCoordinate
-                        { X = moonLong, Y = moonLat }
+                { X = moonLong, Y = moonLat }
                     .HorizontalTransform(longitude, latitude, jdSun); // Horizontal X, Y, 0 = East
 
             result.HorizontalDegreesX = (horizontal.X + 180) % 360;
             result.HorizontalDegreesY = horizontal.Y;
 
             result.AboveHorizon = horizontal.Y > 0;
+
+            result.DistanceFromEarth = AASMoon.RadiusVector(jdSun);
         }
 
         return result;
