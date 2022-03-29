@@ -223,6 +223,16 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] ic_fluent_weather_moon_48_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_weather_moon_48_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] minor_planet_ceres {
             get {
                 object obj = ResourceManager.GetObject("minor_planet_ceres", resourceCulture);

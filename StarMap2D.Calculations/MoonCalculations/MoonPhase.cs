@@ -96,18 +96,22 @@ public class MoonPhase : LatLonDateCalculation
 
         var phase = PhaseFromPositionAngle(pa, phaseAngle);
 
-        MoonPhaseValue = MoonPhaseConstants.GetMoonPhase(phase);
+        PhaseValue = MoonPhaseConstants.GetMoonPhase(phase);
         MoonDiscTiltAngle = CalculateDiscTiltAngle(now, Latitude, Longitude, moonPosition.RightAscension,
             moonPosition.Declination, pa);
 
         MoonIlluminatedPercentage = AASMoonIlluminatedFraction.IlluminatedFraction(phaseAngle);
+
+        Phase = phase;
     }
 
     /// <summary>
     /// Gets the moon phase value.
     /// </summary>
     /// <value>The moon phase value.</value>
-    public MoonPhases MoonPhaseValue { get; internal set; }
+    public MoonPhases PhaseValue { get; internal set; }
+
+    public double Phase { get; internal set; }
 
     /// <summary>
     /// Gets the moon disc illuminated percentage.
