@@ -25,7 +25,6 @@ SOFTWARE.
 #endregion
 
 using System;
-using System.Threading;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.MoonCalculations;
@@ -48,6 +47,8 @@ namespace StarMap2D.EtoForms.Forms
         /// </summary>
         public FormMoonPhase()
         {
+            Title = UI.MoonPhase;
+
             MinimumSize = new Size(800, 600);
 
             btnPreviousDay = EtoHelpers.CreateImageButton(
@@ -62,9 +63,8 @@ namespace StarMap2D.EtoForms.Forms
                 SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
                 Colors.SteelBlue, 10, ClickHandler, UI.CurrentDay);
 
-            btnTestMoon = EtoHelpers.CreateImageButton(
-                SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_weather_moon_48_filled),
-                Colors.SteelBlue, 10, ClickHandler, UI.TestStuff);
+            cbDiscTilt = new CheckBox { ThreeState = false, Text = UI.MoonDiscTilting, };
+            cbDiscTilt.CheckedChanged += CbDiscTilt_CheckedChanged;
 
             dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
             dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
@@ -81,7 +81,7 @@ namespace StarMap2D.EtoForms.Forms
                         EtoHelpers.PaddingWrap(btnReset, Globals.DefaultPadding),
                         EtoHelpers.PaddingWrap(btnNextDay, Globals.DefaultPadding),
                         EtoHelpers.PaddingWrap(dtpTimeMain, Globals.DefaultPadding),
-                        EtoHelpers.PaddingWrap(btnTestMoon, Globals.DefaultPadding)),
+                        EtoHelpers.PaddingWrap(cbDiscTilt, Globals.DefaultPadding)),
                     new TableRow
                     {
                         Cells =
@@ -95,10 +95,24 @@ namespace StarMap2D.EtoForms.Forms
             CurrentDateTime = DateTime.UtcNow;
         }
 
+        private void CbDiscTilt_CheckedChanged(object? sender, EventArgs e)
+        {
+            if (cbDiscTilt.Checked == false)
+            {
+                moonPhase.MoonDiscTiltAngle = 0;
+            }
+        }
+
         private void DtpTimeMain_ValueChanged(object? sender, EventArgs e)
         {
+            if (suspendEvents)
+            {
+                return;
+            }
             CurrentDateTime = dtpTimeMain!.Value!.Value.ToLocalTime();
         }
+
+        private bool suspendEvents;
 
         private void ClickHandler(object? sender, EventArgs e)
         {
@@ -117,16 +131,6 @@ namespace StarMap2D.EtoForms.Forms
             {
                 CurrentDateTime = DateTime.UtcNow;
             }
-
-            if (sender?.Equals(btnTestMoon) == true)
-            {
-                for (var i = 0.0; i <= 1.0; i += 0.01)
-                {
-                    moonPhase.MoonPhase = i;
-                    Application.Instance.RunIteration();
-                    Thread.Sleep(250);
-                }
-            }
         }
 
         private DateTime CurrentDateTime
@@ -137,6 +141,10 @@ namespace StarMap2D.EtoForms.Forms
             {
                 if (value != currentDateTime)
                 {
+                    suspendEvents = true;
+                    dtpTimeMain!.Value = value;
+                    suspendEvents = false;
+
                     currentDateTime = value;
 
                     var calculation = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude)
@@ -144,6 +152,7 @@ namespace StarMap2D.EtoForms.Forms
 
                     moonPhase.MoonPhase = calculation.Phase;
                     moonPhase.MoonIlluminatedFraction = calculation.MoonIlluminatedFraction;
+                    moonPhase.MoonDiscTiltAngle = cbDiscTilt.Checked == true ? calculation.MoonDiscTiltAngle : 0;
                 }
             }
         }
@@ -151,9 +160,9 @@ namespace StarMap2D.EtoForms.Forms
         private Button? btnPreviousDay;
         private Button? btnNextDay;
         private Button? btnReset;
-        private Button? btnTestMoon;
         private DateTimePicker? dtpTimeMain;
         private DateTime currentDateTime = DateTime.UtcNow;
         private MoonPhaseVisualization moonPhase;
+        private CheckBox cbDiscTilt;
     }
 }

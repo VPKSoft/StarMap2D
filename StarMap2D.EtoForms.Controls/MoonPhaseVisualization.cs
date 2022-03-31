@@ -56,8 +56,6 @@ public class MoonPhaseVisualization : Drawable
     }
 
     private double moonPhase;
-    private double moonPhaseAltered;
-
 
     /// <summary>
     /// Gets or sets the moon phase from <c>0</c> to <c>1</c> where <c>0</c> is new moon to <c>0.5</c> = full moon to waning crescent = <c>1</c>.
@@ -71,12 +69,6 @@ public class MoonPhaseVisualization : Drawable
         {
             if (Math.Abs(moonPhase - value) > Globals.FloatingPointSingleTolerance)
             {
-                moonPhaseAltered = value + 0.5;
-                if (moonPhaseAltered > 1)
-                {
-                    moonPhaseAltered = moonPhaseAltered - 1;
-                }
-
                 moonPhase = value;
                 Invalidate();
             }
@@ -126,45 +118,59 @@ public class MoonPhaseVisualization : Drawable
 
     private void MoonPhaseVisualization_Paint(object? sender, PaintEventArgs e)
     {
-        var wh = Math.Min(e.ClipRectangle.Width, e.ClipRectangle.Height);
+        DrawMoonPhase(e.Graphics, e.ClipRectangle);
+    }
+
+    /// <summary>
+    /// Draws the moon and its phase on to the specified graphics.
+    /// </summary>
+    /// <param name="graphics">The graphics to draw on to.</param>
+    /// <param name="drawArea">The drawing area rectangle.</param>
+    private void DrawMoonPhase(Graphics graphics, RectangleF drawArea)
+    {
+        var wh = Math.Min(drawArea.Width, drawArea.Height);
 
         var size = new Size((int)wh, (int)wh);
 
-        var svgBytes = SvgColorize.FromBytes(StarMap2D.EtoForms.Controls.Properties.Resources.full_moon)
+        var svgBytes = SvgColorize.FromBytes(StarMap2D.EtoForms.Controls.Properties.Resources.full_moon_borderless)
             .ToBytes();
 
-        e.Graphics.FillRectangle(Colors.Black, e.ClipRectangle);
+        graphics.FillRectangle(Colors.Black, drawArea);
 
         var image = SvgToImage.ImageFromSvg(svgBytes, size,
             moonDiscTiltAngle > 0 ? (float?)moonDiscTiltAngle : null);
 
-        var x = (e.ClipRectangle.Width - wh) / 2;
-        var y = (e.ClipRectangle.Height - wh) / 2;
+        var x = (drawArea.Width - wh) / 2;
+        var y = (drawArea.Height - wh) / 2;
 
-        e.Graphics.DrawImage(image, x, y);
+        graphics.DrawImage(image, x, y);
 
         var color = Color.FromArgb(0, 0, 0, 230);
 
         using var path1 = new GraphicsPath();
 
-        var waxing = MoonPhase < 0.5;
+        var waning = MoonPhase > 0.5;
 
         float phaseSize;
 
-        if (waxing)
+        var centerX = drawArea.Width / 2f;
+        var centerY = drawArea.Height / 2f;
+        var halfSize = wh / 2f;
+
+        if (waning)
         {
             if (moonIlluminatedFraction < 0.5)
             {
                 phaseSize = (float)(0.5f - moonIlluminatedFraction) * wh;
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 270, 180);
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 90, 180);
+                DrawEllipseSector(path1, centerX, centerY, halfSize, halfSize, 270, 180);
+                DrawEllipseSector(path1, centerX, centerY, phaseSize, halfSize, 90, 180);
 
             }
             else
             {
                 phaseSize = (float)(moonIlluminatedFraction - 0.5f) * wh;
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 270, 180);
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 270, 180);
+                DrawEllipseSector(path1, centerX, centerY, halfSize, halfSize, 270, 180);
+                DrawEllipseSector(path1, centerX, centerY, phaseSize, halfSize, 270, 180);
             }
         }
         else
@@ -172,30 +178,29 @@ public class MoonPhaseVisualization : Drawable
             if (moonIlluminatedFraction < 0.5)
             {
                 phaseSize = (float)(0.5f - moonIlluminatedFraction) * wh;
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 90, 180);
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 270, 180);
+                DrawEllipseSector(path1, centerX, centerY, halfSize, halfSize, 90, 180);
+                DrawEllipseSector(path1, centerX, centerY, phaseSize, halfSize, 270, 180);
 
             }
             else
             {
                 phaseSize = (float)(moonIlluminatedFraction - 0.5f) * wh;
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 90, 180);
-                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 90, 180);
+                DrawEllipseSector(path1, centerX, centerY, halfSize, halfSize, 90, 180);
+                DrawEllipseSector(path1, centerX, centerY, phaseSize, halfSize, 90, 180);
             }
         }
 
         using var matrix = Matrix.Create();
         path1.Transform(matrix);
 
-        matrix.RotateAt((float)moonDiscTiltAngle, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2);
+        matrix.RotateAt((float)moonDiscTiltAngle, centerX, centerY);
 
         path1.Transform(matrix);
 
-        e.Graphics.FillPath(color, path1);
+        graphics.FillPath(color, path1);
     }
 
-
-
+    // (C): Part of the code: http://csharphelper.com/blog/2019/03/use-sines-and-cosines-to-draw-circles-and-ellipses-in-c/
     /// <summary>
     /// Draws an ellipse sector.
     /// </summary>
@@ -206,15 +211,17 @@ public class MoonPhaseVisualization : Drawable
     /// <param name="radiusY">The Y-radius.</param>
     /// <param name="startAngle">The start sweep angle.</param>
     /// <param name="endAngle">The end sweep angle.</param>
+    /// <param name="stepping">The rotation stepping, smaller is more accurate.</param>
     private static void DrawEllipseSector(
         IGraphicsPath path,
         float centerX, float centerY, float radiusX, float radiusY,
         float startAngle,
-        float endAngle)
+        float endAngle,
+        float stepping = 0.05f)
     {
         // Draw the circle.
         var points = new List<PointF>();
-        for (var i = startAngle; i < startAngle + endAngle; i += 0.1f)
+        for (var i = startAngle; i < startAngle + endAngle; i += stepping)
         {
             var x = (float)(centerX + radiusX * MathDegrees.Cos(i));
             var y = (float)(centerY + radiusY * MathDegrees.Sin(i));

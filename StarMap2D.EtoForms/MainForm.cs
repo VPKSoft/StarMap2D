@@ -176,6 +176,10 @@ public class MainForm : Form
         var objectDetailsCommend = new Command { MenuText = UI.ObjectDetails, ToolBarText = UI.ObjectDetails, };
         objectDetailsCommend.Executed += (_, _) => new FormCelestialObjectData().Show();
 
+        var moonPhaseCommand = new Command { MenuText = UI.MoonPhase, ToolBarText = UI.MoonPhase, };
+        moonPhaseCommand.Executed += (_, _) => new FormMoonPhase().Show();
+
+
         // create menu
         base.Menu = new MenuBar
         {
@@ -197,7 +201,7 @@ public class MainForm : Form
         base.Menu.ApplicationMenu.Text = UI.File;
 
         // create toolbar			
-        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend, }, };
+        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend, new SeparatorToolItem(), moonPhaseCommand }, };
 
         CurrentDateTime = DateTime.UtcNow;
     }

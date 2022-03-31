@@ -1,0 +1,38 @@
+https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg
+* full_moon.svg 
+* full_moon_borderless:.svg 
+
+https://commons.wikimedia.org/wiki/File:Moon_0063_Nevit.svg
+* full_moon_nevit.svg
+
+https://github.com/microsoft/fluentui-system-icons
+* ic_*.svg
+
+MIT-licensed files, Copyright(c) 2022 Petteri Kautonen:
+* dwarf_pluto.svg
+* earth.svg
+* minor_planet_ceres.svg
+* minor_planet_chiron.svg
+* minor_planet_juno.svg
+* minor_planet_pallas.svg
+* minor_planet_sedna.svg
+* minor_planet_vesta.svg
+* moon.svg
+* planet_jupiter.svg
+* planet_mars.svg
+* planet_mercury.svg
+* planet_neptune.svg
+* planet_saturn.svg
+* planet_uranus.svg
+* planet_venus.svg
+* sun.svg
+
+The symbols images for files:
+* minor_planet_eris1.svg
+* minor_planet_eris2.svg
+* minor_planet_gonggong.svg
+* minor_planet_haumea.svg
+* minor_planet_makemake.svg
+* minor_planet_orcus.svg
+* minor_planet_quoar.svg
+are copyright by Wikipedia, CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/

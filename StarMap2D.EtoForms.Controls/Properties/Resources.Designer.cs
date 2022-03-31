@@ -71,6 +71,33 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://commons.wikimedia.org/wiki/File:Weather_icon_-_full_moon.svg
+        ///* full_moon.svg 
+        ///* full_moon_borderless:.svg 
+        ///
+        ///https://commons.wikimedia.org/wiki/File:Moon_0063_Nevit.svg
+        ///* full_moon_nevit.svg
+        ///
+        ///https://github.com/microsoft/fluentui-system-icons
+        ///* ic_*.svg
+        ///
+        ///MIT-licensed files, Copyright(c) 2022 Petteri Kautonen:
+        ///* dwarf_pluto.svg
+        ///* earth.svg
+        ///* minor_planet_ceres.svg
+        ///* minor_planet_chiron.svg
+        ///* minor_planet_juno.svg
+        ///* minor_planet_pallas.svg
+        ///* minor_planet_sedna.svg
+        ///* minor_planet_vesta [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string copyright {
+            get {
+                return ResourceManager.GetString("copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] earth {
@@ -86,6 +113,16 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         public static byte[] full_moon {
             get {
                 object obj = ResourceManager.GetObject("full_moon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] full_moon_borderless {
+            get {
+                object obj = ResourceManager.GetObject("full_moon_borderless", resourceCulture);
                 return ((byte[])(obj));
             }
         }

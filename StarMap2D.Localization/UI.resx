@@ -405,4 +405,10 @@
   <data name="MoonSet" xml:space="preserve">
     <value>Moon set</value>
   </data>
+  <data name="MoonDiscTilting" xml:space="preserve">
+    <value>Moon disc tilting</value>
+  </data>
+  <data name="MoonPhase" xml:space="preserve">
+    <value>Moon phase</value>
+  </data>
 </root>

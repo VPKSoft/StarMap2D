@@ -592,6 +592,24 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moon disc tilting.
+        /// </summary>
+        public static string MoonDiscTilting {
+            get {
+                return ResourceManager.GetString("MoonDiscTilting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moon phase.
+        /// </summary>
+        public static string MoonPhase {
+            get {
+                return ResourceManager.GetString("MoonPhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moon rise.
         /// </summary>
         public static string MoonRise {

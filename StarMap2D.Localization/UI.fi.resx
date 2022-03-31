@@ -405,4 +405,10 @@
   <data name="MoonSet" xml:space="preserve">
     <value>Kuun lasku</value>
   </data>
+  <data name="MoonDiscTilting" xml:space="preserve">
+    <value>Kuun kiekon kallistus</value>
+  </data>
+  <data name="MoonPhase" xml:space="preserve">
+    <value>Kuun vaihe</value>
+  </data>
 </root>
