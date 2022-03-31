@@ -36,8 +36,16 @@ using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms.Forms
 {
+    /// <summary>
+    /// A form to display the current moon phase.
+    /// Implements the <see cref="Eto.Forms.Form" />
+    /// </summary>
+    /// <seealso cref="Eto.Forms.Form" />
     public class FormMoonPhase : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormMoonPhase"/> class.
+        /// </summary>
         public FormMoonPhase()
         {
             MinimumSize = new Size(800, 600);
@@ -135,6 +143,7 @@ namespace StarMap2D.EtoForms.Forms
                     { StartTimeLocal = currentDateTime.ToLocalTime(), };
 
                     moonPhase.MoonPhase = calculation.Phase;
+                    moonPhase.MoonIlluminatedFraction = calculation.MoonIlluminatedFraction;
                 }
             }
         }

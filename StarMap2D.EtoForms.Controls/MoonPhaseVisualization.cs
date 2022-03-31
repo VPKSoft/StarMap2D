@@ -25,8 +25,10 @@ SOFTWARE.
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.Controls.Utilities;
 
@@ -81,6 +83,27 @@ public class MoonPhaseVisualization : Drawable
         }
     }
 
+    private double moonIlluminatedFraction;
+
+    /// <summary>
+    /// Gets the moon disc illuminated fraction from <c>0</c> to <c>1</c>.
+    /// </summary>
+    /// <value>The moon illuminated fraction.</value>
+    public double MoonIlluminatedFraction
+    {
+        get => moonIlluminatedFraction;
+
+        set
+        {
+            if (Math.Abs(value - moonIlluminatedFraction) > Globals.FloatingPointTolerance)
+            {
+                moonIlluminatedFraction = value;
+                Invalidate();
+            }
+        }
+
+    }
+
     private double moonDiscTiltAngle;
 
     /// <summary>
@@ -98,14 +121,6 @@ public class MoonPhaseVisualization : Drawable
                 moonDiscTiltAngle = value;
                 Invalidate();
             }
-        }
-    }
-
-    private double MoonPhaseInternal
-    {
-        get
-        {
-            return moonPhase < 0.5 ? 0.5 - moonPhase : 1 - moonPhase;
         }
     }
 
@@ -134,26 +149,39 @@ public class MoonPhaseVisualization : Drawable
 
         var waxing = MoonPhase < 0.5;
 
-        var phaseSize = (float)MoonPhaseInternal * wh;
-
-        var crescent = phaseSize * 2;
+        float phaseSize;
 
         if (waxing)
         {
-            crescent = phaseSize * 2;
-            path1.AddArc(x - 1, y - 1, wh, wh + 2, 90, 180);
-            path1.AddArc(x + wh / 2f - crescent / 2f - 1, y - 1, crescent, wh + 2, 90, 180);
+            if (moonIlluminatedFraction < 0.5)
+            {
+                phaseSize = (float)(0.5f - moonIlluminatedFraction) * wh;
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 270, 180);
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 90, 180);
+
+            }
+            else
+            {
+                phaseSize = (float)(moonIlluminatedFraction - 0.5f) * wh;
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 270, 180);
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 270, 180);
+            }
         }
         else
         {
-            phaseSize = (float)MoonPhaseInternal * e.ClipRectangle.Width;
+            if (moonIlluminatedFraction < 0.5)
+            {
+                phaseSize = (float)(0.5f - moonIlluminatedFraction) * wh;
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 90, 180);
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 270, 180);
 
-            crescent = e.ClipRectangle.Width / 2f - phaseSize;
-
-            var a = wh / 2f - (float)MoonPhaseInternal * wh;
-
-            path1.AddArc(x - 1, y - 1, wh, wh + 2, 90, 180);
-            path1.AddArc(x + wh / 2f - a / 2f - 1, y - 1, crescent, wh + 2, 270, 180);
+            }
+            else
+            {
+                phaseSize = (float)(moonIlluminatedFraction - 0.5f) * wh;
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, wh / 2, wh / 2, 90, 180);
+                DrawEllipseSector(path1, e.ClipRectangle.Width / 2, e.ClipRectangle.Height / 2, phaseSize, wh / 2, 90, 180);
+            }
         }
 
         using var matrix = Matrix.Create();
@@ -164,5 +192,34 @@ public class MoonPhaseVisualization : Drawable
         path1.Transform(matrix);
 
         e.Graphics.FillPath(color, path1);
+    }
+
+
+
+    /// <summary>
+    /// Draws an ellipse sector.
+    /// </summary>
+    /// <param name="path">The <see cref="IGraphicsPath"/> to draw on to.</param>
+    /// <param name="centerX">The center X-coordinate.</param>
+    /// <param name="centerY">The center Y-coordinate.</param>
+    /// <param name="radiusX">The X-radius.</param>
+    /// <param name="radiusY">The Y-radius.</param>
+    /// <param name="startAngle">The start sweep angle.</param>
+    /// <param name="endAngle">The end sweep angle.</param>
+    private static void DrawEllipseSector(
+        IGraphicsPath path,
+        float centerX, float centerY, float radiusX, float radiusY,
+        float startAngle,
+        float endAngle)
+    {
+        // Draw the circle.
+        var points = new List<PointF>();
+        for (var i = startAngle; i < startAngle + endAngle; i += 0.1f)
+        {
+            var x = (float)(centerX + radiusX * MathDegrees.Cos(i));
+            var y = (float)(centerY + radiusY * MathDegrees.Sin(i));
+            points.Add(new PointF(x, y));
+        }
+        path.AddLines(points);
     }
 }

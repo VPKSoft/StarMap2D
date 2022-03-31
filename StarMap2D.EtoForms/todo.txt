@@ -1,7 +1,8 @@
 ﻿* Add stream loading along with the normal read all lines into memory loading to the VPKSoft.StarCatalogs providers.
-* Add few galaxies to the map
-* Detect mouse over star and do something
-* Rise and set times
-* [Done] Separate culture settings for the date and time formatting
+* Add few galaxies to the map.
+* Detect mouse over star and do something.
+* Rise and set times.
+* [Done] Separate culture settings for the date and time formatting.
 * [Done] To Eto.Forms?
-* Lock graph axis to previous maximum & add reset possibility to the same feature.
+* [Done] Lock graph axis to previous maximum & add reset possibility to the same feature.
+* Separate draw methods from paint events in custom controls.
