@@ -6,3 +6,6 @@
 * [Done] To Eto.Forms?
 * [Done] Lock graph axis to previous maximum & add reset possibility to the same feature.
 * Separate draw methods from paint events in custom controls.
+* Add moon calendar view
+* Add custom symbol for user specified right ascension / declination.
+* Calculate the constellation an object is in.

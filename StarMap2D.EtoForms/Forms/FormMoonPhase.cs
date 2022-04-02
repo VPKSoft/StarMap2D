@@ -29,8 +29,10 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.MoonCalculations;
 using StarMap2D.Common.SvgColorization;
+using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.Utilities;
+using StarMap2D.EtoForms.Utility;
 using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms.Forms
@@ -69,6 +71,10 @@ namespace StarMap2D.EtoForms.Forms
             dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
             dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
+            lbMoonPhaseName = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+            lbMoonIlluminatedPercentage = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+            lbMoonPhaseNumber = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+
             moonPhase = new MoonPhaseVisualization();
 
             Content = new TableLayout
@@ -82,7 +88,11 @@ namespace StarMap2D.EtoForms.Forms
                         EtoHelpers.PaddingWrap(btnNextDay, Globals.DefaultPadding),
                         EtoHelpers.PaddingWrap(dtpTimeMain, Globals.DefaultPadding),
                         EtoHelpers.PaddingWrap(cbDiscTilt, Globals.DefaultPadding)),
-                    new TableRow
+                    EtoHelpers.TableWrap(true,
+                        EtoHelpers.LabelWrap(UI.MoonPhase, lbMoonPhaseName, Globals.DefaultPadding),
+                        EtoHelpers.LabelWrap(MoonData.MoonIlluminated, lbMoonIlluminatedPercentage, Globals.DefaultPadding),
+                        EtoHelpers.LabelWrap(MoonData.MoonPhaseNumber, lbMoonPhaseNumber, Globals.DefaultPadding)),
+                        new TableRow
                     {
                         Cells =
                         {
@@ -153,6 +163,9 @@ namespace StarMap2D.EtoForms.Forms
                     moonPhase.MoonPhase = calculation.Phase;
                     moonPhase.MoonIlluminatedFraction = calculation.MoonIlluminatedFraction;
                     moonPhase.MoonDiscTiltAngle = cbDiscTilt.Checked == true ? calculation.MoonDiscTiltAngle : 0;
+                    lbMoonPhaseName!.Text = MoonPhaseLocalization.MoonPhaseName(calculation.PhaseValue);
+                    lbMoonIlluminatedPercentage!.Text = string.Format(Globals.FormattingCulture, "{0:F1}", moonPhase.MoonIlluminatedFraction * 100);
+                    lbMoonPhaseNumber!.Text = string.Format(Globals.FormattingCulture, "{0:F1}", moonPhase.MoonPhase);
                 }
             }
         }
@@ -164,5 +177,8 @@ namespace StarMap2D.EtoForms.Forms
         private DateTime currentDateTime = DateTime.UtcNow;
         private MoonPhaseVisualization moonPhase;
         private CheckBox cbDiscTilt;
+        private Label? lbMoonPhaseName;
+        private readonly Label? lbMoonIlluminatedPercentage;
+        private readonly Label? lbMoonPhaseNumber;
     }
 }

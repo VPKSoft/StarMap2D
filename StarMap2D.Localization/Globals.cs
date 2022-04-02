@@ -43,9 +43,11 @@ public class Globals
 
         set
         {
+            CelestialObjects.Culture = value;
+            Messages.Culture = value;
+            MoonData.Culture = value;
             UI.Culture = value;
             Units.Culture = value;
-            CelestialObjects.Culture = value;
         }
     }
 }

@@ -18,6 +18,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Update="MoonData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MoonData.resx</DependentUpon>
+    </Compile>
     <Compile Update="UI.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -38,6 +43,10 @@
     <EmbeddedResource Update="Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MoonData.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MoonData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="UI.fi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

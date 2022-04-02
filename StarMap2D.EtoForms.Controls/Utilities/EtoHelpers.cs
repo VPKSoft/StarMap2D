@@ -76,9 +76,9 @@ public class EtoHelpers
     /// <returns>A new instance to the <see cref="TableLayout"/> control.</returns>
     public static TableLayout LabelWrap(string text, Control control, int padding = 5)
     {
-        return new TableLayout(new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = text }), true)),
+        return new TableLayout(new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = text, }), true)),
                 new TableRow(new TableCell(control, true)))
-        { Padding = new Padding(padding) };
+        { Padding = new Padding(padding), };
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public class EtoHelpers
     /// <returns>A new instance to the <see cref="Panel"/> control.</returns>
     public static Panel PaddingBottomWrap(Control control, int padding = 5)
     {
-        return new Panel { Content = control, Padding = new Padding(0, 0, 0, padding) };
+        return new Panel { Content = control, Padding = new Padding(0, 0, 0, padding), };
     }
 
     /// <summary>
@@ -102,7 +102,7 @@ public class EtoHelpers
     /// <returns>A new instance to the <see cref="Panel"/> control.</returns>
     public static Panel PaddingWrap(Control control, int padding = 5)
     {
-        return new Panel { Content = control, Padding = new Padding(padding) };
+        return new Panel { Content = control, Padding = new Padding(padding), };
     }
 
     /// <summary>
@@ -128,11 +128,11 @@ public class EtoHelpers
                             Cells =
                             {
                                 new TableCell(control, true),
-                                new TableCell(new Panel { Width = space}),
-                                new TableCell(new Button(clickHandler) { Text = buttonText})
-                            }
-                        }
-                    }
+                                new TableCell(new Panel { Width = space, }),
+                                new TableCell(new Button(clickHandler) { Text = buttonText, }),
+                            },
+                        },
+                    },
                 }, space)
         );
     }
@@ -163,11 +163,11 @@ public class EtoHelpers
                             Cells =
                             {
                                 new TableCell(control, true),
-                                new TableCell(new Panel { Width = space}),
+                                new TableCell(new Panel { Width = space, }),
                                 new TableCell(CreateImageButton(SvgColorize.FromBytes(svgImageBytes), buttonColor, imagePadding, clickHandler)),
-                            }
-                        }
-                    }
+                            },
+                        },
+                    },
                 }, space)
         );
     }
@@ -189,7 +189,7 @@ public class EtoHelpers
             if (i + 1 < controls.Length)
             {
                 result.Cells.Add(new TableCell(controls[i]));
-                result.Cells.Add(new Panel { Width = spacing });
+                result.Cells.Add(new Panel { Width = spacing, });
             }
             else
             {
@@ -197,12 +197,12 @@ public class EtoHelpers
             }
         }
 
-        result.Cells.Add(new TableCell(new Panel()) { ScaleWidth = true });
+        result.Cells.Add(new TableCell(new Panel()) { ScaleWidth = true, });
 
         return new TableRow(new TableLayout(
-            new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = labelText }))),
+            new TableRow(new TableCell(PaddingBottomWrap(new Label { Text = labelText, }))),
             new TableRow(new TableLayout(result)))
-        { Padding = new Padding(padding) });
+        { Padding = new Padding(padding), });
     }
 
     /// <summary>
@@ -221,8 +221,8 @@ public class EtoHelpers
     public static TableCell HeightLimitWrap(Control control, bool upperCell)
     {
         return upperCell
-            ? new TableCell(new TableLayout { Rows = { control, new TableRow { ScaleHeight = true } } })
-            : new TableCell(new TableLayout { Rows = { new TableRow { ScaleHeight = true }, control } });
+            ? new TableCell(new TableLayout { Rows = { control, new TableRow { ScaleHeight = true, }, }, })
+            : new TableCell(new TableLayout { Rows = { new TableRow { ScaleHeight = true, }, control, }, });
     }
 
     /// <summary>
@@ -234,8 +234,8 @@ public class EtoHelpers
     public static TableCell WidthLimitWrap(Control control, bool leftCell)
     {
         return leftCell
-            ? new TableCell(new TableLayout { Rows = { new TableRow(control, new TableCell { ScaleWidth = true }) } })
-            : new TableCell(new TableLayout { Rows = { new TableRow(new TableCell { ScaleWidth = true }, control) } });
+            ? new TableCell(new TableLayout { Rows = { new TableRow(control, new TableCell { ScaleWidth = true, }), }, })
+            : new TableCell(new TableLayout { Rows = { new TableRow(new TableCell { ScaleWidth = true, }, control), }, });
     }
 
     /// <summary>
@@ -255,12 +255,18 @@ public class EtoHelpers
 
         if (addScaleWidthCell)
         {
-            row.Cells.Add(new TableCell { ScaleWidth = true });
+            row.Cells.Add(new TableCell { ScaleWidth = true, });
         }
 
-        return new TableRow(new TableLayout(row, new TableRow { ScaleHeight = true }));
+        return new TableRow(new TableLayout(row, new TableRow { ScaleHeight = true, }));
     }
 
+    /// <summary>
+    /// Creates a vertical <see cref="TableLayout"/> from the specified controls.
+    /// </summary>
+    /// <param name="addScaleHeightCell">if set to <c>true</c> add height scaling cell.</param>
+    /// <param name="controls">The controls for the table row.</param>
+    /// <returns>Am instance to the <see cref="TableLayout"/> class.</returns>
     public static TableLayout TableWrapVertical(bool addScaleHeightCell, params Control[] controls)
     {
         var layOut = new TableLayout();
@@ -276,6 +282,24 @@ public class EtoHelpers
         }
 
         return layOut;
+    }
+
+
+    /// <summary>
+    /// Generates an image from the specified SVG image data with specified color.
+    /// </summary>
+    /// <param name="svgColor">The color for the SVG.</param>
+    /// <param name="imageData">The SVG image data.</param>
+    /// <param name="size">The size for the image.</param>
+    /// <returns>A <see cref="Image"/> class instance with the SVG colorized and sized to the specified size.</returns>
+    public static Image ImageFromSvg(Color svgColor, byte[] imageData, Size size)
+    {
+        var color = new SvgColor(svgColor.Rb, svgColor.Gb, svgColor.Bb);
+        var svgData = SvgColorize.FromBytes(imageData)
+            .ColorizeElementsFill(SvgElement.All, color)
+            .ColorizeElementsStroke(SvgElement.All, color);
+
+        return SvgToImage.ImageFromSvg(svgData.ToBytes(), size);
     }
 
     /// <summary>

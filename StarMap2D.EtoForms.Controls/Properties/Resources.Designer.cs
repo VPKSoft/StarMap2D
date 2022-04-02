@@ -230,6 +230,16 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] ic_fluent_document_bullet_list_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_document_bullet_list_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] ic_fluent_pause_48_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_pause_48_filled", resourceCulture);
@@ -253,6 +263,26 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         public static byte[] ic_fluent_play_circle_48_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_play_circle_48_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] ic_fluent_settings_48_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_settings_48_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] ic_fluent_star_48_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_star_48_filled", resourceCulture);
                 return ((byte[])(obj));
             }
         }

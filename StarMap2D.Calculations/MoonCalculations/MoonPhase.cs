@@ -147,6 +147,11 @@ public class MoonPhase : LatLonDateCalculation
     /// <returns>The moon disc tilt angle relative to the horizontal line of a circle.</returns>
     public static double CalculateDiscTiltAngle(DateTime dateTime, double latitude, double longitude, double rightAscension, double declination, double positionAngle)
     {
+        // Some help with this calculation: 
+        // * https://astronomy.stackexchange.com/questions/39152/how-to-calculate-the-moons-illuminated-fraction-tilt
+        // * https://astronomy.stackexchange.com/questions/26200/implementation-of-formulae-for-meeus-for-the-moon?rq=1
+        // TODO::Verify with the angle: https://astronomy.stackexchange.com/questions/24711/how-does-the-moon-look-like-from-different-latitudes-of-the-earth?rq=1
+
         var meanGreenwichSiderealTime = AASSidereal.MeanGreenwichSiderealTime(dateTime.ToAASDate().Julian);
         var meanLocalSiderealTime = meanGreenwichSiderealTime + AASCoordinateTransformation.DegreesToHours(longitude);
         var localHourAngleMoon = meanLocalSiderealTime - rightAscension;

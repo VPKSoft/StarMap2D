@@ -146,10 +146,22 @@ public class MainForm : Form
         };
 
         // create a few commands that can be used for the menu and toolbar
-        var starMapCommand = new Command { MenuText = UI.StarMap, ToolBarText = UI.StarMap, };
+        var starMapCommand = new Command
+        {
+            MenuText = UI.StarMap,
+            ToolBarText = UI.StarMap,
+            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            EtoForms.Controls.Properties.Resources.ic_fluent_star_48_filled, new Size(16, 16)),
+        };
         starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
 
-        var settingsMenu = new Command { MenuText = UI.Settings, ToolBarText = UI.Settings, };
+        var settingsMenu = new Command
+        {
+            MenuText = UI.Settings,
+            ToolBarText = UI.Settings,
+            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            EtoForms.Controls.Properties.Resources.ic_fluent_settings_48_filled, new Size(16, 16)),
+        };
         settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
 
         var testStuff = new Command { MenuText = UI.TestStuff, };
@@ -173,12 +185,24 @@ public class MainForm : Form
         var aboutCommand = new Command { MenuText = UI.About, };
         aboutCommand.Executed += (_, _) => new AboutDialog().ShowDialog(this);
 
-        var objectDetailsCommend = new Command { MenuText = UI.ObjectDetails, ToolBarText = UI.ObjectDetails, };
+        var objectDetailsCommend = new Command
+        {
+            MenuText = UI.ObjectDetails,
+            ToolBarText = UI.ObjectDetails,
+            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            EtoForms.Controls.Properties.Resources.ic_fluent_document_bullet_list_24_filled, new Size(16, 16)),
+        };
         objectDetailsCommend.Executed += (_, _) => new FormCelestialObjectData().Show();
 
-        var moonPhaseCommand = new Command { MenuText = UI.MoonPhase, ToolBarText = UI.MoonPhase, };
-        moonPhaseCommand.Executed += (_, _) => new FormMoonPhase().Show();
+        var moonPhaseCommand = new Command
+        {
+            MenuText = UI.MoonPhase,
+            ToolBarText = UI.MoonPhase,
+            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            EtoForms.Controls.Properties.Resources.ic_fluent_weather_moon_48_filled, new Size(16, 16)),
+        };
 
+        moonPhaseCommand.Executed += (_, _) => new FormMoonPhase().Show();
 
         // create menu
         base.Menu = new MenuBar
