@@ -28,6 +28,7 @@ using AASharp;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
+using StarMap2D.Calculations.RiseSet;
 
 namespace StarMap2D.Calculations.MoonCalculations;
 
@@ -103,7 +104,25 @@ public class MoonPhase : LatLonDateCalculation
         MoonIlluminatedFraction = AASMoonIlluminatedFraction.IlluminatedFraction(phaseAngle);
 
         Phase = phase;
+
+        var riseSetMoon = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Moon, Latitude,
+            Longitude, StartTimeLocal.ToLocalTime().Date, StartTimeLocal.ToLocalTime().Date.AddDays(1));
+
+        RiseDateTime = riseSetMoon.Rise?.ToLocalTime();
+        SetDateTime = riseSetMoon.Set?.ToLocalTime();
     }
+
+    /// <summary>
+    /// Gets the moon rise date and time.
+    /// </summary>
+    /// <value>The moon rise date and time.</value>
+    public DateTime? RiseDateTime { get; internal set; }
+
+    /// <summary>
+    /// Gets the moon set date and time.
+    /// </summary>
+    /// <value>The moon set date and time.</value>
+    public DateTime? SetDateTime { get; internal set; }
 
     /// <summary>
     /// Gets the moon phase value.

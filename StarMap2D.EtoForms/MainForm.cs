@@ -167,7 +167,7 @@ public class MainForm : Form
         var testStuff = new Command { MenuText = UI.TestStuff, };
         testStuff.Executed += delegate
         {
-            new FormMoonPhase().Show();
+            new FormMoonPhaseCalendar().Show();
 
             //var mp = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude);
 

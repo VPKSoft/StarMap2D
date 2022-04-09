@@ -145,6 +145,12 @@
   <data name="ic_fluent_arrow_right_48_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ic_fluent_arrow_right_48_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ic_fluent_arrow_sort_down_24_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_fluent_arrow_sort_down_24_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ic_fluent_arrow_sort_up_24_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_fluent_arrow_sort_up_24_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ic_fluent_arrow_undo_48_filled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ic_fluent_arrow_undo_48_filled.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

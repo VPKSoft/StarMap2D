@@ -170,6 +170,26 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] ic_fluent_arrow_sort_down_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_arrow_sort_down_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] ic_fluent_arrow_sort_up_24_filled {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_arrow_sort_up_24_filled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] ic_fluent_arrow_undo_48_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_arrow_undo_48_filled", resourceCulture);
