@@ -25,95 +25,86 @@ SOFTWARE.
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Eto.Drawing;
 using Eto.Forms;
-using StarMap2D.Calculations.MoonCalculations;
 using StarMap2D.Common.Utilities;
-using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.MoonCalendar;
 
-namespace StarMap2D.EtoForms.Forms
+namespace StarMap2D.EtoForms.Forms;
+
+public class FormMoonPhaseCalendar : Form
 {
-    public class FormMoonPhaseCalendar : Form
+    public FormMoonPhaseCalendar()
     {
-        public FormMoonPhaseCalendar()
+        MinimumSize = new Size(800, 600);
+        Content = CreateCalendarLayout();
+    }
+
+    private DateOnly calendarDate = DateOnly.FromDateTime(DateTime.Now);
+
+    public DateOnly CalendarDate
+    {
+        get => calendarDate;
+
+        set
         {
-            MinimumSize = new Size(800, 600);
-            Content = CreateCalendarLayout();
-        }
-
-        private DateOnly calendarDate = DateOnly.FromDateTime(DateTime.Now);
-
-        public DateOnly CalendarDate
-        {
-            get => calendarDate;
-
-            set
+            if (value != calendarDate)
             {
-                if (value != calendarDate)
-                {
-                    var monthChanged = value.Month != calendarDate.Month || value.Year != calendarDate.Year;
+                var monthChanged = value.Month != calendarDate.Month || value.Year != calendarDate.Year;
 
-                    calendarDate = value;
-                    if (monthChanged)
-                    {
-                        Content = CreateCalendarLayout();
-                    }
+                calendarDate = value;
+                if (monthChanged)
+                {
+                    Content = CreateCalendarLayout();
                 }
             }
         }
+    }
 
-        private DateTime CalendarStartDate => new(calendarDate.Year, calendarDate.Month, 1);
+    private DateTime CalendarStartDate => new(calendarDate.Year, calendarDate.Month, 1);
 
-        private TableLayout CreateCalendarLayout()
+    private TableLayout CreateCalendarLayout()
+    {
+        var result = new TableLayout();
+
+        var startDate = CalendarStartDate.WeekStartDate();
+
+        TableRow row;
+
+        //            var size = new Size(Width / 7, Height / 5);
+        //            var size = new Size(800 / 7, 600 / 5);
+
+        for (var i = 0; i < 5; i++)
         {
-            var result = new TableLayout();
-
-            var startDate = CalendarStartDate.WeekStartDate();
-
-            TableRow row;
-
-            //            var size = new Size(Width / 7, Height / 5);
-            //            var size = new Size(800 / 7, 600 / 5);
-
-            for (var i = 0; i < 5; i++)
+            row = new TableRow { ScaleHeight = true, };
+            result.Rows.Add(row);
+            for (var j = 0; j < 7; j++)
             {
-                row = new TableRow { ScaleHeight = true, };
-                result.Rows.Add(row);
-                for (var j = 0; j < 7; j++)
-                {
-                    //var moonPhase = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude, startDate, startDate);
+                //var moonPhase = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude, startDate, startDate);
 
-                    row.Cells.Add(new TableCell(new MoonCalendarCell(DateOnly.FromDateTime(startDate),
+                row.Cells.Add(new TableCell(new MoonCalendarCell(DateOnly.FromDateTime(startDate),
                             Globals.Settings.Latitude, Globals.Settings.Longitude, false)
-                    { Padding = Globals.DefaultPadding, })
+                        { Padding = Globals.DefaultPadding, })
                     { ScaleWidth = true, });
 
-                    //row.Cells.Add(new TableCell
-                    //{
-                    //    Control = new MoonPhaseVisualization
-                    //    {
-                    //        MoonIlluminatedFraction = moonPhase.MoonIlluminatedFraction,
-                    //        MoonPhase = moonPhase.Phase,
-                    //        //MinimumSize = size,
+                //row.Cells.Add(new TableCell
+                //{
+                //    Control = new MoonPhaseVisualization
+                //    {
+                //        MoonIlluminatedFraction = moonPhase.MoonIlluminatedFraction,
+                //        MoonPhase = moonPhase.Phase,
+                //        //MinimumSize = size,
 
-                    //    },
-                    //    ScaleWidth = true,
-                    //});
-                    startDate = startDate.AddDays(1);
-                }
-                //                row.Cells.Add(new TableCell { ScaleWidth = true, });
+                //    },
+                //    ScaleWidth = true,
+                //});
+                startDate = startDate.AddDays(1);
             }
-
-            //            result.Rows.Add(new TableRow { ScaleHeight = true, });
-
-            return result;
+            //                row.Cells.Add(new TableCell { ScaleWidth = true, });
         }
+
+        //            result.Rows.Add(new TableRow { ScaleHeight = true, });
+
+        return result;
     }
 }
