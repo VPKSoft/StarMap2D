@@ -232,6 +232,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current month.
+        /// </summary>
+        public static string CurrentMonth {
+            get {
+                return ResourceManager.GetString("CurrentMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data formatting culture (i.e. numbers, etc).
         /// </summary>
         public static string DataFormattingCulture {
@@ -673,6 +682,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next month.
+        /// </summary>
+        public static string NextMonth {
+            get {
+                return ResourceManager.GetString("NextMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object details.
         /// </summary>
         public static string ObjectDetails {
@@ -714,6 +732,15 @@ namespace StarMap2D.Localization {
         public static string PreviousDay {
             get {
                 return ResourceManager.GetString("PreviousDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous month.
+        /// </summary>
+        public static string PreviousMonth {
+            get {
+                return ResourceManager.GetString("PreviousMonth", resourceCulture);
             }
         }
         

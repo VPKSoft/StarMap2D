@@ -50,9 +50,14 @@ public class MoonCalendarCell : Panel, ICalendarCell
     /// <param name="latitude">The latitude of the observer for the moon phase calculation.</param>
     /// <param name="longitude">The longitude of the observer for the moon phase calculation.</param>
     /// <param name="useMoonTilt">if set to <c>true</c> draw the moon phase disc tilt angle.</param>
+    /// <param name="monthNumber">The month number to detect if the cell is out of the active month.</param>
     /// <param name="mouseClick">An action to execute when the moon visualization or the date is clicked.</param>
-    public MoonCalendarCell(DateOnly date, double latitude, double longitude, bool useMoonTilt, Action<DateTime>? mouseClick = null)
+    public MoonCalendarCell(
+        DateOnly date, double latitude, double longitude,
+        bool useMoonTilt, int monthNumber,
+        Action<DateTime>? mouseClick = null)
     {
+        this.monthNumber = monthNumber;
         this.mouseClick = mouseClick;
 
         base.BackgroundColor = backgroundColor;
@@ -67,6 +72,8 @@ public class MoonCalendarCell : Panel, ICalendarCell
         lbRise.Text = moonPhase.RiseDateTime?.ToString("HH:mm") ?? NaText;
         lbSet.Text = moonPhase.SetDateTime?.ToString("HH:mm") ?? NaText;
 
+        lbDate.MouseDown += MoonCalendarCell_MouseDown;
+
         var visualization = new MoonPhaseVisualization
         {
             MoonPhase = moonPhase.Phase,
@@ -76,22 +83,29 @@ public class MoonCalendarCell : Panel, ICalendarCell
 
         visualization.Cursor = mouseClick != null ? Cursors.Pointer : Cursors.Default;
 
+        imageDate = new SvgImageView(
+            StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_calendar_month_28_filled,
+            IndicatorImageColor)
+        { Size = new Size(16, 16) };
+        imageRise = new SvgImageView(
+            StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_up_24_filled,
+            IndicatorImageColor)
+        { Size = new Size(16, 16) };
+        imageSet = new SvgImageView(
+            StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_down_24_filled,
+            IndicatorImageColor)
+        { Size = new Size(16, 16) };
+
         Content = new TableLayout
         {
             Rows =
             {
                 EtoHelpers.TableWrap(true,
-                    new SvgImageView(
-                        StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_calendar_month_28_filled,
-                        Colors.SteelBlue) { Size = new Size(16, 16) },
+                    imageDate,
                     lbDate,
-                    new SvgImageView(
-                        StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_up_24_filled,
-                        Colors.SteelBlue) { Size = new Size(16, 16) },
+                    imageRise,
                     lbRise,
-                    new SvgImageView(
-                        StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_down_24_filled,
-                        Colors.SteelBlue) { Size = new Size(16, 16) },
+                    imageSet,
                     lbSet),
                 new TableRow(visualization) { ScaleHeight = true, },
             },
@@ -104,7 +118,15 @@ public class MoonCalendarCell : Panel, ICalendarCell
                        $"{MoonDiscIlluminationPercentageText}: {moonPhase.MoonIlluminatedFraction * 100:F1}";
 
         UpdateTextColors();
-        base.BackgroundColor = IsCurrentDate ? backgroundColorCurrent : BackgroundColor;
+        UpdateImageColors();
+        if (IsOutOfActiveMonth)
+        {
+            base.BackgroundColor = BackgroundColorOutOfMonth;
+        }
+        else
+        {
+            base.BackgroundColor = IsCurrentDate ? BackgroundColorCurrent : BackgroundColor;
+        }
     }
 
     private void MoonCalendarCell_MouseDown(object? sender, MouseEventArgs e)
@@ -122,6 +144,12 @@ public class MoonCalendarCell : Panel, ICalendarCell
     /// </summary>
     /// <value><c>true</c> if this instance is set to the current date; otherwise, <c>false</c>.</value>
     private bool IsCurrentDate => Date == DateOnly.FromDateTime(DateTime.Now);
+
+    /// <summary>
+    /// Gets a value indicating whether this instance is out of active month.
+    /// </summary>
+    /// <value><c>true</c> if this instance is out of active month; otherwise, <c>false</c>.</value>
+    private bool IsOutOfActiveMonth => Date.Month != monthNumber;
 
     private Color backgroundColorCurrent = Colors.White;
 
@@ -146,9 +174,9 @@ public class MoonCalendarCell : Panel, ICalendarCell
     private Color textColorOther = Colors.White;
 
     /// <summary>
-    /// Gets or sets the background color for the current date.
+    /// Gets or sets the text color for the non-current dates for the month.
     /// </summary>
-    /// <value>The background color for the current date.</value>
+    /// <value>The text color for the non-current dates.</value>
     public Color TextColorOther
     {
         get => textColorOther;
@@ -163,11 +191,151 @@ public class MoonCalendarCell : Panel, ICalendarCell
         }
     }
 
+    private Color indicatorImageColor = Colors.SteelBlue;
+
+    /// <summary>
+    /// Gets or sets the color of the indicator image.
+    /// </summary>
+    /// <value>The color of the indicator image.</value>
+    public Color IndicatorImageColor
+    {
+        get => indicatorImageColor;
+
+        set
+        {
+            if (value != indicatorImageColor)
+            {
+                indicatorImageColor = value;
+                UpdateImageColors();
+            }
+        }
+    }
+
+    private Color indicatorImageColorActive = Colors.SteelBlue;
+
+    /// <summary>
+    /// Gets or sets the indicator image color for current day.
+    /// </summary>
+    /// <value>The indicator image color for current day.</value>
+    public Color IndicatorImageColorActive
+    {
+        get => indicatorImageColorActive;
+
+        set
+        {
+            if (value != indicatorImageColorActive)
+            {
+                indicatorImageColorActive = value;
+                UpdateImageColors();
+            }
+        }
+    }
+
+    private Color indicatorImageColorOutOfMonth = Color.FromArgb(0x4F, 0x4F, 0x50);
+
+    /// <summary>
+    /// Gets or sets the indicator image color for current day.
+    /// </summary>
+    /// <value>The indicator image color for current day.</value>
+    public Color IndicatorImageColorOutOfMonth
+    {
+        get => indicatorImageColorOutOfMonth;
+
+        set
+        {
+            if (value != indicatorImageColorOutOfMonth)
+            {
+                indicatorImageColorOutOfMonth = value;
+                UpdateImageColors();
+            }
+        }
+    }
+
+
+    private Color textColorOutOfMonth = Color.FromArgb(0x47, 0x47, 0x4B);
+
+    /// <summary>
+    /// Gets or sets the text color for the out of month dates.
+    /// </summary>
+    /// <value>The background color for the current date.</value>
+    public Color TextColorOutOfMonth
+    {
+        get => textColorOutOfMonth;
+
+        set
+        {
+            if (textColorOutOfMonth != value)
+            {
+                textColorOutOfMonth = value;
+                UpdateTextColors();
+            }
+        }
+    }
+
+    private Color backgroundColorOutOfMonth = Color.FromArgb(0x38, 0x38, 0x3D);
+
+    /// <summary>
+    /// Gets or sets the background color for the out of month dates.
+    /// </summary>
+    /// <value>The background color for the out of month dates.</value>
+    public Color BackgroundColorOutOfMonth
+    {
+        get => backgroundColorOutOfMonth;
+
+        set
+        {
+            if (backgroundColorOutOfMonth != value)
+            {
+                backgroundColorOutOfMonth = value;
+                if (IsOutOfActiveMonth)
+                {
+                    base.BackgroundColor = backgroundColorOutOfMonth;
+                }
+                else
+                {
+                    base.BackgroundColor = IsCurrentDate ? BackgroundColorCurrent : BackgroundColor;
+                }
+            }
+        }
+    }
+
     private void UpdateTextColors()
     {
-        lbRise.TextColor = IsCurrentDate ? ForeColor : textColorOther;
-        lbSet.TextColor = IsCurrentDate ? ForeColor : textColorOther;
-        lbDate.TextColor = IsCurrentDate ? ForeColor : textColorOther;
+        if (IsOutOfActiveMonth)
+        {
+            lbRise.TextColor = TextColorOutOfMonth;
+            lbSet.TextColor = TextColorOutOfMonth;
+            lbDate.TextColor = TextColorOutOfMonth;
+        }
+        else
+        {
+            lbRise.TextColor = IsCurrentDate ? ForeColor : TextColorOther;
+            lbSet.TextColor = IsCurrentDate ? ForeColor : TextColorOther;
+            lbDate.TextColor = IsCurrentDate ? ForeColor : TextColorOther;
+        }
+    }
+
+    private void UpdateImageColors()
+    {
+        if (IsOutOfActiveMonth)
+        {
+            imageRise.SvgStrokeColor = IndicatorImageColorOutOfMonth;
+            imageRise.SvgFillColor = IndicatorImageColorOutOfMonth;
+            imageSet.SvgStrokeColor = IndicatorImageColorOutOfMonth;
+            imageSet.SvgFillColor = IndicatorImageColorOutOfMonth;
+            imageDate.SvgStrokeColor = IndicatorImageColorOutOfMonth;
+            imageDate.SvgFillColor = IndicatorImageColorOutOfMonth;
+        }
+        else
+        {
+            imageRise.SvgStrokeColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+            imageRise.SvgFillColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+            imageSet.SvgStrokeColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+            imageSet.SvgFillColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+            imageDate.SvgStrokeColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+            imageDate.SvgFillColor = IsCurrentDate ? IndicatorImageColorActive : IndicatorImageColor;
+
+        }
     }
 
     private Color backgroundColor = Colors.Black;
@@ -190,7 +358,14 @@ public class MoonCalendarCell : Panel, ICalendarCell
             if (value != backgroundColor)
             {
                 backgroundColor = value;
-                base.BackgroundColor = IsCurrentDate ? backgroundColorCurrent : BackgroundColor;
+                if (IsOutOfActiveMonth)
+                {
+                    base.BackgroundColor = BackgroundColorOutOfMonth;
+                }
+                else
+                {
+                    base.BackgroundColor = IsCurrentDate ? BackgroundColorCurrent : BackgroundColor;
+                }
             }
         }
     }
@@ -257,4 +432,8 @@ public class MoonCalendarCell : Panel, ICalendarCell
     private readonly Label lbDate = new();
     private readonly Label lbRise = new();
     private readonly Label lbSet = new();
+    private readonly int monthNumber;
+    private readonly SvgImageView imageDate;
+    private readonly SvgImageView imageRise;
+    private readonly SvgImageView imageSet;
 }

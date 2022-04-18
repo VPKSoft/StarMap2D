@@ -421,6 +421,15 @@
     <value>Lasku</value>
   </data>
   <data name="MoonCalendar0" xml:space="preserve">
-    <value>Kuukalenteri</value>
+    <value>Kuukalenteri {0}</value>
+  </data>
+  <data name="PreviousMonth" xml:space="preserve">
+    <value>Edellinen kuukausi</value>
+  </data>
+  <data name="NextMonth" xml:space="preserve">
+    <value>Seuraava kuukausi</value>
+  </data>
+  <data name="CurrentMonth" xml:space="preserve">
+    <value>Nykyinen kuukausi</value>
   </data>
 </root>

@@ -423,4 +423,13 @@
   <data name="MoonCalendar0" xml:space="preserve">
     <value>Moon calendar {0}</value>
   </data>
+  <data name="PreviousMonth" xml:space="preserve">
+    <value>Previous month</value>
+  </data>
+  <data name="NextMonth" xml:space="preserve">
+    <value>Next month</value>
+  </data>
+  <data name="CurrentMonth" xml:space="preserve">
+    <value>Current month</value>
+  </data>
 </root>

@@ -27,8 +27,10 @@ SOFTWARE.
 using System;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
 using StarMap2D.EtoForms.Controls.MoonCalendar;
+using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms.Forms;
@@ -53,7 +55,32 @@ public class FormMoonPhaseCalendar : Form
         MoonCalendarCell.DateText = UI.Date;
         MoonCalendarCell.NaText = UI.NAChar;
 
-        Content = CreateCalendarLayout();
+        calendarLayout = CreateCalendarLayout();
+
+        btnPreviousMonth = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
+            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.PreviousMonth);
+
+        btnNextMonth = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
+            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.NextMonth);
+
+        btnResetMonth = EtoHelpers.CreateImageButton(
+            SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
+            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.CurrentMonth);
+
+
+        Content = new TableLayout
+        {
+            Rows =
+            {
+                EtoHelpers.TableWrap(true,
+                    EtoHelpers.PaddingWrap(btnPreviousMonth, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(btnNextMonth, Globals.DefaultPadding),
+                    EtoHelpers.PaddingWrap(btnResetMonth, Globals.DefaultPadding)),
+                calendarLayout,
+            },
+        };
     }
 
     private DateOnly calendarDate = DateOnly.FromDateTime(DateTime.Now);
@@ -75,7 +102,19 @@ public class FormMoonPhaseCalendar : Form
                 calendarDate = value;
                 if (monthChanged)
                 {
-                    Content = CreateCalendarLayout();
+                    calendarLayout = CreateCalendarLayout();
+
+                    Content = new TableLayout
+                    {
+                        Rows =
+                        {
+                            EtoHelpers.TableWrap(true,
+                                EtoHelpers.PaddingWrap(btnPreviousMonth, Globals.DefaultPadding),
+                                EtoHelpers.PaddingWrap(btnNextMonth, Globals.DefaultPadding),
+                                EtoHelpers.PaddingWrap(btnResetMonth, Globals.DefaultPadding)),
+                            calendarLayout,
+                        },
+                    };
                 }
             }
         }
@@ -90,17 +129,19 @@ public class FormMoonPhaseCalendar : Form
         var result = new TableLayout();
 
         var startDate = CalendarStartDate.WeekStartDate();
+        var month = calendarDate.Month;
 
         for (var i = 0; i < 5; i++)
         {
-            TableRow row = new TableRow { ScaleHeight = true, };
+            var row = new TableRow { ScaleHeight = true, };
             result.Rows.Add(row);
             for (var j = 0; j < 7; j++)
             {
                 //var moonPhase = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude, startDate, startDate);
 
                 row.Cells.Add(new TableCell(new MoonCalendarCell(DateOnly.FromDateTime(startDate),
-                            Globals.Settings.Latitude, Globals.Settings.Longitude, false, time => new FormMoonPhase(time).Show())
+                    Globals.Settings.Latitude, Globals.Settings.Longitude,
+                    false, month, time => new FormMoonPhase(time).Show())
                 { Padding = Globals.DefaultPadding, })
                 { ScaleWidth = true, });
                 startDate = startDate.AddDays(1);
@@ -109,4 +150,29 @@ public class FormMoonPhaseCalendar : Form
 
         return result;
     }
+
+    private void ClickHandler(object? sender, EventArgs e)
+    {
+        if (sender?.Equals(btnNextMonth) == true)
+        {
+
+            CalendarDate = CalendarDate.AddMonths(1);
+        }
+
+        if (sender?.Equals(btnPreviousMonth) == true)
+        {
+            CalendarDate = CalendarDate.AddMonths(-1);
+        }
+
+        if (sender?.Equals(btnResetMonth) == true)
+        {
+            CalendarDate = DateOnly.FromDateTime(DateTime.Now);
+        }
+    }
+
+
+    private TableLayout? calendarLayout;
+    private Button? btnPreviousMonth;
+    private Button? btnNextMonth;
+    private Button? btnResetMonth;
 }
