@@ -26,52 +26,51 @@ SOFTWARE.
 
 using System.Globalization;
 
-namespace StarMap2D.Common.Utilities
+namespace StarMap2D.Common.Utilities;
+
+/// <summary>
+/// Some extensions for the <see cref="DateTime"/> type.
+/// </summary>
+public static class DateTimeExtensions
 {
     /// <summary>
-    /// Some extensions for the <see cref="DateTime"/> type.
+    /// Gets a value indicating whether the month is different for the specified <see cref="DateTime"/> and the comparison value.
     /// </summary>
-    public static class DateTimeExtensions
+    /// <param name="value">The value.</param>
+    /// <param name="comparisonDate">The comparison date.</param>
+    /// <returns><c>true</c> if the month or year differs in comparison, <c>false</c> otherwise.</returns>
+    public static bool MonthChanged(this DateTime value, DateTime comparisonDate)
     {
-        /// <summary>
-        /// Gets a value indicating whether the month is different for the specified <see cref="DateTime"/> and the comparison value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="comparisonDate">The comparison date.</param>
-        /// <returns><c>true</c> if the month or year differs in comparison, <c>false</c> otherwise.</returns>
-        public static bool MonthChanged(this DateTime value, DateTime comparisonDate)
+        return value.Year != comparisonDate.Year || value.Month != comparisonDate.Month;
+    }
+
+    /// <summary>
+    /// Gets whe week number of the specified <see cref="DateTime"/> value.
+    /// </summary>
+    /// <param name="value">The value the get the week number for.</param>
+    /// <returns>The week number of the specified date and time.</returns>
+    public static int WeekOfTheYear(this DateTime value)
+    {
+        var formatInfo = DateTimeFormatInfo.CurrentInfo;
+        var calendar = formatInfo.Calendar;
+
+        return calendar.GetWeekOfYear(value, formatInfo.CalendarWeekRule, formatInfo.FirstDayOfWeek);
+    }
+
+    /// <summary>
+    /// Gets the week starting <see cref="DateTime"/> value for the specified date and time.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>DateTime.</returns>
+    public static DateTime WeekStartDate(this DateTime value)
+    {
+        var week = value.WeekOfTheYear();
+
+        while (value.AddDays(-1).WeekOfTheYear() == week)
         {
-            return value.Year != comparisonDate.Year || value.Month != comparisonDate.Month;
+            value = value.AddDays(-1);
         }
 
-        /// <summary>
-        /// Gets whe week number of the specified <see cref="DateTime"/> value.
-        /// </summary>
-        /// <param name="value">The value the get the week number for.</param>
-        /// <returns>The week number of the specified date and time.</returns>
-        public static int WeekOfTheYear(this DateTime value)
-        {
-            var formatInfo = DateTimeFormatInfo.CurrentInfo;
-            var calendar = formatInfo.Calendar;
-
-            return calendar.GetWeekOfYear(value, formatInfo.CalendarWeekRule, formatInfo.FirstDayOfWeek);
-        }
-
-        /// <summary>
-        /// Gets the week starting <see cref="DateTime"/> value for the specified date and time.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>DateTime.</returns>
-        public static DateTime WeekStartDate(this DateTime value)
-        {
-            var week = value.WeekOfTheYear();
-
-            while (value.AddDays(-1).WeekOfTheYear() == week)
-            {
-                value = value.AddDays(-1);
-            }
-
-            return value;
-        }
+        return value;
     }
 }

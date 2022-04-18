@@ -411,4 +411,16 @@
   <data name="MoonPhase" xml:space="preserve">
     <value>Moon phase</value>
   </data>
+  <data name="Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="Rise" xml:space="preserve">
+    <value>Rise</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="MoonCalendar0" xml:space="preserve">
+    <value>Moon calendar {0}</value>
+  </data>
 </root>

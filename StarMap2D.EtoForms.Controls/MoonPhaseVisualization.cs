@@ -135,7 +135,7 @@ public class MoonPhaseVisualization : Drawable
         var svgBytes = SvgColorize.FromBytes(StarMap2D.EtoForms.Controls.Properties.Resources.full_moon_borderless)
             .ToBytes();
 
-        graphics.FillRectangle(Colors.Black, drawArea);
+        graphics.FillRectangle(BackgroundColor, drawArea);
 
         var image = SvgToImage.ImageFromSvg(svgBytes, size,
             moonDiscTiltAngle > 0 ? (float?)moonDiscTiltAngle : null);
@@ -198,6 +198,32 @@ public class MoonPhaseVisualization : Drawable
         path1.Transform(matrix);
 
         graphics.FillPath(color, path1);
+    }
+
+    private Color backgroundColor = Colors.Black;
+
+    /// <inheritdoc cref="Control.BackgroundColor"/>.
+    public new Color BackgroundColor
+    {
+        get
+        {
+            if (base.BackgroundColor != backgroundColor)
+            {
+                base.BackgroundColor = backgroundColor;
+            }
+
+            return backgroundColor;
+        }
+
+        set
+        {
+            if (value != backgroundColor)
+            {
+                base.BackgroundColor = value;
+                backgroundColor = value;
+                Invalidate();
+            }
+        }
     }
 
     // (C): Part of the code: http://csharphelper.com/blog/2019/03/use-sines-and-cosines-to-draw-circles-and-ellipses-in-c/

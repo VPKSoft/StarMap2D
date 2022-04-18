@@ -26,29 +26,28 @@ SOFTWARE.
 
 using System;
 
-namespace StarMap2D.EtoForms.Controls.Interfaces
+namespace StarMap2D.EtoForms.Controls.Interfaces;
+
+/// <summary>
+/// An interface representing a single day cell in a calendar control.
+/// </summary>
+public interface ICalendarCell
 {
     /// <summary>
-    /// An interface representing a single day cell in a calendar control.
+    /// Gets or sets the calendar cell date.
     /// </summary>
-    public interface ICalendarCell
-    {
-        /// <summary>
-        /// Gets or sets the calendar cell date.
-        /// </summary>
-        /// <value>The date.</value>
-        DateOnly? Date { get; set; }
+    /// <value>The date.</value>
+    DateOnly Date { get; set; }
 
-        /// <summary>
-        /// Gets or sets the calendar cell week number.
-        /// </summary>
-        /// <value>The week number.</value>
-        int WeekNumber { get; set; }
+    /// <summary>
+    /// Gets or sets the calendar cell week number.
+    /// </summary>
+    /// <value>The week number.</value>
+    int WeekNumber { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the calendar cell is the same month as the calendar control.
-        /// </summary>
-        /// <value><c>true</c> if the cell is the same month as the calendar control; otherwise, <c>false</c>.</value>
-        bool CurrentMonth { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets a value indicating whether the calendar cell is the same month as the calendar control.
+    /// </summary>
+    /// <value><c>true</c> if the cell is the same month as the calendar control; otherwise, <c>false</c>.</value>
+    bool CurrentMonth { get; set; }
 }

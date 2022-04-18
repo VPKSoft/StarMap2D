@@ -24,32 +24,31 @@ SOFTWARE.
 */
 #endregion
 
-namespace StarMap2D.Common.Utilities
+namespace StarMap2D.Common.Utilities;
+
+/// <summary>
+/// Some extensions for the <see cref="DateOnly"/> type.
+/// </summary>
+public static class DateOnlyExtensions
 {
     /// <summary>
-    /// Some extensions for the <see cref="DateOnly"/> type.
+    /// Converts the value to a <see cref="DateTime"/> value.
     /// </summary>
-    public static class DateOnlyExtensions
+    /// <param name="value">The value to convert.</param>
+    /// <param name="kind">The <see cref="DateTimeKind"/> kind.</param>
+    /// <returns>A converted <see cref="DateTime"/> value.</returns>
+    public static DateTime ToDateTime(this DateOnly value, DateTimeKind kind)
     {
-        /// <summary>
-        /// Converts the value to a <see cref="DateTime"/> value.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <param name="kind">The <see cref="DateTimeKind"/> kind.</param>
-        /// <returns>A converted <see cref="DateTime"/> value.</returns>
-        public static DateTime ToDateTime(this DateOnly value, DateTimeKind kind)
-        {
-            return new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, kind);
-        }
+        return new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, kind);
+    }
 
-        /// <summary>
-        /// Converts the value to a <see cref="DateTime"/> value.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <returns>A converted <see cref="DateTime"/> value.</returns>
-        public static DateTime ToDateTime(this DateOnly value)
-        {
-            return new DateTime(value.Year, value.Month, value.Day);
-        }
+    /// <summary>
+    /// Converts the value to a <see cref="DateTime"/> value.
+    /// </summary>
+    /// <param name="value">The value to convert.</param>
+    /// <returns>A converted <see cref="DateTime"/> value.</returns>
+    public static DateTime ToDateTime(this DateOnly value)
+    {
+        return new DateTime(value.Year, value.Month, value.Day);
     }
 }

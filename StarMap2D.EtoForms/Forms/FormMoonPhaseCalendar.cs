@@ -29,19 +29,39 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Common.Utilities;
 using StarMap2D.EtoForms.Controls.MoonCalendar;
+using StarMap2D.Localization;
 
 namespace StarMap2D.EtoForms.Forms;
 
+/// <summary>
+/// A form to display a moon phase calendar.
+/// Implements the <see cref="Eto.Forms.Form" />
+/// </summary>
+/// <seealso cref="Eto.Forms.Form" />
 public class FormMoonPhaseCalendar : Form
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FormMoonPhaseCalendar"/> class.
+    /// </summary>
     public FormMoonPhaseCalendar()
     {
         MinimumSize = new Size(800, 600);
+
+        // Localize the MoonCalendarCell component.
+        MoonCalendarCell.SetText = UI.Set;
+        MoonCalendarCell.RiseText = UI.Rise;
+        MoonCalendarCell.DateText = UI.Date;
+        MoonCalendarCell.NaText = UI.NAChar;
+
         Content = CreateCalendarLayout();
     }
 
     private DateOnly calendarDate = DateOnly.FromDateTime(DateTime.Now);
 
+    /// <summary>
+    /// Gets or sets the calendar date.
+    /// </summary>
+    /// <value>The calendar date.</value>
     public DateOnly CalendarDate
     {
         get => calendarDate;
@@ -65,45 +85,27 @@ public class FormMoonPhaseCalendar : Form
 
     private TableLayout CreateCalendarLayout()
     {
+        Title = string.Format(UI.MoonCalendar0, CalendarDate.ToString("MM/yyyy", Globals.Locale));
+
         var result = new TableLayout();
 
         var startDate = CalendarStartDate.WeekStartDate();
 
-        TableRow row;
-
-        //            var size = new Size(Width / 7, Height / 5);
-        //            var size = new Size(800 / 7, 600 / 5);
-
         for (var i = 0; i < 5; i++)
         {
-            row = new TableRow { ScaleHeight = true, };
+            TableRow row = new TableRow { ScaleHeight = true, };
             result.Rows.Add(row);
             for (var j = 0; j < 7; j++)
             {
                 //var moonPhase = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude, startDate, startDate);
 
                 row.Cells.Add(new TableCell(new MoonCalendarCell(DateOnly.FromDateTime(startDate),
-                            Globals.Settings.Latitude, Globals.Settings.Longitude, false)
-                        { Padding = Globals.DefaultPadding, })
-                    { ScaleWidth = true, });
-
-                //row.Cells.Add(new TableCell
-                //{
-                //    Control = new MoonPhaseVisualization
-                //    {
-                //        MoonIlluminatedFraction = moonPhase.MoonIlluminatedFraction,
-                //        MoonPhase = moonPhase.Phase,
-                //        //MinimumSize = size,
-
-                //    },
-                //    ScaleWidth = true,
-                //});
+                            Globals.Settings.Latitude, Globals.Settings.Longitude, false, time => new FormMoonPhase(time).Show())
+                { Padding = Globals.DefaultPadding, })
+                { ScaleWidth = true, });
                 startDate = startDate.AddDays(1);
             }
-            //                row.Cells.Add(new TableCell { ScaleWidth = true, });
         }
-
-        //            result.Rows.Add(new TableRow { ScaleHeight = true, });
 
         return result;
     }

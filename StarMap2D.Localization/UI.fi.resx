@@ -411,4 +411,16 @@
   <data name="MoonPhase" xml:space="preserve">
     <value>Kuun vaihe</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Päiväys</value>
+  </data>
+  <data name="Rise" xml:space="preserve">
+    <value>Nousu</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Lasku</value>
+  </data>
+  <data name="MoonCalendar0" xml:space="preserve">
+    <value>Kuukalenteri</value>
+  </data>
 </root>

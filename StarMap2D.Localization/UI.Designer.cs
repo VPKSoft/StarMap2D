@@ -250,6 +250,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date and number formatting.
         /// </summary>
         public static string DateAndNumberFormattingSettings {
@@ -583,6 +592,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moon calendar {0}.
+        /// </summary>
+        public static string MoonCalendar0 {
+            get {
+                return ResourceManager.GetString("MoonCalendar0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moon height °.
         /// </summary>
         public static string MoonDegrees {
@@ -736,6 +754,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rise.
+        /// </summary>
+        public static string Rise {
+            get {
+                return ResourceManager.GetString("Rise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rise and set graph draw mode.
         /// </summary>
         public static string RiseAndSetGraphDrawMode {
@@ -777,6 +804,15 @@ namespace StarMap2D.Localization {
         public static string SelectLocation {
             get {
                 return ResourceManager.GetString("SelectLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string Set {
+            get {
+                return ResourceManager.GetString("Set", resourceCulture);
             }
         }
         

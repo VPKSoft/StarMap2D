@@ -26,32 +26,31 @@ SOFTWARE.
 
 using StarMap2D.Calculations.MoonCalculations;
 
-namespace StarMap2D.EtoForms.Utility
+namespace StarMap2D.EtoForms.Utility;
+
+/// <summary>
+/// A class to localize moon phases.
+/// </summary>
+public class MoonPhaseLocalization
 {
     /// <summary>
-    /// A class to localize moon phases.
+    /// Gets the the name of the moon phase.
     /// </summary>
-    public class MoonPhaseLocalization
+    /// <param name="moonPhase">The moon phase value.</param>
+    /// <returns>A localized moon phase value string.</returns>
+    public static string MoonPhaseName(MoonPhases moonPhase)
     {
-        /// <summary>
-        /// Gets the the name of the moon phase.
-        /// </summary>
-        /// <param name="moonPhase">The moon phase value.</param>
-        /// <returns>A localized moon phase value string.</returns>
-        public static string MoonPhaseName(MoonPhases moonPhase)
+        return moonPhase switch
         {
-            return moonPhase switch
-            {
-                MoonPhases.NewMoon => Localization.MoonData.MoonNewMoon,
-                MoonPhases.WaxingCrescent => Localization.MoonData.MoonWaxingCrescent,
-                MoonPhases.FirstQuarter => Localization.MoonData.MoonFirstQuarter,
-                MoonPhases.WaxingGibbous => Localization.MoonData.MoonWaxingGibbous,
-                MoonPhases.FullMoon => Localization.MoonData.MoonFullMoon,
-                MoonPhases.WaningGibbous => Localization.MoonData.MoonWaningGibbous,
-                MoonPhases.LastQuarter => Localization.MoonData.MoonLastQuarter,
-                MoonPhases.WaningCrescent => Localization.MoonData.MoonWaningCrescent,
-                _ => Localization.MoonData.MoonNewMoon
-            };
-        }
+            MoonPhases.NewMoon => Localization.MoonData.MoonNewMoon,
+            MoonPhases.WaxingCrescent => Localization.MoonData.MoonWaxingCrescent,
+            MoonPhases.FirstQuarter => Localization.MoonData.MoonFirstQuarter,
+            MoonPhases.WaxingGibbous => Localization.MoonData.MoonWaxingGibbous,
+            MoonPhases.FullMoon => Localization.MoonData.MoonFullMoon,
+            MoonPhases.WaningGibbous => Localization.MoonData.MoonWaningGibbous,
+            MoonPhases.LastQuarter => Localization.MoonData.MoonLastQuarter,
+            MoonPhases.WaningCrescent => Localization.MoonData.MoonWaningCrescent,
+            _ => Localization.MoonData.MoonNewMoon
+        };
     }
 }

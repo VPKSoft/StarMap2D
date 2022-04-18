@@ -31,101 +31,100 @@ using Eto.Forms;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.Controls.Utilities;
 
-namespace StarMap2D.EtoForms.Controls
+namespace StarMap2D.EtoForms.Controls;
+
+/// <summary>
+/// A control to view an SVG image.
+/// Implements the <see cref="Eto.Forms.Drawable" />
+/// </summary>
+/// <seealso cref="Eto.Forms.Drawable" />
+public class SvgImageView : Drawable
 {
     /// <summary>
-    /// A control to view an SVG image.
-    /// Implements the <see cref="Eto.Forms.Drawable" />
+    /// Initializes a new instance of the <see cref="SvgImageView"/> class.
     /// </summary>
-    /// <seealso cref="Eto.Forms.Drawable" />
-    public class SvgImageView : Drawable
+    /// <param name="svgImageBytes">The SVG image data bytes.</param>
+    /// <param name="svgColor">The color (fill/stroke) of the SVG.</param>
+    public SvgImageView(byte[] svgImageBytes, Color svgColor)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SvgImageView"/> class.
-        /// </summary>
-        /// <param name="svgImageBytes">The SVG image data bytes.</param>
-        /// <param name="svgColor">The color (fill/stroke) of the SVG.</param>
-        public SvgImageView(byte[] svgImageBytes, Color svgColor)
-        {
-            SvgImageData = svgImageBytes;
-            Paint += SvgImageView_Paint;
-            SvgFillColor = SvgStrokeColor = svgColor;
-        }
-
-        private void SvgImageView_Paint(object? sender, PaintEventArgs e)
-        {
-            var size = (int)Math.Min(e.ClipRectangle.Width, e.ClipRectangle.Height);
-
-            if (svgImageData?.Length > 0)
-            {
-                var svgData = SvgColorize.FromBytes(svgImageData)
-                    .ColorizeElementsFill(SvgElement.All, svgFillColor.ToString())
-                    .ColorizeElementsStroke(SvgElement.All, SvgStrokeColor.ToString());
-
-                if (size > 0)
-                {
-                    var image = SvgToImage.ImageFromSvg(svgData.ToBytes(), new Size(size, size));
-                    e.Graphics.DrawImage(image, (e.ClipRectangle.Left) / 2, (e.ClipRectangle.Top) / 2);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the SVG fill.
-        /// </summary>
-        /// <value>The color of the SVG fill.</value>
-        public Color SvgFillColor
-        {
-            get => svgFillColor;
-
-            set
-            {
-                if (svgFillColor != value)
-                {
-                    svgFillColor = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the SVG stroke.
-        /// </summary>
-        /// <value>The color of the SVG stroke.</value>
-        public Color SvgStrokeColor
-        {
-            get => svgStrokeColor;
-
-            set
-            {
-                if (svgStrokeColor != value)
-                {
-                    svgStrokeColor = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the SVG image data bytes.
-        /// </summary>
-        /// <value>The SVG image data.</value>
-        public byte[] SvgImageData
-        {
-            get => svgImageData ?? Array.Empty<byte>();
-
-            set
-            {
-                if (svgImageData == null || !value.SequenceEqual(svgImageData))
-                {
-                    svgImageData = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private byte[]? svgImageData;
-        private Color svgFillColor;
-        private Color svgStrokeColor;
+        SvgImageData = svgImageBytes;
+        Paint += SvgImageView_Paint;
+        SvgFillColor = SvgStrokeColor = svgColor;
     }
+
+    private void SvgImageView_Paint(object? sender, PaintEventArgs e)
+    {
+        var size = (int)Math.Min(e.ClipRectangle.Width, e.ClipRectangle.Height);
+
+        if (svgImageData?.Length > 0)
+        {
+            var svgData = SvgColorize.FromBytes(svgImageData)
+                .ColorizeElementsFill(SvgElement.All, svgFillColor.ToString())
+                .ColorizeElementsStroke(SvgElement.All, SvgStrokeColor.ToString());
+
+            if (size > 0)
+            {
+                var image = SvgToImage.ImageFromSvg(svgData.ToBytes(), new Size(size, size));
+                e.Graphics.DrawImage(image, (e.ClipRectangle.Left) / 2, (e.ClipRectangle.Top) / 2);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the color of the SVG fill.
+    /// </summary>
+    /// <value>The color of the SVG fill.</value>
+    public Color SvgFillColor
+    {
+        get => svgFillColor;
+
+        set
+        {
+            if (svgFillColor != value)
+            {
+                svgFillColor = value;
+                Invalidate();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the color of the SVG stroke.
+    /// </summary>
+    /// <value>The color of the SVG stroke.</value>
+    public Color SvgStrokeColor
+    {
+        get => svgStrokeColor;
+
+        set
+        {
+            if (svgStrokeColor != value)
+            {
+                svgStrokeColor = value;
+                Invalidate();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the SVG image data bytes.
+    /// </summary>
+    /// <value>The SVG image data.</value>
+    public byte[] SvgImageData
+    {
+        get => svgImageData ?? Array.Empty<byte>();
+
+        set
+        {
+            if (svgImageData == null || !value.SequenceEqual(svgImageData))
+            {
+                svgImageData = value;
+                Invalidate();
+            }
+        }
+    }
+
+    private byte[]? svgImageData;
+    private Color svgFillColor;
+    private Color svgStrokeColor;
 }
