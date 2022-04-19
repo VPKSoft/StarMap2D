@@ -229,7 +229,7 @@ public class FormSkyMap2D : Form
 
         mapControlLayout.Rows.Add(EtoHelpers.LabelWrapperWithButton(UI.SpecifyDateTimeTitle, null,
             dateTimePickerJump, (_, _) => map2d.DateTimeUtc = dateTimePickerJump.Value?.ToUniversalTime() ?? DateTime.UtcNow,
-            EtoForms.Controls.Properties.Resources.ic_fluent_arrow_right_48_filled, Colors.SteelBlue));
+            EtoForms.Controls.Properties.Resources.ic_fluent_arrow_right_48_filled, Globals.Settings.UiIconsDefaultColor!.Value));
 
 
         // The time unit value and it's type selector combo box.
@@ -243,7 +243,7 @@ public class FormSkyMap2D : Form
             EtoHelpers.LabelWrapperWithControls(UI.SpeedPerTimeUnit, 5, 5, nsSpeedPerTimeAmount,
                 cmbTimeUnit,
                 // A reset button for the date and time jumping.
-                EtoHelpers.CreateImageButton(SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled), Colors.SteelBlue, 6,
+                EtoHelpers.CreateImageButton(SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled), Globals.Settings.UiIconsDefaultColor!.Value, 6,
                     (_, _) =>
                     {
                         TimeUpdate = false;
@@ -265,6 +265,8 @@ public class FormSkyMap2D : Form
         {
             CheckedSvgImage = SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_pause_48_filled),
             UncheckedSvgImage = SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_play_48_filled),
+            CheckedImageColor = Globals.Settings.UiIconsDefaultColor!.Value,
+            UncheckedImageColor = Globals.Settings.UiIconsDefaultColor!.Value,
         };
 
         // The play button, jump hour +/- buttons.
@@ -272,7 +274,7 @@ public class FormSkyMap2D : Form
             buttonPlayPause,
             EtoHelpers.CreateImageButton(
                 SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
-                Colors.SteelBlue, 6, (_, _) =>
+                Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) =>
                 {
                     map2d.DateTimeUtc = map2d.DateTimeUtc.TruncateToHours().AddHours(-1);
                     dateTimePickerJump.Value = map2d.DateTimeUtc.ToLocalTime();
@@ -280,7 +282,7 @@ public class FormSkyMap2D : Form
                 }, UI.HourMinusOne),
             EtoHelpers.CreateImageButton(
                 SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
-                Colors.SteelBlue, 6, (_, _) =>
+                Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) =>
                 {
                     map2d.DateTimeUtc = map2d.DateTimeUtc.TruncateToHours().AddHours(1);
                     dateTimePickerJump.Value = map2d.DateTimeUtc.ToLocalTime();
@@ -326,7 +328,7 @@ public class FormSkyMap2D : Form
             cmbJumpLocation,
             EtoHelpers.CreateImageButton(
                 SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled),
-                Colors.SteelBlue, 6, RevertLocation_Click)
+                Globals.Settings.UiIconsDefaultColor!.Value, 6, RevertLocation_Click)
         ));
 
         nsLatitude = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, };
@@ -344,11 +346,13 @@ public class FormSkyMap2D : Form
 
         Font font = Globals.Settings.DataFont ?? SettingsFontData.Empty;
 
-        lbObjectNameValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbHorizontalXValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbHorizontalYValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+        var color = Globals.Settings.DateTextDefaultColor!.Value;
+
+        lbObjectNameValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbRightAscensionValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbDeclinationValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbHorizontalXValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbHorizontalYValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
         cbAboveHorizonValue = new CheckBox { ThreeState = false, Text = UI.AboveHorizon, };
 
         objectInfoTableNameRaDec =
@@ -372,10 +376,10 @@ public class FormSkyMap2D : Form
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(cbAboveHorizonValue));
         mapControlLayout.Rows.Add(EtoHelpers.PaddingWrap(new Label { Text = UI.Coordinates, }));
 
-        lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbMouseCoordinateRightAscensionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
-        lbMouseCoordinateDeclinationValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+        lbMouseCoordinateHeightValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbMouseCoordinateAzimuthValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbMouseCoordinateRightAscensionValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
+        lbMouseCoordinateDeclinationValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
 
         mousePositionLayout = FluentTableLayoutBuilder.New()
             .WithSpacing(Globals.DefaultPadding)
@@ -387,7 +391,7 @@ public class FormSkyMap2D : Form
 
         mapControlLayout.Rows.Add(mousePositionLayout);
 
-        lbCompassDirectionValue = new Label { Text = UI.NAChar, TextColor = Colors.SteelBlue, Font = font, };
+        lbCompassDirectionValue = new Label { Text = UI.NAChar, TextColor = color, Font = font, };
         mapControlLayout.Rows.Add(EtoHelpers.LabelWrap(UI.CompassDirection, EtoHelpers.PaddingWrap(lbCompassDirectionValue), Globals.DefaultPadding));
 
         cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;

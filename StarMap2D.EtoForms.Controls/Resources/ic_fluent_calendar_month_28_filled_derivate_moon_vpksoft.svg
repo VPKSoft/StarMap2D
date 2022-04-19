@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="28"
+   height="28"
+   viewBox="0 0 28 28"
+   fill="none"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="ic_fluent_calendar_month_28_filled_derivate_moon_vpksoft.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="31.178571"
+     inkscape:cx="14.016037"
+     inkscape:cy="14.016037"
+     inkscape:window-width="3440"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     d="M21.75 3C23.5449 3 25 4.45507 25 6.25V21.75C25 23.5449 23.5449 25 21.75 25H6.25C4.45507 25 3 23.5449 3 21.75V6.25C3 4.45507 4.45507 3 6.25 3H21.75ZM8.5 15.5C7.67157 15.5 7 16.1716 7 17C7 17.8284 7.67157 18.5 8.5 18.5C9.32843 18.5 10 17.8284 10 17C10 16.1716 9.32843 15.5 8.5 15.5ZM14 15.5C13.1716 15.5 12.5 16.1716 12.5 17C12.5 17.8284 13.1716 18.5 14 18.5C14.8284 18.5 15.5 17.8284 15.5 17C15.5 16.1716 14.8284 15.5 14 15.5ZM8.5 9.5C7.67157 9.5 7 10.1716 7 11C7 11.8284 7.67157 12.5 8.5 12.5C9.32843 12.5 10 11.8284 10 11C10 10.1716 9.32843 9.5 8.5 9.5ZM14 9.5C13.1716 9.5 12.5 10.1716 12.5 11C12.5 11.8284 13.1716 12.5 14 12.5C14.8284 12.5 15.5 11.8284 15.5 11C15.5 10.1716 14.8284 9.5 14 9.5ZM19.5 9.5C18.6716 9.5 18 10.1716 18 11C18 11.8284 18.6716 12.5 19.5 12.5C20.3284 12.5 21 11.8284 21 11C21 10.1716 20.3284 9.5 19.5 9.5Z"
+     fill="#212121"
+     id="path2" />
+  <path
+     d="m 23.195966,21.60463 c -1.288182,2.231187 -4.141171,2.995631 -6.372359,1.70745 -0.6076,-0.350799 -1.119113,-0.825374 -1.508701,-1.391095 -0.13025,-0.18916 -0.046,-0.450367 0.170228,-0.527752 1.757198,-0.628931 2.698313,-1.357741 3.24444,-2.400214 0.574948,-1.09749 0.723524,-2.299656 0.321307,-3.947499 -0.05561,-0.227862 0.124366,-0.444821 0.3586,-0.432255 0.726192,0.03896 1.435644,0.247561 2.079009,0.619013 2.231186,1.288174 2.99563,4.141163 1.707476,6.372352 z"
+     fill="#212121"
+     id="path2-9"
+     style="fill:#ffffff;fill-opacity:1;stroke-width:1" />
+</svg>

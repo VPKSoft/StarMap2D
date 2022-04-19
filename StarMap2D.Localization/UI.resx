@@ -432,4 +432,10 @@
   <data name="CurrentMonth" xml:space="preserve">
     <value>Current month</value>
   </data>
+  <data name="DataFontColor" xml:space="preserve">
+    <value>Data font color</value>
+  </data>
+  <data name="UIIconsColor" xml:space="preserve">
+    <value>UI icons color</value>
+  </data>
 </root>

@@ -241,6 +241,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data font color.
+        /// </summary>
+        public static string DataFontColor {
+            get {
+                return ResourceManager.GetString("DataFontColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data formatting culture (i.e. numbers, etc).
         /// </summary>
         public static string DataFormattingCulture {
@@ -993,6 +1002,15 @@ namespace StarMap2D.Localization {
         public static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UI icons color.
+        /// </summary>
+        public static string UIIconsColor {
+            get {
+                return ResourceManager.GetString("UIIconsColor", resourceCulture);
             }
         }
         

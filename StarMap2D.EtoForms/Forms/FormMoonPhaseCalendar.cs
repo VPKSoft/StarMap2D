@@ -59,15 +59,15 @@ public class FormMoonPhaseCalendar : Form
 
         btnPreviousMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.PreviousMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.PreviousMonth);
 
         btnNextMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.NextMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.NextMonth);
 
         btnResetMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
-            Colors.SteelBlue, 10, ClickHandler, StarMap2D.Localization.UI.CurrentMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.CurrentMonth);
 
 
         Content = new TableLayout
@@ -109,9 +109,9 @@ public class FormMoonPhaseCalendar : Form
                         Rows =
                         {
                             EtoHelpers.TableWrap(true,
-                                EtoHelpers.PaddingWrap(btnPreviousMonth, Globals.DefaultPadding),
-                                EtoHelpers.PaddingWrap(btnNextMonth, Globals.DefaultPadding),
-                                EtoHelpers.PaddingWrap(btnResetMonth, Globals.DefaultPadding)),
+                                EtoHelpers.PaddingWrap(btnPreviousMonth!, Globals.DefaultPadding),
+                                EtoHelpers.PaddingWrap(btnNextMonth!, Globals.DefaultPadding),
+                                EtoHelpers.PaddingWrap(btnResetMonth!, Globals.DefaultPadding)),
                             calendarLayout,
                         },
                     };
@@ -139,10 +139,15 @@ public class FormMoonPhaseCalendar : Form
             {
                 //var moonPhase = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude, startDate, startDate);
 
-                row.Cells.Add(new TableCell(new MoonCalendarCell(DateOnly.FromDateTime(startDate),
+                row.Cells.Add(new TableCell(new MoonCalendarCell(
+                            DateOnly.FromDateTime(startDate),
                     Globals.Settings.Latitude, Globals.Settings.Longitude,
                     false, month, time => new FormMoonPhase(time).Show())
-                { Padding = Globals.DefaultPadding, })
+                {
+                    Padding = Globals.DefaultPadding,
+                    IndicatorImageColor = Globals.Settings.UiIconsDefaultColor!.Value,
+                    IndicatorImageColorActive = Globals.Settings.UiIconsDefaultColor!.Value,
+                })
                 { ScaleWidth = true, });
                 startDate = startDate.AddDays(1);
             }

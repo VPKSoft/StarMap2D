@@ -24,6 +24,8 @@ SOFTWARE.
 */
 #endregion
 
+using Eto.Drawing;
+using Newtonsoft.Json;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Controls.Utilities;
 using VPKSoft.ApplicationSettingsJson;
@@ -235,4 +237,21 @@ public class Settings : ApplicationJsonSettings
     /// <value>The main chart draw mode.</value>
     [Settings(Default = 2)]
     public int? MainChartDrawMode { get; set; }
+
+    /// <summary>
+    /// Gets or sets the default color of the UI icons.
+    /// </summary>
+    /// <value>The default color of the UI icons.</value>
+    [Settings(Default = "#4682B4", DefaultValueConverter = typeof(StringToColorDefault))]
+    [JsonConverter(typeof(ColorStringConverter))]
+    public Color? UiIconsDefaultColor { get; set; }
+
+    /// <summary>
+    /// Gets or sets the default color of the date text.
+    /// </summary>
+    /// <value>The default color of the date text.</value>
+    [Settings(Default = "#4682B4", DefaultValueConverter = typeof(StringToColorDefault))]
+    [JsonConverter(typeof(ColorStringConverter))]
+    public Color? DateTextDefaultColor { get; set; }
+
 }

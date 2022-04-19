@@ -432,4 +432,10 @@
   <data name="CurrentMonth" xml:space="preserve">
     <value>Nykyinen kuukausi</value>
   </data>
+  <data name="DataFontColor" xml:space="preserve">
+    <value>Datatekstin väri</value>
+  </data>
+  <data name="UIIconsColor" xml:space="preserve">
+    <value>Käyttöliittymän ikonien väri</value>
+  </data>
 </root>

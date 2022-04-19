@@ -195,7 +195,7 @@ public class FormDialogCelestialObject : Dialog
     private Label CreateLabel()
     {
         var labelWidth = 135;
-        var labelColor = Colors.SteelBlue;
+        var labelColor = Globals.Settings.DateTextDefaultColor!.Value;
         return new Label
         {
             Width = labelWidth,
@@ -296,7 +296,7 @@ public class FormDialogCelestialObject : Dialog
 
         btnCopyToClipboard = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_copy_24_filled),
-            Colors.SteelBlue, 6, (_, _) =>
+            Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) =>
             {
             }, UI.CopyToClipboard);
 

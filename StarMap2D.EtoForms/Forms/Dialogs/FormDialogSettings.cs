@@ -50,6 +50,8 @@ public partial class FormDialogSettings : Dialog<bool>
     private TableLayout? tlFonts;
     private FontPicker? fpNormal;
     private FontPicker? fpMonospaced;
+    private ColorPicker? cpkDataFontColor;
+    private ColorPicker? cpkIconColor;
     #endregion
 
     /// <summary>
@@ -183,6 +185,9 @@ public partial class FormDialogSettings : Dialog<bool>
         cpkMapTextColor!.Value = Color.Parse(Globals.Settings.MapTextColor);
         cpkMapCrossHairColor!.Value = Color.Parse(Globals.Settings.CrossHairColor);
 
+        cpkDataFontColor!.Value = Globals.Settings.DateTextDefaultColor!.Value;
+        cpkIconColor!.Value = Globals.Settings.UiIconsDefaultColor!.Value;
+
         try
         {
             objectGraphics = SolarSystemObjectGraphics
@@ -276,6 +281,8 @@ public partial class FormDialogSettings : Dialog<bool>
         Globals.Settings.MapSurroundingsColor = cpkMapSurroundingsColor!.Value.ToString();
         Globals.Settings.MapTextColor = cpkMapTextColor!.Value.ToString();
         Globals.Settings.CrossHairColor = cpkMapCrossHairColor!.Value.ToString();
+        Globals.Settings.DateTextDefaultColor = cpkDataFontColor!.Value;
+        Globals.Settings.UiIconsDefaultColor = cpkIconColor!.Value;
 
         Globals.Settings.KnownObjects = string.Join(";", objectGraphics!.Select(f => f.SaveToString()));
 

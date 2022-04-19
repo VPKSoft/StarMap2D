@@ -210,6 +210,16 @@ namespace StarMap2D.EtoForms.Controls.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] ic_fluent_calendar_month_28_filled_derivate_moon_vpksoft {
+            get {
+                object obj = ResourceManager.GetObject("ic_fluent_calendar_month_28_filled_derivate_moon_vpksoft", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] ic_fluent_calendar_today_28_filled {
             get {
                 object obj = ResourceManager.GetObject("ic_fluent_calendar_today_28_filled", resourceCulture);

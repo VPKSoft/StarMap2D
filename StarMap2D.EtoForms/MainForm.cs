@@ -89,15 +89,15 @@ public class MainForm : Form
 
         btnPreviousDay = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.PreviousDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.PreviousDay);
 
         btnNextDay = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.NextDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.NextDay);
 
         btnReset = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.CurrentDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.CurrentDay);
 
         dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.Date, Value = DateTime.Now, };
         dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
@@ -108,11 +108,13 @@ public class MainForm : Form
         lbMoonRiseValue = new Label();
         lbMoonSetValue = new Label();
 
-        lbSunRise = new Label { Text = UI.SunRise, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
-        lbSunSet = new Label { Text = UI.SunSet, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
-        lbDayLength = new Label { Text = UI.DayLength, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
-        lbMoonRise = new Label { Text = UI.MoonRise, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
-        lbMoonSet = new Label { Text = UI.MoonSet, TextColor = Colors.SteelBlue, Font = Globals.Settings.Font!, };
+        var color = Globals.Settings.DateTextDefaultColor!.Value;
+
+        lbSunRise = new Label { Text = UI.SunRise, TextColor = color, Font = Globals.Settings.Font!, };
+        lbSunSet = new Label { Text = UI.SunSet, TextColor = color, Font = Globals.Settings.Font!, };
+        lbDayLength = new Label { Text = UI.DayLength, TextColor = color, Font = Globals.Settings.Font!, };
+        lbMoonRise = new Label { Text = UI.MoonRise, TextColor = color, Font = Globals.Settings.Font!, };
+        lbMoonSet = new Label { Text = UI.MoonSet, TextColor = color, Font = Globals.Settings.Font!, };
 
         Content = new TableLayout
         {
@@ -150,7 +152,7 @@ public class MainForm : Form
         {
             MenuText = UI.StarMap,
             ToolBarText = UI.StarMap,
-            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
             EtoForms.Controls.Properties.Resources.ic_fluent_star_48_filled, new Size(16, 16)),
         };
         starMapCommand.Executed += (_, _) => new FormSkyMap2D().Show();
@@ -159,7 +161,7 @@ public class MainForm : Form
         {
             MenuText = UI.Settings,
             ToolBarText = UI.Settings,
-            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
             EtoForms.Controls.Properties.Resources.ic_fluent_settings_48_filled, new Size(16, 16)),
         };
         settingsMenu.Executed += (_, _) => new FormDialogSettings().ShowModal();
@@ -189,7 +191,7 @@ public class MainForm : Form
         {
             MenuText = UI.ObjectDetails,
             ToolBarText = UI.ObjectDetails,
-            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
             EtoForms.Controls.Properties.Resources.ic_fluent_document_bullet_list_24_filled, new Size(16, 16)),
         };
         objectDetailsCommend.Executed += (_, _) => new FormCelestialObjectData().Show();
@@ -198,11 +200,22 @@ public class MainForm : Form
         {
             MenuText = UI.MoonPhase,
             ToolBarText = UI.MoonPhase,
-            Image = EtoHelpers.ImageFromSvg(Colors.SteelBlue,
+            Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
             EtoForms.Controls.Properties.Resources.ic_fluent_weather_moon_48_filled, new Size(16, 16)),
         };
 
         moonPhaseCommand.Executed += (_, _) => new FormMoonPhase().Show();
+
+        var moonCalendarCommand = new Command
+        {
+            MenuText = "Moon calendar",
+            ToolBarText = "Moon calendar",
+            Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
+                EtoForms.Controls.Properties.Resources.ic_fluent_calendar_month_28_filled, new Size(16, 16)),
+        };
+
+        moonCalendarCommand.Executed += (_, _) => new FormMoonPhaseCalendar().Show();
+
 
         // create menu
         base.Menu = new MenuBar
@@ -225,7 +238,21 @@ public class MainForm : Form
         base.Menu.ApplicationMenu.Text = UI.File;
 
         // create toolbar			
-        ToolBar = new ToolBar { Items = { starMapCommand, new SeparatorToolItem(), settingsMenu, new SeparatorToolItem(), objectDetailsCommend, new SeparatorToolItem(), moonPhaseCommand }, };
+        ToolBar = new ToolBar
+        {
+            Items =
+            {
+                starMapCommand,
+                new SeparatorToolItem(),
+                settingsMenu,
+                new SeparatorToolItem(),
+                objectDetailsCommend,
+                new SeparatorToolItem(),
+                moonPhaseCommand,
+                new SeparatorToolItem(),
+                moonCalendarCommand,
+            },
+        };
 
         CurrentDateTime = DateTime.UtcNow;
     }

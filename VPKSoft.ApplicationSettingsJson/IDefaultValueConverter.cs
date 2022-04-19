@@ -24,27 +24,17 @@ SOFTWARE.
 */
 #endregion
 
-using System;
-
 namespace VPKSoft.ApplicationSettingsJson;
 
 /// <summary>
-/// An attribute marking a property as a settings for the <see cref="Attribute"/> class descendants.
-/// Implements the <see cref="System" />
+/// An interface to convert default setting values from strings to objects.
 /// </summary>
-/// <seealso cref="System" />
-[AttributeUsage(AttributeTargets.Property)]
-public class SettingsAttribute : Attribute
+public interface IDefaultValueConverter
 {
     /// <summary>
-    /// Gets or sets the default value for the setting.
+    /// Converts the object value from the specified object string.
     /// </summary>
-    /// <value>The default value.</value>
-    public object? Default { get; set; }
-
-    /// <summary>
-    /// Gets or sets the default value converter to convert values from string to object.
-    /// </summary>
-    /// <value>The default value converter.</value>
-    public Type? DefaultValueConverter { get; set; }
+    /// <param name="value">The value.</param>
+    /// <returns>System.Nullable&lt;System.Object&gt;.</returns>
+    object? ConvertFromString(object? value);
 }

@@ -56,15 +56,15 @@ public class FormMoonPhase : Form
 
         btnPreviousDay = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.PreviousDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.PreviousDay);
 
         btnNextDay = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.NextDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.NextDay);
 
         btnReset = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
-            Colors.SteelBlue, 10, ClickHandler, UI.CurrentDay);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.CurrentDay);
 
         cbDiscTilt = new CheckBox { ThreeState = false, Text = UI.MoonDiscTilting, };
         cbDiscTilt.CheckedChanged += CbDiscTilt_CheckedChanged;
@@ -72,9 +72,9 @@ public class FormMoonPhase : Form
         dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
         dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
-        lbMoonPhaseName = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
-        lbMoonIlluminatedPercentage = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
-        lbMoonPhaseNumber = new Label { TextColor = Colors.SteelBlue, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+        lbMoonPhaseName = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+        lbMoonIlluminatedPercentage = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+        lbMoonPhaseNumber = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
 
         moonPhase = new MoonPhaseVisualization();
 

@@ -238,6 +238,12 @@ public partial class FormDialogSettings
 
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.RiseAndSetGraphDrawMode, rblDrawMode));
 
+        cpkDataFontColor = new ColorPicker();
+        cpkIconColor = new ColorPicker();
+
+        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.DataFontColor, cpkDataFontColor));
+        tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.UIIconsColor, cpkIconColor));
+
         // Scale the last row to the maximum.
         tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
     }
@@ -360,7 +366,7 @@ public partial class FormDialogSettings
 
         btnResetObjectGraphics = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled),
-            Colors.SteelBlue, 6, (_, _) =>
+            Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) =>
             {
             }, UI.ResetObjectGraphics);
 

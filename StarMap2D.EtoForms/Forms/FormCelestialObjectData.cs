@@ -103,13 +103,13 @@ public partial class FormCelestialObjectData : Form
 
         btnCopyToClipboard = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_copy_24_filled),
-            Colors.SteelBlue, 6, (_, _) => { }, UI.CopyToClipboard);
+            Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) => { }, UI.CopyToClipboard);
 
         btnCopyToClipboard.Click += BtnCopyToClipboard_Click;
 
         btnExportCsv = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_document_arrow_down_20_filled),
-            Colors.SteelBlue, 6, (_, _) => { }, UI.ExportCSV);
+            Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) => { }, UI.ExportCSV);
 
         btnExportCsv.Click += BtnExportCsv_Click; ;
 
@@ -122,7 +122,7 @@ public partial class FormCelestialObjectData : Form
                 cmbJumpLocation,
                 EtoHelpers.CreateImageButton(
                     SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled),
-                    Colors.SteelBlue, 6, RevertLocation_Click)),
+                    Globals.Settings.UiIconsDefaultColor!.Value, 6, RevertLocation_Click)),
             EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnCopyToClipboard, Globals.DefaultPadding), false),
             EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnExportCsv, Globals.DefaultPadding), false),
             new TableCell { ScaleWidth = true }

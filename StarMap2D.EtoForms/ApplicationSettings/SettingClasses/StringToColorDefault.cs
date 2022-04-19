@@ -24,27 +24,26 @@ SOFTWARE.
 */
 #endregion
 
-using System;
+using Eto.Drawing;
+using VPKSoft.ApplicationSettingsJson;
 
-namespace VPKSoft.ApplicationSettingsJson;
+namespace StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 
 /// <summary>
-/// An attribute marking a property as a settings for the <see cref="Attribute"/> class descendants.
-/// Implements the <see cref="System" />
+/// A class to convert <see cref="Color"/> values from their string representations.
+/// Implements the <see cref="VPKSoft.ApplicationSettingsJson.IDefaultValueConverter" />
 /// </summary>
-/// <seealso cref="System" />
-[AttributeUsage(AttributeTargets.Property)]
-public class SettingsAttribute : Attribute
+/// <seealso cref="VPKSoft.ApplicationSettingsJson.IDefaultValueConverter" />
+public class StringToColorDefault : IDefaultValueConverter
 {
-    /// <summary>
-    /// Gets or sets the default value for the setting.
-    /// </summary>
-    /// <value>The default value.</value>
-    public object? Default { get; set; }
+    /// <inheritdoc cref="IDefaultValueConverter.ConvertFromString"/>
+    public object? ConvertFromString(object? value)
+    {
+        if (string.IsNullOrWhiteSpace(value?.ToString()))
+        {
+            return null;
+        }
 
-    /// <summary>
-    /// Gets or sets the default value converter to convert values from string to object.
-    /// </summary>
-    /// <value>The default value converter.</value>
-    public Type? DefaultValueConverter { get; set; }
+        return Color.Parse(value.ToString());
+    }
 }

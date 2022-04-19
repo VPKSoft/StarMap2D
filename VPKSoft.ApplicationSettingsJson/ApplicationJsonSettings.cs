@@ -74,7 +74,15 @@ public abstract class ApplicationJsonSettings
 
             var attribute = existingProperty.GetCustomAttribute<SettingsAttribute>();
 
-            existingProperty.SetValue(this, saved?.GetValue(data) ?? attribute?.Default);
+            if (attribute.DefaultValueConverter != null)
+            {
+                var jsonStringConverter = (IDefaultValueConverter)Activator.CreateInstance(attribute.DefaultValueConverter);
+                existingProperty.SetValue(this, jsonStringConverter.ConvertFromString(saved?.GetValue(data) ?? attribute.Default));
+            }
+            else
+            {
+                existingProperty.SetValue(this, saved?.GetValue(data) ?? attribute.Default);
+            }
         }
     }
 
