@@ -13,6 +13,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CelestialObjects.resx</DependentUpon>
     </Compile>
+    <Compile Update="Constellations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Constellations.resx</DependentUpon>
+    </Compile>
     <Compile Update="Messages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -39,6 +44,13 @@
     <EmbeddedResource Update="CelestialObjects.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CelestialObjects.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Constellations.fi.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Constellations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Constellations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

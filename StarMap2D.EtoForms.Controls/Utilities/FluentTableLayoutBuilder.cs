@@ -61,7 +61,7 @@ public class FluentTableLayoutBuilder
     {
         var result = new FluentTableLayoutBuilder
         {
-            RootTableLayout = new TableLayout()
+            RootTableLayout = new TableLayout(),
         };
 
         return result;
@@ -104,7 +104,7 @@ public class FluentTableLayoutBuilder
             if (i + 1 < controls.Length)
             {
                 tableRow.Cells.Add(new TableCell(controls[i]));
-                tableRow.Cells.Add(new Panel { Width = spacing });
+                tableRow.Cells.Add(new Panel { Width = spacing, });
             }
             else
             {
@@ -143,7 +143,7 @@ public class FluentTableLayoutBuilder
             if (i + 1 < controls.Length)
             {
                 tableRow.Cells.Add(new TableCell(controls[i]));
-                tableRow.Cells.Add(new Panel { Width = spacing });
+                tableRow.Cells.Add(new Panel { Width = spacing, });
             }
             else
             {
@@ -163,7 +163,7 @@ public class FluentTableLayoutBuilder
     /// <returns>An instance of this <see cref="FluentTableLayoutBuilder"/> class.</returns>
     public FluentTableLayoutBuilder WithEmptyRow()
     {
-        RootTableLayout!.Rows.Add(new TableRow { ScaleHeight = true });
+        RootTableLayout!.Rows.Add(new TableRow { ScaleHeight = true, });
         return this;
     }
 

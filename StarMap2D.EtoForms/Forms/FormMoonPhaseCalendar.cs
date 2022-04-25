@@ -59,15 +59,15 @@ public class FormMoonPhaseCalendar : Form
 
         btnPreviousMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_previous_24_filled),
-            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.PreviousMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.PreviousMonth);
 
         btnNextMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_next_24_filled),
-            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.NextMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.NextMonth);
 
         btnResetMonth = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_calendar_today_28_filled),
-            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, StarMap2D.Localization.UI.CurrentMonth);
+            Globals.Settings.UiIconsDefaultColor!.Value, 10, ClickHandler, UI.CurrentMonth);
 
 
         Content = new TableLayout
@@ -177,7 +177,7 @@ public class FormMoonPhaseCalendar : Form
 
 
     private TableLayout? calendarLayout;
-    private Button? btnPreviousMonth;
-    private Button? btnNextMonth;
-    private Button? btnResetMonth;
+    private readonly Button? btnPreviousMonth;
+    private readonly Button? btnNextMonth;
+    private readonly Button? btnResetMonth;
 }

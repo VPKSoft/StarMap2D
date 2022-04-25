@@ -63,7 +63,7 @@ public class Centaurs
             T = 2468621.073694782242,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;

@@ -50,7 +50,7 @@ public class MoonPhaseLocalization
             MoonPhases.WaningGibbous => Localization.MoonData.MoonWaningGibbous,
             MoonPhases.LastQuarter => Localization.MoonData.MoonLastQuarter,
             MoonPhases.WaningCrescent => Localization.MoonData.MoonWaningCrescent,
-            _ => Localization.MoonData.MoonNewMoon
+            _ => Localization.MoonData.MoonNewMoon,
         };
     }
 }

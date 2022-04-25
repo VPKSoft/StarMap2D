@@ -31,6 +31,7 @@ using System.Linq;
 using System.Text;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
@@ -65,9 +66,6 @@ public class FormDialogCelestialObject : Dialog
         // Set the icon for the form.
         EtoHelpers.SetIcon(this, EtoForms.Properties.Resources.StarMap2D);
 
-        // Set the software localization.
-        Localization.Globals.Culture = Globals.Locale;
-
         InitializeView();
         DisplayObjectData();
     }
@@ -92,7 +90,7 @@ public class FormDialogCelestialObject : Dialog
 
         var form = new FormDialogCelestialObject
         {
-            ActiveObject = displayObject
+            ActiveObject = displayObject,
         };
 
         form.nsLongitude!.Value = longitude;
@@ -159,6 +157,7 @@ public class FormDialogCelestialObject : Dialog
 
     private Label? lbAboveHorizon;
     private Label? lbAdditionalDataLink;
+    private Label? lbConstellation;
 
     private Label? lbRightAscensionHours;
     private Label? lbDeclinationDegrees;
@@ -261,6 +260,11 @@ public class FormDialogCelestialObject : Dialog
         lbHorizontalX!.Text = DisplayFloating(details.HorizontalDegreesX, 8);
         lbHorizontalY!.Text = DisplayFloating(details.HorizontalDegreesY, 8);
         lbAboveHorizon!.Text = DisplayBoolean(details.AboveHorizon);
+
+        var constellation = PointInConstellation.GetConstellationForPoint(details.RightAscension, details.Declination);
+
+        lbConstellation!.Text = ConstellationClassEnumNameMap.ConstellationClassesEnumsNames
+            .FirstOrDefault(f => f.Constellation == constellation)?.Name;
     }
 
     private Dictionary<Label, string> ValueControls { get; set; } = new();
@@ -286,10 +290,10 @@ public class FormDialogCelestialObject : Dialog
             EtoHelpers.LabelWrap(UI.CelestialObject, cmbObjectSelect),
             EtoHelpers.LabelWrap(UI.Latitude, nsLatitude),
             EtoHelpers.LabelWrap(UI.Longitude, nsLongitude),
-            new TableCell { ScaleWidth = true }
+            new TableCell { ScaleWidth = true, }
         ));
 
-        cmbJumpLocation = new ComboBox { AutoComplete = true };
+        cmbJumpLocation = new ComboBox { AutoComplete = true, };
         cmbJumpLocation.DataStore = Cities.CitiesList;
         cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
         cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;
@@ -306,7 +310,7 @@ public class FormDialogCelestialObject : Dialog
             EtoHelpers.LabelWrap(UI.SpecifyDateTimeTitle, dateTimePickerJump),
             EtoHelpers.LabelWrap(UI.JumpToLcation, cmbJumpLocation),
             EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnCopyToClipboard, Globals.DefaultPadding), false),
-            new TableCell { ScaleWidth = true }
+            new TableCell { ScaleWidth = true, }
         ));
 
         lbRightAscensionHours = CreateLabel();
@@ -340,6 +344,7 @@ public class FormDialogCelestialObject : Dialog
         lbGlobalMagneticField = CreateLabel();
 
         lbAboveHorizon = CreateLabel();
+        lbConstellation = CreateLabel();
 
 
         lbAdditionalDataLink = CreateLabel();
@@ -361,9 +366,9 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(UI.AboveHorizon, lbAboveHorizon)),
                         new TableCell(),
                         new TableCell(),
-                        new TableCell(),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell(EtoHelpers.LabelWrap(UI.Constellation, lbConstellation)),
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -373,8 +378,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(UI.DeclinationDegrees, lbDeclinationDegrees)),
                         new TableCell(EtoHelpers.LabelWrap(UI.HorizontalAltitudeDegrees, lbHorizontalY)),
                         new TableCell(EtoHelpers.LabelWrap(Units.HorizontalAzimuthDegrees, lbHorizontalX)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -384,8 +389,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(Units.DiameterKm, lbDiameter)),
                         new TableCell(EtoHelpers.LabelWrap(Units.DensityKgPerM3, lbDensity)),
                         new TableCell(EtoHelpers.LabelWrap(Units.GravityMPerS2, lbGravity)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -395,8 +400,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(Units.RotationPeriodHours, lbRotationPeriod)),
                         new TableCell(EtoHelpers.LabelWrap(Units.LengthOfDayHours, lbLengthOfDay)),
                         new TableCell(EtoHelpers.LabelWrap(Units.DistanceFromSun_10_6_Km, lbDistanceFromSun)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -406,8 +411,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(Units.Aphelion_10_6_Km, lbAphelion)),
                         new TableCell(EtoHelpers.LabelWrap(Units.OrbitalPeriodDays, lbOrbitalPeriod)),
                         new TableCell(EtoHelpers.LabelWrap(Units.OrbitalVelocityKmPerS, lbOrbitalVelocity)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -417,8 +422,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(Units.OrbitalEccentricity, lbOrbitalEccentricity)),
                         new TableCell(EtoHelpers.LabelWrap(Units.ObliquityToOrbitDegrees, lbObliquityToOrbit)),
                         new TableCell(EtoHelpers.LabelWrap(Units.MeanTemperatureDegreesC, lbMeanTemperature)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
                 new TableRow
                 {
@@ -428,8 +433,8 @@ public class FormDialogCelestialObject : Dialog
                         new TableCell(EtoHelpers.LabelWrap(Units.NumberOfMoons, lbNumberOfMoons)),
                         new TableCell(EtoHelpers.LabelWrap(Units.RingSystem, lbRingSystem)),
                         new TableCell(EtoHelpers.LabelWrap(Units.GlobalMagneticField, lbGlobalMagneticField)),
-                        new TableCell { ScaleWidth = true},
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
             },
         };
@@ -443,17 +448,17 @@ public class FormDialogCelestialObject : Dialog
                     Cells =
                     {
                         new TableCell(EtoHelpers.LabelWrap(UI.AdditionalData, lbAdditionalDataLink)),
-                        new TableCell { ScaleWidth = true },
-                    }
+                        new TableCell { ScaleWidth = true, },
+                    },
                 },
-            }
+            },
         };
 
         tlMain.Rows.Add(tlTopControls);
         tlMain.Rows.Add(tlBottomControls);
         tlMain.Rows.Add(tlExtraData);
 
-        tlMain.Rows.Add(new TableRow { ScaleHeight = true });
+        tlMain.Rows.Add(new TableRow { ScaleHeight = true, });
 
         Content = tlMain;
 

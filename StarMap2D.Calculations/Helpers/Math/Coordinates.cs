@@ -108,6 +108,6 @@ public static class Coordinates
 
         var rightAscension = ( lst - hourAngle ) % 360;
 
-        return new AAS2DCoordinate { X = rightAscension / 15, Y = declination };
+        return new AAS2DCoordinate { X = rightAscension / 15, Y = declination, };
     }
 }

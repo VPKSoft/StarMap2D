@@ -24,7 +24,7 @@ SOFTWARE.
 */
 #endregion
 
-using StarMap2D.Calculations.Constellations.StaticData;
+using StarMap2D.Calculations.Constellations.Enumerations;
 
 namespace StarMap2D.Calculations.Constellations.Interfaces;
 

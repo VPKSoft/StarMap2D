@@ -34,5 +34,5 @@ public static class Properties
     /// <summary>
     /// The localized languages in this library.
     /// </summary>
-    public static readonly string[] Languages = { "en", "fi" };
+    public static readonly string[] Languages = { "en", "fi", };
 }

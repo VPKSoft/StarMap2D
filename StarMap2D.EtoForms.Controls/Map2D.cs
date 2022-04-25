@@ -298,7 +298,7 @@ public class Map2D : Drawable
                 {
                     plot2D.Diameter = Math.Min(Width, Height);
                     CoordinatesChanged?.Invoke(this,
-                        new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude });
+                        new LocationChangedEventArgs { Latitude = plot2D.Latitude, Longitude = plot2D.Longitude, });
                 }
             }
         }
@@ -678,7 +678,7 @@ public class Map2D : Drawable
                 else
                 {
                     var coordinate = new AAS2DCoordinate
-                    { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination }
+                    { X = starMapObject.RightAscension % 360, Y = starMapObject.Declination, }
                         .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
                     var pointD = Plot2D.Project2D(coordinate, invertEastWest);
@@ -737,14 +737,14 @@ public class Map2D : Drawable
             var point1 = new AAS2DCoordinate
             {
                 X = constellation.Boundary[i].RightAscension % 360,
-                Y = constellation.Boundary[i].Declination
+                Y = constellation.Boundary[i].Declination,
             }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var point2 = new AAS2DCoordinate
             {
                 X = constellation.Boundary[i + 1].RightAscension % 360,
-                Y = constellation.Boundary[i + 1].Declination
+                Y = constellation.Boundary[i + 1].Declination,
             }.ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var pointD1 = Plot2D.Project2D(point1, invertEastWest);
@@ -788,11 +788,11 @@ public class Map2D : Drawable
                 f.InternalId == constellationLine.EndIdentifier);
 
             var point1 = new AAS2DCoordinate
-            { X = star1.RightAscension, Y = star1.Declination }
+            { X = star1.RightAscension, Y = star1.Declination, }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var point2 = new AAS2DCoordinate
-            { X = star2.RightAscension, Y = star2.Declination }
+            { X = star2.RightAscension, Y = star2.Declination, }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             var pointD1 = Plot2D.Project2D(point1, invertEastWest);
@@ -815,7 +815,7 @@ public class Map2D : Drawable
                 f.Identifier == constellation.Identifier && f.SerpensOfficial == false);
 
             var labelPoint = new AAS2DCoordinate
-            { X = constellationData.RightAscension, Y = constellationData.Declination }
+            { X = constellationData.RightAscension, Y = constellationData.Declination, }
                 .ToHorizontal(Plot2D.AaDate, Plot2D.Latitude, Plot2D.Longitude);
 
             labelPoint = Plot2D.Project2D(labelPoint, invertEastWest);
@@ -855,7 +855,7 @@ public class Map2D : Drawable
     /// <inheritdoc cref="ValidDrawPoint(PointDouble)"/>
     private bool ValidDrawPoint(PointF point)
     {
-        return ValidDrawPoint(new PointDouble { X = point.X, Y = point.Y });
+        return ValidDrawPoint(new PointDouble { X = point.X, Y = point.Y, });
     }
 
     /// <summary>
@@ -928,7 +928,7 @@ public class Map2D : Drawable
     {
         if (metadata != null)
         {
-            MouseClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            MouseClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name, });
         }
     }
 
@@ -936,7 +936,7 @@ public class Map2D : Drawable
     {
         if (metadata != null)
         {
-            MouseDoubleClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+            MouseDoubleClickObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name, });
         }
     }
 
@@ -1004,7 +1004,7 @@ public class Map2D : Drawable
                         mousePoint = newPoint;
                         Invalidate();
                         CoordinatesChanged?.Invoke(this,
-                            new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude });
+                            new LocationChangedEventArgs { Latitude = latitude, Longitude = longitude, });
                     }
                 }
                 else if (Plot2D.CanPanBy(-xChange, -yChange))
@@ -1025,7 +1025,7 @@ public class Map2D : Drawable
                 if (Circle.PointIsInside(CenterX, CenterY, Diameter / 2, OffsetX + e.Location.X,
                         OffsetY + e.Location.Y))
                 {
-                    var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y },
+                    var point = plot2D?.Invert2DProjection(new AAS2DCoordinate { X = drawPoint.X, Y = drawPoint.Y, },
                         invertEastWest);
 
                     if (point != null && plot2D != null)
@@ -1051,12 +1051,12 @@ public class Map2D : Drawable
             if (newMetadata != null)
             {
                 MouseHoverObject?.Invoke(this,
-                    new NamedObjectEventArgs { Identifier = newMetadata.Identifier, Name = newMetadata.Name });
+                    new NamedObjectEventArgs { Identifier = newMetadata.Identifier, Name = newMetadata.Name, });
                 Cursor = Cursors.Pointer;
             }
             else if (newMetadata == null && metadata != null)
             {
-                MouseLeaveObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name });
+                MouseLeaveObject?.Invoke(this, new NamedObjectEventArgs { Identifier = metadata.Identifier, Name = metadata.Name, });
                 Cursor = Cursors.Default;
             }
 

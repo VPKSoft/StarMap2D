@@ -169,6 +169,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Constellation.
+        /// </summary>
+        public static string Constellation {
+            get {
+                return ResourceManager.GetString("Constellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Constellation border line color.
         /// </summary>
         public static string ConstellationBorderLineColor {

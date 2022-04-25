@@ -64,7 +64,7 @@ public class DwarfPlanetElements
             T = 2459920.804393927769,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -100,7 +100,7 @@ public class DwarfPlanetElements
             T = 2503419.781784388302,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -136,7 +136,7 @@ public class DwarfPlanetElements
             T = 2499960.282547090661,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -172,7 +172,7 @@ public class DwarfPlanetElements
             T = 2477724.375047183858,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -208,7 +208,7 @@ public class DwarfPlanetElements
             T = 2407972.184906341856,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -244,7 +244,7 @@ public class DwarfPlanetElements
             T = 2399112.958107959392,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -280,7 +280,7 @@ public class DwarfPlanetElements
             T = 2546498.396958965866,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -316,7 +316,7 @@ public class DwarfPlanetElements
             T = 2479157.744045111049,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;

@@ -171,6 +171,6 @@ public abstract class ApplicationJsonSettings
         File.WriteAllText(fileName,
             JsonConvert.SerializeObject(this,
                 new JsonSerializerSettings
-                { ContractResolver = new JsonIgnoreResolver(), Formatting = Formatting.Indented }));
+                { ContractResolver = new JsonIgnoreResolver(), Formatting = Formatting.Indented, }));
     }
 }

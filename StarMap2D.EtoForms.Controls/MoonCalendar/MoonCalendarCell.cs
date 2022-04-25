@@ -86,15 +86,15 @@ public class MoonCalendarCell : Panel, ICalendarCell
         imageDate = new SvgImageView(
             StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_calendar_month_28_filled,
             IndicatorImageColor)
-        { Size = new Size(16, 16) };
+        { Size = new Size(16, 16), };
         imageRise = new SvgImageView(
             StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_up_24_filled,
             IndicatorImageColor)
-        { Size = new Size(16, 16) };
+        { Size = new Size(16, 16), };
         imageSet = new SvgImageView(
             StarMap2D.EtoForms.Controls.Properties.Resources.ic_fluent_arrow_sort_down_24_filled,
             IndicatorImageColor)
-        { Size = new Size(16, 16) };
+        { Size = new Size(16, 16), };
 
         Content = new TableLayout
         {

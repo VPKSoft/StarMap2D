@@ -104,7 +104,7 @@ public partial class FormDialogSettings
     /// </summary>
     private void LayoutTabPageCommon()
     {
-        tabCommon = new TabPage { Text = UI.Common };
+        tabCommon = new TabPage { Text = UI.Common, };
         tabControlSettings!.Pages.Add(tabCommon);
 
         tableLayout!.Rows.Add(new TableRow(
@@ -119,9 +119,9 @@ public partial class FormDialogSettings
 
         tabCommonLayout.Rows.Add(new TableRow(new TableCell(EtoHelpers.LabelWrap(UI.LocationName, textBoxLocation), true)));
 
-        latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90 };
-        longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180 };
-        crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70 };
+        latitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -90, MaxValue = 90, };
+        longitudeStepper = new NumericStepper { DecimalPlaces = 10, MinValue = -180, MaxValue = 180, };
+        crossHairStepper = new NumericStepper { DecimalPlaces = 0, MinValue = 2, MaxValue = 70, };
 
         tabCommonLayout.Rows.Add(new TableLayout(new TableRow(
             new TableCell(
@@ -131,9 +131,9 @@ public partial class FormDialogSettings
                 EtoHelpers.LabelWrap(UI.Longitude, longitudeStepper),
                 true))));
 
-        comboBoxLocations = new ComboBox { AutoComplete = true };
+        comboBoxLocations = new ComboBox { AutoComplete = true, };
         comboBoxLocations.Items.AddRange(Cities.CitiesList.Select(f => new ListItem
-        { Key = f.CityName, Text = f.CityName, Tag = f }));
+        { Key = f.CityName, Text = f.CityName, Tag = f, }));
 
         comboBoxLocations.SelectedValueChanged += delegate
         {
@@ -152,11 +152,11 @@ public partial class FormDialogSettings
             EtoHelpers.LabelWrap(UI.SelectLocation,
                 comboBoxLocations), true)));
 
-        cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis };
-        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations };
-        cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames };
-        cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries };
-        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair };
+        cbInvertAxis = new CheckBox { Text = UI.InvertEastWestAxis, };
+        cbDrawConstellations = new CheckBox { Text = UI.DrawConstellations, };
+        cbDrawConstellationLabels = new CheckBox { Text = UI.DrawConstellationNames, };
+        cbDrawConstellationBoundaries = new CheckBox { Text = UI.DrawConstellationBoundaries, };
+        cbDrawCrossHair = new CheckBox { Text = UI.DrawCrossHair, };
 
         tabCommonLayout.Rows.Add(new TableRow(new TableCell(
             EtoHelpers.PaddingWrap(cbInvertAxis), true)));
@@ -186,7 +186,7 @@ public partial class FormDialogSettings
 
         cmbUiLocale.DataStore = Localization.Properties.Languages.Select(f => new CultureExtended(f, true));
 
-        cmbStarCatalog = new ComboBox { AutoComplete = true };
+        cmbStarCatalog = new ComboBox { AutoComplete = true, };
 
         starCatalogs = new List<StarCatalogData>
         {
@@ -208,12 +208,12 @@ public partial class FormDialogSettings
             EtoHelpers.LabelWrap(UI.UiLanguageRequireRestart, cmbUiLocale))));
 
         // Scale the last row to the maximum.
-        tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true });
+        tabCommonLayout.Rows.Add(new TableRow { ScaleHeight = true, });
     }
 
     private void LayoutFontSettings()
     {
-        tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding) };
+        tabFonts = new TabPage { Text = UI.FontsAndAppearance, Padding = new Padding(Globals.DefaultPadding), };
         tabControlSettings!.Pages.Add(tabFonts);
 
         tlFonts = new TableLayout();
@@ -245,7 +245,7 @@ public partial class FormDialogSettings
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.UIIconsColor, cpkIconColor));
 
         // Scale the last row to the maximum.
-        tlFonts.Rows.Add(new TableRow { ScaleHeight = true });
+        tlFonts.Rows.Add(new TableRow { ScaleHeight = true, });
     }
 
     /// <summary>
@@ -254,7 +254,7 @@ public partial class FormDialogSettings
     private void LayoutTabPageFormatting()
     {
         // The base layout.
-        tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings };
+        tabNumberFormatting = new TabPage { Text = UI.DateAndNumberFormattingSettings, };
         tabControlSettings!.Pages.Add(tabNumberFormatting);
         tabNumberFormattingLayout = new TableLayout();
         tabNumberFormattingLayout.Padding = new Padding(5);
@@ -287,7 +287,7 @@ public partial class FormDialogSettings
         cmbDateAndTimeFormattingCulture.DataStore = cultures;
 
         // Scale the last row to the maximum.
-        tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true });
+        tabNumberFormattingLayout.Rows.Add(new TableRow { ScaleHeight = true, });
     }
 
     /// <summary>
@@ -295,7 +295,7 @@ public partial class FormDialogSettings
     /// </summary>
     private void LayoutTabMapColorSettings()
     {
-        tabMapColorSettings = new TabPage { Text = UI.MapColorSettings };
+        tabMapColorSettings = new TabPage { Text = UI.MapColorSettings, };
         tlMapColorSettings = new TableLayout();
         tabMapColorSettings.Content = tlMapColorSettings;
 
@@ -315,7 +315,7 @@ public partial class FormDialogSettings
 
         tabControlSettings!.Pages.Add(tabMapColorSettings);
         // Scale the last row to the maximum.
-        tlMapColorSettings.Rows.Add(new TableRow { ScaleHeight = true });
+        tlMapColorSettings.Rows.Add(new TableRow { ScaleHeight = true, });
     }
 
     /// <summary>
@@ -323,10 +323,10 @@ public partial class FormDialogSettings
     /// </summary>
     private void LayoutKnownObjectColorSettings()
     {
-        tabKnownObjectColorSettings = new TabPage { Text = UI.KnownObjectSymbols };
+        tabKnownObjectColorSettings = new TabPage { Text = UI.KnownObjectSymbols, };
         tlKnownObjectColors = new TableLayout();
         tabKnownObjectColorSettings.Content = tlKnownObjectColors;
-        lbxKnownObjects = new ListBox { Height = 400 };
+        lbxKnownObjects = new ListBox { Height = 400, };
 
         tlKnownObjectsRight = new TableLayout();
 
@@ -340,13 +340,13 @@ public partial class FormDialogSettings
             ));
 
         nsObjectDiameter = new NumericStepper { MinValue = 10, MaxValue = 100, };
-        cbNotUseObject = new CheckBox { Text = UI.DoNotUseTheObject };
+        cbNotUseObject = new CheckBox { Text = UI.DoNotUseTheObject, };
         tlKnownObjectsRight.Rows.Add(new TableRow(EtoHelpers.LabelWrap(UI.ObjectDiameter, nsObjectDiameter),
              new Panel()));
 
         tlKnownObjectsRight.Rows.Add(EtoHelpers.PaddingWrap(cbNotUseObject, Globals.DefaultPadding));
 
-        iwObjectImage = new ImageView { Size = new Size(110, 110) };
+        iwObjectImage = new ImageView { Size = new Size(110, 110), };
         iwObjectImage.BackgroundColor = Colors.Black;
 
         tlKnownObjectsRight.Rows.Add(EtoHelpers.LabelWrap(UI.SymbolImage, iwObjectImage));
@@ -362,7 +362,7 @@ public partial class FormDialogSettings
         lbxKnownObjects.SelectedValueChanged += LbxKnownObjects_SelectedValueChanged;
 
         // Scale the last row to the maximum.
-        tlKnownObjectsRight.Rows.Add(new TableRow { ScaleHeight = true });
+        tlKnownObjectsRight.Rows.Add(new TableRow { ScaleHeight = true, });
 
         btnResetObjectGraphics = EtoHelpers.CreateImageButton(
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_arrow_undo_48_filled),
@@ -374,7 +374,7 @@ public partial class FormDialogSettings
 
         tabControlSettings!.Pages.Add(tabKnownObjectColorSettings);
         // Scale the last row to the maximum.
-        tlKnownObjectColors.Rows.Add(new TableRow { ScaleHeight = true });
+        tlKnownObjectColors.Rows.Add(new TableRow { ScaleHeight = true, });
 
         nsObjectDiameter!.ValueChanged += NsObjectDiameterOnValueChanged;
         cpkSymbolCircleColor!.ValueChanged += CpkSymbolCircleColor_ValueChanged;

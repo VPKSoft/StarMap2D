@@ -44,7 +44,7 @@ public class PrimitiveProperty<T> where T:  struct
     {
         var result = new PrimitiveProperty<T>
         {
-            value = value
+            value = value,
         };
         return result;
     }
@@ -69,7 +69,7 @@ public class PrimitiveProperty<T> where T:  struct
     {
         var result = new PrimitiveProperty<T>
         {
-            value = StringToPrimitiveConvert.ToPrimitive<T>(value)
+            value = StringToPrimitiveConvert.ToPrimitive<T>(value),
         };
         return result;
     }

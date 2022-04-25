@@ -27,7 +27,7 @@ SOFTWARE.
 namespace StarMap2D.Common.EventsAndDelegates;
 
 /// <summary>
-/// Event arguments for the <see cref="Map2D.CoordinatesChanged"/> event.
+/// Event arguments coordinates changed event.
 /// Implements the <see cref="System.EventArgs" />
 /// </summary>
 /// <seealso cref="System.EventArgs" />

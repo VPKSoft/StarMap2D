@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Hydra" xml:space="preserve">
+    <value>Vesikäärme</value>
+  </data>
+  <data name="Virgo" xml:space="preserve">
+    <value>Neitsyt</value>
+  </data>
+  <data name="UrsaMajor" xml:space="preserve">
+    <value>Iso karhu</value>
+  </data>
+  <data name="Cetus" xml:space="preserve">
+    <value>Valaskala</value>
+  </data>
+  <data name="Hercules" xml:space="preserve">
+    <value>Herkules</value>
+  </data>
+  <data name="Eridanus" xml:space="preserve">
+    <value>Eridanus</value>
+  </data>
+  <data name="Pegasus" xml:space="preserve">
+    <value>Pegasus</value>
+  </data>
+  <data name="Draco" xml:space="preserve">
+    <value>Lohikäärme</value>
+  </data>
+  <data name="Centaurus" xml:space="preserve">
+    <value>Kentauri</value>
+  </data>
+  <data name="Aquarius" xml:space="preserve">
+    <value>Vesimies</value>
+  </data>
+  <data name="Ophiuchus" xml:space="preserve">
+    <value>Käärmeenkantaja</value>
+  </data>
+  <data name="Leo" xml:space="preserve">
+    <value>Leijona</value>
+  </data>
+  <data name="Boötes" xml:space="preserve">
+    <value>Karhunvartija</value>
+  </data>
+  <data name="Pisces" xml:space="preserve">
+    <value>Kalat</value>
+  </data>
+  <data name="Sagittarius" xml:space="preserve">
+    <value>Jousimies</value>
+  </data>
+  <data name="Cygnus" xml:space="preserve">
+    <value>Joutsen</value>
+  </data>
+  <data name="Taurus" xml:space="preserve">
+    <value>Härkä</value>
+  </data>
+  <data name="Camelopardalis" xml:space="preserve">
+    <value>Kirahvi</value>
+  </data>
+  <data name="Andromeda" xml:space="preserve">
+    <value>Andromeda</value>
+  </data>
+  <data name="Puppis" xml:space="preserve">
+    <value>Peräkeula</value>
+  </data>
+  <data name="Auriga" xml:space="preserve">
+    <value>Ajomies</value>
+  </data>
+  <data name="Aquila" xml:space="preserve">
+    <value>Kotka</value>
+  </data>
+  <data name="SerpensCauda" xml:space="preserve">
+    <value>Käärmeen häntä</value>
+  </data>
+  <data name="SerpensCaput" xml:space="preserve">
+    <value>Käärmeen pää</value>
+  </data>
+  <data name="Perseus" xml:space="preserve">
+    <value>Perseus</value>
+  </data>
+  <data name="Cassiopeia" xml:space="preserve">
+    <value>Kassiopeia</value>
+  </data>
+  <data name="Orion" xml:space="preserve">
+    <value>Orion</value>
+  </data>
+  <data name="Cepheus" xml:space="preserve">
+    <value>Kefeus</value>
+  </data>
+  <data name="Lynx" xml:space="preserve">
+    <value>Ilves</value>
+  </data>
+  <data name="Libra" xml:space="preserve">
+    <value>Vaaka</value>
+  </data>
+  <data name="Gemini" xml:space="preserve">
+    <value>Kaksoset</value>
+  </data>
+  <data name="Cancer" xml:space="preserve">
+    <value>Krapu</value>
+  </data>
+  <data name="Vela" xml:space="preserve">
+    <value>Purje</value>
+  </data>
+  <data name="Scorpius" xml:space="preserve">
+    <value>Skorpioni</value>
+  </data>
+  <data name="Carina" xml:space="preserve">
+    <value>Köli</value>
+  </data>
+  <data name="Monoceros" xml:space="preserve">
+    <value>Yksisarvinen</value>
+  </data>
+  <data name="Sculptor" xml:space="preserve">
+    <value>Kuvanveistäjä</value>
+  </data>
+  <data name="Phoenix" xml:space="preserve">
+    <value>Feeniks</value>
+  </data>
+  <data name="CanesVenatici" xml:space="preserve">
+    <value>Ajokoira</value>
+  </data>
+  <data name="Aries" xml:space="preserve">
+    <value>Oinas</value>
+  </data>
+  <data name="Capricornus" xml:space="preserve">
+    <value>Kauris</value>
+  </data>
+  <data name="Fornax" xml:space="preserve">
+    <value>Sulatusuuni</value>
+  </data>
+  <data name="ComaBerenices" xml:space="preserve">
+    <value>Bereniken hiukset</value>
+  </data>
+  <data name="CanisMajor" xml:space="preserve">
+    <value>Iso koira</value>
+  </data>
+  <data name="Pavo" xml:space="preserve">
+    <value>Riikinkukko</value>
+  </data>
+  <data name="Grus" xml:space="preserve">
+    <value>Kurki</value>
+  </data>
+  <data name="Lupus" xml:space="preserve">
+    <value>Susi</value>
+  </data>
+  <data name="Sextans" xml:space="preserve">
+    <value>Sekstantti</value>
+  </data>
+  <data name="Tucana" xml:space="preserve">
+    <value>Tukaani</value>
+  </data>
+  <data name="Indus" xml:space="preserve">
+    <value>Intiaani</value>
+  </data>
+  <data name="Octans" xml:space="preserve">
+    <value>Oktantti</value>
+  </data>
+  <data name="Lepus" xml:space="preserve">
+    <value>Jänis</value>
+  </data>
+  <data name="Lyra" xml:space="preserve">
+    <value>Lyyra</value>
+  </data>
+  <data name="Crater" xml:space="preserve">
+    <value>Malja</value>
+  </data>
+  <data name="Columba" xml:space="preserve">
+    <value>Kyyhkynen</value>
+  </data>
+  <data name="Vulpecula" xml:space="preserve">
+    <value>Kettu</value>
+  </data>
+  <data name="UrsaMinor" xml:space="preserve">
+    <value>Pieni karhu</value>
+  </data>
+  <data name="Telescopium" xml:space="preserve">
+    <value>Kaukoputki</value>
+  </data>
+  <data name="Horologium" xml:space="preserve">
+    <value>Heilurikello</value>
+  </data>
+  <data name="Pictor" xml:space="preserve">
+    <value>Maalari</value>
+  </data>
+  <data name="PiscisAustrinus" xml:space="preserve">
+    <value>Etelän kala</value>
+  </data>
+  <data name="Hydrus" xml:space="preserve">
+    <value>Etelän vesikäärme</value>
+  </data>
+  <data name="Antlia" xml:space="preserve">
+    <value>Ilmapumppu</value>
+  </data>
+  <data name="Ara" xml:space="preserve">
+    <value>Alttari</value>
+  </data>
+  <data name="LeoMinor" xml:space="preserve">
+    <value>Pieni leijona</value>
+  </data>
+  <data name="Pyxis" xml:space="preserve">
+    <value>Kompassi</value>
+  </data>
+  <data name="Microscopium" xml:space="preserve">
+    <value>Mikroskooppi</value>
+  </data>
+  <data name="Apus" xml:space="preserve">
+    <value>Paratiisilintu</value>
+  </data>
+  <data name="Lacerta" xml:space="preserve">
+    <value>Sisilisko</value>
+  </data>
+  <data name="Delphinus" xml:space="preserve">
+    <value>Delfiini</value>
+  </data>
+  <data name="Corvus" xml:space="preserve">
+    <value>Korppi</value>
+  </data>
+  <data name="CanisMinor" xml:space="preserve">
+    <value>Pieni koira</value>
+  </data>
+  <data name="Dorado" xml:space="preserve">
+    <value>Kultakala</value>
+  </data>
+  <data name="CoronaBorealis" xml:space="preserve">
+    <value>Pohjan kruunu</value>
+  </data>
+  <data name="Norma" xml:space="preserve">
+    <value>Kulmaviivoitin</value>
+  </data>
+  <data name="Mensa" xml:space="preserve">
+    <value>Pöytävuori</value>
+  </data>
+  <data name="Volans" xml:space="preserve">
+    <value>Lentokala</value>
+  </data>
+  <data name="Musca" xml:space="preserve">
+    <value>Kärpänen</value>
+  </data>
+  <data name="Triangulum" xml:space="preserve">
+    <value>Kolmio</value>
+  </data>
+  <data name="Chamaeleon" xml:space="preserve">
+    <value>Kameleontti</value>
+  </data>
+  <data name="CoronaAustralis" xml:space="preserve">
+    <value>Etelän kruunu</value>
+  </data>
+  <data name="Caelum" xml:space="preserve">
+    <value>Veistotaltta</value>
+  </data>
+  <data name="Reticulum" xml:space="preserve">
+    <value>Verkko</value>
+  </data>
+  <data name="TriangulumAustrale" xml:space="preserve">
+    <value>Etelän kolmio</value>
+  </data>
+  <data name="Scutum" xml:space="preserve">
+    <value>Kilpi</value>
+  </data>
+  <data name="Circinus" xml:space="preserve">
+    <value>Harppi</value>
+  </data>
+  <data name="Sagitta" xml:space="preserve">
+    <value>Nuoli</value>
+  </data>
+  <data name="Equuleus" xml:space="preserve">
+    <value>Pieni hevonen</value>
+  </data>
+  <data name="Crux" xml:space="preserve">
+    <value>Etelän risti</value>
+  </data>
+</root>

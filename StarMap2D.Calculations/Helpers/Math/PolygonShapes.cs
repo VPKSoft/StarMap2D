@@ -48,9 +48,10 @@ public class PolygonShapes
     /// <param name="points">The points of the polygon.</param>
     /// <param name="x">The x-coordinate of the point.</param>
     /// <param name="y">The y-coordinate of the point.</param>
+    /// <param name="totalAngle">The internal total angle calculation value. Get multiple results, the larger is better.</param>
     /// <returns><c>true</c> if the point is inside the polygon, <c>false</c> otherwise.</returns>
     /// <remarks>Based on the article (©): http://csharphelper.com/blog/2014/07/determine-whether-a-point-is-inside-a-polygon-in-c/.</remarks>
-    public static bool PointInPolygon(AAS2DCoordinate[] points, double x, double y)
+    public static bool PointInPolygon(AAS2DCoordinate[] points, double x, double y, out double totalAngle)
     {
         // Get the angle between the point and the
         // first and last vertices.
@@ -64,11 +65,15 @@ public class PolygonShapes
         // to each other pair of vertices.
         for (var i = 0; i < max_point; i++)
         {
-            total_angle += GetAngle(
+            var addAngle = GetAngle(
                 points[i].X, points[i].Y,
                 x, y,
                 points[i + 1].X, points[i + 1].Y);
+
+            total_angle += addAngle;
         }
+
+        totalAngle = System.Math.Abs(total_angle);
 
         // The total angle should be 2 * PI or -2 * PI if
         // the point is in the polygon and close to zero

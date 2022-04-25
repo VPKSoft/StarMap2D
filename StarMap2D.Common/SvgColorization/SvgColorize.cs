@@ -97,7 +97,7 @@ public class SvgColorize
     {
         return new SvgColorize
         {
-            SvgDocument = XDocument.Parse(svgData)
+            SvgDocument = XDocument.Parse(svgData),
         };
     }
 

@@ -270,6 +270,7 @@ public class PlanetData
         result.Longitude = longitude;
         result.DetailDateTime = dateTime;
 
+
         return result;
     }
 
@@ -407,6 +408,6 @@ public class PlanetData
             OrbitalPeriod = 284.81 * 365.2425,
             ObjectType = ObjectsWithPositions.Haumea,
             DataUrl = "https://ssd.jpl.nasa.gov/planets/phys_par.html",
-        }
+        },
     };
 }

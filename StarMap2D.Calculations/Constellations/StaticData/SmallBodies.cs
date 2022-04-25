@@ -58,7 +58,7 @@ public class SmallBodies
                 SolarSystemSmallBodies.Pallas => MainBeltAsteroids.PallasOrbitalElements(),
                 SolarSystemSmallBodies.Chiron => Centaurs.ChironOrbitalElements(),
                 SolarSystemSmallBodies.Pluto => new AASEllipticalObjectElements(),
-                _ => new AASEllipticalObjectElements()
+                _ => new AASEllipticalObjectElements(),
             };
         }
     }

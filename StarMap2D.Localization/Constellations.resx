@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Hydra" xml:space="preserve">
+    <value>Hydra</value>
+  </data>
+  <data name="Virgo" xml:space="preserve">
+    <value>Virgo</value>
+  </data>
+  <data name="UrsaMajor" xml:space="preserve">
+    <value>Ursa Major</value>
+  </data>
+  <data name="Cetus" xml:space="preserve">
+    <value>Cetus</value>
+  </data>
+  <data name="Hercules" xml:space="preserve">
+    <value>Hercules</value>
+  </data>
+  <data name="Eridanus" xml:space="preserve">
+    <value>Eridanus</value>
+  </data>
+  <data name="Pegasus" xml:space="preserve">
+    <value>Pegasus</value>
+  </data>
+  <data name="Draco" xml:space="preserve">
+    <value>Draco</value>
+  </data>
+  <data name="Centaurus" xml:space="preserve">
+    <value>Centaurus</value>
+  </data>
+  <data name="Aquarius" xml:space="preserve">
+    <value>Aquarius</value>
+  </data>
+  <data name="Ophiuchus" xml:space="preserve">
+    <value>Ophiuchus</value>
+  </data>
+  <data name="Leo" xml:space="preserve">
+    <value>Leo</value>
+  </data>
+  <data name="Boötes" xml:space="preserve">
+    <value>Boötes</value>
+  </data>
+  <data name="Pisces" xml:space="preserve">
+    <value>Pisces</value>
+  </data>
+  <data name="Sagittarius" xml:space="preserve">
+    <value>Sagittarius</value>
+  </data>
+  <data name="Cygnus" xml:space="preserve">
+    <value>Cygnus</value>
+  </data>
+  <data name="Taurus" xml:space="preserve">
+    <value>Taurus</value>
+  </data>
+  <data name="Camelopardalis" xml:space="preserve">
+    <value>Camelopardalis</value>
+  </data>
+  <data name="Andromeda" xml:space="preserve">
+    <value>Andromeda</value>
+  </data>
+  <data name="Puppis" xml:space="preserve">
+    <value>Puppis</value>
+  </data>
+  <data name="Auriga" xml:space="preserve">
+    <value>Auriga</value>
+  </data>
+  <data name="Aquila" xml:space="preserve">
+    <value>Aquila</value>
+  </data>
+  <data name="SerpensCauda" xml:space="preserve">
+    <value>Serpens Cauda</value>
+  </data>
+  <data name="SerpensCaput" xml:space="preserve">
+    <value>Serpens Caput</value>
+  </data>
+  <data name="Perseus" xml:space="preserve">
+    <value>Perseus</value>
+  </data>
+  <data name="Cassiopeia" xml:space="preserve">
+    <value>Cassiopeia</value>
+  </data>
+  <data name="Orion" xml:space="preserve">
+    <value>Orion</value>
+  </data>
+  <data name="Cepheus" xml:space="preserve">
+    <value>Cepheus</value>
+  </data>
+  <data name="Lynx" xml:space="preserve">
+    <value>Lynx</value>
+  </data>
+  <data name="Libra" xml:space="preserve">
+    <value>Libra</value>
+  </data>
+  <data name="Gemini" xml:space="preserve">
+    <value>Gemini</value>
+  </data>
+  <data name="Cancer" xml:space="preserve">
+    <value>Cancer</value>
+  </data>
+  <data name="Vela" xml:space="preserve">
+    <value>Vela</value>
+  </data>
+  <data name="Scorpius" xml:space="preserve">
+    <value>Scorpius</value>
+  </data>
+  <data name="Carina" xml:space="preserve">
+    <value>Carina</value>
+  </data>
+  <data name="Monoceros" xml:space="preserve">
+    <value>Monoceros</value>
+  </data>
+  <data name="Sculptor" xml:space="preserve">
+    <value>Sculptor</value>
+  </data>
+  <data name="Phoenix" xml:space="preserve">
+    <value>Phoenix</value>
+  </data>
+  <data name="CanesVenatici" xml:space="preserve">
+    <value>Canes Venatici</value>
+  </data>
+  <data name="Aries" xml:space="preserve">
+    <value>Aries</value>
+  </data>
+  <data name="Capricornus" xml:space="preserve">
+    <value>Capricornus</value>
+  </data>
+  <data name="Fornax" xml:space="preserve">
+    <value>Fornax</value>
+  </data>
+  <data name="ComaBerenices" xml:space="preserve">
+    <value>Coma Berenices</value>
+  </data>
+  <data name="CanisMajor" xml:space="preserve">
+    <value>Canis Major</value>
+  </data>
+  <data name="Pavo" xml:space="preserve">
+    <value>Pavo</value>
+  </data>
+  <data name="Grus" xml:space="preserve">
+    <value>Grus</value>
+  </data>
+  <data name="Lupus" xml:space="preserve">
+    <value>Lupus</value>
+  </data>
+  <data name="Sextans" xml:space="preserve">
+    <value>Sextans</value>
+  </data>
+  <data name="Tucana" xml:space="preserve">
+    <value>Tucana</value>
+  </data>
+  <data name="Indus" xml:space="preserve">
+    <value>Indus</value>
+  </data>
+  <data name="Octans" xml:space="preserve">
+    <value>Octans</value>
+  </data>
+  <data name="Lepus" xml:space="preserve">
+    <value>Lepus</value>
+  </data>
+  <data name="Lyra" xml:space="preserve">
+    <value>Lyra</value>
+  </data>
+  <data name="Crater" xml:space="preserve">
+    <value>Crater</value>
+  </data>
+  <data name="Columba" xml:space="preserve">
+    <value>Columba</value>
+  </data>
+  <data name="Vulpecula" xml:space="preserve">
+    <value>Vulpecula</value>
+  </data>
+  <data name="UrsaMinor" xml:space="preserve">
+    <value>Ursa Minor</value>
+  </data>
+  <data name="Telescopium" xml:space="preserve">
+    <value>Telescopium</value>
+  </data>
+  <data name="Horologium" xml:space="preserve">
+    <value>Horologium</value>
+  </data>
+  <data name="Pictor" xml:space="preserve">
+    <value>Pictor</value>
+  </data>
+  <data name="PiscisAustrinus" xml:space="preserve">
+    <value>Piscis Austrinus</value>
+  </data>
+  <data name="Hydrus" xml:space="preserve">
+    <value>Hydrus</value>
+  </data>
+  <data name="Antlia" xml:space="preserve">
+    <value>Antlia</value>
+  </data>
+  <data name="Ara" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="LeoMinor" xml:space="preserve">
+    <value>Leo Minor</value>
+  </data>
+  <data name="Pyxis" xml:space="preserve">
+    <value>Pyxis</value>
+  </data>
+  <data name="Microscopium" xml:space="preserve">
+    <value>Microscopium</value>
+  </data>
+  <data name="Apus" xml:space="preserve">
+    <value>Apus</value>
+  </data>
+  <data name="Lacerta" xml:space="preserve">
+    <value>Lacerta</value>
+  </data>
+  <data name="Delphinus" xml:space="preserve">
+    <value>Delphinus</value>
+  </data>
+  <data name="Corvus" xml:space="preserve">
+    <value>Corvus</value>
+  </data>
+  <data name="CanisMinor" xml:space="preserve">
+    <value>Canis Minor</value>
+  </data>
+  <data name="Dorado" xml:space="preserve">
+    <value>Dorado</value>
+  </data>
+  <data name="CoronaBorealis" xml:space="preserve">
+    <value>Corona Borealis</value>
+  </data>
+  <data name="Norma" xml:space="preserve">
+    <value>Norma</value>
+  </data>
+  <data name="Mensa" xml:space="preserve">
+    <value>Mensa</value>
+  </data>
+  <data name="Volans" xml:space="preserve">
+    <value>Volans</value>
+  </data>
+  <data name="Musca" xml:space="preserve">
+    <value>Musca</value>
+  </data>
+  <data name="Triangulum" xml:space="preserve">
+    <value>Triangulum</value>
+  </data>
+  <data name="Chamaeleon" xml:space="preserve">
+    <value>Chamaeleon</value>
+  </data>
+  <data name="CoronaAustralis" xml:space="preserve">
+    <value>Corona Australis</value>
+  </data>
+  <data name="Caelum" xml:space="preserve">
+    <value>Caelum</value>
+  </data>
+  <data name="Reticulum" xml:space="preserve">
+    <value>Reticulum</value>
+  </data>
+  <data name="TriangulumAustrale" xml:space="preserve">
+    <value>Triangulum Australe</value>
+  </data>
+  <data name="Scutum" xml:space="preserve">
+    <value>Scutum</value>
+  </data>
+  <data name="Circinus" xml:space="preserve">
+    <value>Circinus</value>
+  </data>
+  <data name="Sagitta" xml:space="preserve">
+    <value>Sagitta</value>
+  </data>
+  <data name="Equuleus" xml:space="preserve">
+    <value>Equuleus</value>
+  </data>
+  <data name="Crux" xml:space="preserve">
+    <value>Crux</value>
+  </data>
+</root>

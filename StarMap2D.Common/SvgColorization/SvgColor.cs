@@ -85,7 +85,7 @@ public readonly struct SvgColor
     }
 
     /// <summary>
-    /// Performs an implicit conversion from <see cref="System.ValueTuple(int,int,int)"/> to <see cref="SvgColor"/>.
+    /// Performs an implicit conversion from <see cref="System.ValueTuple{T1,T2,T3}"/> to <see cref="SvgColor"/>.
     /// </summary>
     /// <param name="value">The reg, green and blue color components.</param>
     /// <returns>A new instance to a <see cref="SvgColor"/> class.</returns>

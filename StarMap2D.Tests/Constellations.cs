@@ -620,7 +620,7 @@ public class Constellations
             ConstellationLines.FigureFlavor = (ConstellationFigureFlavor)value;
             var constellation = (IConstellation<ConstellationArea, ConstellationLine>)Activator.CreateInstance(constellationType)!;
             var coordinates = constellation.Boundary.ToList()
-                .Select(f => new AAS2DCoordinate { X = f.RightAscension, Y = f.Declination }).ToArray();
+                .Select(f => new AAS2DCoordinate { X = f.RightAscension, Y = f.Declination, }).ToArray();
 
             Trace.WriteLine(value.ToString());
 
@@ -641,7 +641,7 @@ public class Constellations
                 var failedCount = 0;
 
                 var inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarStart.RightAscension,
-                    lineStarStart.Declination);
+                    lineStarStart.Declination, out _);
 
                 if (!inPolygon)
                 {
@@ -649,7 +649,7 @@ public class Constellations
                 }
 
                 inPolygon = PolygonShapes.PointInPolygon(coordinates, lineStarEnd.RightAscension,
-                    lineStarEnd.Declination);
+                    lineStarEnd.Declination, out _);
 
                 if (!inPolygon)
                 {

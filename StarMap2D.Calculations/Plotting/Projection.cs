@@ -64,7 +64,7 @@ public class Projection
         xR -= zoomPanPointX;
         yR -= zoomPanPointY;
 
-        return new AAS2DCoordinate { X = invertEastWest ? diameter - xR : xR, Y = yR};
+        return new AAS2DCoordinate { X = invertEastWest ? diameter - xR : xR, Y = yR, };
     }
 
     /// <summary>
@@ -116,6 +116,6 @@ public class Projection
             azimuthDegrees = (360 + azimuthDegrees) % 360;
         }
 
-        return new AAS2DCoordinate { X = azimuthDegrees, Y = altitudeDegrees };
+        return new AAS2DCoordinate { X = azimuthDegrees, Y = altitudeDegrees, };
     }
 }

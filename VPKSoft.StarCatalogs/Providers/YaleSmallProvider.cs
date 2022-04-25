@@ -57,7 +57,7 @@ public class YaleSmallProvider : IStarDataProvider<IStarData>, ILoadDataLines
             {
                 Declination = double.Parse(lineDataSplit[1], CultureInfo.InvariantCulture),
                 RightAscension = double.Parse(lineDataSplit[0], CultureInfo.InvariantCulture),
-                Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture)
+                Magnitude = double.Parse(lineDataSplit[2], CultureInfo.InvariantCulture),
             };
 
             if (data.Magnitude > magnitudeLimit)

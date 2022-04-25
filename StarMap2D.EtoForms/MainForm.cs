@@ -34,6 +34,7 @@ using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.RiseSet;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
+using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.Plotting;
 using StarMap2D.EtoForms.Controls.Utilities;
@@ -58,7 +59,10 @@ public class MainForm : Form
         EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
 
         // Set the software localization.
-        UI.Culture = Globals.Locale;
+        Localization.Globals.Culture = Globals.Locale;
+
+        // Localize the constellation names.
+        ConstellationClassEnumNameMap.GenerateData();
 
         EtoHelpers.IconLoadErrorMessage = Messages.FailedToLoadIconWithMessage0;
         EtoHelpers.ErrorDialogTitle = Messages.Error;

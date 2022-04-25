@@ -26,6 +26,8 @@ SOFTWARE.
 
 using StarMap2D.Calculations.Attributes;
 using StarMap2D.Calculations.Classes;
+using StarMap2D.Calculations.Constellations;
+using StarMap2D.Calculations.Constellations.Enumerations;
 using StarMap2D.Calculations.Extensions;
 using StarMap2D.Calculations.Helpers.Math;
 
@@ -151,7 +153,7 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
     [DataTableConfig(ColumnOrder = 3, NumberFormat = "F10")]
     public double HorizontalDegreesY { get; set; }
 
-    private double latitude { get; set; }
+    private double latitude;
 
     /// <summary>
     /// Gets or sets the latitude of the object.
@@ -164,7 +166,7 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
 
         set
         {
-            if (latitude != value)
+            if (Math.Abs(latitude - value) > Globals.FloatingPointTolerance)
             {
                 latitude = value;
                 RecalculateDynamicData();
@@ -185,7 +187,7 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
 
         set
         {
-            if (value != longitude)
+            if (Math.Abs(value - longitude) > Globals.FloatingPointTolerance)
             {
                 longitude = value;
                 RecalculateDynamicData();
@@ -223,4 +225,11 @@ public class PlanetDataExtended : PlanetData, IObjectDetails
             }
         }
     }
+
+    /// <summary>
+    /// Gets the constellation of the object.
+    /// </summary>
+    /// <value>The constellation of the object.</value>
+    [DataTableConfig(ColumnOrder = 30)]
+    public ConstellationValue? Constellation => PointInConstellation.GetConstellationForPoint(RightAscension, Declination);
 }

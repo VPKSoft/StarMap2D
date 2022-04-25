@@ -219,5 +219,5 @@ public enum SvgElement
     /// <summary>
     /// The SVG element &lt;view&gt;.
     /// </summary>
-    View
+    View,
 }

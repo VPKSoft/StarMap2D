@@ -72,7 +72,7 @@ public class CheckedButton : Button
     {
         Shown += CheckedButton_Shown;
         SizeChanged += CheckedButton_SizeChanged;
-        CheckedChange += delegate { checkedChange.Invoke(this, new CheckedChangeEventArguments { Checked = @checked }); };
+        CheckedChange += delegate { checkedChange.Invoke(this, new CheckedChangeEventArguments { Checked = @checked, }); };
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ public class CheckedButton : Button
             {
                 @checked = value;
                 Image = @checked ? checkedImage : uncheckedImage;
-                CheckedChange?.Invoke(this, new CheckedChangeEventArguments { Checked = @checked });
+                CheckedChange?.Invoke(this, new CheckedChangeEventArguments { Checked = @checked, });
             }
         }
     }

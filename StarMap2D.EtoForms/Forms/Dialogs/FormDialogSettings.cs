@@ -98,10 +98,10 @@ public partial class FormDialogSettings : Dialog<bool>
         // The fifth tab page.
         LayoutKnownObjectColorSettings();
 
-        btOk = new Button { Text = UI.OK };
+        btOk = new Button { Text = UI.OK, };
         btOk.Click += delegate { SaveSettings(); Close(true); };
 
-        btCancel = new Button { Text = UI.Cancel };
+        btCancel = new Button { Text = UI.Cancel, };
         btCancel.Click += delegate { Close(false); };
 
         DefaultButton = btOk;

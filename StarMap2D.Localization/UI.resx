@@ -438,4 +438,7 @@
   <data name="UIIconsColor" xml:space="preserve">
     <value>UI icons color</value>
   </data>
+  <data name="Constellation" xml:space="preserve">
+    <value>Constellation</value>
+  </data>
 </root>

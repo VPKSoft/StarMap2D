@@ -293,7 +293,7 @@ public class TimeValuePlot : Drawable
         graphics.DrawLine(AxisLineColor, topLeft, bottomLeft);
 
         // Draw the zero marker line.
-        using var pen = new Pen(ZeroLineColor) { DashStyle = new DashStyle(10, 5) };
+        using var pen = new Pen(ZeroLineColor) { DashStyle = new DashStyle(10, 5), };
         bottomLeft = new PointF(drawArea.Left + AxisPadding.Left, yCenter);
         var bottomRight = new PointF(drawArea.Right, yCenter);
         graphics.DrawLine(pen, bottomLeft, bottomRight);
@@ -315,7 +315,7 @@ public class TimeValuePlot : Drawable
         {
             foreach (var axisData in AxisData)
             {
-                using var crossHairPen = new Pen(axisData.PlotColor) { DashStyle = new DashStyle(10, 5) };
+                using var crossHairPen = new Pen(axisData.PlotColor) { DashStyle = new DashStyle(10, 5), };
                 var yValue =
                     (float)axisData.GetYAxisValueAtXPoint(mouseCoordinates.Value.X - AxisPadding.Left -
                                                           drawArea.Left);

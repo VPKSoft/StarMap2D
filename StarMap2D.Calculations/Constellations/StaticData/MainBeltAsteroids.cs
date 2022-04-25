@@ -63,7 +63,7 @@ public class MainBeltAsteroids
             T = 2460010.122235846004,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -99,7 +99,7 @@ public class MainBeltAsteroids
             T = 2460037.107263453041,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;
@@ -135,7 +135,7 @@ public class MainBeltAsteroids
             T = 2459574.614128453124,
 
             // The Julian day for which equatorial coordinates should be calculated for. JPL(Epoch xxx TDB), The data grid (Osculating Orbital Elements) header.
-            JDEquinox = 2459600.5
+            JDEquinox = 2459600.5,
         };
 
         return elements;

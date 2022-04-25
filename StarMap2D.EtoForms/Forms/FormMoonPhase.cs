@@ -24,17 +24,23 @@ SOFTWARE.
 */
 #endregion
 
+using AASharp;
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Constellations;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.MoonCalculations;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
+using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls;
 using StarMap2D.EtoForms.Controls.MoonCalendar;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.EtoForms.Utility;
 using StarMap2D.Localization;
 using System;
+using System.Linq;
 
 namespace StarMap2D.EtoForms.Forms;
 
@@ -72,9 +78,10 @@ public class FormMoonPhase : Form
         dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
         dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
-        lbMoonPhaseName = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
-        lbMoonIlluminatedPercentage = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
-        lbMoonPhaseNumber = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty };
+        lbMoonPhaseName = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
+        lbMoonIlluminatedPercentage = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
+        lbMoonPhaseNumber = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
+        lbMoonConstellation = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
 
         moonPhase = new MoonPhaseVisualization();
 
@@ -92,7 +99,8 @@ public class FormMoonPhase : Form
                 EtoHelpers.TableWrap(true,
                     EtoHelpers.LabelWrap(UI.MoonPhase, lbMoonPhaseName, Globals.DefaultPadding),
                     EtoHelpers.LabelWrap(MoonData.MoonIlluminated, lbMoonIlluminatedPercentage, Globals.DefaultPadding),
-                    EtoHelpers.LabelWrap(MoonData.MoonPhaseNumber, lbMoonPhaseNumber, Globals.DefaultPadding)),
+                    EtoHelpers.LabelWrap(MoonData.MoonPhaseNumber, lbMoonPhaseNumber, Globals.DefaultPadding),
+                    EtoHelpers.LabelWrap("Moon constellation", lbMoonConstellation, Globals.DefaultPadding)),
                 new TableRow
                 {
                     Cells =
@@ -176,6 +184,22 @@ public class FormMoonPhase : Form
                 lbMoonPhaseName!.Text = MoonPhaseLocalization.MoonPhaseName(calculation.PhaseValue);
                 lbMoonIlluminatedPercentage!.Text = string.Format(Globals.FormattingCulture, "{0:F1}", moonPhase.MoonIlluminatedFraction * 100);
                 lbMoonPhaseNumber!.Text = string.Format(Globals.FormattingCulture, "{0:F1}", moonPhase.MoonPhase);
+
+                var aaDate = currentDateTime.ToAASDate();
+                var jd = aaDate.Julian + AASDynamicalTime.DeltaT(aaDate.Julian) / 86400.0;
+                var moonLong = AASMoon.EclipticLongitude(jd);
+                var moonLat = AASMoon.EclipticLatitude(jd);
+
+                var raDec = AASCoordinateTransformation.Ecliptic2Equatorial(moonLong, moonLat, AASNutation.TrueObliquityOfEcliptic(jd)); // RA/DEC
+
+                //                var constellation = PointInConstellation.GetConstellationForPoint(raDec.X, raDec.Y);
+                var constellation = PointInConstellation.GetConstellationForPoint(raDec.X, raDec.Y);
+
+                lbMoonConstellation!.Text = constellation != null
+                    ? ConstellationClassEnumNameMap.ConstellationClassesEnumsNames
+                        .FirstOrDefault(f => f.Constellation == constellation)
+                        ?.Name ?? UI.NAChar
+                    : UI.NAChar;
             }
         }
     }
@@ -188,6 +212,7 @@ public class FormMoonPhase : Form
     private MoonPhaseVisualization moonPhase;
     private CheckBox cbDiscTilt;
     private Label? lbMoonPhaseName;
+    private Label? lbMoonConstellation;
     private readonly Label? lbMoonIlluminatedPercentage;
     private readonly Label? lbMoonPhaseNumber;
 }

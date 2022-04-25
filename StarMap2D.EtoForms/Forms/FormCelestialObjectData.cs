@@ -96,7 +96,7 @@ public partial class FormCelestialObjectData : Form
         dateTimePickerJump = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
         dateTimePickerJump.ValueChanged += LatLonDateOnValueChanged;
 
-        cmbJumpLocation = new ComboBox { AutoComplete = true };
+        cmbJumpLocation = new ComboBox { AutoComplete = true, };
         cmbJumpLocation.DataStore = Cities.CitiesList;
         cmbJumpLocation.ItemTextBinding = new PropertyBinding<string>(nameof(CityLatLonCoordinate.CityName));
         cmbJumpLocation.SelectedValueChanged += CmbJumpLocation_SelectedValueChanged;
@@ -125,7 +125,7 @@ public partial class FormCelestialObjectData : Form
                     Globals.Settings.UiIconsDefaultColor!.Value, 6, RevertLocation_Click)),
             EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnCopyToClipboard, Globals.DefaultPadding), false),
             EtoHelpers.HeightLimitWrap(EtoHelpers.PaddingWrap(btnExportCsv, Globals.DefaultPadding), false),
-            new TableCell { ScaleWidth = true }
+            new TableCell { ScaleWidth = true, }
         ));
 
         tlMain.Rows.Add(tlTopControls);
@@ -157,7 +157,7 @@ public partial class FormCelestialObjectData : Form
     {
         SaveFileDialog dialog = new SaveFileDialog
         {
-            Filters = { new FileFilter(UI.CSVFiles, "*.csv") },
+            Filters = { new FileFilter(UI.CSVFiles, "*.csv"), },
             Title = UI.SaveToCSVFile,
         };
 
@@ -326,7 +326,7 @@ public partial class FormCelestialObjectData : Form
             "Longitude" => UI.Longitude,
             "DetailDateTime" => UI.DateAndTime,
             "DataUrl" => UI.DataURL,
-            _ => string.Empty
+            _ => string.Empty,
         };
     }
 }

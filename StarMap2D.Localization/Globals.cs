@@ -48,6 +48,7 @@ public class Globals
             MoonData.Culture = value;
             UI.Culture = value;
             Units.Culture = value;
+            Constellations.Culture = value;
         }
     }
 }

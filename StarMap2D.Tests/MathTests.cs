@@ -45,8 +45,8 @@ public class MathTests
             new AAS2DCoordinate { X = 2, Y = 5, },
         };
 
-        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5));
-        Assert.IsFalse(PolygonShapes.PointInPolygon(coordinates, 2, 1.9));
+        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, 4, 3.5, out _));
+        Assert.IsFalse(PolygonShapes.PointInPolygon(coordinates, 2, 1.9, out _));
 
         // Partially negative coordinates test.
         coordinates = new[]
@@ -57,7 +57,7 @@ public class MathTests
             new AAS2DCoordinate { X = -2, Y = 3, },
         };
 
-        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1));
+        Assert.IsTrue(PolygonShapes.PointInPolygon(coordinates, -1, -1, out _));
     }
 
     [TestMethod]

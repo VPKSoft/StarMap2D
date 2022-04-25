@@ -27,7 +27,9 @@ SOFTWARE.
 using System.Globalization;
 using Eto.Forms;
 using StarMap2D.Calculations.StaticData;
+using StarMap2D.EtoForms.Classes;
 using StarMap2D.Localization;
+using System.Linq;
 
 namespace StarMap2D.EtoForms.Forms;
 
@@ -342,9 +344,19 @@ public partial class FormCelestialObjectData
 
         gridView.Columns.Add(new GridColumn
         {
+            HeaderText = UI.Constellation,
+            DataCell = new TextBoxCell
+            {
+                Binding = Binding.Property((PlanetDataExtended e) => e.Constellation)
+                    .Convert(f => ConstellationClassEnumNameMap.ConstellationClassesEnumsNames.FirstOrDefault(n => n.Constellation == f)?.Name),
+                TextAlignment = TextAlignment.Right,
+            },
+        });
+
+        gridView.Columns.Add(new GridColumn
+        {
             HeaderText = UI.DataURL,
             DataCell = new TextBoxCell(nameof(PlanetDataExtended.DataUrl)),
         });
-
     }
 }

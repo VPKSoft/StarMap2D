@@ -44,7 +44,7 @@ public class PrimitivePropertyNullable<T> where T:  struct
     {
         var result = new PrimitivePropertyNullable<T>
         {
-            value = value
+            value = value,
         };
         return result;
     }

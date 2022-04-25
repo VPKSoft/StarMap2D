@@ -76,18 +76,18 @@ public class TabDeliLocalization
     {
         var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
 
-        if (value is { Message: null } && locale.Split('-').Length == 2)
+        if (value is { Message: null, } && locale.Split('-').Length == 2)
         {
             value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
         }
 
-        if (value is null or { Message: null } && locale.Split('-').Length == 1)
+        if (value is null or { Message: null, } && locale.Split('-').Length == 1)
         {
             value = LocalizationTexts.FirstOrDefault(f =>
                 f.CultureName != null && f.CultureName.StartsWith(locale) && f.MessageName == messageName);
         }
 
-        if (value is null or { Message: null }) // fall back to a generic culture..
+        if (value is null or { Message: null, }) // fall back to a generic culture..
         {
             value = LocalizationTexts.FirstOrDefault(f =>
                 f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
@@ -109,11 +109,11 @@ public class TabDeliLocalization
     {
         var value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale && f.MessageName == messageName);
 
-        if (value is { Message: null } && locale.Split('-').Length == 2)
+        if (value is { Message: null, } && locale.Split('-').Length == 2)
         {
             value = LocalizationTexts.FirstOrDefault(f => f.CultureName == locale.Split('-')[0] && f.MessageName == messageName);
         }
-        else if (value is { Message: null }) // fall back to a generic culture..
+        else if (value is { Message: null, }) // fall back to a generic culture..
         {
             value = LocalizationTexts.FirstOrDefault(f =>
                 f.CultureName!.StartsWith(locale.Split('-')[0]) && f.MessageName == messageName);
@@ -170,7 +170,7 @@ public class TabDeliLocalization
                 {
                     continue;
                 }
-                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale });
+                LocalizationTexts.Add(new LocalizationTextContainer { MessageName = delimited[0], Message = delimited[1], CultureName = locale, });
             }
         }
     }

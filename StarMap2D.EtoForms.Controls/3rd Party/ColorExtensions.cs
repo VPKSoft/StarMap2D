@@ -62,7 +62,7 @@ public static class ColorExtensions
         {
             sourceAlphaValue = Math.Max((byte)Source.Ab, (byte)127); //We don't want contrast color to be more than 50% transparent ever.
         }
-        RGB rgb = new RGB { R = inputColor.Rb, G = inputColor.Gb, B = inputColor.Bb };
+        RGB rgb = new RGB { R = inputColor.Rb, G = inputColor.Gb, B = inputColor.Bb, };
         HSB hsb = ConvertToHSB(rgb);
         hsb.H = hsb.H < 180 ? hsb.H + 180 : hsb.H - 180;
         //_hsb.B = _isColorDark ? 240 : 50; //Added to create dark on light, and light on dark
@@ -116,7 +116,7 @@ public static class ColorExtensions
         {
             R = r1 + m,
             G = g1 + m,
-            B = b1 + m
+            B = b1 + m,
         };
     }
     internal static HSB ConvertToHSB(RGB rgb)
@@ -161,7 +161,7 @@ public static class ColorExtensions
         {
             H = hue,
             S = saturation,
-            B = brightness
+            B = brightness,
         };
     }
     private static double Max(double d1, double d2, double d3)

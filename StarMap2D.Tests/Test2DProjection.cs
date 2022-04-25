@@ -44,7 +44,7 @@ public class Test2DProjection
         {
             var x = random.NextDouble() * 360;
             var y = random.NextDouble() * 90;
-            var projected = Projection.Project2D(new AAS2DCoordinate { X = x, Y = y }, false, 500, 0, 0, 1);
+            var projected = Projection.Project2D(new AAS2DCoordinate { X = x, Y = y, }, false, 500, 0, 0, 1);
             var unProjected = Projection.Invert2DProjection(projected, false, 500, 0, 0, 1);
 
             Trace.WriteLine($"zP = {x}, yP = {y}, xU = {unProjected.X}, yU = {unProjected.Y}");
@@ -60,7 +60,7 @@ public class Test2DProjection
         {
             var x = random.NextDouble() * 360;
             var y = random.NextDouble() * 90;
-            var projected = Projection.Project2D(new AAS2DCoordinate { X = x, Y = y }, true, 500, 0, 0, 1);
+            var projected = Projection.Project2D(new AAS2DCoordinate { X = x, Y = y, }, true, 500, 0, 0, 1);
             var unProjected = Projection.Invert2DProjection(projected, true, 500, 0, 0, 1);
 
             Trace.WriteLine($"zP = {x}, yP = {y}, xU = {unProjected.X}, yU = {unProjected.Y}");
