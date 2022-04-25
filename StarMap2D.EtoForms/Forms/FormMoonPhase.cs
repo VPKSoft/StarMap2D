@@ -100,7 +100,7 @@ public class FormMoonPhase : Form
                     EtoHelpers.LabelWrap(UI.MoonPhase, lbMoonPhaseName, Globals.DefaultPadding),
                     EtoHelpers.LabelWrap(MoonData.MoonIlluminated, lbMoonIlluminatedPercentage, Globals.DefaultPadding),
                     EtoHelpers.LabelWrap(MoonData.MoonPhaseNumber, lbMoonPhaseNumber, Globals.DefaultPadding),
-                    EtoHelpers.LabelWrap("Moon constellation", lbMoonConstellation, Globals.DefaultPadding)),
+                    EtoHelpers.LabelWrap(UI.MoonConstellation, lbMoonConstellation, Globals.DefaultPadding)),
                 new TableRow
                 {
                     Cells =

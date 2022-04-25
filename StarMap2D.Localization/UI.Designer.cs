@@ -619,11 +619,29 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moon calendar.
+        /// </summary>
+        public static string MoonCalendar {
+            get {
+                return ResourceManager.GetString("MoonCalendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moon calendar {0}.
         /// </summary>
         public static string MoonCalendar0 {
             get {
                 return ResourceManager.GetString("MoonCalendar0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moon constellation.
+        /// </summary>
+        public static string MoonConstellation {
+            get {
+                return ResourceManager.GetString("MoonConstellation", resourceCulture);
             }
         }
         

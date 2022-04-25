@@ -438,4 +438,7 @@
   <data name="UIIconsColor" xml:space="preserve">
     <value>Käyttöliittymän ikonien väri</value>
   </data>
+  <data name="Constellation" xml:space="preserve">
+    <value>Tähtikuvio</value>
+  </data>
 </root>

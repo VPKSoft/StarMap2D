@@ -212,8 +212,8 @@ public class MainForm : Form
 
         var moonCalendarCommand = new Command
         {
-            MenuText = "Moon calendar",
-            ToolBarText = "Moon calendar",
+            MenuText = UI.MoonCalendar,
+            ToolBarText = UI.MoonCalendar,
             Image = EtoHelpers.ImageFromSvg(Globals.Settings.UiIconsDefaultColor!.Value,
                 EtoForms.Controls.Properties.Resources.ic_fluent_calendar_month_28_filled, new Size(16, 16)),
         };

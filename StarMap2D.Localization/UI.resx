@@ -441,4 +441,10 @@
   <data name="Constellation" xml:space="preserve">
     <value>Constellation</value>
   </data>
+  <data name="MoonCalendar" xml:space="preserve">
+    <value>Moon calendar</value>
+  </data>
+  <data name="MoonConstellation" xml:space="preserve">
+    <value>Moon constellation</value>
+  </data>
 </root>

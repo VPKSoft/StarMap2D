@@ -11,3 +11,4 @@
 * Calculate the constellation an object is in.
 * [Done] Change Color.SteelBlue --> setting.
 * Make the moon phase view into a singleton form.
+* Localize the known objects (planets, etc in the details view)
