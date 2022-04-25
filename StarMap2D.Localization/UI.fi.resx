@@ -441,4 +441,10 @@
   <data name="Constellation" xml:space="preserve">
     <value>Tähtikuvio</value>
   </data>
+  <data name="MoonCalendar" xml:space="preserve">
+    <value>Kuukalenteri</value>
+  </data>
+  <data name="MoonConstellation" xml:space="preserve">
+    <value>Kuun tähtikuvio</value>
+  </data>
 </root>
