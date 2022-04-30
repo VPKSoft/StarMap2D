@@ -94,6 +94,52 @@ public class PlanetData
     }
 
     /// <summary>
+    /// Clones the specified planet data with optional localized name.
+    /// </summary>
+    /// <param name="planetData">The planet data to clone.</param>
+    /// <param name="localizedName">The optional localized for the planet data.</param>
+    /// <returns>A new instance of the <see cref="PlanetData"/> class cloned from the original and possibly localized.</returns>
+    public static PlanetData Clone(PlanetData planetData, string? localizedName = null)
+    {
+        return new PlanetData
+        {
+            Name = localizedName ?? planetData.Name,
+            Mass = planetData.Mass,
+            Diameter = planetData.Diameter,
+            Density = planetData.Density,
+            Gravity = planetData.Gravity,
+            EscapeVelocity = planetData.EscapeVelocity,
+            RotationPeriod = planetData.RotationPeriod,
+            LengthOfDay = planetData.LengthOfDay,
+            DistanceFromSun = planetData.DistanceFromSun,
+            Perihelion = planetData.Perihelion,
+            Aphelion = planetData.Aphelion,
+            OrbitalPeriod = planetData.OrbitalPeriod,
+            OrbitalVelocity = planetData.OrbitalVelocity,
+            OrbitalInclination = planetData.OrbitalInclination,
+            OrbitalEccentricity = planetData.OrbitalEccentricity,
+            ObliquityToOrbit = planetData.ObliquityToOrbit,
+            MeanTemperature = planetData.MeanTemperature,
+            SurfacePressure = planetData.SurfacePressure,
+            NumberOfMoons = planetData.NumberOfMoons,
+            RingSystem = planetData.RingSystem,
+            GlobalMagneticField = planetData.GlobalMagneticField,
+            ObjectType = planetData.ObjectType,
+            DataUrl = planetData.DataUrl,
+        };
+    }
+
+    /// <summary>
+    /// Clones the planet data with localized name.
+    /// </summary>
+    /// <param name="localizedName">The localized for the planet data.</param>
+    /// <returns>A new instance of the <see cref="PlanetData"/> class cloned from the original and localized.</returns>
+    public PlanetData Clone(string? localizedName)
+    {
+        return Clone(this, localizedName);
+    }
+
+    /// <summary>
     /// Gets or sets the name of the planet.
     /// </summary>
     /// <value>The name of the planet.</value>

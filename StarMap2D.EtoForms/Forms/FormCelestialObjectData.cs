@@ -36,6 +36,7 @@ using StarMap2D.Calculations.Attributes;
 using StarMap2D.Calculations.StaticData;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.Common.Utilities;
+using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.Localization;
 
@@ -111,7 +112,7 @@ public partial class FormCelestialObjectData : Form
             SvgColorize.FromBytes(EtoForms.Controls.Properties.Resources.ic_fluent_document_arrow_down_20_filled),
             Globals.Settings.UiIconsDefaultColor!.Value, 6, (_, _) => { }, UI.ExportCSV);
 
-        btnExportCsv.Click += BtnExportCsv_Click; ;
+        btnExportCsv.Click += BtnExportCsv_Click;
 
         tlTopControls.Rows.Add(new TableRow(
             EtoHelpers.LabelWrap(UI.Latitude, nsLatitude),
@@ -183,7 +184,7 @@ public partial class FormCelestialObjectData : Form
     {
         dataSource = new SelectableFilterCollection<PlanetDataExtended>(gridView);
 
-        dataSource.AddRange(PlanetData.Data.Select(f => PlanetData.GetExtendedData(f.ObjectType,
+        dataSource.AddRange(PlanetData.Data.Select(f => f.Clone(CelestialObjectLocalizations.GetLocalizedName(f.ObjectType))).Select(f => PlanetData.GetExtendedData(f.ObjectType,
             latitude, longitude, dateTime)));
         dataSource.Sort = (extended, dataExtended) =>
             string.Compare(extended.Name, dataExtended.Name, StringComparison.OrdinalIgnoreCase);
