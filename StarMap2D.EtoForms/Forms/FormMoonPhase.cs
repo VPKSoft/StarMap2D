@@ -29,13 +29,11 @@ using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.Calculations.Constellations;
 using StarMap2D.Calculations.Extensions;
-using StarMap2D.Calculations.Helpers.Math;
 using StarMap2D.Calculations.MoonCalculations;
 using StarMap2D.Common.SvgColorization;
 using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls;
-using StarMap2D.EtoForms.Controls.MoonCalendar;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.EtoForms.Utility;
 using StarMap2D.Localization;
@@ -54,7 +52,7 @@ public class FormMoonPhase : Form
     /// <summary>
     /// Initializes a new instance of the <see cref="FormMoonPhase"/> class.
     /// </summary>
-    public FormMoonPhase()
+    private FormMoonPhase()
     {
         Title = UI.MoonPhase;
 
@@ -112,13 +110,53 @@ public class FormMoonPhase : Form
         };
 
         CurrentDateTime = DateTime.UtcNow;
+
+        Closing += FormMoonPhase_Closing;
+    }
+
+    private void FormMoonPhase_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (sender?.Equals(singletonInstance) == true)
+        {
+            e.Cancel = true;
+            Visible = false;
+        }
+    }
+
+    private static FormMoonPhase? singletonInstance;
+
+    /// <summary>
+    /// Shows the singleton instance of the <see cref="FormMoonPhase"/> form.
+    /// </summary>
+    public static void ShowSingleton()
+    {
+        ShowSingleton(DateTime.Now);
+    }
+
+    /// <summary>
+    /// Shows the singleton instance of the <see cref="FormMoonPhase"/> form.
+    /// </summary>
+    /// <param name="currentDateTime">The current date time.</param>
+    public static void ShowSingleton(DateTime currentDateTime)
+    {
+        singletonInstance ??= new FormMoonPhase();
+
+        singletonInstance.CurrentDateTime = currentDateTime;
+        if (!singletonInstance.Visible)
+        {
+            singletonInstance.Show();
+        }
+        else
+        {
+            singletonInstance.BringToFront();
+        }
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FormMoonPhase"/> class.
     /// </summary>
     /// <param name="dateTime">The date and time for the moon phase.</param>
-    public FormMoonPhase(DateTime dateTime) : this()
+    private FormMoonPhase(DateTime dateTime) : this()
     {
         CurrentDateTime = dateTime.ToUniversalTime();
     }

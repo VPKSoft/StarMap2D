@@ -41,6 +41,7 @@ using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.EtoForms.Forms;
 using StarMap2D.EtoForms.Forms.Dialogs;
 using StarMap2D.Localization;
+using System.Linq;
 
 namespace StarMap2D.EtoForms;
 
@@ -208,7 +209,7 @@ public class MainForm : Form
             EtoForms.Controls.Properties.Resources.ic_fluent_weather_moon_48_filled, new Size(16, 16)),
         };
 
-        moonPhaseCommand.Executed += (_, _) => new FormMoonPhase().Show();
+        moonPhaseCommand.Executed += (_, _) => FormMoonPhase.ShowSingleton();
 
         var moonCalendarCommand = new Command
         {
@@ -220,6 +221,7 @@ public class MainForm : Form
 
         moonCalendarCommand.Executed += (_, _) => new FormMoonPhaseCalendar().Show();
 
+        windowMenu = new ButtonMenuItem { Text = "Window", };
 
         // create menu
         base.Menu = new MenuBar
@@ -228,6 +230,7 @@ public class MainForm : Form
             {
                 // File submenu
                 new SubMenuItem { Text = UI.TestStuff, Items = { testStuff, }, },
+                windowMenu,
             },
             ApplicationItems =
             {
@@ -259,6 +262,33 @@ public class MainForm : Form
         };
 
         CurrentDateTime = DateTime.UtcNow;
+
+        GotFocus += MainForm_GotFocus;
+    }
+
+    private void MainForm_GotFocus(object? sender, EventArgs e)
+    {
+        UpdateWindowMenu();
+    }
+
+    private void UpdateWindowMenu(Window? closingWindow = null)
+    {
+        windowMenu!.Items.Clear();
+        foreach (var window in Application.Instance.Windows)
+        {
+            if (window.Equals(closingWindow) || !window.Visible || window.Equals(this))
+            {
+                continue;
+            }
+
+            windowMenu!.Items.Add(new Command((_, _) =>
+            {
+                window.BringToFront();
+            })
+            { MenuText = window.Title, });
+        }
+
+        windowMenu.Enabled = Application.Instance.Windows.Any();
     }
 
     private bool suspendDateTimeChange;
@@ -365,6 +395,7 @@ public class MainForm : Form
     private Label? lbDayLengthValue;
     private Label? lbMoonRiseValue;
     private Label? lbMoonSetValue;
+    private ButtonMenuItem? windowMenu;
 
     private Label? lbSunRise;
     private Label? lbSunSet;

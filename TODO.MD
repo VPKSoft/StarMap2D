@@ -10,5 +10,5 @@
 * Add custom symbol for user specified right ascension / declination.
 * ~~Calculate the constellation an object is in.~~
 * ~~Change Color.SteelBlue --> setting.~~
-* Make the moon phase view into a singleton form.
-* ~~[Done] Localize the known objects (planets, etc in the details view)~~
+* ~~Make the moon phase view into a singleton form.~~
+* ~~Localize the known objects (planets, etc in the details view)~~

@@ -142,7 +142,7 @@ public class FormMoonPhaseCalendar : Form
                 row.Cells.Add(new TableCell(new MoonCalendarCell(
                             DateOnly.FromDateTime(startDate),
                     Globals.Settings.Latitude, Globals.Settings.Longitude,
-                    false, month, time => new FormMoonPhase(time).Show())
+                    false, month, FormMoonPhase.ShowSingleton)
                 {
                     Padding = Globals.DefaultPadding,
                     IndicatorImageColor = Globals.Settings.UiIconsDefaultColor!.Value,
