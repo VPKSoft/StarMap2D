@@ -152,15 +152,6 @@ public class FormMoonPhase : Form
         }
     }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FormMoonPhase"/> class.
-    /// </summary>
-    /// <param name="dateTime">The date and time for the moon phase.</param>
-    private FormMoonPhase(DateTime dateTime) : this()
-    {
-        CurrentDateTime = dateTime.ToUniversalTime();
-    }
-
     private void CbDiscTilt_CheckedChanged(object? sender, EventArgs e)
     {
         if (cbDiscTilt.Checked == false)
