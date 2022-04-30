@@ -447,4 +447,7 @@
   <data name="MoonConstellation" xml:space="preserve">
     <value>Kuun tähtikuvio</value>
   </data>
+  <data name="Window" xml:space="preserve">
+    <value>Ikkuna</value>
+  </data>
 </root>

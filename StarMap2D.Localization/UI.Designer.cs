@@ -1049,5 +1049,14 @@ namespace StarMap2D.Localization {
                 return ResourceManager.GetString("UiLanguageRequireRestart", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window.
+        /// </summary>
+        public static string Window {
+            get {
+                return ResourceManager.GetString("Window", resourceCulture);
+            }
+        }
     }
 }

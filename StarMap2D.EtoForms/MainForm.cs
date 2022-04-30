@@ -221,7 +221,7 @@ public class MainForm : Form
 
         moonCalendarCommand.Executed += (_, _) => new FormMoonPhaseCalendar().Show();
 
-        windowMenu = new ButtonMenuItem { Text = "Window", };
+        windowMenu = new ButtonMenuItem { Text = UI.Window, };
 
         // create menu
         base.Menu = new MenuBar
