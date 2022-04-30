@@ -54,7 +54,17 @@ public class SvgImageView : Drawable
 
     private void SvgImageView_Paint(object? sender, PaintEventArgs e)
     {
-        var size = (int)Math.Min(e.ClipRectangle.Width, e.ClipRectangle.Height);
+        PaintImageView(e.Graphics, e.ClipRectangle);
+    }
+
+    /// <summary>
+    /// Draws the SVG image to the specified graphics.
+    /// </summary>
+    /// <param name="graphics">The graphics to draw on to.</param>
+    /// <param name="drawArea">The drawing area rectangle.</param>
+    private void PaintImageView(Graphics graphics, RectangleF drawArea)
+    {
+        var size = (int)Math.Min(drawArea.Width, drawArea.Height);
 
         if (svgImageData?.Length > 0)
         {
@@ -65,7 +75,7 @@ public class SvgImageView : Drawable
             if (size > 0)
             {
                 var image = SvgToImage.ImageFromSvg(svgData.ToBytes(), new Size(size, size));
-                e.Graphics.DrawImage(image, (e.ClipRectangle.Left) / 2, (e.ClipRectangle.Top) / 2);
+                graphics.DrawImage(image, (drawArea.Left) / 2, (drawArea.Top) / 2);
             }
         }
     }

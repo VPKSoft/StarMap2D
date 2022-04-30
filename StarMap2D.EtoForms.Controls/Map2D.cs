@@ -616,18 +616,28 @@ public class Map2D : Drawable
 
     private void Map2D_Paint(object? sender, PaintEventArgs e)
     {
-        var mapRect = GetCenterSquare(e.ClipRectangle);
+        PaintMapView(e.Graphics, e.ClipRectangle);
+    }
+
+    /// <summary>
+    /// Draws the star map view to the specified graphics.
+    /// </summary>
+    /// <param name="graphics">The graphics to draw on to.</param>
+    /// <param name="drawArea">The drawing area rectangle.</param>
+    private void PaintMapView(Graphics graphics, RectangleF drawArea)
+    {
+        var mapRect = GetCenterSquare(drawArea);
 
         using var backgroundBrush = new SolidBrush(backColor);
-        e.Graphics.FillRectangle(backgroundBrush, e.ClipRectangle);
+        graphics.FillRectangle(backgroundBrush, drawArea);
 
         using var circleBrush = new SolidBrush(mapCircleColor);
-        e.Graphics.FillEllipse(circleBrush, mapRect);
+        graphics.FillEllipse(circleBrush, mapRect);
 
         using var clipPath = new GraphicsPath();
         clipPath.AddEllipse(mapRect);
 
-        e.Graphics.SetClip(clipPath);
+        graphics.SetClip(clipPath);
 
         var previousMagnitude = -11;
         var drawArguments = GetStarDrawArguments(previousMagnitude);
@@ -660,7 +670,7 @@ public class Map2D : Drawable
                             starMapObject.Magnitude);
                         if (image != null)
                         {
-                            e.Graphics.DrawImage(image, GetDrawPoint(image, position));
+                            graphics.DrawImage(image, GetDrawPoint(image, position));
                             if (starMapObject.ObjectName != null)
                             {
                                 objectMetadata.Add(new MapObjectMetadata
@@ -692,7 +702,7 @@ public class Map2D : Drawable
                     {
                         drawPoint.X -= image.Width / 2f;
                         drawPoint.Y -= image.Height / 2f;
-                        e.Graphics.DrawImage(image, drawPoint);
+                        graphics.DrawImage(image, drawPoint);
                         continue;
                     }
 
@@ -702,19 +712,19 @@ public class Map2D : Drawable
                         previousMagnitude = (int)starMapObject.Magnitude;
                     }
 
-                    e.Graphics.DrawStar(drawPoint, drawArguments.starSize, drawArguments.starColor);
+                    graphics.DrawStar(drawPoint, drawArguments.starSize, drawArguments.starColor);
                 }
             }
 
 
             foreach (var constellation in constellations)
             {
-                DrawConstellationBoundary(constellation, e.Graphics);
-                DrawConstellation(constellation, e.Graphics);
+                DrawConstellationBoundary(constellation, graphics);
+                DrawConstellation(constellation, graphics);
             }
         }
 
-        DrawCrossHairFigure(e.Graphics);
+        DrawCrossHairFigure(graphics);
     }
 
     /// <summary>

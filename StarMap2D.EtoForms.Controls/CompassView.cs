@@ -193,7 +193,17 @@ public class CompassView : Drawable
 
     private void CompassView_Paint(object? sender, PaintEventArgs e)
     {
-        var wh = Math.Min(e.ClipRectangle.Width, e.ClipRectangle.Height);
+        PaintCompass(e.Graphics, e.ClipRectangle);
+    }
+
+    /// <summary>
+    /// Draws the compass to the specified graphics.
+    /// </summary>
+    /// <param name="graphics">The graphics to draw on to.</param>
+    /// <param name="drawArea">The drawing area rectangle.</param>
+    private void PaintCompass(Graphics graphics, RectangleF drawArea)
+    {
+        var wh = Math.Min(drawArea.Width, drawArea.Height);
         var whCompass = (int)(wh - TextAreaSize);
 
         wh -= textAreaSize / 2f;
@@ -206,24 +216,24 @@ public class CompassView : Drawable
 
         var image = SvgToImage.ImageFromSvg(svgBytes, size);
 
-        var x = (e.ClipRectangle.Width - whCompass) / 2;
-        var y = (e.ClipRectangle.Height - whCompass) / 2;
+        var x = (drawArea.Width - whCompass) / 2;
+        var y = (drawArea.Height - whCompass) / 2;
 
         using var brushPointsMain = new SolidBrush(compassMainPointsColor);
         using var brushPointsMiddle = new SolidBrush(compassMiddlePointsColor);
 
-        e.Graphics.DrawImage(image, x, y);
+        graphics.DrawImage(image, x, y);
 
         foreach (var compassDirectionValue in InvertEastWestAxis ? compassDirectionValues : compassDirectionValuesInverted)
         {
             var compassPoint = CircleCalculations.GetCirclePoint(wh / 2f, compassDirectionValue.Key - 90,
-                e.ClipRectangle.MiddleX, e.ClipRectangle.MiddleY);
+                drawArea.MiddleX, drawArea.MiddleY);
 
-            var textSize = e.Graphics.MeasureString(Font, compassDirectionValue.Value);
+            var textSize = graphics.MeasureString(Font, compassDirectionValue.Value);
 
             var brush = compassDirectionValue.Key % 90 == 0 ? brushPointsMain : brushPointsMiddle;
 
-            e.Graphics.DrawText(Font, brush, (float)compassPoint.x - textSize.Width / 2,
+            graphics.DrawText(Font, brush, (float)compassPoint.x - textSize.Width / 2,
                 (float)compassPoint.y - textSize.Height / 2, compassDirectionValue.Value);
         }
     }

@@ -174,16 +174,7 @@ public class MainForm : Form
         var testStuff = new Command { MenuText = UI.TestStuff, };
         testStuff.Executed += delegate
         {
-            new FormMoonPhaseCalendar().Show();
-
-            //var mp = new MoonPhase(Globals.Settings.Latitude, Globals.Settings.Longitude);
-
-            //for (int i = 0; i < 24 * 7 * 60; i++)
-            //{
-            //    mp.StartTimeLocal = mp.StartTimeLocal.AddMinutes(1);
-            //}
-
-            //_ = new RiseSetPlanetsSunMoon(ObjectsWithPositions.Moon, Globals.Settings.Latitude, Globals.Settings.Longitude);
+            new FormDialogTestCustomControl().ShowModal();
         };
 
         var quitCommand = new Command { MenuText = UI.Quit, Shortcut = Application.Instance.CommonModifier | Keys.Q, };
