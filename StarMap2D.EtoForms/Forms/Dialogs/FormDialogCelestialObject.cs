@@ -42,8 +42,6 @@ using StarMap2D.EtoForms.ApplicationSettings.SettingClasses;
 using StarMap2D.EtoForms.Classes;
 using StarMap2D.EtoForms.Controls.Utilities;
 using StarMap2D.Localization;
-using CO = StarMap2D.Localization.CelestialObjects;
-
 
 namespace StarMap2D.EtoForms.Forms.Dialogs;
 
@@ -554,21 +552,12 @@ public class FormDialogCelestialObject : Dialog
     private void ListObjects()
     {
         objectsWithPositions.Clear();
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Mercury, CO.Mercury));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Venus, CO.Venus));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Earth, CO.Earth));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Mars, CO.Mars));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Jupiter, CO.Jupiter));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Saturn, CO.Saturn));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Uranus, CO.Uranus));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Neptune, CO.Neptune));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Pluto, CO.Pluto));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Moon, CO.Moon));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Sun, CO.Sun));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Ceres, CO.Ceres));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Eris, CO.Eris));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Makemake, CO.Makemake));
-        objectsWithPositions.Add(new EnumStringItem<ObjectsWithPositions>(ObjectsWithPositions.Haumea, CO.Haumea));
+
+        foreach (var obj in SupportedObjects)
+        {
+            objectsWithPositions.Add(
+                new EnumStringItem<ObjectsWithPositions>(obj, CelestialObjectLocalizations.GetLocalizedName(obj)));
+        }
 
         cmbObjectSelect!.DataStore = objectsWithPositions;
         cmbObjectSelect.ItemTextBinding =
