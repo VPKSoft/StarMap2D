@@ -184,8 +184,8 @@ public partial class FormCelestialObjectData : Form
     {
         dataSource = new SelectableFilterCollection<PlanetDataExtended>(gridView);
 
-        dataSource.AddRange(PlanetData.Data.Select(f => f.Clone(CelestialObjectLocalizations.GetLocalizedName(f.ObjectType))).Select(f => PlanetData.GetExtendedData(f.ObjectType,
-            latitude, longitude, dateTime)));
+        dataSource.AddRange(PlanetData.Data.Select(f => PlanetData.GetExtendedData(f.ObjectType,
+            latitude, longitude, dateTime, CelestialObjectLocalizations.GetLocalizedName(f.ObjectType))));
         dataSource.Sort = (extended, dataExtended) =>
             string.Compare(extended.Name, dataExtended.Name, StringComparison.OrdinalIgnoreCase);
 

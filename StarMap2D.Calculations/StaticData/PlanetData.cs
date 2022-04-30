@@ -284,8 +284,9 @@ public class PlanetData
     /// <param name="latitude">The latitude for the dynamic data calculation.</param>
     /// <param name="longitude">The longitude for the dynamic data calculation.</param>
     /// <param name="dateTime">The date and time for the dynamic data.</param>
+    /// <param name="localizedName">The optional localized for the planet data.</param>
     /// <returns>An instance od the <see cref="PlanetDataExtended"/> class.</returns>
-    public static PlanetDataExtended GetExtendedData(ObjectsWithPositions objectType, double latitude, double longitude, DateTime dateTime)
+    public static PlanetDataExtended GetExtendedData(ObjectsWithPositions objectType, double latitude, double longitude, DateTime dateTime, string? localizedName = null)
     {
         var result = new PlanetDataExtended();
         (result.Name,
@@ -311,6 +312,8 @@ public class PlanetData
             result.GlobalMagneticField,
             result.ObjectType,
             result.DataUrl) = Data.First(f => f.ObjectType == objectType);
+
+        result.Name = localizedName ?? result.Name;
 
         result.Latitude = latitude;
         result.Longitude = longitude;
