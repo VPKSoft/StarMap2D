@@ -450,4 +450,19 @@
   <data name="Window" xml:space="preserve">
     <value>Ikkuna</value>
   </data>
+  <data name="Night" xml:space="preserve">
+    <value>Yö</value>
+  </data>
+  <data name="AstronomicalTwilight" xml:space="preserve">
+    <value>Astronominen hämärä</value>
+  </data>
+  <data name="NauticalTwilight" xml:space="preserve">
+    <value>Nautillinen hämärä</value>
+  </data>
+  <data name="CivilTwilight" xml:space="preserve">
+    <value>Porvarillinen hämärä</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Päivä</value>
+  </data>
 </root>

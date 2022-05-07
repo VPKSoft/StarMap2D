@@ -106,6 +106,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Astronomical twilight.
+        /// </summary>
+        public static string AstronomicalTwilight {
+            get {
+                return ResourceManager.GetString("AstronomicalTwilight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Azimuth.
         /// </summary>
         public static string Azimuth {
@@ -147,6 +156,15 @@ namespace StarMap2D.Localization {
         public static string CelestialObjects {
             get {
                 return ResourceManager.GetString("CelestialObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Civil twilight.
+        /// </summary>
+        public static string CivilTwilight {
+            get {
+                return ResourceManager.GetString("CivilTwilight", resourceCulture);
             }
         }
         
@@ -309,6 +327,15 @@ namespace StarMap2D.Localization {
         public static string DateAndTimeFormattingCulture {
             get {
                 return ResourceManager.GetString("DateAndTimeFormattingCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
             }
         }
         
@@ -709,6 +736,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nautical twilight.
+        /// </summary>
+        public static string NauticalTwilight {
+            get {
+                return ResourceManager.GetString("NauticalTwilight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next day.
         /// </summary>
         public static string NextDay {
@@ -723,6 +759,15 @@ namespace StarMap2D.Localization {
         public static string NextMonth {
             get {
                 return ResourceManager.GetString("NextMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Night.
+        /// </summary>
+        public static string Night {
+            get {
+                return ResourceManager.GetString("Night", resourceCulture);
             }
         }
         

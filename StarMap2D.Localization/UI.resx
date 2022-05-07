@@ -450,4 +450,19 @@
   <data name="Window" xml:space="preserve">
     <value>Window</value>
   </data>
+  <data name="Night" xml:space="preserve">
+    <value>Night</value>
+  </data>
+  <data name="AstronomicalTwilight" xml:space="preserve">
+    <value>Astronomical twilight</value>
+  </data>
+  <data name="NauticalTwilight" xml:space="preserve">
+    <value>Nautical twilight</value>
+  </data>
+  <data name="CivilTwilight" xml:space="preserve">
+    <value>Civil twilight</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
 </root>

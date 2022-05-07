@@ -26,7 +26,13 @@ SOFTWARE.
 
 using Eto.Drawing;
 using Eto.Forms;
+using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.RiseSet;
+using StarMap2D.EtoForms.Controls.Enumerations;
+using StarMap2D.EtoForms.Controls.EventArguments;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StarMap2D.EtoForms.Controls;
 
@@ -43,6 +49,91 @@ public class TwilightVisualization : Drawable
     public TwilightVisualization()
     {
         Paint += TwilightVisualization_Paint;
+        MouseDown += TwilightVisualization_MouseDown;
+        MouseMove += TwilightVisualization_MouseMove;
+    }
+
+    /// <summary>
+    /// Occurs when a twilight section is clicked.
+    /// </summary>
+    public event EventHandler<TwilightMouseEventArguments>? TwilightClicked;
+
+    /// <summary>
+    /// Occurs when mouse moves over the control.
+    /// </summary>
+    public event EventHandler<TwilightMouseEventArguments>? TwilightMouseMove;
+
+    /// <summary>
+    /// Gets the mouse event arguments for the specified X-coordinate.
+    /// </summary>
+    /// <param name="xCoordinate">The X-coordinate.</param>
+    /// <returns>An instance to the <see cref="TwilightMouseEventArguments"/> class if data was found from the specified coordinates. <c>null</c> otherwise.</returns>
+    private TwilightMouseEventArguments? GetMouseEventArguments(float xCoordinate)
+    {
+        var hourValue = xCoordinate / ClientSize.Width * 24.0;
+
+        var twilightType = TwilightType.Night;
+
+        var clickedSection = nightSections.FirstOrDefault(f => f.hourStart >= hourValue && f.hourEnd < hourValue);
+        if (clickedSection == default)
+        {
+            twilightType = TwilightType.Astronomical;
+            clickedSection = astronomicalTwilightSections.FirstOrDefault(f => f.hourStart >= hourValue && f.hourEnd < hourValue);
+        }
+
+        if (clickedSection == default)
+        {
+            twilightType = TwilightType.Nautical;
+            clickedSection = nauticalTwilightSections.FirstOrDefault(f => f.hourStart >= hourValue && f.hourEnd < hourValue);
+        }
+
+        if (clickedSection == default)
+        {
+            twilightType = TwilightType.Civil;
+            clickedSection = civilTwilightSections.FirstOrDefault(f => f.hourStart >= hourValue && f.hourEnd < hourValue);
+        }
+
+        if (clickedSection == default)
+        {
+            twilightType = TwilightType.Day;
+            clickedSection = daylightSections.FirstOrDefault(f => f.hourStart >= hourValue && f.hourEnd < hourValue);
+        }
+
+        if (clickedSection != default)
+        {
+            return new TwilightMouseEventArguments
+            {
+                TwilightStartHour = clickedSection.hourStart,
+                TwilightEndHour = clickedSection.hourEnd,
+                TwilightType = twilightType,
+                TwilightHourValue = hourValue,
+            };
+        }
+
+        return null;
+    }
+
+    private void TwilightVisualization_MouseMove(object? sender, MouseEventArgs e)
+    {
+        var arguments = GetMouseEventArguments(e.Location.X);
+
+        if (arguments != null)
+        {
+            TwilightMouseMove?.Invoke(this, arguments);
+        }
+    }
+
+    private void TwilightVisualization_MouseDown(object? sender, MouseEventArgs e)
+    {
+        if (e.Buttons == MouseButtons.Primary && e.Modifiers == Keys.None)
+        {
+            var arguments = GetMouseEventArguments(e.Location.X);
+
+            if (arguments != null)
+            {
+                TwilightClicked?.Invoke(this, arguments);
+            }
+        }
     }
 
     private void TwilightVisualization_Paint(object? sender, PaintEventArgs e)
@@ -59,11 +150,12 @@ public class TwilightVisualization : Drawable
     {
         bool ValidValue((double hourStart, double hourEnd) value)
         {
-            return value.hourStart < value.hourEnd && value.hourStart <= 24 && value.hourEnd <= 24;
+            return value.hourStart <= 24 && value.hourEnd <= 24 && value.hourStart >= 0 && value.hourEnd >= 0;
         }
 
         RectangleF GetValueRect((double hourStart, double hourEnd) value)
         {
+            value.hourEnd = value.hourStart > value.hourEnd ? 24 : value.hourEnd;
             var width = drawArea.Width / 24f;
             var x1 = drawArea.Left + ((float)value.hourStart * width);
             var x2 = drawArea.Left + ((float)value.hourEnd * width);
@@ -355,4 +447,91 @@ public class TwilightVisualization : Drawable
         }
     }
     #endregion
+
+    /// <summary>
+    /// Sets the twilight values from a <see cref="RiseSetBase"/> class instance.
+    /// </summary>
+    /// <param name="riseSetData">The rise set data.</param>
+    public void SetValuesFromRiseSetData(RiseSetBase riseSetData)
+    {
+        var sectionDataNight = new List<(double hourStart, double hourEnd)>();
+        var sectionDataAstronomical = new List<(double hourStart, double hourEnd)>();
+        var sectionDataNautical = new List<(double hourStart, double hourEnd)>();
+        var sectionDataCivil = new List<(double hourStart, double hourEnd)>();
+        var rise = 0.0;
+        var set = 0.0;
+        var startHour = 0.0;
+
+        if (riseSetData.AstronomicalDawn != null)
+        {
+            sectionDataNight.Add((startHour, riseSetData.AstronomicalDawn.Value.DecimalHours()));
+            startHour = riseSetData.AstronomicalDawn.Value.DecimalHours();
+        }
+
+        if (riseSetData.NauticalDawn != null)
+        {
+            sectionDataAstronomical.Add((startHour, riseSetData.NauticalDawn.Value.DecimalHours()));
+            startHour = riseSetData.NauticalDawn.Value.DecimalHours();
+        }
+
+        if (riseSetData.CivilDawn != null)
+        {
+            sectionDataNautical.Add((startHour, riseSetData.CivilDawn.Value.DecimalHours()));
+            startHour = riseSetData.CivilDawn.Value.DecimalHours();
+        }
+
+        if (riseSetData.Rise != null)
+        {
+            sectionDataCivil.Add((startHour, riseSetData.Rise.Value.DecimalHours()));
+            startHour = riseSetData.Rise.Value.DecimalHours();
+            rise = riseSetData.Rise.Value.DecimalHours();
+        }
+
+        if (riseSetData.Set != null)
+        {
+            startHour = riseSetData.Set.Value.DecimalHours();
+            set = riseSetData.Set.Value.DecimalHours();
+        }
+
+        if (riseSetData.CivilDusk != null)
+        {
+            sectionDataCivil.Add((startHour, riseSetData.CivilDusk.Value.DecimalHours()));
+            startHour = riseSetData.CivilDusk.Value.DecimalHours();
+        }
+
+        if (riseSetData.NauticalDusk != null)
+        {
+            sectionDataNautical.Add((startHour, riseSetData.NauticalDusk.Value.DecimalHours()));
+            startHour = riseSetData.NauticalDusk.Value.DecimalHours();
+        }
+
+        if (riseSetData.AstronomicalDusk != null)
+        {
+            sectionDataAstronomical.Add((startHour, riseSetData.AstronomicalDusk.Value.DecimalHours()));
+            startHour = riseSetData.AstronomicalDusk.Value.DecimalHours();
+        }
+
+        NightSections = sectionDataNight.ToArray();
+        AstronomicalTwilightSections = sectionDataAstronomical.ToArray();
+        NauticalTwilightSections = sectionDataNautical.ToArray();
+        CivilTwilightSections = sectionDataCivil.ToArray();
+
+        if (rise != 0 || set != 0)
+        {
+            DaylightSections =
+                new[] { (rise, set), };
+        }
+        else
+        {
+            if (riseSetData.AboveHorizon)
+            {
+                DaylightSections = new[] { (0.0, 24.0), };
+                NightSections = Array.Empty<(double hourStart, double hourEnd)>();
+            }
+            else
+            {
+                DaylightSections = Array.Empty<(double hourStart, double hourEnd)>();
+            }
+        }
+    }
 }

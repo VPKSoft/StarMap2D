@@ -27,6 +27,7 @@ SOFTWARE.
 using AASharp;
 using StarMap2D.Calculations.Enumerations;
 using StarMap2D.Calculations.Extensions;
+using StarMap2D.Calculations.Helpers.Math;
 
 namespace StarMap2D.Calculations.RiseSet;
 
@@ -91,6 +92,14 @@ public class RiseSetPlanetsSunMoon : RiseSetBase
         {
             h0 = Constants.RiseSet.StarsPlanetsH0;
         }
+
+        var aboveStart = SolarSystemObjectPositions.GetDetails(Object, StartTimeUtc.ToAASDate(),
+            Globals.HighPrecisionCalculations, Latitude, Longitude).HorizontalDegreesY - h0 > 0;
+
+        var aboveEnd = SolarSystemObjectPositions.GetDetails(Object, EndTimeUtc.ToAASDate(),
+            Globals.HighPrecisionCalculations, Latitude, Longitude).HorizontalDegreesY - h0 > 0;
+
+        AboveHorizon = aboveStart && aboveEnd;
 
         var results = AASRiseTransitSet2.Calculate(starJd, endJd, ToAASharp(Object), -Longitude,
             Latitude, h0, bHighPrecision: Globals.HighPrecisionCalculations);

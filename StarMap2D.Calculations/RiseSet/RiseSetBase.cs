@@ -185,6 +185,12 @@ public abstract class RiseSetBase : LatLonDateCalculation
     }
 
     /// <summary>
+    /// Gets a value indicating whether the object is always above horizon.
+    /// </summary>
+    /// <value><c>true</c> if the object is always above horizon; otherwise, <c>false</c>.</value>
+    public bool AboveHorizon { get; internal set; }
+
+    /// <summary>
     /// Converts the AASharp <see cref="AASRiseTransitSet2.Objects" /> enumeration value into <see cref="ObjectsWithPositions" /> enumeration value.
     /// </summary>
     /// <param name="objects">The value to convert.</param>
