@@ -39,7 +39,7 @@ public class SettingsFontData
     /// Gets or sets the font family.
     /// </summary>
     /// <value>The font family.</value>
-    public string FontFamily { get; set; } = "Sans";
+    public string FontFamily { get; set; } = FontFamilies.Sans.Name;
 
     /// <summary>
     /// Gets or sets the size of the font.
@@ -60,12 +60,19 @@ public class SettingsFontData
     /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
     public static implicit operator SettingsFontData(Font font)
     {
-        return new SettingsFontData
+        try
         {
-            FontFamily = font.FamilyName,
-            FontSize = font.Size,
-            FontStyle = font.FontStyle,
-        };
+            return new SettingsFontData
+            {
+                FontFamily = font.FamilyName,
+                FontSize = font.Size,
+                FontStyle = font.FontStyle,
+            };
+        }
+        catch
+        {
+            return Empty;
+        }
     }
 
     /// <summary>
@@ -85,14 +92,21 @@ public class SettingsFontData
     /// <returns>A new instance of the <see cref="SettingsFontData"/> class.</returns>
     public static implicit operator SettingsFontData(string value)
     {
-        var dataStrings = value.Split(';');
-
-        return new SettingsFontData
+        try
         {
-            FontFamily = dataStrings[0],
-            FontSize = float.Parse(dataStrings[0], CultureInfo.InvariantCulture),
-            FontStyle = Enum.Parse<FontStyle>(dataStrings[2]),
-        };
+            var dataStrings = value.Split(';');
+
+            return new SettingsFontData
+            {
+                FontFamily = dataStrings[0],
+                FontSize = float.Parse(dataStrings[0], CultureInfo.InvariantCulture),
+                FontStyle = Enum.Parse<FontStyle>(dataStrings[2]),
+            };
+        }
+        catch
+        {
+            return Empty;
+        }
     }
 
     /// <summary>
@@ -108,5 +122,11 @@ public class SettingsFontData
     /// Gets or sets the empty <see cref="SettingsFontData"/> value.
     /// </summary>
     /// <value>The empty value.</value>
-    public static SettingsFontData Empty = new();
+    public static SettingsFontData Empty { get; } = new();
+
+    /// <summary>
+    /// Gets or sets the empty <see cref="SettingsFontData"/> value for a mono-spaced font.
+    /// </summary>
+    /// <value>The empty value for a mono-spaced font.</value>
+    public static SettingsFontData EmptyMonoSpaced { get; } = new() { FontFamily = FontFamilies.Monospace.Name, };
 }

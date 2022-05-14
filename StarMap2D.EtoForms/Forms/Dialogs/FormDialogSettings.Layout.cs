@@ -222,7 +222,7 @@ public partial class FormDialogSettings
         fpNormal = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
 
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.Font, fpNormal));
-        fpMonospaced = new FontPicker(Globals.Settings.Font ?? SettingsFontData.Empty);
+        fpMonospaced = new FontPicker(Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced);
         tlFonts.Rows.Add(EtoHelpers.LabelWrap(UI.FontMonospaced, fpMonospaced));
 
         rblDrawMode = new RadioButtonList

@@ -176,7 +176,7 @@ public partial class FormDialogSettings : Dialog<bool>
         cbDrawConstellationBoundaries!.Checked = Globals.Settings.DrawConstellationBorders;
         cbDrawCrossHair!.Checked = Globals.Settings.DrawCrossHair;
         fpNormal!.Value = Globals.Settings.Font ?? SettingsFontData.Empty;
-        fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+        fpMonospaced!.Value = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced;
 
         cpkConstellationLineColor!.Value = Color.Parse(Globals.Settings.ConstellationLineColor);
         cpkConstellationBorderLineColor!.Value = Color.Parse(Globals.Settings.ConstellationBorderLineColor);

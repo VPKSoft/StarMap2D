@@ -34,7 +34,7 @@ namespace StarMap2D.EtoForms.Controls;
 /// <summary>
 /// A class containing the global static parameters.
 /// </summary>
-public class Globals
+public static class Globals
 {
     /// <summary>
     /// Overrides the current thread's <see cref="Thread.CurrentUICulture"/> property for all
@@ -60,7 +60,7 @@ public class Globals
     /// <value>The font.</value>
     public static Font Font
     {
-        get => font ?? new Font("Sans", 9);
+        get => font ?? new Font(FontFamilies.Sans.Name, 9);
 
         set => font = value;
     }

@@ -197,7 +197,7 @@ public class FormDialogCelestialObject : Dialog
         {
             Width = labelWidth,
             TextAlignment = TextAlignment.Left,
-            Font = Globals.Settings.DataFont ?? SettingsFontData.Empty,
+            Font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced,
             TextColor = labelColor,
         };
     }

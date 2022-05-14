@@ -344,7 +344,7 @@ public class FormSkyMap2D : Form
 
         // The object information controls.
 
-        Font font = Globals.Settings.DataFont ?? SettingsFontData.Empty;
+        Font font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced;
 
         var color = Globals.Settings.DateTextDefaultColor!.Value;
 

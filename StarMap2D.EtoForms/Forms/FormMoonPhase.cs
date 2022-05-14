@@ -76,10 +76,10 @@ public class FormMoonPhase : Form
         dtpTimeMain = new DateTimePicker { Mode = DateTimePickerMode.DateTime, Value = DateTime.Now, };
         dtpTimeMain.ValueChanged += DtpTimeMain_ValueChanged;
 
-        lbMoonPhaseName = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
-        lbMoonIlluminatedPercentage = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
-        lbMoonPhaseNumber = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
-        lbMoonConstellation = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.Empty, };
+        lbMoonPhaseName = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced, };
+        lbMoonIlluminatedPercentage = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced, };
+        lbMoonPhaseNumber = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced, };
+        lbMoonConstellation = new Label { TextColor = Globals.Settings.DateTextDefaultColor!.Value, Font = Globals.Settings.DataFont ?? SettingsFontData.EmptyMonoSpaced, };
 
         moonPhase = new MoonPhaseVisualization();
 
