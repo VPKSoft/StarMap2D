@@ -39,7 +39,7 @@ public class SettingsFontData
     /// Gets or sets the font family.
     /// </summary>
     /// <value>The font family.</value>
-    public string FontFamily { get; set; } = FontFamilies.Sans.Name;
+    public string FontFamily { get; set; } = Eto.Forms.Application.Instance != null ? FontFamilies.Sans.Name : "Sans";
 
     /// <summary>
     /// Gets or sets the size of the font.
@@ -82,7 +82,14 @@ public class SettingsFontData
     /// <returns>A new instance of the <see cref="Font"/> class.</returns>
     public static implicit operator Font(SettingsFontData fontData)
     {
-        return new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
+        try
+        {
+            return new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
+        }
+        catch
+        {
+            return new Font(Empty.FontFamily, Empty.FontSize, Empty.FontStyle);
+        }
     }
 
     /// <summary>
