@@ -31,6 +31,7 @@ using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
 using StarMap2D.EtoForms.Controls.Plotting;
+using System.Collections.Generic;
 
 namespace StarMap2D.EtoForms.Controls;
 
@@ -232,6 +233,12 @@ public class TimeValuePlot : Drawable
             multiplier = (Height - AxisPadding.Vertical) / Math.Max(Math.Abs(AxisMinimum), Math.Abs(AxisMaximum));
         }
 
+        var lineY = 0f;
+        var measureAddX = drawArea.Left + AxisPadding.Left;
+        var measureAddY = drawArea.Top + AxisPadding.Top;
+
+        var linePointsX = new List<float>();
+
         // Draw the data points of all the axes.
         foreach (var axisData in AxisData)
         {
@@ -243,7 +250,41 @@ public class TimeValuePlot : Drawable
                 var x2 = x1 + 1;
                 graphics.DrawLine(axisData.PlotColor, new PointF(x1, y1), new PointF(x2, y2));
             }
+
+            var measure = graphics.MeasureString(Font, axisData.XAxisLabel);
+
+            if (!string.IsNullOrWhiteSpace(axisData.XAxisLabel))
+            {
+                lineY = measure.Height > lineY ? measure.Height : lineY;
+                graphics.DrawText(Font, axisData.PlotColor, new PointF(measureAddX + 5, drawArea.Top + 2f),
+                    axisData.XAxisLabel);
+                measureAddX += measure.Width + 10f;
+                linePointsX.Add(measureAddX);
+            }
+
+            if (!string.IsNullOrWhiteSpace(axisData.YAxisLabel))
+            {
+                measure = graphics.MeasureString(Font, axisData.YAxisLabel);
+                graphics.DrawLine(AxisLineColor, new PointF(drawArea.Right - AxisPadding.Right, measureAddY),
+                    new PointF(drawArea.Right, measureAddY));
+                graphics.DrawText(Font, axisData.PlotColor,
+                    new PointF(drawArea.Right - AxisPadding.Right + 5f,
+                        measureAddY + measure.Height / 2f), axisData.YAxisLabel);
+                measureAddY += measure.Height + 10f;
+                graphics.DrawLine(AxisLineColor, new PointF(drawArea.Right - AxisPadding.Right, measureAddY),
+                    new PointF(drawArea.Right, measureAddY));
+            }
         }
+
+        lineY += 4f;
+
+        foreach (var p in linePointsX)
+        {
+            graphics.DrawLine(AxisLineColor, new PointF(p, drawArea.Top), new PointF(p, drawArea.Top + lineY));
+        }
+
+        graphics.DrawLine(AxisLineColor, new PointF(drawArea.Left + AxisPadding.Left, lineY), new PointF(drawArea.Right, lineY));
+
 
         // Draw the positive Y-axis markings.
         for (var i = 0.0; i < AxisMinMax; i += YLabelStepping)
@@ -336,7 +377,7 @@ public class TimeValuePlot : Drawable
 
                 var timeLabelValue = TimeSpan.FromMinutes(xValue).ToString(CrossHairTimeLabelFormat);
                 var size = graphics.MeasureString(Font, timeLabelValue);
-                var timeLabelPoint = new PointF(vertical1.X - size.Width / 2f, vertical1.Y - size.Height - 10);
+                var timeLabelPoint = new PointF(vertical1.X - size.Width / 2f, lineY + 2f);
                 graphics.DrawText(Font, axisData.PlotColor, timeLabelPoint, timeLabelValue);
 
                 // Draw the Y-axis value label.

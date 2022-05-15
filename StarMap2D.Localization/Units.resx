@@ -288,4 +288,7 @@
   <data name="NorthNorthWest" xml:space="preserve">
     <value>north-north-west</value>
   </data>
+  <data name="ObjectHeightDegreesAtHours" xml:space="preserve">
+    <value>{0} height [degrees(°) @ hours]</value>
+  </data>
 </root>

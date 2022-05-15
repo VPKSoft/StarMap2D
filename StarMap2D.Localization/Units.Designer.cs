@@ -367,6 +367,15 @@ namespace StarMap2D.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} height [degrees(°) @ hours].
+        /// </summary>
+        public static string ObjectHeightDegreesAtHours {
+            get {
+                return ResourceManager.GetString("ObjectHeightDegreesAtHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obliquity to orbit (degrees).
         /// </summary>
         public static string ObliquityToOrbitDegrees {

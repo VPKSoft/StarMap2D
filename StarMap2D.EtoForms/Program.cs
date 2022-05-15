@@ -51,6 +51,6 @@ class Program
             Controls.Globals.Culture = new CultureInfo(Globals.Settings.Locale);
         }
 
-        new Application().Run(new MainForm());
+        new Application().Run(new FormMain());
     }
 }

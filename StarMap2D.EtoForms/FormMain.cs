@@ -50,12 +50,12 @@ namespace StarMap2D.EtoForms;
 /// Implements the <see cref="Eto.Forms.Form" />
 /// </summary>
 /// <seealso cref="Eto.Forms.Form" />
-public class MainForm : Form
+public class FormMain : Form
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MainForm"/> class.
+    /// Initializes a new instance of the <see cref="FormMain"/> class.
     /// </summary>
-    public MainForm()
+    public FormMain()
     {
         EtoForms.Controls.Globals.Font = Globals.Settings.Font ?? SettingsFontData.Empty;
 
@@ -372,8 +372,21 @@ public class MainForm : Form
             yMoonDoubles[i] = position.Y;
         }
 
-        plot.AxisData.Add(new AxisData { Values = ySunDoubles, XAxisWidth = 100, PlotColor = Colors.Orange, });
-        plot.AxisData.Add(new AxisData { Values = yMoonDoubles, XAxisWidth = 100, PlotColor = Colors.SteelBlue, });
+        plot.AxisData.Add(new AxisData
+        {
+            Values = ySunDoubles,
+            XAxisWidth = 100,
+            PlotColor = Colors.Orange,
+            XAxisLabel = string.Format(Units.ObjectHeightDegreesAtHours, CelestialObjects.Sun),
+        });
+
+        plot.AxisData.Add(new AxisData
+        {
+            Values = yMoonDoubles,
+            XAxisWidth = 100,
+            PlotColor = Colors.SteelBlue,
+            XAxisLabel = string.Format(Units.ObjectHeightDegreesAtHours, CelestialObjects.Moon),
+        });
     }
 
     private Button? btnPreviousDay;

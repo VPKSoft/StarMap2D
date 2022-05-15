@@ -20,4 +20,4 @@
 * Add compass point values for current date and time values for
   - The Sun
   - The Moon
-* Add axis titles for the sun and moon rise & set plot view
+* ~~Add axis titles for the sun and moon rise & set plot view~~

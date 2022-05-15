@@ -288,4 +288,7 @@
   <data name="NorthNorthWest" xml:space="preserve">
     <value>pohjoisluode</value>
   </data>
+  <data name="ObjectHeightDegreesAtHours" xml:space="preserve">
+    <value>{0} korkeus [astetta(°) @ tuntia]</value>
+  </data>
 </root>
